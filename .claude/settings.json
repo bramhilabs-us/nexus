@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(git branch:*)",
+      "Bash(git fetch:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh run list:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(cat:*)",
+      "Bash(wc:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm install:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run:*)",
+      "Read(*)",
+      "Write(/Users/sagarrs/Desktop/official_dev/nexus/**)",
+      "Edit(/Users/sagarrs/Desktop/official_dev/nexus/**)"
+    ],
+    "deny": [
+      "Write(/Users/sagarrs/Desktop/official_dev/karvia_business/**)",
+      "Edit(/Users/sagarrs/Desktop/official_dev/karvia_business/**)",
+      "Bash(rm -rf:*)",
+      "Bash(git push --force:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git branch -D:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/sagarrs/Desktop/official_dev/nexus/.claude/hooks/guard-karvia.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/sagarrs/Desktop/official_dev/nexus/.claude/hooks/budget-check.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/sagarrs/Desktop/official_dev/nexus/.claude/hooks/tick-end.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "env": {
+    "NEXUS_DAILY_BUDGET_USD": "60",
+    "NEXUS_AUTONOMY_LEVEL": "0",
+    "NEXUS_REPO": "bramhilabs-us/nexus",
+    "NEXUS_KARVIA_REFERENCE": "/Users/sagarrs/Desktop/official_dev/karvia_business"
+  }
+}
