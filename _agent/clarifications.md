@@ -29,25 +29,21 @@ Format:
 - **c) Both** (most likely intent): Consultant-led delivery is the primary GTM motion, but the platform itself can be sold direct to organizations. Positioning docs lead with consultants; capabilities docs describe both modes.
 
 **Status**: ANSWERED — see DECISIONS.md 2026-06-03
-**Answer**: (resolved)
+**Answer**: Transformation OS (broad scope). Lego-block architecture is the reason.
 
-<<<<<<< Updated upstream
-=======
 ---
 
-## C-002 — Karvia git history contains real MongoDB credentials
+## C-002 — Karvia git history contains real production credentials
 
 **Asked**: 2026-06-03 by tick N1-P1-01
-**Context**: Tick N1-P1-01 scanned the Karvia doc snapshot for secrets and found 24 markdown files with hardcoded `mongodb+srv://user:pass@host` strings — including what look like real production credentials (`rsm_db_user:DcootoIfBIqL20uA@cluster0.lpzcrvy.mongodb.net`). These were redacted in `_source/` before committing to Nexus. **Nexus is safe.** But Karvia's own committed git history still contains these strings.
+**Context**: Tick N1-P1-01 scanned the Karvia doc snapshot for secrets and found 26 files containing **live production credentials** in plain text: OpenAI service account key, Mailjet API key+secret, JWT_SECRET, SESSION_SECRET, and MongoDB connection strings. Redacted in `_source/` before commit to Nexus; Karvia's own files untouched but contain these in committed git history.
 
 **Question**: Do you want a follow-up plan to clean Karvia's git history?
 
 **Options the agent sees**:
-- **a) Rotate creds, leave history** — fastest. Rotate the affected Mongo user passwords; the history strings become inert. Recommended unless the repo is public or shared externally.
-- **b) Rotate + purge history** — invasive. Use `git filter-repo` to scrub the strings from every commit. Forces every collaborator to re-clone. Required if Karvia is or will be public.
-- **c) Do nothing** — not recommended unless these credentials are already known-rotated and unused.
+- **a) Rotate creds, leave history** — fastest. Once rotated, the historical strings become inert.
+- **b) Rotate + purge history** — invasive. `git filter-repo` to scrub every commit. Required if Karvia is or becomes public.
+- **c) Do nothing** — not recommended unless creds are already known-rotated.
 
 **Status**: ANSWERED — see DECISIONS.md 2026-06-03
-**Answer**: (resolved)
-
->>>>>>> Stashed changes
+**Answer**: Rotate credentials only; do not purge history. Owner: human (not the agent).
