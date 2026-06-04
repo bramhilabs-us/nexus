@@ -49,6 +49,20 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - `NEXUS_STRATEGY/2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md` with Mermaid
   - Cycles flagged red — these are Night 2 refactor targets
 
+### N1-P2-06 — Engineering principles & improvement bar
+- **Status**: DONE (PR pending merge — tick 2026-06-04-03)
+- **Size**: M (1 tick)
+- **Depends on**: N1-P2-01 (DONE, PR #2 pending merge)
+- **Definition of done**:
+  - ✓ `NEXUS_STRATEGY/2-TECHNICAL/IMPROVEMENT_PLAN.md` written
+  - ✓ 10 named anti-patterns sourced from Karvia evidence
+  - ✓ 10 improvements with measurable enforcement
+  - ✓ Per-PR quality gate checklist
+  - ✓ Parking lot (out of scope explicitly)
+  - ✓ Success criteria table (Karvia baseline vs Nexus target)
+  - ✓ Implications for C-003/4/5 stated
+- **Notes**: This doc is the bar every Night 2-5 tick is measured against. Added mid-sprint per human request.
+
 ### N1-P2-05 — User journeys
 - **Status**: READY
 - **Size**: M (2 ticks)
