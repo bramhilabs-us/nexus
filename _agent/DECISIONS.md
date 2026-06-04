@@ -101,3 +101,79 @@ Format:
 - Nexus's `_source/` keeps the `[REDACTED]` versions — that decision stands regardless.
 - For Nexus itself: secret scanning + push protection are enabled at the bramhilabs-us repo level; the agent must also run `redact-secrets.py` as a pre-commit step on every tick that touches files originating from `_source/`.
 
+---
+
+## 2026-06-04 — Consolidate engines into the main server (C-003 answered)
+
+**Context**: Karvia declares 10 engines (ports 8081–8089) but Render only runs the main server + IAM sidecar. The other 8 engines are dead code paths in production. We had to choose between (a) consolidate into one process, (b) genuinely deploy each as its own Render service, or (c) hybrid.
+
+**Decision**: **Consolidate.** Nexus is a single Express app with module boundaries enforced by TypeScript contracts, not process boundaries.
+
+**Alternatives considered**:
+- (b) Genuinely deploy each engine: rejected — premature for current load, multiplies ops cost, no isolation benefit at v1 scale.
+- (c) Hybrid: rejected — has the ops complexity of (b) for the parts split out and the discipline problem of (a) for the parts kept together. Picks the worst of both.
+
+**Consequences**:
+- All "engines" become modules under `src/modules/<name>/` in the main server, not separate Node processes.
+- The 10-engine port mapping in Karvia is discarded. Port conflict (8089) becomes moot.
+- Module isolation is enforced by TS interfaces + ESLint `no-restricted-imports`, not process boundaries.
+- Render deploy is one service per environment; no multi-service orchestration to design.
+- Aligns with `IMPROVEMENT_PLAN.md` AP-2 (deploy honesty — what runs is what's defined).
+- If/when a module needs genuine isolation (compute-heavy, different SLA), it can be extracted later. Decision is reversible per-module.
+
+---
+
+## 2026-06-04 — TypeScript end-to-end on the server (C-004 answered)
+
+**Context**: Module contracts are the heart of the lego-block architecture. TS interfaces enforce them at compile time; JS + JSDoc enforces by convention only.
+
+**Decision**: **TypeScript** for all server-side code in Nexus. `tsconfig.json` will run in strict mode (`strict: true`, `noUncheckedIndexedAccess: true`, `exactOptionalPropertyTypes: true`). Public APIs export only TS types — never raw objects.
+
+**Alternatives considered**:
+- JS + strict JSDoc: rejected — autonomous agent commits will silently introduce type errors a human reviewer would catch. The compiler is a free reviewer.
+- Gradual (TS for new modules only): rejected — produces a JS/TS boundary that becomes its own friction point. Better to migrate the lift in Night 2 once than to maintain a dual-language codebase.
+
+**Consequences**:
+- Night 2 includes a one-time TS toolchain setup (tsconfig, eslint, prettier, ts-node, jest with ts-jest or vitest).
+- Lifted Karvia JS files are converted to TS as part of the modularization pass. Mostly mechanical (add types, fix obvious issues that JS hid).
+- Runtime validation at the edge via `zod` — types describe shape, zod enforces it at the boundary.
+- Client (`client/`) stays vanilla JS for v1 — TS migration there is deferred (see `IMPROVEMENT_PLAN.md` parking lot, "custom UI framework").
+
+**Implementation note**: package manager is `pnpm` for workspaces (cleaner module-per-folder support than npm).
+
+---
+
+## 2026-06-04 — Program as a first-class top-level tenant entity (C-005 answered)
+
+**Context**: Karvia's tenancy is flat — `Company → Users → Objectives`. The Transformation OS positioning (C-001) requires that one Company can run multiple concurrent transformation programs (e.g., "AI Readiness 2026," "Digital Transformation Phase 2," "Customer Success Internal") — each with its own assessment, OKR tree, members, timeline, and outcome.
+
+**Decision**: **Yes — introduce `Program` as a first-class top-level entity.** Tenancy becomes `Company → Program → Objective`.
+
+**Schema**:
+```
+Program {
+  _id, company_id, name, vertical, start_date, end_date,
+  status (active | completed | paused),
+  members[], assigned_consultants[], owner_user_id,
+  assessment_id, outcome { score, narrative, evidence_refs[] }
+}
+```
+
+Every domain model gains a required `program_id`: `Objective`, `KeyResult`, `Goal`, `WeeklyGoal`, `Task`, `Move`, `Assessment`, `Comment`. Users get a `program_memberships[]` array (same person can hold different roles in different programs).
+
+**Alternatives considered**:
+- Defer (implicit single program per company, retrofit later): rejected — the retrofit means adding a required field to every doc, backfilling every existing record, and rewriting every query. We pay 3–4 days now or 3–4 weeks in 6 months. Fresh DB is the cheapest time this decision will ever cost.
+- Tag (`program: string` field, no entity): rejected — looks like the feature but isn't. Can't model program members, program-scoped assessments, or program lifecycle. Brittle.
+
+**Consequences**:
+- All tenancy queries change from `{ company_id: X }` to `{ company_id: X, program_id: Y }`. Mechanical but pervasive.
+- Permissions model gets one dimension wider: a user can be a Manager in Program A and an Employee in Program B.
+- UI needs a program switcher in the global nav.
+- Sharing across programs (people directory, company branding) is explicit — those entities stay at the Company level; everything else is Program-scoped.
+- Enables the AI Readiness module to model a real engagement: program starts → assessment runs → objectives generated from score → execution happens → program ends with outcome record.
+- Enables clean consultant access scoping: a consultant sees only the programs they're assigned to, even within the same Company.
+- Enables outcome measurement per program (the whole point of the Transformation OS positioning).
+- Implication for `N1-P3-01` (positioning docs): GTM model is "per active program," not "per company." Pricing follows.
+
+**Supersedes**: Karvia's implicit single-OKR-tree-per-company tenancy model.
+

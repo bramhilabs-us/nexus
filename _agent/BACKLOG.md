@@ -83,12 +83,14 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - INTERVIEW_TEMPLATE, FEEDBACK_LOG, EVIDENCE_INDEX, METRICS templates
 
 ### N1-P4-01 — Modularization plan + contract drafts
-- **Status**: BLOCKED on C-003, C-004, C-005
+- **Status**: READY (C-003/4/5 all answered — see DECISIONS.md 2026-06-04)
 - **Size**: M (2 ticks)
-- **Depends on**: N1-P2-04 (module graph), N1-P2-02 (data models), C-003 (consolidate vs deploy), C-004 (TS vs JS), C-005 (Program entity)
+- **Depends on**: N1-P2-04 (module graph), N1-P2-02 (data models)
 - **Definition of done**:
-  - MODULARIZATION_PLAN.md with 6 modules + assessment impls
+  - MODULARIZATION_PLAN.md with 8 modules (CRM, Objectives, KeyResults, WeeklyGoals, Tasks, Assessment + Governance + Knowledge) + assessment impls (SSI, AI-Readiness)
   - MODULE_CONTRACTS_DRAFT.md with TS interface signatures
+  - Reflects ratified decisions: consolidate engines, TypeScript strict, Program as first-class entity
+- **Notes**: All 3 architectural clarifications now answered (2026-06-04). N1-P4-02 also unblocked.
 
 ### N1-P4-02 — Nexus vs Karvia diff + Assessment interface spec
 - **Status**: READY

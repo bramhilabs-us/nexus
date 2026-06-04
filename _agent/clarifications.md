@@ -62,8 +62,8 @@ Format:
 - **b) Genuinely deploy** — each engine becomes its own Render service with its own URL. Higher cost, real service isolation, but premature for current load.
 - **c) Hybrid** — main server + a few high-value sidecars (e.g., AI work, scheduled jobs) split out, rest consolidated.
 
-**Status**: OPEN
-**Answer**: (filled by human)
+**Status**: ANSWERED — see DECISIONS.md 2026-06-04
+**Answer**: Consolidate. Single Express app; module boundaries enforced by TS contracts + ESLint, not process boundaries.
 
 ---
 
@@ -79,8 +79,8 @@ Format:
 - **b) JS + strict JSDoc** — lower migration cost, weaker enforcement, agent will drift.
 - **c) Gradual** — TS for new modules (governance, knowledge, ai-readiness), JS for lifted Karvia modules until they're touched.
 
-**Status**: OPEN
-**Answer**: (filled by human)
+**Status**: ANSWERED — see DECISIONS.md 2026-06-04
+**Answer**: TypeScript in strict mode for all server code. Client stays vanilla JS for v1. `pnpm` for workspaces.
 
 ---
 
@@ -96,7 +96,7 @@ Format:
 - **b) Defer** — start with one implicit program per org, retrofit later. Faster v1 but locks in a single-program assumption.
 - **c) Tag, not entity** — use a `program: string` field on existing models, no separate collection. Lightest weight, fragile.
 
-**Status**: OPEN
-**Answer**: (filled by human)
+**Status**: ANSWERED — see DECISIONS.md 2026-06-04
+**Answer**: Yes. `Program` is a first-class top-level entity. `Company → Program → Objective`. Every domain doc gains `program_id`. Users get `program_memberships[]`.
 
 
