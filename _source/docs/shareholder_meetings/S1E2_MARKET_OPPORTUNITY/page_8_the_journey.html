@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E2 - Page 8: The Journey | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-columns: 280px 1fr 1fr;
+            grid-template-rows: auto 1fr auto;
+            gap: 30px;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: #888; text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .page-title { margin-top: 4px; color: #1a1a2e; font-weight: 500; }
+
+        /* Left Column - The Company */
+        .company-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .company-card {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .company-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .company-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .company-type {
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .company-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-row:last-child { border-bottom: none; }
+
+        .stat-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .stat-value {
+            font-size: 12px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .pain-card {
+            background: #FEF3C7;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px dashed #C9A227;
+        }
+
+        .pain-label {
+            font-size: 9px;
+            font-weight: 600;
+            color: #92400E;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .pain-text {
+            font-size: 13px;
+            color: #1a1a2e;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        /* Center Column - The Journey */
+        .journey-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .col-header {
+            font-size: 10px;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .phase-card {
+            background: #FAFAFA;
+            border-radius: 12px;
+            padding: 14px 16px;
+            border: 1px solid #F0F0F0;
+            margin-bottom: 10px;
+            display: flex;
+            gap: 14px;
+        }
+
+        .phase-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .phase-icon.assess { background: #E3F2FD; }
+        .phase-icon.discover { background: #F3E5F5; }
+        .phase-icon.aim { background: #FEF3C7; }
+        .phase-icon.plan { background: #E8F5E9; }
+        .phase-icon.play { background: #FFE4E1; }
+
+        .phase-content { flex: 1; }
+
+        .phase-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+
+        .phase-question {
+            font-size: 10px;
+            color: #888;
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+
+        .phase-answer {
+            font-size: 11px;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        .phase-answer em {
+            font-style: normal;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        /* Right Column - The Conditions */
+        .conditions-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .condition-card {
+            background: #FAFAFA;
+            border-radius: 12px;
+            padding: 14px 16px;
+            border: 1px solid #F0F0F0;
+            margin-bottom: 10px;
+        }
+
+        .condition-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .condition-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .condition-icon.walk { background: #E8F5E9; }
+        .condition-icon.potluck { background: #FFF3E0; }
+        .condition-icon.deep { background: #E3F2FD; }
+
+        .condition-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .condition-when {
+            font-size: 10px;
+            color: #888;
+        }
+
+        .condition-desc {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .condition-why {
+            font-size: 10px;
+            color: #888;
+            padding: 8px 10px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #E0E0E0;
+        }
+
+        .condition-why em {
+            font-style: normal;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        .outcome-card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 6px;
+        }
+
+        .outcome-label {
+            font-size: 9px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .outcome-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .outcome-row:last-child { border-bottom: none; }
+
+        .outcome-before {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            text-decoration: line-through;
+        }
+
+        .outcome-after {
+            font-size: 11px;
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .next { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 24px; grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .page { padding: 20px; gap: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E2: Market Opportunity</div>
+            </div>
+            <div class="page-indicator">
+                <div>Page <span class="current">8</span> of 9</div>
+                <div class="page-title">The Journey</div>
+            </div>
+        </header>
+
+        <!-- Left - The Company -->
+        <div class="company-col">
+            <div class="company-card">
+                <div class="company-icon">&#128161;</div>
+                <div class="company-name">Spark Digital</div>
+                <div class="company-type">Marketing Agency</div>
+
+                <div class="company-stats">
+                    <div class="stat-row">
+                        <span class="stat-label">Team Size</span>
+                        <span class="stat-value">18 employees</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Account Managers</span>
+                        <span class="stat-value">5 AMs</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Founder</span>
+                        <span class="stat-value">Lisa (overworked)</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Revenue</span>
+                        <span class="stat-value">$3.2M</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pain-card">
+                <div class="pain-label">The Symptom</div>
+                <div class="pain-text">
+                    "Every client hiccup lands on my desk. Not because they can't handle it — because they don't trust themselves to."
+                </div>
+            </div>
+        </div>
+
+        <!-- Center - The Journey -->
+        <div class="journey-col">
+            <div class="col-header">The YSELA Journey</div>
+
+            <div class="phase-card">
+                <div class="phase-icon assess">&#128269;</div>
+                <div class="phase-content">
+                    <div class="phase-name">1. Assess</div>
+                    <div class="phase-question">"Where is trust leaking?"</div>
+                    <div class="phase-answer">
+                        SSI reveals AMs score <em>38 on Strength</em>.<br>
+                        They know what to do — they just don't feel safe deciding.
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-icon discover">&#128101;</div>
+                <div class="phase-content">
+                    <div class="phase-name">2. Discover</div>
+                    <div class="phase-question">"Who are these people?"</div>
+                    <div class="phase-answer">
+                        Interest survey reveals: <em>Marcus loves hiking</em>, Priya loves cooking, Aisha craves deep conversations.
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-icon aim">&#127919;</div>
+                <div class="phase-content">
+                    <div class="phase-name">3. Aim</div>
+                    <div class="phase-question">"What would safe feel like?"</div>
+                    <div class="phase-answer">
+                        <em>"Help AMs feel confident enough to say 'I've got this' — and mean it."</em>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-icon plan">&#128197;</div>
+                <div class="phase-content">
+                    <div class="phase-name">4. Plan</div>
+                    <div class="phase-question">"Design the conditions"</div>
+                    <div class="phase-answer">
+                        Client escalations discussed <em>on a 1-hour hike</em>. Decision ownership tracked visibly.
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-icon play">&#127881;</div>
+                <div class="phase-content">
+                    <div class="phase-name">5. Play</div>
+                    <div class="phase-question">"Make it visible"</div>
+                    <div class="phase-answer">
+                        Friday ritual: <em>"Decision of the Week"</em>. Celebrate the act of owning, not just the outcome.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right - The Conditions -->
+        <div class="conditions-col">
+            <div class="col-header">Culture Conditions</div>
+
+            <div class="condition-card">
+                <div class="condition-header">
+                    <div class="condition-icon walk">&#129406;</div>
+                    <div>
+                        <div class="condition-name">Walking Escalations</div>
+                        <div class="condition-when">Wednesdays, 7:30am</div>
+                    </div>
+                </div>
+                <div class="condition-desc">
+                    Hard client conversations happen on the trail. Side-by-side, moving, no screens.
+                </div>
+                <div class="condition-why">
+                    <em>Why it works:</em> Movement reduces cortisol. Side-by-side feels less confrontational.
+                </div>
+            </div>
+
+            <div class="condition-card">
+                <div class="condition-header">
+                    <div class="condition-icon potluck">&#127869;</div>
+                    <div>
+                        <div class="condition-name">Monthly Potluck</div>
+                        <div class="condition-when">First Friday</div>
+                    </div>
+                </div>
+                <div class="condition-desc">
+                    "Wins & Misses" — share one decision that worked, one that didn't. While eating together.
+                </div>
+                <div class="condition-why">
+                    <em>Why it works:</em> Breaking bread triggers oxytocin. Vulnerability becomes normal.
+                </div>
+            </div>
+
+            <div class="condition-card">
+                <div class="condition-header">
+                    <div class="condition-icon deep">&#128172;</div>
+                    <div>
+                        <div class="condition-name">Deep Talk Hour</div>
+                        <div class="condition-when">Bi-weekly (optional)</div>
+                    </div>
+                </div>
+                <div class="condition-desc">
+                    For those who need to process. No agenda. Just space to think out loud.
+                </div>
+                <div class="condition-why">
+                    <em>Why it works:</em> Some people need depth to feel safe. This honors that.
+                </div>
+            </div>
+
+            <div class="outcome-card">
+                <div class="outcome-label">The Outcome</div>
+                <div class="outcome-row">
+                    <span class="outcome-before">Lisa: 2+ hrs/day on AM decisions</span>
+                    <span class="outcome-after">30 min/day</span>
+                </div>
+                <div class="outcome-row">
+                    <span class="outcome-before">AMs: "Should I check first?"</span>
+                    <span class="outcome-after">"I've got this"</span>
+                </div>
+                <div class="outcome-row">
+                    <span class="outcome-before">New hires: "Who's in charge?"</span>
+                    <span class="outcome-after">"We own things"</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_7_the_tool_reality.html">&larr; The Tool Reality</a>
+                <a href="page_9_the_culture_play.html" class="next">Next: The Culture Play &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

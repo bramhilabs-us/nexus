@@ -1,0 +1,137 @@
+# ACCESS_CONTROL.yaml - Central Access Control Configuration
+# Version: 1.0.0
+# Last Updated: January 8, 2026
+# Status: STRUCTURE_ONLY (Enforcement planned for future)
+# Owner: Admin (Human only - Claude cannot modify)
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+# PURPOSE: Define access rules for KARVIA Business documents
+# LOCATION: .claude/ACCESS_CONTROL.yaml
+# ENFORCEMENT: Future - Currently advisory only
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ───────────────────────────────────────────────────────────────────────────────
+# SYSTEM CONFIGURATION
+# ───────────────────────────────────────────────────────────────────────────────
+system:
+  version: "1.0.0"
+  enforcement_mode: "advisory"  # advisory | soft | hard
+  audit_enabled: true
+  owner: "admin"
+
+# ───────────────────────────────────────────────────────────────────────────────
+# DOMAIN CODES
+# ───────────────────────────────────────────────────────────────────────────────
+# DOMAINS:
+#   GOV = Governance
+#   PRD = Product
+#   OKR = Objective Key Results
+#   SSI = Social Style Inventory
+#   ASM = Assessment
+#   ARC = Architecture
+#   API = API/Contracts
+#   SEC = Security
+#   DOC = Documentation
+
+doc_id_schema:
+  format: "DOC-{tier}-{domain}-{sequence}"
+  tiers: ["T1", "T2", "T3", "T4"]
+  domains:
+    GOV: "Governance"
+    PRD: "Product"
+    OKR: "OKR System"
+    SSI: "Social Style Inventory"
+    ASM: "Assessment"
+    ARC: "Architecture"
+    API: "API/Contracts"
+    SEC: "Security"
+    DOC: "Documentation"
+
+# ───────────────────────────────────────────────────────────────────────────────
+# GLOBAL DEFAULTS
+# ───────────────────────────────────────────────────────────────────────────────
+defaults:
+  read: "ALL"
+  write: "ALL"
+  approve: "ADMIN"
+
+# ───────────────────────────────────────────────────────────────────────────────
+# TIER-LEVEL ACCESS RULES
+# ───────────────────────────────────────────────────────────────────────────────
+tiers:
+  T1:
+    name: "Constitutional"
+    description: "Supreme authority documents"
+    read: "ALL"
+    write: "NONE"
+    approve: "ADMIN"
+
+  T2:
+    name: "Canonical"
+    description: "Single source of truth per domain"
+    read: "ALL"
+    write: ["STRATEGY", "ADMIN"]
+    approve: ["STRATEGY", "ADMIN"]
+
+  T3:
+    name: "Derived"
+    description: "Derived from T2, must align with canonical"
+    read: "ALL"
+    write: ["STRATEGY", "CODING", "ADMIN"]
+    approve: "SELF"
+
+  T4:
+    name: "Working"
+    description: "Drafts, notes, incomplete work"
+    read: "ALL"
+    write: "ALL"
+    approve: "SELF"
+
+# ───────────────────────────────────────────────────────────────────────────────
+# SESSION PROFILES
+# ───────────────────────────────────────────────────────────────────────────────
+profiles:
+  STRATEGY:
+    description: "Planning, architecture, specifications"
+    can_read: ["DOC-T1-*", "DOC-T2-*", "DOC-T3-*", "DOC-T4-*"]
+    can_write: ["DOC-T2-*", "DOC-T3-*", "DOC-T4-*"]
+    cannot_write: ["DOC-T1-*", "DOC-*-SEC-*", "DOC-*-GOV-*"]
+
+  CODING:
+    description: "Implementation, bug fixes, features"
+    can_read: ["DOC-T1-*", "DOC-T2-*", "DOC-T3-*", "DOC-T4-*"]
+    can_write: ["DOC-T3-*", "DOC-T4-*"]
+    cannot_write: ["DOC-T1-*", "DOC-T2-*", "DOC-*-SEC-*"]
+
+  AUDIT:
+    description: "Code review, quality validation"
+    can_read: ["DOC-*"]
+    can_write: ["DOC-T4-*"]
+
+  TESTING:
+    description: "Test execution, bug detection"
+    can_read: ["DOC-*"]
+    can_write: ["DOC-T3-TST-*", "DOC-T4-*"]
+
+  GENERAL:
+    description: "Research, questions, quick fixes"
+    can_read: ["DOC-*"]
+    can_write: ["DOC-T4-*"]
+
+  ADMIN:
+    description: "Full access - human admin only"
+    can_read: ["DOC-*"]
+    can_write: ["DOC-*"]
+    can_approve: ["DOC-*"]
+    bypass_escalation: true
+
+# ───────────────────────────────────────────────────────────────────────────────
+# AUDIT LOG CONFIGURATION
+# ───────────────────────────────────────────────────────────────────────────────
+audit_config:
+  enabled: true
+  log_reads: false
+  log_writes: true
+  log_approvals: true
+  log_escalations: true
+  retention_days: 90

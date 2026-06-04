@@ -1,0 +1,3859 @@
+{
+  "info": {
+    "title": "KARVIA Pro API",
+    "version": "1.0.0",
+    "description": "Multi-tenant OKR management platform with assessment capabilities\n\n## Features\n- Role-Based Access Control (RBAC)\n- Multi-tenancy via company_id scoping\n- JWT Authentication (7-day expiry)\n- Real-time analytics & insights\n- AI-powered OKR generation\n- SSI Assessment System (Speed, Strength, Intelligence)\n\n## Authentication\nAll authenticated endpoints require a Bearer token in the Authorization header.\nTokens are obtained through `/api/auth/login` or `/api/auth/signup`.\n\n## Multi-Tenancy\nData is automatically scoped to the user's company_id (extracted from JWT).\nCONSULTANT role can manage multiple companies via the `managed_companies` array.\n",
+    "contact": {
+      "name": "KARVIA Support",
+      "email": "support@karviapro.com",
+      "url": "https://karviapro.com"
+    },
+    "license": {
+      "name": "Proprietary",
+      "url": "https://karviapro.com/terms"
+    }
+  },
+  "domains": {
+    "Objectives": {
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/objectives",
+          "summary": "List objectives",
+          "description": "List objectives with flexible filtering options.",
+          "operationId": "listObjectives",
+          "parameters": [
+            {
+              "name": "owner_type",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by owner type"
+            },
+            {
+              "name": "owner_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by specific owner ID"
+            },
+            {
+              "name": "period",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Time period filter"
+            },
+            {
+              "name": "year",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": "Year filter"
+            },
+            {
+              "name": "status",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Status filter"
+            },
+            {
+              "name": "include_key_results",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": "Include key results in response"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": "Page number"
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": "Items per page"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Objectives retrieved successfully",
+            "401": "Unauthorized",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Objectives"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/objectives",
+          "summary": "Create objective",
+          "description": "Create a new OKR objective.",
+          "operationId": "createObjective",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "Objective created successfully",
+            "400": "Invalid request data",
+            "403": "Insufficient permissions",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Objectives"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/objectives/{id}",
+          "summary": "Get objective details",
+          "description": "Get detailed information about a specific objective.",
+          "operationId": "getObjectiveById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Objective ID"
+            },
+            {
+              "name": "include_children",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": "Include child objectives"
+            },
+            {
+              "name": "include_goals",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": "Include linked goals"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Objective retrieved successfully",
+            "404": "Objective not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Objectives"
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/objectives/{id}",
+          "summary": "Update objective",
+          "description": "Update an existing objective.",
+          "operationId": "updateObjective",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Objective ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Objective updated successfully",
+            "403": "Insufficient permissions",
+            "404": "Objective not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Objectives"
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/objectives/{id}",
+          "summary": "Delete objective",
+          "description": "Delete an objective and optionally its child objectives.",
+          "operationId": "deleteObjective",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Objective ID"
+            },
+            {
+              "name": "cascade",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "How to handle child objectives"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Objective deleted successfully",
+            "400": "Cannot delete - has child objectives",
+            "403": "Insufficient permissions",
+            "404": "Objective not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Objectives"
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/objectives/{id}/progress",
+          "summary": "Update key result progress",
+          "description": "Update progress for one or more key results.",
+          "operationId": "updateKeyResultProgress",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Objective ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Progress updated successfully",
+            "400": "Invalid progress values",
+            "404": "Objective or key result not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Objectives"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/objectives/bulk",
+          "summary": "Bulk objective operations",
+          "description": "Perform bulk operations on multiple objectives.",
+          "operationId": "bulkObjectiveOperations",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Bulk operation completed",
+            "400": "Invalid operation or data",
+            "403": "Insufficient permissions",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Objectives"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/objectives/suggestions",
+          "summary": "Get OKR suggestions",
+          "description": "Get AI-generated OKR suggestions based on: - Assessment results - Industry best practices - Company goals - Team performance",
+          "operationId": "getOKRSuggestions",
+          "parameters": [
+            {
+              "name": "context",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Context for suggestions"
+            },
+            {
+              "name": "focus_area",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Specific area to focus suggestions on"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Suggestions retrieved successfully",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Objectives"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/objectives/my-dashboard",
+          "summary": "Get user dashboard data",
+          "description": "Get personalized dashboard data for the authenticated user.",
+          "operationId": "getUserDashboard",
+          "parameters": [
+            {
+              "name": "period",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Time period"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Dashboard data retrieved",
+            "401": "Unauthorized",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Objectives"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/objectives/list",
+          "summary": "Get filtered objectives list",
+          "description": "Get a simplified list of objectives for dropdowns and selectors. Lightweight version of the main list endpoint. ",
+          "operationId": "getObjectivesList",
+          "parameters": [
+            {
+              "name": "owner_type",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "active_only",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": ""
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "List retrieved successfully",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Objectives"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/objectives/ibrain/priorities/{userId}",
+          "summary": "Get iBrain priority analysis",
+          "description": "Get AI-powered priority analysis for a user's objectives.",
+          "operationId": "getIBrainPriorities",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "User ID for analysis"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Priority analysis retrieved",
+            "403": "iBrain not enabled for company",
+            "404": "User not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Objectives"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/objectives/ibrain/insights/{userId}",
+          "summary": "Get iBrain smart insights",
+          "description": "Get AI-generated insights about user's OKR performance.",
+          "operationId": "getIBrainInsights",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "User ID for insights"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Insights retrieved",
+            "403": "iBrain not enabled for company",
+            "404": "User not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Objectives"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/objectives/ibrain/refresh/{userId}",
+          "summary": "Manually refresh iBrain insights",
+          "description": "Trigger a manual refresh of iBrain analysis and insights. Normally insights are updated automatically, but this allows on-demand refresh. ",
+          "operationId": "refreshIBrainInsights",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "User ID to refresh insights for"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Refresh triggered successfully",
+            "403": "iBrain not enabled for company",
+            "404": "User not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Objectives"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/objectives/{id}/ai-help",
+          "summary": "Request AI help for at-risk objective",
+          "description": "Request AI assistance for an objective that is at risk or behind schedule.",
+          "operationId": "requestAIHelp",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Objective ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "AI help generated",
+            "403": "iBrain not enabled for company",
+            "404": "Objective not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Objectives"
+          ]
+        }
+      ],
+      "count": 14
+    },
+    "Analytics": {
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/analytics/team",
+          "summary": "Get team-level analytics",
+          "description": "Get comprehensive analytics for a team.",
+          "operationId": "getTeamAnalytics",
+          "parameters": [
+            {
+              "name": "team_id",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "description": "Team ID"
+            },
+            {
+              "name": "period",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Time period for analytics"
+            },
+            {
+              "name": "compare_to",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Comparison period"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Analytics retrieved successfully",
+            "403": "Insufficient permissions",
+            "404": "Team not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Analytics"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/analytics/drilldown",
+          "summary": "Dimension/category drilldown",
+          "description": "Deep dive into specific dimensions or categories.",
+          "operationId": "getAnalyticsDrilldown",
+          "parameters": [
+            {
+              "name": "dimension",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "description": "Dimension to drill down"
+            },
+            {
+              "name": "value",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Specific value to filter (e.g., 'speed' for ssi_category)"
+            },
+            {
+              "name": "company_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Company scope"
+            },
+            {
+              "name": "date_from",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "date_to",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": ""
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Drilldown data retrieved",
+            "400": "Invalid dimension or parameters",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Analytics"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/analytics/progress",
+          "summary": "Progress tracking analytics",
+          "description": "Track progress across objectives, goals, and tasks.",
+          "operationId": "getProgressAnalytics",
+          "parameters": [
+            {
+              "name": "entity_type",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Entity type to analyze"
+            },
+            {
+              "name": "owner_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by owner (user, team, or company)"
+            },
+            {
+              "name": "period",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": ""
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Progress analytics retrieved",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Analytics"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/analytics/velocity",
+          "summary": "Team velocity analysis",
+          "description": "Analyze team velocity and productivity trends.",
+          "operationId": "getVelocityAnalytics",
+          "parameters": [
+            {
+              "name": "team_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Team ID (optional, defaults to all teams)"
+            },
+            {
+              "name": "sprint_count",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": "Number of sprints to analyze"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Velocity analytics retrieved",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Analytics"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/analytics/forecast",
+          "summary": "Predictive forecasting",
+          "description": "AI-powered predictive analytics and forecasting.",
+          "operationId": "getForecastAnalytics",
+          "parameters": [
+            {
+              "name": "entity_type",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "description": "What to forecast"
+            },
+            {
+              "name": "horizon",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Forecast horizon"
+            },
+            {
+              "name": "confidence_level",
+              "in": "query",
+              "required": false,
+              "type": "number",
+              "description": "Confidence level for predictions"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Forecast generated successfully",
+            "403": "AI features not enabled",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Analytics"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/analytics/export",
+          "summary": "Export analytics data",
+          "description": "Export analytics data in various formats.",
+          "operationId": "exportAnalytics",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Export initiated",
+            "400": "Invalid export parameters",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Analytics"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/analytics/dashboard",
+          "summary": "Get analytics dashboard data",
+          "description": "Get pre-configured dashboard analytics data.",
+          "operationId": "getAnalyticsDashboard",
+          "parameters": [
+            {
+              "name": "dashboard_type",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Type of dashboard"
+            },
+            {
+              "name": "entity_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Entity ID (team, user, etc.)"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Dashboard data retrieved",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Analytics"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/analytics/comparison",
+          "summary": "Comparative analytics",
+          "description": "Compare performance across teams, periods, or companies.",
+          "operationId": "getComparisonAnalytics",
+          "parameters": [
+            {
+              "name": "comparison_type",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "description": "Type of comparison"
+            },
+            {
+              "name": "entity_a",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "description": "First entity to compare"
+            },
+            {
+              "name": "entity_b",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "description": "Second entity to compare"
+            },
+            {
+              "name": "metrics",
+              "in": "query",
+              "required": false,
+              "type": "array",
+              "description": "Specific metrics to compare"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Comparison data retrieved",
+            "400": "Invalid comparison parameters",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Analytics"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/analytics/insights",
+          "summary": "AI-powered insights",
+          "description": "Get AI-generated insights and recommendations.",
+          "operationId": "getAIInsights",
+          "parameters": [
+            {
+              "name": "scope",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Scope of insights"
+            },
+            {
+              "name": "entity_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Entity ID for scope"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Insights generated successfully",
+            "403": "AI features not enabled",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Analytics"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/analytics/reports/generate",
+          "summary": "Generate custom report",
+          "description": "Generate a custom analytics report.",
+          "operationId": "generateCustomReport",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Report generation initiated",
+            "400": "Invalid report parameters",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Analytics"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/analytics/reports/{id}",
+          "summary": "Get generated report",
+          "description": "Retrieve a previously generated report. ",
+          "operationId": "getGeneratedReport",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Report ID"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Report retrieved",
+            "404": "Report not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Analytics"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/analytics/metrics",
+          "summary": "Get available metrics",
+          "description": "Get list of available metrics and KPIs.",
+          "operationId": "getAvailableMetrics",
+          "parameters": [
+            {
+              "name": "category",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by metric category"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Metrics retrieved",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Analytics"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/analytics/benchmarks",
+          "summary": "Get industry benchmarks",
+          "description": "Get industry benchmark data for comparison.",
+          "operationId": "getIndustryBenchmarks",
+          "parameters": [
+            {
+              "name": "industry",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Industry for benchmarks"
+            },
+            {
+              "name": "company_size",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Company size category"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Benchmarks retrieved",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Analytics"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/analytics/realtime",
+          "summary": "Get real-time analytics",
+          "description": "Get real-time analytics data (WebSocket alternative).",
+          "operationId": "getRealTimeAnalytics",
+          "parameters": [
+            {
+              "name": "metrics",
+              "in": "query",
+              "required": false,
+              "type": "array",
+              "description": "Specific metrics to track"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Real-time data retrieved",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Analytics"
+          ]
+        }
+      ],
+      "count": 14
+    },
+    "Assessments": {
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/assessments",
+          "summary": "List assessments",
+          "description": "List all assessments for the authenticated user's company.",
+          "operationId": "listAssessments",
+          "parameters": [
+            {
+              "name": "status",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by status"
+            },
+            {
+              "name": "template_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by template"
+            },
+            {
+              "name": "participant_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by participant"
+            },
+            {
+              "name": "date_from",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter assessments created after date"
+            },
+            {
+              "name": "date_to",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter assessments created before date"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": ""
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": ""
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Assessments retrieved successfully",
+            "401": "Unauthorized",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessments"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/assessments/start",
+          "summary": "Start new assessment",
+          "description": "Start a new assessment from a template.",
+          "operationId": "startAssessment",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "Assessment started successfully",
+            "404": "Template not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessments"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/assessments/{id}",
+          "summary": "Get assessment details",
+          "description": "Get detailed information about a specific assessment.",
+          "operationId": "getAssessmentById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Assessment ID"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Assessment retrieved successfully",
+            "404": "Assessment not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessments"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/assessments/{id}/submit-responses",
+          "summary": "Submit assessment responses",
+          "description": "Submit responses for an in-progress assessment.",
+          "operationId": "submitAssessmentResponses",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Assessment ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Responses submitted successfully",
+            "400": "Invalid responses",
+            "404": "Assessment not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessments"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/assessments/{id}/calculate",
+          "summary": "Calculate assessment scores",
+          "description": "Calculate SSI scores from assessment responses.",
+          "operationId": "calculateAssessmentScores",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Assessment ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Scores calculated successfully",
+            "400": "Assessment not complete",
+            "404": "Assessment not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessments"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/assessments/{id}/results",
+          "summary": "Get detailed assessment results",
+          "description": "Get comprehensive results and analysis for a completed assessment.",
+          "operationId": "getAssessmentResults",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Assessment ID"
+            },
+            {
+              "name": "include_recommendations",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": "Include AI-generated recommendations"
+            },
+            {
+              "name": "include_benchmarks",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": "Include industry benchmarks"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Results retrieved successfully",
+            "400": "Assessment not complete",
+            "404": "Assessment not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessments"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/assessments/questions",
+          "summary": "Get assessment questions",
+          "description": "Get the standard assessment question bank.",
+          "operationId": "getAssessmentQuestions",
+          "parameters": [
+            {
+              "name": "category",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by SSI category"
+            },
+            {
+              "name": "dimension",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by specific dimension"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Questions retrieved successfully",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessments"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/assessments/history",
+          "summary": "Get assessment history",
+          "description": "Get historical assessments for a user or company.",
+          "operationId": "getAssessmentHistory",
+          "parameters": [
+            {
+              "name": "user_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by user (defaults to current user)"
+            },
+            {
+              "name": "company_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by company (managers only)"
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": "Number of assessments to return"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "History retrieved successfully",
+            "401": "Unauthorized",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessments"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/assessments/team/{company_id}",
+          "summary": "Get team aggregated assessment results",
+          "description": "Get aggregated assessment results for a team or company.",
+          "operationId": "getTeamAssessmentResults",
+          "parameters": [
+            {
+              "name": "company_id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Company ID"
+            },
+            {
+              "name": "team_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by specific team"
+            },
+            {
+              "name": "department",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by department"
+            },
+            {
+              "name": "date_from",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Include assessments after this date"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Team results retrieved successfully",
+            "403": "Insufficient permissions",
+            "404": "Company not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessments"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/assessments/my-assessments",
+          "summary": "List user's assessments",
+          "description": "Get all assessments for the authenticated user.",
+          "operationId": "getUserAssessments",
+          "parameters": [
+            {
+              "name": "status",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by status"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "User assessments retrieved",
+            "401": "Unauthorized",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessments"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/assessments/invitation/{token}/questions",
+          "summary": "Get assessment questions for invitation",
+          "description": "Get assessment questions for an invitation token. This endpoint is used when external users take assessments via invitation.",
+          "operationId": "getInvitationAssessmentQuestions",
+          "parameters": [
+            {
+              "name": "token",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Invitation token"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Questions retrieved successfully",
+            "400": "Invalid or expired token",
+            "404": "Invitation not found",
+            "500": "Server error"
+          },
+          "isPublic": true,
+          "tags": [
+            "Assessments"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/assessments/submit",
+          "summary": "Submit assessment (legacy endpoint)",
+          "description": "Legacy endpoint for submitting complete assessment.",
+          "operationId": "submitAssessmentLegacy",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Assessment submitted",
+            "400": "Invalid submission"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessments"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/assessments/results/{businessId}",
+          "summary": "Get business assessment results (legacy)",
+          "description": "Legacy endpoint for getting business assessment results.",
+          "operationId": "getBusinessAssessmentResults",
+          "parameters": [
+            {
+              "name": "businessId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": ""
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Results retrieved",
+            "404": "Business not found"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessments"
+          ]
+        }
+      ],
+      "count": 13
+    },
+    "Tasks": {
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/tasks",
+          "summary": "List tasks",
+          "description": "List tasks with flexible filtering options.",
+          "operationId": "listTasks",
+          "parameters": [
+            {
+              "name": "assigned_to",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by assigned user"
+            },
+            {
+              "name": "goal_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by linked goal"
+            },
+            {
+              "name": "status",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by status"
+            },
+            {
+              "name": "priority",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by priority"
+            },
+            {
+              "name": "due_date_from",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter tasks due after this date"
+            },
+            {
+              "name": "due_date_to",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter tasks due before this date"
+            },
+            {
+              "name": "overdue_only",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": "Show only overdue tasks"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": ""
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": ""
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Tasks retrieved successfully",
+            "401": "Unauthorized",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Tasks"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks",
+          "summary": "Create task",
+          "description": "Create a new task.",
+          "operationId": "createTask",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "Task created successfully",
+            "400": "Invalid request data",
+            "404": "Goal or user not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Tasks"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/tasks/{id}",
+          "summary": "Get task details",
+          "description": "Get detailed information about a specific task.",
+          "operationId": "getTaskById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Task ID"
+            },
+            {
+              "name": "include_activity",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": "Include activity history"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Task retrieved successfully",
+            "404": "Task not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Tasks"
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/tasks/{id}",
+          "summary": "Update task",
+          "description": "Update task information.",
+          "operationId": "updateTask",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Task ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Task updated successfully",
+            "403": "Insufficient permissions",
+            "404": "Task not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Tasks"
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/tasks/{id}",
+          "summary": "Delete task",
+          "description": "Delete a task.",
+          "operationId": "deleteTask",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Task ID"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Task deleted successfully",
+            "403": "Insufficient permissions",
+            "404": "Task not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Tasks"
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/tasks/{id}/complete",
+          "summary": "Mark task complete",
+          "description": "Mark a task as completed.",
+          "operationId": "completeTask",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Task ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Task marked as complete",
+            "400": "Task already completed",
+            "404": "Task not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Tasks"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/suggest",
+          "summary": "AI suggest tasks",
+          "description": "Get AI-suggested tasks based on goals and objectives.",
+          "operationId": "suggestTasks",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Task suggestions generated",
+            "403": "AI features not enabled",
+            "404": "Goal not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Tasks"
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/tasks/{id}/checklist",
+          "summary": "Update task checklist",
+          "description": "Update checklist items for a task.",
+          "operationId": "updateTaskChecklist",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Task ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Checklist updated successfully",
+            "404": "Task not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Tasks"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/{id}/time",
+          "summary": "Log time on task",
+          "description": "Log time spent on a task.",
+          "operationId": "logTaskTime",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Task ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Time logged successfully",
+            "404": "Task not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Tasks"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks/{id}/comment",
+          "summary": "Add comment to task",
+          "description": "Add a comment to a task.",
+          "operationId": "addTaskComment",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Task ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "Comment added successfully",
+            "404": "Task not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Tasks"
+          ]
+        }
+      ],
+      "count": 10
+    },
+    "AI OKR": {
+      "endpoints": [
+        {
+          "method": "POST",
+          "path": "/api/ai-okr/generate/{assessmentId}",
+          "summary": "Generate OKRs from assessment",
+          "description": "Generate AI-powered OKR suggestions based on assessment results.",
+          "operationId": "generateAIObjectives",
+          "parameters": [
+            {
+              "name": "assessmentId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Assessment ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "OKRs generated successfully",
+            "403": "AI features not enabled",
+            "404": "Assessment not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "AI OKR"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/ai-okr/suggestions/{id}",
+          "summary": "Get AI suggestion by ID",
+          "description": "Get details of a specific AI-generated OKR suggestion. ",
+          "operationId": "getAISuggestionById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Suggestion ID"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Suggestion retrieved successfully",
+            "404": "Suggestion not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "AI OKR"
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/ai-okr/suggestions/{id}",
+          "summary": "Edit AI-generated objective",
+          "description": "Edit an AI-generated objective before approving.",
+          "operationId": "editAISuggestion",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Suggestion ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Suggestion updated successfully",
+            "404": "Suggestion not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "AI OKR"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/ai-okr/suggestions/{id}/approve",
+          "summary": "Approve suggestion and create objective",
+          "description": "Approve an AI suggestion and create actual objective.",
+          "operationId": "approveAISuggestion",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Suggestion ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "Objective created from suggestion",
+            "400": "Suggestion already approved",
+            "404": "Suggestion not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "AI OKR"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/ai-okr/suggestions/{id}/dismiss",
+          "summary": "Dismiss suggestion",
+          "description": "Dismiss an AI suggestion.",
+          "operationId": "dismissAISuggestion",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Suggestion ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Suggestion dismissed",
+            "404": "Suggestion not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "AI OKR"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/ai-okr/suggestions/user/{userId}",
+          "summary": "Get user's AI suggestions",
+          "description": "Get all AI-generated suggestions for a user.",
+          "operationId": "getUserAISuggestions",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "User ID"
+            },
+            {
+              "name": "status",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by status"
+            },
+            {
+              "name": "assessment_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by source assessment"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Suggestions retrieved successfully",
+            "403": "Cannot view other user's suggestions",
+            "404": "User not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "AI OKR"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/ai-okr/regenerate/{suggestionId}",
+          "summary": "Regenerate specific objective",
+          "description": "Regenerate a specific AI suggestion with new parameters.",
+          "operationId": "regenerateAISuggestion",
+          "parameters": [
+            {
+              "name": "suggestionId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Suggestion ID to regenerate"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Suggestion regenerated",
+            "404": "Suggestion not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "AI OKR"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/ai-okr/reanalyze/{assessmentId}",
+          "summary": "Reanalyze assessment with new threshold",
+          "description": "Reanalyze assessment with different parameters to generate new suggestions.",
+          "operationId": "reanalyzeAssessment",
+          "parameters": [
+            {
+              "name": "assessmentId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Assessment ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Reanalysis complete",
+            "404": "Assessment not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "AI OKR"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/ai-okr/batch-approve",
+          "summary": "Approve multiple suggestions",
+          "description": "Approve multiple AI suggestions at once.",
+          "operationId": "batchApproveAISuggestions",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Batch approval processed",
+            "400": "Invalid suggestion IDs",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "AI OKR"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/ai-okr/batch-dismiss",
+          "summary": "Dismiss multiple suggestions",
+          "description": "Dismiss multiple AI suggestions at once. ",
+          "operationId": "batchDismissAISuggestions",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Batch dismissal processed",
+            "400": "Invalid suggestion IDs",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "AI OKR"
+          ]
+        }
+      ],
+      "count": 10
+    },
+    "Teams": {
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/teams",
+          "summary": "List teams",
+          "description": "List all teams in the authenticated user's company.",
+          "operationId": "listTeams",
+          "parameters": [
+            {
+              "name": "status",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by team status"
+            },
+            {
+              "name": "department_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by department"
+            },
+            {
+              "name": "include_members",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": "Include full member details"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Teams retrieved successfully",
+            "401": "Unauthorized",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Teams"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/teams",
+          "summary": "Create team",
+          "description": "Create a new team within the company.",
+          "operationId": "createTeam",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "Team created successfully",
+            "400": "Invalid request data",
+            "403": "Insufficient permissions",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Teams"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/teams/{id}",
+          "summary": "Get team details",
+          "description": "Retrieve detailed information about a specific team.",
+          "operationId": "getTeamById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Team ID"
+            },
+            {
+              "name": "include_objectives",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": "Include team's active objectives"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Team retrieved successfully",
+            "404": "Team not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Teams"
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/teams/{id}",
+          "summary": "Update team",
+          "description": "Update team information.",
+          "operationId": "updateTeam",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Team ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Team updated successfully",
+            "403": "Insufficient permissions",
+            "404": "Team not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Teams"
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/teams/{id}",
+          "summary": "Delete team",
+          "description": "Delete or archive a team.",
+          "operationId": "deleteTeam",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Team ID"
+            },
+            {
+              "name": "permanent",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": "Permanently delete instead of archiving"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Team deleted successfully",
+            "403": "Insufficient permissions",
+            "404": "Team not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Teams"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/teams/{id}/members",
+          "summary": "Add member to team",
+          "description": "Add a user to the team.",
+          "operationId": "addTeamMember",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Team ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Member added successfully",
+            "400": "User already in team",
+            "403": "Insufficient permissions",
+            "404": "Team or user not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Teams"
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/teams/{id}/members/{userId}",
+          "summary": "Remove member from team",
+          "description": "Remove a user from the team.",
+          "operationId": "removeTeamMember",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Team ID"
+            },
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "User ID to remove"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Member removed successfully",
+            "400": "Cannot remove team lead",
+            "403": "Insufficient permissions",
+            "404": "Team or user not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Teams"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/teams/{id}/objectives",
+          "summary": "Get team objectives",
+          "description": "Get all objectives assigned to a team.",
+          "operationId": "getTeamObjectives",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Team ID"
+            },
+            {
+              "name": "period",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Time period filter"
+            },
+            {
+              "name": "status",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Status filter"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Objectives retrieved successfully",
+            "404": "Team not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Teams"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/teams/{id}/stats",
+          "summary": "Get team statistics",
+          "description": "Get comprehensive team performance statistics.",
+          "operationId": "getTeamStats",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Team ID"
+            },
+            {
+              "name": "period",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Time period for statistics"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Statistics retrieved successfully",
+            "404": "Team not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Teams"
+          ]
+        }
+      ],
+      "count": 9
+    },
+    "Goals": {
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/goals",
+          "summary": "List goals",
+          "description": "List goals with filtering options.",
+          "operationId": "listGoals",
+          "parameters": [
+            {
+              "name": "user_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by user"
+            },
+            {
+              "name": "objective_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by linked objective"
+            },
+            {
+              "name": "period",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Goal period type"
+            },
+            {
+              "name": "status",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Goal status"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": ""
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": ""
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Goals retrieved successfully",
+            "401": "Unauthorized",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Goals"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/goals",
+          "summary": "Create goal",
+          "description": "Create a new goal linked to an objective.",
+          "operationId": "createGoal",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "Goal created successfully",
+            "400": "Invalid request data",
+            "404": "Objective not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Goals"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/goals/{id}",
+          "summary": "Get goal details",
+          "description": "Get detailed information about a specific goal.",
+          "operationId": "getGoalById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Goal ID"
+            },
+            {
+              "name": "include_tasks",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": "Include associated tasks"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Goal retrieved successfully",
+            "404": "Goal not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Goals"
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/goals/{id}",
+          "summary": "Update goal",
+          "description": "Update goal information.",
+          "operationId": "updateGoal",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Goal ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Goal updated successfully",
+            "403": "Insufficient permissions",
+            "404": "Goal not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Goals"
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/goals/{id}",
+          "summary": "Delete goal",
+          "description": "Delete a goal.",
+          "operationId": "deleteGoal",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Goal ID"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Goal deleted successfully",
+            "403": "Insufficient permissions",
+            "404": "Goal not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Goals"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/goals/{id}/complete",
+          "summary": "Mark goal complete",
+          "description": "Mark a goal as completed.",
+          "operationId": "completeGoal",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Goal ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Goal marked as complete",
+            "400": "Goal already completed",
+            "404": "Goal not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Goals"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/goals/quarterly",
+          "summary": "Get quarterly goals view",
+          "description": "Get goals organized by quarter with progress summary. Useful for quarterly planning and review sessions. ",
+          "operationId": "getQuarterlyGoals",
+          "parameters": [
+            {
+              "name": "year",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": "Year (defaults to current)"
+            },
+            {
+              "name": "quarter",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Quarter (defaults to current)"
+            },
+            {
+              "name": "user_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by user (defaults to authenticated user)"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Quarterly goals retrieved",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Goals"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/goals/weekly",
+          "summary": "Get weekly goals view",
+          "description": "Get goals for the current or specified week. Useful for weekly planning and standup meetings. ",
+          "operationId": "getWeeklyGoals",
+          "parameters": [
+            {
+              "name": "week_start",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Week start date (defaults to current week Monday)"
+            },
+            {
+              "name": "user_id",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by user (defaults to authenticated user)"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Weekly goals retrieved",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Goals"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/goals/suggest",
+          "summary": "AI suggest goals",
+          "description": "Get AI-suggested goals based on objectives and key results.",
+          "operationId": "suggestGoals",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Goal suggestions generated",
+            "403": "AI features not enabled",
+            "404": "Objective not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Goals"
+          ]
+        }
+      ],
+      "count": 9
+    },
+    "Invitations": {
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/invitations",
+          "summary": "List invitations",
+          "description": "List all invitations for the company.",
+          "operationId": "listInvitations",
+          "parameters": [
+            {
+              "name": "status",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by invitation status"
+            },
+            {
+              "name": "role",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by invited role"
+            },
+            {
+              "name": "sent_by",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by sender"
+            },
+            {
+              "name": "date_from",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter invitations sent after date"
+            },
+            {
+              "name": "date_to",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter invitations sent before date"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": ""
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": ""
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Invitations retrieved successfully",
+            "401": "Unauthorized",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Invitations"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/invitations",
+          "summary": "Create invitation",
+          "description": "Create a new invitation to join the company.",
+          "operationId": "createInvitation",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "Invitation created successfully",
+            "400": "Invalid email or user already exists",
+            "403": "Insufficient permissions or invitation limit reached",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Invitations"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/invitations/validate/{token}",
+          "summary": "Validate invitation token",
+          "description": "Validate an invitation token.",
+          "operationId": "validateInvitationToken",
+          "parameters": [
+            {
+              "name": "token",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Invitation token"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Token is valid",
+            "400": "Invalid or expired token",
+            "404": "Token not found",
+            "500": "Server error"
+          },
+          "isPublic": true,
+          "tags": [
+            "Invitations"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/invitations/accept/{token}",
+          "summary": "Accept invitation and create account",
+          "description": "Accept an invitation and create user account.",
+          "operationId": "acceptInvitation",
+          "parameters": [
+            {
+              "name": "token",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Invitation token"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "Account created successfully",
+            "400": "Invalid token or password",
+            "404": "Token not found",
+            "409": "Email already registered",
+            "500": "Server error"
+          },
+          "isPublic": true,
+          "tags": [
+            "Invitations"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/invitations/{id}",
+          "summary": "Get invitation details",
+          "description": "Get detailed information about a specific invitation.",
+          "operationId": "getInvitationById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Invitation ID"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Invitation retrieved successfully",
+            "403": "Insufficient permissions",
+            "404": "Invitation not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Invitations"
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/invitations/{id}",
+          "summary": "Cancel invitation",
+          "description": "Cancel a pending invitation.",
+          "operationId": "cancelInvitation",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Invitation ID"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Invitation cancelled successfully",
+            "400": "Cannot cancel accepted invitation",
+            "403": "Insufficient permissions",
+            "404": "Invitation not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Invitations"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/invitations/{id}/resend",
+          "summary": "Resend invitation email",
+          "description": "Resend invitation email to recipient.",
+          "operationId": "resendInvitation",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Invitation ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Invitation resent successfully",
+            "400": "Cannot resend accepted invitation",
+            "403": "Insufficient permissions",
+            "404": "Invitation not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Invitations"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/invitations/bulk",
+          "summary": "Send bulk invitations",
+          "description": "Send invitations to multiple recipients.",
+          "operationId": "sendBulkInvitations",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Bulk invitations processed",
+            "400": "Invalid request data",
+            "403": "Insufficient permissions or limit exceeded",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Invitations"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/invitations/stats/{companyId}",
+          "summary": "Get invitation statistics",
+          "description": "Get comprehensive invitation statistics for a company.",
+          "operationId": "getInvitationStats",
+          "parameters": [
+            {
+              "name": "companyId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Company ID"
+            },
+            {
+              "name": "date_from",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Start date for statistics"
+            },
+            {
+              "name": "date_to",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "End date for statistics"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Statistics retrieved successfully",
+            "403": "Insufficient permissions",
+            "404": "Company not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Invitations"
+          ]
+        }
+      ],
+      "count": 9
+    },
+    "Companies": {
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/companies",
+          "summary": "List companies",
+          "description": "List companies based on user role: - **CONSULTANT**: See all companies they manage (via managed_companies array) - **Other roles**: See only their own company",
+          "operationId": "listCompanies",
+          "parameters": [
+            {
+              "name": "status",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by company status"
+            },
+            {
+              "name": "industry",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by industry"
+            },
+            {
+              "name": "size_category",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by company size"
+            },
+            {
+              "name": "subscription_tier",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by subscription tier"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Companies retrieved successfully",
+            "401": "Unauthorized",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Companies"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/companies",
+          "summary": "Create new company",
+          "description": "Create a new company record.",
+          "operationId": "createCompany",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "Company created successfully",
+            "400": "Missing required fields",
+            "403": "Insufficient permissions (not a CONSULTANT)",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Companies"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/companies/{id}",
+          "summary": "Get company by ID",
+          "description": "Retrieve detailed company information.",
+          "operationId": "getCompanyById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Company ID"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Company retrieved successfully",
+            "403": "Forbidden - not authorized to view this company",
+            "404": "Company not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Companies"
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/companies/{id}",
+          "summary": "Update company",
+          "description": "Update company details.",
+          "operationId": "updateCompany",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Company ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Company updated successfully",
+            "403": "Forbidden - not authorized to update this company",
+            "404": "Company not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Companies"
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/companies/{id}",
+          "summary": "Delete/deactivate company",
+          "description": "Delete or deactivate a company.",
+          "operationId": "deleteCompany",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Company ID"
+            },
+            {
+              "name": "permanent",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": "If true, permanently delete. Otherwise soft delete (suspend)."
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Company deleted/deactivated successfully",
+            "403": "Forbidden - not authorized or not a CONSULTANT",
+            "404": "Company not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Companies"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/companies/{id}/stats",
+          "summary": "Get company statistics",
+          "description": "Retrieve comprehensive company statistics including: - User counts (total active users vs target employee_count) - Team count (active teams) - Objective count - Goal count - Assessment scores (SSI) - ",
+          "operationId": "getCompanyStats",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Company ID"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Statistics retrieved successfully",
+            "403": "Unauthorized access",
+            "404": "Company not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Companies"
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/companies/{id}/assessment-scores",
+          "summary": "Update company assessment scores",
+          "description": "Update the company's SSI assessment scores (Speed, Strength, Intelligence).",
+          "operationId": "updateAssessmentScores",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Company ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Assessment scores updated successfully",
+            "404": "Company not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Companies"
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/companies/{id}/onboarding",
+          "summary": "Update company onboarding progress",
+          "description": "Update onboarding progress for a company.",
+          "operationId": "updateOnboardingProgress",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Company ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Onboarding progress updated",
+            "404": "Company not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Companies"
+          ]
+        }
+      ],
+      "count": 8
+    },
+    "Assessment Templates": {
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/assessment-templates",
+          "summary": "List assessment templates",
+          "description": "List all available assessment templates.",
+          "operationId": "listAssessmentTemplates",
+          "parameters": [
+            {
+              "name": "type",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Filter by template type"
+            },
+            {
+              "name": "active",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": "Show only active templates"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Templates retrieved successfully",
+            "401": "Unauthorized",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessment Templates"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/assessment-templates",
+          "summary": "Create assessment template",
+          "description": "Create a new custom assessment template.",
+          "operationId": "createAssessmentTemplate",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "Template created successfully",
+            "400": "Invalid template data",
+            "403": "Insufficient permissions",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessment Templates"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/assessment-templates/{id}",
+          "summary": "Get template details",
+          "description": "Get detailed information about an assessment template.",
+          "operationId": "getTemplateById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Template ID"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Template retrieved successfully",
+            "404": "Template not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessment Templates"
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/assessment-templates/{id}",
+          "summary": "Update assessment template",
+          "description": "Update an existing assessment template.",
+          "operationId": "updateTemplate",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Template ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Template updated successfully",
+            "403": "Cannot modify system template",
+            "404": "Template not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessment Templates"
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/assessment-templates/{id}",
+          "summary": "Delete assessment template",
+          "description": "Delete a custom assessment template.",
+          "operationId": "deleteTemplate",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Template ID"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Template deleted successfully",
+            "400": "Template in use",
+            "403": "Cannot delete system template",
+            "404": "Template not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessment Templates"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/assessment-templates/{id}/clone",
+          "summary": "Clone assessment template",
+          "description": "Create a copy of an existing template.",
+          "operationId": "cloneTemplate",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Template ID to clone"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "Template cloned successfully",
+            "403": "Insufficient permissions",
+            "404": "Template not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessment Templates"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/assessment-templates/{id}/preview",
+          "summary": "Preview assessment template",
+          "description": "Preview how an assessment would look using this template.",
+          "operationId": "previewTemplate",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Template ID"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Preview generated successfully",
+            "404": "Template not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessment Templates"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/assessment-templates/{id}/statistics",
+          "summary": "Get template usage statistics",
+          "description": "Get usage statistics for an assessment template.",
+          "operationId": "getTemplateStatistics",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Template ID"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Statistics retrieved successfully",
+            "404": "Template not found",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Assessment Templates"
+          ]
+        }
+      ],
+      "count": 8
+    },
+    "Authentication": {
+      "endpoints": [
+        {
+          "method": "POST",
+          "path": "/api/auth/register",
+          "summary": "Register user (proxy to IAM engine)",
+          "description": "Proxy endpoint to IAM engine for user registration. This endpoint forwards the request to the IAM microservice.",
+          "operationId": "registerUser",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Registration successful",
+            "400": "Invalid request data",
+            "500": "Registration service unavailable"
+          },
+          "isPublic": true,
+          "tags": [
+            "Authentication"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/signup",
+          "summary": "Signup new company and business owner",
+          "description": "Complete signup flow that creates: 1. New Company record 2. Business Owner user account 3. JWT authentication token",
+          "operationId": "signup",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "Account created successfully",
+            "400": "Invalid request or email already exists",
+            "500": "Server error during signup"
+          },
+          "isPublic": true,
+          "tags": [
+            "Authentication"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/login",
+          "summary": "User login",
+          "description": "Authenticate user with email and password. Returns JWT token valid for 7 days.",
+          "operationId": "login",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Login successful",
+            "400": "Missing email or password",
+            "401": "Invalid credentials",
+            "403": "Account suspended",
+            "500": "Server error during login"
+          },
+          "isPublic": true,
+          "tags": [
+            "Authentication"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/validate",
+          "summary": "Validate JWT token (proxy to IAM)",
+          "description": "Validates a JWT token by forwarding to IAM engine. Returns token validity and decoded payload. ",
+          "operationId": "validateToken",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Token validation result",
+            "500": "Token validation service unavailable"
+          },
+          "isPublic": true,
+          "tags": [
+            "Authentication"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/auth/me",
+          "summary": "Get current authenticated user",
+          "description": "Returns the authenticated user's profile information. Proxies request to IAM engine with Authorization header. ",
+          "operationId": "getCurrentUser",
+          "parameters": [],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "User profile retrieved",
+            "401": "Unauthorized - invalid or missing token",
+            "500": "User service unavailable"
+          },
+          "isPublic": false,
+          "tags": [
+            "Authentication"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/auth/logout",
+          "summary": "User logout (proxy to IAM)",
+          "description": "Logout the current user. Forwards request to IAM engine for session invalidation. ",
+          "operationId": "logout",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Logout successful",
+            "500": "Logout service unavailable"
+          },
+          "isPublic": false,
+          "tags": [
+            "Authentication"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/auth/users",
+          "summary": "Get business users",
+          "description": "Get all active users for the authenticated user's company.",
+          "operationId": "getBusinessUsers",
+          "parameters": [],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Users retrieved successfully",
+            "401": "Authentication required",
+            "500": "Server error"
+          },
+          "isPublic": false,
+          "tags": [
+            "Authentication"
+          ]
+        }
+      ],
+      "count": 7
+    },
+    "Utilities": {
+      "endpoints": [
+        {
+          "method": "POST",
+          "path": "/api/files/upload",
+          "summary": "Upload file",
+          "description": "Upload file attachments for objectives, tasks, or assessments.",
+          "operationId": "uploadFile",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "File uploaded successfully",
+            "400": "Invalid file or size exceeded",
+            "413": "File too large"
+          },
+          "isPublic": false,
+          "tags": [
+            "Utilities"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/files/{id}",
+          "summary": "Get file details",
+          "description": "Get metadata and download URL for uploaded file",
+          "operationId": "getFile",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": ""
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "File details retrieved",
+            "404": "File not found"
+          },
+          "isPublic": false,
+          "tags": [
+            "Utilities"
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/files/{id}",
+          "summary": "Delete file",
+          "description": "Delete uploaded file",
+          "operationId": "deleteFile",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": ""
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "File deleted successfully",
+            "404": "File not found"
+          },
+          "isPublic": false,
+          "tags": [
+            "Utilities"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/notifications",
+          "summary": "Get user notifications",
+          "description": "Get paginated list of notifications for the authenticated user.",
+          "operationId": "getNotifications",
+          "parameters": [
+            {
+              "name": "unreadOnly",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": ""
+            },
+            {
+              "name": "type",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": ""
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": ""
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Notifications retrieved"
+          },
+          "isPublic": false,
+          "tags": [
+            "Utilities"
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/notifications/{id}/read",
+          "summary": "Mark notification as read",
+          "description": "Mark a specific notification as read",
+          "operationId": "markNotificationRead",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": ""
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Notification marked as read",
+            "404": "Notification not found"
+          },
+          "isPublic": false,
+          "tags": [
+            "Utilities"
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/notifications/read-all",
+          "summary": "Mark all notifications as read",
+          "description": "Mark all user notifications as read",
+          "operationId": "markAllNotificationsRead",
+          "parameters": [],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "All notifications marked as read"
+          },
+          "isPublic": false,
+          "tags": [
+            "Utilities"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/search",
+          "summary": "Global search",
+          "description": "Search across objectives, goals, tasks, and users.",
+          "operationId": "globalSearch",
+          "parameters": [
+            {
+              "name": "q",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "description": "Search query"
+            },
+            {
+              "name": "types",
+              "in": "query",
+              "required": false,
+              "type": "array",
+              "description": "Entity types to search (default: all)"
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": ""
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Search results retrieved"
+          },
+          "isPublic": false,
+          "tags": [
+            "Utilities"
+          ]
+        }
+      ],
+      "count": 7
+    },
+    "OKR Cascade": {
+      "endpoints": [
+        {
+          "method": "POST",
+          "path": "/api/objectives/{id}/cascade",
+          "summary": "Cascade objective to child entities",
+          "description": "Create cascaded (child) objectives from a parent objective.",
+          "operationId": "cascadeObjective",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Parent objective ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "201": "Objectives cascaded successfully",
+            "400": "Invalid cascade configuration",
+            "404": "Parent objective not found"
+          },
+          "isPublic": false,
+          "tags": [
+            "OKR Cascade"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/objectives/{id}/cascade-tree",
+          "summary": "Get objective cascade tree",
+          "description": "Get complete cascade hierarchy for an objective.",
+          "operationId": "getCascadeTree",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Objective ID (any level in hierarchy)"
+            },
+            {
+              "name": "direction",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Navigation direction (up to parents, down to children, or both)"
+            },
+            {
+              "name": "maxDepth",
+              "in": "query",
+              "required": false,
+              "type": "integer",
+              "description": "Maximum depth to traverse"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Cascade tree retrieved",
+            "404": "Objective not found"
+          },
+          "isPublic": false,
+          "tags": [
+            "OKR Cascade"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/objectives/{childId}/link-parent",
+          "summary": "Link objective to parent",
+          "description": "Create parent-child relationship between objectives.",
+          "operationId": "linkObjectiveToParent",
+          "parameters": [
+            {
+              "name": "childId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Child objective ID"
+            }
+          ],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Objectives linked successfully",
+            "400": "Invalid linkage (circular dependency, etc.)",
+            "404": "Objective not found"
+          },
+          "isPublic": false,
+          "tags": [
+            "OKR Cascade"
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/objectives/{childId}/unlink-parent",
+          "summary": "Unlink objective from parent",
+          "description": "Remove parent-child relationship between objectives.",
+          "operationId": "unlinkObjectiveFromParent",
+          "parameters": [
+            {
+              "name": "childId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "Child objective ID"
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Objectives unlinked successfully",
+            "404": "Objective or relationship not found"
+          },
+          "isPublic": false,
+          "tags": [
+            "OKR Cascade"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/cascade/alignment-report",
+          "summary": "Get organizational alignment report",
+          "description": "Generate comprehensive alignment report across the organization.",
+          "operationId": "getAlignmentReport",
+          "parameters": [
+            {
+              "name": "companyId",
+              "in": "query",
+              "required": true,
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "startDate",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "endDate",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "departmentId",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "includeRecommendations",
+              "in": "query",
+              "required": false,
+              "type": "boolean",
+              "description": ""
+            }
+          ],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Alignment report generated",
+            "403": "Insufficient permissions"
+          },
+          "isPublic": false,
+          "tags": [
+            "OKR Cascade"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/cascade/validate",
+          "summary": "Validate cascade configuration",
+          "description": "Validate a proposed cascade before execution.",
+          "operationId": "validateCascade",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Validation completed"
+          },
+          "isPublic": false,
+          "tags": [
+            "OKR Cascade"
+          ]
+        }
+      ],
+      "count": 6
+    },
+    "Admin": {
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/admin/health",
+          "summary": "Health check endpoint",
+          "description": "Check the health and availability of the API and its dependencies.",
+          "operationId": "getHealthCheck",
+          "parameters": [],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "System is healthy",
+            "503": "Service unavailable"
+          },
+          "isPublic": true,
+          "tags": [
+            "Admin"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/admin/status",
+          "summary": "Get detailed system status",
+          "description": "Get comprehensive system status and diagnostics information.",
+          "operationId": "getSystemStatus",
+          "parameters": [],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "System status retrieved",
+            "403": "Insufficient permissions"
+          },
+          "isPublic": false,
+          "tags": [
+            "Admin"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/admin/config",
+          "summary": "Get system configuration",
+          "description": "Get current system configuration and feature flags.",
+          "operationId": "getSystemConfig",
+          "parameters": [],
+          "hasRequestBody": false,
+          "responses": {
+            "200": "Configuration retrieved",
+            "403": "Insufficient permissions"
+          },
+          "isPublic": false,
+          "tags": [
+            "Admin"
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/admin/config",
+          "summary": "Update system configuration",
+          "description": "Update system configuration and feature flags.",
+          "operationId": "updateSystemConfig",
+          "parameters": [],
+          "hasRequestBody": true,
+          "responses": {
+            "200": "Configuration updated",
+            "403": "Insufficient permissions"
+          },
+          "isPublic": false,
+          "tags": [
+            "Admin"
+          ]
+        }
+      ],
+      "count": 4
+    }
+  }
+}

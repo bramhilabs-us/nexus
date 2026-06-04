@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60">
+    <defs>
+        <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#1e3a5f"/>
+            <stop offset="100%" style="stop-color:#2d5a87"/>
+        </linearGradient>
+        <linearGradient id="flameGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" style="stop-color:#d4a853"/>
+            <stop offset="100%" style="stop-color:#f0c66e"/>
+        </linearGradient>
+    </defs>
+
+    <!-- Anvil Shape -->
+    <g transform="translate(8, 8)">
+        <!-- Anvil base -->
+        <path d="M8 38 L12 32 L32 32 L36 38 L8 38 Z" fill="url(#navyGrad)"/>
+        <!-- Anvil top -->
+        <path d="M6 32 L10 24 L34 24 L38 32 L6 32 Z" fill="url(#navyGrad)"/>
+        <!-- Anvil horn -->
+        <path d="M2 28 L10 26 L10 30 L2 28 Z" fill="url(#navyGrad)"/>
+
+        <!-- Flame/Spark above anvil -->
+        <path d="M22 4 L24 12 L28 8 L26 16 L30 14 L24 22 L22 18 L20 22 L14 14 L18 16 L16 8 L20 12 L22 4 Z" fill="url(#flameGrad)"/>
+
+        <!-- Small sparks -->
+        <circle cx="10" cy="10" r="1.5" fill="#d4a853"/>
+        <circle cx="34" cy="12" r="1" fill="#d4a853"/>
+        <circle cx="6" cy="18" r="1" fill="#d4a853"/>
+    </g>
+
+    <!-- Forge Text -->
+    <text x="58" y="32" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" fill="url(#navyGrad)">Forge</text>
+
+    <!-- AI Text -->
+    <text x="130" y="32" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="500" fill="#d4a853">AI</text>
+
+    <!-- Tagline -->
+    <text x="58" y="48" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="400" fill="#6b7280">Forge your path. AI-powered.</text>
+</svg>

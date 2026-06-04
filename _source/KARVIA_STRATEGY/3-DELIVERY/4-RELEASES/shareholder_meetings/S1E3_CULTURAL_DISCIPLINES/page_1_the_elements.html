@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E3 - Page 1: The Elements | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 30px 50px;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 20px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: #888; text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .page-title { margin-top: 4px; color: #1a1a2e; font-weight: 500; }
+
+        /* Main Content - Two Column */
+        .content {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* Left Column - GRIT */
+        .left-col {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+
+        .grit-card {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 24px;
+            color: white;
+        }
+
+        .grit-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #C9A227;
+            margin-bottom: 8px;
+        }
+
+        .grit-subtitle {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 20px;
+        }
+
+        .grit-trait {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .grit-trait:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .trait-letter {
+            width: 36px;
+            height: 36px;
+            background: #C9A227;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a2e;
+            flex-shrink: 0;
+        }
+
+        .trait-content {
+            flex: 1;
+        }
+
+        .trait-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 2px;
+        }
+
+        .trait-desc {
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.4;
+        }
+
+        .grit-note {
+            background: rgba(201, 162, 39, 0.15);
+            border-radius: 10px;
+            padding: 14px;
+            margin-top: 16px;
+        }
+
+        .grit-note-label {
+            font-size: 9px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .grit-note-text {
+            font-size: 12px;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.5;
+        }
+
+        /* Right Column - 9 Disciplines */
+        .right-col {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .disciplines-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .disciplines-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .disciplines-source {
+            font-size: 10px;
+            color: #888;
+            background: #F5F5F5;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .disciplines-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .discipline-card {
+            background: #FAFAFA;
+            border: 1px solid #F0F0F0;
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.2s;
+        }
+
+        .discipline-card:hover {
+            border-color: #C9A227;
+            background: #FFFBF0;
+        }
+
+        .discipline-number {
+            width: 24px;
+            height: 24px;
+            background: #1a1a2e;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: #C9A227;
+            margin-bottom: 10px;
+        }
+
+        .discipline-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+
+        .discipline-desc {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .discipline-observable {
+            font-size: 10px;
+            color: #888;
+            background: white;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px dashed #E0E0E0;
+        }
+
+        .discipline-observable strong {
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        /* Connection Box */
+        .connection-box {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #C9A227 0%, #D4AF37 100%);
+            border-radius: 12px;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .connection-item {
+            text-align: center;
+        }
+
+        .connection-label {
+            font-size: 9px;
+            font-weight: 600;
+            color: rgba(26,26,46,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .connection-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .connection-arrow {
+            font-size: 24px;
+            color: #1a1a2e;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .next { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 24px; }
+            .content { grid-template-columns: 1fr; gap: 24px; }
+            .disciplines-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .page { padding: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .disciplines-grid { grid-template-columns: 1fr; }
+            .connection-box { flex-direction: column; gap: 16px; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E3: Cultural Disciplines</div>
+            </div>
+            <div class="page-indicator">
+                <div>Page <span class="current">1</span> of 4</div>
+                <div class="page-title">The Elements</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Left Column - GRIT -->
+            <div class="left-col">
+                <div class="section-label">Character Model</div>
+                <div class="grit-card">
+                    <div class="grit-title">GRIT</div>
+                    <div class="grit-subtitle">Who we develop in individuals and teams</div>
+
+                    <div class="grit-trait">
+                        <div class="trait-letter">G</div>
+                        <div class="trait-content">
+                            <div class="trait-name">Growth</div>
+                            <div class="trait-desc">Commitment to continuous improvement. Always learning, never satisfied.</div>
+                        </div>
+                    </div>
+
+                    <div class="grit-trait">
+                        <div class="trait-letter">R</div>
+                        <div class="trait-content">
+                            <div class="trait-name">Resilience</div>
+                            <div class="trait-desc">Ability to recover from setbacks. Treats failures as learning.</div>
+                        </div>
+                    </div>
+
+                    <div class="grit-trait">
+                        <div class="trait-letter">I</div>
+                        <div class="trait-content">
+                            <div class="trait-name">Integrity</div>
+                            <div class="trait-desc">Doing the right thing consistently. Actions match words.</div>
+                        </div>
+                    </div>
+
+                    <div class="grit-note">
+                        <div class="grit-note-label">Key Insight</div>
+                        <div class="grit-note-text">GRIT describes <strong>who you ARE</strong>.<br>Disciplines describe <strong>what you DO</strong>.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - 9 Disciplines -->
+            <div class="right-col">
+                <div class="disciplines-header">
+                    <div>
+                        <div class="section-label">Observable Behaviors</div>
+                        <div class="disciplines-title">The 9 Disciplines</div>
+                    </div>
+                    <div class="disciplines-source">From Cultural Discipline Framework</div>
+                </div>
+
+                <div class="disciplines-grid">
+                    <div class="discipline-card">
+                        <div class="discipline-number">1</div>
+                        <div class="discipline-name">Truth</div>
+                        <div class="discipline-desc">Honest assessment of reality without spin or politics</div>
+                        <div class="discipline-observable"><strong>Observable:</strong> Accurate reporting</div>
+                    </div>
+
+                    <div class="discipline-card">
+                        <div class="discipline-number">2</div>
+                        <div class="discipline-name">Ownership</div>
+                        <div class="discipline-desc">Taking responsibility, no blame culture</div>
+                        <div class="discipline-observable"><strong>Observable:</strong> Clear accountability</div>
+                    </div>
+
+                    <div class="discipline-card">
+                        <div class="discipline-number">3</div>
+                        <div class="discipline-name">Follow-through</div>
+                        <div class="discipline-desc">Completing commitments on time</div>
+                        <div class="discipline-observable"><strong>Observable:</strong> Tasks done</div>
+                    </div>
+
+                    <div class="discipline-card">
+                        <div class="discipline-number">4</div>
+                        <div class="discipline-name">Alignment</div>
+                        <div class="discipline-desc">Moving in the same direction as a team</div>
+                        <div class="discipline-observable"><strong>Observable:</strong> Shared goals</div>
+                    </div>
+
+                    <div class="discipline-card">
+                        <div class="discipline-number">5</div>
+                        <div class="discipline-name">Foresight</div>
+                        <div class="discipline-desc">Anticipating what's coming, planning ahead</div>
+                        <div class="discipline-observable"><strong>Observable:</strong> Risk awareness</div>
+                    </div>
+
+                    <div class="discipline-card">
+                        <div class="discipline-number">6</div>
+                        <div class="discipline-name">Energy Stewardship</div>
+                        <div class="discipline-desc">Managing resources wisely, sustainable pace</div>
+                        <div class="discipline-observable"><strong>Observable:</strong> No burnout</div>
+                    </div>
+
+                    <div class="discipline-card">
+                        <div class="discipline-number">7</div>
+                        <div class="discipline-name">Handoffs</div>
+                        <div class="discipline-desc">Clean transitions, clear communication</div>
+                        <div class="discipline-observable"><strong>Observable:</strong> No drops</div>
+                    </div>
+
+                    <div class="discipline-card">
+                        <div class="discipline-number">8</div>
+                        <div class="discipline-name">Formation</div>
+                        <div class="discipline-desc">Working in small groups for execution</div>
+                        <div class="discipline-observable"><strong>Observable:</strong> Team structure</div>
+                    </div>
+
+                    <div class="discipline-card">
+                        <div class="discipline-number">9</div>
+                        <div class="discipline-name">Consistency</div>
+                        <div class="discipline-desc">Showing up the same way every day</div>
+                        <div class="discipline-observable"><strong>Observable:</strong> Predictable performance</div>
+                    </div>
+
+                    <!-- Connection Box -->
+                    <div class="connection-box">
+                        <div class="connection-item">
+                            <div class="connection-label">Character</div>
+                            <div class="connection-text">GRIT</div>
+                        </div>
+                        <div class="connection-arrow">+</div>
+                        <div class="connection-item">
+                            <div class="connection-label">Behavior</div>
+                            <div class="connection-text">Disciplines</div>
+                        </div>
+                        <div class="connection-arrow">=</div>
+                        <div class="connection-item">
+                            <div class="connection-label">Result</div>
+                            <div class="connection-text">Excellence</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="index.html">&larr; Contents</a>
+                <a href="page_2_the_mechanism.html" class="next">Next: The Mechanism &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

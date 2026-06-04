@@ -6,7 +6,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 ---
 
 ### N1-P1-01 — Snapshot Karvia docs into `_source/`
-- **Status**: READY
+- **Status**: DONE (PR pending merge — tick 2026-06-03-01)
 - **Size**: S (1 tick)
 - **Depends on**: none
 - **Definition of done**:

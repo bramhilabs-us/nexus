@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E3 - Page 4: The Future | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 30px 50px;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 16px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: #888; text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .page-title { margin-top: 4px; color: #1a1a2e; font-weight: 500; }
+
+        /* Main Content */
+        .content {
+            display: flex;
+            gap: 30px;
+        }
+
+        /* Left Side - Concentric Model */
+        .left-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .model-container {
+            position: relative;
+            width: 420px;
+            height: 420px;
+        }
+
+        /* Outer Ring - Journeys */
+        .ring-outer {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border: 2px dashed #E0E0E0;
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+        }
+
+        .ring-label {
+            position: absolute;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 10px;
+        }
+
+        .ring-outer .ring-label {
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #F5F5F5;
+            color: #888;
+        }
+
+        /* Journey Items */
+        .journey-item {
+            position: absolute;
+            font-size: 10px;
+            color: #666;
+            text-align: center;
+            max-width: 80px;
+        }
+
+        .journey-item.top { top: 15px; left: 50%; transform: translateX(-50%); }
+        .journey-item.right { top: 50%; right: -60px; transform: translateY(-50%); }
+        .journey-item.bottom { bottom: 15px; left: 50%; transform: translateX(-50%); }
+        .journey-item.left { top: 50%; left: -60px; transform: translateY(-50%); }
+
+        .journey-icon {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        /* Middle Ring - Screens */
+        .ring-middle {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 2px dashed #C9A227;
+            border-radius: 50%;
+            top: 60px;
+            left: 60px;
+        }
+
+        .ring-middle .ring-label {
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        /* Screen Items */
+        .screen-item {
+            position: absolute;
+            background: white;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 10px;
+            font-weight: 500;
+            color: #1a1a2e;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .screen-item.top-left { top: 40px; left: 20px; }
+        .screen-item.top-right { top: 40px; right: 20px; }
+        .screen-item.bottom-left { bottom: 40px; left: 20px; }
+        .screen-item.bottom-right { bottom: 40px; right: 20px; }
+
+        /* Inner Circle - Game Rules */
+        .ring-inner {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            background: #1a1a2e;
+            border-radius: 50%;
+            top: 130px;
+            left: 130px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(26,26,46,0.3);
+        }
+
+        .inner-label {
+            font-size: 8px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+
+        .inner-text {
+            font-size: 14px;
+            color: white;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .inner-text em {
+            font-style: normal;
+            color: #C9A227;
+        }
+
+        /* Right Side - Details */
+        .right-side {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 400;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+
+        .section-title em {
+            font-style: normal;
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 16px;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .detail-card {
+            background: #FAFAFA;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #F0F0F0;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .card-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .card-icon.rules { background: #1a1a2e; }
+        .card-icon.screens { background: #FEF3C7; }
+        .card-icon.journeys { background: #E3F2FD; }
+        .card-icon.stories { background: #FCE4EC; }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .card-list {
+            list-style: none;
+        }
+
+        .card-list li {
+            font-size: 11px;
+            color: #666;
+            padding: 6px 0;
+            border-bottom: 1px solid #F0F0F0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-list li:last-child {
+            border-bottom: none;
+        }
+
+        .card-list li::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: #C9A227;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Bottom CTA */
+        .bottom-cta {
+            background: linear-gradient(135deg, #C9A227 0%, #D4AF37 100%);
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        .cta-text {
+            font-size: 14px;
+            color: #1a1a2e;
+            line-height: 1.5;
+        }
+
+        .cta-text strong {
+            font-weight: 600;
+        }
+
+        .cta-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .cta-label {
+            font-size: 9px;
+            font-weight: 600;
+            color: rgba(26,26,46,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button {
+            background: #1a1a2e;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .complete { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 24px; }
+            .content { flex-direction: column; gap: 30px; }
+            .model-container { width: 320px; height: 320px; }
+            .ring-outer { width: 320px; height: 320px; }
+            .ring-middle { width: 220px; height: 220px; top: 50px; left: 50px; }
+            .ring-inner { width: 120px; height: 120px; top: 100px; left: 100px; }
+            .journey-item { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .page { padding: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .bottom-cta { flex-direction: column; gap: 16px; text-align: center; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E3: Cultural Disciplines</div>
+            </div>
+            <div class="page-indicator">
+                <div>Page <span class="current">4</span> of 4</div>
+                <div class="page-title">The Future</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Left Side - Visual Model -->
+            <div class="left-side">
+                <div class="model-container">
+                    <!-- Outer Ring: User Journeys -->
+                    <div class="ring-outer">
+                        <div class="ring-label">User Journeys</div>
+                        <div class="journey-item top">
+                            <div class="journey-icon">&#128101;</div>
+                            Onboarding
+                        </div>
+                        <div class="journey-item right">
+                            <div class="journey-icon">&#127919;</div>
+                            Planning
+                        </div>
+                        <div class="journey-item bottom">
+                            <div class="journey-icon">&#9889;</div>
+                            Execution
+                        </div>
+                        <div class="journey-item left">
+                            <div class="journey-icon">&#128202;</div>
+                            Reflection
+                        </div>
+                    </div>
+
+                    <!-- Middle Ring: Screens -->
+                    <div class="ring-middle">
+                        <div class="ring-label">Screens</div>
+                        <div class="screen-item top-left">Dashboard</div>
+                        <div class="screen-item top-right">Assessment</div>
+                        <div class="screen-item bottom-left">Planning</div>
+                        <div class="screen-item bottom-right">Teams</div>
+                    </div>
+
+                    <!-- Inner Circle: Game Rules -->
+                    <div class="ring-inner">
+                        <div class="inner-label">Game Rules</div>
+                        <div class="inner-text">
+                            <em>GRIT</em> +<br>
+                            <em>Disciplines</em><br>
+                            = Excellence
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Details -->
+            <div class="right-side">
+                <div>
+                    <div class="section-title">
+                        Everything flows from <em>Disciplines</em>
+                    </div>
+                    <div class="section-subtitle">
+                        This framework defines every question about YSELA
+                    </div>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="detail-card">
+                        <div class="card-header">
+                            <div class="card-icon rules">&#127922;</div>
+                            <div class="card-title">Game Rules</div>
+                        </div>
+                        <ul class="card-list">
+                            <li>GRIT defines who we develop</li>
+                            <li>9 Disciplines define behaviors</li>
+                            <li>Flow Model defines how change happens</li>
+                            <li>Football illustrates excellence</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="card-header">
+                            <div class="card-icon screens">&#128187;</div>
+                            <div class="card-title">Screens</div>
+                        </div>
+                        <ul class="card-list">
+                            <li>Dashboard shows discipline health</li>
+                            <li>Assessment measures GRIT traits</li>
+                            <li>Planning enables alignment discipline</li>
+                            <li>Teams enable formation discipline</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="card-header">
+                            <div class="card-icon journeys">&#128736;</div>
+                            <div class="card-title">User Journeys</div>
+                        </div>
+                        <ul class="card-list">
+                            <li>Onboarding: Learn the disciplines</li>
+                            <li>Planning: Practice alignment + foresight</li>
+                            <li>Execution: Practice follow-through</li>
+                            <li>Reflection: Build truth + ownership</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="card-header">
+                            <div class="card-icon stories">&#128221;</div>
+                            <div class="card-title">User Stories</div>
+                        </div>
+                        <ul class="card-list">
+                            <li>As a manager, I practice handoffs</li>
+                            <li>As an employee, I practice ownership</li>
+                            <li>As a consultant, I observe disciplines</li>
+                            <li>As an owner, I see discipline maturity</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Bottom CTA -->
+                <div class="bottom-cta">
+                    <div class="cta-text">
+                        <strong>Every design decision answers one question:</strong><br>
+                        "Does this help teams practice the disciplines?"
+                    </div>
+                    <div class="cta-action">
+                        <div class="cta-label">Next Step</div>
+                        <a href="index.html" class="cta-button">Stakeholder Approval</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_3_the_measurement.html">&larr; The Measurement</a>
+                <a href="index.html" class="complete">Back to Contents &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

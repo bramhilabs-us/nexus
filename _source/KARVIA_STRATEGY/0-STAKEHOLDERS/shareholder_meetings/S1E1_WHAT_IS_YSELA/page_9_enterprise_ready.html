@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E1 - Page 9: Enterprise Ready | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 24px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: #888; text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .section-badge {
+            display: inline-block;
+            background: #EEF2FF;
+            color: #4F46E5;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-bottom: 4px;
+        }
+
+        /* Main Content */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        /* Left - Enterprise Ready */
+        .enterprise-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .main-title {
+            font-size: 38px;
+            font-weight: 300;
+            color: #1a1a2e;
+            line-height: 1.2;
+        }
+
+        .main-title em {
+            font-style: normal;
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        .enterprise-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: #EEF2FF;
+            color: #4F46E5;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .investment-box {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .investment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 16px;
+        }
+
+        .investment-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .investment-value {
+            font-size: 42px;
+            font-weight: 700;
+            color: #C9A227;
+        }
+
+        .investment-breakdown {
+            display: flex;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .breakdown-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .breakdown-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 2px;
+        }
+
+        .breakdown-label {
+            font-size: 9px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Right - What's Included */
+        .included-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .included-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a2e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flip-hint {
+            font-size: 10px;
+            color: #888;
+            font-weight: 400;
+        }
+
+        .tier-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        /* Flip Card Styles */
+        .flip-card {
+            perspective: 1000px;
+            height: 100px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .flip-card-front {
+            background: #D1FAE5;
+            border: 1px solid #10B981;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .flip-card-back {
+            background: #1a1a2e;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .flip-card.gold .flip-card-front {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-color: #C9A227;
+        }
+
+        .flip-card.gold .flip-card-back {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4a 100%);
+        }
+
+        .tier-front-icon {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .tier-front-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 2px;
+        }
+
+        .tier-front-desc {
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Back Card Content */
+        .cost-header {
+            font-size: 10px;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: rgba(255,255,255,0.8);
+            padding: 2px 0;
+        }
+
+        .cost-row .label {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .cost-row .value {
+            font-weight: 600;
+            color: #C9A227;
+        }
+
+        .cost-total {
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .cost-total .label { color: white; }
+        .cost-total .value { color: #C9A227; }
+
+        /* Advisory Box */
+        .advisory-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d4a 100%);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 4px;
+        }
+
+        .advisory-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .advisory-icon {
+            width: 32px;
+            height: 32px;
+            background: #C9A227;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .advisory-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .advisory-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6px;
+        }
+
+        .advisory-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .advisory-item::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: #C9A227;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .next { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 20px; gap: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .page-indicator { text-align: left; }
+            .content { grid-template-columns: 1fr; gap: 30px; }
+            .main-title { font-size: 28px; }
+            .investment-value { font-size: 32px; }
+            .tier-cards { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .flip-card { height: 90px; }
+            .flip-card-front, .flip-card-back { padding: 12px; }
+            .tier-front-name { font-size: 12px; }
+            .tier-front-desc { font-size: 9px; }
+            .advisory-items { grid-template-columns: 1fr 1fr; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .main-title { font-size: 24px; }
+            .investment-value { font-size: 28px; }
+            .tier-cards { grid-template-columns: 1fr; }
+            .flip-card { height: 80px; }
+            .advisory-items { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E1: What Is YSELA, Really?</div>
+            </div>
+            <div class="page-indicator">
+                <div class="section-badge">Section 2: Capabilities</div>
+                <div>Page <span class="current">9</span> of 12</div>
+                <div style="margin-top: 4px; color: #1a1a2e; font-weight: 500;">Enterprise Ready</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Left - Enterprise Ready -->
+            <div class="enterprise-section">
+                <div class="section-label">Full Platform</div>
+
+                <div class="main-title">
+                    Platform plus<br>
+                    <em>partnership</em>.
+                </div>
+
+                <div class="enterprise-badge">
+                    <span>&#128142;</span>
+                    Enterprise Tier
+                </div>
+
+                <div class="investment-box">
+                    <div class="investment-header">
+                        <span class="investment-label">Total Investment</span>
+                        <span class="investment-value">$1.65M</span>
+                    </div>
+                    <div class="investment-breakdown">
+                        <div class="breakdown-item" style="opacity: 0.6;">
+                            <div class="breakdown-value">$150K</div>
+                            <div class="breakdown-label">MVP (Done)</div>
+                        </div>
+                        <div class="breakdown-item" style="border-left: 2px solid #C9A227; padding-left: 12px;">
+                            <div class="breakdown-value" style="color: #C9A227;">$1.5M</div>
+                            <div class="breakdown-label">Jun 26 - Jun 27</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 16px; font-size: 10px; color: rgba(255,255,255,0.5);">
+                        <div>Dev: $400K</div>
+                        <div>Enterprise: $450K</div>
+                        <div>Self-hosted LLM: $350K</div>
+                        <div>Ops: $300K</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right - What's Included -->
+            <div class="included-section">
+                <div class="included-header">
+                    Everything in Scale Ready, plus:
+                    <span class="flip-hint">Hover cards for cost breakdown</span>
+                </div>
+
+                <div class="tier-cards">
+                    <!-- Infrastructure Ready -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="tier-front-icon">&#10003;</div>
+                                <div class="tier-front-name">Infrastructure Ready</div>
+                                <div class="tier-front-desc">750+ points, MVP complete</div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="cost-header">Cost Breakdown</div>
+                                <div class="cost-row"><span class="label">HR (Dev Team)</span><span class="value">$100K</span></div>
+                                <div class="cost-row"><span class="label">Infrastructure</span><span class="value">$30K</span></div>
+                                <div class="cost-row"><span class="label">Operations</span><span class="value">$20K</span></div>
+                                <div class="cost-total"><span class="label">Total</span><span class="value">$150K</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scale Ready -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="tier-front-icon">&#10003;</div>
+                                <div class="tier-front-name">Scale Ready</div>
+                                <div class="tier-front-desc">Production hardening, integrations</div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="cost-header">Cost Breakdown</div>
+                                <div class="cost-row"><span class="label">HR (Dev Team)</span><span class="value">$300K</span></div>
+                                <div class="cost-row"><span class="label">Infrastructure</span><span class="value">$100K</span></div>
+                                <div class="cost-row"><span class="label">Compliance (SOC 2)</span><span class="value">$100K</span></div>
+                                <div class="cost-row"><span class="label">Operations</span><span class="value">$150K</span></div>
+                                <div class="cost-total"><span class="label">Total</span><span class="value">$650K</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enterprise Features -->
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="tier-front-icon">&#10003;</div>
+                                <div class="tier-front-name">Enterprise Features</div>
+                                <div class="tier-front-desc">SSO, analytics, API access</div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="cost-header">Cost Breakdown</div>
+                                <div class="cost-row"><span class="label">HR (Dev Team)</span><span class="value">$200K</span></div>
+                                <div class="cost-row"><span class="label">SSO/SAML Integrations</span><span class="value">$80K</span></div>
+                                <div class="cost-row"><span class="label">Analytics Platform</span><span class="value">$100K</span></div>
+                                <div class="cost-row"><span class="label">HIPAA Compliance</span><span class="value">$70K</span></div>
+                                <div class="cost-total"><span class="label">Total</span><span class="value">$450K</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Self-Hosted LLM -->
+                    <div class="flip-card gold">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="tier-front-icon">&#129504;</div>
+                                <div class="tier-front-name">Self-Hosted LLM</div>
+                                <div class="tier-front-desc">Private AI gateway, data local</div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div class="cost-header">Cost Breakdown</div>
+                                <div class="cost-row"><span class="label">GPU Infrastructure</span><span class="value">$120K</span></div>
+                                <div class="cost-row"><span class="label">HR (ML Engineers)</span><span class="value">$130K</span></div>
+                                <div class="cost-row"><span class="label">Fine-tuning/Training</span><span class="value">$50K</span></div>
+                                <div class="cost-row"><span class="label">ML Ops & Monitoring</span><span class="value">$50K</span></div>
+                                <div class="cost-total"><span class="label">Total</span><span class="value">$350K</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="advisory-box">
+                    <div class="advisory-header">
+                        <div class="advisory-icon">&#128188;</div>
+                        <div class="advisory-title">Advisory Services</div>
+                    </div>
+                    <div class="advisory-items">
+                        <div class="advisory-item">Success manager</div>
+                        <div class="advisory-item">Quarterly reviews</div>
+                        <div class="advisory-item">Custom implementation</div>
+                        <div class="advisory-item">Priority SLA</div>
+                        <div class="advisory-item">Training workshops</div>
+                        <div class="advisory-item">White-label options</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_8_scale_ready.html">&larr; Scale Ready</a>
+                <a href="page_10_the_investment.html" class="next">Next: The Investment &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

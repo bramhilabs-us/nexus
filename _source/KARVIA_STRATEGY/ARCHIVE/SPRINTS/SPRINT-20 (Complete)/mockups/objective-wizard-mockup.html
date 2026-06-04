@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprint 20 Mockup - Intelligent Objective Creation Wizard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           SPRINT 20 - OBJECTIVE WIZARD MOCKUP
+           Tesla-Inspired Minimalist Design
+           ============================================================ */
+
+        :root {
+            --karvia-primary: #7C3AED;
+            --karvia-primary-light: #A78BFA;
+            --karvia-primary-dark: #5B21B6;
+            --karvia-primary-bg: #F5F3FF;
+            --karvia-gray-50: #F9FAFB;
+            --karvia-gray-100: #F3F4F6;
+            --karvia-gray-200: #E5E7EB;
+            --karvia-gray-300: #D1D5DB;
+            --karvia-gray-400: #9CA3AF;
+            --karvia-gray-500: #6B7280;
+            --karvia-gray-600: #4B5563;
+            --karvia-gray-700: #374151;
+            --karvia-gray-800: #1F2937;
+            --karvia-gray-900: #111827;
+            --karvia-success: #10B981;
+            --karvia-success-bg: #ECFDF5;
+        }
+
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: var(--karvia-gray-50);
+            min-height: 100vh;
+        }
+
+        /* Tesla Principle: Maximum negative space */
+        .wizard-container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 48px 24px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Step Indicator - Minimal dots */
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+
+        .step-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--karvia-gray-300);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active {
+            width: 32px;
+            border-radius: 4px;
+            background: var(--karvia-primary);
+        }
+
+        .step-dot.completed {
+            background: var(--karvia-success);
+        }
+
+        /* Tesla Principle: Single focused question */
+        .wizard-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--karvia-gray-900);
+            text-align: center;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .wizard-subtitle {
+            font-size: 16px;
+            color: var(--karvia-gray-500);
+            text-align: center;
+            margin-bottom: 48px;
+            line-height: 1.5;
+        }
+
+        /* Category Cards - Clean selection */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .category-card {
+            padding: 24px;
+            background: white;
+            border: 2px solid var(--karvia-gray-200);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .category-card:hover {
+            border-color: var(--karvia-primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+        }
+
+        .category-card.selected {
+            border-color: var(--karvia-primary);
+            background: var(--karvia-primary-bg);
+        }
+
+        .category-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .category-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--karvia-gray-800);
+            margin-bottom: 4px;
+        }
+
+        .category-desc {
+            font-size: 12px;
+            color: var(--karvia-gray-500);
+        }
+
+        /* Priority Pills - Horizontal selection */
+        .priority-section {
+            margin-bottom: 48px;
+        }
+
+        .priority-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--karvia-gray-600);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .priority-pills {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .priority-pill {
+            padding: 12px 32px;
+            background: white;
+            border: 2px solid var(--karvia-gray-200);
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--karvia-gray-700);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .priority-pill:hover {
+            border-color: var(--karvia-primary-light);
+        }
+
+        .priority-pill.selected {
+            border-color: var(--karvia-primary);
+            background: var(--karvia-primary);
+            color: white;
+        }
+
+        /* Tesla Principle: Generous text input */
+        .text-input-container {
+            margin-bottom: 32px;
+        }
+
+        .text-input {
+            width: 100%;
+            min-height: 160px;
+            padding: 24px;
+            background: white;
+            border: 2px solid var(--karvia-gray-200);
+            border-radius: 16px;
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--karvia-gray-800);
+            resize: none;
+            transition: all 0.2s ease;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--karvia-primary);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+        }
+
+        .text-input::placeholder {
+            color: var(--karvia-gray-400);
+        }
+
+        /* SMART Tips - Subtle guidance */
+        .smart-tips {
+            background: var(--karvia-gray-50);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 48px;
+        }
+
+        .smart-tips-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--karvia-gray-600);
+            margin-bottom: 12px;
+        }
+
+        .smart-tips-list {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .smart-tip {
+            font-size: 11px;
+            color: var(--karvia-gray-500);
+            text-align: center;
+        }
+
+        .smart-tip strong {
+            display: block;
+            font-size: 12px;
+            color: var(--karvia-primary);
+            margin-bottom: 2px;
+        }
+
+        /* Refined Objective Display */
+        .refined-objective {
+            background: white;
+            border: 2px solid var(--karvia-success);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .refined-badge {
+            position: absolute;
+            top: -12px;
+            left: 24px;
+            background: var(--karvia-success);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .refined-text {
+            font-size: 20px;
+            line-height: 1.5;
+            color: var(--karvia-gray-900);
+            font-weight: 500;
+        }
+
+        .refined-edit-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--karvia-gray-100);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--karvia-gray-500);
+            transition: all 0.2s ease;
+        }
+
+        .refined-edit-btn:hover {
+            background: var(--karvia-gray-200);
+            color: var(--karvia-gray-700);
+        }
+
+        /* Metadata Fields */
+        .metadata-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .metadata-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .metadata-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--karvia-gray-600);
+        }
+
+        .metadata-select {
+            padding: 12px 16px;
+            background: white;
+            border: 1px solid var(--karvia-gray-200);
+            border-radius: 10px;
+            font-size: 14px;
+            color: var(--karvia-gray-800);
+            cursor: pointer;
+        }
+
+        .metadata-select:focus {
+            outline: none;
+            border-color: var(--karvia-primary);
+        }
+
+        /* Timeline Pills */
+        .timeline-pills {
+            display: flex;
+            gap: 8px;
+        }
+
+        .timeline-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 14px;
+            background: white;
+            border: 1px solid var(--karvia-gray-200);
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--karvia-gray-600);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .timeline-pill:hover {
+            border-color: var(--karvia-primary-light);
+            background: var(--karvia-primary-bg);
+        }
+
+        .timeline-pill.selected {
+            border-color: var(--karvia-primary);
+            background: var(--karvia-primary-bg);
+            color: var(--karvia-primary);
+        }
+
+        .timeline-icon {
+            font-size: 14px;
+        }
+
+        /* KR Cards */
+        .kr-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--karvia-gray-800);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .kr-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .kr-card {
+            background: white;
+            border: 1px solid var(--karvia-gray-200);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .kr-card:hover {
+            border-color: var(--karvia-primary-light);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .kr-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: var(--karvia-primary-bg);
+            color: var(--karvia-primary);
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .kr-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .kr-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--karvia-gray-900);
+            margin-bottom: 4px;
+        }
+
+        .kr-metric {
+            font-size: 13px;
+            color: var(--karvia-gray-500);
+        }
+
+        .kr-regenerate {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: transparent;
+            border: 1px solid var(--karvia-gray-200);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--karvia-gray-400);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .kr-regenerate:hover {
+            background: var(--karvia-gray-50);
+            border-color: var(--karvia-primary);
+            color: var(--karvia-primary);
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 32px;
+        }
+
+        .btn-back {
+            padding: 14px 28px;
+            background: transparent;
+            border: 1px solid var(--karvia-gray-300);
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--karvia-gray-600);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-back:hover {
+            background: var(--karvia-gray-50);
+            border-color: var(--karvia-gray-400);
+        }
+
+        .btn-next {
+            padding: 14px 36px;
+            background: var(--karvia-primary);
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-next:hover {
+            background: var(--karvia-primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-next:disabled {
+            background: var(--karvia-gray-300);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Loading State */
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--karvia-gray-200);
+            border-top-color: var(--karvia-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 24px;
+            font-size: 16px;
+            color: var(--karvia-gray-600);
+            font-weight: 500;
+        }
+
+        .loading-subtext {
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--karvia-gray-400);
+        }
+
+        /* Screen Switcher (for mockup only) */
+        .mockup-nav {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--karvia-gray-900);
+            padding: 8px;
+            border-radius: 12px;
+            display: flex;
+            gap: 4px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 200;
+        }
+
+        .mockup-nav button {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--karvia-gray-400);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .mockup-nav button:hover {
+            color: white;
+        }
+
+        .mockup-nav button.active {
+            background: var(--karvia-primary);
+            color: white;
+        }
+
+        /* Hide screens by default */
+        .screen { display: none; }
+        .screen.active { display: flex; flex-direction: column; flex: 1; }
+
+        /* AI Reasoning Toast */
+        .ai-reasoning {
+            background: linear-gradient(135deg, var(--karvia-primary-bg) 0%, white 100%);
+            border: 1px solid var(--karvia-primary-light);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .ai-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--karvia-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .ai-content {
+            flex: 1;
+        }
+
+        .ai-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--karvia-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .ai-text {
+            font-size: 14px;
+            color: var(--karvia-gray-700);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================================
+         SCREEN 1: CATEGORY + PRIORITY
+         Tesla Principle: One clear choice at a time
+         ============================================================ -->
+    <div id="screen1" class="screen active">
+        <div class="wizard-container">
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step-dot active"></div>
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
+            </div>
+
+            <!-- Question -->
+            <h1 class="wizard-title">Which area needs attention?</h1>
+            <p class="wizard-subtitle">Select the strategic focus for your new objective</p>
+
+            <!-- Category Grid - Uses server/config/categories.js enum values -->
+            <div class="category-grid">
+                <div class="category-card" onclick="selectCategory(this, 'growth')">
+                    <div class="category-icon">📈</div>
+                    <div class="category-label">Growth</div>
+                    <div class="category-desc">Revenue growth, market expansion, sales targets</div>
+                </div>
+                <div class="category-card selected" onclick="selectCategory(this, 'customer_success')">
+                    <div class="category-icon">🤝</div>
+                    <div class="category-label">Customer Success</div>
+                    <div class="category-desc">Customer satisfaction, retention, experience</div>
+                </div>
+                <div class="category-card" onclick="selectCategory(this, 'operations')">
+                    <div class="category-icon">⚙️</div>
+                    <div class="category-label">Operations</div>
+                    <div class="category-desc">Process efficiency, quality, delivery</div>
+                </div>
+                <div class="category-card" onclick="selectCategory(this, 'people_culture')">
+                    <div class="category-icon">👥</div>
+                    <div class="category-label">People & Culture</div>
+                    <div class="category-desc">Team development, engagement, culture</div>
+                </div>
+                <div class="category-card" onclick="selectCategory(this, 'innovation')">
+                    <div class="category-icon">💡</div>
+                    <div class="category-label">Innovation</div>
+                    <div class="category-desc">Product development, R&D, new capabilities</div>
+                </div>
+                <div class="category-card" onclick="selectCategory(this, 'financial_health')">
+                    <div class="category-icon">💰</div>
+                    <div class="category-label">Financial Health</div>
+                    <div class="category-desc">Profitability, cost management, stability</div>
+                </div>
+            </div>
+
+            <!-- Priority Selection -->
+            <div class="priority-section">
+                <div class="priority-label">How urgent is this?</div>
+                <div class="priority-pills">
+                    <div class="priority-pill selected" onclick="selectPriority(this, 'high')">High</div>
+                    <div class="priority-pill" onclick="selectPriority(this, 'medium')">Medium</div>
+                    <div class="priority-pill" onclick="selectPriority(this, 'low')">Low</div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <button class="btn-back" onclick="window.location.href='/pages/objectives.html'">Cancel</button>
+                <button class="btn-next" onclick="goToScreen(2)">
+                    Continue
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 8h10M9 4l4 4-4 4"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         SCREEN 2: WHAT DO YOU WANT TO ACHIEVE?
+         Tesla Principle: Single focused input
+         ============================================================ -->
+    <div id="screen2" class="screen">
+        <div class="wizard-container">
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step-dot completed"></div>
+                <div class="step-dot active"></div>
+                <div class="step-dot"></div>
+            </div>
+
+            <!-- Question -->
+            <h1 class="wizard-title">What do you want to achieve?</h1>
+            <p class="wizard-subtitle">Describe your goal in your own words. AI will help refine it.</p>
+
+            <!-- Text Input -->
+            <div class="text-input-container">
+                <textarea
+                    class="text-input"
+                    placeholder="e.g., We need to create a customer onboarding process that helps new users get value from our product faster..."
+                    id="whatInput"
+                >We need to create a customer onboarding document, by onboarding a customer - person who pays</textarea>
+            </div>
+
+            <!-- SMART Tips -->
+            <div class="smart-tips">
+                <div class="smart-tips-header">
+                    <span>💡</span>
+                    <span>Great objectives are SMART</span>
+                </div>
+                <div class="smart-tips-list">
+                    <div class="smart-tip">
+                        <strong>S</strong>
+                        Specific
+                    </div>
+                    <div class="smart-tip">
+                        <strong>M</strong>
+                        Measurable
+                    </div>
+                    <div class="smart-tip">
+                        <strong>A</strong>
+                        Achievable
+                    </div>
+                    <div class="smart-tip">
+                        <strong>R</strong>
+                        Relevant
+                    </div>
+                    <div class="smart-tip">
+                        <strong>T</strong>
+                        Time-bound
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <button class="btn-back" onclick="goToScreen(1)">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                        <path d="M13 8H3M7 4l-4 4 4 4"/>
+                    </svg>
+                    Back
+                </button>
+                <button class="btn-next" onclick="goToScreen(3)">
+                    Refine with AI
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 8h10M9 4l4 4-4 4"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         LOADING STATE: AI REFINING
+         ============================================================ -->
+    <div id="loadingScreen" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">AI is refining your objective...</div>
+        <div class="loading-subtext">This usually takes 2-3 seconds</div>
+    </div>
+
+    <!-- ============================================================
+         SCREEN 3: REFINED OBJECTIVE + KRs
+         Tesla Principle: Review and approve
+         ============================================================ -->
+    <div id="screen3" class="screen">
+        <div class="wizard-container">
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step-dot completed"></div>
+                <div class="step-dot completed"></div>
+                <div class="step-dot active"></div>
+            </div>
+
+            <!-- Question -->
+            <h1 class="wizard-title">Review your objective</h1>
+            <p class="wizard-subtitle">AI has refined your goal. Edit if needed, then generate Key Results.</p>
+
+            <!-- AI Reasoning -->
+            <div class="ai-reasoning">
+                <div class="ai-icon">✨</div>
+                <div class="ai-content">
+                    <div class="ai-label">AI Enhancement</div>
+                    <div class="ai-text">I've made your objective more specific by adding a measurable outcome (time-to-value reduction) and a clear deadline (Q2 2026). This aligns with your Customer Success focus.</div>
+                </div>
+            </div>
+
+            <!-- Refined Objective -->
+            <div class="refined-objective">
+                <div class="refined-badge">
+                    <span>✓</span>
+                    <span>AI Refined</span>
+                </div>
+                <div class="refined-text">
+                    Create a comprehensive customer onboarding playbook that reduces time-to-value from 14 days to 7 days for new paying customers by Q2 2026
+                </div>
+                <button class="refined-edit-btn" title="Edit objective">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4l1 1-7 7H4v-1l7-7z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Metadata -->
+            <div class="metadata-row">
+                <div class="metadata-field">
+                    <label class="metadata-label">Owner</label>
+                    <select class="metadata-select">
+                        <option selected>stringsounds@gmail.com</option>
+                        <option>team.member@company.com</option>
+                    </select>
+                </div>
+                <div class="metadata-field">
+                    <label class="metadata-label">Timeline</label>
+                    <div class="timeline-pills">
+                        <div class="timeline-pill selected" onclick="selectTimeline(this, 'asap')">
+                            <span class="timeline-icon">⚡</span>
+                            <span>ASAP</span>
+                        </div>
+                        <div class="timeline-pill" onclick="selectTimeline(this, 'month')">
+                            <span class="timeline-icon">📅</span>
+                            <span>This Month</span>
+                        </div>
+                        <div class="timeline-pill" onclick="selectTimeline(this, 'quarter')">
+                            <span class="timeline-icon">📊</span>
+                            <span>This Quarter</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generate KRs Button (before KRs are generated) -->
+            <div id="generateKRsSection" style="display: none;">
+                <button class="btn-next" style="width: 100%; justify-content: center;" onclick="showKRs()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    Generate Key Results
+                </button>
+            </div>
+
+            <!-- KRs Section (after generation) -->
+            <div id="krsSection">
+                <div class="kr-section-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    Key Results
+                </div>
+                <div class="kr-grid">
+                    <div class="kr-card">
+                        <div class="kr-number">1</div>
+                        <div class="kr-content">
+                            <div class="kr-title">Document 100% of onboarding steps in a digital playbook</div>
+                            <div class="kr-metric">Target: 100% coverage by end of Month 1</div>
+                        </div>
+                        <button class="kr-regenerate" title="Regenerate this KR">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 4v6h6M23 20v-6h-6"/>
+                                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="kr-card">
+                        <div class="kr-number">2</div>
+                        <div class="kr-content">
+                            <div class="kr-title">Achieve 90% customer satisfaction score in onboarding surveys</div>
+                            <div class="kr-metric">Baseline: 72% → Target: 90%</div>
+                        </div>
+                        <button class="kr-regenerate" title="Regenerate this KR">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 4v6h6M23 20v-6h-6"/>
+                                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="kr-card">
+                        <div class="kr-number">3</div>
+                        <div class="kr-content">
+                            <div class="kr-title">Reduce support tickets from new customers by 40%</div>
+                            <div class="kr-metric">Baseline: 8.5 tickets/customer → Target: 5.1</div>
+                        </div>
+                        <button class="kr-regenerate" title="Regenerate this KR">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 4v6h6M23 20v-6h-6"/>
+                                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="kr-card">
+                        <div class="kr-number">4</div>
+                        <div class="kr-content">
+                            <div class="kr-title">Train 100% of customer-facing team on new playbook</div>
+                            <div class="kr-metric">Target: 12 team members certified</div>
+                        </div>
+                        <button class="kr-regenerate" title="Regenerate this KR">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 4v6h6M23 20v-6h-6"/>
+                                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="nav-buttons">
+                <button class="btn-back" onclick="goToScreen(2)">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                        <path d="M13 8H3M7 4l-4 4 4 4"/>
+                    </svg>
+                    Back
+                </button>
+                <button class="btn-next" style="background: #10B981;">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12l5 5L20 7"/>
+                    </svg>
+                    Create Objective
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         MOCKUP NAVIGATION (Remove in production)
+         ============================================================ -->
+    <div class="mockup-nav">
+        <button class="active" onclick="goToScreen(1)">Screen 1</button>
+        <button onclick="goToScreen(2)">Screen 2</button>
+        <button onclick="showLoading()">Loading</button>
+        <button onclick="goToScreen(3)">Screen 3</button>
+    </div>
+
+    <script>
+        function selectCategory(el, value) {
+            document.querySelectorAll('.category-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function selectPriority(el, value) {
+            document.querySelectorAll('.priority-pill').forEach(p => p.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function selectTimeline(el, value) {
+            document.querySelectorAll('.timeline-pill').forEach(t => t.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function goToScreen(num) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('screen' + num).classList.add('active');
+            document.getElementById('loadingScreen').style.display = 'none';
+
+            // Update mockup nav
+            document.querySelectorAll('.mockup-nav button').forEach((b, i) => {
+                b.classList.toggle('active', i === num - 1);
+            });
+        }
+
+        function showLoading() {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('loadingScreen').style.display = 'flex';
+
+            // Simulate loading then go to screen 3
+            setTimeout(() => {
+                goToScreen(3);
+            }, 2000);
+        }
+
+        function showKRs() {
+            document.getElementById('generateKRsSection').style.display = 'none';
+            document.getElementById('krsSection').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

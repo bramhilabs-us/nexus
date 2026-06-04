@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E1 - Page 11: The Math | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 20px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: #888; text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .section-badge {
+            display: inline-block;
+            background: #FEF3C7;
+            color: #D97706;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-bottom: 4px;
+        }
+
+        /* Main Content */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        /* Left - Visual Chart */
+        .chart-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 24px;
+        }
+
+        .chart-container {
+            background: #FAFAFA;
+            border-radius: 20px;
+            padding: 30px;
+            height: 320px;
+            position: relative;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 220px;
+            padding-top: 20px;
+        }
+
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bar {
+            width: 32px;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+        }
+
+        .bar.cost { background: linear-gradient(180deg, #818CF8 0%, #6366F1 100%); }
+        .bar.revenue { background: linear-gradient(180deg, #34D399 0%, #10B981 100%); }
+
+        .bar-value {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 9px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .bar.cost .bar-value { color: #6366F1; }
+        .bar.revenue .bar-value { color: #10B981; }
+
+        .bar-label {
+            font-size: 9px;
+            color: #888;
+        }
+
+        .bar-group {
+            min-width: 45px;
+        }
+
+        .bars-wrapper {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        .legend-dot.cost { background: #6366F1; }
+        .legend-dot.revenue { background: #10B981; }
+
+        /* Right - Projections */
+        .projections {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .projection-card {
+            background: #FAFAFA;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #F0F0F0;
+        }
+
+        .projection-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .projection-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .projection-tier {
+            font-size: 10px;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .tier-scale {
+            background: #D1FAE5;
+            color: #059669;
+        }
+
+        .projection-main {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .projection-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .projection-suffix {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .projection-detail {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Timeline */
+        .timeline-visual {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .timeline-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .timeline-note {
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .timeline-bar {
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #EF4444 0%, #F59E0B 40%, #10B981 100%);
+            border-radius: 8px;
+        }
+
+        .timeline-markers {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .timeline-marker {
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .timeline-marker.highlight {
+            color: #C9A227;
+            font-weight: 600;
+        }
+
+        /* Insight Box */
+        .insight-box {
+            background: rgba(201, 162, 39, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .insight-text {
+            font-size: 14px;
+            color: #1a1a2e;
+        }
+
+        .insight-text em {
+            font-style: normal;
+            color: #C9A227;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .next { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 20px; gap: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .page-indicator { text-align: left; }
+            .content { grid-template-columns: 1fr; gap: 30px; }
+            .chart-title { font-size: 16px; }
+            .chart-container { height: auto; padding: 20px; }
+            .chart-bars { height: 180px; overflow-x: auto; }
+            .bar-group { min-width: 35px; }
+            .bar { width: 24px; }
+            .projection-value { font-size: 28px; }
+            .projection-card { padding: 18px; }
+            .timeline-visual { padding: 18px; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .chart-title { font-size: 14px; }
+            .bar { width: 20px; }
+            .bar-value { font-size: 8px; }
+            .bar-label { font-size: 8px; }
+            .projection-value { font-size: 24px; }
+            .legend-item { font-size: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E1: What Is YSELA, Really?</div>
+            </div>
+            <div class="page-indicator">
+                <div class="section-badge">Section 3: Business</div>
+                <div>Page <span class="current">11</span> of 12</div>
+                <div style="margin-top: 4px; color: #1a1a2e; font-weight: 500;">The Math</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Left - Chart -->
+            <div class="chart-section">
+                <div class="chart-title">Investment vs. Revenue (Scale Ready)</div>
+                <div class="chart-container">
+                    <div class="chart-bars">
+                        <div class="bar-group">
+                            <div class="bars-wrapper">
+                                <div class="bar cost" style="height: 55px;">
+                                    <span class="bar-value">$31K</span>
+                                </div>
+                            </div>
+                            <div class="bar-label">Jun '26</div>
+                        </div>
+                        <div class="bar-group">
+                            <div class="bars-wrapper">
+                                <div class="bar cost" style="height: 87px;">
+                                    <span class="bar-value">$49K</span>
+                                </div>
+                            </div>
+                            <div class="bar-label">Aug '26</div>
+                        </div>
+                        <div class="bar-group">
+                            <div class="bars-wrapper">
+                                <div class="bar cost" style="height: 96px;">
+                                    <span class="bar-value">$54K</span>
+                                </div>
+                                <div class="bar revenue" style="height: 22px;">
+                                    <span class="bar-value">$15K</span>
+                                </div>
+                            </div>
+                            <div class="bar-label">Oct '26</div>
+                        </div>
+                        <div class="bar-group">
+                            <div class="bars-wrapper">
+                                <div class="bar cost" style="height: 100px;">
+                                    <span class="bar-value">$56K</span>
+                                </div>
+                                <div class="bar revenue" style="height: 66px;">
+                                    <span class="bar-value">$45K</span>
+                                </div>
+                            </div>
+                            <div class="bar-label">Dec '26</div>
+                        </div>
+                        <div class="bar-group">
+                            <div class="bars-wrapper">
+                                <div class="bar cost" style="height: 98px;">
+                                    <span class="bar-value">$55K</span>
+                                </div>
+                                <div class="bar revenue" style="height: 111px;">
+                                    <span class="bar-value">$75K</span>
+                                </div>
+                            </div>
+                            <div class="bar-label">Feb '27</div>
+                        </div>
+                        <div class="bar-group">
+                            <div class="bars-wrapper">
+                                <div class="bar cost" style="height: 96px;">
+                                    <span class="bar-value">$54K</span>
+                                </div>
+                                <div class="bar revenue" style="height: 167px;">
+                                    <span class="bar-value">$113K</span>
+                                </div>
+                            </div>
+                            <div class="bar-label">Apr '27</div>
+                        </div>
+                        <div class="bar-group">
+                            <div class="bars-wrapper">
+                                <div class="bar cost" style="height: 96px;">
+                                    <span class="bar-value">$54K</span>
+                                </div>
+                                <div class="bar revenue" style="height: 220px;">
+                                    <span class="bar-value">$149K</span>
+                                </div>
+                            </div>
+                            <div class="bar-label">Jun '27</div>
+                        </div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-dot cost"></div>
+                            Monthly Cost
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot revenue"></div>
+                            Monthly Revenue
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right - Projections -->
+            <div class="projections">
+                <div class="projection-card">
+                    <div class="projection-header">
+                        <span class="projection-label">Jun 2027 MRR</span>
+                        <span class="projection-tier tier-scale">Scale Ready</span>
+                    </div>
+                    <div class="projection-main">
+                        <span class="projection-value">$149K</span>
+                        <span class="projection-suffix">/month</span>
+                    </div>
+                    <div class="projection-detail">
+                        50 customers × 20 users × $149/user
+                    </div>
+                </div>
+
+                <div class="projection-card">
+                    <div class="projection-header">
+                        <span class="projection-label">ARR Potential</span>
+                    </div>
+                    <div class="projection-main">
+                        <span class="projection-value">$1.8M</span>
+                        <span class="projection-suffix">/year</span>
+                    </div>
+                    <div class="projection-detail">
+                        5 customers Sep '26 → 50 by Jun '27
+                    </div>
+                </div>
+
+                <div class="timeline-visual">
+                    <div class="timeline-header">
+                        <span class="timeline-title">Path to Break-Even</span>
+                        <span class="timeline-note">Cost coverage by revenue</span>
+                    </div>
+                    <div class="timeline-bar">
+                        <div class="timeline-fill" style="width: 85%;"></div>
+                    </div>
+                    <div class="timeline-markers">
+                        <span class="timeline-marker">Jun '26</span>
+                        <span class="timeline-marker">Oct '26</span>
+                        <span class="timeline-marker highlight">Feb '27</span>
+                        <span class="timeline-marker">Apr '27</span>
+                        <span class="timeline-marker">Jun '27</span>
+                    </div>
+                </div>
+
+                <div class="insight-box">
+                    <div class="insight-text">
+                        Break-even by <em>Feb 2027</em> · Profitable by <em>Jun 2027</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_10_the_investment.html">&larr; The Investment</a>
+                <a href="page_12_the_decision.html" class="next">Next: The Decision &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KARVIA Pro · Technical Overview</title>
+    <link rel="stylesheet" href="../assets/css/bramhi-elegant.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #f8fafc; font-family: 'Inter', system-ui, -apple-system; }
+        .slides-container .slide-content { max-width: 100%; width: 100%; padding: 3rem 10%; box-sizing: border-box; }
+        .intro-title { font-size: 2.15rem; color: #0f172a; font-weight: 700; letter-spacing: -0.01em; }
+        .intro-subtitle { font-size: 1rem; color: #475569; text-transform: uppercase; letter-spacing: 0.12em; }
+        .intro-description { font-size: 0.95rem; color: #374151; max-width: 780px; margin: 0 auto; line-height: 1.6; }
+        .story-map { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-top: 2.5rem; }
+        .story-card { border-radius: 18px; border: 1px solid rgba(148,163,184,0.35); background: #ffffff; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; box-shadow: 0 18px 36px rgba(15,23,42,0.12); transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; cursor: default; }
+        .story-card:hover { border-color: rgba(79,70,229,0.45); box-shadow: 0 24px 48px rgba(15,23,42,0.18); transform: translateY(-4px); }
+        .story-card h3 { margin: 0; font-size: 1rem; color: #1f2937; display: flex; align-items: center; gap: 0.6rem; }
+        .story-card p { margin: 0; font-size: 0.85rem; color: #4b5563; }
+        .story-subitems { display: flex; flex-direction: column; gap: 0.65rem; }
+        .story-subitem { display: flex; gap: 0.6rem; padding: 0.55rem 0.75rem; border-radius: 12px; border: 1px solid rgba(148,163,184,0.25); background: rgba(241,245,249,0.95); cursor: pointer; transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease; }
+        .story-subitem:hover { border-color: rgba(79,70,229,0.35); background: rgba(79,70,229,0.12); transform: translateY(-2px); }
+        .subitem-emoji { font-size: 1.1rem; }
+        .subitem-text { display: flex; flex-direction: column; gap: 0.2rem; }
+        .subitem-text span { font-size: 0.82rem; font-weight: 600; color: #1f2937; }
+        .subitem-text small { font-size: 0.72rem; color: #4b5563; }
+        .chips-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.8rem; }
+        .info-chip { padding: 0.45rem 0.9rem; border-radius: 999px; background: rgba(255,255,255,0.9); border: 1px solid rgba(99,102,241,0.25); font-size: 0.78rem; color: #4338ca; font-weight: 600; }
+        .slide h2 { font-size: 1.85rem; color: #0f172a; margin: 0; font-weight: 700; }
+        .subtitle { font-size: 0.98rem; color: #475569; margin: 0.75rem 0 0; letter-spacing: 0.01em; }
+        .two-column { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2.2rem; }
+        .highlight-card { border-radius: 16px; border: 1px solid rgba(148,163,184,0.25); background: rgba(248,250,252,0.98); padding: 1.6rem; box-shadow: 0 14px 28px rgba(15,23,42,0.1); }
+        .highlight-card h3 { margin: 0; font-size: 1rem; color: #1f2937; }
+        .highlight-card ul { margin: 0.85rem 0 0; padding-left: 1.1rem; font-size: 0.82rem; color: #4b5563; line-height: 1.55; }
+        .value-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.1rem; margin-top: 2.2rem; }
+        .value-card { border: 1px solid rgba(148,163,184,0.28); border-radius: 14px; padding: 1.25rem; background: white; box-shadow: 0 12px 24px rgba(79,70,229,0.12); }
+        .value-card h4 { margin: 0; font-size: 0.95rem; color: #312e81; }
+        .value-card p { margin: 0.6rem 0 0; font-size: 0.78rem; color: #4b5563; line-height: 1.45; }
+        .callout { margin-top: 2rem; padding: 1.6rem; border-left: 4px solid #6366f1; background: rgba(99,102,241,0.08); border-radius: 12px; font-size: 0.82rem; color: #312e81; }
+        .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-top: 2rem; }
+        .metric-card { border-radius: 14px; padding: 1.3rem; border: 1px solid rgba(199,210,254,0.55); background: rgba(238,242,255,0.95); box-shadow: 0 12px 24px rgba(79,70,229,0.12); font-size: 0.82rem; color: #4338ca; }
+        .metric-card h3 { margin: 0; font-size: 0.92rem; color: #312e81; }
+        .metric-card p { margin: 0.5rem 0 0; color: #4b5563; line-height: 1.45; }
+        .code-block { background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 0.75rem; overflow-x: auto; margin-top: 1rem; }
+        .tech-stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .tech-item { padding: 0.8rem 1rem; border-radius: 10px; border: 1px solid rgba(148,163,184,0.25); background: white; text-align: center; }
+        .tech-item strong { display: block; color: #312e81; font-size: 0.85rem; }
+        .tech-item span { display: block; color: #4b5563; font-size: 0.72rem; margin-top: 0.3rem; }
+        .list-tight { margin: 0.8rem 0 0; padding-left: 1.2rem; font-size: 0.8rem; color: #475569; line-height: 1.5; }
+        @media (max-width: 960px) { .slides-container .slide-content { padding: 2.5rem 7%; } }
+        @media (max-width: 640px) { .slides-container .slide-content { padding: 2rem 6%; } }
+    </style>
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">15</span>
+    </div>
+
+    <div class="slide-nav">
+        <button class="nav-btn" id="prevBtn" onclick="navigateSlide(-1)">←</button>
+        <button class="nav-btn" id="nextBtn" onclick="navigateSlide(1)">→</button>
+    </div>
+
+    <div class="slides-container">
+
+        <!-- Slide 1: Technical Story Map -->
+        <section class="slide" data-slide="1">
+            <div class="slide-content">
+                <div style="text-align: center;">
+                    <div class="intro-subtitle">Technical Deep Dive · Architecture & Implementation</div>
+                    <h1 class="intro-title">KARVIA Pro · Technical Overview</h1>
+                    <p class="intro-description">
+                        Navigate through our technical architecture: backend services, database design, API contracts, deployment infrastructure, and iBrain integration. Built for SMB scale with enterprise-grade reliability.
+                    </p>
+                </div>
+
+                <div class="story-map">
+                    <div class="story-card">
+                        <h3><span>🏗️</span><span>System Architecture</span></h3>
+                        <p>How KARVIA Pro is built and deployed.</p>
+                        <div class="story-subitems">
+                            <div class="story-subitem" onclick="jumpTo('2')">
+                                <div class="subitem-emoji">📐</div>
+                                <div class="subitem-text">
+                                    <span>Architecture Overview</span>
+                                    <small>3-tier architecture, tech stack.</small>
+                                </div>
+                            </div>
+                            <div class="story-subitem" onclick="jumpTo('3')">
+                                <div class="subitem-emoji">🛠️</div>
+                                <div class="subitem-text">
+                                    <span>Tech Stack</span>
+                                    <small>Node.js, PostgreSQL, Redis, Azure.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-card">
+                        <h3><span>🗄️</span><span>Database & Models</span></h3>
+                        <p>Data models, relationships, schema design.</p>
+                        <div class="story-subitems">
+                            <div class="story-subitem" onclick="jumpTo('4')">
+                                <div class="subitem-emoji">📊</div>
+                                <div class="subitem-text">
+                                    <span>Database Schema</span>
+                                    <small>10 core models, relationships.</small>
+                                </div>
+                            </div>
+                            <div class="story-subitem" onclick="jumpTo('5')">
+                                <div class="subitem-emoji">🔗</div>
+                                <div class="subitem-text">
+                                    <span>Data Relationships</span>
+                                    <small>Business → User → Assessment → Objective.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-card">
+                        <h3><span>⚙️</span><span>Backend Services</span></h3>
+                        <p>Core services powering KARVIA Pro.</p>
+                        <div class="story-subitems">
+                            <div class="story-subitem" onclick="jumpTo('6')">
+                                <div class="subitem-emoji">🧠</div>
+                                <div class="subitem-text">
+                                    <span>Service Layer</span>
+                                    <small>15 services: AI, analytics, export, etc.</small>
+                                </div>
+                            </div>
+                            <div class="story-subitem" onclick="jumpTo('7')">
+                                <div class="subitem-emoji">🤖</div>
+                                <div class="subitem-text">
+                                    <span>iBrain Integration</span>
+                                    <small>Toggle architecture, API layer.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-card">
+                        <h3><span>🔌</span><span>API Layer</span></h3>
+                        <p>RESTful APIs, routes, authentication.</p>
+                        <div class="story-subitems">
+                            <div class="story-subitem" onclick="jumpTo('8')">
+                                <div class="subitem-emoji">🛣️</div>
+                                <div class="subitem-text">
+                                    <span>API Routes</span>
+                                    <small>13 route modules, 50+ endpoints.</small>
+                                </div>
+                            </div>
+                            <div class="story-subitem" onclick="jumpTo('9')">
+                                <div class="subitem-emoji">🔐</div>
+                                <div class="subitem-text">
+                                    <span>Authentication & Authorization</span>
+                                    <small>JWT, RBAC, business-level isolation.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-card">
+                        <h3><span>🚀</span><span>Deployment & Infrastructure</span></h3>
+                        <p>How KARVIA Pro runs in production.</p>
+                        <div class="story-subitems">
+                            <div class="story-subitem" onclick="jumpTo('10')">
+                                <div class="subitem-emoji">☁️</div>
+                                <div class="subitem-text">
+                                    <span>Cloud Infrastructure</span>
+                                    <small>Azure App Service, PostgreSQL, Redis.</small>
+                                </div>
+                            </div>
+                            <div class="story-subitem" onclick="jumpTo('11')">
+                                <div class="subitem-emoji">📈</div>
+                                <div class="subitem-text">
+                                    <span>Monitoring & Observability</span>
+                                    <small>Logging, error tracking, metrics.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chips-row">
+                    <span class="info-chip">Node.js + Express backend</span>
+                    <span class="info-chip">PostgreSQL + Sequelize ORM</span>
+                    <span class="info-chip">Azure Cloud (App Service + Database)</span>
+                    <span class="info-chip">iBrain SaaS integration (optional)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: Architecture Overview -->
+        <section class="slide" data-slide="2">
+            <div class="slide-content">
+                <h2>System Architecture Overview</h2>
+                <p class="subtitle">3-tier architecture: Client → API → Database</p>
+
+                <div class="code-block">
+┌──────────────────────────────────────────────────────────────┐
+│  CLIENT LAYER (Vanilla JS + Bootstrap)                      │
+│  • Dynamic pages (dashboard, objectives, analytics)         │
+│  • API client wrappers (fetch + error handling)             │
+│  • Client-side calculators (progress %, status)             │
+│  • Responsive design (desktop + mobile)                     │
+└──────────────────────────────────────────────────────────────┘
+                              ↓ HTTPS
+┌──────────────────────────────────────────────────────────────┐
+│  API LAYER (Node.js + Express)                              │
+│  • RESTful routes (13 modules, 50+ endpoints)               │
+│  • Middleware (auth, RBAC, validation, error handling)      │
+│  • Service layer (business logic, external APIs)            │
+│  • iBrain integration (toggle-controlled)                   │
+└──────────────────────────────────────────────────────────────┘
+                              ↓ SQL
+┌──────────────────────────────────────────────────────────────┐
+│  DATA LAYER (PostgreSQL + Redis)                            │
+│  • PostgreSQL: Core data (users, businesses, objectives)    │
+│  • Sequelize ORM: Models + migrations                       │
+│  • Redis: Session cache, rate limiting (Beta)               │
+│  • Business-level data isolation (multi-tenant)             │
+└──────────────────────────────────────────────────────────────┘
+                </div>
+
+                <div class="callout">
+                    <strong>Design Principles</strong>: Stateless API servers (horizontal scaling), business-level data isolation (multi-tenant security), zero hardcoded values (config-driven), graceful degradation (iBrain toggle).
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Tech Stack -->
+        <section class="slide" data-slide="3">
+            <div class="slide-content">
+                <h2>Technology Stack</h2>
+                <p class="subtitle">Production-grade stack for SMB scale (200-1,000 users)</p>
+
+                <div class="tech-stack-grid">
+                    <div class="tech-item">
+                        <strong>Backend</strong>
+                        <span>Node.js v18+</span>
+                        <span>Express.js v4.19</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Database</strong>
+                        <span>PostgreSQL v14</span>
+                        <span>Sequelize ORM v6</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Caching</strong>
+                        <span>Redis (Beta)</span>
+                        <span>Session + Query cache</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Frontend</strong>
+                        <span>Vanilla JS (ES6+)</span>
+                        <span>Bootstrap v5.3</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Cloud</strong>
+                        <span>Azure App Service</span>
+                        <span>Azure Database (Postgres)</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>AI/ML</strong>
+                        <span>iBrain SaaS</span>
+                        <span>OpenAI GPT-4 (Azure)</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Email</strong>
+                        <span>Mailjet API</span>
+                        <span>Transactional emails</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Authentication</strong>
+                        <span>JWT (jsonwebtoken)</span>
+                        <span>bcrypt (password hash)</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Validation</strong>
+                        <span>Joi v17</span>
+                        <span>Schema validation</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Testing</strong>
+                        <span>Jest (unit tests)</span>
+                        <span>Supertest (integration)</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Export</strong>
+                        <span>PDFKit (PDF)</span>
+                        <span>json2csv (CSV)</span>
+                    </div>
+                    <div class="tech-item">
+                        <strong>Monitoring</strong>
+                        <span>Winston (logging)</span>
+                        <span>Azure App Insights (V1)</span>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Why This Stack?</strong> Proven SMB-scale tech (not over-engineered), low hosting costs ($200-500/month Azure), familiar to most devs (easy handover), production-ready libraries (not beta).
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Database Schema -->
+        <section class="slide" data-slide="4">
+            <div class="slide-content">
+                <h2>Database Schema</h2>
+                <p class="subtitle">10 core models, business-level data isolation</p>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <h3>Business</h3>
+                        <p><strong>Purpose</strong>: Multi-tenant root (business_id isolation)</p>
+                        <p><strong>Fields</strong>: name, ibrain_enabled, ibrain_api_key, settings</p>
+                        <p><strong>Relationships</strong>: hasMany Users, Assessments, Objectives</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>User</h3>
+                        <p><strong>Purpose</strong>: Authentication + RBAC</p>
+                        <p><strong>Fields</strong>: email, password_hash, role, business_id</p>
+                        <p><strong>Roles</strong>: admin, manager, team_lead, member</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>AssessmentTemplate</h3>
+                        <p><strong>Purpose</strong>: Template library (org/team/individual)</p>
+                        <p><strong>Fields</strong>: name, level, category, business_id</p>
+                        <p><strong>Relationships</strong>: hasMany AssessmentQuestions</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>AssessmentQuestion</h3>
+                        <p><strong>Purpose</strong>: Questions for assessments</p>
+                        <p><strong>Fields</strong>: text, dimension (Speed/Strength/Intelligence), category</p>
+                        <p><strong>Scoring</strong>: 1-5 Likert scale</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Assessment</h3>
+                        <p><strong>Purpose</strong>: Completed assessments with SSI scores</p>
+                        <p><strong>Fields</strong>: template_id, scores (JSON), insights, business_id</p>
+                        <p><strong>Calculations</strong>: SSI scores, gap analysis</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Objective</h3>
+                        <p><strong>Purpose</strong>: OKRs (multi-level cascade)</p>
+                        <p><strong>Fields</strong>: title, level, parent_id, key_results (JSON), business_id</p>
+                        <p><strong>Progress</strong>: Auto-calculated from KR updates</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>AIOKRSuggestion</h3>
+                        <p><strong>Purpose</strong>: iBrain-generated objectives (pre-approval)</p>
+                        <p><strong>Fields</strong>: assessment_id, objective_text, status, business_id</p>
+                        <p><strong>Workflow</strong>: Generated → Reviewed → Approved → Saved to Objective</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Invitation</h3>
+                        <p><strong>Purpose</strong>: Team member invitations</p>
+                        <p><strong>Fields</strong>: email, role, token, status, business_id</p>
+                        <p><strong>Workflow</strong>: Sent → Pending → Accepted</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Goal (Legacy)</h3>
+                        <p><strong>Purpose</strong>: Original goal tracking (pre-OKR)</p>
+                        <p><strong>Status</strong>: Deprecated (use Objective instead)</p>
+                        <p><strong>Migration</strong>: V1 (migrate to Objective model)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Task (Legacy)</h3>
+                        <p><strong>Purpose</strong>: Task management (pre-OKR)</p>
+                        <p><strong>Status</strong>: Deprecated (use Objective KRs instead)</p>
+                        <p><strong>Migration</strong>: V1 (migrate to KRs)</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Data Isolation</strong>: All queries scoped by business_id (WHERE business_id = :business_id). Multi-tenant security enforced at ORM level (Sequelize scopes).
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Data Relationships -->
+        <section class="slide" data-slide="5">
+            <div class="slide-content">
+                <h2>Data Model Relationships</h2>
+                <p class="subtitle">How data flows through KARVIA Pro</p>
+
+                <div class="code-block">
+Business (1) ────┬──────> User (N)
+                 │
+                 ├──────> AssessmentTemplate (N)
+                 │              │
+                 │              └──────> AssessmentQuestion (N)
+                 │
+                 ├──────> Assessment (N)
+                 │              │
+                 │              └──────> AIOKRSuggestion (N)
+                 │                             │
+                 │                             └──────> Objective (N)
+                 │
+                 ├──────> Objective (N)
+                 │              │
+                 │              └──────> Objective (N) [parent_id self-reference]
+                 │
+                 └──────> Invitation (N)
+
+
+**Key Relationships**:
+
+1. Business → User (1:N): One business has many users
+2. Business → Assessment (1:N): One business has many assessments
+3. Assessment → AIOKRSuggestion (1:N): One assessment generates many AI suggestions
+4. AIOKRSuggestion → Objective (1:1): Approved suggestion becomes objective
+5. Objective → Objective (1:N): Parent objective has child objectives (cascade)
+6. Business → Objective (1:N): One business has many objectives (all levels)
+7. AssessmentTemplate → AssessmentQuestion (1:N): One template has many questions
+                </div>
+
+                <div class="callout">
+                    <strong>Cascade Model</strong>: Objectives support multi-level hierarchy via parent_id (Company → Department → Team → Individual). Progress rolls up from child to parent.
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Service Layer -->
+        <section class="slide" data-slide="6">
+            <div class="slide-content">
+                <h2>Backend Service Layer</h2>
+                <p class="subtitle">15 services powering core functionality</p>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <h3>aiOKRService</h3>
+                        <p><strong>Purpose</strong>: AI OKR generation (iBrain toggle)</p>
+                        <p><strong>Functions</strong>: generateObjectives(), analyzePriorities()</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>iBrainService</h3>
+                        <p><strong>Purpose</strong>: iBrain API wrapper</p>
+                        <p><strong>Functions</strong>: callIBrain(), handleError(), gracefulDegradation()</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>analyticsService</h3>
+                        <p><strong>Purpose</strong>: Team analytics, dashboards</p>
+                        <p><strong>Functions</strong>: getTeamMetrics(), drillDown(), comparativeBenchmarking()</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>calculatorService</h3>
+                        <p><strong>Purpose</strong>: Server-side progress calculations</p>
+                        <p><strong>Functions</strong>: calculateProgress(), determineStatus(), rollUpProgress()</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>objectiveService</h3>
+                        <p><strong>Purpose</strong>: Objective CRUD + business logic</p>
+                        <p><strong>Functions</strong>: createObjective(), updateKR(), getHierarchy()</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>exportService</h3>
+                        <p><strong>Purpose</strong>: PDF/CSV report generation</p>
+                        <p><strong>Functions</strong>: generatePDF(), generateCSV(), scheduleReport()</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>SSIScoringService</h3>
+                        <p><strong>Purpose</strong>: Assessment scoring (Speed/Strength/Intelligence)</p>
+                        <p><strong>Functions</strong>: calculateSSI(), gapAnalysis(), generateInsights()</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>BusinessCreationService</h3>
+                        <p><strong>Purpose</strong>: Business onboarding</p>
+                        <p><strong>Functions</strong>: createBusiness(), seedDefaults(), inviteTeam()</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>mailjetService</h3>
+                        <p><strong>Purpose</strong>: Transactional emails</p>
+                        <p><strong>Functions</strong>: sendInvitation(), sendWelcome(), sendReport()</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>logger</h3>
+                        <p><strong>Purpose</strong>: Centralized logging (Winston)</p>
+                        <p><strong>Levels</strong>: error, warn, info, debug</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>secretsManager</h3>
+                        <p><strong>Purpose</strong>: Secure config management</p>
+                        <p><strong>Functions</strong>: getSecret(), rotateKey(), encryptAPIKey()</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>cascade-engine (Beta)</h3>
+                        <p><strong>Purpose</strong>: Auto-cascade objectives</p>
+                        <p><strong>Status</strong>: In development (Weeks 7-8)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>progress-tracker (Beta)</h3>
+                        <p><strong>Purpose</strong>: Historical progress tracking</p>
+                        <p><strong>Status</strong>: In development (Week 9-10)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>feature-flags</h3>
+                        <p><strong>Purpose</strong>: Feature toggle management</p>
+                        <p><strong>Flags</strong>: iBrain, cascade, recognition (Beta)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>discovery</h3>
+                        <p><strong>Purpose</strong>: Service registry (microservices prep)</p>
+                        <p><strong>Status</strong>: V1 feature (not active in MVP)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: iBrain Integration Architecture -->
+        <section class="slide" data-slide="7">
+            <div class="slide-content">
+                <h2>iBrain Integration Architecture</h2>
+                <p class="subtitle">Toggle-controlled AI features, graceful degradation</p>
+
+                <div class="code-block">
+// Feature Toggle Check (Backend)
+async function generateObjectives(req, res) {
+  const business = await Business.findByPk(req.user.business_id);
+
+  if (!business.ibrain_enabled) {
+    return res.status(403).json({
+      error: 'iBrain not enabled. Upgrade to unlock AI features.'
+    });
+  }
+
+  // iBrain enabled, call SaaS API
+  const objectives = await iBrainService.generateObjectives({
+    assessmentId: req.body.assessment_id,
+    apiKey: business.ibrain_api_key
+  });
+
+  res.json({ objectives });
+}
+
+// Graceful Degradation (Frontend)
+async function loadObjectivePage() {
+  const business = await API.getBusiness();
+
+  if (business.ibrainEnabled) {
+    showAIFeatures(); // Show "Generate with AI" button
+  } else {
+    showManualMode(); // Show manual OKR form
+  }
+}
+
+// iBrain API Integration (Service Layer)
+async function callIBrainAPI(endpoint, data, apiKey) {
+  try {
+    const response = await axios.post(
+      `https://ibrain.bramhilabs.com/api/v1/${endpoint}`,
+      data,
+      { headers: { 'Authorization': `Bearer ${apiKey}` } }
+    );
+    return response.data;
+  } catch (error) {
+    logger.error('iBrain API error:', error);
+    throw new Error('AI service unavailable. Use manual mode.');
+  }
+}
+                </div>
+
+                <div class="callout">
+                    <strong>Deployment Models</strong>: (1) Standalone (toggle OFF, no iBrain), (2) Integrated (toggle ON, iBrain SaaS), (3) Handover (codebase + optional iBrain subscription).
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: API Routes -->
+        <section class="slide" data-slide="8">
+            <div class="slide-content">
+                <h2>API Routes</h2>
+                <p class="subtitle">13 route modules, 50+ RESTful endpoints</p>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <h3>/api/auth</h3>
+                        <p><strong>Endpoints</strong>: POST /register, POST /login, POST /logout</p>
+                        <p><strong>Auth</strong>: None (public), returns JWT token</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>/api/businesses</h3>
+                        <p><strong>Endpoints</strong>: GET /:id, PUT /:id, GET /:id/settings</p>
+                        <p><strong>Auth</strong>: JWT required, RBAC (admin only for updates)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>/api/assessments</h3>
+                        <p><strong>Endpoints</strong>: POST /, GET /:id, GET /business/:id</p>
+                        <p><strong>Logic</strong>: SSI scoring, gap analysis, insights</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>/api/assessment-templates</h3>
+                        <p><strong>Endpoints</strong>: GET /, GET /:id, POST / (admin)</p>
+                        <p><strong>Filters</strong>: By level (org/team/individual), category</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>/api/objectives</h3>
+                        <p><strong>Endpoints</strong>: POST /, GET /:id, PUT /:id/kr, GET /business/:id</p>
+                        <p><strong>Logic</strong>: Multi-level cascade, progress calculation</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>/api/ai-okr</h3>
+                        <p><strong>Endpoints</strong>: POST /generate, POST /analyze-priorities</p>
+                        <p><strong>Toggle</strong>: Requires business.ibrain_enabled = true</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>/api/analytics</h3>
+                        <p><strong>Endpoints</strong>: GET /team, GET /drilldown, GET /benchmarking</p>
+                        <p><strong>Filters</strong>: By dimension, category, status, date range</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>/api/invitations</h3>
+                        <p><strong>Endpoints</strong>: POST /, GET /:token/accept, GET /business/:id</p>
+                        <p><strong>Workflow</strong>: Send invite → Email link → Accept → Create user</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>/api/cascade (Beta)</h3>
+                        <p><strong>Endpoints</strong>: POST /auto-cascade, GET /preview</p>
+                        <p><strong>Status</strong>: In development (Weeks 7-8)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>/api/admin</h3>
+                        <p><strong>Endpoints</strong>: GET /health, GET /stats, POST /seed</p>
+                        <p><strong>Auth</strong>: Admin only (role guard)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>/api/goals (Legacy)</h3>
+                        <p><strong>Status</strong>: Deprecated (use /objectives)</p>
+                        <p><strong>Migration</strong>: V1 (remove legacy routes)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>/api/tasks (Legacy)</h3>
+                        <p><strong>Status</strong>: Deprecated (use Objective KRs)</p>
+                        <p><strong>Migration</strong>: V1 (remove legacy routes)</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>API Design</strong>: RESTful conventions (GET/POST/PUT/DELETE), JSON responses, business_id scoping (multi-tenant), error handling (AppError class), rate limiting (Beta).
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Authentication & Authorization -->
+        <section class="slide" data-slide="9">
+            <div class="slide-content">
+                <h2>Authentication & Authorization</h2>
+                <p class="subtitle">JWT authentication + RBAC + business-level isolation</p>
+
+                <div class="two-column">
+                    <div class="highlight-card">
+                        <h3>Authentication Flow</h3>
+                        <ul class="list-tight">
+                            <li><strong>Registration</strong>: POST /api/auth/register → Create user + business</li>
+                            <li><strong>Login</strong>: POST /api/auth/login → Validate credentials → Issue JWT (15min expiry)</li>
+                            <li><strong>Token Format</strong>: { userId, businessId, role, email, exp }</li>
+                            <li><strong>Refresh</strong>: Refresh tokens (V1 feature, not MVP)</li>
+                            <li><strong>Logout</strong>: POST /api/auth/logout → Invalidate token (client-side)</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Security</h3>
+                        <ul class="list-tight">
+                            <li><strong>Password Hashing</strong>: bcrypt (10 salt rounds)</li>
+                            <li><strong>JWT Secret</strong>: 256-bit key (rotated quarterly)</li>
+                            <li><strong>HTTPS Only</strong>: Secure cookie (httpOnly, secure flags)</li>
+                            <li><strong>Rate Limiting</strong>: 5 failed logins → 15min lockout (Beta)</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>Role-Based Access Control (RBAC)</h3>
+                        <ul class="list-tight">
+                            <li><strong>admin</strong>: Full access (manage business, users, all OKRs)</li>
+                            <li><strong>manager</strong>: Department-level (create/edit team OKRs, view analytics)</li>
+                            <li><strong>team_lead</strong>: Team-level (create/edit individual OKRs, view team analytics)</li>
+                            <li><strong>member</strong>: Individual-level (update own KRs, view company OKRs)</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Business-Level Isolation</h3>
+                        <ul class="list-tight">
+                            <li><strong>JWT includes business_id</strong>: All queries scoped by business</li>
+                            <li><strong>ORM Scopes</strong>: Sequelize default scope (WHERE business_id = :id)</li>
+                            <li><strong>Multi-Tenant Security</strong>: Business A cannot access Business B data</li>
+                            <li><strong>Audit Logging</strong>: All CRUD operations logged with business_id (V1)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Middleware Stack</strong>: authenticate() → checkBusinessAccess() → checkRole() → validate() → route handler → errorHandler().
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Cloud Infrastructure -->
+        <section class="slide" data-slide="10">
+            <div class="slide-content">
+                <h2>Cloud Infrastructure</h2>
+                <p class="subtitle">Azure-hosted, production-ready deployment</p>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <h3>Azure App Service</h3>
+                        <p><strong>Tier</strong>: Basic B1 (1 core, 1.75GB RAM) → Standard S1 (Beta)</p>
+                        <p><strong>Cost</strong>: $13/month (B1), $70/month (S1)</p>
+                        <p><strong>Scaling</strong>: Manual (MVP), auto-scale (V1)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Azure Database for PostgreSQL</h3>
+                        <p><strong>Tier</strong>: Basic (1 vCore, 50GB) → General Purpose (Beta)</p>
+                        <p><strong>Cost</strong>: $25/month (Basic), $150/month (GP)</p>
+                        <p><strong>Backups</strong>: Daily automated, 7-day retention</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Azure Cache for Redis (Beta)</h3>
+                        <p><strong>Tier</strong>: Basic C0 (250MB)</p>
+                        <p><strong>Cost</strong>: $16/month</p>
+                        <p><strong>Use Cases</strong>: Session cache, rate limiting, query cache</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Azure Key Vault</h3>
+                        <p><strong>Purpose</strong>: Secrets management (DB passwords, API keys)</p>
+                        <p><strong>Cost</strong>: $0.03/10,000 operations (~$5/month)</p>
+                        <p><strong>Security</strong>: Encrypted at rest + in transit</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Azure Application Insights (V1)</h3>
+                        <p><strong>Purpose</strong>: Monitoring, metrics, error tracking</p>
+                        <p><strong>Cost</strong>: $2.30/GB ingested (~$20/month)</p>
+                        <p><strong>Features</strong>: Live metrics, request tracking, alerts</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Azure CDN (V1)</h3>
+                        <p><strong>Purpose</strong>: Static asset delivery (CSS, JS, images)</p>
+                        <p><strong>Cost</strong>: $0.081/GB (~$10/month)</p>
+                        <p><strong>Performance</strong>: <100ms asset load times</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Total Monthly Cost</strong>: MVP ($50-70), Beta ($250-300), V1 ($400-500). Hosting cost <$5/user/month at 100 users (95%+ gross margin).
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 11: Monitoring & Observability -->
+        <section class="slide" data-slide="11">
+            <div class="slide-content">
+                <h2>Monitoring & Observability</h2>
+                <p class="subtitle">Logging, error tracking, metrics (MVP + V1 roadmap)</p>
+
+                <div class="two-column">
+                    <div class="highlight-card">
+                        <h3>Logging (MVP - Winston)</h3>
+                        <ul class="list-tight">
+                            <li><strong>Levels</strong>: error, warn, info, debug</li>
+                            <li><strong>Transports</strong>: Console (dev), File (prod), Azure (V1)</li>
+                            <li><strong>Format</strong>: JSON (structured logging)</li>
+                            <li><strong>Fields</strong>: timestamp, level, message, business_id, user_id, trace_id</li>
+                            <li><strong>Retention</strong>: 30 days (MVP), 90 days (V1)</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Error Tracking (MVP - Custom)</h3>
+                        <ul class="list-tight">
+                            <li><strong>AppError Class</strong>: Custom error handler (status code, message, stack)</li>
+                            <li><strong>Error Middleware</strong>: Centralized error handler (catch all unhandled errors)</li>
+                            <li><strong>Slack Alerts</strong>: Critical errors → #karvia-alerts (V1)</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>Metrics (V1 - Azure App Insights)</h3>
+                        <ul class="list-tight">
+                            <li><strong>Request Metrics</strong>: Count, duration (p50, p95, p99), status codes</li>
+                            <li><strong>Dependency Metrics</strong>: DB query time, iBrain API latency</li>
+                            <li><strong>Custom Metrics</strong>: OKR creation rate, user engagement, iBrain usage</li>
+                            <li><strong>Live Metrics</strong>: Real-time dashboard (requests/sec, errors/sec)</li>
+                            <li><strong>Alerts</strong>: Error rate >5%, API p95 >500ms, DB CPU >80%</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Uptime Monitoring (V1)</h3>
+                        <ul class="list-tight">
+                            <li><strong>Health Check</strong>: GET /api/admin/health (every 1 min)</li>
+                            <li><strong>Status Page</strong>: status.karviapro.com (V1)</li>
+                            <li><strong>SLA Target</strong>: 99.5% (Beta), 99.9% (V1)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Observability Roadmap</strong>: MVP (Winston logging + AppError), Beta (Redis metrics, custom dashboards), V1 (Azure App Insights, Slack alerts, status page).
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 12: Frontend Architecture -->
+        <section class="slide" data-slide="12">
+            <div class="slide-content">
+                <h2>Frontend Architecture</h2>
+                <p class="subtitle">Vanilla JS + Bootstrap, no framework bloat</p>
+
+                <div class="two-column">
+                    <div class="highlight-card">
+                        <h3>Technology Choices</h3>
+                        <ul class="list-tight">
+                            <li><strong>No Framework</strong>: Vanilla JS (ES6+), no React/Vue/Angular</li>
+                            <li><strong>Reasoning</strong>: Faster page loads, easier handover, no build step</li>
+                            <li><strong>UI Library</strong>: Bootstrap v5.3 (responsive grid, components)</li>
+                            <li><strong>Icons</strong>: Bootstrap Icons (no Font Awesome dependency)</li>
+                            <li><strong>Charts</strong>: Chart.js (analytics dashboards, Week 3)</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Key Pages</h3>
+                        <ul class="list-tight">
+                            <li><strong>dashboard.html</strong>: Company overview, top 3 objectives</li>
+                            <li><strong>objective-detail.html</strong>: Single objective deep dive (Week 4)</li>
+                            <li><strong>analytics.html</strong>: Team analytics, drill-down (Week 3)</li>
+                            <li><strong>assessment.html</strong>: Assessment form, SSI scoring (Week 1)</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>Client-Side Architecture</h3>
+                        <ul class="list-tight">
+                            <li><strong>API Client Wrappers</strong>: Fetch + error handling (client/js/api-client.js)</li>
+                            <li><strong>Calculator</strong>: Client-side progress calc (mirrors server, Week 4)</li>
+                            <li><strong>State Management</strong>: localStorage (JWT token, user prefs)</li>
+                            <li><strong>Routing</strong>: Multi-page app (no SPA, faster initial load)</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Performance</h3>
+                        <ul class="list-tight">
+                            <li><strong>Page Load</strong>: <2s (dashboard), <1s (list views)</li>
+                            <li><strong>API Calls</strong>: <500ms p95 (real-time updates)</li>
+                            <li><strong>Bundle Size</strong>: <100KB (no webpack, just vanilla JS)</li>
+                            <li><strong>Mobile</strong>: Responsive (Bootstrap grid, tested iOS/Android)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Why No Framework?</strong> Faster page loads (no 500KB React bundle), easier handover (any dev knows vanilla JS), no build tooling (simpler deployment).
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 13: Security -->
+        <section class="slide" data-slide="13">
+            <div class="slide-content">
+                <h2>Security & Compliance</h2>
+                <p class="subtitle">OWASP Top 10 protections, GDPR-ready (Beta), SOC2 (V1)</p>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <h3>SQL Injection</h3>
+                        <p><strong>Protection</strong>: Sequelize ORM (parameterized queries)</p>
+                        <p><strong>Validation</strong>: Joi schema validation (all inputs)</p>
+                        <p><strong>Status</strong>: ✅ Protected</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>XSS (Cross-Site Scripting)</h3>
+                        <p><strong>Protection</strong>: Input sanitization, Content-Security-Policy headers</p>
+                        <p><strong>Libraries</strong>: DOMPurify (client-side), validator.js (server)</p>
+                        <p><strong>Status</strong>: ✅ Protected</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>CSRF (Cross-Site Request Forgery)</h3>
+                        <p><strong>Protection</strong>: SameSite cookies, CSRF tokens (V1)</p>
+                        <p><strong>Middleware</strong>: csurf (Express middleware)</p>
+                        <p><strong>Status</strong>: ⏳ Beta (SameSite cookies only)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Authentication Attacks</h3>
+                        <p><strong>Protection</strong>: bcrypt (10 rounds), JWT expiry (15min)</p>
+                        <p><strong>Rate Limiting</strong>: 5 failed logins → 15min lockout</p>
+                        <p><strong>Status</strong>: ✅ Protected</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Data Encryption</h3>
+                        <p><strong>In Transit</strong>: TLS 1.3 (HTTPS only)</p>
+                        <p><strong>At Rest</strong>: AES-256 (Azure Database encryption)</p>
+                        <p><strong>Status</strong>: ✅ Protected</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Business-Level Isolation</h3>
+                        <p><strong>Multi-Tenant</strong>: All queries scoped by business_id</p>
+                        <p><strong>ORM Scopes</strong>: Sequelize default scope enforcement</p>
+                        <p><strong>Status</strong>: ✅ Protected</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>GDPR Compliance (Beta)</h3>
+                        <p><strong>Features</strong>: Data export, right to deletion, consent management</p>
+                        <p><strong>Privacy Policy</strong>: Hosted at /privacy</p>
+                        <p><strong>Status</strong>: ⏳ Beta (Week 11-12)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>SOC2 Compliance (V1)</h3>
+                        <p><strong>Requirements</strong>: Audit logging, access controls, encryption</p>
+                        <p><strong>Vendor</strong>: Vanta (automated compliance)</p>
+                        <p><strong>Status</strong>: 📋 V1 (Weeks 13+)</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Security Roadmap</strong>: MVP (OWASP Top 10 basics), Beta (GDPR-ready, penetration testing), V1 (SOC2 certified, annual security audits).
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 14: Testing Strategy -->
+        <section class="slide" data-slide="14">
+            <div class="slide-content">
+                <h2>Testing Strategy</h2>
+                <p class="subtitle">TDD infrastructure, 80%+ coverage target (V1)</p>
+
+                <div class="two-column">
+                    <div class="highlight-card">
+                        <h3>Unit Tests (Jest)</h3>
+                        <ul class="list-tight">
+                            <li><strong>Target</strong>: 80%+ code coverage (V1)</li>
+                            <li><strong>Current</strong>: 45% coverage (Week 2 baseline)</li>
+                            <li><strong>Scope</strong>: Services, models, utilities, middleware</li>
+                            <li><strong>Mocking</strong>: Database queries, external APIs (iBrain)</li>
+                            <li><strong>Run</strong>: npm test (local), GitHub Actions (CI)</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Integration Tests (Supertest)</h3>
+                        <ul class="list-tight">
+                            <li><strong>Target</strong>: All API routes tested (V1)</li>
+                            <li><strong>Current</strong>: 30% routes covered (Week 2)</li>
+                            <li><strong>Scope</strong>: API contracts, auth flows, business logic</li>
+                            <li><strong>Setup</strong>: In-memory SQLite (test DB), seed data</li>
+                            <li><strong>Run</strong>: npm run test:integration</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>E2E Tests (Playwright - V1)</h3>
+                        <ul class="list-tight">
+                            <li><strong>Target</strong>: Critical user paths (login, create OKR, export)</li>
+                            <li><strong>Status</strong>: V1 feature (not MVP)</li>
+                            <li><strong>Scope</strong>: Full browser automation (Chrome, Safari, Firefox)</li>
+                            <li><strong>Run</strong>: npm run test:e2e (nightly)</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Quality Gates</h3>
+                        <ul class="list-tight">
+                            <li><strong>Pre-Commit</strong>: Linting (ESLint), formatting (Prettier)</li>
+                            <li><strong>Pre-Push</strong>: Unit tests pass (GitHub hook)</li>
+                            <li><strong>CI/CD</strong>: Integration tests pass → Deploy to staging</li>
+                            <li><strong>Production</strong>: Manual smoke tests (Beta), automated (V1)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>TDD Infrastructure</strong>: Week 2 deliverable (DEV-W2-003) ✅ Complete. Test setup, sample tests, CI/CD pipeline ready. Coverage target: 80%+ by V1.
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 15: Deployment & CI/CD -->
+        <section class="slide" data-slide="15">
+            <div class="slide-content">
+                <h2>Deployment & CI/CD</h2>
+                <p class="subtitle">Automated deployments, staging → production pipeline (V1)</p>
+
+                <div class="two-column">
+                    <div class="highlight-card">
+                        <h3>Current Deployment (MVP)</h3>
+                        <ul class="list-tight">
+                            <li><strong>Method</strong>: Manual deploy (Azure CLI)</li>
+                            <li><strong>Frequency</strong>: Weekly (end of each sprint)</li>
+                            <li><strong>Steps</strong>:
+                                <ol style="margin-top: 0.5rem; padding-left: 1.5rem; font-size: 0.75rem;">
+                                    <li>git push origin main</li>
+                                    <li>az webapp deploy (Azure App Service)</li>
+                                    <li>Restart app service</li>
+                                    <li>Manual smoke tests</li>
+                                </ol>
+                            </li>
+                            <li><strong>Downtime</strong>: ~2 minutes (app restart)</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Environments</h3>
+                        <ul class="list-tight">
+                            <li><strong>Local</strong>: Developer machines (npm run dev)</li>
+                            <li><strong>Staging</strong>: Azure App Service (staging slot, V1)</li>
+                            <li><strong>Production</strong>: Azure App Service (main slot)</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>CI/CD Pipeline (V1)</h3>
+                        <ul class="list-tight">
+                            <li><strong>Tool</strong>: GitHub Actions</li>
+                            <li><strong>Trigger</strong>: Push to main → Run tests → Deploy to staging</li>
+                            <li><strong>Pipeline</strong>:
+                                <ol style="margin-top: 0.5rem; padding-left: 1.5rem; font-size: 0.75rem;">
+                                    <li>Checkout code</li>
+                                    <li>Install dependencies (npm ci)</li>
+                                    <li>Run linter (ESLint)</li>
+                                    <li>Run unit tests (Jest)</li>
+                                    <li>Run integration tests (Supertest)</li>
+                                    <li>Deploy to staging (Azure CLI)</li>
+                                    <li>Run smoke tests</li>
+                                    <li>Manual approval → Deploy to production</li>
+                                </ol>
+                            </li>
+                            <li><strong>Rollback</strong>: Automated rollback if smoke tests fail</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Deployment Roadmap</strong>: MVP (manual deploy, weekly), Beta (semi-automated, GitHub Actions CI), V1 (full CI/CD, blue/green deployments, zero-downtime).
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 15;
+
+        function updateSlideCounter() {
+            document.getElementById('currentSlide').textContent = currentSlide;
+            document.getElementById('progressFill').style.width = ((currentSlide / totalSlides) * 100) + '%';
+        }
+
+        function navigateSlide(direction) {
+            const slides = document.querySelectorAll('.slide');
+            slides[currentSlide - 1].style.display = 'none';
+
+            currentSlide += direction;
+            if (currentSlide < 1) currentSlide = 1;
+            if (currentSlide > totalSlides) currentSlide = totalSlides;
+
+            slides[currentSlide - 1].style.display = 'block';
+            updateSlideCounter();
+        }
+
+        function jumpTo(slideNum) {
+            const slides = document.querySelectorAll('.slide');
+            slides[currentSlide - 1].style.display = 'none';
+            currentSlide = parseInt(slideNum);
+            slides[currentSlide - 1].style.display = 'block';
+            updateSlideCounter();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide, index) => {
+                slide.style.display = index === 0 ? 'block' : 'none';
+            });
+            updateSlideCounter();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') navigateSlide(1);
+            if (e.key === 'ArrowLeft') navigateSlide(-1);
+        });
+    </script>
+</body>
+</html>

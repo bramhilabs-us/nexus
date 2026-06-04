@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Profile | Karvia</title>
+  <style>
+    :root {
+      --navy: #1e3a5f;
+      --navy-light: #2d4a6f;
+      --gold: #d4a853;
+      --gold-light: #f5e6c8;
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --green: #10b981;
+      --green-light: #d1fae5;
+      --purple: #8b5cf6;
+      --purple-light: #ede9fe;
+      --orange: #f59e0b;
+      --orange-light: #fef3c7;
+      --red: #ef4444;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-700);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ========================================
+       TOP NAV BAR
+    ======================================== */
+    .top-nav {
+      background: var(--navy);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .logo {
+      color: var(--gold);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-link {
+      color: var(--gray-300);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-link:hover { color: var(--white); }
+    .nav-link.active { color: var(--gold); border-color: var(--gold); }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    /* ========================================
+       CONTEXT HEADER
+    ======================================== */
+    .context-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .context-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Maturity Ring */
+    .maturity-ring {
+      position: relative;
+      width: 64px;
+      height: 64px;
+    }
+
+    .maturity-ring svg {
+      transform: rotate(-90deg);
+    }
+
+    .maturity-ring circle {
+      fill: none;
+      stroke-width: 5;
+    }
+
+    .maturity-ring .bg { stroke: var(--gray-200); }
+
+    .maturity-ring .progress {
+      stroke: var(--purple);
+      stroke-linecap: round;
+      stroke-dasharray: 175;
+      stroke-dashoffset: 140; /* ~20% */
+      transition: stroke-dashoffset 0.5s;
+    }
+
+    .maturity-ring .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .maturity-ring .stage-num {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .maturity-ring .stage-label {
+      font-size: 9px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+    }
+
+    /* Context Info */
+    .context-info h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stage-badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      background: var(--purple-light);
+      color: var(--purple);
+      border-radius: 100px;
+      font-weight: 600;
+    }
+
+    .context-info p {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+
+    .stage-dots {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .stage-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gray-300);
+    }
+
+    .stage-dot.complete { background: var(--green); }
+    .stage-dot.current { background: var(--purple); }
+
+    /* AI Knows Panel */
+    .ai-knows {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 14px 18px;
+      min-width: 280px;
+    }
+
+    .ai-knows-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-600);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ai-knows-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ai-knows-item {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ai-knows-item.done { color: var(--green); }
+    .ai-knows-item.missing { color: var(--gray-400); }
+
+    .ai-knows-item .icon {
+      width: 14px;
+      text-align: center;
+    }
+
+    .ai-knows-cta {
+      font-size: 11px;
+      color: var(--purple);
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    /* ========================================
+       STAGE TABS (Main)
+    ======================================== */
+    .stage-tabs {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      padding: 0 24px;
+      flex-shrink: 0;
+    }
+
+    .stage-tab {
+      padding: 12px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-500);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+
+    .stage-tab:hover { color: var(--gray-700); }
+
+    .stage-tab.active {
+      color: var(--navy);
+      border-bottom-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .stage-tab.locked {
+      color: var(--gray-400);
+      cursor: pointer;
+    }
+
+    .stage-tab .num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gray-200);
+      color: var(--gray-500);
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stage-tab.active .num {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .stage-tab.complete .num {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .stage-tab.locked .num {
+      background: var(--gray-100);
+      color: var(--gray-400);
+    }
+
+    /* ========================================
+       MAIN CONTENT AREA
+    ======================================== */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .stage-panel {
+      flex: 1;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .stage-panel.active {
+      display: flex;
+    }
+
+    /* Sub-tabs */
+    .sub-tabs {
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      padding: 0 24px;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .sub-tab {
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-500);
+      cursor: pointer;
+      border-radius: 8px 8px 0 0;
+      background: transparent;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .sub-tab:hover {
+      background: var(--gray-100);
+      color: var(--gray-700);
+    }
+
+    .sub-tab.active {
+      background: var(--white);
+      color: var(--navy);
+      font-weight: 600;
+      box-shadow: 0 1px 0 var(--white);
+    }
+
+    .sub-tab .check {
+      color: var(--green);
+      margin-left: 4px;
+    }
+
+    /* Sub-panel Content */
+    .sub-panel {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      display: none;
+    }
+
+    .sub-panel.active {
+      display: block;
+    }
+
+    /* ========================================
+       FORM COMPONENTS
+    ======================================== */
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-600);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .form-label .impact {
+      font-size: 9px;
+      padding: 2px 5px;
+      background: var(--gold-light);
+      color: var(--navy);
+      border-radius: 3px;
+      font-weight: 600;
+    }
+
+    .form-input {
+      padding: 10px 12px;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+    }
+
+    .form-input.filled {
+      border-color: var(--green);
+    }
+
+    /* Chip Select */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      padding: 8px 14px;
+      border: 1px solid var(--gray-200);
+      border-radius: 100px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s;
+      background: var(--white);
+      color: var(--gray-600);
+    }
+
+    .chip:hover {
+      border-color: var(--gray-300);
+      background: var(--gray-50);
+    }
+
+    .chip.selected {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    /* Priority Card */
+    .priority-card {
+      background: linear-gradient(135deg, #fef9f0, #fdf6e9);
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .priority-card label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .priority-card textarea {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      resize: none;
+      height: 60px;
+    }
+
+    .priority-card textarea:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+
+    .priority-hint {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* SSI Cards */
+    .ssi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .ssi-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .ssi-card.weak {
+      border-color: var(--orange);
+      background: var(--orange-light);
+    }
+
+    .ssi-card .icon { font-size: 24px; margin-bottom: 8px; }
+    .ssi-card .score { font-size: 28px; font-weight: 700; color: var(--navy); }
+    .ssi-card .label { font-size: 12px; color: var(--gray-600); margin-top: 4px; }
+
+    .ssi-card .bar {
+      height: 4px;
+      background: var(--gray-200);
+      border-radius: 2px;
+      margin-top: 12px;
+      overflow: hidden;
+    }
+
+    .ssi-card .bar-fill {
+      height: 100%;
+      border-radius: 2px;
+    }
+
+    .ssi-card .bar-fill.speed { background: #3b82f6; }
+    .ssi-card .bar-fill.strength { background: var(--green); }
+    .ssi-card .bar-fill.intelligence { background: var(--purple); }
+
+    .ssi-card .insight {
+      font-size: 10px;
+      margin-top: 8px;
+      color: var(--gray-500);
+    }
+
+    .ssi-card.weak .insight { color: var(--orange); font-weight: 500; }
+
+    /* Metric Cards */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .metric-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+    }
+
+    .metric-card.filled { border-color: var(--green); }
+
+    .metric-card .icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gray-100);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .metric-card.filled .icon { background: var(--green-light); }
+
+    .metric-card .content { flex: 1; }
+    .metric-card .label { font-size: 11px; color: var(--gray-500); }
+
+    .metric-card .value-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .metric-card input {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      border: none;
+      background: transparent;
+      width: 100px;
+    }
+
+    .metric-card input:focus { outline: none; }
+    .metric-card input::placeholder { color: var(--gray-300); }
+    .metric-card .unit { font-size: 12px; color: var(--gray-400); }
+
+    .metric-card .change {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .metric-card .change.up { background: var(--green-light); color: var(--green); }
+    .metric-card .change.down { background: #fee2e2; color: var(--red); }
+
+    /* Locked State */
+    .locked-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .locked-state .icon {
+      font-size: 40px;
+      opacity: 0.3;
+      margin-bottom: 16px;
+    }
+
+    .locked-state h3 {
+      font-size: 16px;
+      color: var(--gray-400);
+      margin-bottom: 8px;
+    }
+
+    .locked-state p {
+      font-size: 13px;
+      color: var(--gray-400);
+      max-width: 300px;
+      margin-bottom: 20px;
+    }
+
+    .requirements {
+      background: var(--gray-50);
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-align: left;
+    }
+
+    .requirement {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--gray-500);
+      padding: 6px 0;
+    }
+
+    .requirement.done { color: var(--green); }
+
+    .requirement .dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    .requirement.done .dot { background: var(--green); color: var(--white); }
+
+    /* Section Header */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .section-header h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .section-header .progress {
+      font-size: 11px;
+      color: var(--gray-400);
+    }
+
+    .section-header .progress .done { color: var(--green); font-weight: 600; }
+
+    /* Footer Bar */
+    .footer-bar {
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .progress-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .progress-track {
+      width: 180px;
+      height: 6px;
+      background: var(--gray-200);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 3px;
+      transition: width 0.3s;
+    }
+
+    .progress-text {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .btn {
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .btn-primary:hover { background: #c99b48; }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--gray-600);
+      border: 1px solid var(--gray-200);
+    }
+
+    .btn-secondary:hover { border-color: var(--gray-400); }
+
+    /* ========================================
+       LOCKED PREVIEW STYLES
+    ======================================== */
+    .locked-banner {
+      background: linear-gradient(90deg, var(--gray-100), var(--gray-50));
+      border-bottom: 1px solid var(--gray-200);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .locked-banner-icon {
+      font-size: 16px;
+    }
+
+    .locked-banner-text {
+      font-size: 12px;
+      color: var(--gray-500);
+      font-weight: 500;
+    }
+
+    .locked-requirements-mini {
+      display: flex;
+      gap: 12px;
+      margin-left: auto;
+      font-size: 11px;
+    }
+
+    .req-done { color: var(--green); }
+    .req-pending { color: var(--gray-400); }
+
+    .locked-preview {
+      opacity: 0.6;
+      pointer-events: none;
+      position: relative;
+    }
+
+    .locked-preview::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 10px,
+        rgba(156, 163, 175, 0.05) 10px,
+        rgba(156, 163, 175, 0.05) 20px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .badge-auto {
+      font-size: 10px;
+      padding: 3px 8px;
+      background: var(--blue-light);
+      color: #3b82f6;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .badge-gold {
+      font-size: 10px;
+      padding: 3px 8px;
+      background: var(--gold-light);
+      color: var(--navy);
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .preview-card {
+      background: var(--white);
+      border: 1px dashed var(--gray-300);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .preview-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+      opacity: 0.5;
+    }
+
+    .preview-label {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-bottom: 6px;
+    }
+
+    .preview-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gray-400);
+    }
+
+    .preview-hint {
+      font-size: 10px;
+      color: var(--gray-400);
+      margin-top: 6px;
+    }
+
+    .preview-insight {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 12px;
+      color: var(--gray-600);
+    }
+
+    .preview-insight strong {
+      color: var(--navy);
+    }
+
+    .lessons-preview {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .lesson-column h4 {
+      font-size: 13px;
+      margin-bottom: 10px;
+      color: var(--gray-600);
+    }
+
+    .lesson-placeholder {
+      background: var(--white);
+      border: 1px dashed var(--gray-300);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+
+    /* Mastery Preview */
+    .mastery-preview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .mastery-card {
+      background: var(--white);
+      border: 1px dashed var(--gray-300);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .mastery-card.full {
+      grid-column: 1 / -1;
+    }
+
+    .mastery-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+
+    .mastery-card h4 {
+      font-size: 14px;
+      color: var(--gray-600);
+      margin-bottom: 8px;
+    }
+
+    .mastery-card p {
+      font-size: 12px;
+      color: var(--gray-500);
+      line-height: 1.5;
+    }
+
+    .mastery-example {
+      margin-top: 12px;
+      padding: 10px;
+      background: var(--gray-50);
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--gray-500);
+      font-style: italic;
+    }
+
+    .mastery-example .example-label {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--gray-600);
+    }
+
+    .mastery-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .mastery-list li {
+      font-size: 12px;
+      color: var(--gray-500);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .mastery-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--gray-400);
+    }
+
+    @media (max-width: 900px) {
+      .preview-grid,
+      .mastery-preview {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .lessons-preview {
+        grid-template-columns: 1fr;
+      }
+
+      .mastery-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <div class="logo">Karvia</div>
+    <div class="nav-links">
+      <a href="#" class="nav-link">Dashboard</a>
+      <a href="#" class="nav-link">Objectives</a>
+      <a href="#" class="nav-link">Goals</a>
+      <a href="#" class="nav-link active">Company Profile</a>
+    </div>
+    <div class="user-avatar">JD</div>
+  </nav>
+
+  <!-- Context Header -->
+  <header class="context-header">
+    <div class="context-left">
+      <div class="maturity-ring">
+        <svg width="64" height="64">
+          <circle class="bg" cx="32" cy="32" r="28"></circle>
+          <circle class="progress" cx="32" cy="32" r="28"></circle>
+        </svg>
+        <div class="center">
+          <div class="stage-num">1</div>
+          <div class="stage-label">Stage</div>
+        </div>
+      </div>
+      <div class="context-info">
+        <h1>
+          Your AI Context
+          <span class="stage-badge">Assessment Stage</span>
+        </h1>
+        <p>The more context you provide, the smarter your OKRs become</p>
+        <div class="stage-dots">
+          <div class="stage-dot complete" title="Discovery"></div>
+          <div class="stage-dot current" title="Assessment"></div>
+          <div class="stage-dot" title="Execution"></div>
+          <div class="stage-dot" title="Learning"></div>
+          <div class="stage-dot" title="Mastery"></div>
+        </div>
+      </div>
+    </div>
+    <div class="ai-knows">
+      <div class="ai-knows-title">
+        <span>🧠</span> What AI knows about you
+      </div>
+      <div class="ai-knows-list">
+        <div class="ai-knows-item done">
+          <span class="icon">✓</span> Industry: Consulting (IT focus)
+        </div>
+        <div class="ai-knows-item done">
+          <span class="icon">✓</span> Business model defined
+        </div>
+        <div class="ai-knows-item missing">
+          <span class="icon">○</span> Missing: Strategic priority
+        </div>
+        <div class="ai-knows-item missing">
+          <span class="icon">○</span> Missing: Revenue metrics
+        </div>
+      </div>
+      <div class="ai-knows-cta">Complete profile to reach Stage 2 →</div>
+    </div>
+  </header>
+
+  <!-- Stage Tabs -->
+  <div class="stage-tabs">
+    <button class="stage-tab complete" onclick="showStage(0)">
+      <span class="num">✓</span> Discovery
+    </button>
+    <button class="stage-tab active" onclick="showStage(1)">
+      <span class="num">1</span> Assessment
+    </button>
+    <button class="stage-tab" onclick="showStage(2)">
+      <span class="num">2</span> Execution
+    </button>
+    <button class="stage-tab locked" onclick="showStage(3)">
+      <span class="num">🔒</span> Learning
+    </button>
+    <button class="stage-tab locked" onclick="showStage(4)">
+      <span class="num">🔒</span> Mastery
+    </button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- ==========================================
+         STAGE 0: DISCOVERY
+    ========================================== -->
+    <div class="stage-panel" id="stage-0">
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSubTab(0, 'profile')">
+          Company Profile <span class="check">✓</span>
+        </button>
+        <button class="sub-tab" onclick="showSubTab(0, 'priority')">
+          #1 Priority <span class="check">✓</span>
+        </button>
+      </div>
+
+      <div class="sub-panel active" id="stage-0-profile">
+        <div class="section-header">
+          <h3>Basic Information</h3>
+          <span class="progress"><span class="done">4</span> / 4 complete</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Industry <span class="impact">High Impact</span></label>
+            <div class="chips">
+              <span class="chip">Financial Services</span>
+              <span class="chip selected">Consulting</span>
+              <span class="chip">Technology</span>
+              <span class="chip">Healthcare</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subtype</label>
+            <div class="chips">
+              <span class="chip selected">IT Consulting</span>
+              <span class="chip">Management</span>
+              <span class="chip">Strategy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Team Size</label>
+            <div class="chips">
+              <span class="chip">1-10</span>
+              <span class="chip selected">11-50</span>
+              <span class="chip">51-200</span>
+              <span class="chip">200+</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Revenue Range</label>
+            <div class="chips">
+              <span class="chip">< $1M</span>
+              <span class="chip selected">$1M-$5M</span>
+              <span class="chip">$5M-$10M</span>
+              <span class="chip">$10M+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-panel" id="stage-0-priority">
+        <div class="priority-card">
+          <label>✨ What's your #1 priority for the next 12 months?</label>
+          <textarea placeholder="e.g., Grow client base by 25% while maintaining service quality...">Expand into new markets while building a scalable delivery model</textarea>
+          <div class="priority-hint">💡 This becomes your first personalized objective</div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full">
+            <label class="form-label">Quick suggestions (click to use)</label>
+            <div class="chips">
+              <span class="chip">Grow revenue</span>
+              <span class="chip">Improve retention</span>
+              <span class="chip">Scale operations</span>
+              <span class="chip">Hire talent</span>
+              <span class="chip">Enter new market</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STAGE 1: ASSESSMENT
+    ========================================== -->
+    <div class="stage-panel active" id="stage-1">
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSubTab(1, 'ssi')">
+          SSI Results
+        </button>
+        <button class="sub-tab" onclick="showSubTab(1, 'context')">
+          Business Context
+        </button>
+        <button class="sub-tab" onclick="showSubTab(1, 'challenges')">
+          Challenges
+        </button>
+      </div>
+
+      <div class="sub-panel active" id="stage-1-ssi">
+        <div class="section-header">
+          <h3>Strategic Strength Index</h3>
+          <a href="#" style="font-size: 11px; color: var(--purple);">Retake Assessment →</a>
+        </div>
+
+        <div class="ssi-grid">
+          <div class="ssi-card">
+            <div class="icon">⚡</div>
+            <div class="score">72</div>
+            <div class="label">Speed</div>
+            <div class="bar"><div class="bar-fill speed" style="width: 72%"></div></div>
+            <div class="insight">Strong decision velocity</div>
+          </div>
+          <div class="ssi-card weak">
+            <div class="icon">💪</div>
+            <div class="score">48</div>
+            <div class="label">Strength</div>
+            <div class="bar"><div class="bar-fill strength" style="width: 48%"></div></div>
+            <div class="insight">⚠️ Focus area</div>
+          </div>
+          <div class="ssi-card">
+            <div class="icon">🧠</div>
+            <div class="score">65</div>
+            <div class="label">Intelligence</div>
+            <div class="bar"><div class="bar-fill intelligence" style="width: 65%"></div></div>
+            <div class="insight">Good learning agility</div>
+          </div>
+        </div>
+
+        <div style="background: var(--purple-light); padding: 12px 16px; border-radius: 8px; font-size: 12px; color: var(--purple);">
+          <strong>AI Insight:</strong> Your "Strength" dimension scores lowest. We'll prioritize objectives that build operational capacity and team capability.
+        </div>
+      </div>
+
+      <div class="sub-panel" id="stage-1-context">
+        <div class="section-header">
+          <h3>Business Context</h3>
+          <span class="progress"><span class="done">1</span> / 3 complete</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full">
+            <label class="form-label">What does your company do? <span class="impact">High Impact</span></label>
+            <textarea class="form-input filled" rows="2" style="resize: none;">We provide IT consulting and digital transformation services to mid-market enterprises, specializing in cloud migration and system integration.</textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Business Model</label>
+            <div class="chips">
+              <span class="chip selected">Project-based</span>
+              <span class="chip">Retainer</span>
+              <span class="chip">Subscription</span>
+              <span class="chip">Hybrid</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Primary Revenue Driver</label>
+            <input type="text" class="form-input" placeholder="e.g., Implementation projects">
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-panel" id="stage-1-challenges">
+        <div class="section-header">
+          <h3>What's Blocking You?</h3>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full">
+            <label class="form-label">Biggest obstacle right now <span class="impact">Creates Objectives</span></label>
+            <textarea class="form-input" rows="2" style="resize: none;" placeholder="What's preventing you from reaching your goals?"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full">
+            <label class="form-label">Common challenges (select all that apply)</label>
+            <div class="chips">
+              <span class="chip">Hiring talent</span>
+              <span class="chip selected">Scaling operations</span>
+              <span class="chip">Client retention</span>
+              <span class="chip">Cash flow</span>
+              <span class="chip">Technology gaps</span>
+              <span class="chip">Market competition</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STAGE 2: EXECUTION
+    ========================================== -->
+    <div class="stage-panel" id="stage-2">
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSubTab(2, 'metrics')">
+          Core Metrics
+        </button>
+        <button class="sub-tab" onclick="showSubTab(2, 'targets')">
+          Targets
+        </button>
+      </div>
+
+      <div class="sub-panel active" id="stage-2-metrics">
+        <div class="section-header">
+          <h3>Current Performance</h3>
+          <span class="progress"><span class="done">2</span> / 4 complete</span>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card filled">
+            <div class="icon">💰</div>
+            <div class="content">
+              <div class="label">Annual Revenue</div>
+              <div class="value-row">
+                <span style="color: var(--gray-400);">$</span>
+                <input type="text" value="2,400,000" placeholder="0">
+                <span class="change up">↑ 12%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="metric-card filled">
+            <div class="icon">👥</div>
+            <div class="content">
+              <div class="label">Active Clients</div>
+              <div class="value-row">
+                <input type="text" value="28" placeholder="0">
+                <span class="change up">↑ 4</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="icon">📊</div>
+            <div class="content">
+              <div class="label">Client Retention</div>
+              <div class="value-row">
+                <input type="text" placeholder="e.g., 85">
+                <span class="unit">%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="icon">💵</div>
+            <div class="content">
+              <div class="label">Profit Margin</div>
+              <div class="value-row">
+                <input type="text" placeholder="e.g., 22">
+                <span class="unit">%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-panel" id="stage-2-targets">
+        <div class="section-header">
+          <h3>12-Month Targets</h3>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Target Revenue</label>
+            <input type="text" class="form-input" placeholder="e.g., $3,000,000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Target Clients</label>
+            <input type="text" class="form-input" placeholder="e.g., 35">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Target Retention %</label>
+            <input type="text" class="form-input" placeholder="e.g., 90%">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Target Team Size</label>
+            <input type="text" class="form-input" placeholder="e.g., 45">
+          </div>
+        </div>
+
+        <div style="background: var(--gold-light); padding: 12px 16px; border-radius: 8px; font-size: 12px; color: var(--navy); margin-top: 16px;">
+          <strong>Why this matters:</strong> Targets enable specific "from $2.4M to $3M" Key Results instead of generic "increase revenue"
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STAGE 3: LEARNING (Locked Preview)
+    ========================================== -->
+    <div class="stage-panel" id="stage-3">
+      <!-- Locked Banner -->
+      <div class="locked-banner">
+        <span class="locked-banner-icon">🔒</span>
+        <span class="locked-banner-text">Preview Mode — Unlocks after completing 50+ tasks and 1 OKR cycle</span>
+        <div class="locked-requirements-mini">
+          <span class="req-done">✓ Discovery</span>
+          <span class="req-done">✓ SSI</span>
+          <span class="req-pending">○ Metrics</span>
+          <span class="req-pending">○ 50 tasks</span>
+          <span class="req-pending">○ OKR cycle</span>
+        </div>
+      </div>
+
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSubTab(3, 'behavior')">Execution Patterns</button>
+        <button class="sub-tab" onclick="showSubTab(3, 'outcomes')">OKR Outcomes</button>
+        <button class="sub-tab" onclick="showSubTab(3, 'lessons')">Lessons Learned</button>
+      </div>
+
+      <div class="sub-panel active locked-preview" id="stage-3-behavior">
+        <div class="section-header">
+          <h3>How Your Team Executes</h3>
+          <span class="badge-auto">Auto-tracked</span>
+        </div>
+
+        <div class="preview-grid">
+          <div class="preview-card">
+            <div class="preview-icon">📊</div>
+            <div class="preview-label">Task Completion Rate</div>
+            <div class="preview-value">—%</div>
+            <div class="preview-hint">Tracked after 50 tasks</div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-icon">⚡</div>
+            <div class="preview-label">Average Velocity</div>
+            <div class="preview-value">— tasks/week</div>
+            <div class="preview-hint">Your team's pace</div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-icon">🎯</div>
+            <div class="preview-label">Goal Achievement</div>
+            <div class="preview-value">—%</div>
+            <div class="preview-hint">Weekly goals hit rate</div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-icon">📅</div>
+            <div class="preview-label">On-Time Delivery</div>
+            <div class="preview-value">—%</div>
+            <div class="preview-hint">Tasks done by due date</div>
+          </div>
+        </div>
+
+        <div class="preview-insight">
+          <strong>What AI will learn:</strong> Your team's execution patterns help AI suggest realistic timelines and workload distribution for goals.
+        </div>
+      </div>
+
+      <div class="sub-panel locked-preview" id="stage-3-outcomes">
+        <div class="section-header">
+          <h3>OKR Cycle Results</h3>
+          <span class="badge-auto">Auto-tracked</span>
+        </div>
+
+        <div class="preview-grid">
+          <div class="preview-card">
+            <div class="preview-icon">🏆</div>
+            <div class="preview-label">Success Rate</div>
+            <div class="preview-value">—%</div>
+            <div class="preview-hint">OKRs achieving 70%+</div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-icon">📈</div>
+            <div class="preview-label">Cycles Completed</div>
+            <div class="preview-value">0</div>
+            <div class="preview-hint">Quarterly OKR cycles</div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-icon">⭐</div>
+            <div class="preview-label">Best Category</div>
+            <div class="preview-value">—</div>
+            <div class="preview-hint">Highest success rate</div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-icon">⚠️</div>
+            <div class="preview-label">Needs Focus</div>
+            <div class="preview-value">—</div>
+            <div class="preview-hint">Lowest success rate</div>
+          </div>
+        </div>
+
+        <div class="preview-insight">
+          <strong>What AI will learn:</strong> Which objectives you succeed at vs struggle with, so it can adjust recommendations.
+        </div>
+      </div>
+
+      <div class="sub-panel locked-preview" id="stage-3-lessons">
+        <div class="section-header">
+          <h3>What Worked & What Didn't</h3>
+          <span class="badge-auto">From Quarterly Reviews</span>
+        </div>
+
+        <div class="lessons-preview">
+          <div class="lesson-column">
+            <h4>✅ What Worked</h4>
+            <div class="lesson-placeholder">
+              <span>Lessons appear here after your first OKR cycle review</span>
+            </div>
+          </div>
+          <div class="lesson-column">
+            <h4>❌ What Didn't Work</h4>
+            <div class="lesson-placeholder">
+              <span>Failure patterns help AI avoid repeating mistakes</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-insight">
+          <strong>What AI will learn:</strong> Your documented lessons become institutional knowledge that improves every future recommendation.
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STAGE 4: MASTERY (Locked Preview)
+    ========================================== -->
+    <div class="stage-panel" id="stage-4">
+      <!-- Locked Banner -->
+      <div class="locked-banner">
+        <span class="locked-banner-icon">🔒</span>
+        <span class="locked-banner-text">Preview Mode — Unlocks after 4+ OKR cycles with outcome tracking</span>
+        <div class="locked-requirements-mini">
+          <span class="req-done">✓ Discovery</span>
+          <span class="req-done">✓ Assessment</span>
+          <span class="req-pending">○ Execution</span>
+          <span class="req-pending">○ Learning</span>
+          <span class="req-pending">○ 4 cycles</span>
+        </div>
+      </div>
+
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSubTab(4, 'predictions')">AI Predictions</button>
+        <button class="sub-tab" onclick="showSubTab(4, 'patterns')">Org Patterns</button>
+        <button class="sub-tab" onclick="showSubTab(4, 'recommendations')">Smart Recs</button>
+      </div>
+
+      <div class="sub-panel active locked-preview" id="stage-4-predictions">
+        <div class="section-header">
+          <h3>Predictive Intelligence</h3>
+          <span class="badge-gold">Full AI Power</span>
+        </div>
+
+        <div class="mastery-preview">
+          <div class="mastery-card">
+            <div class="mastery-icon">🔮</div>
+            <h4>Success Prediction</h4>
+            <p>AI predicts likelihood of achieving each objective before you commit</p>
+            <div class="mastery-example">
+              <span class="example-label">Example:</span>
+              "This objective has 78% success probability based on your history"
+            </div>
+          </div>
+
+          <div class="mastery-card">
+            <div class="mastery-icon">⚡</div>
+            <h4>Risk Warnings</h4>
+            <p>Proactive alerts when objectives match your historical failure patterns</p>
+            <div class="mastery-example">
+              <span class="example-label">Example:</span>
+              "Warning: Similar targets have failed 3 times due to resource constraints"
+            </div>
+          </div>
+
+          <div class="mastery-card">
+            <div class="mastery-icon">🎯</div>
+            <h4>Target Calibration</h4>
+            <p>Recommended targets based on what your team actually achieves</p>
+            <div class="mastery-example">
+              <span class="example-label">Example:</span>
+              "Based on velocity, recommend 15% growth vs. your 25% target"
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-panel locked-preview" id="stage-4-patterns">
+        <div class="section-header">
+          <h3>Organizational DNA</h3>
+          <span class="badge-gold">Deep Insights</span>
+        </div>
+
+        <div class="mastery-preview">
+          <div class="mastery-card">
+            <div class="mastery-icon">📊</div>
+            <h4>Execution Fingerprint</h4>
+            <p>AI understands your unique execution style and adapts recommendations</p>
+          </div>
+
+          <div class="mastery-card">
+            <div class="mastery-icon">👥</div>
+            <h4>Team Dynamics</h4>
+            <p>Which team combinations excel at different objective types</p>
+          </div>
+
+          <div class="mastery-card">
+            <div class="mastery-icon">📅</div>
+            <h4>Timing Insights</h4>
+            <p>Best quarters for different initiatives based on your history</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-panel locked-preview" id="stage-4-recommendations">
+        <div class="section-header">
+          <h3>Hyper-Personalized Recommendations</h3>
+          <span class="badge-gold">Your Data + AI</span>
+        </div>
+
+        <div class="mastery-preview">
+          <div class="mastery-card full">
+            <div class="mastery-icon">🧠</div>
+            <h4>What You'll Get at Mastery</h4>
+            <ul class="mastery-list">
+              <li>Objectives pre-scored for success probability</li>
+              <li>KRs calibrated to your actual achievement patterns</li>
+              <li>Proactive suggestions based on seasonal patterns</li>
+              <li>Cross-cycle learning from what worked</li>
+              <li>Risk warnings before you commit</li>
+              <li>Team-aware task distribution</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- End main-content -->
+
+  <!-- Footer Bar -->
+  <footer class="footer-bar">
+    <div class="progress-bar">
+      <div class="progress-track">
+        <div class="progress-fill" style="width: 35%"></div>
+      </div>
+      <span class="progress-text">Stage 1: 35% complete</span>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <button class="btn btn-secondary">Save Draft</button>
+      <button class="btn btn-primary">Save & Continue →</button>
+    </div>
+  </footer>
+
+  <script>
+    function showStage(num) {
+      // Update panels
+      document.querySelectorAll('.stage-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('stage-' + num).classList.add('active');
+
+      // Update tabs
+      document.querySelectorAll('.stage-tab').forEach((t, i) => {
+        t.classList.remove('active');
+        if (i === num) t.classList.add('active');
+      });
+
+      // Show first sub-panel
+      const panel = document.getElementById('stage-' + num);
+      const firstSubTab = panel.querySelector('.sub-tab');
+      if (firstSubTab) firstSubTab.click();
+    }
+
+    function showSubTab(stage, tab) {
+      const panel = document.getElementById('stage-' + stage);
+
+      // Update sub-tabs
+      panel.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Update sub-panels
+      panel.querySelectorAll('.sub-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('stage-' + stage + '-' + tab).classList.add('active');
+    }
+
+    // Chip selection
+    document.querySelectorAll('.chips').forEach(container => {
+      container.addEventListener('click', e => {
+        if (e.target.classList.contains('chip')) {
+          const isMulti = container.closest('.form-group')?.querySelector('.form-label')?.textContent.includes('select all');
+          if (!isMulti) {
+            container.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+          }
+          e.target.classList.toggle('selected');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

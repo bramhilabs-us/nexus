@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E3 - Page 3: The Measurement | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 30px 50px;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 16px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: #888; text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .page-title { margin-top: 4px; color: #1a1a2e; font-weight: 500; }
+
+        /* Main Content */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* Column Styling */
+        .column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .column-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #F0F0F0;
+        }
+
+        .column-number {
+            width: 32px;
+            height: 32px;
+            background: #1a1a2e;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #C9A227;
+        }
+
+        .column-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .column-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        /* Metric Cards */
+        .metric-card {
+            background: #FAFAFA;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 12px;
+            border: 1px solid #F0F0F0;
+            transition: all 0.2s;
+        }
+
+        .metric-card:hover {
+            border-color: #C9A227;
+            background: #FFFBF0;
+        }
+
+        .metric-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .metric-discipline {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .metric-badge {
+            font-size: 9px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-badge.lead { background: #E3F2FD; color: #1565C0; }
+        .metric-badge.lag { background: #FFF3E0; color: #E65100; }
+        .metric-badge.outcome { background: #E8F5E9; color: #2E7D32; }
+
+        .metric-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: #1a1a2e;
+            margin-bottom: 6px;
+        }
+
+        .metric-desc {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .metric-example {
+            font-size: 10px;
+            color: #888;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 1px dashed #E0E0E0;
+        }
+
+        .metric-example strong {
+            color: #C9A227;
+        }
+
+        /* SSI Connection */
+        .ssi-card {
+            background: #1a1a2e;
+            border-radius: 14px;
+            padding: 18px;
+            margin-top: auto;
+        }
+
+        .ssi-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .ssi-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .ssi-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .ssi-letter {
+            width: 28px;
+            height: 28px;
+            background: #C9A227;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .ssi-text {
+            font-size: 12px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Maturity Section */
+        .maturity-card {
+            background: linear-gradient(135deg, #C9A227 0%, #D4AF37 100%);
+            border-radius: 14px;
+            padding: 18px;
+            margin-top: auto;
+        }
+
+        .maturity-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(26,26,46,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .maturity-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 12px;
+        }
+
+        .maturity-stages {
+            display: flex;
+            gap: 8px;
+        }
+
+        .maturity-stage {
+            flex: 1;
+            text-align: center;
+            background: rgba(26,26,46,0.1);
+            border-radius: 8px;
+            padding: 10px 6px;
+        }
+
+        .stage-number {
+            font-size: 10px;
+            color: rgba(26,26,46,0.5);
+            margin-bottom: 2px;
+        }
+
+        .stage-name {
+            font-size: 10px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        /* Outcome Card */
+        .outcome-card {
+            background: #FAFAFA;
+            border: 2px solid #2E7D32;
+            border-radius: 14px;
+            padding: 18px;
+            margin-top: auto;
+        }
+
+        .outcome-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .outcome-icon {
+            font-size: 24px;
+        }
+
+        .outcome-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2E7D32;
+        }
+
+        .outcome-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .outcome-metric {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #E0E0E0;
+        }
+
+        .outcome-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2E7D32;
+        }
+
+        .outcome-label {
+            font-size: 10px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .next { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 24px; }
+            .content { grid-template-columns: 1fr; gap: 24px; }
+        }
+
+        @media (max-width: 768px) {
+            .page { padding: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E3: Cultural Disciplines</div>
+            </div>
+            <div class="page-indicator">
+                <div>Page <span class="current">3</span> of 4</div>
+                <div class="page-title">The Measurement</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Column 1: Leading Indicators -->
+            <div class="column">
+                <div class="column-header">
+                    <div class="column-number">1</div>
+                    <div>
+                        <div class="column-label">Leading Indicators</div>
+                        <div class="column-title">What We Watch</div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-discipline">Truth + Ownership</span>
+                        <span class="metric-badge lead">Lead</span>
+                    </div>
+                    <div class="metric-name">Honest Updates Rate</div>
+                    <div class="metric-desc">% of status updates that reflect reality without spin</div>
+                    <div class="metric-example"><strong>Signal:</strong> "Blocked" status used appropriately</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-discipline">Follow-through</span>
+                        <span class="metric-badge lead">Lead</span>
+                    </div>
+                    <div class="metric-name">Commitment Completion</div>
+                    <div class="metric-desc">% of weekly commitments delivered on time</div>
+                    <div class="metric-example"><strong>Signal:</strong> Tasks marked done match reality</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-discipline">Formation</span>
+                        <span class="metric-badge lead">Lead</span>
+                    </div>
+                    <div class="metric-name">Team Engagement</div>
+                    <div class="metric-desc">% of team members active in formation groups</div>
+                    <div class="metric-example"><strong>Signal:</strong> Weekly check-ins completed</div>
+                </div>
+
+                <!-- SSI Connection -->
+                <div class="ssi-card">
+                    <div class="ssi-label">Assessment Framework</div>
+                    <div class="ssi-title">SSI Scores</div>
+                    <div class="ssi-item">
+                        <div class="ssi-letter">S</div>
+                        <div class="ssi-text">Speed of execution</div>
+                    </div>
+                    <div class="ssi-item">
+                        <div class="ssi-letter">S</div>
+                        <div class="ssi-text">Strength of team</div>
+                    </div>
+                    <div class="ssi-item">
+                        <div class="ssi-letter">I</div>
+                        <div class="ssi-text">Intelligence of decisions</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 2: Lagging Indicators -->
+            <div class="column">
+                <div class="column-header">
+                    <div class="column-number">2</div>
+                    <div>
+                        <div class="column-label">Lagging Indicators</div>
+                        <div class="column-title">What Changes</div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-discipline">Alignment</span>
+                        <span class="metric-badge lag">Lag</span>
+                    </div>
+                    <div class="metric-name">Goal Coherence</div>
+                    <div class="metric-desc">% of individual goals aligned to company OKRs</div>
+                    <div class="metric-example"><strong>Signal:</strong> Less rework, fewer conflicts</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-discipline">Foresight</span>
+                        <span class="metric-badge lag">Lag</span>
+                    </div>
+                    <div class="metric-name">Risk Detection Time</div>
+                    <div class="metric-desc">Days between risk emergence and detection</div>
+                    <div class="metric-example"><strong>Signal:</strong> Problems caught earlier</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-discipline">Handoffs</span>
+                        <span class="metric-badge lag">Lag</span>
+                    </div>
+                    <div class="metric-name">Drop Rate</div>
+                    <div class="metric-desc">% of handoffs that result in dropped balls</div>
+                    <div class="metric-example"><strong>Signal:</strong> Smoother transitions</div>
+                </div>
+
+                <!-- Maturity Card -->
+                <div class="maturity-card">
+                    <div class="maturity-label">Progress Tracking</div>
+                    <div class="maturity-title">Discipline Maturity</div>
+                    <div class="maturity-stages">
+                        <div class="maturity-stage">
+                            <div class="stage-number">1</div>
+                            <div class="stage-name">Exposure</div>
+                        </div>
+                        <div class="maturity-stage">
+                            <div class="stage-number">2</div>
+                            <div class="stage-name">Engage</div>
+                        </div>
+                        <div class="maturity-stage">
+                            <div class="stage-number">3</div>
+                            <div class="stage-name">Embody</div>
+                        </div>
+                        <div class="maturity-stage">
+                            <div class="stage-number">4</div>
+                            <div class="stage-name">Excel</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 3: Business Outcomes -->
+            <div class="column">
+                <div class="column-header">
+                    <div class="column-number">3</div>
+                    <div>
+                        <div class="column-label">Business Outcomes</div>
+                        <div class="column-title">What Matters</div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-discipline">Energy Stewardship</span>
+                        <span class="metric-badge outcome">Outcome</span>
+                    </div>
+                    <div class="metric-name">Sustainable Pace</div>
+                    <div class="metric-desc">Team burnout indicators, overtime hours</div>
+                    <div class="metric-example"><strong>Result:</strong> Retention improves</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-discipline">Consistency</span>
+                        <span class="metric-badge outcome">Outcome</span>
+                    </div>
+                    <div class="metric-name">Delivery Predictability</div>
+                    <div class="metric-desc">Variance between estimated and actual delivery</div>
+                    <div class="metric-example"><strong>Result:</strong> Trust with clients</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-discipline">All Disciplines</span>
+                        <span class="metric-badge outcome">Outcome</span>
+                    </div>
+                    <div class="metric-name">OKR Achievement</div>
+                    <div class="metric-desc">% of Key Results achieved per quarter</div>
+                    <div class="metric-example"><strong>Result:</strong> Business growth</div>
+                </div>
+
+                <!-- Outcome Summary -->
+                <div class="outcome-card">
+                    <div class="outcome-header">
+                        <span class="outcome-icon">&#127942;</span>
+                        <span class="outcome-title">Ultimate Measure</span>
+                    </div>
+                    <div class="outcome-metrics">
+                        <div class="outcome-metric">
+                            <div class="outcome-value">70%+</div>
+                            <div class="outcome-label">OKR Achievement</div>
+                        </div>
+                        <div class="outcome-metric">
+                            <div class="outcome-value">&lt;10%</div>
+                            <div class="outcome-label">Turnover Rate</div>
+                        </div>
+                        <div class="outcome-metric">
+                            <div class="outcome-value">4.0+</div>
+                            <div class="outcome-label">Team Health Score</div>
+                        </div>
+                        <div class="outcome-metric">
+                            <div class="outcome-value">80%+</div>
+                            <div class="outcome-label">On-Time Delivery</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_2_the_mechanism.html">&larr; The Mechanism</a>
+                <a href="page_4_the_future.html" class="next">Next: The Future &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

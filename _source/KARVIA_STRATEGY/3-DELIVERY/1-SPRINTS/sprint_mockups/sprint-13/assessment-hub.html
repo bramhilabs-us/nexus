@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprint 13 - Assessment Hub Redesign Mockup | Chief AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FAFAFA;
+            color: #1F2937;
+            line-height: 1.5;
+        }
+
+        /* ========================================
+           NAVIGATION BAR (S13 Pattern)
+           ======================================== */
+        .nav {
+            background: white;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            border-bottom: 1px solid #F0F0F0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo svg {
+            height: 80px;
+            width: auto;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .nav-item {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            text-decoration: none;
+            color: #6B7280;
+            font-size: 13px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item:hover { color: #1F2937; }
+        .nav-item.active { color: #1F2937; }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 16px;
+            right: 16px;
+            height: 2px;
+            background: transparent;
+            transition: background 0.2s ease;
+        }
+
+        .nav-item[data-philosophy="play"].active::after,
+        .nav-item[data-philosophy="play"]:hover::after { background: #8B5CF6; }
+        .nav-item[data-philosophy="assess"].active::after,
+        .nav-item[data-philosophy="assess"]:hover::after { background: #3B82F6; }
+        .nav-item[data-philosophy="align"].active::after,
+        .nav-item[data-philosophy="align"]:hover::after { background: #22c55e; }
+        .nav-item[data-philosophy="plan"].active::after,
+        .nav-item[data-philosophy="plan"]:hover::after { background: #F59E0B; }
+
+        .nav-divider {
+            width: 1px;
+            height: 24px;
+            background: #E5E7EB;
+        }
+
+        .nav-item .tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+            background: #1F2937;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 400;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease 0.5s, visibility 0.15s ease 0.5s;
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        .nav-item .tooltip::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 6px 6px 6px;
+            border-style: solid;
+            border-color: transparent transparent #1F2937 transparent;
+        }
+
+        .nav-item:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .nav-user:hover { background: #F5F5F5; }
+
+        .nav-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .nav-user-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        /* ========================================
+           MAIN CONTENT (S13 Pattern)
+           ======================================== */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        /* ========================================
+           HEADER
+           ======================================== */
+        .header {
+            margin-bottom: 32px;
+        }
+
+        .header-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .header-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .header-subtitle {
+            font-size: 13px;
+            color: #9CA3AF;
+            margin-top: 4px;
+        }
+
+        /* KPI Stats Row */
+        .kpi-row {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .kpi-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 18px;
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+        }
+
+        .kpi-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .kpi-icon.blue { background: #EFF6FF; color: #3B82F6; }
+        .kpi-icon.purple { background: #F5F3FF; color: #8B5CF6; }
+        .kpi-icon.amber { background: #FFFBEB; color: #F59E0B; }
+        .kpi-icon.green { background: #ECFDF5; color: #22c55e; }
+
+        .kpi-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .kpi-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .kpi-label {
+            font-size: 11px;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* ========================================
+           TAB NAVIGATION (S13 Pattern)
+           ======================================== */
+        .tab-nav {
+            display: flex;
+            gap: 4px;
+            background: white;
+            border: 1px solid #EBEBEB;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: #6B7280;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .tab-btn:hover {
+            background: #F5F5F5;
+            color: #374151;
+        }
+
+        .tab-btn.active {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .tab-btn .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            border-radius: 9px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-left: 6px;
+        }
+
+        .tab-btn .badge { background: #E5E7EB; color: #6B7280; }
+        .tab-btn.active .badge { background: rgba(255,255,255,0.25); color: white; }
+
+        /* ========================================
+           SECTION COMMON STYLES (S13 Pattern)
+           ======================================== */
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            flex-shrink: 0;
+        }
+
+        .section-progress {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 200px;
+        }
+
+        .section-progress-bar {
+            flex: 1;
+            height: 4px;
+            background: #E5E7EB;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .section-progress-fill {
+            height: 100%;
+            border-radius: 2px;
+            background: #3B82F6;
+        }
+
+        .section-progress-text {
+            font-size: 11px;
+            font-weight: 600;
+            color: #9CA3AF;
+            min-width: 32px;
+        }
+
+        .section-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-left: auto;
+        }
+
+        .section-count {
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: #F0F0F0;
+        }
+
+        /* ========================================
+           CARD GRID (S13 Pattern)
+           ======================================== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .card-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        /* ========================================
+           ASSESSMENT CARD
+           ======================================== */
+        .assessment-card {
+            background: white;
+            border: 1px solid #EBEBEB;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .assessment-card:hover {
+            border-color: #D1D5DB;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .card-type-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .badge-speed { background: #EEF2FF; color: #4338CA; }
+        .badge-strength { background: #ECFDF5; color: #065F46; }
+        .badge-intelligence { background: #EFF6FF; color: #1E3A8A; }
+        .badge-full { background: #FEF3C7; color: #92400E; }
+
+        .card-status {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .status-pending { background: #FEF3C7; color: #92400E; }
+        .status-in-progress { background: #DBEAFE; color: #1E40AF; }
+        .status-completed { background: #D1FAE5; color: #065F46; }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .card-meta {
+            font-size: 12px;
+            color: #9CA3AF;
+            margin-bottom: 16px;
+        }
+
+        .card-progress {
+            margin-bottom: 12px;
+        }
+
+        .card-progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #F3F4F6;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .card-progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: #3B82F6;
+        }
+
+        .card-progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid #F5F5F5;
+        }
+
+        .card-footer-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        .card-avatar-name {
+            font-size: 12px;
+            color: #6B7280;
+        }
+
+        .card-action-btn {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
+            background: white;
+            color: #374151;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .card-action-btn:hover {
+            background: #F9FAFB;
+            border-color: #D1D5DB;
+        }
+
+        .card-action-btn.primary {
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            border-color: #1e3a5f;
+            color: white;
+        }
+
+        .card-action-btn.primary:hover {
+            opacity: 0.9;
+            box-shadow: 0 2px 8px rgba(30, 58, 95, 0.3);
+        }
+
+        /* ========================================
+           TEMPLATE CARD (My Templates tab)
+           ======================================== */
+        .template-card {
+            background: white;
+            border: 1px solid #EBEBEB;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .template-card:hover {
+            border-color: #D1D5DB;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .template-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .template-questions {
+            font-size: 12px;
+            color: #6B7280;
+            margin-bottom: 8px;
+        }
+
+        .template-dimensions {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .dim-chip {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .dim-speed { background: #EEF2FF; color: #4338CA; }
+        .dim-strength { background: #ECFDF5; color: #065F46; }
+        .dim-intelligence { background: #EFF6FF; color: #1E3A8A; }
+
+        .template-weight-bar {
+            display: flex;
+            height: 4px;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .weight-speed { background: #6366F1; }
+        .weight-strength { background: #22c55e; }
+        .weight-intelligence { background: #3B82F6; }
+
+        .template-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* ========================================
+           SENT TRACKING TABLE
+           ======================================== */
+        .tracking-table {
+            background: white;
+            border: 1px solid #EBEBEB;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .tracking-row {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1fr 1fr 100px;
+            align-items: center;
+            padding: 14px 20px;
+            border-bottom: 1px solid #F5F5F5;
+            font-size: 13px;
+        }
+
+        .tracking-row:last-child { border-bottom: none; }
+
+        .tracking-row.header {
+            background: #F9FAFB;
+            font-size: 11px;
+            font-weight: 600;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tracking-recipient {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tracking-status {
+            display: inline-flex;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .tracking-action {
+            font-size: 12px;
+            color: #3B82F6;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .tracking-action:hover { text-decoration: underline; }
+
+        /* ========================================
+           TEAM RESULTS
+           ======================================== */
+        .result-card {
+            background: white;
+            border: 1px solid #EBEBEB;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .result-score-ring {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 12px;
+            position: relative;
+        }
+
+        .result-score-ring svg {
+            transform: rotate(-90deg);
+        }
+
+        .result-score-ring .bg {
+            fill: none;
+            stroke: #E5E7EB;
+            stroke-width: 4;
+        }
+
+        .result-score-ring .fill {
+            fill: none;
+            stroke-width: 4;
+            stroke-linecap: round;
+        }
+
+        .result-score-ring .value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .result-member-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+            text-align: center;
+            margin-bottom: 2px;
+        }
+
+        .result-member-role {
+            font-size: 11px;
+            color: #9CA3AF;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .result-breakdown {
+            display: flex;
+            gap: 8px;
+        }
+
+        .result-dim {
+            flex: 1;
+            text-align: center;
+            padding: 8px 4px;
+            background: #F9FAFB;
+            border-radius: 8px;
+        }
+
+        .result-dim-value {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .result-dim-label {
+            font-size: 9px;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .result-dim.speed .result-dim-value { color: #4338CA; }
+        .result-dim.strength .result-dim-value { color: #065F46; }
+        .result-dim.intelligence .result-dim-value { color: #1E3A8A; }
+
+        /* ========================================
+           EMPTY STATE
+           ======================================== */
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px;
+            background: white;
+            border: 2px dashed #E5E7EB;
+            border-radius: 12px;
+        }
+
+        .empty-state-icon {
+            width: 56px;
+            height: 56px;
+            background: #EFF6FF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .empty-state h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .empty-state p {
+            font-size: 13px;
+            color: #9CA3AF;
+        }
+
+        /* ========================================
+           ACTION BUTTON (Header)
+           ======================================== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-primary:hover { opacity: 0.9; box-shadow: 0 2px 8px rgba(30, 58, 95, 0.3); }
+
+        /* Hidden tab content */
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+    </style>
+</head>
+<body>
+    <!-- ============================
+         NAVIGATION (S13 Pattern)
+         ============================ -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 75">
+                <defs>
+                    <linearGradient id="chiefGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1e3a5f"/>
+                        <stop offset="100%" style="stop-color:#2d5a87"/>
+                    </linearGradient>
+                </defs>
+                <path d="M25 10L27 20L35 15L29 23L42 25L29 27L35 35L27 30L25 40L23 30L15 35L21 27L8 25L21 23L15 15L23 20L25 10Z" fill="url(#chiefGrad)"/>
+                <circle cx="25" cy="25" r="3" fill="#d4a853"/>
+                <text x="50" y="31" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1e3a5f">Chief</text>
+                <text x="108" y="31" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="500" fill="#d4a853">AI</text>
+                <text x="50" y="48" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="400" fill="#6B7280">Your AI Chief of Staff</text>
+            </svg>
+        </div>
+        <div class="nav-center">
+            <a href="dashboard-redesign.html" class="nav-item" data-philosophy="play">
+                Dashboard
+                <span class="tooltip">Play - Your daily focus</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="assessment-hub.html" class="nav-item active" data-philosophy="assess">
+                Assessments
+                <span class="tooltip">Assess - Understand your org</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="teams-redesign.html" class="nav-item" data-philosophy="align">
+                Teams
+                <span class="tooltip">Align - Get everyone aligned</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="objectives-redesign.html" class="nav-item" data-philosophy="plan">
+                Objectives
+                <span class="tooltip">Plan - Strategic direction</span>
+            </a>
+            <a href="planning-redesign.html" class="nav-item" data-philosophy="plan">
+                Planning
+                <span class="tooltip">Plan - Weekly execution</span>
+            </a>
+        </div>
+        <div class="nav-user">
+            <div class="nav-avatar">JD</div>
+            <span class="nav-user-name">John Doe</span>
+            <svg width="14" height="14" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6"/>
+            </svg>
+        </div>
+    </nav>
+
+    <!-- ============================
+         MAIN CONTENT
+         ============================ -->
+    <div class="main">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-top-row">
+                <div>
+                    <div class="header-title">Assessments Hub</div>
+                    <div class="header-subtitle">Manage assessments, templates, and track team progress</div>
+                </div>
+                <button class="btn-primary">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                    Send Assessment
+                </button>
+            </div>
+
+            <!-- KPI Row -->
+            <div class="kpi-row">
+                <div class="kpi-card">
+                    <div class="kpi-icon blue">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-value">3</span>
+                        <span class="kpi-label">Pending</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon purple">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5z"/><path d="M4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6z"/></svg>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-value">5</span>
+                        <span class="kpi-label">Templates</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon amber">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-value">12</span>
+                        <span class="kpi-label">Sent</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon green">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-value">8</span>
+                        <span class="kpi-label">Completed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB NAVIGATION -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('assigned')">Assigned to Me <span class="badge">3</span></button>
+            <button class="tab-btn" onclick="switchTab('templates')">My Templates <span class="badge">5</span></button>
+            <button class="tab-btn" onclick="switchTab('sent')">Sent <span class="badge">12</span></button>
+            <button class="tab-btn" onclick="switchTab('results')">Team Results <span class="badge">6</span></button>
+        </div>
+
+        <!-- ============================
+             TAB 1: ASSIGNED TO ME
+             ============================ -->
+        <div id="tab-assigned" class="tab-panel active">
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-title">Pending Assessments</span>
+                    <div class="section-progress">
+                        <div class="section-progress-bar">
+                            <div class="section-progress-fill" style="width: 33%"></div>
+                        </div>
+                        <span class="section-progress-text">1/3</span>
+                    </div>
+                    <div class="section-line"></div>
+                    <span class="section-count">3 assessments</span>
+                </div>
+
+                <div class="card-grid">
+                    <!-- Card 1 -->
+                    <div class="assessment-card">
+                        <div class="card-top">
+                            <span class="card-type-badge badge-full">Full SSI</span>
+                            <span class="card-status status-pending">Pending</span>
+                        </div>
+                        <div class="card-title">Q1 2026 Team Assessment</div>
+                        <div class="card-meta">45 questions &middot; Due Jan 31, 2026</div>
+                        <div class="card-progress">
+                            <div class="card-progress-bar">
+                                <div class="card-progress-fill" style="width: 0%"></div>
+                            </div>
+                            <div class="card-progress-text">
+                                <span>0% complete</span>
+                                <span>0/45</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-left">
+                                <div class="card-avatar">SM</div>
+                                <span class="card-avatar-name">Sent by Sarah M.</span>
+                            </div>
+                            <button class="card-action-btn primary">Start</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="assessment-card">
+                        <div class="card-top">
+                            <span class="card-type-badge badge-speed">Speed</span>
+                            <span class="card-status status-in-progress">In Progress</span>
+                        </div>
+                        <div class="card-title">Operations Speed Check</div>
+                        <div class="card-meta">15 questions &middot; Due Feb 5, 2026</div>
+                        <div class="card-progress">
+                            <div class="card-progress-bar">
+                                <div class="card-progress-fill" style="width: 60%"></div>
+                            </div>
+                            <div class="card-progress-text">
+                                <span>60% complete</span>
+                                <span>9/15</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-left">
+                                <div class="card-avatar">JD</div>
+                                <span class="card-avatar-name">Sent by John D.</span>
+                            </div>
+                            <button class="card-action-btn primary">Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="assessment-card">
+                        <div class="card-top">
+                            <span class="card-type-badge badge-strength">Strength</span>
+                            <span class="card-status status-pending">Pending</span>
+                        </div>
+                        <div class="card-title">Leadership Strength Eval</div>
+                        <div class="card-meta">20 questions &middot; Due Feb 10, 2026</div>
+                        <div class="card-progress">
+                            <div class="card-progress-bar">
+                                <div class="card-progress-fill" style="width: 0%"></div>
+                            </div>
+                            <div class="card-progress-text">
+                                <span>0% complete</span>
+                                <span>0/20</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-footer-left">
+                                <div class="card-avatar">AK</div>
+                                <span class="card-avatar-name">Sent by Amy K.</span>
+                            </div>
+                            <button class="card-action-btn primary">Start</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================
+             TAB 2: MY TEMPLATES
+             ============================ -->
+        <div id="tab-templates" class="tab-panel">
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-title">Saved Templates</span>
+                    <div class="section-line"></div>
+                    <span class="section-count">5 templates</span>
+                    <button class="btn-primary" style="padding: 8px 16px; font-size: 12px;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                        New Template
+                    </button>
+                </div>
+
+                <div class="card-grid">
+                    <!-- Template 1 -->
+                    <div class="template-card">
+                        <div class="template-header">
+                            <div class="card-title">Full SSI Assessment</div>
+                            <span class="card-type-badge badge-full">Full SSI</span>
+                        </div>
+                        <div class="template-questions">45 questions across 3 dimensions</div>
+                        <div class="template-dimensions">
+                            <span class="dim-chip dim-speed">Speed 33%</span>
+                            <span class="dim-chip dim-strength">Strength 34%</span>
+                            <span class="dim-chip dim-intelligence">Intelligence 33%</span>
+                        </div>
+                        <div class="template-weight-bar">
+                            <div class="weight-speed" style="width: 33%"></div>
+                            <div class="weight-strength" style="width: 34%"></div>
+                            <div class="weight-intelligence" style="width: 33%"></div>
+                        </div>
+                        <div class="template-actions">
+                            <button class="card-action-btn primary">Send</button>
+                            <button class="card-action-btn">Edit</button>
+                            <button class="card-action-btn">Duplicate</button>
+                        </div>
+                    </div>
+
+                    <!-- Template 2 -->
+                    <div class="template-card">
+                        <div class="template-header">
+                            <div class="card-title">Speed Focus</div>
+                            <span class="card-type-badge badge-speed">Speed</span>
+                        </div>
+                        <div class="template-questions">15 questions &middot; Speed dimension only</div>
+                        <div class="template-dimensions">
+                            <span class="dim-chip dim-speed">Speed 100%</span>
+                        </div>
+                        <div class="template-weight-bar">
+                            <div class="weight-speed" style="width: 100%"></div>
+                        </div>
+                        <div class="template-actions">
+                            <button class="card-action-btn primary">Send</button>
+                            <button class="card-action-btn">Edit</button>
+                            <button class="card-action-btn">Duplicate</button>
+                        </div>
+                    </div>
+
+                    <!-- Template 3 -->
+                    <div class="template-card">
+                        <div class="template-header">
+                            <div class="card-title">Leadership Assessment</div>
+                            <span class="card-type-badge badge-strength">Strength</span>
+                        </div>
+                        <div class="template-questions">20 questions &middot; Strength + Intelligence</div>
+                        <div class="template-dimensions">
+                            <span class="dim-chip dim-strength">Strength 60%</span>
+                            <span class="dim-chip dim-intelligence">Intelligence 40%</span>
+                        </div>
+                        <div class="template-weight-bar">
+                            <div class="weight-strength" style="width: 60%"></div>
+                            <div class="weight-intelligence" style="width: 40%"></div>
+                        </div>
+                        <div class="template-actions">
+                            <button class="card-action-btn primary">Send</button>
+                            <button class="card-action-btn">Edit</button>
+                            <button class="card-action-btn">Duplicate</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================
+             TAB 3: SENT
+             ============================ -->
+        <div id="tab-sent" class="tab-panel">
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-title">Sent Assessments</span>
+                    <div class="section-progress">
+                        <div class="section-progress-bar">
+                            <div class="section-progress-fill" style="width: 67%"></div>
+                        </div>
+                        <span class="section-progress-text">67%</span>
+                    </div>
+                    <div class="section-line"></div>
+                    <span class="section-count">12 sent &middot; 8 completed</span>
+                </div>
+
+                <div class="tracking-table">
+                    <div class="tracking-row header">
+                        <span>Recipient</span>
+                        <span>Template</span>
+                        <span>Status</span>
+                        <span>Sent</span>
+                        <span>Action</span>
+                    </div>
+                    <div class="tracking-row">
+                        <div class="tracking-recipient">
+                            <div class="card-avatar">MJ</div>
+                            <div>
+                                <div style="font-weight: 500; color: #111827;">Mike Johnson</div>
+                                <div style="font-size: 11px; color: #9CA3AF;">Operations Manager</div>
+                            </div>
+                        </div>
+                        <span style="color: #6B7280;">Full SSI Assessment</span>
+                        <span class="tracking-status status-completed">Completed</span>
+                        <span style="color: #9CA3AF;">Jan 15</span>
+                        <a class="tracking-action">View Results</a>
+                    </div>
+                    <div class="tracking-row">
+                        <div class="tracking-recipient">
+                            <div class="card-avatar">LW</div>
+                            <div>
+                                <div style="font-weight: 500; color: #111827;">Lisa Wang</div>
+                                <div style="font-size: 11px; color: #9CA3AF;">Team Lead</div>
+                            </div>
+                        </div>
+                        <span style="color: #6B7280;">Speed Focus</span>
+                        <span class="tracking-status status-in-progress">In Progress</span>
+                        <span style="color: #9CA3AF;">Jan 20</span>
+                        <a class="tracking-action">Remind</a>
+                    </div>
+                    <div class="tracking-row">
+                        <div class="tracking-recipient">
+                            <div class="card-avatar">TP</div>
+                            <div>
+                                <div style="font-weight: 500; color: #111827;">Tom Park</div>
+                                <div style="font-size: 11px; color: #9CA3AF;">Sales Executive</div>
+                            </div>
+                        </div>
+                        <span style="color: #6B7280;">Full SSI Assessment</span>
+                        <span class="tracking-status status-completed">Completed</span>
+                        <span style="color: #9CA3AF;">Jan 18</span>
+                        <a class="tracking-action">View Results</a>
+                    </div>
+                    <div class="tracking-row">
+                        <div class="tracking-recipient">
+                            <div class="card-avatar">RD</div>
+                            <div>
+                                <div style="font-weight: 500; color: #111827;">Rachel Davis</div>
+                                <div style="font-size: 11px; color: #9CA3AF;">HR Director</div>
+                            </div>
+                        </div>
+                        <span style="color: #6B7280;">Leadership Assessment</span>
+                        <span class="tracking-status status-pending">Pending</span>
+                        <span style="color: #9CA3AF;">Jan 24</span>
+                        <a class="tracking-action">Remind</a>
+                    </div>
+                    <div class="tracking-row">
+                        <div class="tracking-recipient">
+                            <div class="card-avatar">BN</div>
+                            <div>
+                                <div style="font-weight: 500; color: #111827;">Ben Nguyen</div>
+                                <div style="font-size: 11px; color: #9CA3AF;">Field Supervisor</div>
+                            </div>
+                        </div>
+                        <span style="color: #6B7280;">Speed Focus</span>
+                        <span class="tracking-status status-completed">Completed</span>
+                        <span style="color: #9CA3AF;">Jan 12</span>
+                        <a class="tracking-action">View Results</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================
+             TAB 4: TEAM RESULTS
+             ============================ -->
+        <div id="tab-results" class="tab-panel">
+            <div class="section">
+                <div class="section-header">
+                    <span class="section-title">Team SSI Scores</span>
+                    <div class="section-progress">
+                        <div class="section-progress-bar">
+                            <div class="section-progress-fill" style="width: 72%; background: #22c55e;"></div>
+                        </div>
+                        <span class="section-progress-text">72%</span>
+                    </div>
+                    <div class="section-line"></div>
+                    <span class="section-count">6 members scored</span>
+                </div>
+
+                <div class="card-grid">
+                    <!-- Result 1 -->
+                    <div class="result-card">
+                        <div class="result-score-ring">
+                            <svg width="64" height="64" viewBox="0 0 64 64">
+                                <circle class="bg" cx="32" cy="32" r="28"/>
+                                <circle class="fill" cx="32" cy="32" r="28" stroke="#22c55e" stroke-dasharray="176" stroke-dashoffset="35"/>
+                            </svg>
+                            <span class="value">80</span>
+                        </div>
+                        <div class="result-member-name">Mike Johnson</div>
+                        <div class="result-member-role">Operations Manager</div>
+                        <div class="result-breakdown">
+                            <div class="result-dim speed">
+                                <div class="result-dim-value">85</div>
+                                <div class="result-dim-label">Speed</div>
+                            </div>
+                            <div class="result-dim strength">
+                                <div class="result-dim-value">78</div>
+                                <div class="result-dim-label">Strength</div>
+                            </div>
+                            <div class="result-dim intelligence">
+                                <div class="result-dim-value">77</div>
+                                <div class="result-dim-label">Intel</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result 2 -->
+                    <div class="result-card">
+                        <div class="result-score-ring">
+                            <svg width="64" height="64" viewBox="0 0 64 64">
+                                <circle class="bg" cx="32" cy="32" r="28"/>
+                                <circle class="fill" cx="32" cy="32" r="28" stroke="#3B82F6" stroke-dasharray="176" stroke-dashoffset="53"/>
+                            </svg>
+                            <span class="value">70</span>
+                        </div>
+                        <div class="result-member-name">Tom Park</div>
+                        <div class="result-member-role">Sales Executive</div>
+                        <div class="result-breakdown">
+                            <div class="result-dim speed">
+                                <div class="result-dim-value">65</div>
+                                <div class="result-dim-label">Speed</div>
+                            </div>
+                            <div class="result-dim strength">
+                                <div class="result-dim-value">72</div>
+                                <div class="result-dim-label">Strength</div>
+                            </div>
+                            <div class="result-dim intelligence">
+                                <div class="result-dim-value">73</div>
+                                <div class="result-dim-label">Intel</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result 3 -->
+                    <div class="result-card">
+                        <div class="result-score-ring">
+                            <svg width="64" height="64" viewBox="0 0 64 64">
+                                <circle class="bg" cx="32" cy="32" r="28"/>
+                                <circle class="fill" cx="32" cy="32" r="28" stroke="#F59E0B" stroke-dasharray="176" stroke-dashoffset="70"/>
+                            </svg>
+                            <span class="value">60</span>
+                        </div>
+                        <div class="result-member-name">Ben Nguyen</div>
+                        <div class="result-member-role">Field Supervisor</div>
+                        <div class="result-breakdown">
+                            <div class="result-dim speed">
+                                <div class="result-dim-value">70</div>
+                                <div class="result-dim-label">Speed</div>
+                            </div>
+                            <div class="result-dim strength">
+                                <div class="result-dim-value">55</div>
+                                <div class="result-dim-label">Strength</div>
+                            </div>
+                            <div class="result-dim intelligence">
+                                <div class="result-dim-value">55</div>
+                                <div class="result-dim-label">Intel</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            // Update buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.tab-btn').classList.add('active');
+
+            // Update panels
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+        }
+    </script>
+</body>
+</html>

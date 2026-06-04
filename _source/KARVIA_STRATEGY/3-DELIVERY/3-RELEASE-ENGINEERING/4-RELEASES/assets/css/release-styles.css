@@ -1,0 +1,396 @@
+/**
+ * Karvia Release Mail Styles
+ * Self-contained styles for release emails (web view)
+ */
+
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: #1f2937;
+  background: #f9fafb;
+}
+
+/* Container */
+.release-container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.release-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Header */
+.release-header {
+  padding: 24px 32px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.release-header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.release-header .subtitle {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* 4-Step Flow */
+.four-step-flow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+  color: #ffffff;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+.step-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.step-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: #ffffff;
+}
+
+.step-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.step-arrow {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 18px;
+  margin: 0 8px;
+}
+
+.flow-tagline {
+  text-align: center;
+  padding: 12px 32px;
+  background: #f0f4f8;
+  font-size: 13px;
+  color: #475569;
+  font-style: italic;
+}
+
+/* Content */
+.release-content {
+  padding: 32px;
+}
+
+.greeting {
+  font-size: 15px;
+  color: #374151;
+  margin-bottom: 24px;
+}
+
+.greeting strong {
+  color: #1e3a5f;
+}
+
+/* Section Headers */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e3a5f;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.section-header .emoji {
+  font-size: 16px;
+}
+
+/* Feature Cards */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.feature-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+
+.feature-card .icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.feature-card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e3a5f;
+  margin-bottom: 4px;
+}
+
+.feature-card .points {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+
+.feature-card ul {
+  list-style: none;
+  text-align: left;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.feature-card li {
+  padding: 2px 0;
+}
+
+.feature-card li::before {
+  content: "•";
+  color: #1e3a5f;
+  margin-right: 6px;
+}
+
+/* Bug Fixes */
+.bug-fixes {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 32px;
+}
+
+.bug-fixes h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #166534;
+  margin-bottom: 12px;
+}
+
+.bug-fixes .fixes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.bug-fixes .fix-item {
+  font-size: 12px;
+  color: #15803d;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bug-fixes .fix-item::before {
+  content: "✓";
+  font-weight: bold;
+}
+
+/* CTA Section */
+.cta-section {
+  margin-bottom: 32px;
+}
+
+.cta-section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e3a5f;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.cta-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #f8fafc;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s;
+}
+
+.cta-row:hover {
+  background: #f1f5f9;
+}
+
+.cta-row .label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.cta-row .action {
+  font-size: 13px;
+  color: #1e3a5f;
+  font-weight: 600;
+}
+
+.cta-row .action::after {
+  content: " →";
+}
+
+/* Vote Section */
+.vote-section {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid #f59e0b;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 32px;
+}
+
+.vote-section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #92400e;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vote-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.vote-preview .logo {
+  width: 48px;
+  height: 48px;
+  background: #f8fafc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vote-preview .logo svg {
+  width: 28px;
+  height: 28px;
+}
+
+.vote-preview .brand {
+  flex: 1;
+}
+
+.vote-preview .brand-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e3a5f;
+}
+
+.vote-preview .brand-name span {
+  color: #d4a853;
+}
+
+.vote-preview .brand-tagline {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.vote-options {
+  font-size: 13px;
+  color: #78350f;
+  line-height: 1.8;
+}
+
+.vote-options strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.preview-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #b45309;
+  text-decoration: underline;
+}
+
+/* Footer */
+.release-footer {
+  padding: 20px 32px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 13px;
+  color: #6b7280;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .release-container {
+    padding: 12px;
+  }
+
+  .four-step-flow {
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .step {
+    flex: 0 0 40%;
+  }
+
+  .step-arrow {
+    display: none;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bug-fixes .fixes-grid {
+    grid-template-columns: 1fr;
+  }
+}

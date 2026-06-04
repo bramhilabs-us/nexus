@@ -1,0 +1,28 @@
+═══════════════════════════════════════════════════════════════
+  WEEK 4 SESSION START - COPY THIS TO YOUR AI ASSISTANT
+═══════════════════════════════════════════════════════════════
+
+I'm continuing the Karvia OKR Business development project.
+
+**Week 3 (Analytics & Insights) is complete.**
+**Starting Week 4 (AI OKR Generation).**
+
+Please restore context by reading these files IN ORDER:
+
+1. QUICK_START_WEEK_4.md
+   ↓
+2. CONTEXT_WEEK_4_START.md
+   ↓
+3. Karvia_OKR_Product_Planning/Daily_Handoffs/Week_3/WEEK_3_HANDOFF.md
+   ↓
+4. Karvia_OKR_Product_Planning/Daily_Handoffs/Week_4/WEEK_4_PLAN.md
+
+After reading, confirm you understand:
+- Week 3 delivered analytics service with weak area detection
+- 18 API endpoints tested and working
+- getWeakAreas() API available for Week 4
+- We need to build AI OKR generation from weak areas
+
+Then let's start Week 4 Day 1 together.
+
+═══════════════════════════════════════════════════════════════

@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Profile | Karvia</title>
+  <style>
+    :root {
+      --navy: #1e3a5f;
+      --gold: #d4a853;
+      --gold-light: #f5e6c8;
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --green: #10b981;
+      --green-light: #d1fae5;
+      --purple: #8b5cf6;
+      --purple-light: #ede9fe;
+      --orange: #f59e0b;
+      --orange-light: #fef3c7;
+      --blue: #3b82f6;
+      --blue-light: #dbeafe;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-700);
+      min-height: 100vh;
+    }
+
+    /* ========================================
+       TOP NAV
+    ======================================== */
+    .top-nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-link {
+      color: var(--gray-500);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-link:hover { color: var(--gray-700); }
+    .nav-link.active { color: var(--navy); font-weight: 600; }
+
+    .user-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .company-name {
+      font-size: 14px;
+      color: var(--gray-600);
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    /* ========================================
+       CONTEXT HEADER
+    ======================================== */
+    .context-header {
+      background: var(--white);
+      padding: 24px 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .maturity-ring {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+    }
+
+    .maturity-ring svg {
+      transform: rotate(-90deg);
+    }
+
+    .maturity-ring circle {
+      fill: none;
+      stroke-width: 5;
+    }
+
+    .maturity-ring .bg { stroke: var(--gray-200); }
+
+    .maturity-ring .progress {
+      stroke: var(--purple);
+      stroke-linecap: round;
+      stroke-dasharray: 188;
+      stroke-dashoffset: 150;
+      transition: stroke-dashoffset 0.5s;
+    }
+
+    .maturity-ring .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .maturity-ring .num {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .maturity-ring .label {
+      font-size: 9px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .context-info {
+      flex: 1;
+    }
+
+    .context-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .context-title h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .stage-badge {
+      font-size: 11px;
+      padding: 4px 12px;
+      background: var(--purple-light);
+      color: var(--purple);
+      border-radius: 100px;
+      font-weight: 600;
+    }
+
+    .context-subtitle {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-bottom: 12px;
+    }
+
+    .stage-dots {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+
+    .stage-dots .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gray-300);
+    }
+
+    .stage-dots .dot.complete { background: var(--green); }
+    .stage-dots .dot.current { background: var(--purple); }
+
+    .stage-dots .arrow {
+      color: var(--gray-300);
+    }
+
+    .stage-dots .stage-name {
+      font-size: 12px;
+    }
+
+    .stage-dots .stage-name.current {
+      color: var(--purple);
+      font-weight: 600;
+    }
+
+    /* AI Knows Card */
+    .ai-knows-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 16px 20px;
+      min-width: 280px;
+    }
+
+    .ai-knows-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 12px;
+    }
+
+    .ai-knows-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ai-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .ai-item.done { color: var(--green); }
+    .ai-item.missing { color: var(--gray-400); }
+
+    .ai-cta {
+      font-size: 12px;
+      color: var(--purple);
+      margin-top: 12px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    /* ========================================
+       CATEGORY PROGRESS CARDS
+    ======================================== */
+    .category-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 0 32px 24px;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .category-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 16px 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .category-card:hover {
+      border-color: var(--gray-300);
+    }
+
+    .category-card.active {
+      border-color: var(--purple);
+      background: var(--purple-light);
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .category-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .category-percent {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .category-percent.high { color: var(--green); }
+    .category-percent.medium { color: var(--orange); }
+    .category-percent.low { color: #ef4444; }
+
+    .category-bar {
+      height: 6px;
+      background: var(--gray-200);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .category-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.3s;
+    }
+
+    .category-bar-fill.high { background: var(--green); }
+    .category-bar-fill.medium { background: var(--orange); }
+    .category-bar-fill.low { background: #ef4444; }
+
+    .category-desc {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    /* ========================================
+       MAIN CONTENT
+    ======================================== */
+    .main-content {
+      padding: 24px 32px;
+    }
+
+    /* Stage Tabs */
+    .stage-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+
+    .stage-tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .stage-tab:hover {
+      border-color: var(--gray-300);
+    }
+
+    .stage-tab.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: var(--white);
+    }
+
+    .stage-tab.complete {
+      background: var(--green-light);
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .stage-tab.locked {
+      color: var(--gray-400);
+      background: var(--gray-50);
+    }
+
+    .stage-tab .icon {
+      font-size: 14px;
+    }
+
+    /* Content Panel */
+    .content-panel {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* Sub-tabs */
+    .sub-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 24px;
+    }
+
+    .sub-tab {
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-500);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      transition: all 0.2s;
+    }
+
+    .sub-tab:hover {
+      color: var(--gray-700);
+    }
+
+    .sub-tab.active {
+      color: var(--navy);
+      border-bottom-color: var(--gold);
+      font-weight: 600;
+    }
+
+    .sub-tab .check {
+      color: var(--green);
+      margin-left: 6px;
+    }
+
+    /* Panel Content */
+    .panel-content {
+      padding: 24px;
+      display: none;
+    }
+
+    .panel-content.active {
+      display: block;
+    }
+
+    /* ========================================
+       FORM COMPONENTS
+    ======================================== */
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-title h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title h3 .icon {
+      font-size: 18px;
+    }
+
+    .why-link {
+      font-size: 12px;
+      color: var(--purple);
+      cursor: pointer;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .form-row.single {
+      grid-template-columns: 1fr;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-600);
+    }
+
+    .form-sublabel {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-top: -4px;
+    }
+
+    /* Chips */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 10px 18px;
+      border: 1px solid var(--gray-200);
+      border-radius: 100px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s;
+      background: var(--white);
+      color: var(--gray-600);
+    }
+
+    .chip:hover {
+      border-color: var(--gray-400);
+      background: var(--gray-50);
+    }
+
+    .chip.selected {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    /* Sub-chips */
+    .sub-chips {
+      margin-top: 12px;
+      padding-left: 16px;
+      border-left: 3px solid var(--gray-200);
+    }
+
+    .sub-chips-label {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-bottom: 8px;
+    }
+
+    /* Input Fields */
+    .form-input {
+      padding: 12px 16px;
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+    }
+
+    .form-input.filled {
+      border-color: var(--green);
+    }
+
+    textarea.form-input {
+      resize: none;
+      min-height: 80px;
+    }
+
+    /* Priority Card */
+    .priority-card {
+      background: linear-gradient(135deg, #fef9f0, #fdf6e9);
+      border: 2px solid var(--gold);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .priority-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .priority-label .star {
+      font-size: 20px;
+    }
+
+    .priority-card textarea {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      resize: none;
+      min-height: 70px;
+    }
+
+    .priority-card textarea:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+
+    .priority-hint {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 12px;
+    }
+
+    /* Quick Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .metric-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .metric-card:focus-within {
+      border-color: var(--purple);
+    }
+
+    .metric-card.filled {
+      border-color: var(--green);
+      background: var(--green-light);
+    }
+
+    .metric-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .metric-label {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-bottom: 6px;
+    }
+
+    .metric-input {
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      border: none;
+      background: transparent;
+    }
+
+    .metric-input:focus {
+      outline: none;
+    }
+
+    .metric-input::placeholder {
+      color: var(--gray-300);
+      font-weight: 400;
+    }
+
+    .metric-unit {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-top: 4px;
+    }
+
+    /* SSI Grid */
+    .ssi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .ssi-card {
+      background: var(--white);
+      border: 2px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .ssi-card.weak {
+      border-color: var(--orange);
+      background: var(--orange-light);
+    }
+
+    .ssi-icon { font-size: 28px; margin-bottom: 10px; }
+    .ssi-score { font-size: 36px; font-weight: 700; color: var(--navy); }
+    .ssi-label { font-size: 14px; color: var(--gray-600); margin-top: 4px; }
+
+    .ssi-bar {
+      height: 6px;
+      background: var(--gray-200);
+      border-radius: 3px;
+      margin-top: 16px;
+      overflow: hidden;
+    }
+
+    .ssi-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+    }
+
+    .ssi-bar-fill.speed { background: var(--blue); }
+    .ssi-bar-fill.strength { background: var(--green); }
+    .ssi-bar-fill.intelligence { background: var(--purple); }
+
+    .ssi-insight {
+      font-size: 12px;
+      margin-top: 10px;
+      color: var(--gray-500);
+    }
+
+    .ssi-card.weak .ssi-insight {
+      color: var(--orange);
+      font-weight: 500;
+    }
+
+    .ai-insight-box {
+      background: var(--purple-light);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: var(--purple);
+      margin-top: 20px;
+    }
+
+    .ai-insight-box strong {
+      color: var(--navy);
+    }
+
+    /* Locked Preview */
+    .locked-banner {
+      background: linear-gradient(90deg, var(--gray-100), var(--gray-50));
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .locked-banner-icon { font-size: 16px; }
+
+    .locked-banner-text {
+      font-size: 13px;
+      color: var(--gray-500);
+      flex: 1;
+    }
+
+    .locked-reqs {
+      display: flex;
+      gap: 16px;
+      font-size: 11px;
+    }
+
+    .locked-reqs .done { color: var(--green); }
+    .locked-reqs .pending { color: var(--gray-400); }
+
+    .locked-preview {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .preview-card {
+      background: var(--white);
+      border: 2px dashed var(--gray-300);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .preview-icon {
+      font-size: 28px;
+      opacity: 0.4;
+      margin-bottom: 10px;
+    }
+
+    .preview-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--gray-400);
+    }
+
+    .preview-label {
+      font-size: 12px;
+      color: var(--gray-400);
+      margin-top: 6px;
+    }
+
+    .preview-insight {
+      background: var(--gray-100);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-top: 20px;
+    }
+
+    /* ========================================
+       FOOTER
+    ======================================== */
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+    }
+
+    .autosave {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--green);
+    }
+
+    .progress-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .progress-text {
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+
+    .progress-text .highlight {
+      color: var(--purple);
+      font-weight: 600;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .btn-primary:hover {
+      background: #c99b48;
+    }
+
+    /* Spacer for fixed footer */
+    .footer-spacer {
+      height: 80px;
+    }
+
+    /* ========================================
+       RESPONSIVE
+    ======================================== */
+    @media (max-width: 1024px) {
+      .category-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics-grid,
+      .ssi-grid,
+      .preview-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <div class="logo">KARVIA</div>
+    <div class="nav-links">
+      <a href="#" class="nav-link">Dashboard</a>
+      <a href="#" class="nav-link">Objectives</a>
+      <a href="#" class="nav-link">Planning</a>
+    </div>
+    <div class="user-section">
+      <span class="company-name">KARVIA Consulting</span>
+      <div class="avatar">KC</div>
+    </div>
+  </nav>
+
+  <!-- Context Header -->
+  <header class="context-header">
+    <div class="maturity-ring">
+      <svg width="72" height="72">
+        <circle class="bg" cx="36" cy="36" r="30"></circle>
+        <circle class="progress" cx="36" cy="36" r="30"></circle>
+      </svg>
+      <div class="center">
+        <div class="num">1</div>
+        <div class="label">Stage</div>
+      </div>
+    </div>
+
+    <div class="context-info">
+      <div class="context-title">
+        <h1>Your AI Context</h1>
+        <span class="stage-badge">Assessment Stage</span>
+      </div>
+      <p class="context-subtitle">The more context you provide, the smarter your OKRs become</p>
+      <div class="stage-dots">
+        <span class="dot complete"></span>
+        <span class="stage-name">Discovery</span>
+        <span class="arrow">→</span>
+        <span class="dot current"></span>
+        <span class="stage-name current">Assessment</span>
+        <span class="arrow">→</span>
+        <span class="dot"></span>
+        <span class="stage-name">Execution</span>
+        <span class="arrow">→</span>
+        <span class="dot"></span>
+        <span class="stage-name">Learning</span>
+        <span class="arrow">→</span>
+        <span class="dot"></span>
+        <span class="stage-name">Mastery</span>
+      </div>
+    </div>
+
+    <div class="ai-knows-card">
+      <div class="ai-knows-header">
+        <span>🧠</span> What AI knows about you
+      </div>
+      <div class="ai-knows-list">
+        <div class="ai-item done">✓ Industry: Consulting (IT focus)</div>
+        <div class="ai-item done">✓ Business model defined</div>
+        <div class="ai-item missing">○ Missing: Strategic priority</div>
+        <div class="ai-item missing">○ Missing: Revenue metrics</div>
+      </div>
+      <div class="ai-cta">Complete profile to reach Stage 2 →</div>
+    </div>
+  </header>
+
+  <!-- Category Progress Cards -->
+  <div class="category-cards">
+    <div class="category-card active" onclick="showCategory('business')">
+      <div class="category-header">
+        <span class="category-name">The Business</span>
+        <span class="category-percent high">85%</span>
+      </div>
+      <div class="category-bar">
+        <div class="category-bar-fill high" style="width: 85%"></div>
+      </div>
+      <div class="category-desc">Who you are and what you do</div>
+    </div>
+
+    <div class="category-card" onclick="showCategory('numbers')">
+      <div class="category-header">
+        <span class="category-name">The Numbers</span>
+        <span class="category-percent medium">40%</span>
+      </div>
+      <div class="category-bar">
+        <div class="category-bar-fill medium" style="width: 40%"></div>
+      </div>
+      <div class="category-desc">Metrics for gap analysis</div>
+    </div>
+
+    <div class="category-card" onclick="showCategory('vision')">
+      <div class="category-header">
+        <span class="category-name">The Vision</span>
+        <span class="category-percent low">15%</span>
+      </div>
+      <div class="category-bar">
+        <div class="category-bar-fill low" style="width: 15%"></div>
+      </div>
+      <div class="category-desc">Where you're headed</div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Stage Tabs -->
+    <div class="stage-tabs">
+      <button class="stage-tab complete" onclick="showStage(0)">
+        <span class="icon">✓</span> Discovery
+      </button>
+      <button class="stage-tab active" onclick="showStage(1)">
+        <span class="icon">1</span> Assessment
+      </button>
+      <button class="stage-tab" onclick="showStage(2)">
+        <span class="icon">2</span> Execution
+      </button>
+      <button class="stage-tab locked" onclick="showStage(3)">
+        <span class="icon">🔒</span> Learning
+      </button>
+      <button class="stage-tab locked" onclick="showStage(4)">
+        <span class="icon">🔒</span> Mastery
+      </button>
+    </div>
+
+    <!-- ==========================================
+         STAGE 0: DISCOVERY (Complete Snapshot)
+    ========================================== -->
+    <div class="content-panel stage-panel" id="stage-0">
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSubTab(0, 'identity')">Identity <span class="check">✓</span></button>
+        <button class="sub-tab" onclick="showSubTab(0, 'business')">Business Model <span class="check">✓</span></button>
+        <button class="sub-tab" onclick="showSubTab(0, 'snapshot')">Quick Snapshot</button>
+        <button class="sub-tab" onclick="showSubTab(0, 'priority')">Priority <span class="check">✓</span></button>
+      </div>
+
+      <!-- Identity Tab -->
+      <div class="panel-content active" id="stage-0-identity">
+        <div class="section">
+          <div class="section-title">
+            <h3><span class="icon">🏢</span> Company Identity</h3>
+            <span class="why-link">Why this matters →</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">What industry are you in?</label>
+              <div class="chips">
+                <span class="chip selected">Consulting</span>
+                <span class="chip">Financial Services</span>
+                <span class="chip">Healthcare</span>
+                <span class="chip">Professional Services</span>
+                <span class="chip">Trade/Contractor</span>
+                <span class="chip">Other</span>
+              </div>
+              <div class="sub-chips">
+                <div class="sub-chips-label">What type of consulting?</div>
+                <div class="chips">
+                  <span class="chip selected">IT Consulting</span>
+                  <span class="chip">Management</span>
+                  <span class="chip">Strategy</span>
+                  <span class="chip">HR/Talent</span>
+                  <span class="chip">Operations</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top: 20px;">
+            <div class="form-group">
+              <label class="form-label">How many employees?</label>
+              <div class="chips">
+                <span class="chip">1-10</span>
+                <span class="chip selected">11-50</span>
+                <span class="chip">51-200</span>
+                <span class="chip">201-500</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">When was the company founded?</label>
+              <input type="text" class="form-input filled" value="2018" placeholder="e.g., 2015">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Business Model Tab -->
+      <div class="panel-content" id="stage-0-business">
+        <div class="section">
+          <div class="section-title">
+            <h3><span class="icon">💼</span> What You Do</h3>
+          </div>
+
+          <div class="form-row single">
+            <div class="form-group">
+              <label class="form-label">Describe your business in 1-2 sentences</label>
+              <textarea class="form-input filled" placeholder="What does your company do?">We provide IT consulting and digital transformation services to mid-market enterprises, specializing in cloud migration and system integration.</textarea>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top: 20px;">
+            <div class="form-group">
+              <label class="form-label">Business Model</label>
+              <div class="chips">
+                <span class="chip selected">Project-based</span>
+                <span class="chip">Retainer</span>
+                <span class="chip">Subscription</span>
+                <span class="chip">Commission</span>
+                <span class="chip">Hybrid</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Primary Revenue Driver</label>
+              <input type="text" class="form-input" placeholder="e.g., Implementation projects">
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top: 20px;">
+            <div class="form-group">
+              <label class="form-label">Who is your typical client?</label>
+              <textarea class="form-input" rows="2" placeholder="Describe your ideal customer"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">What makes you different?</label>
+              <textarea class="form-input" rows="2" placeholder="Your competitive advantage"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Snapshot Tab -->
+      <div class="panel-content" id="stage-0-snapshot">
+        <div class="section">
+          <div class="section-title">
+            <h3><span class="icon">📊</span> Quick Numbers</h3>
+            <span class="why-link">Enables "from X to Y" Key Results</span>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric-card filled">
+              <div class="metric-icon">💰</div>
+              <div class="metric-label">Annual Revenue</div>
+              <input type="text" class="metric-input" value="$2.4M" placeholder="$0">
+              <div class="metric-unit">USD</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon">👥</div>
+              <div class="metric-label">Active Clients</div>
+              <input type="text" class="metric-input" placeholder="0">
+              <div class="metric-unit">clients</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon">📈</div>
+              <div class="metric-label">Growth Rate</div>
+              <input type="text" class="metric-input" placeholder="0">
+              <div class="metric-unit">% YoY</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon">🎯</div>
+              <div class="metric-label">Retention Rate</div>
+              <input type="text" class="metric-input" placeholder="0">
+              <div class="metric-unit">%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">
+            <h3><span class="icon">⚠️</span> Current Challenges</h3>
+          </div>
+
+          <div class="form-row single">
+            <div class="form-group">
+              <label class="form-label">What's blocking your growth? (select all that apply)</label>
+              <div class="chips">
+                <span class="chip selected">Scaling operations</span>
+                <span class="chip">Hiring talent</span>
+                <span class="chip">Client retention</span>
+                <span class="chip">Cash flow</span>
+                <span class="chip">Technology gaps</span>
+                <span class="chip">Market competition</span>
+                <span class="chip">Sales pipeline</span>
+                <span class="chip">Delivery capacity</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Priority Tab -->
+      <div class="panel-content" id="stage-0-priority">
+        <div class="section">
+          <div class="priority-card">
+            <label class="priority-label">
+              <span class="star">✨</span>
+              What's your #1 priority for the next 12 months?
+            </label>
+            <textarea placeholder="e.g., Grow client base by 25% while maintaining service quality...">Expand into new markets while building a scalable delivery model</textarea>
+            <div class="priority-hint">
+              💡 This becomes your first personalized objective
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">What's your biggest obstacle?</label>
+              <textarea class="form-input" rows="2" placeholder="What's preventing you from reaching this priority?"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">If you could only accomplish ONE thing?</label>
+              <textarea class="form-input" rows="2" placeholder="The single most important thing to achieve"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">
+            <h3><span class="icon">🎯</span> Where do you want to be in 12 months?</h3>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-icon">💰</div>
+              <div class="metric-label">Target Revenue</div>
+              <input type="text" class="metric-input" placeholder="$0">
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon">👥</div>
+              <div class="metric-label">Target Clients</div>
+              <input type="text" class="metric-input" placeholder="0">
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon">👔</div>
+              <div class="metric-label">Target Team Size</div>
+              <input type="text" class="metric-input" placeholder="0">
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon">🎯</div>
+              <div class="metric-label">Target Retention</div>
+              <input type="text" class="metric-input" placeholder="0%">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STAGE 1: ASSESSMENT
+    ========================================== -->
+    <div class="content-panel stage-panel active" id="stage-1">
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSubTab(1, 'ssi')">SSI Results</button>
+        <button class="sub-tab" onclick="showSubTab(1, 'refine')">Refine Understanding</button>
+        <button class="sub-tab" onclick="showSubTab(1, 'deeper')">Deeper Context</button>
+      </div>
+
+      <!-- SSI Results -->
+      <div class="panel-content active" id="stage-1-ssi">
+        <div class="section">
+          <div class="section-title">
+            <h3><span class="icon">📊</span> Strategic Strength Index</h3>
+            <span class="why-link">Retake Assessment →</span>
+          </div>
+
+          <div class="ssi-grid">
+            <div class="ssi-card">
+              <div class="ssi-icon">⚡</div>
+              <div class="ssi-score">72</div>
+              <div class="ssi-label">Speed</div>
+              <div class="ssi-bar">
+                <div class="ssi-bar-fill speed" style="width: 72%"></div>
+              </div>
+              <div class="ssi-insight">Strong decision velocity</div>
+            </div>
+
+            <div class="ssi-card weak">
+              <div class="ssi-icon">💪</div>
+              <div class="ssi-score">48</div>
+              <div class="ssi-label">Strength</div>
+              <div class="ssi-bar">
+                <div class="ssi-bar-fill strength" style="width: 48%"></div>
+              </div>
+              <div class="ssi-insight">⚠️ Focus area</div>
+            </div>
+
+            <div class="ssi-card">
+              <div class="ssi-icon">🧠</div>
+              <div class="ssi-score">65</div>
+              <div class="ssi-label">Intelligence</div>
+              <div class="ssi-bar">
+                <div class="ssi-bar-fill intelligence" style="width: 65%"></div>
+              </div>
+              <div class="ssi-insight">Good learning agility</div>
+            </div>
+          </div>
+
+          <div class="ai-insight-box">
+            <strong>AI Insight:</strong> Your "Strength" dimension scores lowest. We'll prioritize objectives that build operational capacity and team capability.
+          </div>
+        </div>
+      </div>
+
+      <!-- Refine Understanding -->
+      <div class="panel-content" id="stage-1-refine">
+        <div class="section">
+          <div class="section-title">
+            <h3><span class="icon">🔄</span> Has anything changed?</h3>
+            <span class="why-link">Updates improve AI accuracy</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Current revenue (updated)</label>
+              <input type="text" class="form-input" value="$2.4M" placeholder="Update if changed">
+              <span class="form-sublabel">Last set in Discovery</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Active clients (updated)</label>
+              <input type="text" class="form-input" placeholder="Update if known">
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top: 20px;">
+            <div class="form-group">
+              <label class="form-label">Is your #1 priority still the same?</label>
+              <textarea class="form-input" rows="2">Expand into new markets while building a scalable delivery model</textarea>
+              <span class="form-sublabel">Edit if your focus has shifted</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deeper Context -->
+      <div class="panel-content" id="stage-1-deeper">
+        <div class="section">
+          <div class="section-title">
+            <h3><span class="icon">🔍</span> Additional Context</h3>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Mission (optional)</label>
+              <textarea class="form-input" rows="2" placeholder="What's your company's mission?"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Vision (optional)</label>
+              <textarea class="form-input" rows="2" placeholder="Where do you see the company in 5 years?"></textarea>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top: 20px;">
+            <div class="form-group">
+              <label class="form-label">Core Values</label>
+              <div class="chips">
+                <span class="chip">Innovation</span>
+                <span class="chip selected">Client Focus</span>
+                <span class="chip selected">Excellence</span>
+                <span class="chip">Integrity</span>
+                <span class="chip">Collaboration</span>
+                <span class="chip">Growth</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STAGE 2: EXECUTION
+    ========================================== -->
+    <div class="content-panel stage-panel" id="stage-2">
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSubTab(2, 'detailed')">Detailed Metrics</button>
+        <button class="sub-tab" onclick="showSubTab(2, 'targets')">Gap Analysis</button>
+        <button class="sub-tab" onclick="showSubTab(2, 'trajectory')">YoY Trajectory</button>
+      </div>
+
+      <div class="panel-content active" id="stage-2-detailed">
+        <div class="section">
+          <div class="section-title">
+            <h3><span class="icon">📊</span> Current Performance</h3>
+          </div>
+          <p style="color: var(--gray-500); font-size: 13px; margin-bottom: 20px;">
+            Detailed metrics enable specific "from $2.4M to $3M" Key Results
+          </p>
+
+          <div class="metrics-grid">
+            <div class="metric-card filled">
+              <div class="metric-icon">💰</div>
+              <div class="metric-label">Annual Revenue</div>
+              <input type="text" class="metric-input" value="$2.4M">
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon">📈</div>
+              <div class="metric-label">Profit Margin</div>
+              <input type="text" class="metric-input" placeholder="0%">
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon">👥</div>
+              <div class="metric-label">Clients</div>
+              <input type="text" class="metric-input" placeholder="0">
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon">🔄</div>
+              <div class="metric-label">Retention</div>
+              <input type="text" class="metric-input" placeholder="0%">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-content" id="stage-2-targets">
+        <div class="section">
+          <div class="section-title">
+            <h3><span class="icon">🎯</span> 12-Month Targets vs Current</h3>
+          </div>
+          <p style="color: var(--gray-500); font-size: 13px;">
+            Gap analysis drives objective prioritization
+          </p>
+        </div>
+      </div>
+
+      <div class="panel-content" id="stage-2-trajectory">
+        <div class="section">
+          <div class="section-title">
+            <h3><span class="icon">📈</span> Year-over-Year Changes</h3>
+          </div>
+          <p style="color: var(--gray-500); font-size: 13px;">
+            Historical trajectory validates target realism
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STAGE 3: LEARNING (Preview)
+    ========================================== -->
+    <div class="content-panel stage-panel" id="stage-3">
+      <div class="locked-banner">
+        <span class="locked-banner-icon">🔒</span>
+        <span class="locked-banner-text">Preview Mode — Unlocks after 50+ tasks and 1 OKR cycle</span>
+        <div class="locked-reqs">
+          <span class="done">✓ Discovery</span>
+          <span class="done">✓ SSI</span>
+          <span class="pending">○ 50 tasks</span>
+          <span class="pending">○ 1 OKR cycle</span>
+        </div>
+      </div>
+
+      <div class="sub-tabs">
+        <button class="sub-tab active">Execution Patterns</button>
+        <button class="sub-tab">OKR Outcomes</button>
+        <button class="sub-tab">Lessons Learned</button>
+      </div>
+
+      <div class="panel-content active locked-preview">
+        <div class="section">
+          <div class="section-title">
+            <h3><span class="icon">📊</span> How Your Team Executes</h3>
+          </div>
+
+          <div class="preview-grid">
+            <div class="preview-card">
+              <div class="preview-icon">📊</div>
+              <div class="preview-value">—%</div>
+              <div class="preview-label">Task Completion Rate</div>
+            </div>
+            <div class="preview-card">
+              <div class="preview-icon">⚡</div>
+              <div class="preview-value">—</div>
+              <div class="preview-label">Avg Tasks/Week</div>
+            </div>
+            <div class="preview-card">
+              <div class="preview-icon">🎯</div>
+              <div class="preview-value">—%</div>
+              <div class="preview-label">Goal Achievement</div>
+            </div>
+            <div class="preview-card">
+              <div class="preview-icon">📅</div>
+              <div class="preview-value">—%</div>
+              <div class="preview-label">On-Time Delivery</div>
+            </div>
+          </div>
+
+          <div class="preview-insight">
+            <strong>What AI will learn:</strong> Your team's execution patterns help AI suggest realistic timelines and workload distribution.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         STAGE 4: MASTERY (Preview)
+    ========================================== -->
+    <div class="content-panel stage-panel" id="stage-4">
+      <div class="locked-banner">
+        <span class="locked-banner-icon">🔒</span>
+        <span class="locked-banner-text">Preview Mode — Unlocks after 4+ OKR cycles with outcomes</span>
+        <div class="locked-reqs">
+          <span class="done">✓ Discovery</span>
+          <span class="done">✓ Assessment</span>
+          <span class="pending">○ Execution</span>
+          <span class="pending">○ 4 cycles</span>
+        </div>
+      </div>
+
+      <div class="sub-tabs">
+        <button class="sub-tab active">AI Predictions</button>
+        <button class="sub-tab">Org Patterns</button>
+        <button class="sub-tab">Smart Recommendations</button>
+      </div>
+
+      <div class="panel-content active locked-preview">
+        <div class="section">
+          <div class="section-title">
+            <h3><span class="icon">🔮</span> Predictive Intelligence</h3>
+          </div>
+
+          <div class="preview-grid">
+            <div class="preview-card">
+              <div class="preview-icon">🔮</div>
+              <div class="preview-value">—%</div>
+              <div class="preview-label">Success Prediction</div>
+            </div>
+            <div class="preview-card">
+              <div class="preview-icon">⚠️</div>
+              <div class="preview-value">—</div>
+              <div class="preview-label">Risk Alerts</div>
+            </div>
+            <div class="preview-card">
+              <div class="preview-icon">🎯</div>
+              <div class="preview-value">—</div>
+              <div class="preview-label">Calibrated Targets</div>
+            </div>
+            <div class="preview-card">
+              <div class="preview-icon">🧠</div>
+              <div class="preview-value">—</div>
+              <div class="preview-label">Pattern Insights</div>
+            </div>
+          </div>
+
+          <div class="preview-insight">
+            <strong>What you'll get:</strong> AI predicts success probability, warns of risks, and calibrates targets based on your actual performance history.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-spacer"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-bar">
+    <div class="autosave">
+      <span>✓</span> All changes saved automatically
+    </div>
+    <div class="progress-info">
+      <span class="progress-text">Profile: <span class="highlight">47%</span> → Stage 2 at 65%</span>
+      <button class="btn btn-primary">Generate OKRs →</button>
+    </div>
+  </footer>
+
+  <script>
+    function showStage(num) {
+      document.querySelectorAll('.stage-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('stage-' + num).classList.add('active');
+
+      document.querySelectorAll('.stage-tab').forEach((t, i) => {
+        t.classList.remove('active');
+        if (i === num) t.classList.add('active');
+      });
+
+      // Show first sub-tab
+      const panel = document.getElementById('stage-' + num);
+      const firstSubTab = panel.querySelector('.sub-tab');
+      if (firstSubTab) {
+        panel.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+        panel.querySelectorAll('.panel-content').forEach(p => p.classList.remove('active'));
+        firstSubTab.classList.add('active');
+        const firstPanel = panel.querySelector('.panel-content');
+        if (firstPanel) firstPanel.classList.add('active');
+      }
+    }
+
+    function showSubTab(stage, tab) {
+      const panel = document.getElementById('stage-' + stage);
+      panel.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      panel.querySelectorAll('.panel-content').forEach(p => p.classList.remove('active'));
+      document.getElementById('stage-' + stage + '-' + tab).classList.add('active');
+    }
+
+    function showCategory(cat) {
+      document.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+    }
+
+    // Chip selection
+    document.querySelectorAll('.chips').forEach(container => {
+      container.addEventListener('click', e => {
+        if (e.target.classList.contains('chip')) {
+          const label = container.closest('.form-group')?.querySelector('.form-label')?.textContent || '';
+          const isMulti = label.toLowerCase().includes('select all') || label.toLowerCase().includes('challenges') || label.toLowerCase().includes('values');
+          if (!isMulti) {
+            container.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+          }
+          e.target.classList.toggle('selected');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

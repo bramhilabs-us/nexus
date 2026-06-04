@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E1 - Page 3: The Path | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-columns: 280px 1fr 280px;
+            grid-template-rows: auto 1fr auto;
+            gap: 30px;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: #888; text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .page-title { margin-top: 4px; color: #1a1a2e; font-weight: 500; }
+
+        /* Left Column */
+        .left-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .opening {
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 32px;
+        }
+
+        .opening em {
+            font-style: normal;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        .wisdom-box {
+            background: #FAFAFA;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #F0F0F0;
+        }
+
+        .wisdom-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .wisdom-list {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .wisdom-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .wisdom-dot {
+            width: 6px;
+            height: 6px;
+            background: #C9A227;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Center - The Cycle */
+        .center-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cycle-container {
+            width: 420px;
+            height: 420px;
+            position: relative;
+        }
+
+        .cycle-ring {
+            width: 100%;
+            height: 100%;
+            border: 2px dashed #E0E0E0;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        /* Cycle Steps */
+        .cycle-step {
+            position: absolute;
+            width: 130px;
+            text-align: center;
+            transform: translate(-50%, -50%);
+        }
+
+        .cycle-step.assess { top: 5%; left: 50%; }
+        .cycle-step.generate { top: 50%; left: 95%; }
+        .cycle-step.execute { top: 95%; left: 50%; }
+        .cycle-step.learn { top: 50%; left: 5%; }
+
+        .step-icon {
+            width: 56px;
+            height: 56px;
+            background: white;
+            border: 3px solid #1a1a2e;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .cycle-step.assess .step-icon { border-color: #1a1a2e; }
+        .cycle-step.generate .step-icon { border-color: #C9A227; background: #C9A227; }
+        .cycle-step.execute .step-icon { border-color: #1a1a2e; }
+        .cycle-step.learn .step-icon { border-color: #1a1a2e; }
+
+        .step-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+
+        .step-question {
+            font-size: 12px;
+            color: #888;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* Arrows */
+        .arrow {
+            position: absolute;
+            font-size: 18px;
+            color: #C9A227;
+        }
+
+        .arrow.a1 { top: 18%; left: 78%; transform: rotate(45deg); }
+        .arrow.a2 { top: 78%; left: 82%; transform: rotate(135deg); }
+        .arrow.a3 { top: 82%; left: 22%; transform: rotate(225deg); }
+        .arrow.a4 { top: 22%; left: 18%; transform: rotate(315deg); }
+
+        /* Center Hub */
+        .center-hub {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            border: 2px solid #C9A227;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .hub-label {
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hub-text {
+            font-size: 11px;
+            color: #1a1a2e;
+            font-weight: 500;
+            text-align: center;
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        /* Right Column */
+        .right-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .insight-card {
+            background: #FAFAFA;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #F0F0F0;
+            margin-bottom: 20px;
+        }
+
+        .insight-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+        }
+
+        .insight-text {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .closing-reflection {
+            font-size: 15px;
+            color: #444;
+            line-height: 1.7;
+            padding: 20px;
+            border-left: 3px solid #C9A227;
+        }
+
+        .closing-reflection em {
+            font-style: normal;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .next { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 20px; grid-template-columns: 1fr; gap: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .page-indicator { text-align: left; }
+            .left-col, .center-col, .right-col { grid-column: 1; }
+            .cycle-container { width: 300px; height: 300px; margin: 0 auto; }
+            .cycle-step { width: 100px; }
+            .step-icon { width: 44px; height: 44px; font-size: 18px; }
+            .step-name { font-size: 12px; }
+            .step-question { font-size: 10px; }
+            .center-hub { width: 90px; height: 90px; }
+            .hub-text { font-size: 10px; }
+            .opening { font-size: 16px; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .cycle-container { width: 260px; height: 260px; }
+            .cycle-step { width: 80px; }
+            .step-icon { width: 36px; height: 36px; font-size: 14px; }
+            .step-name { font-size: 11px; }
+            .step-question { font-size: 9px; }
+            .center-hub { width: 70px; height: 70px; }
+            .hub-label { font-size: 8px; }
+            .hub-text { font-size: 9px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E1: What Is YSELA, Really?</div>
+            </div>
+            <div class="page-indicator">
+                <div>Page <span class="current">3</span> of 6</div>
+                <div class="page-title">The Path</div>
+            </div>
+        </header>
+
+        <!-- Left Column -->
+        <div class="left-col">
+            <div class="opening">
+                Once you see where you are,<br>
+                <em>the path reveals itself</em>.<br><br>
+                It's not new.<br>
+                You already know it.
+            </div>
+
+            <div class="wisdom-box">
+                <div class="wisdom-label">This Cycle Is Ancient</div>
+                <div class="wisdom-list">
+                    <div class="wisdom-item">
+                        <div class="wisdom-dot"></div>
+                        <span>The scientist uses it</span>
+                    </div>
+                    <div class="wisdom-item">
+                        <div class="wisdom-dot"></div>
+                        <span>The artist uses it</span>
+                    </div>
+                    <div class="wisdom-item">
+                        <div class="wisdom-dot"></div>
+                        <span>The athlete uses it</span>
+                    </div>
+                    <div class="wisdom-item">
+                        <div class="wisdom-dot"></div>
+                        <span>The craftsman uses it</span>
+                    </div>
+                    <div class="wisdom-item">
+                        <div class="wisdom-dot"></div>
+                        <span>The leader uses it</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center - The Cycle -->
+        <div class="center-col">
+            <div class="cycle-container">
+                <div class="cycle-ring"></div>
+
+                <div class="cycle-step assess">
+                    <div class="step-icon">&#128269;</div>
+                    <div class="step-name">ASSESS</div>
+                    <div class="step-question">"Where am I,<br>honestly?"</div>
+                </div>
+
+                <div class="cycle-step generate">
+                    <div class="step-icon"><span style="filter: invert(1);">&#127919;</span></div>
+                    <div class="step-name">GENERATE</div>
+                    <div class="step-question">"Where should<br>I aim?"</div>
+                </div>
+
+                <div class="cycle-step execute">
+                    <div class="step-icon">&#9997;</div>
+                    <div class="step-name">EXECUTE</div>
+                    <div class="step-question">"What do I<br>do today?"</div>
+                </div>
+
+                <div class="cycle-step learn">
+                    <div class="step-icon">&#128161;</div>
+                    <div class="step-name">LEARN</div>
+                    <div class="step-question">"Did it matter?<br>What now?"</div>
+                </div>
+
+                <span class="arrow a1">&#10140;</span>
+                <span class="arrow a2">&#10140;</span>
+                <span class="arrow a3">&#10140;</span>
+                <span class="arrow a4">&#10140;</span>
+
+                <div class="center-hub">
+                    <div class="hub-label">The Cycle</div>
+                    <div class="hub-text">Never ends.<br>Always grows.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-col">
+            <div class="insight-card">
+                <div class="insight-title">You already do this intuitively.</div>
+                <div class="insight-text">
+                    But intuition doesn't scale.<br><br>
+                    What if your entire organization could see this cycle together? Moving in rhythm. Each person clear on their part.
+                </div>
+            </div>
+
+            <div class="closing-reflection">
+                We already know how to grow.<br><br>
+                We just can't <em>see</em> it at scale.<br><br>
+                Until now.
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_2_the_mirror.html">&larr; The Mirror</a>
+                <a href="page_4_the_shared_journey.html" class="next">Next: The Shared Journey &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

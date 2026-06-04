@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Dashboard/execution icon with play element -->
+  <circle cx="12" cy="12" r="10" stroke="currentColor" fill="none" opacity="0.3"/>
+  <!-- Play triangle -->
+  <polygon points="10,8 16,12 10,16" fill="currentColor" opacity="0.8"/>
+  <!-- Progress arc -->
+  <path d="M12 2a10 10 0 0 1 8.5 15" stroke="currentColor" stroke-width="2.5" fill="none" stroke-dasharray="4 2"/>
+</svg>

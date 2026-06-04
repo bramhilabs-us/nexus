@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E1 - Page 12: The Decision | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a2e;
+            color: white;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 30px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: white; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: rgba(255,255,255,0.5); text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .section-badge {
+            display: inline-block;
+            background: rgba(201, 162, 39, 0.2);
+            color: #C9A227;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-bottom: 4px;
+        }
+
+        /* Main Content */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* Left - The Ask */
+        .ask-section {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .ask-header {
+            font-size: 11px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .ask-main {
+            font-size: 48px;
+            font-weight: 300;
+            line-height: 1.2;
+            color: white;
+        }
+
+        .ask-main em {
+            font-style: normal;
+            color: #C9A227;
+            font-weight: 600;
+        }
+
+        .ask-amount {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .amount-value {
+            font-size: 64px;
+            font-weight: 700;
+            color: #C9A227;
+        }
+
+        .amount-context {
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .ask-timeline {
+            display: flex;
+            gap: 30px;
+            padding: 24px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .timeline-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(201, 162, 39, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 20px;
+        }
+
+        .timeline-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 4px;
+        }
+
+        .timeline-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* Right - Next Steps */
+        .next-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .next-header {
+            font-size: 11px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .step-item:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(201, 162, 39, 0.3);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #C9A227 0%, #D4AF37 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a2e;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .step-arrow {
+            color: #C9A227;
+            font-size: 18px;
+        }
+
+        /* Closing Box */
+        .closing-box {
+            background: rgba(201, 162, 39, 0.1);
+            border: 2px solid #C9A227;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .closing-quote {
+            font-size: 18px;
+            font-weight: 300;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .closing-quote em {
+            font-style: normal;
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: rgba(255,255,255,0.5); text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .complete { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 20px; gap: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .page-indicator { text-align: left; }
+            .content { grid-template-columns: 1fr; gap: 30px; }
+            .ask-main { font-size: 32px; }
+            .amount-value { font-size: 48px; }
+            .amount-context { font-size: 14px; }
+            .ask-timeline { flex-direction: column; gap: 20px; padding: 20px; }
+            .timeline-item { display: flex; align-items: center; gap: 16px; text-align: left; }
+            .timeline-icon { margin: 0; }
+            .step-item { padding: 16px; }
+            .step-title { font-size: 14px; }
+            .closing-quote { font-size: 16px; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .ask-main { font-size: 28px; }
+            .amount-value { font-size: 40px; }
+            .step-number { width: 32px; height: 32px; font-size: 14px; }
+            .step-title { font-size: 13px; }
+            .step-desc { font-size: 11px; }
+            .closing-quote { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <div class="logo">YSELA<span>.AI</span></div>
+                <div class="series-tag">S1E1: What Is YSELA, Really?</div>
+            </div>
+            <div class="page-indicator">
+                <div class="section-badge">Section 3: Business</div>
+                <div>Page <span class="current">12</span> of 12</div>
+                <div style="margin-top: 4px; color: white; font-weight: 500;">The Decision</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Left - The Ask -->
+            <div class="ask-section">
+                <div class="ask-header">The Ask</div>
+
+                <div class="ask-main">
+                    Build with us.<br>
+                    <em>Scale</em> with us.
+                </div>
+
+                <div class="ask-amount">
+                    <span class="amount-value">$800K</span>
+                    <span class="amount-context">Scale Ready Path<br>Break-even by Q1 2027</span>
+                </div>
+
+                <div class="ask-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">&#128197;</div>
+                        <div class="timeline-label">Start</div>
+                        <div class="timeline-value">Jun 2026</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">&#127919;</div>
+                        <div class="timeline-label">MRR Target</div>
+                        <div class="timeline-value">$100K</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">&#9989;</div>
+                        <div class="timeline-label">Break-Even</div>
+                        <div class="timeline-value">Q1 2027</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right - Next Steps -->
+            <div class="next-section">
+                <div class="next-header">Next Steps</div>
+
+                <div class="steps-list">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Review Investment Tiers</div>
+                            <div class="step-desc">Choose path that matches your risk appetite</div>
+                        </div>
+                        <div class="step-arrow">&#8594;</div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Schedule Deep Dive</div>
+                            <div class="step-desc">Technical roadmap + financial projections</div>
+                        </div>
+                        <div class="step-arrow">&#8594;</div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Commit to Timeline</div>
+                            <div class="step-desc">Jun 2026 launch requires May decision</div>
+                        </div>
+                        <div class="step-arrow">&#8594;</div>
+                    </div>
+                </div>
+
+                <div class="closing-box">
+                    <div class="closing-quote">
+                        The mirror shows what is.<br>
+                        You decide what <em>becomes</em>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_11_the_math.html">&larr; The Math</a>
+                <span class="complete">S1E1 Complete</span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "company_id": "__COMPANY_ID__",
+  "overall_scores": {
+    "speed": 5.8,
+    "strength": 6.2,
+    "intelligence": 5.4
+  },
+  "teams": [
+    { "team_name": "Delivery Pod A", "function_name": "delivery", "completion_rate": 82 },
+    { "team_name": "Delivery Pod B", "function_name": "delivery", "completion_rate": 76 },
+    { "team_name": "Delivery Pod C", "function_name": "delivery", "completion_rate": 79 },
+    { "team_name": "Strategy Office", "function_name": "strategy", "completion_rate": 88 },
+    { "team_name": "Data and AI", "function_name": "data_ai", "completion_rate": 74 },
+    { "team_name": "Revenue Operations", "function_name": "revops_sales", "completion_rate": 81 }
+  ],
+  "by_function": {
+    "delivery": { "speed": 5.6, "strength": 6.2, "intelligence": 5.4 },
+    "strategy": { "speed": 5.9, "strength": 6.5, "intelligence": 5.0 },
+    "data_ai": { "speed": 5.4, "strength": 5.9, "intelligence": 5.1 },
+    "revops_sales": { "speed": 6.2, "strength": 6.1, "intelligence": 5.8 }
+  },
+  "weak_areas": [
+    { "dimension": "strategy", "avg_score": 5.0, "team_count": 2, "teams_affected": ["Strategy Office", "Leadership"] },
+    { "dimension": "market", "avg_score": 5.1, "team_count": 3, "teams_affected": ["Revenue Operations", "Strategy Office", "Leadership"] },
+    { "dimension": "data", "avg_score": 5.2, "team_count": 4, "teams_affected": ["Data and AI", "Delivery Pod A", "Delivery Pod B", "Delivery Pod C"] },
+    { "dimension": "delivery", "avg_score": 5.3, "team_count": 3, "teams_affected": ["Delivery Pod A", "Delivery Pod B", "Delivery Pod C"] }
+  ],
+  "completion_stats": {
+    "total_members": 58,
+    "total_completed": 47,
+    "completion_rate": 81
+  },
+  "start_date": "2026-04-01",
+  "period": "quarterly"
+}

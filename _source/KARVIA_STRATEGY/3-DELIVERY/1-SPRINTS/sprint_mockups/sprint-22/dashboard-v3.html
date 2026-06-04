@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YSELA Dashboard V3 — The Causal Chain</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Production navigation deps — DO NOT REMOVE -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../../../client/css/s13-patterns.css">
+    <style>
+        :root {
+            /* Sprint 22 Theme — Navy/Gold (matches s13-patterns.css --s22-* tokens) */
+            --karvia-primary: #1F2937;       /* s22-navy */
+            --karvia-primary-light: #374151; /* s22-navy-light */
+            --karvia-primary-dark: #111827;  /* s22-navy-dark */
+            --karvia-primary-bg: #F3F4F6;    /* s22-navy-bg */
+            --s22-gold: #F59E0B;
+            --s22-gold-light: #FCD34D;
+            --s22-gold-bg: #FFFBEB;
+
+            --karvia-gray-50: #F9FAFB;
+            --karvia-gray-100: #F3F4F6;
+            --karvia-gray-200: #E5E7EB;
+            --karvia-gray-300: #D1D5DB;
+            --karvia-gray-400: #9CA3AF;
+            --karvia-gray-500: #6B7280;
+            --karvia-gray-600: #4B5563;
+            --karvia-gray-700: #374151;
+            --karvia-gray-800: #1F2937;
+            --karvia-gray-900: #111827;
+
+            --karvia-success: #10B981;
+            --karvia-warning: #F59E0B;
+            --karvia-danger: #EF4444;
+
+            --karvia-radius-sm: 0.375rem;
+            --karvia-radius-md: 0.5rem;
+            --karvia-radius-lg: 0.75rem;
+
+            --karvia-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+            --karvia-shadow-lg: 0 12px 32px -8px rgba(0, 0, 0, 0.15);
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--karvia-gray-50);
+            color: var(--karvia-gray-900);
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        button { font-family: inherit; }
+
+        .app { min-height: 100vh; display: flex; flex-direction: column; }
+
+        .app-header {
+            background: white;
+            border-bottom: 1px solid var(--karvia-gray-200);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 1.125rem;
+            letter-spacing: -0.01em;
+            color: var(--karvia-primary);
+        }
+
+        .today-date {
+            font-size: 0.875rem;
+            color: var(--karvia-gray-500);
+            font-weight: 500;
+        }
+
+        .stage {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 32px 24px 96px;
+            width: 100%;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--karvia-gray-400);
+            margin: 0 0 14px 2px;
+        }
+
+        /* ─────────────────────────────────────────────
+           CATCH-UP STRIP
+           ───────────────────────────────────────────── */
+        .catchup {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 36px;
+        }
+
+        .catchup-tile {
+            background: white;
+            border: 1px solid var(--karvia-gray-200);
+            border-radius: var(--karvia-radius-md);
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: all 150ms ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: left;
+            width: 100%;
+            font: inherit;
+            color: inherit;
+        }
+        .catchup-tile:hover {
+            border-color: var(--karvia-gray-300);
+            background: var(--karvia-gray-50);
+            transform: translateY(-1px);
+        }
+
+        .catchup-glyph { font-size: 1.125rem; line-height: 1; color: var(--karvia-gray-600); flex-shrink: 0; }
+        .catchup-glyph.dim { color: var(--karvia-gray-400); }
+        .catchup-glyph.fwd { color: var(--karvia-gray-500); }
+        .catchup-body { min-width: 0; }
+        .catchup-count { font-size: 1rem; font-weight: 600; color: var(--karvia-gray-900); line-height: 1.1; display: block; }
+        .catchup-meta { font-size: 0.7rem; color: var(--karvia-gray-500); margin-top: 2px; display: block; }
+
+        .catchup-panel {
+            display: none;
+            margin-top: 14px;
+            margin-bottom: 28px;
+            padding: 16px 20px;
+            background: white;
+            border: 1px solid var(--karvia-gray-200);
+            border-radius: var(--karvia-radius-md);
+        }
+        .catchup-panel.is-open { display: block; }
+        .panel-title { font-size: 0.8rem; font-weight: 600; color: var(--karvia-gray-700); margin: 0 0 12px; }
+
+        .forgotten-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--karvia-gray-100);
+        }
+        .forgotten-item:last-child { border-bottom: none; }
+        .forgotten-date { font-size: 0.7rem; color: var(--karvia-gray-400); width: 54px; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+        .forgotten-title { flex: 1; font-size: 0.9rem; color: var(--karvia-gray-700); }
+        .forgotten-chain { display: block; font-size: 0.7rem; color: var(--karvia-gray-400); margin-top: 2px; }
+
+        .bring-back {
+            background: transparent;
+            border: 1px solid var(--karvia-gray-300);
+            color: var(--karvia-gray-700);
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-radius: var(--karvia-radius-sm);
+            cursor: pointer;
+        }
+        .bring-back:hover { border-color: var(--karvia-primary); color: var(--karvia-primary); }
+
+        .ghost-row {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 12px;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 0.8rem;
+            color: var(--karvia-gray-500);
+        }
+        .ghost-day { color: var(--karvia-gray-700); font-weight: 500; }
+        .ghost-load { display: flex; gap: 3px; }
+        .ghost-bar { width: 10px; height: 6px; background: var(--karvia-gray-200); border-radius: 1px; }
+        .ghost-bar.move { background: var(--karvia-primary-light); opacity: 0.6; }
+        .ghost-bar.chore { background: var(--karvia-gray-300); }
+        .ghost-count { color: var(--karvia-gray-400); font-variant-numeric: tabular-nums; }
+
+        /* ─────────────────────────────────────────────
+           MOVE CARD — horizontal flow
+           ───────────────────────────────────────────── */
+        .move-stack { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+
+        .move-card {
+            background: white;
+            border: 1px solid var(--karvia-gray-200);
+            border-radius: var(--karvia-radius-lg);
+            padding: 16px 22px 18px;
+            transition: all 200ms ease;
+            box-shadow: var(--karvia-shadow-sm);
+            position: relative;
+        }
+        .move-card.is-complete { background: var(--karvia-gray-50); border-color: var(--karvia-gray-100); opacity: 0.78; }
+        .move-card.is-paused { background: #FEFCE8; border-color: #FDE68A; }
+        .move-card.is-assigned-out { border-style: dashed; }
+
+        .move-row { display: flex; align-items: flex-start; gap: 14px; }
+
+        .check {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid var(--karvia-gray-300);
+            flex-shrink: 0;
+            margin-top: 1px;
+            cursor: pointer;
+            transition: all 150ms ease;
+            background: white;
+            position: relative;
+        }
+        .check:hover { border-color: var(--karvia-primary); }
+        .is-complete .check { background: var(--karvia-primary); border-color: var(--karvia-primary); }
+        .is-complete .check::after {
+            content: "";
+            position: absolute;
+            left: 5px; top: 2px;
+            width: 5px; height: 10px;
+            border: solid white; border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .move-main { flex: 1; min-width: 0; }
+
+        /* Title row */
+        .title-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .move-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--karvia-gray-900);
+            margin: 0;
+            line-height: 1.4;
+            flex: 1;
+            min-width: 0;
+        }
+        .is-complete .move-title { color: var(--karvia-gray-500); }
+
+        .done-stamp {
+            font-size: 0.75rem;
+            color: var(--karvia-success);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* Top-right actions */
+        .actions { display: flex; gap: 4px; flex-shrink: 0; align-items: center; }
+
+        .avatar {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--karvia-gray-500);
+            background: var(--karvia-gray-100);
+            border: none;
+            cursor: pointer;
+            transition: all 150ms ease;
+        }
+        .avatar:hover { background: var(--karvia-gray-200); color: var(--karvia-gray-700); }
+        .avatar.is-other { background: var(--karvia-primary-bg); color: var(--karvia-primary-dark); }
+
+        .act-glyph {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--karvia-gray-400);
+            font-size: 0.95rem;
+            line-height: 1;
+            transition: all 150ms ease;
+            padding: 0;
+        }
+        .act-glyph:hover { background: var(--karvia-gray-100); color: var(--karvia-gray-800); }
+
+        /* ─────────────────────────────────────────────
+           CAUSAL CHAIN GRID
+           left column: building (habit) | sep | right column: moving (ball)
+           ───────────────────────────────────────────── */
+        .chain-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.2fr);
+            gap: 14px;
+            align-items: start;
+        }
+
+        .chain-col { min-width: 0; }
+
+        .chain-leg {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .chain-icon { width: 14px; height: 14px; flex-shrink: 0; display: inline-block; }
+        .chain-icon.icon-building { color: var(--karvia-gray-600); }
+        .chain-icon.icon-moving { color: var(--karvia-primary); }
+
+        .chain-value { color: var(--karvia-gray-900); font-weight: 600; font-size: 0.875rem; }
+        .chain-ball { color: var(--karvia-primary); font-weight: 600; font-size: 0.875rem; }
+
+        .is-complete .chain-value,
+        .is-complete .chain-ball { color: var(--karvia-gray-500); }
+        .is-complete .chain-icon.icon-building,
+        .is-complete .chain-icon.icon-moving { color: var(--karvia-gray-400); }
+
+        .is-paused .chain-ball { color: var(--karvia-warning); }
+        .is-paused .chain-icon.icon-moving { color: var(--karvia-warning); }
+
+        .chain-sep {
+            color: var(--karvia-gray-300);
+            font-size: 1rem;
+            line-height: 1;
+            margin-top: 3px;
+            font-weight: 300;
+        }
+
+        /* Meta line — aligned under the icon+label (20px indent) */
+        .chain-meta {
+            margin-left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            color: var(--karvia-gray-500);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .meter-track {
+            flex: 0 0 auto;
+            width: 60px;
+            height: 3px;
+            background: var(--karvia-gray-200);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .meter-fill {
+            height: 100%;
+            background: var(--karvia-gray-600);
+            border-radius: 2px;
+            transition: width 300ms ease;
+        }
+        .is-paused .meter-fill { background: var(--karvia-warning); }
+        .is-complete .meter-fill { background: var(--karvia-gray-400); }
+
+        /* Ball lift readout */
+        .lift {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 5px;
+            font-size: 0.8rem;
+        }
+
+        .lift-arrow {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--karvia-success);
+            line-height: 1;
+        }
+        .lift-arrow.down { color: var(--karvia-danger); }
+        .lift-arrow.flat { color: var(--karvia-gray-400); }
+        .lift-arrow.track { color: var(--karvia-gray-400); font-size: 0.75rem; }
+
+        .lift-now {
+            font-weight: 700;
+            color: var(--karvia-success);
+            font-variant-numeric: tabular-nums;
+            font-size: 0.9rem;
+        }
+        .lift-arrow.down ~ .lift-now { color: var(--karvia-danger); }
+        .lift-arrow.flat ~ .lift-now { color: var(--karvia-gray-600); }
+        .lift-arrow.track ~ .lift-now { color: var(--karvia-gray-600); }
+
+        .lift-from {
+            color: var(--karvia-gray-400);
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+
+        .is-complete .lift-now { color: var(--karvia-gray-500); }
+        .is-complete .lift-arrow { color: var(--karvia-gray-400); }
+        .is-paused .lift-now { color: var(--karvia-warning); }
+        .is-paused .lift-arrow { color: var(--karvia-warning); }
+
+        /* ─────────────────────────────────────────────
+           POPOVERS
+           ───────────────────────────────────────────── */
+        .popover {
+            position: absolute;
+            top: 48px;
+            right: 18px;
+            background: white;
+            border: 1px solid var(--karvia-gray-200);
+            border-radius: var(--karvia-radius-md);
+            box-shadow: var(--karvia-shadow-lg);
+            padding: 14px 16px;
+            z-index: 20;
+            display: none;
+            min-width: 260px;
+        }
+        .popover.is-open { display: block; }
+
+        .popover-title {
+            font-size: 0.7rem; font-weight: 600;
+            color: var(--karvia-gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin: 0 0 10px;
+        }
+        .popover-scope { font-size: 0.7rem; color: var(--karvia-gray-400); margin-bottom: 10px; }
+
+        .popover input[type="date"] {
+            width: 100%; font: inherit; font-size: 0.875rem;
+            padding: 8px 10px;
+            border: 1px solid var(--karvia-gray-200);
+            border-radius: var(--karvia-radius-sm);
+            color: var(--karvia-gray-800);
+        }
+        .popover-actions { display: flex; gap: 8px; margin-top: 10px; justify-content: flex-end; }
+
+        .btn-confirm, .btn-cancel {
+            padding: 6px 12px;
+            border-radius: var(--karvia-radius-sm);
+            font-size: 0.75rem; font-weight: 500;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .btn-confirm { background: var(--karvia-primary); color: white; border-color: var(--karvia-primary); }
+        .btn-confirm:hover { background: var(--karvia-primary-dark); }
+        .btn-cancel { background: transparent; color: var(--karvia-gray-600); border-color: var(--karvia-gray-200); }
+        .btn-cancel:hover { background: var(--karvia-gray-50); }
+
+        .assignee-group { margin-bottom: 10px; }
+        .assignee-group:last-child { margin-bottom: 0; }
+        .assignee-group-label {
+            font-size: 0.65rem; font-weight: 600;
+            color: var(--karvia-gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+        }
+        .assignee-list { display: flex; flex-direction: column; gap: 2px; }
+        .assignee-option {
+            display: flex; align-items: center; gap: 10px;
+            padding: 7px 8px;
+            border-radius: var(--karvia-radius-sm);
+            cursor: pointer;
+            background: transparent; border: none;
+            text-align: left; width: 100%;
+            font: inherit; color: var(--karvia-gray-800);
+        }
+        .assignee-option:hover { background: var(--karvia-gray-50); }
+        .assignee-option.is-current { background: var(--karvia-primary-bg); color: var(--karvia-primary-dark); }
+        .assignee-initials {
+            width: 22px; height: 22px; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 0.65rem; font-weight: 600;
+            background: var(--karvia-gray-100); color: var(--karvia-gray-600);
+            flex-shrink: 0;
+        }
+        .assignee-name { font-size: 0.85rem; flex: 1; }
+        .assignee-role { font-size: 0.7rem; color: var(--karvia-gray-400); }
+        .assignee-invalid { opacity: 0.4; cursor: not-allowed; }
+
+        /* ─────────────────────────────────────────────
+           CHORES
+           ───────────────────────────────────────────── */
+        .chores {
+            border-top: 1px solid var(--karvia-gray-200);
+            padding-top: 28px;
+            margin-top: 40px;
+        }
+        .chore-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2px; }
+        .chore {
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 4px;
+            font-size: 0.9rem;
+            color: var(--karvia-gray-800);
+            position: relative;
+        }
+        .chore .check { width: 16px; height: 16px; border-width: 1.5px; margin-top: 0; }
+        .chore.is-complete .check::after {
+            left: 3px; top: 1px; width: 4px; height: 7px;
+            border-width: 0 1.5px 1.5px 0;
+        }
+        .chore-title { flex: 1; }
+        .chore-time {
+            color: var(--karvia-gray-400); font-size: 0.75rem;
+            font-weight: 500; font-variant-numeric: tabular-nums;
+            width: 44px; text-align: right;
+        }
+        .chore.is-complete .chore-title { color: var(--karvia-gray-400); text-decoration: line-through; }
+        .chore-actions { display: flex; gap: 4px; align-items: center; }
+        .chore .avatar { width: 20px; height: 20px; font-size: 0.6rem; }
+
+        /* ─────────────────────────────────────────────
+           RESPONSIVE
+           ───────────────────────────────────────────── */
+        @media (max-width: 640px) {
+            .stage { padding: 24px 16px 64px; }
+            .move-card { padding: 14px 16px 16px; }
+            .chain-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .chain-sep { display: none; }
+            .catchup { grid-template-columns: 1fr; }
+            .popover { right: 8px; left: 8px; min-width: auto; }
+            .kpi-strip { display: none; }
+        }
+
+        /* ─────────────────────────────────────────────
+           MOVES HEADER — label + group switch + KPI strip
+           ───────────────────────────────────────────── */
+        .moves-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 0 0 14px 2px;
+        }
+
+        .moves-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .moves-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--karvia-gray-400);
+            white-space: nowrap;
+        }
+
+        .group-switch {
+            display: inline-flex;
+            background: var(--karvia-gray-100);
+            border-radius: 6px;
+            padding: 2px;
+            gap: 1px;
+        }
+
+        .group-btn {
+            padding: 3px 8px;
+            border: none;
+            background: transparent;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--karvia-gray-500);
+            cursor: pointer;
+            transition: all 150ms ease;
+            font-family: inherit;
+            line-height: 1.4;
+        }
+
+        .group-btn.is-active {
+            background: white;
+            color: var(--karvia-gray-900);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+        }
+
+        .kpi-strip {
+            font-size: 0.7rem;
+            color: var(--karvia-gray-400);
+            font-weight: 500;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .kpi-accent { color: var(--karvia-success); font-weight: 700; }
+
+        /* Injected by JS when grouping is active */
+        .group-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 18px 0 6px;
+            padding: 0 2px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .group-header:first-child { margin-top: 0; }
+
+        .group-header-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--karvia-gray-500);
+            white-space: nowrap;
+        }
+
+        .group-header-line {
+            flex: 1;
+            height: 1px;
+            background: var(--karvia-gray-200);
+        }
+
+        .group-header-chevron {
+            font-size: 0.6rem;
+            color: var(--karvia-gray-400);
+            flex-shrink: 0;
+            line-height: 1;
+            transition: transform 200ms ease;
+        }
+
+        .group-header.is-collapsed .group-header-chevron {
+            transform: rotate(-90deg);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     PRODUCTION NAVIGATION — LOCKED, DO NOT MODIFY
+     Copied verbatim from client/pages/dashboard-v2.html lines 932-935.
+     Implementation must preserve this block exactly + load /js/navigation.js.
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+    <div id="main-navigation"></div>
+</nav>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <symbol id="icon-building" viewBox="0 0 14 14">
+            <rect x="1" y="9" width="3" height="4" rx="0.5" fill="currentColor" opacity="0.35"/>
+            <rect x="5.5" y="6" width="3" height="7" rx="0.5" fill="currentColor" opacity="0.65"/>
+            <rect x="10" y="3" width="3" height="10" rx="0.5" fill="currentColor"/>
+        </symbol>
+        <symbol id="icon-moving" viewBox="0 0 14 14">
+            <path d="M1.5 10.5 L5 7.5 L8 9 L12 3.5"
+                  stroke="currentColor" fill="none"
+                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="3.5" r="1.75" fill="currentColor"/>
+        </symbol>
+    </defs>
+</svg>
+
+<div class="app">
+
+    <header class="app-header">
+        <div class="brand">YSELA</div>
+        <div class="today-date">Wed · Apr 22</div>
+    </header>
+
+    <main class="stage">
+
+        <!-- ──────────────────────────────────
+             CATCH-UP STRIP
+             ────────────────────────────────── -->
+        <div class="catchup" role="navigation" aria-label="Catch-up">
+            <button class="catchup-tile" data-panel="pushed">
+                <span class="catchup-glyph" aria-hidden="true">◐</span>
+                <span class="catchup-body">
+                    <span class="catchup-count">2</span>
+                    <span class="catchup-meta">pushed to today</span>
+                </span>
+            </button>
+            <button class="catchup-tile" data-panel="forgotten">
+                <span class="catchup-glyph dim" aria-hidden="true">○</span>
+                <span class="catchup-body">
+                    <span class="catchup-count">3</span>
+                    <span class="catchup-meta">forgotten · 7d</span>
+                </span>
+            </button>
+            <button class="catchup-tile" data-panel="upcoming">
+                <span class="catchup-glyph fwd" aria-hidden="true">▸</span>
+                <span class="catchup-body">
+                    <span class="catchup-count">12</span>
+                    <span class="catchup-meta">this week</span>
+                </span>
+            </button>
+        </div>
+
+        <section class="catchup-panel" data-panel-for="forgotten">
+            <h3 class="panel-title">Forgotten</h3>
+            <div class="forgotten-item">
+                <span class="forgotten-date">Apr 15</span>
+                <div class="forgotten-title">
+                    Send Monday agenda by 6pm Sunday
+                    <span class="forgotten-chain">Accountability · Meeting Structure</span>
+                </div>
+                <button class="bring-back">Bring back</button>
+            </div>
+            <div class="forgotten-item">
+                <span class="forgotten-date">Apr 17</span>
+                <div class="forgotten-title">
+                    Review one KPI scorecard
+                    <span class="forgotten-chain">Discipline · Implement KPI</span>
+                </div>
+                <button class="bring-back">Bring back</button>
+            </div>
+            <div class="forgotten-item">
+                <span class="forgotten-date">Apr 19</span>
+                <div class="forgotten-title">
+                    Write one sentence of reflection
+                    <span class="forgotten-chain">Maturity · Charter Alignment</span>
+                </div>
+                <button class="bring-back">Bring back</button>
+            </div>
+        </section>
+
+        <section class="catchup-panel" data-panel-for="pushed">
+            <h3 class="panel-title">Pushed into today</h3>
+            <div class="forgotten-item">
+                <span class="forgotten-date">from Mon</span>
+                <div class="forgotten-title">
+                    Spend 10 minutes with one direct report
+                    <span class="forgotten-chain">Growth · Right Person / Right Seat</span>
+                </div>
+            </div>
+            <div class="forgotten-item">
+                <span class="forgotten-date">from Tue</span>
+                <div class="forgotten-title">
+                    Send Q2 proposal to Acme
+                    <span class="forgotten-chain">chore · 5pm</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="catchup-panel" data-panel-for="upcoming">
+            <h3 class="panel-title">This week</h3>
+            <div class="ghost-row">
+                <span class="ghost-day">Thu · 23</span>
+                <span class="ghost-load">
+                    <span class="ghost-bar move"></span><span class="ghost-bar move"></span>
+                    <span class="ghost-bar move"></span><span class="ghost-bar move"></span>
+                    <span class="ghost-bar chore"></span><span class="ghost-bar chore"></span>
+                </span>
+                <span class="ghost-count">4 + 2</span>
+            </div>
+            <div class="ghost-row">
+                <span class="ghost-day">Fri · 24</span>
+                <span class="ghost-load">
+                    <span class="ghost-bar move"></span><span class="ghost-bar move"></span>
+                    <span class="ghost-bar move"></span>
+                    <span class="ghost-bar chore"></span>
+                </span>
+                <span class="ghost-count">3 + 1</span>
+            </div>
+            <div class="ghost-row">
+                <span class="ghost-day">Sat · 25</span>
+                <span style="color: var(--karvia-gray-300);">—</span>
+                <span class="ghost-count">rest</span>
+            </div>
+            <div class="ghost-row">
+                <span class="ghost-day">Sun · 26</span>
+                <span class="ghost-load">
+                    <span class="ghost-bar move"></span>
+                </span>
+                <span class="ghost-count">1 + 0</span>
+            </div>
+            <div class="ghost-row">
+                <span class="ghost-day">Mon · 27</span>
+                <span class="ghost-load">
+                    <span class="ghost-bar move"></span><span class="ghost-bar move"></span>
+                    <span class="ghost-bar move"></span><span class="ghost-bar move"></span>
+                    <span class="ghost-bar chore"></span><span class="ghost-bar chore"></span>
+                    <span class="ghost-bar chore"></span>
+                </span>
+                <span class="ghost-count">4 + 3</span>
+            </div>
+        </section>
+
+        <!-- ──────────────────────────────────
+             TODAY'S MOVES
+             ────────────────────────────────── -->
+        <div class="moves-header">
+            <div class="moves-header-left">
+                <span class="moves-label">Today's moves</span>
+                <div class="group-switch" role="group" aria-label="Group by">
+                    <button class="group-btn is-active" data-group="all">All</button>
+                    <button class="group-btn" data-group="ball">Objective</button>
+                    <button class="group-btn" data-group="habit">Habit</button>
+                </div>
+            </div>
+            <div class="kpi-strip">83 moves &middot; 85% this week &middot; <span class="kpi-accent">▲</span></div>
+        </div>
+
+        <div class="move-stack">
+
+            <!-- MOVE 1 — Active, lift -->
+            <article class="move-card" data-move-id="m1" data-ball="Meeting Structure" data-habit="Accountability">
+                <div class="move-row">
+                    <div class="check" role="checkbox" aria-checked="false" tabindex="0"></div>
+                    <div class="move-main">
+
+                        <div class="title-row">
+                            <h3 class="move-title">Send Monday agenda by 6pm Sunday</h3>
+                            <div class="actions">
+                                <button class="avatar" title="You" data-action="assign">MP</button>
+                                <button class="act-glyph" title="Postpone" data-action="postpone">↦</button>
+                            </div>
+                        </div>
+
+                        <div class="chain-grid">
+                            <div class="chain-col">
+                                <div class="chain-leg">
+                                    <svg class="chain-icon icon-building"><use href="#icon-building"/></svg>
+                                    <span class="chain-value">Accountability</span>
+                                </div>
+                                <div class="chain-meta">
+                                    <div class="meter-track"><div class="meter-fill" style="width: 50%"></div></div>
+                                    <span>6 / 12 days</span>
+                                </div>
+                            </div>
+
+                            <span class="chain-sep" aria-hidden="true">→</span>
+
+                            <div class="chain-col">
+                                <div class="chain-leg">
+                                    <svg class="chain-icon icon-moving"><use href="#icon-moving"/></svg>
+                                    <span class="chain-ball">Meeting Structure</span>
+                                </div>
+                                <div class="chain-meta">
+                                    <span class="lift">
+                                        <span class="lift-arrow">↑</span>
+                                        <span class="lift-now">50%</span>
+                                        <span class="lift-from">from 25% in Jan</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="popover" data-popover="postpone">
+                            <h4 class="popover-title">Push to</h4>
+                            <div class="popover-scope">KR window: Jan 15 — Jun 30</div>
+                            <input type="date" min="2026-04-23" max="2026-06-30" value="2026-04-23">
+                            <div class="popover-actions">
+                                <button class="btn-cancel" data-action="popover-close">Cancel</button>
+                                <button class="btn-confirm" data-action="popover-confirm">Push</button>
+                            </div>
+                        </div>
+
+                        <div class="popover" data-popover="assign">
+                            <h4 class="popover-title">Assign to</h4>
+                            <div class="assignee-group">
+                                <div class="assignee-group-label">RR Homes</div>
+                                <div class="assignee-list">
+                                    <button class="assignee-option is-current">
+                                        <span class="assignee-initials">MP</span>
+                                        <span class="assignee-name">Me (Priya)</span>
+                                        <span class="assignee-role">Consultant</span>
+                                    </button>
+                                    <button class="assignee-option">
+                                        <span class="assignee-initials" style="background:var(--s22-gold-bg);color:var(--karvia-primary);">SH</span>
+                                        <span class="assignee-name">Shaina</span>
+                                        <span class="assignee-role">Ops</span>
+                                    </button>
+                                    <button class="assignee-option">
+                                        <span class="assignee-initials" style="background:#FEF3C7;color:#92400E;">SK</span>
+                                        <span class="assignee-name">Shawn</span>
+                                        <span class="assignee-role">Exec</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="assignee-group">
+                                <div class="assignee-group-label">Legacy</div>
+                                <div class="assignee-list">
+                                    <button class="assignee-option">
+                                        <span class="assignee-initials" style="background:#DBEAFE;color:#1E40AF;">MD</span>
+                                        <span class="assignee-name">Madison</span>
+                                        <span class="assignee-role">Owner</span>
+                                    </button>
+                                    <button class="assignee-option assignee-invalid" title="Role can't build this behavior">
+                                        <span class="assignee-initials">KO</span>
+                                        <span class="assignee-name">Koy</span>
+                                        <span class="assignee-role">Employee</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </article>
+
+            <!-- MOVE 2 — Active, lift -->
+            <article class="move-card" data-move-id="m2" data-ball="Charter Alignment" data-habit="Maturity">
+                <div class="move-row">
+                    <div class="check" role="checkbox" aria-checked="false" tabindex="0"></div>
+                    <div class="move-main">
+                        <div class="title-row">
+                            <h3 class="move-title">Write one sentence of reflection before closing the laptop</h3>
+                            <div class="actions">
+                                <button class="avatar" title="You" data-action="assign">MP</button>
+                                <button class="act-glyph" title="Postpone" data-action="postpone">↦</button>
+                            </div>
+                        </div>
+                        <div class="chain-grid">
+                            <div class="chain-col">
+                                <div class="chain-leg">
+                                    <svg class="chain-icon icon-building"><use href="#icon-building"/></svg>
+                                    <span class="chain-value">Maturity</span>
+                                </div>
+                                <div class="chain-meta">
+                                    <div class="meter-track"><div class="meter-fill" style="width: 66%"></div></div>
+                                    <span>8 / 12 days</span>
+                                </div>
+                            </div>
+                            <span class="chain-sep" aria-hidden="true">→</span>
+                            <div class="chain-col">
+                                <div class="chain-leg">
+                                    <svg class="chain-icon icon-moving"><use href="#icon-moving"/></svg>
+                                    <span class="chain-ball">Charter Alignment</span>
+                                </div>
+                                <div class="chain-meta">
+                                    <span class="lift">
+                                        <span class="lift-arrow">↑</span>
+                                        <span class="lift-now">25%</span>
+                                        <span class="lift-from">from 10% in Feb</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- MOVE 3 — Paused / no baseline yet -->
+            <article class="move-card is-paused" data-move-id="m3" data-ball="Right Person / Right Seat" data-habit="Growth">
+                <div class="move-row">
+                    <div class="check" role="checkbox" aria-checked="false" tabindex="0"></div>
+                    <div class="move-main">
+                        <div class="title-row">
+                            <h3 class="move-title">Spend 10 minutes with one direct report — no agenda</h3>
+                            <div class="actions">
+                                <button class="avatar" title="You" data-action="assign">MP</button>
+                                <button class="act-glyph" title="Postpone" data-action="postpone">↦</button>
+                            </div>
+                        </div>
+                        <div class="chain-grid">
+                            <div class="chain-col">
+                                <div class="chain-leg">
+                                    <svg class="chain-icon icon-building"><use href="#icon-building"/></svg>
+                                    <span class="chain-value">Growth</span>
+                                </div>
+                                <div class="chain-meta">
+                                    <div class="meter-track"><div class="meter-fill" style="width: 17%"></div></div>
+                                    <span>Day 2 · paused</span>
+                                </div>
+                            </div>
+                            <span class="chain-sep" aria-hidden="true">→</span>
+                            <div class="chain-col">
+                                <div class="chain-leg">
+                                    <svg class="chain-icon icon-moving"><use href="#icon-moving"/></svg>
+                                    <span class="chain-ball">Right Person / Right Seat</span>
+                                </div>
+                                <div class="chain-meta">
+                                    <span class="lift">
+                                        <span class="lift-arrow track">◆</span>
+                                        <span class="lift-now">20%</span>
+                                        <span class="lift-from">tracking since Apr 20</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- MOVE 4 — Assigned out -->
+            <article class="move-card is-assigned-out" data-move-id="m4" data-ball="Meeting Structure" data-habit="Accountability">
+                <div class="move-row">
+                    <div class="check" role="checkbox" aria-checked="false" tabindex="0"></div>
+                    <div class="move-main">
+                        <div class="title-row">
+                            <h3 class="move-title">Run weekly ops rhythm check</h3>
+                            <div class="actions">
+                                <button class="avatar is-other" title="Assigned to Shaina"
+                                        style="background:var(--s22-gold-bg);color:var(--karvia-primary);" data-action="assign">SH</button>
+                                <button class="act-glyph" title="Postpone" data-action="postpone">↦</button>
+                            </div>
+                        </div>
+                        <div class="chain-grid">
+                            <div class="chain-col">
+                                <div class="chain-leg">
+                                    <svg class="chain-icon icon-building"><use href="#icon-building"/></svg>
+                                    <span class="chain-value">Accountability</span>
+                                </div>
+                                <div class="chain-meta">
+                                    <div class="meter-track"><div class="meter-fill" style="width: 33%"></div></div>
+                                    <span>4 / 12 days</span>
+                                </div>
+                            </div>
+                            <span class="chain-sep" aria-hidden="true">→</span>
+                            <div class="chain-col">
+                                <div class="chain-leg">
+                                    <svg class="chain-icon icon-moving"><use href="#icon-moving"/></svg>
+                                    <span class="chain-ball">Meeting Structure</span>
+                                </div>
+                                <div class="chain-meta">
+                                    <span class="lift">
+                                        <span class="lift-arrow">↑</span>
+                                        <span class="lift-now">40%</span>
+                                        <span class="lift-from">from 25% in Jan</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- MOVE 5 — Completed -->
+            <article class="move-card is-complete" data-move-id="m5" data-ball="Implement KPI" data-habit="Discipline">
+                <div class="move-row">
+                    <div class="check" role="checkbox" aria-checked="true" tabindex="0"></div>
+                    <div class="move-main">
+                        <div class="title-row">
+                            <h3 class="move-title">Review one KPI scorecard</h3>
+                            <span class="done-stamp">✓ done 9:14am</span>
+                        </div>
+                        <div class="chain-grid">
+                            <div class="chain-col">
+                                <div class="chain-leg">
+                                    <svg class="chain-icon icon-building"><use href="#icon-building"/></svg>
+                                    <span class="chain-value">Discipline</span>
+                                </div>
+                                <div class="chain-meta">
+                                    <div class="meter-track"><div class="meter-fill" style="width: 83%"></div></div>
+                                    <span>10 / 12 days</span>
+                                </div>
+                            </div>
+                            <span class="chain-sep" aria-hidden="true">→</span>
+                            <div class="chain-col">
+                                <div class="chain-leg">
+                                    <svg class="chain-icon icon-moving"><use href="#icon-moving"/></svg>
+                                    <span class="chain-ball">Implement KPI</span>
+                                </div>
+                                <div class="chain-meta">
+                                    <span class="lift">
+                                        <span class="lift-arrow">↑</span>
+                                        <span class="lift-now">35%</span>
+                                        <span class="lift-from">from 25% last week</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- ──────────────────────────────────
+             TODAY'S CHORES
+             ────────────────────────────────── -->
+        <div class="chores">
+            <div class="section-label">Today's chores</div>
+            <ul class="chore-list">
+                <li class="chore" data-chore-id="c1">
+                    <div class="check" role="checkbox" aria-checked="false" tabindex="0"></div>
+                    <span class="chore-title">Approve Madison's expense report</span>
+                    <span class="chore-time">2:00p</span>
+                    <div class="chore-actions">
+                        <button class="avatar" title="You" data-action="assign">MP</button>
+                        <button class="act-glyph" title="Postpone" data-action="postpone">↦</button>
+                    </div>
+                </li>
+                <li class="chore" data-chore-id="c2">
+                    <div class="check" role="checkbox" aria-checked="false" tabindex="0"></div>
+                    <span class="chore-title">Send Q2 proposal to Acme Corp</span>
+                    <span class="chore-time">5:00p</span>
+                    <div class="chore-actions">
+                        <button class="avatar" title="You" data-action="assign">MP</button>
+                        <button class="act-glyph" title="Postpone" data-action="postpone">↦</button>
+                    </div>
+                </li>
+                <li class="chore is-complete" data-chore-id="c3">
+                    <div class="check" role="checkbox" aria-checked="true" tabindex="0"></div>
+                    <span class="chore-title">Team standup notes</span>
+                    <span class="chore-time">✓</span>
+                    <div class="chore-actions"></div>
+                </li>
+            </ul>
+        </div>
+
+    </main>
+</div>
+
+<script>
+    document.querySelectorAll('.check').forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const card = el.closest('.move-card, .chore');
+            if (!card) return;
+            card.classList.remove('is-paused');
+            card.classList.toggle('is-complete');
+            el.setAttribute('aria-checked', card.classList.contains('is-complete') ? 'true' : 'false');
+        });
+    });
+
+    const panels = document.querySelectorAll('.catchup-panel');
+    document.querySelectorAll('.catchup-tile').forEach(tile => {
+        tile.addEventListener('click', () => {
+            const key = tile.dataset.panel;
+            panels.forEach(p => {
+                if (p.dataset.panelFor === key) p.classList.toggle('is-open');
+                else p.classList.remove('is-open');
+            });
+        });
+    });
+
+    function closeAllPopovers() {
+        document.querySelectorAll('.popover.is-open').forEach(p => p.classList.remove('is-open'));
+    }
+
+    document.querySelectorAll('[data-action="postpone"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const card = btn.closest('.move-card, .chore');
+            const pop = card.querySelector('[data-popover="postpone"]');
+            const wasOpen = pop && pop.classList.contains('is-open');
+            closeAllPopovers();
+            if (pop && !wasOpen) pop.classList.add('is-open');
+        });
+    });
+
+    document.querySelectorAll('[data-action="assign"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const card = btn.closest('.move-card, .chore');
+            const pop = card.querySelector('[data-popover="assign"]');
+            const wasOpen = pop && pop.classList.contains('is-open');
+            closeAllPopovers();
+            if (pop && !wasOpen) pop.classList.add('is-open');
+        });
+    });
+
+    document.querySelectorAll('[data-action="popover-close"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeAllPopovers();
+        });
+    });
+
+    document.querySelectorAll('[data-action="popover-confirm"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const card = btn.closest('.move-card, .chore');
+            const pop = btn.closest('.popover');
+            const input = pop.querySelector('input[type="date"]');
+            if (card && input) {
+                card.classList.add('is-paused');
+                const label = card.querySelector('.chain-col .chain-meta span:last-child');
+                if (label) label.textContent = 'pushed to ' + input.value.slice(5);
+            }
+            closeAllPopovers();
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.popover') && !e.target.closest('[data-action]')) {
+            closeAllPopovers();
+        }
+    });
+
+    // ── Group switch ──────────────────────────────────────────
+    const moveStack = document.querySelector('.move-stack');
+    const originalOrder = Array.from(moveStack.querySelectorAll('.move-card')).map(c => c.dataset.moveId);
+
+    document.querySelectorAll('.group-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.group-btn').forEach(b => b.classList.remove('is-active'));
+            btn.classList.add('is-active');
+            applyGrouping(btn.dataset.group);
+        });
+    });
+
+    function applyGrouping(mode) {
+        moveStack.querySelectorAll('.group-header').forEach(h => h.remove());
+        const cards = Array.from(moveStack.querySelectorAll('.move-card'));
+
+        if (mode === 'all') {
+            originalOrder.forEach(id => {
+                const card = moveStack.querySelector(`[data-move-id="${id}"]`);
+                if (card) moveStack.appendChild(card);
+            });
+            return;
+        }
+
+        const key = mode === 'ball' ? 'ball' : 'habit';
+        const groups = {};
+        const groupOrder = [];
+
+        cards.forEach(card => {
+            const val = card.dataset[key] || 'Other';
+            if (!groups[val]) { groups[val] = []; groupOrder.push(val); }
+            groups[val].push(card);
+        });
+
+        groupOrder.forEach(groupName => {
+            const header = document.createElement('div');
+            header.className = 'group-header';
+            header.innerHTML =
+                `<span class="group-header-label">${groupName}</span>` +
+                `<span class="group-header-line"></span>` +
+                `<span class="group-header-chevron">▾</span>`;
+            moveStack.appendChild(header);
+
+            const groupCards = groups[groupName];
+            groupCards.forEach(card => moveStack.appendChild(card));
+
+            header.addEventListener('click', () => {
+                const collapsed = header.classList.toggle('is-collapsed');
+                groupCards.forEach(card => { card.style.display = collapsed ? 'none' : ''; });
+            });
+        });
+    }
+
+    document.querySelectorAll('.assignee-option').forEach(opt => {
+        opt.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (opt.classList.contains('assignee-invalid')) return;
+            const card = opt.closest('.move-card, .chore');
+            const avatar = card.querySelector('.avatar');
+            const initialsEl = opt.querySelector('.assignee-initials');
+            const isMe = opt.classList.contains('is-current');
+            if (avatar && initialsEl) {
+                avatar.textContent = initialsEl.textContent;
+                avatar.classList.toggle('is-other', !isMe);
+                card.classList.toggle('is-assigned-out', !isMe);
+            }
+            opt.closest('.popover').querySelectorAll('.assignee-option').forEach(o => o.classList.remove('is-current'));
+            opt.classList.add('is-current');
+            closeAllPopovers();
+        });
+    });
+</script>
+
+<!-- Production navigation loader — DO NOT REMOVE -->
+<script src="/js/navigation.js"></script>
+
+</body>
+</html>

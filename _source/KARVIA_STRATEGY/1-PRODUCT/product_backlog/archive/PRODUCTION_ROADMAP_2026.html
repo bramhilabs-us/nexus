@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KARVIA Pro - Production Infrastructure Roadmap 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #f8fafc; min-height: 100vh; }
+
+        .card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; }
+        .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+
+        .quarter-card { transition: all 0.3s ease; cursor: pointer; }
+        .quarter-card:hover { transform: translateY(-2px); }
+
+        .expandable { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .expandable.expanded { max-height: 2000px; transition: max-height 0.6s ease-in; }
+
+        .sprint-row { border-left: 3px solid transparent; transition: all 0.2s; }
+        .sprint-row:hover { background: #f8fafc; border-left-color: #8b5cf6; }
+
+        .tool-badge { font-size: 9px; padding: 2px 6px; border-radius: 4px; }
+        .tool-observability { background: #dbeafe; color: #1d4ed8; }
+        .tool-security { background: #fee2e2; color: #dc2626; }
+        .tool-resilience { background: #d1fae5; color: #059669; }
+        .tool-compliance { background: #fef3c7; color: #d97706; }
+
+        .cost-software { background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%); }
+        .cost-infra { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); }
+        .cost-hr { background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); }
+        .cost-misc { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); }
+
+        .chevron { transition: transform 0.3s ease; }
+        .chevron.rotated { transform: rotate(180deg); }
+
+        /* Flip Card Styles */
+        .flip-card {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .flip-card-front {
+            z-index: 2;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+            z-index: 1;
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.5); border-radius: 3px; }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-[1600px] mx-auto">
+
+        <!-- Header -->
+        <header class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center font-bold text-2xl text-white shadow-lg">K</div>
+                <div>
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Production Infrastructure Roadmap</h1>
+                    <p class="text-sm text-gray-500">2026 DevOps, Security & Compliance Plan</p>
+                </div>
+            </div>
+
+            <!-- Summary Stats -->
+            <div class="flex items-center gap-6">
+                <div class="text-center px-4 py-2 bg-white rounded-lg border border-gray-200">
+                    <div class="text-xl font-bold text-purple-600">$205,675</div>
+                    <div class="text-[10px] text-gray-500">Annual Investment</div>
+                </div>
+                <div class="text-center px-4 py-2 bg-white rounded-lg border border-gray-200">
+                    <div class="text-xl font-bold text-emerald-600">1,010</div>
+                    <div class="text-[10px] text-gray-500">Total Hours</div>
+                </div>
+                <div class="text-center px-4 py-2 bg-white rounded-lg border border-gray-200">
+                    <div class="text-xl font-bold text-blue-600">10</div>
+                    <div class="text-[10px] text-gray-500">Sprints (15-24)</div>
+                </div>
+                <div class="text-center px-4 py-2 bg-white rounded-lg border border-gray-200">
+                    <div class="text-xl font-bold text-amber-600">12</div>
+                    <div class="text-[10px] text-gray-500">Tools Integrated</div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="flex items-center gap-3 text-sm">
+                <a href="PRODUCT_OVERVIEW.html" class="text-gray-500 hover:text-purple-600 transition">Overview</a>
+                <span class="text-gray-300">|</span>
+                <a href="PRODUCT_BACKLOG_VIEW.html" class="text-gray-500 hover:text-purple-600 transition">Backlogs</a>
+                <span class="text-gray-300">|</span>
+                <a href="PRODUCT_ROADMAP_2026.html" class="text-gray-500 hover:text-purple-600 transition">Features</a>
+                <span class="text-gray-300">|</span>
+                <span class="font-semibold text-purple-600">Infrastructure</span>
+            </div>
+        </header>
+
+        <!-- Timeline Overview -->
+        <div class="card p-4 mb-6">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-sm font-semibold text-gray-700">2026 Timeline - Post Sprint 14</h2>
+                <div class="flex items-center gap-4 text-[10px]">
+                    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-purple-500"></span> Observability</span>
+                    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-red-500"></span> Security</span>
+                    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-emerald-500"></span> Resilience</span>
+                    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-amber-500"></span> Compliance</span>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 gap-1 text-[10px]">
+                <div class="text-center py-1 bg-gray-100 rounded text-gray-400">Jan</div>
+                <div class="text-center py-1 bg-gray-100 rounded text-gray-400">Feb</div>
+                <div class="text-center py-1 bg-purple-100 rounded text-purple-700 font-medium">Mar (S15)</div>
+                <div class="text-center py-1 bg-purple-100 rounded text-purple-700 font-medium">Apr (S16)</div>
+                <div class="text-center py-1 bg-blue-100 rounded text-blue-700 font-medium">May (S17)</div>
+                <div class="text-center py-1 bg-blue-100 rounded text-blue-700 font-medium">Jun (S18)</div>
+                <div class="text-center py-1 bg-emerald-100 rounded text-emerald-700 font-medium">Jul (S19)</div>
+                <div class="text-center py-1 bg-emerald-100 rounded text-emerald-700 font-medium">Aug (S20)</div>
+                <div class="text-center py-1 bg-emerald-100 rounded text-emerald-700 font-medium">Sep (S21)</div>
+                <div class="text-center py-1 bg-amber-100 rounded text-amber-700 font-medium">Oct (S22)</div>
+                <div class="text-center py-1 bg-amber-100 rounded text-amber-700 font-medium">Nov (S23)</div>
+                <div class="text-center py-1 bg-amber-100 rounded text-amber-700 font-medium">Dec (S24)</div>
+            </div>
+            <div class="grid grid-cols-4 gap-2 mt-2 text-[9px]">
+                <div class="text-center py-1 bg-purple-50 rounded border border-purple-200 text-purple-700">PHASE 1: Launch Ready</div>
+                <div class="text-center py-1 bg-blue-50 rounded border border-blue-200 text-blue-700">PHASE 2: Scale Ready</div>
+                <div class="text-center py-1 bg-emerald-50 rounded border border-emerald-200 text-emerald-700">PHASE 3: Hardening</div>
+                <div class="text-center py-1 bg-amber-50 rounded border border-amber-200 text-amber-700">PHASE 4: Enterprise</div>
+            </div>
+        </div>
+
+        <!-- Quarterly Cards Grid -->
+        <div class="grid grid-cols-4 gap-4 mb-6">
+
+            <!-- Q1 Card -->
+            <div class="card quarter-card" onclick="toggleQuarter('q1')">
+                <div class="p-4 border-b border-gray-100">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg font-bold text-purple-600">Q1</span>
+                            <span class="text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">Launch Ready</span>
+                        </div>
+                        <svg class="chevron w-5 h-5 text-gray-400" id="chevron-q1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="text-[10px] text-gray-500 mb-3">Sprint 13-15 | Jan-Mar 2026</div>
+
+                    <!-- Cost Summary -->
+                    <div class="grid grid-cols-2 gap-2 mb-3">
+                        <div class="bg-gray-50 rounded p-2 text-center">
+                            <div class="text-lg font-bold text-gray-800">$13,450</div>
+                            <div class="text-[9px] text-gray-500">Total Cost</div>
+                        </div>
+                        <div class="bg-gray-50 rounded p-2 text-center">
+                            <div class="text-lg font-bold text-emerald-600">60 hrs</div>
+                            <div class="text-[9px] text-gray-500">HR Hours</div>
+                        </div>
+                    </div>
+
+                    <!-- Tools Preview -->
+                    <div class="flex flex-wrap gap-1">
+                        <span class="tool-badge tool-observability">Sentry</span>
+                        <span class="tool-badge tool-security">Cloudflare</span>
+                        <span class="tool-badge tool-resilience">Backups</span>
+                    </div>
+                </div>
+
+                <!-- Expandable Content -->
+                <div class="expandable" id="expand-q1">
+                    <div class="p-4 bg-gray-50">
+                        <!-- Sprint 15 -->
+                        <div class="sprint-row bg-white rounded-lg p-3 mb-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold text-gray-700">Sprint 15 (Mar)</span>
+                                <span class="text-[10px] text-purple-600 font-medium">Phase 1A</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-[10px]">
+                                <div>
+                                    <div class="font-medium text-gray-600 mb-1">Deliverables</div>
+                                    <ul class="text-gray-500 space-y-0.5">
+                                        <li>- Sentry error tracking setup</li>
+                                        <li>- Health check endpoints</li>
+                                        <li>- Basic alerting (Slack)</li>
+                                        <li>- Automated daily backups</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-gray-600 mb-1">Resources</div>
+                                    <ul class="text-gray-500 space-y-0.5">
+                                        <li>- DevOps: 40 hrs @ $150</li>
+                                        <li>- Developer: 20 hrs @ $150</li>
+                                        <li>- Total: $9,000</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cost Breakdown -->
+                        <div class="bg-white rounded-lg p-3">
+                            <div class="text-xs font-semibold text-gray-700 mb-2">Q1 Cost Breakdown</div>
+                            <div class="space-y-1 text-[10px]">
+                                <div class="flex justify-between"><span class="text-purple-600">Software</span><span>$675</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">Sentry $600, Uptime Robot $75</div>
+                                <div class="flex justify-between"><span class="text-blue-600">Infrastructure</span><span>$3,275</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">Render, MongoDB, OpenAI, Cloudflare, S3</div>
+                                <div class="flex justify-between"><span class="text-emerald-600">Human Resources</span><span>$9,000</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">DevOps 40hrs + Dev 20hrs @ $150/hr</div>
+                                <div class="flex justify-between"><span class="text-amber-600">Miscellaneous</span><span>$500</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">Documentation, runbooks</div>
+                                <div class="flex justify-between font-semibold border-t pt-1 mt-1"><span>Total</span><span>$13,450</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q2 Card -->
+            <div class="card quarter-card" onclick="toggleQuarter('q2')">
+                <div class="p-4 border-b border-gray-100">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg font-bold text-blue-600">Q2</span>
+                            <span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">Scale Ready</span>
+                        </div>
+                        <svg class="chevron w-5 h-5 text-gray-400" id="chevron-q2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="text-[10px] text-gray-500 mb-3">Sprint 16-18 | Apr-Jun 2026</div>
+
+                    <!-- Cost Summary -->
+                    <div class="grid grid-cols-2 gap-2 mb-3">
+                        <div class="bg-gray-50 rounded p-2 text-center">
+                            <div class="text-lg font-bold text-gray-800">$42,975</div>
+                            <div class="text-[9px] text-gray-500">Total Cost</div>
+                        </div>
+                        <div class="bg-gray-50 rounded p-2 text-center">
+                            <div class="text-lg font-bold text-emerald-600">195 hrs</div>
+                            <div class="text-[9px] text-gray-500">HR Hours</div>
+                        </div>
+                    </div>
+
+                    <!-- Tools Preview -->
+                    <div class="flex flex-wrap gap-1">
+                        <span class="tool-badge tool-observability">New Relic</span>
+                        <span class="tool-badge tool-security">Snyk</span>
+                        <span class="tool-badge tool-security">SonarQube</span>
+                    </div>
+                </div>
+
+                <!-- Expandable Content -->
+                <div class="expandable" id="expand-q2">
+                    <div class="p-4 bg-gray-50">
+                        <!-- Sprint 16 -->
+                        <div class="sprint-row bg-white rounded-lg p-3 mb-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold text-gray-700">Sprint 16 (Apr)</span>
+                                <span class="text-[10px] text-blue-600 font-medium">Phase 1B</span>
+                            </div>
+                            <div class="text-[10px] text-gray-500">
+                                Cloudflare WAF config, CDN optimization, SSL/TLS hardening, DDoS protection rules
+                            </div>
+                        </div>
+
+                        <!-- Sprint 17 -->
+                        <div class="sprint-row bg-white rounded-lg p-3 mb-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold text-gray-700">Sprint 17 (May)</span>
+                                <span class="text-[10px] text-blue-600 font-medium">Phase 2A</span>
+                            </div>
+                            <div class="text-[10px] text-gray-500">
+                                New Relic APM setup, performance baselines, custom metrics, dashboards
+                            </div>
+                        </div>
+
+                        <!-- Sprint 18 -->
+                        <div class="sprint-row bg-white rounded-lg p-3 mb-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold text-gray-700">Sprint 18 (Jun)</span>
+                                <span class="text-[10px] text-blue-600 font-medium">Phase 2B</span>
+                            </div>
+                            <div class="text-[10px] text-gray-500">
+                                Snyk CI/CD pipeline, SonarQube quality gates, code analysis, tech debt tracking
+                            </div>
+                        </div>
+
+                        <!-- Cost Breakdown -->
+                        <div class="bg-white rounded-lg p-3">
+                            <div class="text-xs font-semibold text-gray-700 mb-2">Q2 Cost Breakdown</div>
+                            <div class="space-y-1 text-[10px]">
+                                <div class="flex justify-between"><span class="text-purple-600">Software</span><span>$3,275</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">Sentry, New Relic, Snyk, SonarQube</div>
+                                <div class="flex justify-between"><span class="text-blue-600">Infrastructure</span><span>$5,400</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">Render (6 svc), MongoDB M20, Redis</div>
+                                <div class="flex justify-between"><span class="text-emerald-600">Human Resources</span><span>$29,250</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">DevOps 120hrs + Security 30hrs + Dev 45hrs</div>
+                                <div class="flex justify-between"><span class="text-amber-600">Miscellaneous</span><span>$800</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">Training, setup costs</div>
+                                <div class="flex justify-between font-semibold border-t pt-1 mt-1"><span>Total</span><span>$42,975</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q3 Card -->
+            <div class="card quarter-card" onclick="toggleQuarter('q3')">
+                <div class="p-4 border-b border-gray-100">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg font-bold text-emerald-600">Q3</span>
+                            <span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">Hardening</span>
+                        </div>
+                        <svg class="chevron w-5 h-5 text-gray-400" id="chevron-q3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="text-[10px] text-gray-500 mb-3">Sprint 19-21 | Jul-Sep 2026</div>
+
+                    <!-- Cost Summary -->
+                    <div class="grid grid-cols-2 gap-2 mb-3">
+                        <div class="bg-gray-50 rounded p-2 text-center">
+                            <div class="text-lg font-bold text-gray-800">$54,875</div>
+                            <div class="text-[9px] text-gray-500">Total Cost</div>
+                        </div>
+                        <div class="bg-gray-50 rounded p-2 text-center">
+                            <div class="text-lg font-bold text-emerald-600">260 hrs</div>
+                            <div class="text-[9px] text-gray-500">HR Hours</div>
+                        </div>
+                    </div>
+
+                    <!-- Tools Preview -->
+                    <div class="flex flex-wrap gap-1">
+                        <span class="tool-badge tool-observability">Shannon AI</span>
+                        <span class="tool-badge tool-resilience">Circuit Breakers</span>
+                        <span class="tool-badge tool-resilience">Failover</span>
+                    </div>
+                </div>
+
+                <!-- Expandable Content -->
+                <div class="expandable" id="expand-q3">
+                    <div class="p-4 bg-gray-50">
+                        <!-- Sprint 19 -->
+                        <div class="sprint-row bg-white rounded-lg p-3 mb-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold text-gray-700">Sprint 19 (Jul)</span>
+                                <span class="text-[10px] text-emerald-600 font-medium">Phase 2C</span>
+                            </div>
+                            <div class="text-[10px] text-gray-500">
+                                Shannon AI monitor setup, AI cost tracking, model drift detection, token analytics
+                            </div>
+                        </div>
+
+                        <!-- Sprint 20 -->
+                        <div class="sprint-row bg-white rounded-lg p-3 mb-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold text-gray-700">Sprint 20 (Aug)</span>
+                                <span class="text-[10px] text-emerald-600 font-medium">Phase 3A</span>
+                            </div>
+                            <div class="text-[10px] text-gray-500">
+                                Circuit breakers, graceful degradation, retry logic with exponential backoff
+                            </div>
+                        </div>
+
+                        <!-- Sprint 21 -->
+                        <div class="sprint-row bg-white rounded-lg p-3 mb-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold text-gray-700">Sprint 21 (Sep)</span>
+                                <span class="text-[10px] text-emerald-600 font-medium">Phase 3B</span>
+                            </div>
+                            <div class="text-[10px] text-gray-500">
+                                Failover strategy, DR runbooks, incident playbooks, PagerDuty integration
+                            </div>
+                        </div>
+
+                        <!-- Cost Breakdown -->
+                        <div class="bg-white rounded-lg p-3">
+                            <div class="text-xs font-semibold text-gray-700 mb-2">Q3 Cost Breakdown</div>
+                            <div class="space-y-1 text-[10px]">
+                                <div class="flex justify-between"><span class="text-purple-600">Software</span><span>$5,625</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">+ Shannon AI $900, PagerDuty $450</div>
+                                <div class="flex justify-between"><span class="text-blue-600">Infrastructure</span><span>$9,450</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">+ Secondary region $1,800, MongoDB M30</div>
+                                <div class="flex justify-between"><span class="text-emerald-600">Human Resources</span><span>$39,000</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">DevOps 150hrs + SRE 50hrs + Dev 60hrs</div>
+                                <div class="flex justify-between"><span class="text-amber-600">Miscellaneous</span><span>$800</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">DR drills, runbook updates</div>
+                                <div class="flex justify-between font-semibold border-t pt-1 mt-1"><span>Total</span><span>$54,875</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q4 Card -->
+            <div class="card quarter-card" onclick="toggleQuarter('q4')">
+                <div class="p-4 border-b border-gray-100">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg font-bold text-amber-600">Q4</span>
+                            <span class="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">Enterprise</span>
+                        </div>
+                        <svg class="chevron w-5 h-5 text-gray-400" id="chevron-q4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="text-[10px] text-gray-500 mb-3">Sprint 22-24 | Oct-Dec 2026</div>
+
+                    <!-- Cost Summary -->
+                    <div class="grid grid-cols-2 gap-2 mb-3">
+                        <div class="bg-gray-50 rounded p-2 text-center">
+                            <div class="text-lg font-bold text-gray-800">$94,375</div>
+                            <div class="text-[9px] text-gray-500">Total Cost</div>
+                        </div>
+                        <div class="bg-gray-50 rounded p-2 text-center">
+                            <div class="text-lg font-bold text-emerald-600">495 hrs</div>
+                            <div class="text-[9px] text-gray-500">HR Hours</div>
+                        </div>
+                    </div>
+
+                    <!-- Tools Preview -->
+                    <div class="flex flex-wrap gap-1">
+                        <span class="tool-badge tool-compliance">SOC 2</span>
+                        <span class="tool-badge tool-compliance">Vanta</span>
+                        <span class="tool-badge tool-resilience">Multi-Region</span>
+                    </div>
+                </div>
+
+                <!-- Expandable Content -->
+                <div class="expandable" id="expand-q4">
+                    <div class="p-4 bg-gray-50">
+                        <!-- Sprint 22 -->
+                        <div class="sprint-row bg-white rounded-lg p-3 mb-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold text-gray-700">Sprint 22 (Oct)</span>
+                                <span class="text-[10px] text-amber-600 font-medium">Phase 3C</span>
+                            </div>
+                            <div class="text-[10px] text-gray-500">
+                                Multi-region deployment, data replication, latency optimization, load balancing
+                            </div>
+                        </div>
+
+                        <!-- Sprint 23 -->
+                        <div class="sprint-row bg-white rounded-lg p-3 mb-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold text-gray-700">Sprint 23 (Nov)</span>
+                                <span class="text-[10px] text-amber-600 font-medium">Phase 4A</span>
+                            </div>
+                            <div class="text-[10px] text-gray-500">
+                                SOC 2 preparation, Vanta setup, policy documentation, access reviews, audit trails
+                            </div>
+                        </div>
+
+                        <!-- Sprint 24 -->
+                        <div class="sprint-row bg-white rounded-lg p-3 mb-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-semibold text-gray-700">Sprint 24 (Dec)</span>
+                                <span class="text-[10px] text-amber-600 font-medium">Phase 4B</span>
+                            </div>
+                            <div class="text-[10px] text-gray-500">
+                                SOC 2 Type II audit, certification, penetration testing, enterprise ready
+                            </div>
+                        </div>
+
+                        <!-- Cost Breakdown -->
+                        <div class="bg-white rounded-lg p-3">
+                            <div class="text-xs font-semibold text-gray-700 mb-2">Q4 Cost Breakdown</div>
+                            <div class="space-y-1 text-[10px]">
+                                <div class="flex justify-between"><span class="text-purple-600">Software</span><span>$9,225</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">+ Vanta $3,000, Sentry upgrade</div>
+                                <div class="flex justify-between"><span class="text-blue-600">Infrastructure</span><span>$13,650</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">Multi-region, Cloudflare Business</div>
+                                <div class="flex justify-between"><span class="text-emerald-600">Human Resources</span><span>$65,000</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">DevOps 240hrs + SOC2 Consultant + Auditor</div>
+                                <div class="flex justify-between"><span class="text-amber-600">Miscellaneous</span><span>$6,500</span></div>
+                                <div class="flex justify-between text-[9px] text-gray-400 pl-2">Pen testing $5k, policies, training</div>
+                                <div class="flex justify-between font-semibold border-t pt-1 mt-1"><span>Total</span><span>$94,375</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Combined Cost & HR Analysis Section -->
+        <div class="card p-5 mb-6">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-700">Investment & Resource Analysis</h3>
+                    <p class="text-[10px] text-gray-500 mt-0.5">Click any quarter card to see HR breakdown | Rate: $150/hour</p>
+                </div>
+                <div class="flex items-center gap-4 text-[10px]">
+                    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded" style="background: rgba(139,92,246,0.7)"></span> Software</span>
+                    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded" style="background: rgba(59,130,246,0.7)"></span> Infrastructure</span>
+                    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded" style="background: rgba(16,185,129,0.7)"></span> Human Resources</span>
+                    <span class="flex items-center gap-1"><span class="w-3 h-3 rounded" style="background: rgba(245,158,11,0.7)"></span> Miscellaneous</span>
+                </div>
+            </div>
+
+            <!-- Quarterly Flip Cards with Donuts -->
+            <div class="grid grid-cols-5 gap-4">
+
+                <!-- Q1 Flip Card -->
+                <div class="flip-card h-[280px]" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <!-- Front: Donut Chart -->
+                        <div class="flip-card-front bg-gradient-to-b from-purple-50 to-white p-4 border border-purple-200 rounded-xl">
+                            <div class="text-center mb-2">
+                                <span class="text-lg font-bold text-purple-600">Q1</span>
+                                <span class="text-[10px] text-gray-500 block">Jan-Mar</span>
+                            </div>
+                            <div class="h-[140px] flex items-center justify-center">
+                                <canvas id="donutQ1"></canvas>
+                            </div>
+                            <div class="text-center mt-2">
+                                <div class="text-xl font-bold text-gray-800">$13,450</div>
+                                <div class="text-[9px] text-gray-500">60 hours</div>
+                            </div>
+                            <div class="absolute bottom-2 right-2 text-[8px] text-purple-400">click for HR</div>
+                        </div>
+                        <!-- Back: HR Breakdown -->
+                        <div class="flip-card-back bg-gradient-to-b from-purple-100 to-purple-50 p-4 border border-purple-300 rounded-xl">
+                            <div class="text-xs font-semibold text-purple-700 mb-3">Q1 Team Allocation</div>
+                            <div class="space-y-2">
+                                <div class="bg-white/80 rounded p-2">
+                                    <div class="flex justify-between text-[10px]">
+                                        <span class="text-gray-600">DevOps Engineer</span>
+                                        <span class="font-semibold">40 hrs</span>
+                                    </div>
+                                    <div class="text-[9px] text-purple-600">$6,000</div>
+                                </div>
+                                <div class="bg-white/80 rounded p-2">
+                                    <div class="flex justify-between text-[10px]">
+                                        <span class="text-gray-600">Developer (Int.)</span>
+                                        <span class="font-semibold">20 hrs</span>
+                                    </div>
+                                    <div class="text-[9px] text-purple-600">$3,000</div>
+                                </div>
+                            </div>
+                            <div class="mt-3 pt-2 border-t border-purple-200">
+                                <div class="flex justify-between text-[10px] font-semibold">
+                                    <span>Total HR Cost</span>
+                                    <span class="text-purple-700">$9,000</span>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-2 right-2 text-[8px] text-purple-400">click to flip</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q2 Flip Card -->
+                <div class="flip-card h-[280px]" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <!-- Front: Donut Chart -->
+                        <div class="flip-card-front bg-gradient-to-b from-blue-50 to-white p-4 border border-blue-200 rounded-xl">
+                            <div class="text-center mb-2">
+                                <span class="text-lg font-bold text-blue-600">Q2</span>
+                                <span class="text-[10px] text-gray-500 block">Apr-Jun</span>
+                            </div>
+                            <div class="h-[140px] flex items-center justify-center">
+                                <canvas id="donutQ2"></canvas>
+                            </div>
+                            <div class="text-center mt-2">
+                                <div class="text-xl font-bold text-gray-800">$42,975</div>
+                                <div class="text-[9px] text-gray-500">195 hours</div>
+                            </div>
+                            <div class="absolute bottom-2 right-2 text-[8px] text-blue-400">click for HR</div>
+                        </div>
+                        <!-- Back: HR Breakdown -->
+                        <div class="flip-card-back bg-gradient-to-b from-blue-100 to-blue-50 p-4 border border-blue-300 rounded-xl">
+                            <div class="text-xs font-semibold text-blue-700 mb-3">Q2 Team Allocation</div>
+                            <div class="space-y-2">
+                                <div class="bg-white/80 rounded p-2">
+                                    <div class="flex justify-between text-[10px]">
+                                        <span class="text-gray-600">DevOps Engineer</span>
+                                        <span class="font-semibold">120 hrs</span>
+                                    </div>
+                                    <div class="text-[9px] text-blue-600">$18,000</div>
+                                </div>
+                                <div class="bg-white/80 rounded p-2">
+                                    <div class="flex justify-between text-[10px]">
+                                        <span class="text-gray-600">Developer (Int.)</span>
+                                        <span class="font-semibold">45 hrs</span>
+                                    </div>
+                                    <div class="text-[9px] text-blue-600">$6,750</div>
+                                </div>
+                                <div class="bg-white/80 rounded p-2">
+                                    <div class="flex justify-between text-[10px]">
+                                        <span class="text-gray-600">Security Reviewer</span>
+                                        <span class="font-semibold">30 hrs</span>
+                                    </div>
+                                    <div class="text-[9px] text-blue-600">$4,500</div>
+                                </div>
+                            </div>
+                            <div class="mt-2 pt-2 border-t border-blue-200">
+                                <div class="flex justify-between text-[10px] font-semibold">
+                                    <span>Total HR Cost</span>
+                                    <span class="text-blue-700">$29,250</span>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-2 right-2 text-[8px] text-blue-400">click to flip</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q3 Flip Card -->
+                <div class="flip-card h-[280px]" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <!-- Front: Donut Chart -->
+                        <div class="flip-card-front bg-gradient-to-b from-emerald-50 to-white p-4 border border-emerald-200 rounded-xl">
+                            <div class="text-center mb-2">
+                                <span class="text-lg font-bold text-emerald-600">Q3</span>
+                                <span class="text-[10px] text-gray-500 block">Jul-Sep</span>
+                            </div>
+                            <div class="h-[140px] flex items-center justify-center">
+                                <canvas id="donutQ3"></canvas>
+                            </div>
+                            <div class="text-center mt-2">
+                                <div class="text-xl font-bold text-gray-800">$54,875</div>
+                                <div class="text-[9px] text-gray-500">260 hours</div>
+                            </div>
+                            <div class="absolute bottom-2 right-2 text-[8px] text-emerald-400">click for HR</div>
+                        </div>
+                        <!-- Back: HR Breakdown -->
+                        <div class="flip-card-back bg-gradient-to-b from-emerald-100 to-emerald-50 p-4 border border-emerald-300 rounded-xl">
+                            <div class="text-xs font-semibold text-emerald-700 mb-3">Q3 Team Allocation</div>
+                            <div class="space-y-2">
+                                <div class="bg-white/80 rounded p-2">
+                                    <div class="flex justify-between text-[10px]">
+                                        <span class="text-gray-600">DevOps Engineer</span>
+                                        <span class="font-semibold">150 hrs</span>
+                                    </div>
+                                    <div class="text-[9px] text-emerald-600">$22,500</div>
+                                </div>
+                                <div class="bg-white/80 rounded p-2">
+                                    <div class="flex justify-between text-[10px]">
+                                        <span class="text-gray-600">Developer (Int.)</span>
+                                        <span class="font-semibold">60 hrs</span>
+                                    </div>
+                                    <div class="text-[9px] text-emerald-600">$9,000</div>
+                                </div>
+                                <div class="bg-white/80 rounded p-2">
+                                    <div class="flex justify-between text-[10px]">
+                                        <span class="text-gray-600">SRE Consultant</span>
+                                        <span class="font-semibold">50 hrs</span>
+                                    </div>
+                                    <div class="text-[9px] text-emerald-600">$7,500</div>
+                                </div>
+                            </div>
+                            <div class="mt-2 pt-2 border-t border-emerald-200">
+                                <div class="flex justify-between text-[10px] font-semibold">
+                                    <span>Total HR Cost</span>
+                                    <span class="text-emerald-700">$39,000</span>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-2 right-2 text-[8px] text-emerald-400">click to flip</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q4 Flip Card -->
+                <div class="flip-card h-[280px]" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <!-- Front: Donut Chart -->
+                        <div class="flip-card-front bg-gradient-to-b from-amber-50 to-white p-4 border border-amber-200 rounded-xl">
+                            <div class="text-center mb-2">
+                                <span class="text-lg font-bold text-amber-600">Q4</span>
+                                <span class="text-[10px] text-gray-500 block">Oct-Dec</span>
+                            </div>
+                            <div class="h-[140px] flex items-center justify-center">
+                                <canvas id="donutQ4"></canvas>
+                            </div>
+                            <div class="text-center mt-2">
+                                <div class="text-xl font-bold text-gray-800">$94,375</div>
+                                <div class="text-[9px] text-gray-500">495 hours</div>
+                            </div>
+                            <div class="absolute bottom-2 right-2 text-[8px] text-amber-400">click for HR</div>
+                        </div>
+                        <!-- Back: HR Breakdown -->
+                        <div class="flip-card-back bg-gradient-to-b from-amber-100 to-amber-50 p-4 border border-amber-300 rounded-xl">
+                            <div class="text-xs font-semibold text-amber-700 mb-2">Q4 Team Allocation</div>
+                            <div class="space-y-1.5">
+                                <div class="bg-white/80 rounded p-1.5">
+                                    <div class="flex justify-between text-[9px]">
+                                        <span class="text-gray-600">DevOps Engineer</span>
+                                        <span class="font-semibold">240 hrs - $36k</span>
+                                    </div>
+                                </div>
+                                <div class="bg-white/80 rounded p-1.5">
+                                    <div class="flex justify-between text-[9px]">
+                                        <span class="text-gray-600">Developer (Int.)</span>
+                                        <span class="font-semibold">75 hrs - $11.25k</span>
+                                    </div>
+                                </div>
+                                <div class="bg-white/80 rounded p-1.5">
+                                    <div class="flex justify-between text-[9px]">
+                                        <span class="text-gray-600">SOC 2 Consultant</span>
+                                        <span class="font-semibold">80 hrs - $12k</span>
+                                    </div>
+                                </div>
+                                <div class="bg-white/80 rounded p-1.5">
+                                    <div class="flex justify-between text-[9px]">
+                                        <span class="text-gray-600">SOC 2 Auditor</span>
+                                        <span class="font-semibold">Fixed - $10k</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2 pt-2 border-t border-amber-200">
+                                <div class="flex justify-between text-[10px] font-semibold">
+                                    <span>Total HR Cost</span>
+                                    <span class="text-amber-700">$69,250</span>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-2 right-2 text-[8px] text-amber-400">click to flip</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Annual Summary Card -->
+                <div class="bg-gradient-to-b from-gray-100 to-white rounded-xl border border-gray-300 p-4 h-[280px]">
+                    <div class="text-center mb-3">
+                        <span class="text-lg font-bold text-gray-700">Annual</span>
+                        <span class="text-[10px] text-gray-500 block">Total 2026</span>
+                    </div>
+                    <div class="h-[100px] flex items-center justify-center">
+                        <canvas id="donutAnnual"></canvas>
+                    </div>
+                    <div class="text-center mt-2">
+                        <div class="text-2xl font-bold text-gray-800">$205,675</div>
+                        <div class="text-[9px] text-gray-500">1,010 total hours</div>
+                    </div>
+                    <div class="mt-3 grid grid-cols-2 gap-1 text-[8px]">
+                        <div class="flex items-center gap-1"><span class="w-2 h-2 rounded" style="background: rgba(139,92,246,0.7)"></span>SW $18.8k</div>
+                        <div class="flex items-center gap-1"><span class="w-2 h-2 rounded" style="background: rgba(59,130,246,0.7)"></span>Infra $31.8k</div>
+                        <div class="flex items-center gap-1"><span class="w-2 h-2 rounded" style="background: rgba(16,185,129,0.7)"></span>HR $146.5k</div>
+                        <div class="flex items-center gap-1"><span class="w-2 h-2 rounded" style="background: rgba(245,158,11,0.7)"></span>Misc $8.6k</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- HR Summary Bar -->
+            <div class="mt-4 bg-gray-50 rounded-lg p-3">
+                <div class="flex items-center justify-between">
+                    <div class="text-[10px] font-semibold text-gray-600">HR Investment Timeline</div>
+                    <div class="text-[10px] text-gray-500">Total: 1,010 hours | $146,500</div>
+                </div>
+                <div class="mt-2 flex gap-1 h-6">
+                    <div class="bg-purple-400 rounded-l flex items-center justify-center text-[8px] text-white font-medium" style="width: 6%">60h</div>
+                    <div class="bg-blue-400 flex items-center justify-center text-[8px] text-white font-medium" style="width: 19%">195h</div>
+                    <div class="bg-emerald-400 flex items-center justify-center text-[8px] text-white font-medium" style="width: 26%">260h</div>
+                    <div class="bg-amber-400 rounded-r flex items-center justify-center text-[8px] text-white font-medium" style="width: 49%">495h</div>
+                </div>
+                <div class="mt-1 flex text-[8px] text-gray-500">
+                    <div style="width: 6%" class="text-center">Q1</div>
+                    <div style="width: 19%" class="text-center">Q2</div>
+                    <div style="width: 26%" class="text-center">Q3</div>
+                    <div style="width: 49%" class="text-center">Q4 (SOC 2)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tool Stack Section -->
+        <div class="card p-4 mb-6">
+            <h3 class="text-sm font-semibold text-gray-700 mb-4">Production Tool Stack</h3>
+
+            <div class="grid grid-cols-4 gap-4">
+                <!-- Observability -->
+                <div class="bg-purple-50 rounded-lg p-3 border border-purple-100">
+                    <div class="text-xs font-semibold text-purple-700 mb-2">Observability</div>
+                    <div class="space-y-2">
+                        <div class="bg-white rounded p-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-medium">Sentry</span>
+                                <span class="text-[9px] text-gray-500">$200/mo</span>
+                            </div>
+                            <div class="text-[9px] text-gray-400">Error tracking, crash reports</div>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-medium">New Relic</span>
+                                <span class="text-[9px] text-gray-500">$500/mo</span>
+                            </div>
+                            <div class="text-[9px] text-gray-400">APM, distributed tracing</div>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-medium">Shannon AI</span>
+                                <span class="text-[9px] text-gray-500">$300/mo</span>
+                            </div>
+                            <div class="text-[9px] text-gray-400">AI model monitoring, drift</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security -->
+                <div class="bg-red-50 rounded-lg p-3 border border-red-100">
+                    <div class="text-xs font-semibold text-red-700 mb-2">Security</div>
+                    <div class="space-y-2">
+                        <div class="bg-white rounded p-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-medium">Cloudflare</span>
+                                <span class="text-[9px] text-gray-500">$200/mo</span>
+                            </div>
+                            <div class="text-[9px] text-gray-400">WAF, CDN, DDoS protection</div>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-medium">Snyk</span>
+                                <span class="text-[9px] text-gray-500">$400/mo</span>
+                            </div>
+                            <div class="text-[9px] text-gray-400">Dependency scanning, SBOM</div>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-medium">SonarQube</span>
+                                <span class="text-[9px] text-gray-500">$300/mo</span>
+                            </div>
+                            <div class="text-[9px] text-gray-400">Code quality, static analysis</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resilience -->
+                <div class="bg-emerald-50 rounded-lg p-3 border border-emerald-100">
+                    <div class="text-xs font-semibold text-emerald-700 mb-2">Resilience</div>
+                    <div class="space-y-2">
+                        <div class="bg-white rounded p-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-medium">PagerDuty</span>
+                                <span class="text-[9px] text-gray-500">$150/mo</span>
+                            </div>
+                            <div class="text-[9px] text-gray-400">Incident management, on-call</div>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-medium">Uptime Robot</span>
+                                <span class="text-[9px] text-gray-500">$25/mo</span>
+                            </div>
+                            <div class="text-[9px] text-gray-400">Health monitoring, alerts</div>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-medium">AWS S3/Glacier</span>
+                                <span class="text-[9px] text-gray-500">~$50/mo</span>
+                            </div>
+                            <div class="text-[9px] text-gray-400">Backup storage, DR</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compliance -->
+                <div class="bg-amber-50 rounded-lg p-3 border border-amber-100">
+                    <div class="text-xs font-semibold text-amber-700 mb-2">Compliance</div>
+                    <div class="space-y-2">
+                        <div class="bg-white rounded p-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-medium">Vanta</span>
+                                <span class="text-[9px] text-gray-500">$1,000/mo</span>
+                            </div>
+                            <div class="text-[9px] text-gray-400">SOC 2 automation platform</div>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-medium">SOC 2 Audit</span>
+                                <span class="text-[9px] text-gray-500">$10k (1x)</span>
+                            </div>
+                            <div class="text-[9px] text-gray-400">Type II certification</div>
+                        </div>
+                        <div class="bg-white rounded p-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-medium">Pen Testing</span>
+                                <span class="text-[9px] text-gray-500">$5k (1x)</span>
+                            </div>
+                            <div class="text-[9px] text-gray-400">External security audit</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-200">
+            <div class="flex items-center gap-6">
+                <span>Annual Investment: <span class="font-semibold text-gray-700">$205,675</span></span>
+                <span>|</span>
+                <span>Total Hours: <span class="font-semibold text-gray-700">1,010 hrs</span></span>
+                <span>|</span>
+                <span>Sprints: <span class="font-semibold text-gray-700">15-24 (10 sprints)</span></span>
+                <span>|</span>
+                <span>Tools: <span class="font-semibold text-gray-700">12 integrated</span></span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-gray-400">Last Updated: February 2026</span>
+                <a href="PRODUCT_ROADMAP_2026.html" class="text-purple-600 hover:underline">View Feature Roadmap</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Toggle Quarter Expansion
+        function toggleQuarter(quarter) {
+            const expandable = document.getElementById('expand-' + quarter);
+            const chevron = document.getElementById('chevron-' + quarter);
+
+            expandable.classList.toggle('expanded');
+            chevron.classList.toggle('rotated');
+        }
+
+        // Donut chart configuration
+        const donutOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '60%',
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.label + ': $' + context.raw.toLocaleString();
+                        }
+                    }
+                }
+            }
+        };
+
+        const chartColors = [
+            'rgba(139, 92, 246, 0.8)',   // Purple - Software
+            'rgba(59, 130, 246, 0.8)',   // Blue - Infrastructure
+            'rgba(16, 185, 129, 0.8)',   // Green - HR
+            'rgba(245, 158, 11, 0.8)'    // Amber - Misc
+        ];
+
+        // Q1 Donut
+        new Chart(document.getElementById('donutQ1').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Software', 'Infrastructure', 'HR', 'Misc'],
+                datasets: [{
+                    data: [675, 3275, 9000, 500],
+                    backgroundColor: chartColors,
+                    borderWidth: 0
+                }]
+            },
+            options: donutOptions
+        });
+
+        // Q2 Donut
+        new Chart(document.getElementById('donutQ2').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Software', 'Infrastructure', 'HR', 'Misc'],
+                datasets: [{
+                    data: [3275, 5400, 29250, 800],
+                    backgroundColor: chartColors,
+                    borderWidth: 0
+                }]
+            },
+            options: donutOptions
+        });
+
+        // Q3 Donut
+        new Chart(document.getElementById('donutQ3').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Software', 'Infrastructure', 'HR', 'Misc'],
+                datasets: [{
+                    data: [5625, 9450, 39000, 800],
+                    backgroundColor: chartColors,
+                    borderWidth: 0
+                }]
+            },
+            options: donutOptions
+        });
+
+        // Q4 Donut
+        new Chart(document.getElementById('donutQ4').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Software', 'Infrastructure', 'HR', 'Misc'],
+                datasets: [{
+                    data: [9225, 13650, 65000, 6500],
+                    backgroundColor: chartColors,
+                    borderWidth: 0
+                }]
+            },
+            options: donutOptions
+        });
+
+        // Annual Donut
+        new Chart(document.getElementById('donutAnnual').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Software', 'Infrastructure', 'HR', 'Misc'],
+                datasets: [{
+                    data: [18800, 31775, 146500, 8600],
+                    backgroundColor: chartColors,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                ...donutOptions,
+                cutout: '55%'
+            }
+        });
+
+        // Auto-expand Q1 on load
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleQuarter('q1');
+        });
+    </script>
+</body>
+</html>

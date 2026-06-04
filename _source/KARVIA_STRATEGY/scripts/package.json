@@ -1,0 +1,12 @@
+{
+  "name": "karvia-pdf-converter",
+  "version": "1.0.0",
+  "description": "Convert KARVIA Pro HTML decks to PDF",
+  "main": "html-to-pdf.js",
+  "scripts": {
+    "convert": "node html-to-pdf.js"
+  },
+  "dependencies": {
+    "puppeteer": "^21.5.2"
+  }
+}

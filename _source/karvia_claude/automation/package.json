@@ -1,0 +1,34 @@
+{
+  "name": "claude-automation",
+  "version": "1.0.0",
+  "description": "Automation scripts for Claude AI session management",
+  "main": "start-session.js",
+  "scripts": {
+    "start": "node start-session.js",
+    "end": "node end-session.js",
+    "session:start": "node start-session.js",
+    "session:end": "node end-session.js",
+    "metrics": "cat ../KARVIA_STRATEGY/3-DELIVERY/handoffs/SESSION_MANAGEMENT/ACTIVE_SESSION.md | grep -A 5 'Performance Scores'",
+    "status": "cat ../KARVIA_STRATEGY/3-DELIVERY/handoffs/SESSION_MANAGEMENT/ACTIVE_SESSION.md | head -30",
+    "help": "echo 'Available commands:\n  npm run start - Start new Claude session\n  npm run end - End current session\n  npm run metrics - View current performance metrics\n  npm run status - View current session status'"
+  },
+  "keywords": [
+    "claude",
+    "ai",
+    "automation",
+    "session-management",
+    "handoff",
+    "metrics"
+  ],
+  "author": "Karvia Development Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "karvia_business"
+  }
+}

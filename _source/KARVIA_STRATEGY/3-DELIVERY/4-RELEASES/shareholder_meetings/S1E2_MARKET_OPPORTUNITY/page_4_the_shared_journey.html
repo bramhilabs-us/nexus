@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E2 - Page 4: The Owner's Day | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-columns: 200px 1fr 280px;
+            grid-template-rows: auto 1fr auto;
+            gap: 30px;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: #888; text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .page-title { margin-top: 4px; color: #1a1a2e; font-weight: 500; }
+
+        /* Left Column - The Owner */
+        .left-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .owner-profile {
+            text-align: center;
+        }
+
+        .owner-avatar {
+            width: 100px;
+            height: 100px;
+            background: #1a1a2e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .owner-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+
+        .owner-title {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 16px;
+        }
+
+        .owner-stats {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .owner-thought {
+            margin-top: 20px;
+            font-size: 13px;
+            font-style: italic;
+            color: #444;
+            padding: 16px;
+            background: #FAFAFA;
+            border-radius: 12px;
+            border-left: 3px solid #C9A227;
+            text-align: left;
+        }
+
+        /* Center - Daily Timeline */
+        .center-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .timeline-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 300;
+            color: #444;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .time-block {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 16px;
+            background: #FAFAFA;
+            border-radius: 12px;
+            border: 1px solid #F0F0F0;
+        }
+
+        .time-block.fragmented {
+            border-color: #FFE0B2;
+            background: #FFF8E1;
+        }
+
+        .time-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .time-icon.linkedin { background: #E3F2FD; }
+        .time-icon.planning { background: #F3E5F5; }
+        .time-icon.fires { background: #FFEBEE; }
+        .time-icon.meetings { background: #E8F5E9; }
+        .time-icon.admin { background: #FFF3E0; }
+
+        .time-content {
+            flex: 1;
+        }
+
+        .time-activity {
+            font-size: 13px;
+            font-weight: 500;
+            color: #1a1a2e;
+        }
+
+        .time-detail {
+            font-size: 11px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        .time-duration {
+            font-size: 11px;
+            font-weight: 600;
+            color: #666;
+            background: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            border: 1px solid #E0E0E0;
+        }
+
+        .timeline-total {
+            margin-top: 16px;
+            text-align: center;
+            padding: 12px;
+            background: #1a1a2e;
+            border-radius: 12px;
+        }
+
+        .total-label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 4px;
+        }
+
+        .total-value {
+            font-size: 14px;
+            color: #C9A227;
+            font-weight: 600;
+        }
+
+        /* Right Column - The Gap */
+        .right-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .gap-section {
+            margin-bottom: 20px;
+        }
+
+        .gap-header {
+            font-size: 10px;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .gap-question {
+            font-size: 16px;
+            font-weight: 300;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .gap-question em {
+            font-style: normal;
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        .opportunity-card {
+            background: #FAFAFA;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 10px;
+            border: 1px solid #F0F0F0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .opportunity-icon {
+            width: 32px;
+            height: 32px;
+            background: #E8F5E9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .opportunity-text {
+            font-size: 13px;
+            color: #444;
+        }
+
+        .opportunity-text strong {
+            color: #1a1a2e;
+        }
+
+        .ysela-fit {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .ysela-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .ysela-text {
+            font-size: 13px;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.7;
+        }
+
+        .ysela-text em {
+            font-style: normal;
+            color: #C9A227;
+        }
+
+        /* Footer */
+        .footer {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .next { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 20px; grid-template-columns: 1fr; gap: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .owner-avatar { width: 80px; height: 80px; font-size: 32px; }
+            .time-block { padding: 10px 12px; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E2: Market Opportunity</div>
+            </div>
+            <div class="page-indicator">
+                <div>Page <span class="current">4</span> of 9</div>
+                <div class="page-title">The Owner's Day</div>
+            </div>
+        </header>
+
+        <!-- Left Column - The Owner -->
+        <div class="left-col">
+            <div class="owner-profile">
+                <div class="owner-avatar">👤</div>
+                <div class="owner-name">The Owner</div>
+                <div class="owner-title">Service Business / 15-40 Employees</div>
+                <div class="owner-stats">
+                    Revenue: $2M-$8M<br>
+                    No HR function<br>
+                    No coaching staff<br>
+                    Growth: Plateauing
+                </div>
+                <div class="owner-thought">
+                    "I know what needs to happen.<br>
+                    I just don't have time to make it happen."
+                </div>
+            </div>
+        </div>
+
+        <!-- Center - Daily Timeline -->
+        <div class="center-col">
+            <div class="timeline-header">
+                <div class="timeline-label">A Typical Day</div>
+                <div class="timeline-title">Where the hours go</div>
+            </div>
+
+            <div class="timeline">
+                <div class="time-block">
+                    <div class="time-icon linkedin">in</div>
+                    <div class="time-content">
+                        <div class="time-activity">LinkedIn Promotion</div>
+                        <div class="time-detail">Writing posts, engaging, building brand</div>
+                    </div>
+                    <div class="time-duration">45 min</div>
+                </div>
+
+                <div class="time-block">
+                    <div class="time-icon planning">M</div>
+                    <div class="time-content">
+                        <div class="time-activity">Monday.com / Planning</div>
+                        <div class="time-detail">Assigning tasks, checking progress, updating boards</div>
+                    </div>
+                    <div class="time-duration">1.5 hrs</div>
+                </div>
+
+                <div class="time-block fragmented">
+                    <div class="time-icon fires">!</div>
+                    <div class="time-content">
+                        <div class="time-activity">Firefighting</div>
+                        <div class="time-detail">Client issues, team questions, unexpected problems</div>
+                    </div>
+                    <div class="time-duration">2+ hrs</div>
+                </div>
+
+                <div class="time-block">
+                    <div class="time-icon meetings">&#128172;</div>
+                    <div class="time-content">
+                        <div class="time-activity">Meetings</div>
+                        <div class="time-detail">Team check-ins, client calls, vendor sync</div>
+                    </div>
+                    <div class="time-duration">2 hrs</div>
+                </div>
+
+                <div class="time-block">
+                    <div class="time-icon admin">&#128221;</div>
+                    <div class="time-content">
+                        <div class="time-activity">Admin & Brainstorming</div>
+                        <div class="time-detail">Invoices, ideas, hiring notes, follow-ups</div>
+                    </div>
+                    <div class="time-duration">1.5 hrs</div>
+                </div>
+            </div>
+
+            <div class="timeline-total">
+                <div class="total-label">Time left for strategic growth</div>
+                <div class="total-value">Maybe 30 minutes. If lucky.</div>
+            </div>
+        </div>
+
+        <!-- Right Column - The Gap -->
+        <div class="right-col">
+            <div class="gap-section">
+                <div class="gap-header">The Real Question</div>
+                <div class="gap-question">
+                    What if some of that time<br>
+                    could go toward <em>building culture</em>?
+                </div>
+            </div>
+
+            <div class="opportunity-card">
+                <div class="opportunity-icon">&#129309;</div>
+                <div class="opportunity-text">
+                    <strong>Customer relationships</strong><br>
+                    Not just service—partnership
+                </div>
+            </div>
+
+            <div class="opportunity-card">
+                <div class="opportunity-icon">&#127793;</div>
+                <div class="opportunity-text">
+                    <strong>Team development</strong><br>
+                    Coaching without being the coach
+                </div>
+            </div>
+
+            <div class="opportunity-card">
+                <div class="opportunity-icon">&#128161;</div>
+                <div class="opportunity-text">
+                    <strong>Dreaming bigger</strong><br>
+                    Vision, not just operations
+                </div>
+            </div>
+
+            <div class="ysela-fit">
+                <div class="ysela-label">Where YSELA Fits</div>
+                <div class="ysela-text">
+                    <em>Self-reflection</em> replaces check-ins.<br>
+                    <em>Assessments</em> start conversations.<br>
+                    <em>The team grows</em> without the owner pushing.
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_3_the_path.html">&larr; The Real ICP</a>
+                <a href="page_5_the_connection.html" class="next">Next: The Position &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

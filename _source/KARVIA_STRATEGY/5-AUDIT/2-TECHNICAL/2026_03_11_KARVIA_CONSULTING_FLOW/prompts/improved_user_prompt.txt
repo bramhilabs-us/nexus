@@ -1,0 +1,104 @@
+Generate 4 quarterly OKRs for KARVIA Consulting using the Vision-Gap-Bridge framework.
+
+---
+
+## STEP 1: THE VISION
+
+COMPANY: KARVIA Consulting
+INDUSTRY: consulting (IT/AI consulting focus)
+SIZE: 58 employees
+
+WHO THEY ARE:
+KARVIA Consulting helps mid-market service companies design and execute AI-enabled operating models. We combine strategy, data modernization, and implementation sprints to deliver measurable business impact in 90-day cycles.
+
+BUSINESS MODEL:
+Hybrid model: strategy advisory retainers + fixed-fee implementation sprints + managed optimization support.
+
+VALUE PROPOSITION:
+We turn AI strategy into executed workflows, with clear commercial and operational outcomes, not just recommendations.
+
+TARGET CLIENT:
+US-based service businesses (50-500 employees, $10M-$200M revenue) with fragmented operations and growth pressure.
+
+STRATEGIC PRIORITY (#1 - MUST ADDRESS):
+"Scale recurring AI advisory revenue to 40% of total revenue while maintaining delivery quality."
+
+BIGGEST BLOCKER:
+Inconsistent delivery playbooks and utilization volatility across consultant teams.
+
+KEY CHANGE NEEDED:
+Standardize service packaging and implementation methods into repeatable offerings.
+
+3-5 YEAR VISION:
+Become the most trusted AI transformation partner for mid-market service firms on the US West Coast, with productized services, 120 active clients, and 30% EBITDA.
+
+---
+
+## STEP 2: THE GAP
+
+### BASELINE METRICS (Use these EXACT numbers in Key Results!)
+
+| Metric | Current | Target | Gap |
+|--------|---------|--------|-----|
+| Annual Revenue | $6.8M | $8.2M | +$1.4M |
+| Revenue Growth | 9.2% | 20% | +10.8% |
+| Profit Margin | 18.5% | - | - |
+| Top-5 Client Concentration | 43% | 35% | -8% |
+| Total Client Accounts | 84 | 98 | +14 |
+| Client Retention Rate | 88% | 92% | +4% |
+| Avg Client Tenure | 2.8 years | - | - |
+| Total Advisors/Consultants | 36 | - | - |
+| Clients per Advisor | 7 | 8.5 | +1.5 |
+
+### SSI DIAGNOSTIC SCORES (0-10 scale)
+
+DIMENSION SCORES:
+- Speed: 5.8 (WEAK)
+- Strength: 6.2 (MODERATE)
+- Intelligence: 5.4 (CRITICAL)
+
+12-BLOCK BREAKDOWN:
+
+SPEED DIMENSION:
+- delivery: 5.3 (CRITICAL - standardize playbooks)
+- decisions: 5.6 (WEAK)
+- change: 6.0 (MODERATE)
+- response: 6.2 (MODERATE)
+
+STRENGTH DIMENSION:
+- financial: 6.4 (MODERATE)
+- operations: 5.7 (WEAK)
+- people: 6.1 (MODERATE)
+- quality: 6.5 (MODERATE)
+
+INTELLIGENCE DIMENSION:
+- market: 5.1 (CRITICAL - client insights)
+- data: 5.2 (CRITICAL - data-driven decisions)
+- strategy: 5.0 (CRITICAL - planning/allocation)
+- learning: 6.0 (MODERATE)
+
+PRIORITY TARGETS (weakest blocks):
+1. STRATEGY (5.0) - Develop client roadmap frameworks
+2. MARKET (5.1) - Improve client insights and segmentation
+3. DATA (5.2) - Build KPI dashboards and analytics
+4. DELIVERY (5.3) - Standardize delivery playbooks
+
+---
+
+## STEP 3: THE BRIDGE
+
+Generate 4 OKRs that bridge the gap:
+
+RULES:
+1. ONE objective MUST address strategic priority: "Scale recurring AI advisory revenue to 40%"
+2. Each objective targets ONE weak SSI block (strategy, market, data, or delivery)
+3. Use EXACT baseline numbers in Key Results (from table above)
+4. Each objective has 4 DIVERSE KRs measuring different metrics
+5. Use consulting terminology: utilization, clients per advisor, delivery playbooks, recurring revenue
+6. Reference "KARVIA Consulting" or "AI advisory" in objectives
+
+CATEGORY COVERAGE:
+- Assign each objective to the CORRECT category based on its focus
+- Ensure coverage across: growth, operations, innovation, people_culture
+
+Return ONLY valid JSON array - no markdown, no explanations.

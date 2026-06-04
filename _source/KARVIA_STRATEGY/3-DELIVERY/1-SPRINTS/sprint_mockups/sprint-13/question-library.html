@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprint 13 - Question Library Redesign Mockup | Chief AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FAFAFA;
+            color: #1F2937;
+            line-height: 1.5;
+        }
+
+        /* ========================================
+           NAVIGATION BAR (S13 Pattern)
+           ======================================== */
+        .nav {
+            background: white;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            border-bottom: 1px solid #F0F0F0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo svg {
+            height: 80px;
+            width: auto;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .nav-item {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            text-decoration: none;
+            color: #6B7280;
+            font-size: 13px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item:hover { color: #1F2937; }
+        .nav-item.active { color: #1F2937; }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 16px;
+            right: 16px;
+            height: 2px;
+            background: transparent;
+            transition: background 0.2s ease;
+        }
+
+        .nav-item[data-philosophy="play"].active::after,
+        .nav-item[data-philosophy="play"]:hover::after { background: #8B5CF6; }
+        .nav-item[data-philosophy="assess"].active::after,
+        .nav-item[data-philosophy="assess"]:hover::after { background: #3B82F6; }
+        .nav-item[data-philosophy="align"].active::after,
+        .nav-item[data-philosophy="align"]:hover::after { background: #22c55e; }
+        .nav-item[data-philosophy="plan"].active::after,
+        .nav-item[data-philosophy="plan"]:hover::after { background: #F59E0B; }
+
+        .nav-divider {
+            width: 1px;
+            height: 24px;
+            background: #E5E7EB;
+        }
+
+        .nav-item .tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+            background: #1F2937;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 400;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease 0.5s, visibility 0.15s ease 0.5s;
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        .nav-item .tooltip::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 6px 6px 6px;
+            border-style: solid;
+            border-color: transparent transparent #1F2937 transparent;
+        }
+
+        .nav-item:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .nav-user:hover { background: #F5F5F5; }
+
+        .nav-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .nav-user-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        /* ========================================
+           MAIN CONTENT (S13 Pattern)
+           ======================================== */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        /* ========================================
+           WIZARD STEPPER
+           ======================================== */
+        .wizard-stepper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #9CA3AF;
+        }
+
+        .step.active {
+            color: #3B82F6;
+        }
+
+        .step.completed {
+            color: #22c55e;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            background: #F3F4F6;
+            color: #9CA3AF;
+        }
+
+        .step.active .step-number {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .step.completed .step-number {
+            background: #22c55e;
+            color: white;
+        }
+
+        .step-connector {
+            width: 40px;
+            height: 2px;
+            background: #E5E7EB;
+        }
+
+        .step-connector.completed {
+            background: #22c55e;
+        }
+
+        /* ========================================
+           HEADER
+           ======================================== */
+        .header {
+            margin-bottom: 24px;
+        }
+
+        .header-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .header-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .header-subtitle {
+            font-size: 13px;
+            color: #9CA3AF;
+            margin-top: 4px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-primary:hover { opacity: 0.9; box-shadow: 0 2px 8px rgba(30, 58, 95, 0.3); }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            background: white;
+            color: #374151;
+            border: 1px solid #D1D5DB;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-secondary:hover { background: #F9FAFB; border-color: #9CA3AF; }
+
+        /* Module Tabs */
+        .module-tabs {
+            display: flex;
+            gap: 4px;
+            padding: 4px;
+            background: #F3F4F6;
+            border-radius: 10px;
+            margin-bottom: 16px;
+        }
+
+        .module-tab {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+            background: transparent;
+            color: #6B7280;
+            transition: all 0.2s;
+        }
+
+        .module-tab.active {
+            background: white;
+            color: #111827;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .module-tab .tab-count {
+            font-size: 11px;
+            color: #9CA3AF;
+            margin-left: 4px;
+        }
+
+        .module-tab.active .tab-count {
+            color: #6B7280;
+        }
+
+        /* KPI Row */
+        .kpi-row {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .kpi-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 18px;
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+        }
+
+        .kpi-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .kpi-icon.indigo { background: #EEF2FF; color: #4338CA; }
+        .kpi-icon.green { background: #ECFDF5; color: #065F46; }
+        .kpi-icon.blue { background: #EFF6FF; color: #1E3A8A; }
+        .kpi-icon.amber { background: #FFFBEB; color: #92400E; }
+
+        .kpi-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .kpi-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .kpi-label {
+            font-size: 11px;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* ========================================
+           TWO-PANEL LAYOUT
+           ======================================== */
+        .content-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        /* ========================================
+           LEFT SIDEBAR - FILTERS
+           ======================================== */
+        .sidebar {
+            background: white;
+            border: 1px solid #EBEBEB;
+            border-radius: 12px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 92px;
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 16px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 20px;
+        }
+
+        .sidebar-section-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        /* Dimension Tree */
+        .dim-tree {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-bottom: 20px;
+        }
+
+        .dim-group {}
+
+        .dim-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            width: 100%;
+            text-align: left;
+        }
+
+        .dim-header:hover { background: #F5F5F5; }
+
+        .dim-header .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dim-header .dot.speed { background: #6366F1; }
+        .dim-header .dot.strength { background: #22c55e; }
+        .dim-header .dot.intelligence { background: #3B82F6; }
+
+        .dim-header .count {
+            margin-left: auto;
+            font-size: 11px;
+            color: #9CA3AF;
+            font-weight: 600;
+        }
+
+        .dim-header .chevron-sm {
+            color: #9CA3AF;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .dim-group.open .dim-header .chevron-sm {
+            transform: rotate(90deg);
+        }
+
+        .block-list {
+            display: none;
+            padding-left: 20px;
+        }
+
+        .dim-group.open .block-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .block-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            color: #6B7280;
+            transition: all 0.15s;
+        }
+
+        .block-item:hover { background: #F5F5F5; color: #374151; }
+
+        .block-item.active {
+            background: #EFF6FF;
+            color: #1E40AF;
+            font-weight: 600;
+        }
+
+        .block-item .block-count {
+            margin-left: auto;
+            font-size: 10px;
+            color: #9CA3AF;
+        }
+
+        .block-item.active .block-count {
+            color: #3B82F6;
+        }
+
+        /* Industry Filter */
+        .filter-dropdown {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 12px;
+            font-family: inherit;
+            color: #374151;
+            background: white;
+            cursor: pointer;
+        }
+
+        .filter-dropdown:focus {
+            outline: none;
+            border-color: #3B82F6;
+        }
+
+        /* Search Box */
+        .search-box {
+            width: 100%;
+            padding: 10px 12px 10px 36px;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: inherit;
+            color: #374151;
+            background: white;
+            transition: border-color 0.2s;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .search-wrapper {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9CA3AF;
+        }
+
+        /* Selected counter */
+        .selected-counter {
+            text-align: center;
+            padding: 12px;
+            background: #F9FAFB;
+            border-radius: 8px;
+        }
+
+        .selected-counter .count-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #3B82F6;
+        }
+
+        .selected-counter .count-label {
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        /* ========================================
+           RIGHT PANEL - QUESTIONS
+           ======================================== */
+        .questions-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .panel-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .panel-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .panel-subtitle {
+            font-size: 12px;
+            color: #9CA3AF;
+        }
+
+        .panel-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-link {
+            font-size: 12px;
+            font-weight: 600;
+            color: #3B82F6;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: background 0.15s;
+        }
+
+        .action-link:hover {
+            background: #EFF6FF;
+        }
+
+        /* Block Panel (replaces subcategory-panel) */
+        .block-panel {
+            background: white;
+            border: 1px solid #EBEBEB;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .block-panel:hover {
+            border-color: #D1D5DB;
+        }
+
+        .block-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .block-header:hover { background: #FAFAFA; }
+
+        .block-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .block-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .block-icon.speed { background: #EEF2FF; }
+        .block-icon.strength { background: #ECFDF5; }
+        .block-icon.intelligence { background: #EFF6FF; }
+
+        .block-info h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .block-info p {
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        .block-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .block-count-badge {
+            padding: 3px 10px;
+            border-radius: 6px;
+            background: #F3F4F6;
+            font-size: 11px;
+            font-weight: 600;
+            color: #6B7280;
+        }
+
+        .type-badge {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .type-badge.quant {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .type-badge.qual {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .chevron {
+            color: #9CA3AF;
+            transition: transform 0.2s;
+        }
+
+        .block-panel.open .chevron {
+            transform: rotate(180deg);
+        }
+
+        .block-panel.open {
+            border-color: #BFDBFE;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+        }
+
+        /* Questions List inside block */
+        .questions-list {
+            display: none;
+            padding: 0 20px 16px;
+        }
+
+        .block-panel.open .questions-list {
+            display: block;
+        }
+
+        .question-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            border: 1px solid #F3F4F6;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: all 0.15s;
+        }
+
+        .question-item:hover {
+            border-color: #BFDBFE;
+            background: #F8FAFF;
+        }
+
+        .question-item:last-child { margin-bottom: 0; }
+
+        .question-checkbox {
+            margin-top: 2px;
+            accent-color: #3B82F6;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .question-content {
+            flex: 1;
+        }
+
+        .question-text {
+            font-size: 13px;
+            color: #374151;
+            line-height: 1.5;
+        }
+
+        .question-meta {
+            display: flex;
+            gap: 6px;
+            margin-top: 4px;
+            flex-wrap: wrap;
+        }
+
+        .question-tag {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+
+        .tag-speed { background: #EEF2FF; color: #4338CA; }
+        .tag-strength { background: #ECFDF5; color: #065F46; }
+        .tag-intelligence { background: #EFF6FF; color: #1E3A8A; }
+        .tag-industry { background: #F3F4F6; color: #6B7280; }
+        .tag-quant { background: #DBEAFE; color: #1E40AF; }
+        .tag-qual { background: #FEF3C7; color: #92400E; }
+        .tag-core { background: #E0E7FF; color: #3730A3; }
+        .tag-module-industry { background: #D1FAE5; color: #065F46; }
+        .tag-role { background: #FEE2E2; color: #991B1B; }
+
+        /* ========================================
+           FOOTER BAR (Block Coverage)
+           ======================================== */
+        .footer-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #E5E7EB;
+            padding: 12px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 200;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.04);
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-stat {
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .footer-stat strong {
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .coverage-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .coverage-badge.full {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .coverage-badge.partial {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Padding at bottom so footer doesn't overlap content */
+        .main {
+            padding-bottom: 80px;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 900px) {
+            .content-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+            }
+            .kpi-row {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .main {
+                padding: 16px;
+                padding-bottom: 80px;
+            }
+            .nav {
+                padding: 0 16px;
+            }
+            .module-tabs {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================
+         NAVIGATION (S13 Pattern)
+         ============================ -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 75">
+                <defs>
+                    <linearGradient id="chiefGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1e3a5f"/>
+                        <stop offset="100%" style="stop-color:#2d5a87"/>
+                    </linearGradient>
+                </defs>
+                <path d="M25 10L27 20L35 15L29 23L42 25L29 27L35 35L27 30L25 40L23 30L15 35L21 27L8 25L21 23L15 15L23 20L25 10Z" fill="url(#chiefGrad)"/>
+                <circle cx="25" cy="25" r="3" fill="#d4a853"/>
+                <text x="50" y="31" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1e3a5f">Chief</text>
+                <text x="108" y="31" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="500" fill="#d4a853">AI</text>
+                <text x="50" y="48" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="400" fill="#6B7280">Your AI Chief of Staff</text>
+            </svg>
+        </div>
+        <div class="nav-center">
+            <a href="dashboard-redesign.html" class="nav-item" data-philosophy="play">
+                Dashboard
+                <span class="tooltip">Play - Your daily focus</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="assessment-hub.html" class="nav-item active" data-philosophy="assess">
+                Assessments
+                <span class="tooltip">Assess - Understand your org</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="teams-redesign.html" class="nav-item" data-philosophy="align">
+                Teams
+                <span class="tooltip">Align - Get everyone aligned</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="objectives-redesign.html" class="nav-item" data-philosophy="plan">
+                Objectives
+                <span class="tooltip">Plan - Strategic direction</span>
+            </a>
+            <a href="planning-redesign.html" class="nav-item" data-philosophy="plan">
+                Planning
+                <span class="tooltip">Plan - Weekly execution</span>
+            </a>
+        </div>
+        <div class="nav-user">
+            <div class="nav-avatar">JD</div>
+            <span class="nav-user-name">John Doe</span>
+            <svg width="14" height="14" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6"/>
+            </svg>
+        </div>
+    </nav>
+
+    <!-- ============================
+         MAIN CONTENT
+         ============================ -->
+    <div class="main">
+        <!-- WIZARD STEPPER (J6-J8: 3-step template creation) -->
+        <div class="wizard-stepper">
+            <div class="step active">
+                <div class="step-number">1</div>
+                Select Questions
+            </div>
+            <div class="step-connector"></div>
+            <div class="step">
+                <div class="step-number">2</div>
+                Configure
+            </div>
+            <div class="step-connector"></div>
+            <div class="step">
+                <div class="step-number">3</div>
+                Review & Save
+            </div>
+        </div>
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-top-row">
+                <div>
+                    <div class="header-title">Select Questions</div>
+                    <div class="header-subtitle">Choose questions from Core, Industry, and Role modules to build your template</div>
+                </div>
+            </div>
+
+            <!-- MODULE TABS (Epic J: Core / Industry / Role) -->
+            <div class="module-tabs">
+                <button class="module-tab active" onclick="switchModule('core')">
+                    Core <span class="tab-count">(24)</span>
+                </button>
+                <button class="module-tab" onclick="switchModule('industry')">
+                    Industry <span class="tab-count">(6)</span>
+                </button>
+                <button class="module-tab" onclick="switchModule('role')">
+                    Role <span class="tab-count">(8)</span>
+                </button>
+            </div>
+
+            <!-- KPI Row -->
+            <div class="kpi-row">
+                <div class="kpi-card">
+                    <div class="kpi-icon indigo">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-value">8</span>
+                        <span class="kpi-label">Speed</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon green">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-value">8</span>
+                        <span class="kpi-label">Strength</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon blue">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 017 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 017-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-value">8</span>
+                        <span class="kpi-label">Intelligence</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon amber">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-value">24</span>
+                        <span class="kpi-label">Total Qs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TWO-PANEL LAYOUT -->
+        <div class="content-layout">
+            <!-- LEFT SIDEBAR -->
+            <div class="sidebar">
+                <div class="search-wrapper">
+                    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <input type="text" class="search-box" placeholder="Search questions...">
+                </div>
+
+                <!-- Dimension > Block Tree (12-block MECE) -->
+                <div class="sidebar-section">
+                    <div class="sidebar-section-label">Dimension &rarr; Block</div>
+                    <div class="dim-tree">
+                        <!-- Speed: 4 blocks -->
+                        <div class="dim-group open">
+                            <button class="dim-header" onclick="this.parentElement.classList.toggle('open')">
+                                <svg class="chevron-sm" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                                <span class="dot speed"></span>
+                                Speed
+                                <span class="count">8</span>
+                            </button>
+                            <div class="block-list">
+                                <div class="block-item active" onclick="selectBlock('speed','delivery')">
+                                    Delivery
+                                    <span class="block-count">2</span>
+                                </div>
+                                <div class="block-item" onclick="selectBlock('speed','decisions')">
+                                    Decisions
+                                    <span class="block-count">2</span>
+                                </div>
+                                <div class="block-item" onclick="selectBlock('speed','change')">
+                                    Change
+                                    <span class="block-count">2</span>
+                                </div>
+                                <div class="block-item" onclick="selectBlock('speed','response')">
+                                    Response
+                                    <span class="block-count">2</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Strength: 4 blocks -->
+                        <div class="dim-group">
+                            <button class="dim-header" onclick="this.parentElement.classList.toggle('open')">
+                                <svg class="chevron-sm" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                                <span class="dot strength"></span>
+                                Strength
+                                <span class="count">8</span>
+                            </button>
+                            <div class="block-list">
+                                <div class="block-item" onclick="selectBlock('strength','financial')">
+                                    Financial
+                                    <span class="block-count">2</span>
+                                </div>
+                                <div class="block-item" onclick="selectBlock('strength','operations')">
+                                    Operations
+                                    <span class="block-count">2</span>
+                                </div>
+                                <div class="block-item" onclick="selectBlock('strength','people')">
+                                    People
+                                    <span class="block-count">2</span>
+                                </div>
+                                <div class="block-item" onclick="selectBlock('strength','quality')">
+                                    Quality
+                                    <span class="block-count">2</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Intelligence: 4 blocks -->
+                        <div class="dim-group">
+                            <button class="dim-header" onclick="this.parentElement.classList.toggle('open')">
+                                <svg class="chevron-sm" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                                <span class="dot intelligence"></span>
+                                Intelligence
+                                <span class="count">8</span>
+                            </button>
+                            <div class="block-list">
+                                <div class="block-item" onclick="selectBlock('intelligence','market')">
+                                    Market
+                                    <span class="block-count">2</span>
+                                </div>
+                                <div class="block-item" onclick="selectBlock('intelligence','data')">
+                                    Data
+                                    <span class="block-count">2</span>
+                                </div>
+                                <div class="block-item" onclick="selectBlock('intelligence','strategy')">
+                                    Strategy
+                                    <span class="block-count">2</span>
+                                </div>
+                                <div class="block-item" onclick="selectBlock('intelligence','learning')">
+                                    Learning
+                                    <span class="block-count">2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Industry Filter (shown on Industry module tab) -->
+                <div class="sidebar-section" id="industryFilter">
+                    <div class="sidebar-section-label">Industry</div>
+                    <select class="filter-dropdown" onchange="filterByIndustry(this.value)">
+                        <option value="">All Industries</option>
+                        <option value="financial_services" selected>Financial Services</option>
+                        <option value="consulting">Consulting</option>
+                        <option value="professional_services">Professional Services</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="trade_contractor">Trade Contractor</option>
+                        <option value="home_services">Home Services</option>
+                        <option value="oil_gas">Oil &amp; Gas</option>
+                    </select>
+                </div>
+
+                <!-- Role Filter (shown on Role module tab) -->
+                <div class="sidebar-section" id="roleFilter">
+                    <div class="sidebar-section-label">Role</div>
+                    <select class="filter-dropdown" onchange="filterByRole(this.value)">
+                        <option value="">All Roles</option>
+                        <option value="executive">Executive</option>
+                        <option value="manager">Manager</option>
+                        <option value="operations">Operations</option>
+                        <option value="sales">Sales</option>
+                        <option value="technical">Technical</option>
+                    </select>
+                </div>
+
+                <!-- Selected counter -->
+                <div class="sidebar-section" style="margin-bottom:0;">
+                    <div class="sidebar-section-label">Selected</div>
+                    <div class="selected-counter">
+                        <div class="count-value">24</div>
+                        <div class="count-label">questions selected</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL -->
+            <div class="questions-panel">
+                <!-- Panel Header with Select All / Deselect All -->
+                <div class="panel-header">
+                    <div class="panel-header-left">
+                        <span class="panel-title">Delivery</span>
+                        <span class="panel-subtitle">Speed &middot; 2 questions</span>
+                    </div>
+                    <div class="panel-actions">
+                        <button class="action-link" onclick="selectAll()">Select All</button>
+                        <button class="action-link" onclick="deselectAll()">Deselect All</button>
+                    </div>
+                </div>
+
+                <!-- Block 1: Delivery (Speed) -->
+                <div class="block-panel open">
+                    <div class="block-header" onclick="this.parentElement.classList.toggle('open')">
+                        <div class="block-left">
+                            <div class="block-icon speed">&#128666;</div>
+                            <div class="block-info">
+                                <h3>Delivery</h3>
+                                <p>Speed of turning plans into completed work</p>
+                            </div>
+                        </div>
+                        <div class="block-right">
+                            <span class="type-badge quant">Quant</span>
+                            <span class="type-badge qual">Qual</span>
+                            <span class="block-count-badge">2 questions</span>
+                            <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                        </div>
+                    </div>
+                    <div class="questions-list">
+                        <div class="question-item">
+                            <input type="checkbox" class="question-checkbox" checked>
+                            <div class="question-content">
+                                <div class="question-text">What percentage of projects are delivered on or before the committed deadline?</div>
+                                <div class="question-meta">
+                                    <span class="question-tag tag-speed">Speed</span>
+                                    <span class="question-tag tag-quant">Quantitative</span>
+                                    <span class="question-tag tag-core">Core</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question-item">
+                            <input type="checkbox" class="question-checkbox" checked>
+                            <div class="question-content">
+                                <div class="question-text">How often does your team complete deliverables without requiring extensions?</div>
+                                <div class="question-meta">
+                                    <span class="question-tag tag-speed">Speed</span>
+                                    <span class="question-tag tag-qual">Qualitative</span>
+                                    <span class="question-tag tag-core">Core</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Block 2: Decisions (Speed) -->
+                <div class="block-panel">
+                    <div class="block-header" onclick="this.parentElement.classList.toggle('open')">
+                        <div class="block-left">
+                            <div class="block-icon speed">&#9889;</div>
+                            <div class="block-info">
+                                <h3>Decisions</h3>
+                                <p>How fast decisions are made across the organization</p>
+                            </div>
+                        </div>
+                        <div class="block-right">
+                            <span class="type-badge quant">Quant</span>
+                            <span class="type-badge qual">Qual</span>
+                            <span class="block-count-badge">2 questions</span>
+                            <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                        </div>
+                    </div>
+                    <div class="questions-list">
+                        <div class="question-item">
+                            <input type="checkbox" class="question-checkbox" checked>
+                            <div class="question-content">
+                                <div class="question-text">What percentage of strategic decisions are made within the planned timeframe?</div>
+                                <div class="question-meta">
+                                    <span class="question-tag tag-speed">Speed</span>
+                                    <span class="question-tag tag-quant">Quantitative</span>
+                                    <span class="question-tag tag-core">Core</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question-item">
+                            <input type="checkbox" class="question-checkbox" checked>
+                            <div class="question-content">
+                                <div class="question-text">How often are decisions made with all necessary stakeholders aligned?</div>
+                                <div class="question-meta">
+                                    <span class="question-tag tag-speed">Speed</span>
+                                    <span class="question-tag tag-qual">Qualitative</span>
+                                    <span class="question-tag tag-core">Core</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Block 3: Change (Speed) -->
+                <div class="block-panel">
+                    <div class="block-header" onclick="this.parentElement.classList.toggle('open')">
+                        <div class="block-left">
+                            <div class="block-icon speed">&#9851;</div>
+                            <div class="block-info">
+                                <h3>Change</h3>
+                                <p>Ability to pivot and adapt when conditions shift</p>
+                            </div>
+                        </div>
+                        <div class="block-right">
+                            <span class="type-badge quant">Quant</span>
+                            <span class="type-badge qual">Qual</span>
+                            <span class="block-count-badge">2 questions</span>
+                            <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                        </div>
+                    </div>
+                    <div class="questions-list">
+                        <div class="question-item">
+                            <input type="checkbox" class="question-checkbox" checked>
+                            <div class="question-content">
+                                <div class="question-text">What percentage of change initiatives are completed within the planned timeline?</div>
+                                <div class="question-meta">
+                                    <span class="question-tag tag-speed">Speed</span>
+                                    <span class="question-tag tag-quant">Quantitative</span>
+                                    <span class="question-tag tag-core">Core</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question-item">
+                            <input type="checkbox" class="question-checkbox" checked>
+                            <div class="question-content">
+                                <div class="question-text">How readily does your organization embrace and implement new processes?</div>
+                                <div class="question-meta">
+                                    <span class="question-tag tag-speed">Speed</span>
+                                    <span class="question-tag tag-qual">Qualitative</span>
+                                    <span class="question-tag tag-core">Core</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Block 4: Response (Speed) -->
+                <div class="block-panel">
+                    <div class="block-header" onclick="this.parentElement.classList.toggle('open')">
+                        <div class="block-left">
+                            <div class="block-icon speed">&#128276;</div>
+                            <div class="block-info">
+                                <h3>Response</h3>
+                                <p>How fast the organization responds to external events</p>
+                            </div>
+                        </div>
+                        <div class="block-right">
+                            <span class="type-badge quant">Quant</span>
+                            <span class="type-badge qual">Qual</span>
+                            <span class="block-count-badge">2 questions</span>
+                            <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                        </div>
+                    </div>
+                    <div class="questions-list">
+                        <div class="question-item">
+                            <input type="checkbox" class="question-checkbox" checked>
+                            <div class="question-content">
+                                <div class="question-text">What percentage of customer escalations are resolved within the SLA timeframe?</div>
+                                <div class="question-meta">
+                                    <span class="question-tag tag-speed">Speed</span>
+                                    <span class="question-tag tag-quant">Quantitative</span>
+                                    <span class="question-tag tag-core">Core</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question-item">
+                            <input type="checkbox" class="question-checkbox" checked>
+                            <div class="question-content">
+                                <div class="question-text">How quickly does your organization respond to market disruptions or competitor moves?</div>
+                                <div class="question-meta">
+                                    <span class="question-tag tag-speed">Speed</span>
+                                    <span class="question-tag tag-qual">Qualitative</span>
+                                    <span class="question-tag tag-core">Core</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER BAR (Block Coverage) -->
+    <div class="footer-bar">
+        <div class="footer-left">
+            <div class="footer-stat"><strong>24</strong> questions selected</div>
+            <div class="coverage-badge full">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                12/12 blocks covered
+            </div>
+            <div class="footer-stat" style="font-size:11px; color:#9CA3AF;">Speed: 8 &middot; Strength: 8 &middot; Intelligence: 8</div>
+        </div>
+        <div class="footer-right">
+            <button class="btn-secondary" onclick="goBack()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Back
+            </button>
+            <button class="btn-primary" onclick="goToStep2()">
+                Next: Configure
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // MOCKUP INTERACTIVITY
+        // In production, all data comes from API:
+        //   GET /api/assessment-questions?module=core&grouped=true
+        // ============================================
+
+        function switchModule(module) {
+            // Switch active module tab
+            document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active'));
+            event.target.closest('.module-tab').classList.add('active');
+
+            // Show/hide context filters
+            document.getElementById('industryFilter').style.display =
+                module === 'industry' ? 'block' : 'none';
+            document.getElementById('roleFilter').style.display =
+                module === 'role' ? 'block' : 'none';
+
+            // In production: fetch(`/api/assessment-questions?module=${module}&grouped=true`)
+            console.log(`Switched to module: ${module}`);
+        }
+
+        function selectBlock(dimension, block) {
+            // Highlight active block in sidebar
+            document.querySelectorAll('.block-item').forEach(b => b.classList.remove('active'));
+            event.target.closest('.block-item').classList.add('active');
+
+            // In production: scroll to or filter right panel to show this block
+            console.log(`Selected block: ${dimension} > ${block}`);
+        }
+
+        function filterByIndustry(industry) {
+            // In production: refetch questions with ?industry=financial_services
+            console.log(`Filter by industry: ${industry}`);
+        }
+
+        function filterByRole(role) {
+            // In production: refetch questions with ?role=executive
+            console.log(`Filter by role: ${role}`);
+        }
+
+        function selectAll() {
+            document.querySelectorAll('.question-checkbox').forEach(cb => cb.checked = true);
+        }
+
+        function deselectAll() {
+            document.querySelectorAll('.question-checkbox').forEach(cb => cb.checked = false);
+        }
+
+        function goBack() {
+            // In production: navigate to assessment hub
+            console.log('Navigate back to Assessment Hub');
+        }
+
+        function goToStep2() {
+            // In production: save state to localStorage, navigate to step 2
+            console.log('Navigate to Step 2: Configure Template');
+        }
+
+        // Initialize: show only relevant filters for Core module
+        document.getElementById('industryFilter').style.display = 'none';
+        document.getElementById('roleFilter').style.display = 'none';
+    </script>
+</body>
+</html>

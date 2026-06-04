@@ -1,0 +1,59 @@
+slot_id,role,function,team,pod,okr_scope,daily_focus
+U001,BUSINESS_OWNER,Leadership,Executive Office,,O1 owner (growth),Review dashboard and clear top blockers by 09:00
+U002,EXECUTIVE,Leadership,Strategy Leadership,,O3 sponsor (innovation),Approve strategic decisions and risk tradeoffs
+U003,EXECUTIVE,Leadership,Delivery Leadership,,O2 sponsor (operations),Review delivery risk and client escalations
+U004,MANAGER,Delivery,Delivery Management A,Pod A,O2 owner (operations),Run delivery standup and capacity check
+U005,MANAGER,Delivery,Delivery Management B,Pod B,O2 KR3 owner,Track utilization and milestone slippage
+U006,MANAGER,Delivery,Delivery Management C,Pod C,O2 KR4 owner,Drive on-time delivery and dependency clearing
+U007,MANAGER,Strategy,Strategy Office,,O1 KR2 and O3 KR2 owner,Maintain roadmap and strategic alignment
+U008,MANAGER,Data_AI,Data Engineering,,O3 owner (innovation),Track KPI dashboard adoption and data blockers
+U009,MANAGER,Data_AI,AI Implementation,,O3 KR4 owner,Ensure roadmap implementation quality
+U010,MANAGER,RevOps_Sales,Revenue Operations,,O1 KR1 and KR3 owner,Update pipeline and conversion actions
+U011,MANAGER,PeopleOps,Talent Operations,,O4 owner (people_culture),Run staffing and retention risk review
+U012,MANAGER,Finance,Finance Operations,,O1 KR4 and O4 KR1 owner,Validate margin and concentration risk
+U013,EMPLOYEE,Delivery,Delivery Team A,Pod A,O2 execution,Execute client delivery tasks and update progress
+U014,EMPLOYEE,Delivery,Delivery Team A,Pod A,O2 execution,Execute client delivery tasks and update progress
+U015,EMPLOYEE,Delivery,Delivery Team A,Pod A,O2 execution,Execute client delivery tasks and update progress
+U016,EMPLOYEE,Delivery,Delivery Team A,Pod A,O2 execution,Execute client delivery tasks and update progress
+U017,EMPLOYEE,Delivery,Delivery Team A,Pod A,O2 execution,Execute client delivery tasks and update progress
+U018,EMPLOYEE,Delivery,Delivery Team A,Pod A,O2 execution,Execute client delivery tasks and update progress
+U019,EMPLOYEE,Delivery,Delivery Team B,Pod B,O2 execution,Execute client delivery tasks and update progress
+U020,EMPLOYEE,Delivery,Delivery Team B,Pod B,O2 execution,Execute client delivery tasks and update progress
+U021,EMPLOYEE,Delivery,Delivery Team B,Pod B,O2 execution,Execute client delivery tasks and update progress
+U022,EMPLOYEE,Delivery,Delivery Team B,Pod B,O2 execution,Execute client delivery tasks and update progress
+U023,EMPLOYEE,Delivery,Delivery Team B,Pod B,O2 execution,Execute client delivery tasks and update progress
+U024,EMPLOYEE,Delivery,Delivery Team B,Pod B,O2 execution,Execute client delivery tasks and update progress
+U025,EMPLOYEE,Delivery,Delivery Team C,Pod C,O2 execution,Execute client delivery tasks and update progress
+U026,EMPLOYEE,Delivery,Delivery Team C,Pod C,O2 execution,Execute client delivery tasks and update progress
+U027,EMPLOYEE,Delivery,Delivery Team C,Pod C,O2 execution,Execute client delivery tasks and update progress
+U028,EMPLOYEE,Delivery,Delivery Team C,Pod C,O2 execution,Execute client delivery tasks and update progress
+U029,EMPLOYEE,Delivery,Delivery Team C,Pod C,O2 execution,Execute client delivery tasks and update progress
+U030,EMPLOYEE,Delivery,Delivery Team C,Pod C,O2 execution,Execute client delivery tasks and update progress
+U031,EMPLOYEE,Strategy,Strategy Office,,O1 and O3 support,Build account plans and hypothesis tracking
+U032,EMPLOYEE,Strategy,Strategy Office,,O1 and O3 support,Build account plans and hypothesis tracking
+U033,EMPLOYEE,Strategy,Strategy Office,,O1 and O3 support,Build account plans and hypothesis tracking
+U034,EMPLOYEE,Strategy,Strategy Office,,O1 and O3 support,Build account plans and hypothesis tracking
+U035,EMPLOYEE,Data_AI,Data Engineering,,O3 execution,Implement dashboard and KPI instrumentation
+U036,EMPLOYEE,Data_AI,Data Engineering,,O3 execution,Implement dashboard and KPI instrumentation
+U037,EMPLOYEE,Data_AI,Data Engineering,,O3 execution,Implement dashboard and KPI instrumentation
+U038,EMPLOYEE,Data_AI,Data Engineering,,O3 execution,Implement dashboard and KPI instrumentation
+U039,EMPLOYEE,Data_AI,Data Engineering,,O3 execution,Implement dashboard and KPI instrumentation
+U040,EMPLOYEE,Data_AI,AI Implementation,,O3 execution,Implement AI workflow changes and QA
+U041,EMPLOYEE,Data_AI,AI Implementation,,O3 execution,Implement AI workflow changes and QA
+U042,EMPLOYEE,Data_AI,AI Implementation,,O3 execution,Implement AI workflow changes and QA
+U043,EMPLOYEE,Data_AI,AI Implementation,,O3 execution,Implement AI workflow changes and QA
+U044,EMPLOYEE,Data_AI,AI Implementation,,O3 execution,Implement AI workflow changes and QA
+U045,EMPLOYEE,RevOps_Sales,Revenue Operations,,O1 execution,Advance top opportunities and proposal quality
+U046,EMPLOYEE,RevOps_Sales,Revenue Operations,,O1 execution,Advance top opportunities and proposal quality
+U047,EMPLOYEE,RevOps_Sales,Revenue Operations,,O1 execution,Advance top opportunities and proposal quality
+U048,EMPLOYEE,RevOps_Sales,Revenue Operations,,O1 execution,Advance top opportunities and proposal quality
+U049,EMPLOYEE,RevOps_Sales,Revenue Operations,,O1 execution,Advance top opportunities and proposal quality
+U050,EMPLOYEE,RevOps_Sales,Revenue Operations,,O1 execution,Advance top opportunities and proposal quality
+U051,EMPLOYEE,RevOps_Sales,Revenue Operations,,O1 execution,Advance top opportunities and proposal quality
+U052,EMPLOYEE,PeopleOps,Talent Operations,,O4 execution,Run staffing pipeline and capability development
+U053,EMPLOYEE,PeopleOps,Talent Operations,,O4 execution,Run staffing pipeline and capability development
+U054,EMPLOYEE,PeopleOps,Talent Operations,,O4 execution,Run staffing pipeline and capability development
+U055,EMPLOYEE,Finance,Finance Operations,,O1 and O4 support,Track margin and concentration compliance
+U056,EMPLOYEE,Finance,Finance Operations,,O1 and O4 support,Track margin and concentration compliance
+U057,EMPLOYEE,Finance,Finance Operations,,O1 and O4 support,Track margin and concentration compliance
+U058,EMPLOYEE,PMO_Enablement,PMO,,Cross-objective support,Track governance cadences and unblock dependencies

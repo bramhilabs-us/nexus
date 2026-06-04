@@ -1,0 +1,10 @@
+{
+  "ready": true,
+  "session_focus": "High-priority customer success objective linked to onboarding speed, adoption, and retention.",
+  "assumptions": [
+    "Onboarding is a leading driver of retention for this company."
+  ],
+  "watchouts": [
+    "Avoid duplicating any existing objective already focused on activation."
+  ]
+}

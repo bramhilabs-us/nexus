@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Clients | Sprint 22 Mockup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../../client/css/s13-patterns.css">
+    <style>
+        :root {
+            /* Sprint 22 Theme — Navy/Gold (aliases s22-navy from s13-patterns.css) */
+            --navy: #1F2937;       /* s22-navy */
+            --navy-light: #374151; /* s22-navy-light */
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #F8FAFC;
+        }
+        .navy-gradient {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+        }
+        .btn-navy {
+            background: var(--navy);
+            transition: all 0.15s ease;
+        }
+        .btn-navy:hover {
+            background: var(--navy-light);
+        }
+
+        /* SSI Donut */
+        .ssi-donut {
+            transform: rotate(-90deg);
+        }
+        .ssi-donut-bg {
+            fill: none;
+            stroke: #E5E7EB;
+            stroke-width: 3;
+        }
+        .ssi-donut-progress {
+            fill: none;
+            stroke-width: 3;
+            stroke-linecap: round;
+        }
+
+        /* Status Border */
+        .status-prospect { border-left: 3px solid #EC4899; }
+        .status-onboarding { border-left: 3px solid #9CA3AF; }
+        .status-objective-identified { border-left: 3px solid var(--navy); }
+        .status-handed-off { border-left: 3px solid #3B82F6; }
+        .status-in-progress { border-left: 3px solid #F59E0B; }
+        .status-completed { border-left: 3px solid #10B981; }
+        .status-sustained { border-left: 3px solid #059669; }
+
+        /* Objectives Bar */
+        .obj-bar {
+            display: flex;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 6px;
+        }
+
+        /* Actions */
+        .tile-action {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 10px 0;
+            font-size: 12px;
+            font-weight: 500;
+            color: #6B7280;
+            transition: all 0.15s;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+        .tile-action:hover {
+            background: #F9FAFB;
+            color: #1e3a5f;
+        }
+        .tile-action svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Nudge Dropdown */
+        .nudge-wrap {
+            position: relative;
+            flex: 1;
+        }
+        .nudge-menu {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 140px;
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 10px;
+            box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+            overflow: hidden;
+            z-index: 10;
+        }
+        .nudge-wrap:hover .nudge-menu {
+            display: block;
+        }
+        .nudge-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            font-size: 12px;
+            color: #374151;
+            cursor: pointer;
+        }
+        .nudge-item:hover {
+            background: #F3F4F6;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PRODUCTION NAVIGATION — LOCKED, DO NOT MODIFY
+         Copied verbatim from client/pages/dashboard-v2.html lines 932-935.
+         Implementation must preserve this block exactly + load /js/navigation.js.
+         /js/navigation.js will inject the unified nav into #main-navigation.
+         Implementation TODO: add "My Clients" entry to /js/navigation.js
+         (consultants only, role gate).
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div id="main-navigation"></div>
+    </nav>
+
+    <!-- Main -->
+    <main class="max-w-7xl mx-auto px-6 py-6">
+
+        <!-- KPIs -->
+        <div class="grid grid-cols-4 gap-4 mb-6">
+            <div class="bg-white rounded-xl p-4 border border-gray-100">
+                <div class="text-xs text-gray-400 mb-1">Clients</div>
+                <div class="text-2xl font-bold text-gray-900">7</div>
+            </div>
+            <div class="bg-white rounded-xl p-4 border border-gray-100">
+                <div class="text-xs text-gray-400 mb-1">Need Attention</div>
+                <div class="text-2xl font-bold text-amber-500">3</div>
+            </div>
+            <div class="bg-white rounded-xl p-4 border border-gray-100">
+                <div class="text-xs text-gray-400 mb-1">Avg SSI</div>
+                <div class="text-2xl font-bold text-emerald-600">72</div>
+            </div>
+            <div class="bg-white rounded-xl p-4 border border-gray-100">
+                <div class="text-xs text-gray-400 mb-1">At Risk</div>
+                <div class="text-2xl font-bold text-red-500">2</div>
+            </div>
+        </div>
+
+        <!-- Search & Filter -->
+        <div class="flex items-center justify-between gap-3 mb-5">
+            <div class="flex items-center gap-2 flex-1">
+                <div class="relative flex-1 max-w-sm">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input type="text" placeholder="Search..." class="w-full pl-9 pr-3 py-2 bg-white border border-gray-200 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-[#1e3a5f]/30">
+                </div>
+                <select class="px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs text-gray-600">
+                    <option>All Stages</option>
+                    <option>Prospect</option>
+                    <option>Onboarding</option>
+                    <option>In Progress</option>
+                    <option>Completed</option>
+                    <option>Sustained</option>
+                </select>
+            </div>
+            <!-- Add Client trigger → opens 3-step wizard modal (see add-client-wizard.html) -->
+            <button id="btn-add-client" class="btn-navy text-white px-4 py-2 rounded-lg text-xs font-medium flex items-center gap-1.5"
+                    data-opens="add-client-wizard">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                Add Client
+            </button>
+        </div>
+
+        <!-- Tiles Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+            <!-- Tile 1: R&R Homes - In Progress -->
+            <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow status-in-progress">
+                <div class="p-4">
+                    <!-- Header -->
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white font-bold text-sm">R</div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 text-sm">R&R Homes</h3>
+                                <p class="text-xs text-gray-400">Robert Chen</p>
+                            </div>
+                        </div>
+                        <!-- SSI Donut -->
+                        <div class="relative w-10 h-10">
+                            <svg class="ssi-donut w-10 h-10" viewBox="0 0 36 36">
+                                <circle class="ssi-donut-bg" cx="18" cy="18" r="15"></circle>
+                                <circle class="ssi-donut-progress" cx="18" cy="18" r="15" stroke="#10B981" stroke-dasharray="94.2" stroke-dashoffset="20.7"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-[10px] font-bold text-emerald-600 leading-none">78</span>
+                                <span class="text-[7px] text-gray-400 leading-none mt-0.5">SSI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Objectives Rectangle -->
+                    <div class="bg-gray-50 rounded-lg p-3 mb-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-medium text-gray-600">Objectives</span>
+                            <span class="text-xs font-bold text-gray-900">4 total</span>
+                        </div>
+                        <div class="obj-bar mb-2">
+                            <div class="bg-emerald-500" style="width: 50%"></div>
+                            <div class="bg-amber-400" style="width: 25%"></div>
+                            <div class="bg-red-400" style="width: 25%"></div>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="text-emerald-600">2 on track</span>
+                            <span class="text-amber-500">1 at risk</span>
+                            <span class="text-red-500">1 behind</span>
+                        </div>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-1 bg-amber-50 text-amber-700 text-xs font-medium rounded-full">In Progress</span>
+                        <span class="text-xs text-gray-400">3/3 assessed</span>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex border-t border-gray-100">
+                    <button class="tile-action">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        Notes
+                    </button>
+                    <div class="w-px bg-gray-100"></div>
+                    <div class="nudge-wrap">
+                        <div class="nudge-menu">
+                            <div class="nudge-item">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                Send Reminder
+                            </div>
+                        </div>
+                        <button class="tile-action">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                            Nudge
+                        </button>
+                    </div>
+                    <div class="w-px bg-gray-100"></div>
+                    <button class="tile-action">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        Assess
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tile 2: Mountain Electric - Onboarding -->
+            <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow status-onboarding">
+                <div class="p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white font-bold text-sm">M</div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 text-sm">Mountain Electric</h3>
+                                <p class="text-xs text-gray-400">James Wilson</p>
+                            </div>
+                        </div>
+                        <div class="relative w-10 h-10">
+                            <svg class="ssi-donut w-10 h-10" viewBox="0 0 36 36">
+                                <circle class="ssi-donut-bg" cx="18" cy="18" r="15"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-[10px] font-bold text-gray-300 leading-none">—</span>
+                                <span class="text-[7px] text-gray-300 leading-none mt-0.5">SSI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-3 mb-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-medium text-gray-600">Objectives</span>
+                            <span class="text-xs font-bold text-gray-400">—</span>
+                        </div>
+                        <div class="obj-bar mb-2">
+                            <div class="bg-gray-200" style="width: 100%"></div>
+                        </div>
+                        <div class="text-xs text-gray-400">No objectives set yet</div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full">Onboarding</span>
+                        <span class="text-xs text-amber-500">0/1 assessed</span>
+                    </div>
+                </div>
+
+                <div class="flex border-t border-gray-100">
+                    <button class="tile-action">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        Notes
+                    </button>
+                    <div class="w-px bg-gray-100"></div>
+                    <div class="nudge-wrap">
+                        <div class="nudge-menu">
+                            <div class="nudge-item">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                Send Reminder
+                            </div>
+                        </div>
+                        <button class="tile-action">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                            Nudge
+                        </button>
+                    </div>
+                    <div class="w-px bg-gray-100"></div>
+                    <button class="tile-action">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        Assess
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tile 3: Apex Consulting - Sustained -->
+            <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow status-sustained">
+                <div class="p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white font-bold text-sm">A</div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 text-sm">Apex Consulting</h3>
+                                <p class="text-xs text-gray-400">Sarah Martinez</p>
+                            </div>
+                        </div>
+                        <div class="relative w-10 h-10">
+                            <svg class="ssi-donut w-10 h-10" viewBox="0 0 36 36">
+                                <circle class="ssi-donut-bg" cx="18" cy="18" r="15"></circle>
+                                <circle class="ssi-donut-progress" cx="18" cy="18" r="15" stroke="#10B981" stroke-dasharray="94.2" stroke-dashoffset="13.2"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-[10px] font-bold text-emerald-600 leading-none">86</span>
+                                <span class="text-[7px] text-gray-400 leading-none mt-0.5">SSI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-3 mb-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-medium text-gray-600">Objectives</span>
+                            <span class="text-xs font-bold text-gray-900">4 total</span>
+                        </div>
+                        <div class="obj-bar mb-2">
+                            <div class="bg-emerald-500" style="width: 100%"></div>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="text-emerald-600">4 on track</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-1 bg-emerald-50 text-emerald-700 text-xs font-medium rounded-full">Sustained</span>
+                        <span class="text-xs text-gray-400">5/5 assessed</span>
+                    </div>
+                </div>
+
+                <div class="flex border-t border-gray-100">
+                    <button class="tile-action">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        Notes
+                    </button>
+                    <div class="w-px bg-gray-100"></div>
+                    <div class="nudge-wrap">
+                        <div class="nudge-menu">
+                            <div class="nudge-item">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                Send Reminder
+                            </div>
+                        </div>
+                        <button class="tile-action">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                            Nudge
+                        </button>
+                    </div>
+                    <div class="w-px bg-gray-100"></div>
+                    <button class="tile-action">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        Assess
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tile 4: Valley HVAC - Handed Off -->
+            <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow status-handed-off">
+                <div class="p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-slate-500 to-slate-700 flex items-center justify-center text-white font-bold text-sm">V</div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 text-sm">Valley HVAC</h3>
+                                <p class="text-xs text-gray-400">Mike Thompson</p>
+                            </div>
+                        </div>
+                        <div class="relative w-10 h-10">
+                            <svg class="ssi-donut w-10 h-10" viewBox="0 0 36 36">
+                                <circle class="ssi-donut-bg" cx="18" cy="18" r="15"></circle>
+                                <circle class="ssi-donut-progress" cx="18" cy="18" r="15" stroke="#F59E0B" stroke-dasharray="94.2" stroke-dashoffset="33.9"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-[10px] font-bold text-amber-500 leading-none">64</span>
+                                <span class="text-[7px] text-gray-400 leading-none mt-0.5">SSI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-3 mb-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-medium text-gray-600">Objectives</span>
+                            <span class="text-xs font-bold text-gray-900">3 total</span>
+                        </div>
+                        <div class="obj-bar mb-2">
+                            <div class="bg-emerald-500" style="width: 33%"></div>
+                            <div class="bg-amber-400" style="width: 33%"></div>
+                            <div class="bg-red-400" style="width: 34%"></div>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="text-emerald-600">1 on track</span>
+                            <span class="text-amber-500">1 at risk</span>
+                            <span class="text-red-500">1 behind</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-1 bg-blue-50 text-blue-700 text-xs font-medium rounded-full">Handed Off</span>
+                        <span class="text-xs text-gray-400">2/2 assessed</span>
+                    </div>
+                </div>
+
+                <div class="flex border-t border-gray-100">
+                    <button class="tile-action">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        Notes
+                    </button>
+                    <div class="w-px bg-gray-100"></div>
+                    <div class="nudge-wrap">
+                        <div class="nudge-menu">
+                            <div class="nudge-item">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                Send Reminder
+                            </div>
+                        </div>
+                        <button class="tile-action">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                            Nudge
+                        </button>
+                    </div>
+                    <div class="w-px bg-gray-100"></div>
+                    <button class="tile-action">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        Assess
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tile 5: Precision Plumbing - Completed -->
+            <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow status-completed">
+                <div class="p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-cyan-700 flex items-center justify-center text-white font-bold text-sm">P</div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 text-sm">Precision Plumbing</h3>
+                                <p class="text-xs text-gray-400">David Park</p>
+                            </div>
+                        </div>
+                        <div class="relative w-10 h-10">
+                            <svg class="ssi-donut w-10 h-10" viewBox="0 0 36 36">
+                                <circle class="ssi-donut-bg" cx="18" cy="18" r="15"></circle>
+                                <circle class="ssi-donut-progress" cx="18" cy="18" r="15" stroke="#10B981" stroke-dasharray="94.2" stroke-dashoffset="26.4"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-[10px] font-bold text-emerald-600 leading-none">72</span>
+                                <span class="text-[7px] text-gray-400 leading-none mt-0.5">SSI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-3 mb-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-medium text-gray-600">Objectives</span>
+                            <span class="text-xs font-bold text-gray-900">2 total</span>
+                        </div>
+                        <div class="obj-bar mb-2">
+                            <div class="bg-emerald-500" style="width: 100%"></div>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="text-emerald-600">2 on track</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-1 bg-emerald-50 text-emerald-700 text-xs font-medium rounded-full">Completed</span>
+                        <span class="text-xs text-gray-400">2/2 assessed</span>
+                    </div>
+                </div>
+
+                <div class="flex border-t border-gray-100">
+                    <button class="tile-action">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        Notes
+                    </button>
+                    <div class="w-px bg-gray-100"></div>
+                    <div class="nudge-wrap">
+                        <div class="nudge-menu">
+                            <div class="nudge-item">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                Send Reminder
+                            </div>
+                        </div>
+                        <button class="tile-action">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                            Nudge
+                        </button>
+                    </div>
+                    <div class="w-px bg-gray-100"></div>
+                    <button class="tile-action">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        Assess
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tile 6: Summit Roofing - In Progress -->
+            <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow status-in-progress">
+                <div class="p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white font-bold text-sm">S</div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 text-sm">Summit Roofing</h3>
+                                <p class="text-xs text-gray-400">Lisa Anderson</p>
+                            </div>
+                        </div>
+                        <div class="relative w-10 h-10">
+                            <svg class="ssi-donut w-10 h-10" viewBox="0 0 36 36">
+                                <circle class="ssi-donut-bg" cx="18" cy="18" r="15"></circle>
+                                <circle class="ssi-donut-progress" cx="18" cy="18" r="15" stroke="#10B981" stroke-dasharray="94.2" stroke-dashoffset="24.5"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-[10px] font-bold text-emerald-600 leading-none">74</span>
+                                <span class="text-[7px] text-gray-400 leading-none mt-0.5">SSI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-3 mb-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-medium text-gray-600">Objectives</span>
+                            <span class="text-xs font-bold text-gray-900">3 total</span>
+                        </div>
+                        <div class="obj-bar mb-2">
+                            <div class="bg-emerald-500" style="width: 67%"></div>
+                            <div class="bg-amber-400" style="width: 33%"></div>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs">
+                            <span class="text-emerald-600">2 on track</span>
+                            <span class="text-amber-500">1 at risk</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-1 bg-amber-50 text-amber-700 text-xs font-medium rounded-full">In Progress</span>
+                        <span class="text-xs text-gray-400">4/4 assessed</span>
+                    </div>
+                </div>
+
+                <div class="flex border-t border-gray-100">
+                    <button class="tile-action">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        Notes
+                    </button>
+                    <div class="w-px bg-gray-100"></div>
+                    <div class="nudge-wrap">
+                        <div class="nudge-menu">
+                            <div class="nudge-item">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                Send Reminder
+                            </div>
+                        </div>
+                        <button class="tile-action">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                            Nudge
+                        </button>
+                    </div>
+                    <div class="w-px bg-gray-100"></div>
+                    <button class="tile-action">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        Assess
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tile 7: Greenway Landscaping - Prospect -->
+            <div class="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow status-prospect">
+                <div class="p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-500 to-pink-700 flex items-center justify-center text-white font-bold text-sm">G</div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900 text-sm">Greenway Landscaping</h3>
+                                <p class="text-xs text-gray-400">Tom Richards</p>
+                            </div>
+                        </div>
+                        <div class="relative w-10 h-10">
+                            <svg class="ssi-donut w-10 h-10" viewBox="0 0 36 36">
+                                <circle class="ssi-donut-bg" cx="18" cy="18" r="15"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-[10px] font-bold text-gray-300 leading-none">—</span>
+                                <span class="text-[7px] text-gray-300 leading-none mt-0.5">SSI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-3 mb-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-medium text-gray-600">Objectives</span>
+                            <span class="text-xs font-bold text-gray-400">—</span>
+                        </div>
+                        <div class="obj-bar mb-2">
+                            <div class="bg-gray-200" style="width: 100%"></div>
+                        </div>
+                        <div class="text-xs text-gray-400">Pending engagement</div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-1 bg-pink-50 text-pink-700 text-xs font-medium rounded-full">Prospect</span>
+                        <span class="text-xs text-gray-400">Not started</span>
+                    </div>
+                </div>
+
+                <div class="flex border-t border-gray-100">
+                    <button class="tile-action">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        Notes
+                    </button>
+                    <div class="w-px bg-gray-100"></div>
+                    <div class="nudge-wrap">
+                        <div class="nudge-menu">
+                            <div class="nudge-item">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                Send Reminder
+                            </div>
+                        </div>
+                        <button class="tile-action">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                            Nudge
+                        </button>
+                    </div>
+                    <div class="w-px bg-gray-100"></div>
+                    <button class="tile-action">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        Assess
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+<!-- Production navigation loader — DO NOT REMOVE -->
+<script src="/js/navigation.js"></script>
+
+</body>
+</html>

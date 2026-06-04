@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Profile | Karvia</title>
+  <style>
+    :root {
+      --navy: #1e3a5f;
+      --purple: #8b5cf6;
+      --purple-light: #ede9fe;
+      --gold: #d4a853;
+      --gold-light: #fef3c7;
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --green: #10b981;
+      --green-light: #d1fae5;
+      --orange: #f59e0b;
+      --orange-light: #fef3c7;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--gray-100);
+      color: var(--gray-700);
+    }
+
+    /* ========================================
+       TOP NAV (Existing Style)
+    ======================================== */
+    .top-nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--purple), #6366f1);
+      border-radius: 6px;
+    }
+
+    .logo-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-link {
+      color: var(--gray-500);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-link:hover { color: var(--gray-700); }
+    .nav-link.active { color: var(--navy); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .company-select {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--gray-600);
+      cursor: pointer;
+    }
+
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      background: var(--purple);
+      border-radius: 50%;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* ========================================
+       MAIN CONTAINER
+    ======================================== */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* ========================================
+       PAGE HEADER (Compact)
+    ======================================== */
+    .page-header {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--gray-700);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Compact Ring */
+    .completion-ring {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .completion-ring svg {
+      position: absolute;
+      transform: rotate(-90deg);
+    }
+
+    .completion-ring circle {
+      fill: none;
+      stroke-width: 5;
+    }
+
+    .completion-ring .bg { stroke: var(--gray-200); }
+    .completion-ring .progress { stroke: var(--purple); stroke-linecap: round; }
+
+    .completion-ring .value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--purple);
+      z-index: 1;
+    }
+
+    .header-info h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .header-info p {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    /* Stage dots under title */
+    .stage-dots {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    .stage-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gray-300);
+    }
+
+    .stage-dot.complete { background: var(--green); }
+    .stage-dot.current { background: var(--purple); }
+
+    .stage-label {
+      color: var(--gray-400);
+    }
+
+    .stage-label.current {
+      color: var(--purple);
+      font-weight: 600;
+    }
+
+    /* Header Right - AI Knows */
+    .header-right {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 14px 18px;
+      min-width: 240px;
+    }
+
+    .ai-knows-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ai-knows-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ai-item {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ai-item.done { color: var(--green); }
+    .ai-item.missing { color: var(--gray-400); }
+
+    .header-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .save-status {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    .btn-save {
+      padding: 10px 24px;
+      background: var(--purple);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-save:hover {
+      background: #7c3aed;
+    }
+
+    /* ========================================
+       MAIN TABS (The Business / Numbers / Vision)
+    ======================================== */
+    .main-tabs {
+      display: flex;
+      background: var(--white);
+      border-radius: 12px 12px 0 0;
+      border: 1px solid var(--gray-200);
+      border-bottom: none;
+    }
+
+    .main-tab {
+      flex: 1;
+      padding: 14px 20px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-500);
+      cursor: pointer;
+      border: none;
+      background: none;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .main-tab:hover {
+      color: var(--gray-700);
+      background: var(--gray-50);
+    }
+
+    .main-tab.active {
+      color: var(--purple);
+      border-bottom-color: var(--purple);
+      background: var(--white);
+    }
+
+    .main-tab.complete {
+      color: var(--green);
+    }
+
+    .main-tab.locked {
+      color: var(--gray-400);
+      cursor: pointer;
+    }
+
+    /* Stage Content */
+    .stage-content {
+      display: none;
+    }
+
+    .stage-content.active {
+      display: block;
+    }
+
+    /* ========================================
+       CONTENT AREA
+    ======================================== */
+    .content-area {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      min-height: 400px;
+    }
+
+    /* Stage Sub-tabs (inside content) */
+    .stage-subtabs {
+      display: flex;
+      gap: 4px;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--gray-100);
+      background: var(--gray-50);
+    }
+
+    .stage-subtab {
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-500);
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .stage-subtab:hover {
+      border-color: var(--gray-300);
+    }
+
+    .stage-subtab.active {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: var(--white);
+    }
+
+    .stage-subtab .check {
+      margin-left: 4px;
+      color: var(--green);
+    }
+
+    .stage-subtab.active .check {
+      color: var(--white);
+    }
+
+    /* Content Panel */
+    .content-panel {
+      padding: 20px;
+      display: none;
+    }
+
+    .content-panel.active {
+      display: block;
+    }
+
+    /* ========================================
+       FORM STYLES (Matching Existing)
+    ======================================== */
+    .section {
+      margin-bottom: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .used-by-ai {
+      font-size: 11px;
+      padding: 4px 10px;
+      background: var(--purple-light);
+      color: var(--purple);
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-600);
+    }
+
+    .form-label .required {
+      color: var(--purple);
+    }
+
+    .form-input {
+      padding: 10px 14px;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+    }
+
+    .form-input.filled {
+      border-color: var(--green);
+    }
+
+    .form-select {
+      padding: 10px 14px;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 14px;
+      background: var(--white);
+      cursor: pointer;
+    }
+
+    textarea.form-input {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .char-count {
+      font-size: 11px;
+      color: var(--gray-400);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    /* Chips */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 8px 16px;
+      border: 1px solid var(--gray-200);
+      border-radius: 100px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s;
+      background: var(--white);
+      color: var(--gray-600);
+    }
+
+    .chip:hover {
+      border-color: var(--gray-300);
+      background: var(--gray-50);
+    }
+
+    .chip.selected {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    /* Priority Box */
+    .priority-box {
+      background: linear-gradient(135deg, #fef9f0, #fdf6e9);
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .priority-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .priority-box textarea {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      resize: none;
+      min-height: 60px;
+    }
+
+    .priority-box textarea:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+
+    .priority-hint {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-top: 8px;
+    }
+
+    /* Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .metric-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .metric-card:focus-within {
+      border-color: var(--purple);
+      background: var(--white);
+    }
+
+    .metric-card.filled {
+      border-color: var(--green);
+      background: var(--green-light);
+    }
+
+    .metric-icon {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .metric-label {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-bottom: 4px;
+    }
+
+    .metric-input {
+      width: 100%;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      border: none;
+      background: transparent;
+    }
+
+    .metric-input:focus { outline: none; }
+    .metric-input::placeholder { color: var(--gray-300); font-weight: 400; }
+
+    /* SSI Cards */
+    .ssi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .ssi-card {
+      background: var(--white);
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .ssi-card.weak {
+      border-color: var(--orange);
+      background: var(--orange-light);
+    }
+
+    .ssi-icon { font-size: 24px; margin-bottom: 8px; }
+    .ssi-score { font-size: 32px; font-weight: 700; color: var(--navy); }
+    .ssi-label { font-size: 13px; color: var(--gray-600); margin-top: 4px; }
+
+    .ssi-bar {
+      height: 4px;
+      background: var(--gray-200);
+      border-radius: 2px;
+      margin-top: 12px;
+      overflow: hidden;
+    }
+
+    .ssi-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+    }
+
+    .ssi-insight {
+      font-size: 11px;
+      margin-top: 8px;
+      color: var(--gray-500);
+    }
+
+    .ssi-card.weak .ssi-insight {
+      color: var(--orange);
+      font-weight: 500;
+    }
+
+    .ai-insight-box {
+      background: var(--purple-light);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--purple);
+      margin-top: 16px;
+    }
+
+    /* Locked State */
+    .locked-overlay {
+      padding: 40px;
+      text-align: center;
+      color: var(--gray-400);
+    }
+
+    .locked-overlay .icon {
+      font-size: 32px;
+      opacity: 0.4;
+      margin-bottom: 12px;
+    }
+
+    .locked-overlay h4 {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .locked-overlay p {
+      font-size: 12px;
+      max-width: 300px;
+      margin: 0 auto 16px;
+    }
+
+    .locked-reqs {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: left;
+      background: var(--gray-50);
+      padding: 12px 16px;
+      border-radius: 8px;
+    }
+
+    .locked-reqs .req {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .locked-reqs .req.done { color: var(--green); }
+
+    /* Preview Grid */
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      opacity: 0.5;
+    }
+
+    .preview-card {
+      background: var(--gray-50);
+      border: 2px dashed var(--gray-300);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .preview-icon { font-size: 20px; opacity: 0.4; margin-bottom: 8px; }
+    .preview-value { font-size: 18px; font-weight: 700; color: var(--gray-400); }
+    .preview-label { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
+
+    /* ========================================
+       FOOTER
+    ======================================== */
+    .footer-bar {
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      border-radius: 12px;
+    }
+
+    .auto-save {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--green);
+    }
+
+    .progress-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .progress-text {
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+
+    .progress-text .highlight {
+      color: var(--purple);
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      padding: 10px 24px;
+      background: var(--purple);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #7c3aed;
+    }
+
+    /* ========================================
+       RESPONSIVE
+    ======================================== */
+    @media (max-width: 900px) {
+      .form-grid,
+      .ssi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics-grid,
+      .preview-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .page-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+      }
+
+      .header-right {
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <span class="logo-text">CULTURAL DISCIPLINE</span>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="nav-link">Dashboard</a>
+      <a href="#" class="nav-link">Objectives</a>
+      <a href="#" class="nav-link">Assessments</a>
+      <a href="#" class="nav-link">Teams</a>
+      <a href="#" class="nav-link active">Planning</a>
+    </div>
+    <div class="nav-right">
+      <div class="company-select">
+        <span>📁</span> Select Company (2) <span>▾</span>
+      </div>
+      <div class="user-badge">
+        Rsm Consultant
+        <div class="avatar">RC</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="main-container">
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <div class="header-left">
+        <div class="completion-ring">
+          <svg width="64" height="64">
+            <circle class="bg" cx="32" cy="32" r="28"></circle>
+            <circle class="progress" cx="32" cy="32" r="28" stroke-dasharray="176" stroke-dashoffset="18"></circle>
+          </svg>
+          <span class="value">94%</span>
+        </div>
+        <div class="header-info">
+          <h1>Company Profile</h1>
+          <p>Build your organizational context for AI-powered OKR generation</p>
+          <div class="stage-dots">
+            <span class="stage-dot complete"></span>
+            <span class="stage-label">Discovery</span>
+            <span style="color: var(--gray-300);">→</span>
+            <span class="stage-dot current"></span>
+            <span class="stage-label current">Assessment</span>
+            <span style="color: var(--gray-300);">→</span>
+            <span class="stage-dot"></span>
+            <span class="stage-label">Execution</span>
+            <span style="color: var(--gray-300);">→</span>
+            <span class="stage-dot"></span>
+            <span class="stage-label">Learning</span>
+            <span style="color: var(--gray-300);">→</span>
+            <span class="stage-dot"></span>
+            <span class="stage-label">Mastery</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="header-right">
+          <div class="ai-knows-title">🧠 What AI knows about you</div>
+          <div class="ai-knows-list">
+            <span class="ai-item done">✓ Industry: Consulting (IT focus)</span>
+            <span class="ai-item done">✓ Business model defined</span>
+            <span class="ai-item missing">○ Missing: Strategic priority</span>
+            <span class="ai-item missing">○ Missing: Revenue metrics</span>
+          </div>
+        </div>
+        <div class="save-status">All changes saved</div>
+        <button class="btn-save">Save</button>
+      </div>
+    </header>
+
+    <!-- Stage Tabs (Main Navigation) -->
+    <div class="main-tabs">
+      <button class="main-tab complete" onclick="showStageTab(0)">✓ Discovery</button>
+      <button class="main-tab active" onclick="showStageTab(1)">Assessment</button>
+      <button class="main-tab" onclick="showStageTab(2)">Execution</button>
+      <button class="main-tab locked" onclick="showStageTab(3)">🔒 Learning</button>
+      <button class="main-tab locked" onclick="showStageTab(4)">🔒 Mastery</button>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+
+      <!-- ==========================================
+           STAGE 0: DISCOVERY
+      ========================================== -->
+      <div class="stage-content" id="stage-0">
+        <div class="stage-subtabs">
+          <button class="stage-subtab active" onclick="showSubTab(0, 'business')">The Business <span class="check">✓</span></button>
+          <button class="stage-subtab" onclick="showSubTab(0, 'numbers')">The Numbers</button>
+          <button class="stage-subtab" onclick="showSubTab(0, 'vision')">The Vision</button>
+        </div>
+
+        <!-- The Business -->
+        <div class="content-panel active" id="stage-0-business">
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">Company Information</span>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Company Name<span class="required">*</span></label>
+                <input type="text" class="form-input filled" value="KARVIA Consulting">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Industry</label>
+                <select class="form-select">
+                  <option selected>Consulting</option>
+                  <option>Financial Services</option>
+                  <option>Healthcare</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Industry Subtype</label>
+                <select class="form-select">
+                  <option selected>IT Consulting</option>
+                  <option>Management</option>
+                  <option>Strategy</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Employee Count<span class="required">*</span></label>
+                <input type="number" class="form-input filled" value="1">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Year Founded</label>
+                <input type="number" class="form-input filled" value="2026">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Website</label>
+                <input type="text" class="form-input filled" value="karvia.ai">
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">Business Model</span>
+              <span class="used-by-ai">Used by AI</span>
+            </div>
+            <div class="form-grid">
+              <div class="form-group full">
+                <label class="form-label">Business Description<span class="required">*</span></label>
+                <textarea class="form-input filled">We are an AI transformation consulting firm focused on helping small and medium-sized businesses adopt artificial intelligence safely, practically, and profitably.</textarea>
+                <span class="char-count">934/1000 characters</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Business Model</label>
+                <div class="chips">
+                  <span class="chip selected">Project-based</span>
+                  <span class="chip">Retainer</span>
+                  <span class="chip">Subscription</span>
+                  <span class="chip">Hybrid</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Primary Revenue Driver</label>
+                <input type="text" class="form-input" placeholder="e.g., Implementation projects">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Numbers -->
+        <div class="content-panel" id="stage-0-numbers">
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">Current Metrics</span>
+              <span class="used-by-ai">Enables "from X to Y" KRs</span>
+            </div>
+            <div class="metrics-grid">
+              <div class="metric-card filled">
+                <div class="metric-icon">💰</div>
+                <div class="metric-label">Annual Revenue</div>
+                <input type="text" class="metric-input" value="$2.4M">
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon">👥</div>
+                <div class="metric-label">Active Clients</div>
+                <input type="text" class="metric-input" placeholder="0">
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon">📈</div>
+                <div class="metric-label">Growth %</div>
+                <input type="text" class="metric-input" placeholder="0%">
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon">🎯</div>
+                <div class="metric-label">Retention</div>
+                <input type="text" class="metric-input" placeholder="0%">
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">12-Month Targets</span>
+            </div>
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <div class="metric-icon">🎯</div>
+                <div class="metric-label">Target Revenue</div>
+                <input type="text" class="metric-input" placeholder="$0">
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon">👥</div>
+                <div class="metric-label">Target Clients</div>
+                <input type="text" class="metric-input" placeholder="0">
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon">👔</div>
+                <div class="metric-label">Target Team</div>
+                <input type="text" class="metric-input" placeholder="0">
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon">🎯</div>
+                <div class="metric-label">Target Retention</div>
+                <input type="text" class="metric-input" placeholder="0%">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Vision -->
+        <div class="content-panel" id="stage-0-vision">
+          <div class="section">
+            <div class="priority-box">
+              <label class="priority-label">✨ #1 Priority for the next 12 months</label>
+              <textarea placeholder="What's the single most important thing to accomplish?"></textarea>
+              <div class="priority-hint">💡 This becomes your first personalized objective</div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">Challenges & Blockers</span>
+              <span class="used-by-ai">Creates Objectives</span>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Biggest obstacle right now</label>
+                <textarea class="form-input" rows="2" placeholder="What's preventing you from reaching your goals?"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">If you could only accomplish ONE thing?</label>
+                <textarea class="form-input" rows="2" placeholder="The single most important thing"></textarea>
+              </div>
+            </div>
+            <div class="form-group full" style="margin-top: 16px;">
+              <label class="form-label">Current challenges (select all that apply)</label>
+              <div class="chips">
+                <span class="chip selected">Scaling operations</span>
+                <span class="chip">Hiring talent</span>
+                <span class="chip">Client retention</span>
+                <span class="chip">Cash flow</span>
+                <span class="chip">Technology gaps</span>
+                <span class="chip">Market competition</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           STAGE 1: ASSESSMENT
+      ========================================== -->
+      <div class="stage-content active" id="stage-1">
+        <div class="stage-subtabs">
+          <button class="stage-subtab active" onclick="showSubTab(1, 'ssi')">SSI Results</button>
+          <button class="stage-subtab" onclick="showSubTab(1, 'refine')">Refine Understanding</button>
+          <button class="stage-subtab" onclick="showSubTab(1, 'deeper')">Deeper Context</button>
+        </div>
+
+        <!-- SSI Panel (Assessment Stage) -->
+        <div class="content-panel active" id="stage-1-ssi">
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">Strategic Strength Index</span>
+              <a href="#" style="font-size: 12px; color: var(--purple);">Retake Assessment →</a>
+            </div>
+            <div class="ssi-grid">
+              <div class="ssi-card">
+                <div class="ssi-icon">⚡</div>
+                <div class="ssi-score">72</div>
+                <div class="ssi-label">Speed</div>
+                <div class="ssi-bar"><div class="ssi-bar-fill" style="width:72%; background: #3b82f6;"></div></div>
+                <div class="ssi-insight">Strong decision velocity</div>
+              </div>
+              <div class="ssi-card weak">
+                <div class="ssi-icon">💪</div>
+                <div class="ssi-score">48</div>
+                <div class="ssi-label">Strength</div>
+                <div class="ssi-bar"><div class="ssi-bar-fill" style="width:48%; background: var(--green);"></div></div>
+                <div class="ssi-insight">⚠️ Focus area</div>
+              </div>
+              <div class="ssi-card">
+                <div class="ssi-icon">🧠</div>
+                <div class="ssi-score">65</div>
+                <div class="ssi-label">Intelligence</div>
+                <div class="ssi-bar"><div class="ssi-bar-fill" style="width:65%; background: var(--purple);"></div></div>
+                <div class="ssi-insight">Good learning agility</div>
+              </div>
+            </div>
+            <div class="ai-insight-box">
+              <strong>AI Insight:</strong> Your "Strength" dimension scores lowest. We'll prioritize objectives that build operational capacity.
+            </div>
+          </div>
+        </div>
+
+        <!-- Refine Understanding -->
+        <div class="content-panel" id="stage-1-refine">
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">Has anything changed?</span>
+              <span class="used-by-ai">Updates improve AI accuracy</span>
+            </div>
+            <p style="color: var(--gray-500); font-size: 13px; margin-bottom: 16px;">
+              Review and update your Discovery data if anything has changed.
+            </p>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Current revenue</label>
+                <input type="text" class="form-input" value="$2.4M" placeholder="Update if changed">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Active clients</label>
+                <input type="text" class="form-input" placeholder="Update if known">
+              </div>
+              <div class="form-group full">
+                <label class="form-label">Is your #1 priority still the same?</label>
+                <textarea class="form-input" rows="2" placeholder="Edit if your focus has shifted"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deeper Context -->
+        <div class="content-panel" id="stage-1-deeper">
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">Optional: Mission & Values</span>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Mission Statement</label>
+                <textarea class="form-input" rows="2" placeholder="Your company's mission"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Vision Statement</label>
+                <textarea class="form-input" rows="2" placeholder="Where you see the company in 5 years"></textarea>
+              </div>
+              <div class="form-group full">
+                <label class="form-label">Core Values</label>
+                <div class="chips">
+                  <span class="chip">Innovation</span>
+                  <span class="chip selected">Client Focus</span>
+                  <span class="chip selected">Excellence</span>
+                  <span class="chip">Integrity</span>
+                  <span class="chip">Collaboration</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           STAGE 2: EXECUTION
+      ========================================== -->
+      <div class="stage-content" id="stage-2">
+        <div class="stage-subtabs">
+          <button class="stage-subtab active" onclick="showSubTab(2, 'detailed')">Detailed Metrics</button>
+          <button class="stage-subtab" onclick="showSubTab(2, 'gaps')">Gap Analysis</button>
+          <button class="stage-subtab" onclick="showSubTab(2, 'trajectory')">YoY Trajectory</button>
+        </div>
+
+        <div class="content-panel active" id="stage-2-detailed">
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">Current Performance</span>
+            </div>
+            <p style="color: var(--gray-500); font-size: 13px; margin-bottom: 16px;">
+              Detailed metrics enable specific "from $2.4M to $3M" Key Results
+            </p>
+            <div class="metrics-grid">
+              <div class="metric-card filled">
+                <div class="metric-icon">💰</div>
+                <div class="metric-label">Annual Revenue</div>
+                <input type="text" class="metric-input" value="$2.4M">
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon">📈</div>
+                <div class="metric-label">Profit Margin</div>
+                <input type="text" class="metric-input" placeholder="0%">
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon">👥</div>
+                <div class="metric-label">Clients</div>
+                <input type="text" class="metric-input" placeholder="0">
+              </div>
+              <div class="metric-card">
+                <div class="metric-icon">🔄</div>
+                <div class="metric-label">Retention</div>
+                <input type="text" class="metric-input" placeholder="0%">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-panel" id="stage-2-gaps">
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">12-Month Targets vs Current</span>
+            </div>
+            <p style="color: var(--gray-500); font-size: 13px;">
+              Gap analysis drives objective prioritization
+            </p>
+          </div>
+        </div>
+
+        <div class="content-panel" id="stage-2-trajectory">
+          <div class="section">
+            <div class="section-header">
+              <span class="section-title">Year-over-Year Changes</span>
+            </div>
+            <p style="color: var(--gray-500); font-size: 13px;">
+              Historical trajectory validates target realism
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           STAGE 3: LEARNING (Locked Preview)
+      ========================================== -->
+      <div class="stage-content" id="stage-3">
+        <div class="stage-subtabs">
+          <button class="stage-subtab active">Execution Patterns</button>
+          <button class="stage-subtab">OKR Outcomes</button>
+          <button class="stage-subtab">Lessons Learned</button>
+        </div>
+
+        <div class="content-panel active">
+          <div class="locked-overlay">
+            <div class="icon">🔒</div>
+            <h4>Learning Stage - Preview Mode</h4>
+            <p>This stage tracks your execution patterns and OKR outcomes. It unlocks as you use Karvia.</p>
+            <div class="locked-reqs">
+              <span class="req done">✓ Complete Discovery</span>
+              <span class="req done">✓ SSI Assessment</span>
+              <span class="req">○ Add baseline metrics</span>
+              <span class="req">○ Complete 50+ tasks</span>
+              <span class="req">○ Complete 1 OKR cycle</span>
+            </div>
+          </div>
+
+          <div class="section" style="margin-top: 24px;">
+            <div class="section-header">
+              <span class="section-title">What You'll See Here</span>
+            </div>
+            <div class="preview-grid">
+              <div class="preview-card">
+                <div class="preview-icon">📊</div>
+                <div class="preview-value">—%</div>
+                <div class="preview-label">Task Completion Rate</div>
+              </div>
+              <div class="preview-card">
+                <div class="preview-icon">⚡</div>
+                <div class="preview-value">—</div>
+                <div class="preview-label">Avg Tasks/Week</div>
+              </div>
+              <div class="preview-card">
+                <div class="preview-icon">🎯</div>
+                <div class="preview-value">—%</div>
+                <div class="preview-label">Goal Achievement</div>
+              </div>
+              <div class="preview-card">
+                <div class="preview-icon">📅</div>
+                <div class="preview-value">—%</div>
+                <div class="preview-label">On-Time Delivery</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           STAGE 4: MASTERY (Locked Preview)
+      ========================================== -->
+      <div class="stage-content" id="stage-4">
+        <div class="stage-subtabs">
+          <button class="stage-subtab active">AI Predictions</button>
+          <button class="stage-subtab">Org Patterns</button>
+          <button class="stage-subtab">Smart Recommendations</button>
+        </div>
+
+        <div class="content-panel active">
+          <div class="locked-overlay">
+            <div class="icon">🔒</div>
+            <h4>Mastery Stage - Preview Mode</h4>
+            <p>Full predictive AI unlocks after multiple OKR cycles with outcome tracking.</p>
+            <div class="locked-reqs">
+              <span class="req done">✓ Complete Discovery</span>
+              <span class="req done">✓ Complete Assessment</span>
+              <span class="req">○ Complete Execution</span>
+              <span class="req">○ Complete Learning</span>
+              <span class="req">○ 4+ OKR cycles with outcomes</span>
+            </div>
+          </div>
+
+          <div class="section" style="margin-top: 24px;">
+            <div class="section-header">
+              <span class="section-title">What You'll Get at Mastery</span>
+            </div>
+            <div class="preview-grid">
+              <div class="preview-card">
+                <div class="preview-icon">🔮</div>
+                <div class="preview-value">—%</div>
+                <div class="preview-label">Success Prediction</div>
+              </div>
+              <div class="preview-card">
+                <div class="preview-icon">⚠️</div>
+                <div class="preview-value">—</div>
+                <div class="preview-label">Risk Alerts</div>
+              </div>
+              <div class="preview-card">
+                <div class="preview-icon">🎯</div>
+                <div class="preview-value">—</div>
+                <div class="preview-label">Calibrated Targets</div>
+              </div>
+              <div class="preview-card">
+                <div class="preview-icon">🧠</div>
+                <div class="preview-value">—</div>
+                <div class="preview-label">Pattern Insights</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-bar">
+      <div class="auto-save">✓ All changes saved automatically</div>
+      <div class="progress-info">
+        <span class="progress-text">Profile: <span class="highlight">94%</span> → Stage 2 at 100%</span>
+        <button class="btn-primary">Generate OKRs →</button>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Track current active stage
+    let currentStage = 1; // Assessment is active by default
+
+    // Switch between stage tabs (main navigation)
+    function showStageTab(stageNum) {
+      currentStage = stageNum;
+
+      // Update main tab buttons
+      const mainTabs = document.querySelectorAll('.main-tab');
+      mainTabs.forEach((tab, i) => {
+        tab.classList.remove('active');
+        if (i === stageNum) {
+          tab.classList.add('active');
+        }
+      });
+
+      // Show/hide stage content
+      document.querySelectorAll('.stage-content').forEach((content, i) => {
+        content.classList.remove('active');
+        if (i === stageNum) {
+          content.classList.add('active');
+        }
+      });
+
+      // Reset sub-tabs to first one in the new stage
+      const stageContent = document.getElementById('stage-' + stageNum);
+      if (stageContent) {
+        const subTabs = stageContent.querySelectorAll('.stage-subtab');
+        const panels = stageContent.querySelectorAll('.content-panel');
+
+        subTabs.forEach((tab, i) => {
+          tab.classList.toggle('active', i === 0);
+        });
+        panels.forEach((panel, i) => {
+          panel.classList.toggle('active', i === 0);
+        });
+      }
+    }
+
+    // Switch between sub-tabs within a stage
+    function showSubTab(stageNum, subTabId) {
+      const stageContent = document.getElementById('stage-' + stageNum);
+      if (!stageContent) return;
+
+      // Update sub-tab buttons
+      stageContent.querySelectorAll('.stage-subtab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      event.target.classList.add('active');
+
+      // Show/hide content panels
+      stageContent.querySelectorAll('.content-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+
+      const targetPanel = document.getElementById('stage-' + stageNum + '-' + subTabId);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+    }
+
+    // Chip selection (single or multi-select based on label)
+    document.querySelectorAll('.chips').forEach(container => {
+      container.addEventListener('click', e => {
+        if (e.target.classList.contains('chip')) {
+          const label = container.closest('.form-group')?.querySelector('.form-label')?.textContent || '';
+          const isMulti = label.toLowerCase().includes('select all') || label.toLowerCase().includes('challenges') || label.toLowerCase().includes('values');
+          if (!isMulti) {
+            container.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+          }
+          e.target.classList.toggle('selected');
+        }
+      });
+    });
+
+    // Auto-save simulation
+    let saveTimeout;
+    document.querySelectorAll('input, textarea, select').forEach(input => {
+      input.addEventListener('change', () => {
+        clearTimeout(saveTimeout);
+        const saveStatus = document.querySelector('.save-status');
+        const autoSave = document.querySelector('.auto-save');
+
+        if (saveStatus) saveStatus.textContent = 'Saving...';
+        if (autoSave) autoSave.innerHTML = '⏳ Saving...';
+
+        saveTimeout = setTimeout(() => {
+          if (saveStatus) saveStatus.textContent = 'All changes saved';
+          if (autoSave) autoSave.innerHTML = '✓ All changes saved automatically';
+        }, 800);
+      });
+    });
+  </script>
+
+</body>
+</html>

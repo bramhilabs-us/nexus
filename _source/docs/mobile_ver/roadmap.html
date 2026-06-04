@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KARVIA Pro - 2026 Roadmap (Mobile)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { font-family: 'Inter', sans-serif; }
+
+        body {
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #8b5cf6;
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        .nav-dot:not(.active) {
+            background: #d1d5db;
+        }
+
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .must-have { border-left: 3px solid #8b5cf6; }
+        .nice-to-have { border-left: 3px solid #06b6d4; }
+        .customer { border-left: 3px solid #10b981; }
+        .marketing { border-left: 3px solid #f59e0b; }
+
+        .milestone {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            color: white;
+        }
+
+        .toggle-btn {
+            background: #f8fafc;
+        }
+
+        .toggle-btn.active {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: #8b5cf6;
+        }
+
+        .phase-header {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .phase-mvp { background: rgba(139,92,246,0.1); color: #7c3aed; }
+        .phase-beta { background: rgba(6,182,212,0.1); color: #0891b2; }
+        .phase-growth { background: rgba(16,185,129,0.1); color: #059669; }
+
+        .month-section {
+            margin-bottom: 16px;
+        }
+
+        .month-header {
+            font-size: 11px;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .track-tab {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.65rem;
+            font-weight: 500;
+            border-radius: 6px;
+        }
+
+        .flip-card {
+            perspective: 1000px;
+            cursor: pointer;
+            height: 160px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 0.75rem;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.5); border-radius: 2px; }
+    </style>
+</head>
+<body class="p-4">
+    <div class="max-w-md mx-auto">
+
+        <!-- Header -->
+        <header class="mb-4">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center font-bold text-lg text-white shadow-lg">K</div>
+                    <div>
+                        <h1 class="text-xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">KARVIA Pro</h1>
+                        <p class="text-xs text-gray-500">2026 Roadmap</p>
+                    </div>
+                </div>
+                <a href="../roadmap.html" class="text-xs text-purple-600 hover:underline">Desktop</a>
+            </div>
+
+            <!-- Navigation -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                    <div class="nav-dot"></div>
+                    <div class="nav-dot"></div>
+                    <div class="nav-dot active"></div>
+                    <div class="nav-dot"></div>
+                </div>
+                <div class="flex items-center gap-2 text-xs">
+                    <a href="index.html" class="text-gray-500">Overview</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="backlog.html" class="text-gray-500">Backlogs</a>
+                    <span class="text-gray-300">|</span>
+                    <span class="font-semibold text-purple-600">Roadmap</span>
+                    <span class="text-gray-300">|</span>
+                    <a href="investment.html" class="text-gray-500">Investment</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Summary Stats -->
+        <div class="flex items-center justify-between mb-4 text-[10px] text-gray-500">
+            <div><span class="text-gray-800 font-semibold">516</span> pts</div>
+            <div><span class="text-gray-800 font-semibold">24</span> items</div>
+            <div class="text-purple-600 font-medium">Team TBD</div>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap gap-1.5 mb-4">
+            <button onclick="toggleFilter('must-have')" class="toggle-btn active px-2 py-1 text-[9px] rounded border border-purple-300 text-purple-700" data-filter="must-have">
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-purple-500 mr-1"></span>Must-Have
+            </button>
+            <button onclick="toggleFilter('nice-to-have')" class="toggle-btn active px-2 py-1 text-[9px] rounded border border-cyan-300 text-cyan-700" data-filter="nice-to-have">
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-cyan-500 mr-1"></span>Nice-to-Have
+            </button>
+            <button onclick="toggleFilter('customer')" class="toggle-btn active px-2 py-1 text-[9px] rounded border border-emerald-300 text-emerald-700" data-filter="customer">
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1"></span>Customer
+            </button>
+            <button onclick="toggleFilter('marketing')" class="toggle-btn active px-2 py-1 text-[9px] rounded border border-amber-300 text-amber-700" data-filter="marketing">
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-500 mr-1"></span>Marketing
+            </button>
+        </div>
+
+        <!-- Phase 1: MVP Testing (Jan-Mar) -->
+        <section class="mb-6">
+            <div class="phase-header phase-mvp flex items-center justify-between">
+                <span>MVP TESTING (3 customers)</span>
+                <span class="milestone text-[8px] px-2 py-0.5 rounded-full">Mar: MVP Complete</span>
+            </div>
+
+            <!-- January -->
+            <div class="month-section">
+                <div class="month-header">January</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="card must-have" data-type="must-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Dashboard</span>
+                            <span class="text-[9px] text-purple-600 font-medium">35 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Task Management</div>
+                    </div>
+                    <div class="card customer" data-type="customer">
+                        <span class="text-[10px] font-semibold text-emerald-600">Survey</span>
+                        <div class="text-[9px] text-gray-500">Pre-launch | 5 pts</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- February -->
+            <div class="month-section">
+                <div class="month-header">February</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="card must-have" data-type="must-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">SSI Report</span>
+                            <span class="text-[9px] text-purple-600 font-medium">20 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Analytics</div>
+                    </div>
+                    <div class="card must-have" data-type="must-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Planning+</span>
+                            <span class="text-[9px] text-purple-600 font-medium">20 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Enhanced AI</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- March -->
+            <div class="month-section">
+                <div class="month-header">March</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="card must-have" data-type="must-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Profiles</span>
+                            <span class="text-[9px] text-purple-600 font-medium">25 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">User + Company</div>
+                    </div>
+                    <div class="card must-have" data-type="must-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Notifications</span>
+                            <span class="text-[9px] text-purple-600 font-medium">25 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Email + In-app</div>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <div class="card marketing" data-type="marketing">
+                        <span class="text-[10px] font-semibold text-amber-600">Beta Launch</span>
+                        <span class="text-[9px] text-gray-500 ml-2">6+ users</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 2: Beta (Apr-Jun) -->
+        <section class="mb-6">
+            <div class="phase-header phase-beta flex items-center justify-between">
+                <span>BETA (6+ customers)</span>
+                <span class="milestone text-[8px] px-2 py-0.5 rounded-full">Jun: GA Launch</span>
+            </div>
+
+            <!-- April -->
+            <div class="month-section">
+                <div class="month-header">April</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="card must-have" data-type="must-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Assess P1</span>
+                            <span class="text-[9px] text-purple-600 font-medium">20 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Individual tying</div>
+                    </div>
+                    <div class="card customer" data-type="customer">
+                        <span class="text-[10px] font-semibold text-emerald-600">Feedback</span>
+                        <div class="text-[9px] text-gray-500">Beta users</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- May -->
+            <div class="month-section">
+                <div class="month-header">May</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="card must-have" data-type="must-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Assess P2</span>
+                            <span class="text-[9px] text-purple-600 font-medium">20 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Team/Function</div>
+                    </div>
+                    <div class="card must-have" data-type="must-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Consult P1</span>
+                            <span class="text-[9px] text-purple-600 font-medium">15 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Dashboard</div>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <div class="card marketing" data-type="marketing">
+                        <span class="text-[10px] font-semibold text-amber-600">GA Prep</span>
+                        <span class="text-[9px] text-gray-500 ml-2">Launch prep</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- June -->
+            <div class="month-section">
+                <div class="month-header">June</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="card must-have" data-type="must-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Consult P2</span>
+                            <span class="text-[9px] text-purple-600 font-medium">15 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Complete</div>
+                    </div>
+                    <div class="card must-have" data-type="must-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">UI P1</span>
+                            <span class="text-[9px] text-purple-600 font-medium">10 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Polish</div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2 mt-2">
+                    <div class="card marketing" data-type="marketing">
+                        <span class="text-[10px] font-semibold text-amber-600">GA Launch</span>
+                        <span class="text-[9px] text-gray-500 ml-1">15 pts</span>
+                    </div>
+                    <div class="card customer" data-type="customer">
+                        <span class="text-[10px] font-semibold text-emerald-600">NPS</span>
+                        <span class="text-[9px] text-gray-500 ml-1">Post-launch</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 3: Growth & Scale (Jul-Dec) -->
+        <section class="mb-6">
+            <div class="phase-header phase-growth flex items-center justify-between">
+                <span>GROWTH & SCALE</span>
+                <span class="milestone text-[8px] px-2 py-0.5 rounded-full">Dec: Full Platform</span>
+            </div>
+
+            <!-- July -->
+            <div class="month-section">
+                <div class="month-header">July</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="card nice-to-have" data-type="nice-to-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Analytics</span>
+                            <span class="text-[9px] text-cyan-600 font-medium">30 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Insights & metrics</div>
+                    </div>
+                    <div class="card customer" data-type="customer">
+                        <span class="text-[10px] font-semibold text-emerald-600">Interviews</span>
+                        <div class="text-[9px] text-gray-500">Q2 review</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- August -->
+            <div class="month-section">
+                <div class="month-header">August</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="card nice-to-have" data-type="nice-to-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Templates</span>
+                            <span class="text-[9px] text-cyan-600 font-medium">15 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Goal library</div>
+                    </div>
+                    <div class="card nice-to-have" data-type="nice-to-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Collaboration</span>
+                            <span class="text-[9px] text-cyan-600 font-medium">25 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Comments, @mentions</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- September -->
+            <div class="month-section">
+                <div class="month-header">September</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="card nice-to-have" data-type="nice-to-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Import/Export</span>
+                            <span class="text-[9px] text-cyan-600 font-medium">15 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">CSV/Excel</div>
+                    </div>
+                    <div class="card nice-to-have" data-type="nice-to-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Slack/Teams</span>
+                            <span class="text-[9px] text-cyan-600 font-medium">20 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Integrations</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- October -->
+            <div class="month-section">
+                <div class="month-header">October</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="card nice-to-have" data-type="nice-to-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Mobile PWA</span>
+                            <span class="text-[9px] text-cyan-600 font-medium">35 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Offline support</div>
+                    </div>
+                    <div class="card marketing" data-type="marketing">
+                        <span class="text-[10px] font-semibold text-amber-600">Case Studies</span>
+                        <div class="text-[9px] text-gray-500">Success stories</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- November -->
+            <div class="month-section">
+                <div class="month-header">November</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="card nice-to-have" data-type="nice-to-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Reports</span>
+                            <span class="text-[9px] text-cyan-600 font-medium">25 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">PDF builder</div>
+                    </div>
+                    <div class="card must-have" data-type="must-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">UI P2</span>
+                            <span class="text-[9px] text-purple-600 font-medium">10 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Final polish</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- December -->
+            <div class="month-section">
+                <div class="month-header">December</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="card nice-to-have" data-type="nice-to-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">Audit Log</span>
+                            <span class="text-[9px] text-cyan-600 font-medium">20 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Compliance</div>
+                    </div>
+                    <div class="card nice-to-have" data-type="nice-to-have">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[10px] font-semibold text-gray-800">API</span>
+                            <span class="text-[9px] text-cyan-600 font-medium">25 pts</span>
+                        </div>
+                        <div class="text-[9px] text-gray-500">Webhooks</div>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <div class="card marketing" data-type="marketing">
+                        <span class="text-[10px] font-semibold text-amber-600">2027 Preview</span>
+                        <span class="text-[9px] text-gray-500 ml-2">Planning</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resource Planning -->
+        <section class="mb-6">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-sm font-semibold text-gray-700">Resource Plan</h2>
+                <div class="flex gap-0.5 bg-gray-100 rounded-lg p-0.5">
+                    <button onclick="switchResourceTrack('bootstrap')" id="track-bootstrap" class="track-tab text-gray-600">Boot</button>
+                    <button onclick="switchResourceTrack('growth')" id="track-growth" class="track-tab bg-emerald-500 text-white">Growth</button>
+                    <button onclick="switchResourceTrack('enterprise')" id="track-enterprise" class="track-tab text-gray-600">Ent</button>
+                </div>
+            </div>
+
+            <!-- Resource Cards - Horizontal Scroll -->
+            <div class="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 snap-x snap-mandatory" id="resource-cards">
+
+                <!-- Stage 1: Testing Phase -->
+                <div class="flip-card min-w-[200px] snap-center flex-shrink-0" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-gradient-to-b from-purple-50 to-white p-3 border border-purple-100">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="text-[10px] font-semibold text-purple-700">Testing</div>
+                                <div class="text-[9px] text-gray-400">Jan-Mar '26</div>
+                            </div>
+                            <div class="text-lg font-bold text-gray-800 mb-1" id="stage1-cost">$14k<span class="text-[9px] font-normal text-gray-400">/mo</span></div>
+                            <div class="space-y-1 text-[9px]">
+                                <div class="flex justify-between"><span class="text-gray-500">PM (You)</span><span>20 hrs</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">Developer</span><span>1</span></div>
+                            </div>
+                            <div class="absolute bottom-2 right-2 text-[8px] text-purple-400">tap to flip</div>
+                        </div>
+                        <div class="flip-card-back bg-gradient-to-b from-purple-100 to-purple-50 p-3 border border-purple-200">
+                            <div class="text-[10px] font-semibold text-purple-700 mb-2">Beta Phase</div>
+                            <div class="space-y-1 text-[9px]">
+                                <div class="flex justify-between"><span>Paying</span><span class="font-semibold">0</span></div>
+                                <div class="flex justify-between"><span>Beta</span><span class="font-semibold text-purple-700">1</span></div>
+                                <div class="flex justify-between"><span>MRR</span><span class="font-bold text-purple-700" id="stage1-mrr">$0</span></div>
+                                <div class="pt-2 border-t border-purple-200 mt-2">
+                                    <div class="flex justify-between"><span>Net</span><span class="font-bold text-red-600" id="stage1-net">-$47,000</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stage 2: 1 → 3 -->
+                <div class="flip-card min-w-[200px] snap-center flex-shrink-0" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-gradient-to-b from-purple-50 to-white p-3 border border-purple-100">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="text-[10px] font-semibold text-purple-700">1 &rarr; 3</div>
+                                <div class="text-[9px] text-gray-400">Apr-Jun</div>
+                            </div>
+                            <div class="text-lg font-bold text-gray-800 mb-1" id="stage2-cost">$21k<span class="text-[9px] font-normal text-gray-400">/mo</span></div>
+                            <div class="space-y-1 text-[9px]">
+                                <div class="flex justify-between"><span class="text-gray-500">PM (You)</span><span>30 hrs</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">Developer</span><span>1</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">Intern</span><span>1</span></div>
+                            </div>
+                            <div class="absolute bottom-2 right-2 text-[8px] text-purple-400">tap to flip</div>
+                        </div>
+                        <div class="flip-card-back bg-gradient-to-b from-purple-100 to-purple-50 p-3 border border-purple-200">
+                            <div class="text-[10px] font-semibold text-purple-700 mb-2">Revenue</div>
+                            <div class="space-y-1 text-[9px]">
+                                <div class="flex justify-between"><span>Customers</span><span class="font-semibold">3</span></div>
+                                <div class="flex justify-between"><span>Users</span><span class="font-semibold text-purple-700">60</span></div>
+                                <div class="flex justify-between"><span>MRR</span><span class="font-bold text-purple-700" id="stage2-mrr">$11,940</span></div>
+                                <div class="pt-2 border-t border-purple-200 mt-2">
+                                    <div class="flex justify-between"><span>Net</span><span class="font-bold text-red-600" id="stage2-net">-$9,060</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stage 3: 3 → 10 -->
+                <div class="flip-card min-w-[200px] snap-center flex-shrink-0" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-gradient-to-b from-cyan-50 to-white p-3 border border-cyan-100">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="text-[10px] font-semibold text-cyan-700">3 &rarr; 10</div>
+                                <div class="text-[9px] text-gray-400">Jul-Sep</div>
+                            </div>
+                            <div class="text-lg font-bold text-gray-800 mb-1" id="stage3-cost">$31k<span class="text-[9px] font-normal text-gray-400">/mo</span></div>
+                            <div class="space-y-1 text-[9px]">
+                                <div class="flex justify-between"><span class="text-gray-500">PM (You)</span><span>40 hrs</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">Developers</span><span>2</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">Designer</span><span>0.5</span></div>
+                            </div>
+                            <div class="absolute bottom-2 right-2 text-[8px] text-cyan-400">tap to flip</div>
+                        </div>
+                        <div class="flip-card-back bg-gradient-to-b from-cyan-100 to-cyan-50 p-3 border border-cyan-200">
+                            <div class="text-[10px] font-semibold text-cyan-700 mb-2">Revenue</div>
+                            <div class="space-y-1 text-[9px]">
+                                <div class="flex justify-between"><span>Customers</span><span class="font-semibold">10</span></div>
+                                <div class="flex justify-between"><span>Users</span><span class="font-semibold text-cyan-700">200</span></div>
+                                <div class="flex justify-between"><span>MRR</span><span class="font-bold text-cyan-700" id="stage3-mrr">$39,800</span></div>
+                                <div class="pt-2 border-t border-cyan-200 mt-2">
+                                    <div class="flex justify-between"><span>Net</span><span class="font-bold text-emerald-600" id="stage3-net">+$8,800</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stage 4: 10 → 25 -->
+                <div class="flip-card min-w-[200px] snap-center flex-shrink-0" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front bg-gradient-to-b from-emerald-50 to-white p-3 border border-emerald-100">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="text-[10px] font-semibold text-emerald-700">10 &rarr; 25</div>
+                                <div class="text-[9px] text-gray-400">Oct-Apr '27</div>
+                            </div>
+                            <div class="text-lg font-bold text-gray-800 mb-1" id="stage4-cost">$37.5k<span class="text-[9px] font-normal text-gray-400">/mo</span></div>
+                            <div class="space-y-1 text-[9px]">
+                                <div class="flex justify-between"><span class="text-gray-500">PM (You)</span><span>40 hrs</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">Developers</span><span>3</span></div>
+                                <div class="flex justify-between"><span class="text-gray-500">Designer</span><span>0.5</span></div>
+                            </div>
+                            <div class="absolute bottom-2 right-2 text-[8px] text-emerald-400">tap to flip</div>
+                        </div>
+                        <div class="flip-card-back bg-gradient-to-b from-emerald-100 to-emerald-50 p-3 border border-emerald-200">
+                            <div class="text-[10px] font-semibold text-emerald-700 mb-2">Revenue</div>
+                            <div class="space-y-1 text-[9px]">
+                                <div class="flex justify-between"><span>Customers</span><span class="font-semibold">25</span></div>
+                                <div class="flex justify-between"><span>Users</span><span class="font-semibold text-emerald-700">500</span></div>
+                                <div class="flex justify-between"><span>MRR</span><span class="font-bold text-emerald-700" id="stage4-mrr">$99,500</span></div>
+                                <div class="pt-2 border-t border-emerald-200 mt-2">
+                                    <div class="flex justify-between"><span>Net</span><span class="font-bold text-emerald-600" id="stage4-net">+$62,000</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Summary Footer -->
+        <footer class="pt-4 border-t border-gray-200">
+            <div class="grid grid-cols-2 gap-2 text-[10px] text-gray-500 mb-3">
+                <div><span class="text-purple-600 font-medium">Must-Have:</span> 215 pts</div>
+                <div><span class="text-cyan-600 font-medium">Nice-to-Have:</span> 210 pts</div>
+                <div><span class="text-emerald-600 font-medium">Customer:</span> 35 pts</div>
+                <div><span class="text-amber-600 font-medium">Marketing:</span> 56 pts</div>
+            </div>
+            <div class="text-center">
+                <a href="index.html" class="text-xs text-purple-600 hover:underline">&larr; Back to Overview</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const activeFilters = new Set(['must-have', 'nice-to-have', 'customer', 'marketing']);
+
+        function toggleFilter(type) {
+            const btn = document.querySelector(`[data-filter="${type}"]`);
+            if (activeFilters.has(type)) {
+                activeFilters.delete(type);
+                btn.classList.remove('active');
+            } else {
+                activeFilters.add(type);
+                btn.classList.add('active');
+            }
+            applyFilters();
+        }
+
+        function applyFilters() {
+            document.querySelectorAll('.card[data-type]').forEach(card => {
+                const type = card.getAttribute('data-type');
+                card.style.display = activeFilters.has(type) ? '' : 'none';
+            });
+        }
+
+        const resourceData = {
+            bootstrap: {
+                stage1: { cost: '$10k', mrr: '$0', net: '-$33,000' },  // Testing phase
+                stage2: { cost: '$12k', mrr: '$3,980', net: '-$8,020' },
+                stage3: { cost: '$14k', mrr: '$39,800', net: '+$25,800' },
+                stage4: { cost: '$16k', mrr: '$59,700', net: '+$43,700' }
+            },
+            growth: {
+                stage1: { cost: '$14k', mrr: '$0', net: '-$47,000' },  // Testing phase
+                stage2: { cost: '$21k', mrr: '$11,940', net: '-$9,060' },
+                stage3: { cost: '$31k', mrr: '$39,800', net: '+$8,800' },
+                stage4: { cost: '$37.5k', mrr: '$99,500', net: '+$62,000' }
+            },
+            enterprise: {
+                stage1: { cost: '$14k', mrr: '$0', net: '-$47,000' },  // Testing phase
+                stage2: { cost: '$35k', mrr: '$11,940', net: '-$23,060' },
+                stage3: { cost: '$50k', mrr: '$47,760', net: '-$2,240' },
+                stage4: { cost: '$65k', mrr: '$159,200', net: '+$94,200' }
+            }
+        };
+
+        function switchResourceTrack(track) {
+            const data = resourceData[track];
+            const tabs = ['bootstrap', 'growth', 'enterprise'];
+            const colors = { bootstrap: 'amber', growth: 'emerald', enterprise: 'indigo' };
+
+            tabs.forEach(t => {
+                const tab = document.getElementById('track-' + t);
+                if (t === track) {
+                    tab.classList.add('bg-' + colors[t] + '-500', 'text-white');
+                    tab.classList.remove('text-gray-600');
+                } else {
+                    tab.classList.remove('bg-' + colors[t] + '-500', 'text-white');
+                    tab.classList.add('text-gray-600');
+                }
+            });
+
+            // Update values
+            for (let i = 1; i <= 4; i++) {
+                const stage = data['stage' + i];
+                document.getElementById('stage' + i + '-cost').innerHTML = stage.cost + '<span class="text-[9px] font-normal text-gray-400">/mo</span>';
+                document.getElementById('stage' + i + '-mrr').textContent = stage.mrr;
+                const netEl = document.getElementById('stage' + i + '-net');
+                netEl.textContent = stage.net;
+                netEl.className = stage.net.startsWith('+') ? 'font-bold text-emerald-600' : 'font-bold text-red-600';
+            }
+        }
+    </script>
+</body>
+</html>

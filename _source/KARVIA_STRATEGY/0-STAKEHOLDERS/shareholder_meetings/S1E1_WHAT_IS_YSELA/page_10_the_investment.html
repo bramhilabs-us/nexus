@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E1 - Page 10: The Investment | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 20px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: #888; text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .section-badge {
+            display: inline-block;
+            background: #FEF3C7;
+            color: #D97706;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-bottom: 4px;
+        }
+
+        /* Main Content */
+        .content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-intro {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 300;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+
+        .section-title em {
+            font-style: normal;
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        .flip-hint {
+            font-size: 11px;
+            color: #888;
+        }
+
+        /* Flip Card Container */
+        .tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            flex: 1;
+        }
+
+        /* Flip Card */
+        .flip-card {
+            perspective: 1500px;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Front - Tier Info */
+        .flip-card-front {
+            background: #FAFAFA;
+            border: 2px solid #F0F0F0;
+        }
+
+        .flip-card.recommended .flip-card-front {
+            border-color: #10B981;
+            background: linear-gradient(180deg, #ECFDF5 0%, #FFFFFF 100%);
+        }
+
+        /* Back - Cost Breakdown */
+        .flip-card-back {
+            background: #1a1a2e;
+            transform: rotateY(180deg);
+            color: white;
+        }
+
+        .flip-card.recommended .flip-card-back {
+            background: linear-gradient(180deg, #065F46 0%, #1a1a2e 100%);
+        }
+
+        .flip-card:nth-child(3) .flip-card-back {
+            background: linear-gradient(180deg, #4F46E5 0%, #1a1a2e 100%);
+        }
+
+        /* Front Content */
+        .recommended-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10B981;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 16px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tier-header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .tier-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin: 0 auto 10px;
+        }
+
+        .flip-card:nth-child(1) .tier-icon { background: #FEF3C7; }
+        .flip-card:nth-child(2) .tier-icon { background: #D1FAE5; }
+        .flip-card:nth-child(3) .tier-icon { background: #EDE9FE; }
+
+        .tier-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 2px;
+        }
+
+        .tier-tagline {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .tier-price {
+            text-align: center;
+            padding: 12px 0;
+            border-top: 1px solid #E5E7EB;
+            border-bottom: 1px solid #E5E7EB;
+            margin-bottom: 12px;
+        }
+
+        .price-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .price-period {
+            font-size: 10px;
+            color: #888;
+        }
+
+        .price-note {
+            font-size: 9px;
+            color: #C9A227;
+            margin-top: 2px;
+        }
+
+        .tier-features {
+            flex: 1;
+        }
+
+        .feature-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 0;
+            font-size: 11px;
+            color: #444;
+        }
+
+        .feature-check {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            flex-shrink: 0;
+        }
+
+        .feature-check.yes { background: #D1FAE5; color: #059669; }
+        .feature-check.no { background: #F3F4F6; color: #9CA3AF; }
+
+        .tier-outcome {
+            margin-top: 12px;
+            padding: 10px;
+            background: rgba(201, 162, 39, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .outcome-label {
+            font-size: 8px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .outcome-value {
+            font-size: 12px;
+            font-weight: 600;
+            color: #C9A227;
+        }
+
+        /* Back Content - Cost Breakdown */
+        .back-header {
+            text-align: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .back-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .back-total {
+            font-size: 28px;
+            font-weight: 700;
+            color: #C9A227;
+        }
+
+        .cost-breakdown {
+            flex: 1;
+        }
+
+        .cost-section {
+            margin-bottom: 14px;
+        }
+
+        .cost-section-header {
+            font-size: 9px;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 11px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .cost-row:last-child {
+            border-bottom: none;
+        }
+
+        .cost-label {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .cost-value {
+            color: white;
+            font-weight: 600;
+        }
+
+        .cost-total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            margin-top: 10px;
+            border-top: 2px solid rgba(255,255,255,0.3);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .cost-total-row .cost-label {
+            color: white;
+        }
+
+        .cost-total-row .cost-value {
+            color: #C9A227;
+            font-size: 16px;
+        }
+
+        .back-note {
+            font-size: 9px;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            margin-top: auto;
+            padding-top: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .next { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 20px; gap: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .page-indicator { text-align: left; }
+            .section-title { font-size: 22px; }
+            .tiers { grid-template-columns: 1fr; gap: 20px; }
+            .flip-card { height: 400px; }
+            .flip-card-front, .flip-card-back { padding: 20px; }
+            .price-amount { font-size: 28px; }
+            .tier-name { font-size: 16px; }
+            .back-total { font-size: 24px; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .section-title { font-size: 20px; }
+            .flip-card { height: 380px; }
+            .price-amount { font-size: 24px; }
+            .tier-icon { width: 40px; height: 40px; font-size: 18px; }
+            .feature-row { font-size: 10px; }
+            .back-total { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E1: What Is YSELA, Really?</div>
+            </div>
+            <div class="page-indicator">
+                <div class="section-badge">Section 3: Business</div>
+                <div>Page <span class="current">10</span> of 12</div>
+                <div style="margin-top: 4px; color: #1a1a2e; font-weight: 500;">The Investment</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="section-intro">
+                <div class="section-title">Three paths. One <em>choice</em>.</div>
+                <div class="flip-hint">Hover each card to see cost breakdown</div>
+            </div>
+
+            <div class="tiers">
+                <!-- Production Ready -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="tier-header">
+                                <div class="tier-icon">🚀</div>
+                                <div class="tier-name">Production Ready</div>
+                                <div class="tier-tagline">Hardening only</div>
+                            </div>
+
+                            <div class="tier-price">
+                                <div class="price-amount">$450K</div>
+                                <div class="price-period">Total by Jun 2027</div>
+                                <div class="price-note">$150K MVP + $300K</div>
+                            </div>
+
+                            <div class="tier-features">
+                                <div class="feature-row">
+                                    <span class="feature-check yes">✓</span>
+                                    Security hardening
+                                </div>
+                                <div class="feature-row">
+                                    <span class="feature-check yes">✓</span>
+                                    Monitoring & backups
+                                </div>
+                                <div class="feature-row">
+                                    <span class="feature-check yes">✓</span>
+                                    Basic compliance
+                                </div>
+                                <div class="feature-row">
+                                    <span class="feature-check no">–</span>
+                                    <span style="color: #9CA3AF;">Gamification</span>
+                                </div>
+                                <div class="feature-row">
+                                    <span class="feature-check no">–</span>
+                                    <span style="color: #9CA3AF;">SOC 2</span>
+                                </div>
+                            </div>
+
+                            <div class="tier-outcome">
+                                <div class="outcome-label">You Get</div>
+                                <div class="outcome-value">Deployable Product</div>
+                            </div>
+                        </div>
+
+                        <div class="flip-card-back">
+                            <div class="back-header">
+                                <div class="back-title">Production Ready</div>
+                                <div class="back-total">$300K</div>
+                            </div>
+
+                            <div class="cost-breakdown">
+                                <div class="cost-section">
+                                    <div class="cost-section-header">Human Resources</div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">Senior Dev (2)</span>
+                                        <span class="cost-value">$120K</span>
+                                    </div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">DevOps Engineer</span>
+                                        <span class="cost-value">$50K</span>
+                                    </div>
+                                </div>
+
+                                <div class="cost-section">
+                                    <div class="cost-section-header">Infrastructure</div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">Cloud (AWS/GCP)</span>
+                                        <span class="cost-value">$40K</span>
+                                    </div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">Security Tools</span>
+                                        <span class="cost-value">$30K</span>
+                                    </div>
+                                </div>
+
+                                <div class="cost-section">
+                                    <div class="cost-section-header">Operations</div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">Monitoring Stack</span>
+                                        <span class="cost-value">$20K</span>
+                                    </div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">Buffer</span>
+                                        <span class="cost-value">$40K</span>
+                                    </div>
+                                </div>
+
+                                <div class="cost-section">
+                                    <div class="cost-section-header">Founder Oversight</div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">~48 hrs/mo × $250/hr</span>
+                                        <span class="cost-value" style="color: rgba(255,255,255,0.5);">~$12K/mo</span>
+                                    </div>
+                                    <div class="cost-row" style="border-bottom: none;">
+                                        <span class="cost-label" style="font-style: italic; font-size: 9px;">Not included in investment</span>
+                                        <span class="cost-value"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cost-total-row">
+                                <span class="cost-label">New Investment</span>
+                                <span class="cost-value">$300K</span>
+                            </div>
+
+                            <div class="back-note">+ $150K MVP already invested</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scale Ready -->
+                <div class="flip-card recommended">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="recommended-badge">Recommended</div>
+                            <div class="tier-header">
+                                <div class="tier-icon">📈</div>
+                                <div class="tier-name">Scale Ready</div>
+                                <div class="tier-tagline">Full platform</div>
+                            </div>
+
+                            <div class="tier-price">
+                                <div class="price-amount">$800K</div>
+                                <div class="price-period">Total by Jun 2027</div>
+                                <div class="price-note">$150K MVP + $650K</div>
+                            </div>
+
+                            <div class="tier-features">
+                                <div class="feature-row">
+                                    <span class="feature-check yes">✓</span>
+                                    Everything in Production
+                                </div>
+                                <div class="feature-row">
+                                    <span class="feature-check yes">✓</span>
+                                    Gamification & Engagement
+                                </div>
+                                <div class="feature-row">
+                                    <span class="feature-check yes">✓</span>
+                                    SOC 2 Type II
+                                </div>
+                                <div class="feature-row">
+                                    <span class="feature-check yes">✓</span>
+                                    Culture Score
+                                </div>
+                                <div class="feature-row">
+                                    <span class="feature-check no">–</span>
+                                    <span style="color: #9CA3AF;">Private AI</span>
+                                </div>
+                            </div>
+
+                            <div class="tier-outcome">
+                                <div class="outcome-label">You Get</div>
+                                <div class="outcome-value">Market-Ready SaaS</div>
+                            </div>
+                        </div>
+
+                        <div class="flip-card-back">
+                            <div class="back-header">
+                                <div class="back-title">Scale Ready</div>
+                                <div class="back-total">$650K</div>
+                            </div>
+
+                            <div class="cost-breakdown">
+                                <div class="cost-section">
+                                    <div class="cost-section-header">Human Resources</div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">Dev Team (4)</span>
+                                        <span class="cost-value">$200K</span>
+                                    </div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">DevOps & QA</span>
+                                        <span class="cost-value">$80K</span>
+                                    </div>
+                                </div>
+
+                                <div class="cost-section">
+                                    <div class="cost-section-header">Infrastructure</div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">Cloud Infrastructure</span>
+                                        <span class="cost-value">$80K</span>
+                                    </div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">SOC 2 Certification</span>
+                                        <span class="cost-value">$80K</span>
+                                    </div>
+                                </div>
+
+                                <div class="cost-section">
+                                    <div class="cost-section-header">Operations</div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">Tools & Licenses</span>
+                                        <span class="cost-value">$60K</span>
+                                    </div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">Buffer (20%)</span>
+                                        <span class="cost-value">$150K</span>
+                                    </div>
+                                </div>
+
+                                <div class="cost-section">
+                                    <div class="cost-section-header">Founder Oversight</div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">~48 hrs/mo × $250/hr</span>
+                                        <span class="cost-value" style="color: rgba(255,255,255,0.5);">~$12K/mo</span>
+                                    </div>
+                                    <div class="cost-row" style="border-bottom: none;">
+                                        <span class="cost-label" style="font-style: italic; font-size: 9px;">Not included in investment</span>
+                                        <span class="cost-value"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cost-total-row">
+                                <span class="cost-label">New Investment</span>
+                                <span class="cost-value">$650K</span>
+                            </div>
+
+                            <div class="back-note">Break-even by Feb 2027</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enterprise Ready -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="tier-header">
+                                <div class="tier-icon">🏢</div>
+                                <div class="tier-name">Enterprise Ready</div>
+                                <div class="tier-tagline">Full scale + Private AI</div>
+                            </div>
+
+                            <div class="tier-price">
+                                <div class="price-amount">$1.65M</div>
+                                <div class="price-period">Total by Jun 2027</div>
+                                <div class="price-note">$150K MVP + $1.5M</div>
+                            </div>
+
+                            <div class="tier-features">
+                                <div class="feature-row">
+                                    <span class="feature-check yes">✓</span>
+                                    Everything in Scale
+                                </div>
+                                <div class="feature-row">
+                                    <span class="feature-check yes">✓</span>
+                                    AI Coaching & Insights
+                                </div>
+                                <div class="feature-row">
+                                    <span class="feature-check yes">✓</span>
+                                    HIPAA preparation
+                                </div>
+                                <div class="feature-row">
+                                    <span class="feature-check yes">✓</span>
+                                    Multi-region deploy
+                                </div>
+                                <div class="feature-row">
+                                    <span class="feature-check yes">✓</span>
+                                    SSO/SAML + Audit
+                                </div>
+                                <div class="feature-row">
+                                    <span class="feature-check yes">✓</span>
+                                    <span style="color: #C9A227; font-weight: 600;">Self-hosted LLM</span>
+                                </div>
+                            </div>
+
+                            <div class="tier-outcome">
+                                <div class="outcome-label">You Get</div>
+                                <div class="outcome-value">Enterprise SaaS + Private AI</div>
+                            </div>
+                        </div>
+
+                        <div class="flip-card-back">
+                            <div class="back-header">
+                                <div class="back-title">Enterprise Ready</div>
+                                <div class="back-total">$1.5M</div>
+                            </div>
+
+                            <div class="cost-breakdown">
+                                <div class="cost-section">
+                                    <div class="cost-section-header">Human Resources</div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">Dev Team (6)</span>
+                                        <span class="cost-value">$300K</span>
+                                    </div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">ML Engineers (2)</span>
+                                        <span class="cost-value">$150K</span>
+                                    </div>
+                                </div>
+
+                                <div class="cost-section">
+                                    <div class="cost-section-header">Self-Hosted LLM</div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">GPU Infrastructure</span>
+                                        <span class="cost-value">$150K</span>
+                                    </div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">Fine-tuning & Training</span>
+                                        <span class="cost-value">$100K</span>
+                                    </div>
+                                </div>
+
+                                <div class="cost-section">
+                                    <div class="cost-section-header">Enterprise & Ops</div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">Compliance (HIPAA, SOC)</span>
+                                        <span class="cost-value">$200K</span>
+                                    </div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">Multi-region Infra</span>
+                                        <span class="cost-value">$200K</span>
+                                    </div>
+                                    <div class="cost-row">
+                                        <span class="cost-label">Buffer (20%)</span>
+                                        <span class="cost-value">$300K</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cost-total-row">
+                                <span class="cost-label">New Investment</span>
+                                <span class="cost-value">$1.5M</span>
+                            </div>
+
+                            <div class="back-note">Includes private AI infrastructure</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_9_enterprise_ready.html">&larr; Enterprise Ready</a>
+                <a href="page_11_the_math.html" class="next">Next: The Math &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

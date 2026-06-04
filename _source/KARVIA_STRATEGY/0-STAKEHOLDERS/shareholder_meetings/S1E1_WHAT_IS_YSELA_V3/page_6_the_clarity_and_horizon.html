@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E1 - Page 6: The Build Sequence | YSELA.AI</title>
+    <style>
+        @page {
+            size: landscape;
+            margin: 0;
+        }
+        @media print {
+            html, body {
+                width: 100%;
+                height: 100%;
+            }
+            .page {
+                height: 100%;
+                page-break-after: avoid;
+            }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto 1fr auto auto;
+            gap: 24px;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator {
+            font-size: 12px;
+            color: #888;
+            text-align: right;
+        }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+
+        /* Main Content Area */
+        .left-col, .center-col, .right-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Left - The Clarity */
+        .section-header {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .clarity-intro {
+            font-size: 15px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .clarity-intro em {
+            font-style: normal;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        .clarity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding: 14px;
+            background: #FAFAFA;
+            border-radius: 12px;
+            border: 1px solid #F0F0F0;
+        }
+
+        .clarity-icon {
+            width: 36px;
+            height: 36px;
+            background: #E8F5E9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #2E7D32;
+            flex-shrink: 0;
+        }
+
+        .clarity-content {
+            flex: 1;
+        }
+
+        .clarity-stat {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 2px;
+        }
+
+        .clarity-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Center - The Horizon */
+        .horizon-intro {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .horizon-item {
+            padding: 16px;
+            background: #FAFAFA;
+            border-radius: 14px;
+            border: 1px solid #F0F0F0;
+            margin-bottom: 14px;
+        }
+
+        .horizon-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .horizon-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .horizon-item.ibrain .horizon-icon { background: #EEF2FF; }
+        .horizon-item.culture .horizon-icon { background: #E8F5E9; }
+        .horizon-item.attention .horizon-icon { background: #FEF3C7; }
+
+        .horizon-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .horizon-desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .horizon-note {
+            font-size: 10px;
+            color: #888;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* Right - The Promise */
+        .promise-box {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .promise-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .promise-text {
+            font-size: 14px;
+            color: white;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .promise-text em {
+            font-style: normal;
+            color: #C9A227;
+        }
+
+        .promise-text .highlight {
+            display: block;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 13px;
+        }
+
+        .closing-note {
+            background: #FAFAFA;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .closing-text {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .closing-text strong {
+            color: #1a1a2e;
+        }
+
+        /* Promise Section - Bottom */
+        .promise-section {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px 0;
+            border-top: 1px solid #F0F0F0;
+        }
+
+        .final-message {
+            text-align: center;
+            max-width: 700px;
+        }
+
+        .final-question {
+            font-size: 18px;
+            color: #888;
+            font-weight: 300;
+            margin-bottom: 8px;
+        }
+
+        .final-answer {
+            font-size: 22px;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        .final-answer em {
+            font-style: normal;
+            color: #C9A227;
+        }
+
+        /* Footer */
+        .footer {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-nav a {
+            color: #888;
+            text-decoration: none;
+        }
+
+        .footer-nav a:hover {
+            color: #C9A227;
+        }
+
+        .footer-nav .complete {
+            color: #C9A227;
+            font-weight: 500;
+        }
+        .footer-nav .next {
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 20px; grid-template-columns: 1fr; gap: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .page-indicator { text-align: left; }
+            .left-col, .center-col, .right-col { grid-column: 1; }
+            .clarity-stat { font-size: 16px; }
+            .horizon-item { padding: 14px; }
+            .horizon-name { font-size: 13px; }
+            .promise-box { padding: 18px; }
+            .promise-text { font-size: 13px; }
+            .final-question { font-size: 14px; }
+            .final-answer { font-size: 18px; }
+            .promise-section { padding: 12px 0; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .clarity-stat { font-size: 14px; }
+            .clarity-desc { font-size: 11px; }
+            .horizon-desc { font-size: 11px; }
+            .promise-text { font-size: 12px; }
+            .final-question { font-size: 12px; }
+            .final-answer { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E1: Strategic Overview V3</div>
+            </div>
+            <div class="page-indicator">
+                <div>Page <span class="current">6</span> of 6</div>
+                <div style="margin-top: 4px; color: #1a1a2e; font-weight: 500;">The Build Sequence</div>
+            </div>
+        </header>
+
+        <!-- Left - The Clarity -->
+        <div class="left-col">
+            <div class="section-header">What We Know</div>
+
+            <div class="clarity-intro">
+                Principles keep evolving.<br>
+                That is the point—<em>test and learn</em>.
+            </div>
+
+            <div class="clarity-item">
+                <div class="clarity-icon">&#10003;</div>
+                <div class="clarity-content">
+                    <div class="clarity-stat">Tool advantage compresses</div>
+                    <div class="clarity-desc">AI commoditizes execution. Human coordination does not.</div>
+                </div>
+            </div>
+
+            <div class="clarity-item">
+                <div class="clarity-icon">&#10003;</div>
+                <div class="clarity-content">
+                    <div class="clarity-stat">Formation beats structure alone</div>
+                    <div class="clarity-desc">EOS gives structure. We build the behaviors it cannot change.</div>
+                </div>
+            </div>
+
+            <div class="clarity-item">
+                <div class="clarity-icon">&#10003;</div>
+                <div class="clarity-content">
+                    <div class="clarity-stat">Self-reflection, not surveillance</div>
+                    <div class="clarity-desc">Motivation through awareness, not tracking.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center - The Horizon -->
+        <div class="center-col">
+            <div class="section-header">Beta Test Plan</div>
+
+            <div class="horizon-intro">
+                We need to answer one question first:<br>
+                Does gamification improve retention?
+            </div>
+
+            <div class="horizon-item ibrain">
+                <div class="horizon-header">
+                    <div class="horizon-icon">A</div>
+                    <div class="horizon-name">Group A: SSI Only</div>
+                </div>
+                <div class="horizon-desc">
+                    Assessments. Reflection. Conversations. No gamification.
+                </div>
+                <div class="horizon-note">Baseline for engagement and retention.</div>
+            </div>
+
+            <div class="horizon-item culture">
+                <div class="horizon-header">
+                    <div class="horizon-icon">B</div>
+                    <div class="horizon-name">Group B: SSI + Culture + Gamification</div>
+                </div>
+                <div class="horizon-desc">
+                    Add Culture Score. Add iBrain gamification engine. Minimize friction.
+                </div>
+                <div class="horizon-note">Test whether reinforcement changes behavior.</div>
+            </div>
+
+            <div class="horizon-item attention">
+                <div class="horizon-header">
+                    <div class="horizon-icon">&#10003;</div>
+                    <div class="horizon-name">Measure What Matters</div>
+                </div>
+                <div class="horizon-desc">
+                    Retention. Follow-through. Team trust scores. Behavioral change over time.
+                </div>
+                <div class="horizon-note">Real teams. Real feedback. Then expand.</div>
+            </div>
+        </div>
+
+        <!-- Right - The Promise -->
+        <div class="right-col">
+            <div class="section-header">Gamification</div>
+
+            <div class="promise-box">
+                <div class="promise-label">What It Means</div>
+                <div class="promise-text">
+                    Gamification = minimize human friction.<br>
+                    Between teams. Within teams.<br><br>
+                    iBrain is a series of ML models that surface the right nudge at the right time.
+
+                    <span class="highlight">
+                        It is not a game. It is a system<br>
+                        that makes follow-through easier.
+                    </span>
+                </div>
+            </div>
+
+            <div class="closing-note">
+                <div class="closing-text">
+                    <strong>The value is behavioral change.</strong><br>
+                    Teams that follow through. Owners who trust.
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Promise Section -->
+        <div class="promise-section">
+            <div class="final-message">
+                <div class="final-question">What are we building?</div>
+                <div class="final-answer">The <em>Human Efficiency Operating System</em> for small businesses.</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_5_the_connection.html">&larr; The Product Bridge</a>
+                <a href="index.html" class="complete">Back to Contents &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

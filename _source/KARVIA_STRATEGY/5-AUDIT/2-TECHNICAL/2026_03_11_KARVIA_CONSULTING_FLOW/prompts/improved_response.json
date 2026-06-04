@@ -1,0 +1,162 @@
+[
+  {
+    "title": "Standardize AI Delivery to Enhance Client Satisfaction",
+    "description": "Develop and implement standardized delivery playbooks to improve client satisfaction and project outcomes.",
+    "category": "operations",
+    "priority": "high",
+    "key_results": [
+      {
+        "title": "Increase delivery satisfaction score from 5.3 to 6.3",
+        "metric_type": "number",
+        "target_value": 6.3,
+        "current_value": 5.3,
+        "unit": "score",
+        "quarter": 1
+      },
+      {
+        "title": "Reduce project variance from 15% to 10%",
+        "metric_type": "percentage",
+        "target_value": 10,
+        "current_value": 15,
+        "unit": "percentage",
+        "quarter": 2
+      },
+      {
+        "title": "Improve on-time delivery from 82% to 90%",
+        "metric_type": "percentage",
+        "target_value": 90,
+        "current_value": 82,
+        "unit": "percentage",
+        "quarter": 3
+      },
+      {
+        "title": "Decrease client escalations from 12 to 5",
+        "metric_type": "number",
+        "target_value": 5,
+        "current_value": 12,
+        "unit": "incidents",
+        "quarter": 4
+      }
+    ]
+  },
+  {
+    "title": "Enhance Strategic Planning Through Client Roadmaps",
+    "description": "Develop comprehensive client roadmap frameworks to improve strategic engagement and value delivery.",
+    "category": "innovation",
+    "priority": "high",
+    "key_results": [
+      {
+        "title": "Increase strategy alignment score from 5.0 to 6.0",
+        "metric_type": "number",
+        "target_value": 6.0,
+        "current_value": 5.0,
+        "unit": "score",
+        "quarter": 1
+      },
+      {
+        "title": "Increase client roadmap adoption from 30% to 60%",
+        "metric_type": "percentage",
+        "target_value": 60,
+        "current_value": 30,
+        "unit": "percentage",
+        "quarter": 2
+      },
+      {
+        "title": "Increase recurring AI advisory revenue from 20% to 30%",
+        "metric_type": "percentage",
+        "target_value": 30,
+        "current_value": 20,
+        "unit": "percentage",
+        "quarter": 3
+      },
+      {
+        "title": "Increase client retention rate from 88% to 92%",
+        "metric_type": "percentage",
+        "target_value": 92,
+        "current_value": 88,
+        "unit": "percentage",
+        "quarter": 4
+      }
+    ]
+  },
+  {
+    "title": "Leverage Data Analytics for Improved Decision-Making",
+    "description": "Build KPI dashboards and implement data-driven decision protocols at KARVIA Consulting.",
+    "category": "innovation",
+    "priority": "medium",
+    "key_results": [
+      {
+        "title": "Increase data-driven decision score from 5.2 to 6.2",
+        "metric_type": "number",
+        "target_value": 6.2,
+        "current_value": 5.2,
+        "unit": "score",
+        "quarter": 1
+      },
+      {
+        "title": "Reduce decision-making time from 10 days to 6 days",
+        "metric_type": "number",
+        "target_value": 6,
+        "current_value": 10,
+        "unit": "days",
+        "quarter": 2
+      },
+      {
+        "title": "Improve KPI dashboard adoption from 40% to 75%",
+        "metric_type": "percentage",
+        "target_value": 75,
+        "current_value": 40,
+        "unit": "percentage",
+        "quarter": 3
+      },
+      {
+        "title": "Increase clients per advisor from 7 to 8.5",
+        "metric_type": "number",
+        "target_value": 8.5,
+        "current_value": 7,
+        "unit": "clients",
+        "quarter": 4
+      }
+    ]
+  },
+  {
+    "title": "Deepen Market Insights for Targeted Client Engagement",
+    "description": "Enhance client insights and segmentation to increase market intelligence and client engagement.",
+    "category": "growth",
+    "priority": "medium",
+    "key_results": [
+      {
+        "title": "Increase market insight score from 5.1 to 6.1",
+        "metric_type": "number",
+        "target_value": 6.1,
+        "current_value": 5.1,
+        "unit": "score",
+        "quarter": 1
+      },
+      {
+        "title": "Decrease top-5 client concentration from 43% to 39%",
+        "metric_type": "percentage",
+        "target_value": 39,
+        "current_value": 43,
+        "unit": "percentage",
+        "quarter": 2
+      },
+      {
+        "title": "Increase total client accounts from 84 to 92",
+        "metric_type": "number",
+        "target_value": 92,
+        "current_value": 84,
+        "unit": "clients",
+        "quarter": 3
+      },
+      {
+        "title": "Increase revenue growth from 9.2% to 15%",
+        "metric_type": "percentage",
+        "target_value": 15,
+        "current_value": 9.2,
+        "unit": "percentage",
+        "quarter": 4
+      }
+    ]
+  }
+]

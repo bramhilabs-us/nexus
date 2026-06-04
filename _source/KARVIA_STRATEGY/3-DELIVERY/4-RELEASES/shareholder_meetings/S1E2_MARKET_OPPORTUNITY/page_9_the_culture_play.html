@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E2 - Page 9: The Culture Play | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 30px 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr auto;
+            gap: 16px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: #888; text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .page-title { margin-top: 4px; color: #1a1a2e; font-weight: 500; }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+        }
+
+        /* Left - Concentric Circles */
+        .circles-container {
+            position: relative;
+            width: 550px;
+            height: 550px;
+            flex-shrink: 0;
+            margin-left: 20px;
+        }
+
+        /* Outer circle - Embedded Culture */
+        .circle-long {
+            position: absolute;
+            width: 550px;
+            height: 550px;
+            border: 2px dashed #E0E0E0;
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+        }
+
+        .circle-label {
+            position: absolute;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 6px 14px;
+            border-radius: 12px;
+        }
+
+        .circle-long .circle-label {
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #F5F5F5;
+            color: #888;
+        }
+
+        .circle-long .circle-feature {
+            position: absolute;
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+            max-width: 90px;
+            line-height: 1.4;
+        }
+
+        .circle-long .feature-top {
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .circle-long .feature-left {
+            top: 50%;
+            left: -80px;
+            transform: translateY(-50%);
+        }
+
+        .circle-long .feature-right {
+            top: 50%;
+            right: -80px;
+            transform: translateY(-50%);
+        }
+
+        .circle-long .feature-bottom {
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Middle circle - Culture Conditions */
+        .circle-medium {
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            border: 2px dashed #C9A227;
+            border-radius: 50%;
+            top: 85px;
+            left: 85px;
+        }
+
+        .circle-medium .circle-label {
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .circle-medium .circle-feature {
+            position: absolute;
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+            max-width: 70px;
+            line-height: 1.3;
+        }
+
+        .circle-medium .feature-top-left {
+            top: 55px;
+            left: 55px;
+        }
+
+        .circle-medium .feature-top-right {
+            top: 55px;
+            right: 55px;
+        }
+
+        .circle-medium .feature-bottom-left {
+            bottom: 55px;
+            left: 55px;
+        }
+
+        .circle-medium .feature-bottom-right {
+            bottom: 55px;
+            right: 55px;
+        }
+
+        /* Inner circle - The Cycle */
+        .circle-now {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background: #1a1a2e;
+            border-radius: 50%;
+            top: 185px;
+            left: 185px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(26, 26, 46, 0.2);
+        }
+
+        .cycle-label {
+            font-size: 9px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .cycle-text {
+            font-size: 15px;
+            color: white;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .cycle-text em {
+            font-style: normal;
+            color: #C9A227;
+        }
+
+        /* Cycle Steps - positioned in outer ring */
+        .cycle-step {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .cycle-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 2px solid #1a1a2e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .cycle-icon.active {
+            background: #C9A227;
+            border-color: #C9A227;
+        }
+
+        .cycle-name {
+            font-size: 11px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .cycle-desc {
+            font-size: 9px;
+            color: #888;
+            text-align: center;
+            max-width: 75px;
+        }
+
+        /* Position cycle steps in the outer ring (between outer and middle circles) */
+        .step-assess { top: 50px; left: 50%; transform: translateX(-50%); }
+        .step-aim { top: 50%; right: 15px; transform: translateY(-50%); }
+        .step-plan { bottom: 50px; right: 90px; }
+        .step-play { bottom: 50px; left: 90px; }
+        .step-discover { top: 50%; left: 15px; transform: translateY(-50%); }
+
+        /* Right Side - Summary Cards */
+        .summary-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 400px;
+        }
+
+        .summary-header {
+            font-size: 11px;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .summary-card {
+            background: #FAFAFA;
+            border-radius: 14px;
+            padding: 16px 20px;
+            border: 1px solid #F0F0F0;
+            margin-bottom: 12px;
+        }
+
+        .summary-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .summary-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .summary-dot.now { background: #1a1a2e; }
+        .summary-dot.medium { background: #C9A227; }
+        .summary-dot.long { background: #E0E0E0; }
+
+        .summary-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .summary-text {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .summary-text em {
+            font-style: normal;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        .transformation-box {
+            background: #1a1a2e;
+            border-radius: 14px;
+            padding: 20px;
+            margin-top: 8px;
+        }
+
+        .transformation-label {
+            font-size: 9px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+
+        .transformation-text {
+            font-size: 16px;
+            color: white;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .transformation-text em {
+            font-style: normal;
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .complete { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 24px; }
+            .main-content { flex-direction: column; gap: 30px; }
+            .circles-container { width: 420px; height: 420px; margin-left: 0; }
+            .circle-long { width: 420px; height: 420px; }
+            .circle-medium { width: 290px; height: 290px; top: 65px; left: 65px; }
+            .circle-now { width: 140px; height: 140px; top: 140px; left: 140px; }
+            .summary-col { max-width: 100%; }
+            .step-assess { top: 35px; }
+            .step-aim { right: 10px; }
+            .step-plan { bottom: 35px; right: 65px; }
+            .step-play { bottom: 35px; left: 65px; }
+            .step-discover { left: 10px; }
+        }
+
+        @media (max-width: 768px) {
+            .page { padding: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .circles-container { width: 340px; height: 340px; }
+            .circle-long { width: 340px; height: 340px; }
+            .circle-medium { width: 230px; height: 230px; top: 55px; left: 55px; }
+            .circle-now { width: 110px; height: 110px; top: 115px; left: 115px; }
+            .step-assess { top: 25px; }
+            .step-aim { right: 5px; }
+            .step-plan { bottom: 25px; right: 50px; }
+            .step-play { bottom: 25px; left: 50px; }
+            .step-discover { left: 5px; }
+            .cycle-step { gap: 2px; }
+            .cycle-icon { width: 32px; height: 32px; font-size: 14px; }
+            .cycle-name { font-size: 9px; }
+            .cycle-desc { display: none; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E2: Market Opportunity</div>
+            </div>
+            <div class="page-indicator">
+                <div>Page <span class="current">9</span> of 9</div>
+                <div class="page-title">The Culture Play</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Concentric Circles -->
+            <div class="circles-container">
+                <!-- Outer: Embedded Culture -->
+                <div class="circle-long">
+                    <div class="circle-label">Embedded Culture</div>
+                    <div class="circle-feature feature-top">Team<br>Rituals</div>
+                    <div class="circle-feature feature-left">New Hires<br>Learn It</div>
+                    <div class="circle-feature feature-right">Ownership<br>Is Normal</div>
+                    <div class="circle-feature feature-bottom">Culture<br>Spreads</div>
+                </div>
+
+                <!-- Middle: Culture Conditions -->
+                <div class="circle-medium">
+                    <div class="circle-label">Culture Conditions</div>
+                    <div class="circle-feature feature-top-left">Interest<br>Pods</div>
+                    <div class="circle-feature feature-top-right">Walking<br>Meetings</div>
+                    <div class="circle-feature feature-bottom-left">Team<br>Potlucks</div>
+                    <div class="circle-feature feature-bottom-right">Deep Talk<br>Sessions</div>
+                </div>
+
+                <!-- Inner: The Cycle -->
+                <div class="circle-now">
+                    <div class="cycle-label">The Cycle</div>
+                    <div class="cycle-text">
+                        Behavior<br>
+                        <em>becomes</em><br>
+                        Culture
+                    </div>
+                </div>
+
+                <!-- Cycle Steps -->
+                <div class="cycle-step step-assess">
+                    <div class="cycle-icon">&#128269;</div>
+                    <div class="cycle-name">Assess</div>
+                    <div class="cycle-desc">"Where is trust leaking?"</div>
+                </div>
+
+                <div class="cycle-step step-discover">
+                    <div class="cycle-icon">&#128101;</div>
+                    <div class="cycle-name">Discover</div>
+                    <div class="cycle-desc">"Who are they?"</div>
+                </div>
+
+                <div class="cycle-step step-aim">
+                    <div class="cycle-icon active">&#127919;</div>
+                    <div class="cycle-name">Aim</div>
+                    <div class="cycle-desc">"What feels safe?"</div>
+                </div>
+
+                <div class="cycle-step step-plan">
+                    <div class="cycle-icon">&#128197;</div>
+                    <div class="cycle-name">Plan</div>
+                    <div class="cycle-desc">"Design conditions"</div>
+                </div>
+
+                <div class="cycle-step step-play">
+                    <div class="cycle-icon">&#127881;</div>
+                    <div class="cycle-name">Play</div>
+                    <div class="cycle-desc">"Make it visible"</div>
+                </div>
+            </div>
+
+            <!-- Right - Summary -->
+            <div class="summary-col">
+                <div class="summary-header">The Culture Journey</div>
+
+                <div class="summary-card">
+                    <div class="summary-row">
+                        <div class="summary-dot now"></div>
+                        <div class="summary-label">Now: SSI Reveals the Gap</div>
+                    </div>
+                    <div class="summary-text">
+                        <em>Assess</em> where trust is low. <em>Discover</em> what energizes each person. The gap isn't skill — it's safety.
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-row">
+                        <div class="summary-dot medium"></div>
+                        <div class="summary-label">Medium: Create the Conditions</div>
+                    </div>
+                    <div class="summary-text">
+                        <em>Interest pods</em> group people by energy. <em>Shared activities</em> — hikes, potlucks, deep talks — build psychological safety.
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-row">
+                        <div class="summary-dot long"></div>
+                        <div class="summary-label">Long: Rituals Become Culture</div>
+                    </div>
+                    <div class="summary-text">
+                        <em>Behaviors</em> become rituals. <em>Rituals</em> become norms. New hires learn: "Here, we own things."
+                    </div>
+                </div>
+
+                <div class="transformation-box">
+                    <div class="transformation-label">The Culture Play</div>
+                    <div class="transformation-text">
+                        Not another tool.<br>
+                        <em>Conditions</em> for trust.<br>
+                        Behavior &rarr; Ritual &rarr; <em>Culture</em>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_8_the_journey.html">&larr; The Journey</a>
+                <a href="index.html" class="complete">Back to Contents &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

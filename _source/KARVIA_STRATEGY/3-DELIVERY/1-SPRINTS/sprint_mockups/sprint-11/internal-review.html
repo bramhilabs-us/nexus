@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprint 11 Internal Review - Karvia Business</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .module-card {
+            transition: all 0.2s ease;
+        }
+        .module-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .epic-badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .sprint-11 { background: #DBEAFE; color: #1E40AF; }
+        .sprint-12 { background: #FEF3C7; color: #92400E; }
+        .sprint-13 { background: #E0E7FF; color: #3730A3; }
+        .no-change { background: #F3F4F6; color: #6B7280; }
+        .new-page { background: #D1FAE5; color: #065F46; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-xl font-bold text-gray-900">Sprint 11 Internal Review</h1>
+                    <p class="text-sm text-gray-500">Page-Based Epic Categorization</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-2xl font-bold text-blue-600">69 pts</div>
+                        <div class="text-xs text-gray-500">2.5 weeks</div>
+                    </div>
+                    <span class="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm font-medium">
+                        PLANNING
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Legend -->
+    <div class="max-w-7xl mx-auto px-4 py-4">
+        <div class="flex flex-wrap gap-3 items-center text-sm">
+            <span class="font-medium text-gray-700">Legend:</span>
+            <span class="epic-badge sprint-11">Sprint 11</span>
+            <span class="epic-badge sprint-12">Sprint 12</span>
+            <span class="epic-badge sprint-13">Sprint 13</span>
+            <span class="epic-badge no-change">No Change</span>
+            <span class="epic-badge new-page">New Page</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 pb-8">
+
+        <!-- Sprint 11 Epic Summary -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6 p-4">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">Sprint 11 Epics Overview</h2>
+            <div class="grid grid-cols-4 gap-4">
+                <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs text-blue-600 font-medium">EPIC J</div>
+                            <div class="font-semibold text-gray-900">Assessment Credibility</div>
+                        </div>
+                        <span class="text-lg font-bold text-blue-600">28</span>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Modular question system, 3-step template wizard</p>
+                </div>
+                <div class="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs text-green-600 font-medium">EPIC L</div>
+                            <div class="font-semibold text-gray-900">Planning Redesign</div>
+                        </div>
+                        <span class="text-lg font-bold text-green-600">25</span>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Week tiles grid, AI context assembly</p>
+                </div>
+                <div class="bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs text-purple-600 font-medium">EPIC M</div>
+                            <div class="font-semibold text-gray-900">OKR Wizard (Phase 1)</div>
+                        </div>
+                        <span class="text-lg font-bold text-purple-600">13</span>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Wizard structure, mode selection, model extensions</p>
+                </div>
+                <div class="bg-amber-50 rounded-lg p-4 border-l-4 border-amber-500">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs text-amber-600 font-medium">QUICKFIX</div>
+                            <div class="font-semibold text-gray-900">Forgot Password</div>
+                        </div>
+                        <span class="text-lg font-bold text-amber-600">3</span>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Password reset flow implementation</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module: Authentication -->
+        <div class="mb-6">
+            <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 bg-gray-800 rounded flex items-center justify-center">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">MODULE 1: Authentication</h3>
+                <span class="text-sm text-gray-500">(4 pages)</span>
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+                <div class="module-card bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Login</span>
+                        <span class="epic-badge no-change">No Change</span>
+                    </div>
+                    <div class="text-xs text-gray-500">login.html</div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Signup</span>
+                        <span class="epic-badge no-change">No Change</span>
+                    </div>
+                    <div class="text-xs text-gray-500">signup.html</div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-amber-300 border-2 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Forgot Password</span>
+                        <span class="epic-badge sprint-11">S11 QF</span>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-2">forgot-password.html</div>
+                    <div class="text-xs text-amber-600 font-medium">2 pts - New flow</div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-amber-300 border-2 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Reset Password</span>
+                        <span class="epic-badge sprint-11">S11 QF</span>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-2">reset-password.html</div>
+                    <div class="text-xs text-amber-600 font-medium">1 pt - Token handling</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module: Assessment -->
+        <div class="mb-6">
+            <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">MODULE 3: Assessment</h3>
+                <span class="text-sm text-gray-500">(10 pages)</span>
+                <span class="ml-2 px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs font-medium">Epic J Focus</span>
+            </div>
+
+            <div class="grid grid-cols-4 gap-4 mb-4">
+                <!-- Row 1: Hub and Template Wizard -->
+                <div class="module-card bg-white rounded-lg border border-blue-300 border-2 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Assessment Hub</span>
+                        <span class="epic-badge sprint-11">S11 J</span>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-2">assessment-hub.html</div>
+                    <div class="text-xs text-blue-600 font-medium">Entry link update</div>
+                </div>
+                <div class="module-card bg-green-50 rounded-lg border border-green-400 border-2 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Template Step 1</span>
+                        <span class="epic-badge new-page">NEW</span>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-2">assess-template-step1.html</div>
+                    <div class="text-xs text-green-600 font-medium">J6 - 6 pts - Select Questions</div>
+                </div>
+                <div class="module-card bg-green-50 rounded-lg border border-green-400 border-2 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Template Step 2</span>
+                        <span class="epic-badge new-page">NEW</span>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-2">assess-template-step2.html</div>
+                    <div class="text-xs text-green-600 font-medium">J7 - 2 pts - Configure</div>
+                </div>
+                <div class="module-card bg-green-50 rounded-lg border border-green-400 border-2 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Template Step 3</span>
+                        <span class="epic-badge new-page">NEW</span>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-2">assess-template-step3.html</div>
+                    <div class="text-xs text-green-600 font-medium">J8 - 2 pts - Review & Save</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-5 gap-4">
+                <!-- Row 2: Other assessment pages -->
+                <div class="module-card bg-white rounded-lg border border-blue-300 border-2 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Question Library</span>
+                        <span class="epic-badge sprint-11">S11 J</span>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-2">question-library.html</div>
+                    <div class="text-xs text-blue-600 font-medium">Filters (done Jan 19)</div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Take Assessment</span>
+                        <span class="epic-badge no-change">No Change</span>
+                    </div>
+                    <div class="text-xs text-gray-500">assessment-take.html</div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Results</span>
+                        <span class="epic-badge no-change">No Change</span>
+                    </div>
+                    <div class="text-xs text-gray-500">assessment-results.html</div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Survey</span>
+                        <span class="epic-badge no-change">No Change</span>
+                    </div>
+                    <div class="text-xs text-gray-500">survey.html</div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Invitations</span>
+                        <span class="epic-badge no-change">No Change</span>
+                    </div>
+                    <div class="text-xs text-gray-500">assessment-invitations.html</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module: Planning -->
+        <div class="mb-6">
+            <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 bg-green-600 rounded flex items-center justify-center">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">MODULE 6: Planning</h3>
+                <span class="text-sm text-gray-500">(3 pages)</span>
+                <span class="ml-2 px-2 py-0.5 bg-green-100 text-green-800 rounded text-xs font-medium">Epic L Focus</span>
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="module-card bg-white rounded-lg border border-green-400 border-2 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Planning</span>
+                        <div class="flex gap-1">
+                            <span class="epic-badge sprint-11">S11 L</span>
+                        </div>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-2">planning.html</div>
+                    <div class="text-xs text-green-600 font-medium">25 pts - Major Redesign</div>
+                    <div class="mt-2 p-2 bg-green-50 rounded text-xs">
+                        <div class="font-medium text-green-800 mb-1">Stories:</div>
+                        <ul class="text-green-700 space-y-0.5">
+                            <li>L1: Week tiles grid (5 pts)</li>
+                            <li>L2: KR sidebar (3 pts)</li>
+                            <li>L3: Expansion panel (5 pts)</li>
+                            <li>L4: Status calc (3 pts)</li>
+                            <li>L5: AI context (5 pts)</li>
+                            <li>L6: AI UI (4 pts)</li>
+                        </ul>
+                    </div>
+                    <div class="mt-2 p-2 bg-amber-50 rounded text-xs">
+                        <span class="text-amber-700">Note: S13 Epic P REMOVED (overlap)</span>
+                    </div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Quarterly Goals</span>
+                        <span class="epic-badge no-change">No Change</span>
+                    </div>
+                    <div class="text-xs text-gray-500">quarterly-goals.html</div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Goal Details</span>
+                        <span class="epic-badge no-change">No Change</span>
+                    </div>
+                    <div class="text-xs text-gray-500">goal-details.html</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module: OKR Management -->
+        <div class="mb-6">
+            <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 bg-purple-600 rounded flex items-center justify-center">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">MODULE 5: OKR Management</h3>
+                <span class="text-sm text-gray-500">(4 pages)</span>
+                <span class="ml-2 px-2 py-0.5 bg-purple-100 text-purple-800 rounded text-xs font-medium">Epic M Focus</span>
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+                <div class="module-card bg-white rounded-lg border border-indigo-300 border-2 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Objectives</span>
+                        <span class="epic-badge sprint-13">S13 O</span>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-2">objectives.html</div>
+                    <div class="text-xs text-indigo-600 font-medium">3 pts - Styling only</div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-purple-400 border-2 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">OKR Wizard</span>
+                        <span class="epic-badge sprint-11">S11 M</span>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-2">okr-creation-wizard.html</div>
+                    <div class="text-xs text-purple-600 font-medium">8 pts - Structure + Modes</div>
+                    <div class="mt-2 p-2 bg-purple-50 rounded text-xs">
+                        <ul class="text-purple-700 space-y-0.5">
+                            <li>M1: Wizard structure (5 pts)</li>
+                            <li>M6: Mode selection (3 pts)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">OKR Dashboard</span>
+                        <span class="epic-badge no-change">No Change</span>
+                    </div>
+                    <div class="text-xs text-gray-500">okr-dashboard.html</div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">AI Review</span>
+                        <span class="epic-badge no-change">No Change</span>
+                    </div>
+                    <div class="text-xs text-gray-500">ai-okr-review.html</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module: Dashboard (Sprint 13) -->
+        <div class="mb-6 opacity-60">
+            <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 bg-indigo-600 rounded flex items-center justify-center">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900">MODULE 2: Dashboard</h3>
+                <span class="text-sm text-gray-500">(4 pages)</span>
+                <span class="ml-2 px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs font-medium">Sprint 13</span>
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+                <div class="module-card bg-white rounded-lg border border-indigo-300 border-2 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Dashboard</span>
+                        <span class="epic-badge sprint-13">S13 D</span>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-2">dashboard.html</div>
+                    <div class="text-xs text-indigo-600 font-medium">5 pts - Redesign</div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Manager Dash</span>
+                        <span class="epic-badge no-change">No Change</span>
+                    </div>
+                    <div class="text-xs text-gray-500">manager-dashboard.html</div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Executive Dash</span>
+                        <span class="epic-badge no-change">No Change</span>
+                    </div>
+                    <div class="text-xs text-gray-500">executive-dashboard.html</div>
+                </div>
+                <div class="module-card bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium text-gray-900">Analytics</span>
+                        <span class="epic-badge no-change">No Change</span>
+                    </div>
+                    <div class="text-xs text-gray-500">analytics-dashboard.html</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Backend Changes Summary -->
+        <div class="bg-gray-800 rounded-lg p-6 text-white">
+            <h3 class="text-lg font-semibold mb-4">Backend Changes (Sprint 11)</h3>
+            <div class="grid grid-cols-3 gap-6">
+                <div>
+                    <h4 class="text-sm font-medium text-gray-300 mb-2">Model Changes</h4>
+                    <ul class="text-sm space-y-1">
+                        <li class="flex items-center gap-2">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+                            AssessmentQuestion.js (+5 fields)
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-2 h-2 bg-purple-400 rounded-full"></span>
+                            Objective.js (+4 fields)
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-medium text-gray-300 mb-2">New Services</h4>
+                    <ul class="text-sm space-y-1">
+                        <li class="flex items-center gap-2">
+                            <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                            planning-ai-context.js (NEW)
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-medium text-gray-300 mb-2">API Changes</h4>
+                    <ul class="text-sm space-y-1">
+                        <li class="flex items-center gap-2">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+                            assessments.js (module filters)
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-2 h-2 bg-amber-400 rounded-full"></span>
+                            auth.js (password reset)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conflicts & Resolutions -->
+        <div class="mt-6 bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <h3 class="text-lg font-semibold text-amber-800 mb-3">Conflicts Resolved</h3>
+            <div class="space-y-3">
+                <div class="flex items-start gap-3">
+                    <span class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </span>
+                    <div>
+                        <div class="font-medium text-gray-900">Planning Page Overlap</div>
+                        <div class="text-sm text-gray-600">S11 Epic L (25pts) vs S13 Epic P (5pts) - <span class="text-green-600 font-medium">Removed S13 Epic P</span></div>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </span>
+                    <div>
+                        <div class="font-medium text-gray-900">False Dependency D1/D2/D4</div>
+                        <div class="text-sm text-gray-600">S11 referenced non-existent S10 stories - <span class="text-green-600 font-medium">Removed false refs</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Implementation Order -->
+        <div class="mt-6 bg-white rounded-lg border border-gray-200 p-4">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Recommended Implementation Order</h3>
+            <div class="flex gap-4">
+                <div class="flex-1 bg-blue-50 rounded-lg p-4">
+                    <div class="text-xs text-blue-600 font-medium mb-2">WEEK 1</div>
+                    <div class="font-medium text-gray-900 mb-2">Epic J Backend (18 pts)</div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>J1: Schema (5)</li>
+                        <li>J2-J4: Seeds (8)</li>
+                        <li>J5: API (5)</li>
+                    </ul>
+                </div>
+                <div class="flex-1 bg-green-50 rounded-lg p-4">
+                    <div class="text-xs text-green-600 font-medium mb-2">WEEK 2</div>
+                    <div class="font-medium text-gray-900 mb-2">Epic J UI + L Start (18 pts)</div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>J6-J8: Template wizard (10)</li>
+                        <li>L1-L2: Grid + sidebar (8)</li>
+                    </ul>
+                </div>
+                <div class="flex-1 bg-purple-50 rounded-lg p-4">
+                    <div class="text-xs text-purple-600 font-medium mb-2">WEEK 2.5</div>
+                    <div class="font-medium text-gray-900 mb-2">L Complete + M + QF (33 pts)</div>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>L3-L6: Planning (17)</li>
+                        <li>M1, M6, M10: Wizard (8)</li>
+                        <li>Quickfix (3)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 bg-white py-4">
+        <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-500">
+            Internal Review Document - Sprint 11 Planning | Generated: January 19, 2026
+        </div>
+    </footer>
+</body>
+</html>
