@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KARVIA Pro - SSI Assessment Feedback (3 min)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: block;
+            max-width: 220px;
+            height: auto;
+            margin: 0 auto 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #6b7280;
+            margin-bottom: 12px;
+        }
+
+        .time-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        .section-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 50px 0 30px 0;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #6366f1;
+        }
+
+        .section-description {
+            font-size: 15px;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f9fafb;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366f1 0%, #764ba2 100%);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: 700;
+            font-size: 16px;
+            margin-right: 14px;
+        }
+
+        .question-label {
+            font-weight: 600;
+            color: #1f2937;
+            font-size: 17px;
+            margin-bottom: 20px;
+            display: block;
+            line-height: 1.5;
+        }
+
+        .required::after {
+            content: " *";
+            color: #ef4444;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: white;
+            border: 2px solid #d1d5db;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .radio-option:hover {
+            border-color: #6366f1;
+            background: #f0f4ff;
+        }
+
+        .radio-option input {
+            width: 20px;
+            height: 20px;
+            margin-right: 14px;
+            cursor: pointer;
+            accent-color: #6366f1;
+        }
+
+        .radio-option label {
+            cursor: pointer;
+            font-size: 15px;
+            color: #374151;
+            flex: 1;
+        }
+
+        .nps-scale {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+
+        .nps-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nps-option input {
+            display: none;
+        }
+
+        .nps-option label {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #d1d5db;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 18px;
+            color: #6b7280;
+            background: white;
+            transition: all 0.2s ease;
+        }
+
+        .nps-option input:checked + label {
+            background: linear-gradient(135deg, #6366f1 0%, #764ba2 100%);
+            border-color: #6366f1;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .nps-option label:hover {
+            border-color: #6366f1;
+            background: #f0f4ff;
+        }
+
+        .nps-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #d1d5db;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            min-height: 120px;
+            resize: vertical;
+            transition: border-color 0.2s ease;
+            background: white;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+            background: #f0f4ff;
+        }
+
+        input[type="email"],
+        input[type="number"] {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #d1d5db;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            transition: border-color 0.2s ease;
+            background: white;
+        }
+
+        input[type="email"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #6366f1;
+            background: #f0f4ff;
+        }
+
+        .optional-note {
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .helper-text {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 8px;
+            padding: 12px;
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            border-radius: 6px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #6366f1 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 80px 20px;
+            display: none;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-message h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: #1f2937;
+            margin-bottom: 20px;
+        }
+
+        .success-message p {
+            color: #6b7280;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center;
+            color: #6b7280;
+            margin-top: 60px;
+            font-size: 14px;
+            padding-top: 30px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+            .question {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .nps-scale {
+                gap: 6px;
+            }
+
+            .nps-option label {
+                width: 44px;
+                height: 44px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="../../client/images/CD_Logo_WSlogan.png" alt="KARVIA Pro" class="logo">
+
+        <div class="header">
+            <h1>SSI Assessment Feedback</h1>
+            <p>Help us understand how the Speed-Strength-Intelligence framework serves you</p>
+            <span class="time-badge">⏱️ Takes 3 minutes</span>
+        </div>
+
+        <form id="feedback-form" action="https://formsubmit.co/rsm@karvia.ai" method="POST">
+            <!-- FormSubmit.co Configuration -->
+            <input type="hidden" name="_subject" value="🎯 SSI Assessment Feedback">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="submitted_at" id="submitted_at">
+
+            <!-- SECTION 1: Current Economics & Pain -->
+            <h2 class="section-header">Your Current Strategic Planning Process</h2>
+            <p class="section-description">Help us understand your baseline - what you do today before using KARVIA Pro</p>
+
+            <!-- Q1: Current Spend -->
+            <div class="question">
+                <label class="question-label required">
+                    <span class="question-number">1</span>
+                    What do you currently spend ANNUALLY on goal-setting/strategic planning tools & processes?
+                </label>
+                <p class="helper-text">💡 Include: Software subscriptions, consultant fees, workshop costs, planning retreats, etc.</p>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="current_spend" id="spend_1" value="0" required>
+                        <label for="spend_1">$0 (free tools/manual process only)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="current_spend" id="spend_2" value="1-500">
+                        <label for="spend_2">$1 - $500</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="current_spend" id="spend_3" value="500-2000">
+                        <label for="spend_3">$500 - $2,000</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="current_spend" id="spend_4" value="2000-5000">
+                        <label for="spend_4">$2,000 - $5,000</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="current_spend" id="spend_5" value="5000-10000">
+                        <label for="spend_5">$5,000 - $10,000</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="current_spend" id="spend_6" value="10000+">
+                        <label for="spend_6">$10,000+</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q2: Time Spent -->
+            <div class="question">
+                <label class="question-label required">
+                    <span class="question-number">2</span>
+                    How much TIME does your leadership team collectively spend on strategic planning annually?
+                </label>
+                <p class="helper-text">💡 Think about: Annual planning offsites, quarterly reviews, monthly strategy meetings, weekly priority discussions</p>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="time_spent" id="time_1" value="<5days" required>
+                        <label for="time_1">Less than 5 days/year total</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="time_spent" id="time_2" value="5-10days">
+                        <label for="time_2">5-10 days/year</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="time_spent" id="time_3" value="10-20days">
+                        <label for="time_3">10-20 days/year</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="time_spent" id="time_4" value="20-40days">
+                        <label for="time_4">20-40 days/year</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="time_spent" id="time_5" value="40+days">
+                        <label for="time_5">40+ days/year</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q3: Biggest Challenge -->
+            <div class="question">
+                <label class="question-label required">
+                    <span class="question-number">3</span>
+                    What's your BIGGEST challenge with strategic planning today?
+                </label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="biggest_challenge" id="challenge_1" value="identifying_priorities" required>
+                        <label for="challenge_1">Hard to identify the RIGHT priorities (not sure what to focus on)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="biggest_challenge" id="challenge_2" value="subjective_opinions">
+                        <label for="challenge_2">Everyone has different opinions (no objective framework)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="biggest_challenge" id="challenge_3" value="generic_goals">
+                        <label for="challenge_3">Plans feel disconnected from reality (generic goals, not actionable)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="biggest_challenge" id="challenge_4" value="time_consuming">
+                        <label for="challenge_4">Too time-consuming (takes days/weeks to align on strategy)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="biggest_challenge" id="challenge_5" value="no_followthrough">
+                        <label for="challenge_5">No follow-through (we plan but don't execute/track)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="biggest_challenge" id="challenge_6" value="other">
+                        <label for="challenge_6">Other (please specify below)</label>
+                    </div>
+                </div>
+                <textarea name="challenge_other" placeholder="If 'Other', please describe your biggest challenge..." style="margin-top: 12px;"></textarea>
+            </div>
+
+            <!-- SECTION 2: SSI Assessment Experience -->
+            <h2 class="section-header">Your SSI Assessment Experience</h2>
+            <p class="section-description">Tell us about your experience with the Speed-Strength-Intelligence framework</p>
+
+            <!-- Q4: Clarity Gained -->
+            <div class="question">
+                <label class="question-label required">
+                    <span class="question-number">4</span>
+                    After completing the SSI Assessment, how CLEAR are you on your strategic priorities?
+                </label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="clarity" id="clarity_1" value="much_clearer" required>
+                        <label for="clarity_1">Much clearer - the framework gave me new insights I didn't have before</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="clarity" id="clarity_2" value="somewhat_clearer">
+                        <label for="clarity_2">Somewhat clearer - it helped validate what I already suspected</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="clarity" id="clarity_3" value="same">
+                        <label for="clarity_3">About the same - interesting but didn't change my thinking</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="clarity" id="clarity_4" value="less_clear">
+                        <label for="clarity_4">Less clear - it confused me or felt too abstract</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q5: Most Valuable Aspect -->
+            <div class="question">
+                <label class="question-label required">
+                    <span class="question-number">5</span>
+                    What did you find MOST VALUABLE about the SSI Assessment?
+                </label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="most_valuable" id="value_1" value="framework" required>
+                        <label for="value_1">The structured framework (Speed/Strength/Intelligence lens)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="most_valuable" id="value_2" value="forced_prioritization">
+                        <label for="value_2">The forced prioritization (can't pick "everything is important")</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="most_valuable" id="value_3" value="speed">
+                        <label for="value_3">The speed of completion (fast vs. 2-day offsite)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="most_valuable" id="value_4" value="objective">
+                        <label for="value_4">The objective scoring system (data-driven vs. gut feel)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="most_valuable" id="value_5" value="other">
+                        <label for="value_5">Other (please specify below)</label>
+                    </div>
+                </div>
+                <textarea name="value_other" placeholder="If 'Other', what was most valuable?..." style="margin-top: 12px;"></textarea>
+            </div>
+
+            <!-- Q6: What Would Make It More Valuable -->
+            <div class="question">
+                <label class="question-label required">
+                    <span class="question-number">6</span>
+                    What would make the SSI Assessment MORE valuable for you?
+                </label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="more_valuable" id="improve_1" value="ai_recommendations" required>
+                        <label for="improve_1">AI recommendations based on my scores (suggested OKRs/actions)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="more_valuable" id="improve_2" value="benchmarks">
+                        <label for="improve_2">Industry benchmarks (how do I compare to peers?)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="more_valuable" id="improve_3" value="team_collaboration">
+                        <label for="improve_3">Team collaboration (multiple stakeholders fill it out, compare views)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="more_valuable" id="improve_4" value="deeper_diagnosis">
+                        <label for="improve_4">Deeper diagnosis (more questions, more nuanced analysis)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="more_valuable" id="improve_5" value="execution_tools">
+                        <label for="improve_5">Integration with execution tools (turn insights into trackable OKRs)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="more_valuable" id="improve_6" value="good_as_is">
+                        <label for="improve_6">Nothing - it's good as is</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: Value & Willingness to Pay -->
+            <h2 class="section-header">Value & Investment</h2>
+            <p class="section-description">Help us understand the economic value this creates for you</p>
+
+            <!-- Q7: Economic Value -->
+            <div class="question">
+                <label class="question-label required">
+                    <span class="question-number">7</span>
+                    If the SSI Assessment saved you 2 days of offsite planning time, what would you pay for it annually?
+                </label>
+                <div class="helper-text">
+                    💰 <strong>Quick ROI calculation:</strong><br>
+                    • 5 executives × 2 days × $500/day (loaded cost) = $5,000 saved<br>
+                    • Consultant fees avoided = $5,000-15,000<br>
+                    • <strong>Total value: $10,000-20,000 per planning cycle</strong>
+                </div>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="annual_price" id="price_1" value="<500" required>
+                        <label for="price_1">Less than $500/year</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="annual_price" id="price_2" value="500-1000">
+                        <label for="price_2">$500 - $1,000/year</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="annual_price" id="price_3" value="1000-2500">
+                        <label for="price_3">$1,000 - $2,500/year</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="annual_price" id="price_4" value="2500-5000">
+                        <label for="price_4">$2,500 - $5,000/year</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="annual_price" id="price_5" value="5000-10000">
+                        <label for="price_5">$5,000 - $10,000/year</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="annual_price" id="price_6" value="10000+">
+                        <label for="price_6">$10,000+/year</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q8: No-Brainer Price -->
+            <div class="question">
+                <label class="question-label required">
+                    <span class="question-number">8</span>
+                    At what annual price would the SSI Assessment be a "NO-BRAINER" purchase for your organization?
+                </label>
+                <p class="helper-text">💡 What price makes you say "That's a steal, I'd buy it immediately without hesitation"?</p>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="nobrainer_price" id="nb_1" value="100" required>
+                        <label for="nb_1">$100</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="nobrainer_price" id="nb_2" value="250">
+                        <label for="nb_2">$250</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="nobrainer_price" id="nb_3" value="500">
+                        <label for="nb_3">$500</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="nobrainer_price" id="nb_4" value="1000">
+                        <label for="nb_4">$1,000</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="nobrainer_price" id="nb_5" value="2500">
+                        <label for="nb_5">$2,500</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="nobrainer_price" id="nb_6" value="5000+">
+                        <label for="nb_6">$5,000+</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q9: NPS -->
+            <div class="question">
+                <label class="question-label required">
+                    <span class="question-number">9</span>
+                    How likely are you to recommend the SSI Assessment to another business leader?
+                </label>
+                <div class="nps-scale">
+                    <div class="nps-option">
+                        <input type="radio" name="nps" id="nps_0" value="0" required>
+                        <label for="nps_0">0</label>
+                    </div>
+                    <div class="nps-option">
+                        <input type="radio" name="nps" id="nps_1" value="1">
+                        <label for="nps_1">1</label>
+                    </div>
+                    <div class="nps-option">
+                        <input type="radio" name="nps" id="nps_2" value="2">
+                        <label for="nps_2">2</label>
+                    </div>
+                    <div class="nps-option">
+                        <input type="radio" name="nps" id="nps_3" value="3">
+                        <label for="nps_3">3</label>
+                    </div>
+                    <div class="nps-option">
+                        <input type="radio" name="nps" id="nps_4" value="4">
+                        <label for="nps_4">4</label>
+                    </div>
+                    <div class="nps-option">
+                        <input type="radio" name="nps" id="nps_5" value="5">
+                        <label for="nps_5">5</label>
+                    </div>
+                    <div class="nps-option">
+                        <input type="radio" name="nps" id="nps_6" value="6">
+                        <label for="nps_6">6</label>
+                    </div>
+                    <div class="nps-option">
+                        <input type="radio" name="nps" id="nps_7" value="7">
+                        <label for="nps_7">7</label>
+                    </div>
+                    <div class="nps-option">
+                        <input type="radio" name="nps" id="nps_8" value="8">
+                        <label for="nps_8">8</label>
+                    </div>
+                    <div class="nps-option">
+                        <input type="radio" name="nps" id="nps_9" value="9">
+                        <label for="nps_9">9</label>
+                    </div>
+                    <div class="nps-option">
+                        <input type="radio" name="nps" id="nps_10" value="10">
+                        <label for="nps_10">10</label>
+                    </div>
+                </div>
+                <div class="nps-labels">
+                    <span>Not at all likely</span>
+                    <span>Extremely likely</span>
+                </div>
+            </div>
+
+            <!-- Optional: Email -->
+            <div class="question" style="background: #fef3c7; border-color: #fbbf24;">
+                <label class="question-label">
+                    <span class="question-number" style="background: #f59e0b;">📧</span>
+                    Email (optional - for follow-up & early access to new features)
+                </label>
+                <input type="email" name="email" placeholder="your.email@company.com">
+                <p class="optional-note">We'll never spam you. Only reach out for valuable updates or if we need clarification on your feedback.</p>
+            </div>
+
+            <button type="submit" class="submit-btn">🚀 Submit Feedback</button>
+        </form>
+
+        <!-- Success Message -->
+        <div id="success-message" class="success-message">
+            <div class="success-icon">
+                <svg width="60" height="60" viewBox="0 0 20 20" fill="white">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <h2>Thank You! 🎉</h2>
+            <p style="margin-bottom: 16px;">Your feedback has been submitted successfully.</p>
+            <p>We'll review your responses and use them to make the SSI Assessment even more valuable for strategic leaders like you.</p>
+        </div>
+
+        <div class="footer">
+            <p>Questions? Contact us at <a href="mailto:rsm@karvia.ai">rsm@karvia.ai</a></p>
+            <p style="margin-top: 12px; color: #9ca3af;">© 2025 KARVIA Pro. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Auto-save to localStorage (prevent data loss)
+        const form = document.getElementById('feedback-form');
+        const formFields = ['current_spend', 'time_spent', 'biggest_challenge', 'challenge_other', 'clarity', 'most_valuable', 'value_other', 'more_valuable', 'annual_price', 'nobrainer_price', 'nps', 'email'];
+
+        // Load saved data
+        formFields.forEach(field => {
+            const saved = localStorage.getItem('karvia_ssi_feedback_' + field);
+            if (saved) {
+                const input = form.querySelector(`[name="${field}"]`);
+                if (input) {
+                    if (input.type === 'radio') {
+                        const radio = form.querySelector(`[name="${field}"][value="${saved}"]`);
+                        if (radio) radio.checked = true;
+                    } else {
+                        input.value = saved;
+                    }
+                }
+            }
+        });
+
+        // Save on change
+        form.addEventListener('change', (e) => {
+            if (e.target.name) {
+                localStorage.setItem('karvia_ssi_feedback_' + e.target.name, e.target.value);
+            }
+        });
+
+        form.addEventListener('input', (e) => {
+            if (e.target.name && (e.target.type === 'textarea' || e.target.type === 'email')) {
+                localStorage.setItem('karvia_ssi_feedback_' + e.target.name, e.target.value);
+            }
+        });
+
+        // Form submission - set timestamp and clear localStorage before submitting
+        form.addEventListener('submit', function(e) {
+            // Set timestamp
+            document.getElementById('submitted_at').value = new Date().toISOString();
+
+            // Clear localStorage
+            formFields.forEach(field => {
+                localStorage.removeItem('karvia_ssi_feedback_' + field);
+            });
+
+            // Let form submit naturally to FormSubmit.co
+        });
+    </script>
+</body>
+</html>

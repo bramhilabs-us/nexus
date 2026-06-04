@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E1 - Page 5: The Connection | YSELA.AI</title>
+    <style>
+        @page {
+            size: landscape;
+            margin: 0;
+        }
+        @media print {
+            html, body {
+                width: 100%;
+                height: 100%;
+            }
+            .page {
+                height: 100%;
+                page-break-after: avoid;
+            }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-columns: 320px 1fr 320px;
+            grid-template-rows: auto 1fr auto;
+            gap: 30px;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator {
+            font-size: 12px;
+            color: #888;
+            text-align: right;
+        }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+
+        /* Left Column */
+        .left-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .problem-box {
+            background: #FAFAFA;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #F0F0F0;
+            margin-bottom: 24px;
+        }
+
+        .problem-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .problem-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .problem-text strong {
+            color: #1a1a2e;
+        }
+
+        .opening-reflection {
+            font-size: 17px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #444;
+            padding-left: 20px;
+            border-left: 3px solid #C9A227;
+        }
+
+        .opening-reflection em {
+            font-style: normal;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        /* Center - The Cascade */
+        .center-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cascade-container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .cascade-title {
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+
+        .cascade-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+
+        .cascade-line {
+            width: 3px;
+            height: 24px;
+            background: linear-gradient(180deg, #C9A227 0%, #E0E0E0 100%);
+            margin-left: 30px;
+            margin-bottom: 8px;
+        }
+
+        .cascade-line.fade {
+            background: #E0E0E0;
+        }
+
+        .cascade-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .cascade-step.level-1 .cascade-icon {
+            background: #1a1a2e;
+            color: white;
+            width: 64px;
+            height: 64px;
+            font-size: 15px;
+        }
+
+        .cascade-step.level-2 .cascade-icon {
+            background: #C9A227;
+            color: white;
+        }
+
+        .cascade-step.level-3 .cascade-icon {
+            background: #FEF3C7;
+            color: #1a1a2e;
+        }
+
+        .cascade-step.level-4 .cascade-icon {
+            background: #F0F0F0;
+            color: #666;
+        }
+
+        .cascade-step.level-5 .cascade-icon {
+            background: white;
+            border: 3px solid #C9A227;
+            color: #C9A227;
+            width: 64px;
+            height: 64px;
+        }
+
+        .cascade-content {
+            flex: 1;
+        }
+
+        .cascade-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 2px;
+        }
+
+        .cascade-question {
+            font-size: 12px;
+            color: #888;
+            font-style: italic;
+        }
+
+        .cascade-step.level-5 .cascade-name {
+            color: #C9A227;
+        }
+
+        /* Right Column */
+        .right-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .insight-box {
+            background: #FAFAFA;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #F0F0F0;
+            margin-bottom: 24px;
+        }
+
+        .insight-text {
+            font-size: 15px;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .insight-text em {
+            font-style: normal;
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        .closing-truth {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .closing-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .closing-text {
+            font-size: 16px;
+            color: white;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-nav a {
+            color: #888;
+            text-decoration: none;
+        }
+
+        .footer-nav a:hover {
+            color: #C9A227;
+        }
+
+        .footer-nav .next {
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 20px; grid-template-columns: 1fr; gap: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .page-indicator { text-align: left; }
+            .left-col, .center-col, .right-col { grid-column: 1; }
+            .cascade-container { max-width: 100%; }
+            .cascade-icon { width: 50px; height: 50px; font-size: 12px; }
+            .cascade-step.level-1 .cascade-icon,
+            .cascade-step.level-5 .cascade-icon { width: 54px; height: 54px; font-size: 13px; }
+            .cascade-name { font-size: 13px; }
+            .cascade-question { font-size: 11px; }
+            .problem-text { font-size: 13px; }
+            .opening-reflection { font-size: 15px; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .cascade-icon { width: 44px; height: 44px; font-size: 11px; }
+            .cascade-step.level-1 .cascade-icon,
+            .cascade-step.level-5 .cascade-icon { width: 48px; height: 48px; font-size: 11px; }
+            .cascade-name { font-size: 12px; }
+            .cascade-question { font-size: 10px; }
+            .problem-text { font-size: 12px; }
+            .closing-text { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <div class="logo">YSELA<span>.AI</span></div>
+                <div class="series-tag">S1E1: What Is YSELA, Really?</div>
+            </div>
+            <div class="page-indicator">
+                <div>Page <span class="current">5</span> of 6</div>
+                <div style="margin-top: 4px; color: #1a1a2e; font-weight: 500;">The Connection</div>
+            </div>
+        </header>
+
+        <!-- Left Column -->
+        <div class="left-col">
+            <div class="problem-box">
+                <div class="problem-label">Where Most Systems Break</div>
+                <div class="problem-text">
+                    <strong>Company</strong> has a vision.<br>
+                    <strong>Teams</strong> have goals.<br>
+                    <strong>People</strong> have tasks.<br><br>
+                    But the threads are <strong>invisible</strong>.<br><br>
+                    The employee does their task<br>
+                    without feeling its weight.<br><br>
+                    The leader sets the vision<br>
+                    without seeing its execution.
+                </div>
+            </div>
+
+            <div class="opening-reflection">
+                What if the connection<br>
+                was <em>visible</em>?
+            </div>
+        </div>
+
+        <!-- Center - The Cascade -->
+        <div class="center-col">
+            <div class="cascade-container">
+                <div class="cascade-title">The Cascade</div>
+
+                <div class="cascade-step level-1">
+                    <div class="cascade-icon">OBJ</div>
+                    <div class="cascade-content">
+                        <div class="cascade-name">Objective</div>
+                        <div class="cascade-question">"What are we becoming this year?"</div>
+                    </div>
+                </div>
+
+                <div class="cascade-line"></div>
+
+                <div class="cascade-step level-2">
+                    <div class="cascade-icon">KR</div>
+                    <div class="cascade-content">
+                        <div class="cascade-name">Key Result</div>
+                        <div class="cascade-question">"How will we know we're there?"</div>
+                    </div>
+                </div>
+
+                <div class="cascade-line"></div>
+
+                <div class="cascade-step level-3">
+                    <div class="cascade-icon">Q</div>
+                    <div class="cascade-content">
+                        <div class="cascade-name">Quarterly Goal</div>
+                        <div class="cascade-question">"What must be true in 90 days?"</div>
+                    </div>
+                </div>
+
+                <div class="cascade-line fade"></div>
+
+                <div class="cascade-step level-4">
+                    <div class="cascade-icon">W</div>
+                    <div class="cascade-content">
+                        <div class="cascade-name">Weekly Goal</div>
+                        <div class="cascade-question">"What must happen this week?"</div>
+                    </div>
+                </div>
+
+                <div class="cascade-line fade"></div>
+
+                <div class="cascade-step level-5">
+                    <div class="cascade-icon">TODAY</div>
+                    <div class="cascade-content">
+                        <div class="cascade-name">Today's Task</div>
+                        <div class="cascade-question">"What do I do right now?"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-col">
+            <div class="insight-box">
+                <div class="insight-text">
+                    Every task carries the <em>weight</em> of the objective.<br><br>
+                    Not because someone told you.<br><br>
+                    Because you can <em>see</em> it.
+                </div>
+            </div>
+
+            <div class="closing-truth">
+                <div class="closing-label">The Realization</div>
+                <div class="closing-text">
+                    We don't need motivation.<br>
+                    We need connection.
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_4_the_shared_journey.html">&larr; The Shared Journey</a>
+                <a href="page_6_the_clarity_and_horizon.html" class="next">Next: The Clarity &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

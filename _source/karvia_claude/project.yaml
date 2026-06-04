@@ -1,0 +1,110 @@
+# .claude/project.yaml
+# Project Configuration for Claude Code Sessions
+# Generated: January 8, 2026
+# Edit this file to customize project governance
+
+# =============================================================================
+# PROJECT IDENTITY
+# =============================================================================
+project:
+  name: "KARVIA Business"
+  description: "Business OKR management platform with SSI diagnostics and AI-assisted planning"
+  created: "2025-10-30"
+  owner: "BRAMHI_LABS"
+
+# =============================================================================
+# SCAFFOLD SETTINGS
+# =============================================================================
+scaffold:
+  # Options: "full" | "minimal"
+  mode: "full"
+
+  # Name of the strategy documentation folder
+  strategy_folder: "KARVIA_STRATEGY"
+
+  # Tier structure
+  tiers:
+    constitutional: false    # Not using full MVG
+    authoritative: true      # Domain truth sources
+    master: true             # MASTER_* strategy docs
+    derived: true            # Derived from master
+    vision: true             # Future direction
+    governance: true         # Document management
+
+# =============================================================================
+# ACTIVE DOMAINS
+# =============================================================================
+domains:
+  - GOVERNANCE      # Rules, values
+  - PRODUCT         # Features, roadmap
+  - ARCHITECTURE    # System design
+  - OKR             # Objective Key Results
+  - SSI             # Social Style Inventory
+  - ASSESSMENT      # Diagnostic assessments
+  - IDENTITY        # User identity, teams
+  - AI              # AI-assisted features
+  - DELIVERY        # Sprints, releases
+  - API             # Endpoints, contracts
+
+# =============================================================================
+# ACCESS CONTROL
+# =============================================================================
+access_control:
+  config_file: ".claude/ACCESS_CONTROL.yaml"
+  enforcement_mode: "advisory"
+  owner: "admin"
+  doc_id_enabled: false
+  audit_logging: true
+
+# =============================================================================
+# GOVERNANCE SETTINGS
+# =============================================================================
+governance:
+  audit_claude_folder: true
+  session_seals_required: false
+  version_tracking: true
+
+  freshness:
+    hot: 7
+    warm: 30
+    cool: 90
+    cold: 180
+
+# =============================================================================
+# CHANGE TRACKING
+# =============================================================================
+change_log:
+  location: ".claude/CHANGE_LOG.md"
+  include_claude_changes: true
+  session_log: ".claude/SESSION_LOG.md"
+
+# =============================================================================
+# TEMPLATES
+# =============================================================================
+templates:
+  folder: ".claude/templates"
+  files:
+    - README_TEMPLATE.md
+    - SESSION_TEMPLATE.md
+    - OPERATIONAL_TEMPLATE.md
+    - COMMAND_TEMPLATE.md
+
+# =============================================================================
+# PORTABILITY
+# =============================================================================
+portability:
+  # Copy these as-is (universal)
+  copy:
+    - commands/
+    - templates/
+    - bramhi/
+    - README.md
+    - MASTER_GUIDE.md
+    - BEST_PRACTICES.md
+
+  # Regenerate these (project-specific)
+  regenerate:
+    - SESSION_LOG.md
+    - CHANGE_LOG.md
+    - project.yaml
+    - DOCUMENT_REGISTRY.md

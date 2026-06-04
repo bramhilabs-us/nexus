@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultant Onboarding Journey - Karvia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #edf3f7;
+      --ink: #0f172a;
+      --muted: #475569;
+      --card: #ffffff;
+      --brand: #134e6f;
+      --brand-soft: #1f6d96;
+      --accent: #f59e0b;
+      --line: #dbe4ec;
+      --radius: 20px;
+      --shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(1000px 480px at 88% -6%, #d6e9f7 0%, transparent 65%),
+        radial-gradient(850px 380px at -10% 18%, #f5edd6 0%, transparent 60%),
+        var(--bg);
+      color: var(--ink);
+      font-family: 'Manrope', sans-serif;
+      scroll-snap-type: y mandatory;
+      overflow-y: auto;
+    }
+
+    .dock {
+      position: fixed;
+      top: 14px;
+      right: 16px;
+      z-index: 20;
+      display: flex;
+      gap: 6px;
+      padding: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(19, 78, 111, 0.16);
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #bfd4e2;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .dot:hover {
+      background: var(--brand);
+      transform: scale(1.2);
+    }
+
+    .slide {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      display: grid;
+      place-items: center;
+      padding: 52px 24px 36px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: rise 0.7s ease forwards;
+      animation-delay: var(--d, 0s);
+    }
+
+    .wrap {
+      width: min(1160px, 96vw);
+      background: rgba(255, 255, 255, 0.93);
+      border: 1px solid #d6e3ee;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 34px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: 'Sora', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .kicker {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #e0eef7;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-grid {
+      margin-top: 22px;
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+
+    .hero-box {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(140deg, #f7fbff 0%, #ffffff 64%);
+      padding: 20px;
+    }
+
+    .hero-value {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .metric {
+      border: 1px solid #dce8f1;
+      border-radius: 14px;
+      padding: 14px;
+      background: #ffffff;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 22px;
+      color: var(--brand);
+      font-family: 'Sora', sans-serif;
+    }
+
+    .journey-row {
+      margin-top: 24px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      align-items: center;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      padding: 12px 10px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0b3958;
+    }
+
+    .arrow {
+      height: 2px;
+      background: linear-gradient(90deg, #b8ccda, #73a5c6);
+      margin: 0 -6px;
+      grid-column: span 1;
+      position: relative;
+      top: -18px;
+    }
+
+    .stage {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 0.95fr 1.05fr;
+      margin-top: 18px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      padding: 18px;
+    }
+
+    .panel h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .mini-item {
+      border: 1px solid #e2ecf3;
+      border-left: 4px solid var(--brand-soft);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #fdfefe;
+      font-size: 14px;
+      color: #1e293b;
+    }
+
+    .mini-item span {
+      display: block;
+      color: #5b6b7a;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .shot {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #d4e2ec;
+      background: #f8fbfd;
+    }
+
+    .shot img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .caption {
+      font-size: 12px;
+      padding: 9px 12px;
+      color: #41566a;
+      border-top: 1px solid #d4e2ec;
+      background: #f1f7fb;
+    }
+
+    .matrix {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .matrix-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      padding: 14px;
+    }
+
+    .matrix-card h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .matrix-card p {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .stage,
+      .matrix {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-value {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .journey-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .arrow {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="dock" aria-label="Slide anchors">
+    <a href="#s1" class="dot" aria-label="Slide 1"></a>
+    <a href="#s2" class="dot" aria-label="Slide 2"></a>
+    <a href="#s3" class="dot" aria-label="Slide 3"></a>
+    <a href="#s4" class="dot" aria-label="Slide 4"></a>
+    <a href="#s5" class="dot" aria-label="Slide 5"></a>
+    <a href="#s6" class="dot" aria-label="Slide 6"></a>
+    <a href="#s7" class="dot" aria-label="Slide 7"></a>
+  </nav>
+
+  <section class="slide" id="s1" style="--d: 0s;">
+    <div class="wrap">
+      <span class="kicker">Consultant Enablement</span>
+      <h1 style="margin-top: 10px; font-size: clamp(28px, 4.2vw, 52px);">From SSI Assessment to Daily Execution</h1>
+      <p style="margin-top: 10px; font-size: 18px;">A low-friction journey for consultants to guide business growth inside Karvia.</p>
+      <div class="hero-grid">
+        <div class="hero-box">
+          <h2 style="font-size: 24px;">Core narrative</h2>
+          <p style="margin-top: 8px;">Assess. Choose. Build teams. Co-create objectives. Plan the journey. Run daily tasks.</p>
+          <div class="hero-value">
+            <div class="metric"><strong>6</strong>Journey stages</div>
+            <div class="metric"><strong>1</strong>Shared decision flow</div>
+            <div class="metric"><strong>Daily</strong>Execution focus</div>
+          </div>
+        </div>
+        <div class="hero-box">
+          <h2 style="font-size: 24px;">Consultant outcomes</h2>
+          <p style="margin-top: 8px;">Faster alignment, clearer priorities, and visible progress for each client company.</p>
+          <div class="mini-list">
+            <div class="mini-item">Objective clarity<span>SSI-backed, not opinion-led</span></div>
+            <div class="mini-item">Team accountability<span>Role-to-task ownership on one screen</span></div>
+            <div class="mini-item">Execution rhythm<span>Weekly planning, daily action</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s2" style="--d: 0.08s;">
+    <div class="wrap">
+      <span class="kicker">Journey Map</span>
+      <h2 style="margin-top: 10px; font-size: clamp(24px, 3.5vw, 40px);">Page-to-page consultant flow</h2>
+      <p style="margin-top: 8px;">One visual sequence to teach in onboarding and repeat with every new client.</p>
+      <div class="journey-row">
+        <div class="step">1. Assessments</div>
+        <div class="step">2. Choose Focus</div>
+        <div class="step">3. Build Teams</div>
+        <div class="step">4. Set Objectives</div>
+        <div class="step">5. Plan Journey</div>
+        <div class="step">6. Daily Tasks</div>
+      </div>
+      <div class="matrix">
+        <div class="matrix-card">
+          <h3>Input</h3>
+          <p>SSI signals and stakeholder priorities.</p>
+        </div>
+        <div class="matrix-card">
+          <h3>Decision</h3>
+          <p>Consultant-guided objective selection and sequencing.</p>
+        </div>
+        <div class="matrix-card">
+          <h3>Output</h3>
+          <p>A daily task cadence with measurable momentum.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s3" style="--d: 0.14s;">
+    <div class="wrap">
+      <span class="kicker">Stage 1</span>
+      <h2 style="margin-top: 10px; font-size: clamp(23px, 3.2vw, 38px);">Assessments and Focus Choice</h2>
+      <div class="stage">
+        <div class="panel">
+          <h3>Page objective</h3>
+          <p>Create a trustworthy baseline for Speed, Strength, and Intelligence.</p>
+          <div class="mini-list">
+            <div class="mini-item">Consultant action<span>Launch assessments and frame why each dimension matters.</span></div>
+            <div class="mini-item">Co-creation action<span>Agree which gap to address first this quarter.</span></div>
+            <div class="mini-item">Expected output<span>Priority area selected and ready for team design.</span></div>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="assets/screenshots/assessment-mockup.png" alt="Assessment center screen">
+          <figcaption class="caption">Assessment Center: three SSI dimensions with clear call-to-action.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s4" style="--d: 0.2s;">
+    <div class="wrap">
+      <span class="kicker">Stage 2</span>
+      <h2 style="margin-top: 10px; font-size: clamp(23px, 3.2vw, 38px);">Build Teams Around the Chosen Direction</h2>
+      <div class="stage">
+        <div class="panel">
+          <h3>Page objective</h3>
+          <p>Translate strategy into accountable team structures.</p>
+          <div class="mini-list">
+            <div class="mini-item">Consultant action<span>Assign contributors, define ownership, and confirm team health.</span></div>
+            <div class="mini-item">Co-creation action<span>Identify cross-functional dependencies early.</span></div>
+            <div class="mini-item">Expected output<span>Team map aligned to objective scope.</span></div>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="assets/screenshots/team-mockup.png" alt="Team collaboration screen">
+          <figcaption class="caption">Team page: member progress, health, activity, and quick actions.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s5" style="--d: 0.26s;">
+    <div class="wrap">
+      <span class="kicker">Stage 3</span>
+      <h2 style="margin-top: 10px; font-size: clamp(23px, 3.2vw, 38px);">Arrive Together at Strategic Objectives</h2>
+      <div class="stage">
+        <div class="panel">
+          <h3>Page objective</h3>
+          <p>Finalize strategic objectives with measurable key results.</p>
+          <div class="mini-list">
+            <div class="mini-item">Consultant action<span>Facilitate trade-offs and confirm objective quality.</span></div>
+            <div class="mini-item">Co-creation action<span>Link each objective to owner, timeline, and risk status.</span></div>
+            <div class="mini-item">Expected output<span>A committed objective portfolio for execution.</span></div>
+          </div>
+        </div>
+        <figure class="shot">
+          <img src="assets/screenshots/objectives-mockup.png" alt="Objectives and key results screen">
+          <figcaption class="caption">Objectives page: on-track and at-risk visibility at a glance.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s6" style="--d: 0.32s;">
+    <div class="wrap">
+      <span class="kicker">Stage 4 and 5</span>
+      <h2 style="margin-top: 10px; font-size: clamp(23px, 3.2vw, 38px);">Plan the Journey, Then Run Daily Tasks</h2>
+      <div class="stage">
+        <div class="panel">
+          <h3>Page objective</h3>
+          <p>Break objectives into approved weekly plans and daily task execution.</p>
+          <div class="mini-list">
+            <div class="mini-item">Consultant action<span>Review AI planning suggestions and approve the weekly sequence.</span></div>
+            <div class="mini-item">Manager action<span>Use the task board for daily focus, progress updates, and reassignments.</span></div>
+            <div class="mini-item">Expected output<span>Execution rhythm with visible throughput and fewer coordination gaps.</span></div>
+          </div>
+        </div>
+        <div style="display: grid; gap: 12px;">
+          <figure class="shot">
+            <img src="assets/screenshots/planning-mockup.png" alt="Planning screen">
+            <figcaption class="caption">Planning page: AI task review, approvals, and confidence signals.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="assets/screenshots/team-tasks.png" alt="Daily task board screen">
+            <figcaption class="caption">Daily task board: clear status lanes and fast action controls.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s7" style="--d: 0.38s;">
+    <div class="wrap">
+      <span class="kicker">Delivery Format</span>
+      <h2 style="margin-top: 10px; font-size: clamp(23px, 3.2vw, 38px);">How to use this in consultant onboarding</h2>
+      <div class="matrix">
+        <div class="matrix-card">
+          <h3>Session 1</h3>
+          <p>Walk the journey map and explain what success looks like on each page.</p>
+        </div>
+        <div class="matrix-card">
+          <h3>Session 2</h3>
+          <p>Run one client scenario end-to-end: assessment to daily tasks.</p>
+        </div>
+        <div class="matrix-card">
+          <h3>Session 3</h3>
+          <p>Coach facilitation behavior: where to ask, decide, and lock alignment.</p>
+        </div>
+      </div>
+      <div class="hero-box" style="margin-top: 16px;">
+        <h3 style="font-size: 20px;">One-line narrative for consultants</h3>
+        <p style="margin-top: 8px; font-size: 17px; color: #1e293b;">
+          "We do not jump to goals. We diagnose first, choose together, design teams, commit objectives, plan responsibly, and execute daily."
+        </p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

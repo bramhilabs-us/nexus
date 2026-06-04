@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E1 - Page 7: Infrastructure Ready | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 24px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: #888; text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .section-badge {
+            display: inline-block;
+            background: #EEF2FF;
+            color: #4F46E5;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-bottom: 4px;
+        }
+
+        /* Main Content */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        /* Left - The Foundation */
+        .foundation {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .main-title {
+            font-size: 42px;
+            font-weight: 300;
+            color: #1a1a2e;
+            line-height: 1.2;
+        }
+
+        .main-title em {
+            font-style: normal;
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: #FAFAFA;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #F0F0F0;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+
+        .stat-value.gold { color: #C9A227; }
+
+        .stat-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .foundation-note {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            padding-left: 16px;
+            border-left: 3px solid #C9A227;
+        }
+
+        /* Right - What's Built */
+        .built-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .built-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+
+        .built-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .built-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: #FAFAFA;
+            border-radius: 12px;
+            border: 1px solid #F0F0F0;
+        }
+
+        .built-icon {
+            width: 40px;
+            height: 40px;
+            background: #E8F5E9;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #2E7D32;
+            flex-shrink: 0;
+        }
+
+        .built-content {
+            flex: 1;
+        }
+
+        .built-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 2px;
+        }
+
+        .built-desc {
+            font-size: 11px;
+            color: #888;
+        }
+
+        /* Timeline Visual */
+        .timeline-visual {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-top: 8px;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .timeline-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .timeline-status {
+            font-size: 10px;
+            padding: 4px 10px;
+            background: #10B981;
+            color: white;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .timeline-bar {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 8px;
+        }
+
+        .timeline-segment {
+            flex: 1;
+            height: 8px;
+            background: #10B981;
+            border-radius: 2px;
+        }
+
+        .timeline-segment.prework {
+            background: #6EE7B7;
+        }
+
+        .timeline-segment.mvp {
+            background: #10B981;
+        }
+
+        .timeline-segment.beta {
+            background: #C9A227;
+        }
+
+        .timeline-segment.empty {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .timeline-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .timeline-labels .current {
+            color: #C9A227;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .citations {
+            font-size: 9px;
+            color: #bbb;
+        }
+
+        .citations sup {
+            color: #999;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .next { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            html, body { height: auto; overflow: auto; }
+
+            .page {
+                height: auto;
+                min-height: 100vh;
+                padding: 20px;
+                gap: 20px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .page-indicator { text-align: left; }
+
+            .content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .main-title {
+                font-size: 28px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .stat-card {
+                padding: 12px 8px;
+            }
+
+            .stat-value {
+                font-size: 22px;
+            }
+
+            .stat-label {
+                font-size: 9px;
+            }
+
+            .foundation-note {
+                font-size: 13px;
+            }
+
+            .built-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .built-item {
+                padding: 12px;
+            }
+
+            .built-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+
+            .timeline-visual {
+                padding: 16px;
+            }
+
+            .timeline-labels {
+                font-size: 8px;
+            }
+
+            .footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .citations {
+                font-size: 8px;
+            }
+
+            .footer-nav {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+
+            .stat-value {
+                font-size: 18px;
+            }
+
+            .stat-label {
+                font-size: 8px;
+            }
+
+            .main-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E1: What Is YSELA, Really?</div>
+            </div>
+            <div class="page-indicator">
+                <div class="section-badge">Section 2: Capabilities</div>
+                <div>Page <span class="current">7</span> of 12</div>
+                <div style="margin-top: 4px; color: #1a1a2e; font-weight: 500;">Infrastructure Ready</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Left - The Foundation -->
+            <div class="foundation">
+                <div class="section-label">The Foundation</div>
+
+                <div class="main-title">
+                    We didn't start<br>
+                    from <em>zero</em>.
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">900+</div>
+                        <div class="stat-label">Story Points</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">17</div>
+                        <div class="stat-label">Sprints</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value gold">$150K</div>
+                        <div class="stat-label">Invested<sup>1</sup></div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">6</div>
+                        <div class="stat-label">Months Pre-work</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value gold">$350K+</div>
+                        <div class="stat-label">Dev Value<sup>2</sup></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">7</div>
+                        <div class="stat-label">Months Dev</div>
+                    </div>
+                </div>
+
+                <div class="foundation-note">
+                    The core platform is built. Multi-tenant architecture,
+                    role-based access, goal cascade system.
+                    <strong>Infrastructure ready</strong> for what comes next.
+                </div>
+            </div>
+
+            <!-- Right - What's Built -->
+            <div class="built-section">
+                <div class="built-header">What's Already Built</div>
+
+                <div class="built-grid">
+                    <div class="built-item">
+                        <div class="built-icon">&#10003;</div>
+                        <div class="built-content">
+                            <div class="built-name">SSI Assessment</div>
+                            <div class="built-desc">Speed, Strength, Intelligence</div>
+                        </div>
+                    </div>
+
+                    <div class="built-item">
+                        <div class="built-icon">&#10003;</div>
+                        <div class="built-content">
+                            <div class="built-name">OKR Framework</div>
+                            <div class="built-desc">Objectives & Key Results</div>
+                        </div>
+                    </div>
+
+                    <div class="built-item">
+                        <div class="built-icon">&#10003;</div>
+                        <div class="built-content">
+                            <div class="built-name">Goal Cascade</div>
+                            <div class="built-desc">Quarterly → Weekly → Daily</div>
+                        </div>
+                    </div>
+
+                    <div class="built-item">
+                        <div class="built-icon">&#10003;</div>
+                        <div class="built-content">
+                            <div class="built-name">Multi-Tenant</div>
+                            <div class="built-desc">Company isolation</div>
+                        </div>
+                    </div>
+
+                    <div class="built-item">
+                        <div class="built-icon">&#10003;</div>
+                        <div class="built-content">
+                            <div class="built-name">Role-Based Access</div>
+                            <div class="built-desc">5 role hierarchy</div>
+                        </div>
+                    </div>
+
+                    <div class="built-item">
+                        <div class="built-icon">&#10003;</div>
+                        <div class="built-content">
+                            <div class="built-name">AI OKR Generation</div>
+                            <div class="built-desc">OpenAI integration</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-visual">
+                    <div class="timeline-header">
+                        <span class="timeline-title">Mar '25 → May '26</span>
+                        <span class="timeline-status">Beta Launch</span>
+                    </div>
+                    <div class="timeline-bar">
+                        <!-- Pre-work: Mar-Aug '25 (6 months) -->
+                        <div class="timeline-segment prework"></div>
+                        <div class="timeline-segment prework"></div>
+                        <div class="timeline-segment prework"></div>
+                        <div class="timeline-segment prework"></div>
+                        <div class="timeline-segment prework"></div>
+                        <div class="timeline-segment prework"></div>
+                        <!-- MVP Development: Sep-Dec '25 (4 months) -->
+                        <div class="timeline-segment mvp"></div>
+                        <div class="timeline-segment mvp"></div>
+                        <div class="timeline-segment mvp"></div>
+                        <div class="timeline-segment mvp"></div>
+                        <!-- Beta Development: Jan-Apr '26 (4 months) -->
+                        <div class="timeline-segment beta"></div>
+                        <div class="timeline-segment beta"></div>
+                        <div class="timeline-segment beta"></div>
+                        <div class="timeline-segment beta"></div>
+                        <!-- Beta Launch: May '26 -->
+                        <div class="timeline-segment empty"></div>
+                    </div>
+                    <div class="timeline-labels">
+                        <span>Pre-work</span>
+                        <span>MVP (Dec '25)</span>
+                        <span class="current">Beta Dev</span>
+                        <span>May '26</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-left">
+                <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+                <div class="citations">
+                    <sup>1</sup> Pre-work: 150h + Dev: 385h = 535h @ $200/hr avg &nbsp;
+                    <sup>2</sup> Market rate: Sr. Dev ($175/hr) + AI/ML ($200/hr) + PM ($125/hr) + QA ($100/hr) + DevOps ($150/hr)
+                </div>
+            </div>
+            <div class="footer-nav">
+                <a href="page_6_the_clarity_and_horizon.html">&larr; The Clarity</a>
+                <a href="page_8_scale_ready.html" class="next">Next: Scale Ready &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

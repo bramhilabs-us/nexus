@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karvia OKR - Data Model & Architecture Visualization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .architecture-note {
+            background: #fef5e7;
+            border: 2px solid #f39c12;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .architecture-note h3 {
+            color: #8b6914;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .architecture-note p {
+            color: #6b5d0f;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .scenario-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid #cbd5e0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: #f7fafc;
+            border-color: #4299e1;
+            color: #2b6cb0;
+        }
+
+        .btn.active {
+            background: #4299e1;
+            color: white;
+            border-color: #3182ce;
+        }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            padding: 12px;
+            background: #f7fafc;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-left: auto;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #4a5568;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            border: 1px solid #cbd5e0;
+        }
+
+        .visualization {
+            position: relative;
+            min-height: 900px;
+            background: #fafbfc;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .layer {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .layer-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .layer-badge {
+            background: #805ad5;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: normal;
+        }
+
+        .layer-badge.delivered {
+            background: #48bb78;
+        }
+
+        .layer-badge.external {
+            background: #f56565;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .model {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .model:hover {
+            border-color: #4299e1;
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .model.active {
+            border-color: #f6ad55;
+            background: #fffaf0;
+            box-shadow: 0 4px 12px rgba(246, 173, 85, 0.3);
+        }
+
+        .model.source {
+            border-color: #4299e1;
+            background: #ebf8ff;
+        }
+
+        .model.target {
+            border-color: #9f7aea;
+            background: #faf5ff;
+        }
+
+        .model-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .model-icon {
+            font-size: 16px;
+        }
+
+        .model-fields {
+            font-size: 11px;
+            color: #718096;
+            line-height: 1.5;
+        }
+
+        .field {
+            padding: 2px 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .field-key {
+            color: #805ad5;
+            font-weight: 600;
+        }
+
+        .field-fk {
+            color: #3182ce;
+            font-style: italic;
+        }
+
+        .field-required {
+            color: #e53e3e;
+            font-weight: bold;
+        }
+
+        .api-badge {
+            margin-top: 8px;
+            padding: 4px 8px;
+            background: #fef5e7;
+            border: 1px solid #f39c12;
+            border-radius: 4px;
+            font-size: 10px;
+            color: #8b6914;
+            display: inline-block;
+        }
+
+        .engine {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+        }
+
+        .engine .model-header {
+            color: white;
+        }
+
+        .engine .model-fields {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .engine.active {
+            background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+            box-shadow: 0 4px 12px rgba(237, 137, 54, 0.4);
+        }
+
+        .ibrain-layer {
+            background: linear-gradient(to right, #fef5e7, #fff8f0);
+            border: 2px dashed #f39c12;
+        }
+
+        .ibrain-model {
+            background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
+            border: none;
+            color: white;
+        }
+
+        .ibrain-model .model-header {
+            color: white;
+            font-size: 16px;
+        }
+
+        .ibrain-model .model-fields {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .delivery-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .delivery-badge.included {
+            background: #48bb78;
+        }
+
+        .delivery-badge.external {
+            background: #f56565;
+        }
+
+        .flow-arrow {
+            position: absolute;
+            width: 2px;
+            background: #4299e1;
+            transform-origin: top center;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .flow-arrow::after {
+            content: '▼';
+            position: absolute;
+            bottom: -8px;
+            left: -4px;
+            color: #4299e1;
+            font-size: 10px;
+        }
+
+        .flow-label {
+            position: absolute;
+            background: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: #4a5568;
+            border: 1px solid #cbd5e0;
+            white-space: nowrap;
+            z-index: 2;
+        }
+
+        .info-panel {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .info-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .flow-steps {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin-bottom: 15px;
+        }
+
+        .flow-step {
+            padding: 8px 12px;
+            background: #edf2f7;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #4a5568;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .flow-step.active {
+            background: #4299e1;
+            color: white;
+        }
+
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -18px;
+            color: #cbd5e0;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .crud-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .crud-table th {
+            background: #f7fafc;
+            padding: 10px;
+            text-align: left;
+            font-size: 12px;
+            color: #4a5568;
+            font-weight: 600;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .crud-table td {
+            padding: 10px;
+            font-size: 12px;
+            color: #2d3748;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .method-badge {
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: bold;
+            color: white;
+            display: inline-block;
+        }
+
+        .method-post { background: #48bb78; }
+        .method-get { background: #4299e1; }
+        .method-put { background: #ed8936; }
+        .method-delete { background: #f56565; }
+
+        .block-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #805ad5;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        .separator-line {
+            border-top: 3px dashed #e53e3e;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .separator-label {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 0 15px;
+            color: #e53e3e;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .models-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .legend {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ Karvia OKR - Complete Architecture & Data Model</h1>
+            <p>Core Platform (Delivered) + Optional iBrain Enhancement (SaaS)</p>
+        </div>
+
+        <div class="architecture-note">
+            <h3>⚠️ Important Architecture Distinction</h3>
+            <p><strong>✅ Delivered with Karvia Pro:</strong> 7 Modular Blocks + 6 Core Backend Engines (Everything needed for complete OKR platform)</p>
+            <p><strong>🔴 NOT Delivered (External SaaS):</strong> iBrain AI Enhancement Layer (Optional $30/user/month add-on via API)</p>
+            <p><strong>Key Point:</strong> Karvia Pro works 100% standalone. iBrain is an optional enhancement that adds AI superpowers but is NOT required.</p>
+        </div>
+
+        <div class="controls">
+            <div class="scenario-group">
+                <button class="btn active" onclick="showScenario('overview')">📊 Overview</button>
+                <button class="btn" onclick="showScenario('assessment-flow')">📝 Assessment Creation</button>
+                <button class="btn" onclick="showScenario('okr-generation')">🤖 OKR Generation</button>
+                <button class="btn" onclick="showScenario('task-cascade')">✅ Task Cascade</button>
+                <button class="btn" onclick="showScenario('team-management')">👥 Team Management</button>
+                <button class="btn" onclick="showScenario('why-chain')">🔗 Why Chain</button>
+                <button class="btn" onclick="showScenario('progress-rollup')">📈 Progress Rollup</button>
+                <button class="btn" onclick="showScenario('ibrain-enhance')">🧠 iBrain Enhancement</button>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #fffaf0; border-color: #f6ad55;"></div>
+                    <span>Active</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ebf8ff; border-color: #4299e1;"></div>
+                    <span>Source</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #faf5ff; border-color: #9f7aea;"></div>
+                    <span>Target</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #48bb78;"></div>
+                    <span>Delivered</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #f56565;"></div>
+                    <span>External SaaS</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="visualization">
+            <!-- Layer 1: Core Models (Block 1) -->
+            <div class="layer">
+                <div class="layer-title">
+                    <span>Core OKR Models</span>
+                    <span class="layer-badge delivered">Block 1 - REQUIRED - DELIVERED</span>
+                </div>
+                <div class="models-grid">
+                    <div class="model" id="user">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="block-badge">Block 1</div>
+                        <div class="model-header">
+                            <span class="model-icon">👤</span>
+                            <span>User</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field field-key">_id: ObjectId</div>
+                            <div class="field">email: String <span class="field-required">*</span></div>
+                            <div class="field">password_hash: String</div>
+                            <div class="field">name: String</div>
+                            <div class="field">role: Enum</div>
+                            <div class="field field-fk">companies: [{company_id, role}]</div>
+                            <div class="field">avatar_url: String</div>
+                        </div>
+                        <div class="api-badge">POST /api/auth/login</div>
+                    </div>
+
+                    <div class="model" id="objective">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="block-badge">Block 1</div>
+                        <div class="model-header">
+                            <span class="model-icon">🎯</span>
+                            <span>Objective</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field field-key">_id: ObjectId</div>
+                            <div class="field field-fk">user_id: ObjectId</div>
+                            <div class="field">title: String <span class="field-required">*</span></div>
+                            <div class="field">description: String</div>
+                            <div class="field">progress_%: Number</div>
+                            <div class="field">quarter: Number</div>
+                            <div class="field">year: Number</div>
+                            <div class="field">status: Enum</div>
+                            <div class="field field-fk">assessment_id: ObjectId</div>
+                        </div>
+                        <div class="api-badge">POST /api/objectives</div>
+                    </div>
+
+                    <div class="model" id="keyresult">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="block-badge">Block 1</div>
+                        <div class="model-header">
+                            <span class="model-icon">🔑</span>
+                            <span>KeyResult</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field field-key">_id: ObjectId</div>
+                            <div class="field field-fk">objective_id: ObjectId <span class="field-required">*</span></div>
+                            <div class="field">description: String <span class="field-required">*</span></div>
+                            <div class="field">baseline: Number</div>
+                            <div class="field">target: Number <span class="field-required">*</span></div>
+                            <div class="field">current: Number</div>
+                            <div class="field">unit: String</div>
+                            <div class="field">progress_%: Number</div>
+                        </div>
+                        <div class="api-badge">PUT /api/key-results/:id</div>
+                    </div>
+
+                    <div class="model" id="goal">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="block-badge">Block 1</div>
+                        <div class="model-header">
+                            <span class="model-icon">📅</span>
+                            <span>Goal</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field field-key">_id: ObjectId</div>
+                            <div class="field field-fk">user_id: ObjectId</div>
+                            <div class="field field-fk">objective_id: ObjectId</div>
+                            <div class="field field-fk">key_result_id: ObjectId</div>
+                            <div class="field">title: String <span class="field-required">*</span></div>
+                            <div class="field">type: quarterly|weekly</div>
+                            <div class="field">week_number: Number</div>
+                            <div class="field">progress_%: Number</div>
+                        </div>
+                        <div class="api-badge">POST /api/goals</div>
+                    </div>
+
+                    <div class="model" id="task">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="block-badge">Block 1</div>
+                        <div class="model-header">
+                            <span class="model-icon">✅</span>
+                            <span>Task</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field field-key">_id: ObjectId</div>
+                            <div class="field field-fk">goal_id: ObjectId <span class="field-required">*</span></div>
+                            <div class="field field-fk">assigned_to: ObjectId <span class="field-required">*</span></div>
+                            <div class="field">title: String <span class="field-required">*</span></div>
+                            <div class="field">priority: high|medium|low</div>
+                            <div class="field">status: todo|in_progress|done</div>
+                            <div class="field">due_date: Date</div>
+                        </div>
+                        <div class="api-badge">PUT /api/tasks/:id/complete</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layer 2: Core Backend Engines -->
+            <div class="layer">
+                <div class="layer-title">
+                    <span>Core Backend Microservice Engines</span>
+                    <span class="layer-badge delivered">6 Engines - ALL DELIVERED</span>
+                </div>
+                <div class="models-grid">
+                    <div class="model engine" id="iam-engine">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="model-header">
+                            <span class="model-icon">🔐</span>
+                            <span>IAM Engine (8081)</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field">• Authentication & JWT</div>
+                            <div class="field">• User Management</div>
+                            <div class="field">• Company/Team CRUD</div>
+                            <div class="field">• Invitations & Onboarding</div>
+                            <div class="field">• Role-Based Access Control</div>
+                            <div class="field">• Multi-tenancy Support</div>
+                        </div>
+                    </div>
+
+                    <div class="model engine" id="assessment-engine">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="model-header">
+                            <span class="model-icon">📊</span>
+                            <span>Assessment Engine (8082)</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field">• SSI Score Calculation</div>
+                            <div class="field">• Multi-level Aggregation</div>
+                            <div class="field">• Weak Area Analysis</div>
+                            <div class="field">• Template Management</div>
+                            <div class="field">• Team Health Metrics</div>
+                            <div class="field">• Question Library (146+)</div>
+                        </div>
+                    </div>
+
+                    <div class="model engine" id="planner-engine">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="model-header">
+                            <span class="model-icon">🎯</span>
+                            <span>Planner Engine (8083)</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field">• OKR Creation & Management</div>
+                            <div class="field">• Template-Based Generation</div>
+                            <div class="field">• Goal/Task Creation</div>
+                            <div class="field">• Quarterly Planning</div>
+                            <div class="field">• Capacity Planning</div>
+                            <div class="field">• OpenAI Integration (Optional)</div>
+                        </div>
+                    </div>
+
+                    <div class="model engine" id="scoring-engine">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="model-header">
+                            <span class="model-icon">🏆</span>
+                            <span>Scoring Engine (8084)</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field">• Progress Calculation</div>
+                            <div class="field">• Health Scoring</div>
+                            <div class="field">• Rollup Aggregation</div>
+                            <div class="field">• Risk Detection</div>
+                            <div class="field">• Performance Metrics</div>
+                        </div>
+                    </div>
+
+                    <div class="model engine" id="observer-engine">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="model-header">
+                            <span class="model-icon">👁️</span>
+                            <span>Observer Engine (8085)</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field">• Activity Logging</div>
+                            <div class="field">• Audit Trails</div>
+                            <div class="field">• Change Tracking</div>
+                            <div class="field">• Basic Alert Generation</div>
+                            <div class="field">• Event Streaming</div>
+                        </div>
+                    </div>
+
+                    <div class="model engine" id="tracking-engine">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="model-header">
+                            <span class="model-icon">📍</span>
+                            <span>Tracking Engine (8086)</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field">• Task Management</div>
+                            <div class="field">• Progress Updates</div>
+                            <div class="field">• Time Tracking</div>
+                            <div class="field">• Status Transitions</div>
+                            <div class="field">• Due Date Monitoring</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Separator Line -->
+            <div class="separator-line">
+                <span class="separator-label">DELIVERY BOUNDARY</span>
+            </div>
+
+            <!-- iBrain Layer - External SaaS -->
+            <div class="layer ibrain-layer">
+                <div class="layer-title">
+                    <span>iBrain AI Enhancement Layer</span>
+                    <span class="layer-badge external">EXTERNAL SaaS - NOT DELIVERED</span>
+                </div>
+                <div class="models-grid">
+                    <div class="model ibrain-model">
+                        <div class="delivery-badge external">✗ External</div>
+                        <div class="model-header">
+                            <span class="model-icon">🧠</span>
+                            <span>iBrain SaaS Platform</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field"><strong>Enhanced AI Capabilities:</strong></div>
+                            <div class="field">• AI OKR Generation (GPT-4)</div>
+                            <div class="field">• Behavioral Nudging</div>
+                            <div class="field">• Predictive Analytics (78% risk)</div>
+                            <div class="field">• Pattern Detection</div>
+                            <div class="field">• AI Coaching Conversations</div>
+                            <div class="field">• Smart Priority Analysis</div>
+                            <div class="field">• Velocity Tracking</div>
+                            <div class="field">• Early Warning System</div>
+                            <div class="field" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.3);">
+                                <strong>Integration:</strong>
+                            </div>
+                            <div class="field">• API Key: IBRAIN_API_KEY</div>
+                            <div class="field">• Webhook: IBRAIN_WEBHOOK_URL</div>
+                            <div class="field">• Toggle: FEATURE_IBRAIN_ENABLED</div>
+                            <div class="field">• Pricing: $30/user/month</div>
+                            <div class="field">• Owner: BRAMHI Labs</div>
+                        </div>
+                    </div>
+
+                    <div class="model" style="background: #fff8f0; border: 2px solid #f39c12;">
+                        <div class="model-header">
+                            <span class="model-icon">🔌</span>
+                            <span>How iBrain Enhances</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field"><strong>When ENABLED:</strong></div>
+                            <div class="field">• IAM Engine → User behavior tracking</div>
+                            <div class="field">• Assessment → AI gap analysis</div>
+                            <div class="field">• Planner → AI OKR generation</div>
+                            <div class="field">• Scoring → Predictive scoring</div>
+                            <div class="field">• Observer → Smart alerts</div>
+                            <div class="field">• Tracking → Velocity analysis</div>
+                            <div class="field" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0;">
+                                <strong>When DISABLED:</strong>
+                            </div>
+                            <div class="field">• All engines work normally</div>
+                            <div class="field">• Template-based OKRs</div>
+                            <div class="field">• Manual progress tracking</div>
+                            <div class="field">• Basic alerts only</div>
+                        </div>
+                    </div>
+
+                    <div class="model" style="background: #f0fff4; border: 2px solid #48bb78;">
+                        <div class="model-header">
+                            <span class="model-icon">💰</span>
+                            <span>Business Model</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field"><strong>Client Gets:</strong></div>
+                            <div class="field">• Complete Karvia Pro platform</div>
+                            <div class="field">• All 6 backend engines</div>
+                            <div class="field">• All source code</div>
+                            <div class="field">• Deployment scripts</div>
+                            <div class="field">• Documentation</div>
+                            <div class="field" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0;">
+                                <strong>Client Doesn't Get:</strong>
+                            </div>
+                            <div class="field">• iBrain source code</div>
+                            <div class="field">• iBrain deployment</div>
+                            <div class="field" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0;">
+                                <strong>Revenue Model:</strong>
+                            </div>
+                            <div class="field">• One-time: Platform delivery</div>
+                            <div class="field">• Recurring: iBrain subscription</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Models Layer -->
+            <div class="layer">
+                <div class="layer-title">
+                    <span>Supporting Models & Components</span>
+                    <span class="layer-badge delivered">Blocks 2, 3, 7 - DELIVERED</span>
+                </div>
+                <div class="models-grid">
+                    <div class="model" id="company">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="block-badge">Block 2</div>
+                        <div class="model-header">
+                            <span class="model-icon">🏢</span>
+                            <span>Company</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field field-key">_id: ObjectId</div>
+                            <div class="field">name: String <span class="field-required">*</span></div>
+                            <div class="field">industry: String</div>
+                            <div class="field">ibrain_enabled: Boolean</div>
+                            <div class="field">ibrain_api_key: String</div>
+                        </div>
+                        <div class="api-badge">POST /api/companies</div>
+                    </div>
+
+                    <div class="model" id="team">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="block-badge">Block 2</div>
+                        <div class="model-header">
+                            <span class="model-icon">👥</span>
+                            <span>Team</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field field-key">_id: ObjectId</div>
+                            <div class="field field-fk">company_id: ObjectId</div>
+                            <div class="field">name: String</div>
+                            <div class="field field-fk">manager_id: ObjectId</div>
+                            <div class="field">members: Array</div>
+                        </div>
+                        <div class="api-badge">POST /api/teams</div>
+                    </div>
+
+                    <div class="model" id="assessmenttemplate">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="block-badge">Block 3</div>
+                        <div class="model-header">
+                            <span class="model-icon">📋</span>
+                            <span>AssessmentTemplate</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field field-key">_id: ObjectId</div>
+                            <div class="field">name: String</div>
+                            <div class="field">dimensions: [{name, weight%}]</div>
+                            <div class="field">questions: [ObjectId]</div>
+                            <div class="field field-fk">created_by: ObjectId</div>
+                        </div>
+                        <div class="api-badge">POST /api/assessment-templates</div>
+                    </div>
+
+                    <div class="model" id="permissionrule">
+                        <div class="delivery-badge included">✓ Included</div>
+                        <div class="block-badge">Block 7</div>
+                        <div class="model-header">
+                            <span class="model-icon">🔒</span>
+                            <span>PermissionRule</span>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field field-key">_id: ObjectId</div>
+                            <div class="field">resource: String</div>
+                            <div class="field">action: CRUD</div>
+                            <div class="field">allowed_roles: Array</div>
+                            <div class="field">conditions: Object</div>
+                        </div>
+                        <div class="api-badge">POST /api/permission-rules</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Panel -->
+        <div class="info-panel" id="infoPanel">
+            <div class="info-title">📊 Data Flow Visualization</div>
+
+            <div class="flow-steps" id="flowSteps">
+                <div class="flow-step active">Select a scenario above to see data flow</div>
+            </div>
+
+            <table class="crud-table">
+                <thead>
+                    <tr>
+                        <th>Operation</th>
+                        <th>Method</th>
+                        <th>Endpoint</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody id="crudTableBody">
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: #718096;">
+                            Click a scenario to view CRUD operations
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const scenarios = {
+            'overview': {
+                title: 'System Overview',
+                steps: ['User Login', 'Company/Team Context', 'Assessment', 'OKR Generation', 'Goal Planning', 'Task Execution', 'Progress Tracking'],
+                active: ['user', 'company', 'team', 'objective', 'goal', 'task', 'iam-engine', 'planner-engine'],
+                crud: [
+                    {operation: 'User Authentication', method: 'POST', endpoint: '/api/auth/login', desc: 'JWT token generation (IAM Engine)'},
+                    {operation: 'Create Company', method: 'POST', endpoint: '/api/companies', desc: 'Setup organization (IAM Engine)'},
+                    {operation: 'Create Team', method: 'POST', endpoint: '/api/teams', desc: 'Organize users (IAM Engine)'},
+                    {operation: 'Create Objective', method: 'POST', endpoint: '/api/objectives', desc: 'Quarterly OKRs (Planner Engine)'},
+                    {operation: 'Create Goal', method: 'POST', endpoint: '/api/goals', desc: 'Weekly goals (Planner Engine)'},
+                    {operation: 'Create Task', method: 'POST', endpoint: '/api/tasks', desc: 'Daily work (Tracking Engine)'}
+                ]
+            },
+            'assessment-flow': {
+                title: 'Assessment Creation & Distribution',
+                steps: ['Create Template', 'Select Questions', 'Set Weights', 'Send Assessment', 'Collect Responses', 'Calculate Scores', 'Identify Weak Areas'],
+                active: ['assessmenttemplate', 'assessment-engine'],
+                crud: [
+                    {operation: 'Create Template', method: 'POST', endpoint: '/api/assessment-templates', desc: 'Dynamic template creation'},
+                    {operation: 'Get Question Library', method: 'GET', endpoint: '/api/questions/library', desc: 'Browse 146+ questions'},
+                    {operation: 'Send Assessment', method: 'POST', endpoint: '/api/assessments/send', desc: 'Email invitations'},
+                    {operation: 'Submit Assessment', method: 'POST', endpoint: '/api/assessments/:id/submit', desc: 'User responses'},
+                    {operation: 'Calculate Scores', method: 'AUTO', endpoint: 'Internal', desc: 'Assessment Engine processing'}
+                ]
+            },
+            'okr-generation': {
+                title: 'OKR Generation (Template-based or AI)',
+                steps: ['Assessment Results', 'Weak Area Analysis', 'Generate OKRs', 'Review & Edit', 'Save to Database'],
+                active: ['planner-engine', 'objective', 'keyresult'],
+                crud: [
+                    {operation: 'Template OKRs', method: 'POST', endpoint: '/api/objectives/generate', desc: 'Default: Template-based'},
+                    {operation: 'AI OKRs (if enabled)', method: 'POST', endpoint: '/api/ai-okr/generate', desc: 'Optional: OpenAI GPT-4'},
+                    {operation: 'Create Objective', method: 'POST', endpoint: '/api/objectives', desc: 'Save to database'},
+                    {operation: 'Create Key Results', method: 'POST', endpoint: '/api/key-results', desc: 'Measurable outcomes'},
+                    {operation: 'Link Assessment', method: 'PUT', endpoint: '/api/objectives/:id', desc: 'Maintain lineage'}
+                ]
+            },
+            'task-cascade': {
+                title: 'Goal to Task Breakdown',
+                steps: ['Quarterly Goal', 'Weekly Goal', 'Create Tasks', 'Assign to Users', 'Set Priority', 'Track Progress'],
+                active: ['goal', 'task', 'tracking-engine'],
+                crud: [
+                    {operation: 'Create Goal', method: 'POST', endpoint: '/api/goals', desc: 'Manager creates'},
+                    {operation: 'Create Tasks', method: 'POST', endpoint: '/api/tasks', desc: 'Break into tasks'},
+                    {operation: 'Assign Task', method: 'PUT', endpoint: '/api/tasks/:id/assign', desc: 'To team member'},
+                    {operation: 'Update Progress', method: 'PUT', endpoint: '/api/tasks/:id/progress', desc: 'Status updates'},
+                    {operation: 'Complete Task', method: 'PUT', endpoint: '/api/tasks/:id/complete', desc: 'Mark done'}
+                ]
+            },
+            'team-management': {
+                title: 'Team & Company Structure',
+                steps: ['Create Company', 'Create Teams', 'Invite Members', 'Accept Invitation', 'Assign Roles'],
+                active: ['company', 'team', 'user', 'iam-engine'],
+                crud: [
+                    {operation: 'Create Company', method: 'POST', endpoint: '/api/companies', desc: 'Organization setup'},
+                    {operation: 'Create Team', method: 'POST', endpoint: '/api/teams', desc: 'Department/team'},
+                    {operation: 'Bulk Invite', method: 'POST', endpoint: '/api/invitations/bulk', desc: 'Email invites'},
+                    {operation: 'Accept Invite', method: 'POST', endpoint: '/api/invitations/:token/accept', desc: 'Join company'},
+                    {operation: 'Add Members', method: 'POST', endpoint: '/api/teams/:id/members', desc: 'Team assignment'}
+                ]
+            },
+            'why-chain': {
+                title: 'Why Chain - Complete Lineage',
+                steps: ['Task', 'Weekly Goal', 'Quarterly Goal', 'Key Result', 'Objective', 'Assessment Source'],
+                active: ['task', 'goal', 'keyresult', 'objective'],
+                crud: [
+                    {operation: 'Get Context', method: 'GET', endpoint: '/api/tasks/:id/context', desc: 'Full lineage chain'},
+                    {operation: 'Task → Goal', method: 'GET', endpoint: '/api/goals/:id', desc: 'Via goal_id FK'},
+                    {operation: 'Goal → KR', method: 'GET', endpoint: '/api/key-results/:id', desc: 'Via key_result_id'},
+                    {operation: 'KR → Objective', method: 'GET', endpoint: '/api/objectives/:id', desc: 'Via objective_id'},
+                    {operation: 'Objective → Assessment', method: 'GET', endpoint: '/api/assessments/:id', desc: 'Source assessment'}
+                ]
+            },
+            'progress-rollup': {
+                title: 'Automatic Progress Aggregation',
+                steps: ['Task Complete', 'Update Goal %', 'Update KR %', 'Update Objective %', 'Team Rollup'],
+                active: ['task', 'goal', 'keyresult', 'objective', 'scoring-engine'],
+                crud: [
+                    {operation: 'Complete Task', method: 'PUT', endpoint: '/api/tasks/:id/complete', desc: 'Trigger rollup'},
+                    {operation: 'Post-Save Hook', method: 'AUTO', endpoint: 'Internal', desc: 'Mongoose middleware'},
+                    {operation: 'Update Goal', method: 'AUTO', endpoint: 'Internal', desc: 'tasks_done/total'},
+                    {operation: 'Update KR', method: 'AUTO', endpoint: 'Internal', desc: 'avg(goals)'},
+                    {operation: 'Update Objective', method: 'AUTO', endpoint: 'Internal', desc: 'avg(KRs)'}
+                ]
+            },
+            'ibrain-enhance': {
+                title: 'iBrain AI Enhancement (When Enabled)',
+                steps: ['Check Toggle', 'Call iBrain API', 'Get AI Insights', 'Display Enhanced Features', 'Track Behavior', 'Predictive Alerts'],
+                active: ['planner-engine', 'scoring-engine', 'observer-engine'],
+                crud: [
+                    {operation: 'Check Toggle', method: 'GET', endpoint: '/api/companies/:id', desc: 'ibrain_enabled flag'},
+                    {operation: 'AI OKR Generation', method: 'POST', endpoint: 'https://ibrain.api/okrs', desc: 'External iBrain API'},
+                    {operation: 'Get Predictions', method: 'POST', endpoint: 'https://ibrain.api/predict', desc: 'Risk analysis'},
+                    {operation: 'Behavior Tracking', method: 'POST', endpoint: 'https://ibrain.api/track', desc: 'User patterns'},
+                    {operation: 'Smart Alerts', method: 'GET', endpoint: 'https://ibrain.api/alerts', desc: 'AI-powered nudges'}
+                ]
+            }
+        };
+
+        function showScenario(scenarioId) {
+            // Reset all models
+            document.querySelectorAll('.model').forEach(m => {
+                m.classList.remove('active', 'source', 'target');
+            });
+
+            // Clear active buttons
+            document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const scenario = scenarios[scenarioId];
+
+            // Highlight active models
+            scenario.active.forEach(modelId => {
+                const model = document.getElementById(modelId);
+                if (model) model.classList.add('active');
+            });
+
+            // Update flow steps
+            const stepsHtml = scenario.steps.map((step, i) =>
+                `<div class="flow-step ${i === 0 ? 'active' : ''}">${step}</div>`
+            ).join('');
+            document.getElementById('flowSteps').innerHTML = stepsHtml;
+
+            // Update CRUD table
+            const crudHtml = scenario.crud.map(op => `
+                <tr>
+                    <td>${op.operation}</td>
+                    <td><span class="method-badge method-${op.method.toLowerCase()}">${op.method}</span></td>
+                    <td style="font-family: monospace; font-size: 11px;">${op.endpoint}</td>
+                    <td>${op.desc}</td>
+                </tr>
+            `).join('');
+            document.getElementById('crudTableBody').innerHTML = crudHtml;
+        }
+
+        // Initialize with overview
+        window.onload = () => {
+            document.querySelector('.btn').click();
+        };
+    </script>
+</body>
+</html>

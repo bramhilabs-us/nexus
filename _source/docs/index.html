@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chief AI — Your AI Chief of Staff</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .chief-gradient { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); }
+        .chief-gradient-text {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gold-accent { color: #d4a853; }
+        .gold-bg { background-color: #d4a853; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <div class="max-w-4xl mx-auto px-4 py-8 lg:py-12">
+
+        <!-- Header: Logo + Core Message -->
+        <div class="bg-white rounded-2xl border border-gray-200 p-6 lg:p-8 shadow-sm mb-6">
+
+            <!-- Logo -->
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 bg-white rounded-xl shadow-md flex items-center justify-center">
+                    <svg width="32" height="32" viewBox="0 0 28 28" fill="none">
+                        <defs>
+                            <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#1e3a5f"/>
+                                <stop offset="100%" style="stop-color:#2d5a87"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M14 2L15.5 10L22 6L17 12L26 14L17 16L22 22L15.5 18L14 26L12.5 18L6 22L11 16L2 14L11 12L6 6L12.5 10L14 2Z" fill="url(#navyGrad)"/>
+                        <circle cx="14" cy="14" r="2" fill="#d4a853"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <div>
+                        <span class="text-2xl font-bold chief-gradient-text">Chief</span>
+                        <span class="text-2xl font-medium gold-accent ml-1">AI</span>
+                    </div>
+                    <span class="text-sm text-gray-500">Your AI Chief of Staff</span>
+                </div>
+            </div>
+
+            <!-- Core Message -->
+            <h1 class="text-2xl lg:text-3xl font-bold text-gray-900 leading-tight mb-4">
+                Running a service business is complex.<br>
+                <span class="chief-gradient-text">Your goals don't have to be.</span>
+            </h1>
+
+            <p class="text-base lg:text-lg text-gray-600 mb-6">
+                Chief AI turns team insights into clear plans everyone can follow.
+            </p>
+
+            <!-- Value Statement -->
+            <div class="bg-gradient-to-r from-slate-50 to-blue-50 border-l-4 border-[#1e3a5f] rounded-r-xl p-4 lg:p-5">
+                <p class="text-gray-800 text-sm lg:text-base">
+                    <span class="font-semibold text-[#1e3a5f]">Better matches, better outcomes.</span><br>
+                    <span class="text-gray-600">When work matches strengths, your team delivers their best—and your clients feel the difference.</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- How It Works - Full Width -->
+        <div class="bg-white rounded-2xl border border-gray-200 p-6 lg:p-8 shadow-sm mb-6">
+
+            <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-2">Your journey starts here</h2>
+            <p class="text-gray-500 text-sm lg:text-base mb-8">Four simple steps to transform how your team works</p>
+
+            <!-- Visual Flow - Horizontal -->
+            <div class="flex items-center justify-between mb-10 px-4">
+                <div class="flex flex-col items-center">
+                    <div class="w-14 h-14 lg:w-16 lg:h-16 chief-gradient rounded-full flex items-center justify-center text-2xl lg:text-3xl shadow-lg mb-2">📊</div>
+                    <span class="text-xs lg:text-sm font-bold text-[#1e3a5f]">ASSESS</span>
+                </div>
+                <div class="flex-1 h-1 bg-gradient-to-r from-[#1e3a5f] to-[#2d5a87] mx-2 lg:mx-4 rounded"></div>
+                <div class="flex flex-col items-center">
+                    <div class="w-14 h-14 lg:w-16 lg:h-16 chief-gradient rounded-full flex items-center justify-center text-2xl lg:text-3xl shadow-lg mb-2">🎯</div>
+                    <span class="text-xs lg:text-sm font-bold text-[#1e3a5f]">ALIGN</span>
+                </div>
+                <div class="flex-1 h-1 bg-gradient-to-r from-[#2d5a87] to-[#1e3a5f] mx-2 lg:mx-4 rounded"></div>
+                <div class="flex flex-col items-center">
+                    <div class="w-14 h-14 lg:w-16 lg:h-16 chief-gradient rounded-full flex items-center justify-center text-2xl lg:text-3xl shadow-lg mb-2">📋</div>
+                    <span class="text-xs lg:text-sm font-bold text-[#1e3a5f]">PLAN</span>
+                </div>
+                <div class="flex-1 h-1 bg-gradient-to-r from-[#1e3a5f] to-[#2d5a87] mx-2 lg:mx-4 rounded"></div>
+                <div class="flex flex-col items-center">
+                    <div class="w-14 h-14 lg:w-16 lg:h-16 chief-gradient rounded-full flex items-center justify-center text-2xl lg:text-3xl shadow-lg mb-2">✨</div>
+                    <span class="text-xs lg:text-sm font-bold text-[#1e3a5f]">PLAY</span>
+                </div>
+            </div>
+
+            <!-- Step 1: Assess -->
+            <div class="border border-gray-100 rounded-xl p-5 lg:p-6 mb-4 hover:border-[#2d5a87]/30 transition-colors">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 chief-gradient rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">1</div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-2">
+                            <h3 class="font-bold text-gray-900 text-base lg:text-lg">Assess</h3>
+                            <span class="text-xs bg-blue-100 text-[#1e3a5f] px-2 py-0.5 rounded-full font-medium">→ Assessment Page</span>
+                        </div>
+                        <p class="text-gray-600 text-sm lg:text-base leading-relaxed">
+                            A <span class="font-semibold text-gray-800">5-15 minute assessment</span> measures your organization's
+                            <span class="font-semibold text-gray-800">Speed, Strength, and Intelligence</span>—how fast you deliver,
+                            how resilient you are under pressure, and how smartly you adapt to challenges.
+                        </p>
+                        <div class="mt-4 bg-gray-50 rounded-lg p-3">
+                            <p class="text-xs font-semibold text-[#1e3a5f] uppercase tracking-wide mb-1">Built for service businesses</p>
+                            <p class="text-xs text-gray-500">
+                                Consulting • Marketing • Wellness • Healthcare • Accounting • Trades • IT • Real Estate
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Align -->
+            <div class="border border-gray-100 rounded-xl p-5 lg:p-6 mb-4 hover:border-[#2d5a87]/30 transition-colors">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 chief-gradient rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">2</div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-2">
+                            <h3 class="font-bold text-gray-900 text-base lg:text-lg">Align</h3>
+                            <span class="text-xs bg-blue-100 text-[#1e3a5f] px-2 py-0.5 rounded-full font-medium">→ Objectives Page</span>
+                        </div>
+                        <p class="text-gray-600 text-sm lg:text-base leading-relaxed">
+                            Objectives shaped by your SSI profile—<span class="font-semibold text-gray-800">goals that leverage your speed,
+                            build on your strengths, and sharpen your intelligence</span>. Not generic templates from a book.
+                            Review them, adjust them, make them yours.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Plan -->
+            <div class="border border-gray-100 rounded-xl p-5 lg:p-6 mb-4 hover:border-[#2d5a87]/30 transition-colors">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 chief-gradient rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">3</div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-2">
+                            <h3 class="font-bold text-gray-900 text-base lg:text-lg">Plan</h3>
+                            <span class="text-xs bg-blue-100 text-[#1e3a5f] px-2 py-0.5 rounded-full font-medium">→ Planning Page</span>
+                        </div>
+                        <p class="text-gray-600 text-sm lg:text-base leading-relaxed">
+                            Tasks matched to capabilities. <span class="font-semibold text-gray-800">Fast movers get time-sensitive work.
+                            Strong performers handle pressure. Sharp thinkers solve complex problems.</span>
+                            Your planning page shows who's doing what, when it's due, and why it matters.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Play -->
+            <div class="border border-gray-100 rounded-xl p-5 lg:p-6 hover:border-[#2d5a87]/30 transition-colors">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 chief-gradient rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0">4</div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-2">
+                            <h3 class="font-bold text-gray-900 text-base lg:text-lg">Play</h3>
+                            <span class="text-xs bg-blue-100 text-[#1e3a5f] px-2 py-0.5 rounded-full font-medium">→ Dashboard</span>
+                        </div>
+                        <p class="text-gray-600 text-sm lg:text-base leading-relaxed">
+                            Focus on <span class="font-semibold text-gray-800">the task at hand</span>. No overwhelm, no endless lists.
+                            Track progress across all three dimensions. Watch your organization get
+                            <span class="font-semibold text-gray-800">faster, stronger, and smarter</span>—and your clients notice the difference.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="chief-gradient rounded-2xl p-6 lg:p-8 text-center text-white shadow-lg mb-6">
+            <h2 class="text-xl lg:text-2xl font-bold mb-2">Ready to see your team's potential?</h2>
+            <p class="text-blue-100 text-sm lg:text-base mb-5">Start with a free assessment. It takes 5 minutes and changes everything.</p>
+            <a href="https://karvia-business.onrender.com"
+               class="inline-block bg-white text-[#1e3a5f] font-bold px-8 py-3 rounded-xl hover:shadow-lg transition-all">
+                Get Started Free →
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center py-4">
+            <div class="flex items-center justify-center gap-2">
+                <span class="text-xs text-gray-400">Powered by</span>
+                <img src="CD_Logo_NoSlogan.png" alt="Cultural Discipline" class="h-8" />
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

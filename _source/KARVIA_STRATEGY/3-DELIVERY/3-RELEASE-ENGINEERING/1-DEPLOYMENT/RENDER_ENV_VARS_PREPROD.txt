@@ -1,0 +1,65 @@
+=============================================================
+RENDER ENVIRONMENT VARIABLES - PRE-PRODUCTION
+=============================================================
+Copy and paste these into Render.com Environment tab
+Last Updated: November 14, 2025
+=============================================================
+
+--- CORE CONFIGURATION ---
+NODE_ENV=production
+HOST=0.0.0.0
+PORT=8080
+
+--- FRONTEND & CORS (UPDATE AFTER FIRST DEPLOYMENT) ---
+FRONTEND_URL=https://karvia-business-preprod.onrender.com
+CORS_ORIGIN=https://karvia-business-preprod.onrender.com
+SIGNUP_URL=https://karvia-business-preprod.onrender.com/pages/signup.html
+
+--- DATABASE ---
+MONGODB_URI=mongodb+srv://[REDACTED]:[REDACTED]@cluster0.lpzcrvy.mongodb.net/karvia_business_preprod?retryWrites=true&w=majority&tls=true&tlsAllowInvalidCertificates=false
+
+--- JWT & SESSION ---
+JWT_SECRET=[REDACTED]
+JWT_EXPIRES_IN=24h
+SESSION_SECRET=[REDACTED]
+
+--- MAILJET EMAIL ---
+MAILJET_API_KEY=[REDACTED]
+MAILJET_API_SECRET=[REDACTED]
+MAILJET_FROM_EMAIL=rsm@karvia.ai
+MAILJET_FROM_NAME=Karvia Business [PRE-PROD]
+
+--- OPENAI ---
+OPENAI_API_KEY=[REDACTED]
+OPENAI_MODEL=gpt-4-turbo-preview
+OPENAI_MAX_TOKENS=2500
+OPENAI_TEMPERATURE=0.7
+
+--- FEATURE FLAGS ---
+FEATURE_OPENAI_ENABLED=true
+FEATURE_EMAIL_ENABLED=true
+FEATURE_REDIS_ENABLED=false
+FEATURE_IBRAIN_ENABLED=false
+ENABLE_AI_FEATURES=true
+ENABLE_INTEGRATIONS=false
+ENABLE_ANALYTICS=true
+
+--- LOGGING ---
+LOG_LEVEL=info
+
+=============================================================
+IMPORTANT NOTES:
+=============================================================
+1. After first deployment, get your Render URL
+2. Update FRONTEND_URL, CORS_ORIGIN, SIGNUP_URL with actual URL
+3. Database name is "karvia_business_preprod" (separate from prod)
+4. JWT_SECRET is production-grade (different from development)
+5. Email from name includes [PRE-PROD] tag for identification
+
+=============================================================
+BUILD & START COMMANDS FOR RENDER:
+=============================================================
+Build Command: npm install
+Start Command: npm run start:preprod
+
+=============================================================

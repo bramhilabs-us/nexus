@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E2 - Page 6: The Midpoint | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto 1fr auto auto;
+            gap: 24px;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: #888; text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .page-title { margin-top: 4px; color: #1a1a2e; font-weight: 500; }
+
+        /* Columns */
+        .left-col, .center-col, .right-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-header {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        /* Left - The ICP Summary */
+        .icp-summary {
+            font-size: 15px;
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .icp-summary em {
+            font-style: normal;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            padding: 14px;
+            background: #FAFAFA;
+            border-radius: 12px;
+            border: 1px solid #F0F0F0;
+        }
+
+        .summary-icon {
+            width: 36px;
+            height: 36px;
+            background: #E8F5E9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .summary-content { flex: 1; }
+
+        .summary-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 2px;
+        }
+
+        .summary-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Center - The Position */
+        .position-intro {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .position-card {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 14px;
+        }
+
+        .position-label {
+            font-size: 9px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .position-text {
+            font-size: 14px;
+            color: white;
+            line-height: 1.8;
+        }
+
+        .position-text em {
+            font-style: normal;
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        .differentiator {
+            background: #FAFAFA;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #F0F0F0;
+        }
+
+        .diff-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #F0F0F0;
+            font-size: 12px;
+        }
+
+        .diff-row:last-child { border-bottom: none; }
+
+        .diff-label { color: #888; }
+        .diff-value { color: #1a1a2e; font-weight: 500; }
+
+        /* Right - Next Steps */
+        .next-intro {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .next-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: #FAFAFA;
+            border-radius: 12px;
+            border: 1px solid #F0F0F0;
+            margin-bottom: 10px;
+        }
+
+        .next-number {
+            width: 32px;
+            height: 32px;
+            background: #C9A227;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a2e;
+            flex-shrink: 0;
+        }
+
+        .next-content { flex: 1; }
+
+        .next-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #1a1a2e;
+        }
+
+        .next-desc {
+            font-size: 11px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        .cta-box {
+            background: #FEF3C7;
+            border: 1px dashed #C9A227;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .cta-text {
+            font-size: 13px;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        .cta-sub {
+            font-size: 11px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        /* Bottom - Final Message */
+        .closing-section {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            border-top: 1px solid #F0F0F0;
+        }
+
+        .final-message {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .final-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .final-text {
+            font-size: 24px;
+            color: #1a1a2e;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .final-text em {
+            font-style: normal;
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .complete { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 20px; grid-template-columns: 1fr; gap: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .final-text { font-size: 18px; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E2: Market Opportunity</div>
+            </div>
+            <div class="page-indicator">
+                <div>Page <span class="current">6</span> of 9</div>
+                <div class="page-title">The Midpoint</div>
+            </div>
+        </header>
+
+        <!-- Left - The ICP Summary -->
+        <div class="left-col">
+            <div class="section-header">The Market</div>
+
+            <div class="icp-summary">
+                Service businesses with <em>15-40 employees</em>.<br>
+                Overworked owners. Messy tools. Plateauing growth.
+            </div>
+
+            <div class="summary-item">
+                <div class="summary-icon">&#128188;</div>
+                <div class="summary-content">
+                    <div class="summary-title">Service Business Owners</div>
+                    <div class="summary-desc">Home services, healthcare, professional services, consulting</div>
+                </div>
+            </div>
+
+            <div class="summary-item">
+                <div class="summary-icon">&#128176;</div>
+                <div class="summary-content">
+                    <div class="summary-title">$2M - $8M Revenue</div>
+                    <div class="summary-desc">Too small for HR. Too ambitious to stay stuck.</div>
+                </div>
+            </div>
+
+            <div class="summary-item">
+                <div class="summary-icon">&#9200;</div>
+                <div class="summary-content">
+                    <div class="summary-title">Time-Starved</div>
+                    <div class="summary-desc">30 minutes left for growth. If lucky.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center - The Position -->
+        <div class="center-col">
+            <div class="section-header">The Position</div>
+
+            <div class="position-intro">
+                AI speeds execution.<br>
+                But human coordination remains unsolved.
+            </div>
+
+            <div class="position-card">
+                <div class="position-label">What We Are</div>
+                <div class="position-text">
+                    <em>Formation</em>, not structure.<br>
+                    <em>Self-reflection</em>, not tracking.<br>
+                    <em>Culture through discipline</em>.<br><br>
+                    The layer between tool efficiency<br>
+                    and human efficiency.
+                </div>
+            </div>
+
+            <div class="differentiator">
+                <div class="diff-row">
+                    <span class="diff-label">vs. EOS</span>
+                    <span class="diff-value">Formation, not just structure</span>
+                </div>
+                <div class="diff-row">
+                    <span class="diff-label">vs. Monday</span>
+                    <span class="diff-value">Behavior change, not task tracking</span>
+                </div>
+                <div class="diff-row">
+                    <span class="diff-label">vs. Coaching</span>
+                    <span class="diff-value">Self-reflection, not dependency</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right - Coming Up -->
+        <div class="right-col">
+            <div class="section-header">Coming Up</div>
+
+            <div class="next-intro">
+                Now that we know the <em>who</em> and <em>where</em>,<br>
+                let's see <em>how</em> it actually works.
+            </div>
+
+            <div class="next-item">
+                <div class="next-number">7</div>
+                <div class="next-content">
+                    <div class="next-title">The Tool Reality</div>
+                    <div class="next-desc">What they already pay for — and what's missing</div>
+                </div>
+            </div>
+
+            <div class="next-item">
+                <div class="next-number">8</div>
+                <div class="next-content">
+                    <div class="next-title">The Journey</div>
+                    <div class="next-desc">A real example: Spark Digital Marketing Agency</div>
+                </div>
+            </div>
+
+            <div class="next-item">
+                <div class="next-number">9</div>
+                <div class="next-content">
+                    <div class="next-title">The Culture Play</div>
+                    <div class="next-desc">How behavior becomes ritual becomes culture</div>
+                </div>
+            </div>
+
+            <div class="cta-box">
+                <div class="cta-text">From theory to practice</div>
+                <div class="cta-sub">The next 3 pages show what this looks like in action.</div>
+            </div>
+        </div>
+
+        <!-- Bottom - Transition Message -->
+        <div class="closing-section">
+            <div class="final-message">
+                <div class="final-label">The Question</div>
+                <div class="final-text">
+                    They know <em>what</em> needs to happen.<br>
+                    Now let's show them <em>how</em>.
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_5_the_connection.html">&larr; The Position</a>
+                <a href="page_7_the_tool_reality.html" class="next">Next: The Tool Reality &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

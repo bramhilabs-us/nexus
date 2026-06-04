@@ -1,0 +1,496 @@
+# Claude Insights Command
+
+<!-- @GENOME T2-CMD-014 | ACTIVE | 2026-03-30 | parent:T0-GOV-001 | auto:/insights | linked:- -->
+
+**Version**: 1.0.0
+**Last Updated**: March 4, 2026
+**Status**: Active
+**Purpose**: Automated workflow for collecting, analyzing, and storing KARVIA Business project insights
+
+---
+
+## IMPORTANT: This is an AUTOMATED WORKFLOW
+
+**Claude MUST execute each phase to gather comprehensive project insights. Use `/insights` to generate a full analysis report.**
+
+---
+
+## PHASE 1: PROJECT DISCOVERY
+
+### Step 1.1: Gather Project Context
+
+**Execute these commands:**
+
+```bash
+# Get project structure overview
+find . -type d -name "node_modules" -prune -o -type d -print | head -50
+
+# Check git history for activity patterns
+git log --oneline -20
+
+# Check recent changes
+git diff --stat HEAD~10
+
+# Count files by type
+find . -type f -name "*.js" | wc -l
+find . -type f -name "*.html" | wc -l
+find . -type f -name "*.md" | wc -l
+find . -type f -name "*.css" | wc -l
+```
+
+**Collect from codebase:**
+- Primary technologies used (Node.js, Express, MongoDB, vanilla JS frontend)
+- Microservice architecture patterns
+- Documentation coverage
+- Test coverage (Playwright, unit tests)
+
+### Step 1.2: Sprint & Session Context
+
+**Read these files:**
+
+```
+READ -> .claude/SESSION_LOG.md (last 100 lines)
+READ -> .claude/PERFORMANCE_METRICS.md
+READ -> KARVIA_STRATEGY/3-DELIVERY/1-SPRINTS/[CURRENT]/SPRINT*_HANDOFF_DOCUMENT.md
+```
+
+**Extract:**
+- Current sprint progress
+- Session velocity
+- Story points completed
+- Quality ratings trend
+
+---
+
+## PHASE 2: INSIGHT CATEGORIES
+
+### 2.1 Architecture Insights
+
+**Analyze and document:**
+
+| Category | Questions to Answer |
+|----------|---------------------|
+| **Microservices** | Are engines properly isolated? Is the API gateway pattern followed? |
+| **Multi-tenancy** | Is company_id filtering consistent across all queries? |
+| **RBAC** | Are role checks (CONSULTANT > BUSINESS_OWNER > EXECUTIVE > MANAGER > EMPLOYEE) properly enforced? |
+| **Data Flow** | Is OKR cascade (Objective → KR → Goal → Task) maintained? |
+
+### 2.2 Sprint Health Insights
+
+**Analyze and document:**
+
+| Category | Questions to Answer |
+|----------|---------------------|
+| **Velocity** | What's the average points/session? Is it improving? |
+| **Quality** | What's the average session quality? Trend? |
+| **Bug Rate** | How many bugs found per sprint? |
+| **Completion Rate** | What % of planned work gets done? |
+
+### 2.3 Documentation Insights
+
+**Analyze and document:**
+
+| Category | Questions to Answer |
+|----------|---------------------|
+| **Sprint Docs** | Are all sprints properly documented? |
+| **Handoff Docs** | Are handoff documents current? |
+| **Code Comments** | Are complex functions documented? |
+| **API Docs** | Are endpoints documented? |
+
+### 2.4 Technical Debt Insights
+
+**Identify and categorize:**
+
+| Debt Type | KARVIA-Specific Examples |
+|-----------|--------------------------|
+| **Code Debt** | Duplicated API calls, inconsistent error handling |
+| **Security Debt** | Missing XSS escaping, RBAC gaps |
+| **Architecture Debt** | Engine coupling, shared state issues |
+| **Test Debt** | Missing integration tests, untested edge cases |
+
+### 2.5 Opportunity Insights
+
+**Identify improvements:**
+
+| Category | Focus Areas |
+|----------|-------------|
+| **Performance** | API response times, frontend load times |
+| **UX** | Assessment flow, OKR creation wizard |
+| **AI Integration** | Context building, prompt optimization |
+| **Automation** | CI/CD, testing, deployment |
+
+### 2.6 Risk Insights
+
+**Identify and assess:**
+
+| Risk Type | Assessment Criteria |
+|-----------|---------------------|
+| **Security** | Multi-tenant isolation, JWT handling, OWASP |
+| **Data Integrity** | OKR cascade consistency, assessment scoring |
+| **Reliability** | Error handling, graceful degradation |
+| **Scalability** | Database queries, engine load |
+
+---
+
+## PHASE 3: COLLECT SESSION-SPECIFIC INSIGHTS
+
+### Step 3.1: Review Current Session
+
+**From the current conversation, extract:**
+
+1. **Decisions Made** - Why certain approaches were chosen
+2. **Trade-offs Accepted** - What was sacrificed for what gain
+3. **Patterns Discovered** - New patterns or anti-patterns found
+4. **Blockers Encountered** - Issues that slowed progress
+5. **Solutions Found** - Creative solutions worth remembering
+
+### Step 3.2: Document Learning Moments
+
+**Capture insights like:**
+
+```markdown
+### Learning: [Title]
+
+**Context**: [What was being done]
+**Insight**: [What was learned]
+**Impact**: [How this affects future work]
+**Action**: [What to do with this knowledge]
+```
+
+---
+
+## PHASE 4: GENERATE INSIGHTS REPORT
+
+### Step 4.1: Create/Update PROJECT_INSIGHTS.md
+
+**Create or update**: `KARVIA_STRATEGY/4-AUDIT/1-INTERNAL/PROJECT_INSIGHTS.md`
+
+**Use this structure:**
+
+```markdown
+# KARVIA Business Project Insights
+
+**Version**: X.Y.Z
+**Last Updated**: [Date]
+**Generated By**: Claude Code
+**Status**: Active
+**Current Sprint**: [N]
+
+---
+
+## Quick Stats
+
+| Metric | Value | Trend | Target |
+|--------|-------|-------|--------|
+| **Total Sessions** | [N] | - | - |
+| **Story Points Delivered** | [N] | ↑/→/↓ | - |
+| **Avg Session Quality** | [X/10] | ↑/→/↓ | >=8/10 |
+| **Current Sprint Progress** | [X%] | - | 100% |
+| **CER (Context Efficiency)** | [X%] | ↑/→/↓ | 85-95% |
+| **TCV (Task Completion)** | [X] | ↑/→/↓ | 0.9-1.1 |
+| **Tech Debt Items** | [N] | ↑/→/↓ | <10 |
+
+---
+
+## 1. Sprint Health
+
+### Current Sprint: [N] - [Name]
+| Epic | Points | Status | Notes |
+|------|--------|--------|-------|
+| [Epic] | [N] | [%] | [Notes] |
+
+### Velocity Trend
+| Sprint | Planned | Delivered | Velocity |
+|--------|---------|-----------|----------|
+| [N] | [X] | [Y] | [Y/X%] |
+
+---
+
+## 2. Architecture Insights
+
+### Strengths
+- [Strength 1]
+- [Strength 2]
+
+### Areas for Improvement
+- [Area 1]
+- [Area 2]
+
+### Multi-tenancy Audit
+| Area | Status | Notes |
+|------|--------|-------|
+| API Routes | ✅/⚠️/❌ | [Notes] |
+| Frontend | ✅/⚠️/❌ | [Notes] |
+| Engines | ✅/⚠️/❌ | [Notes] |
+
+---
+
+## 3. Documentation Coverage
+
+| Area | Coverage | Notes |
+|------|----------|-------|
+| Sprint Plans | [%] | [Notes] |
+| Handoff Docs | [%] | [Notes] |
+| API Docs | [%] | [Notes] |
+| Code Comments | [%] | [Notes] |
+
+### Gaps Identified
+- [Gap 1]
+- [Gap 2]
+
+---
+
+## 4. Technical Debt Register
+
+### High Priority
+| ID | Description | Impact | Effort | Sprint |
+|----|-------------|--------|--------|--------|
+| TD-001 | [Description] | H/M/L | S/M/L | [N] |
+
+### Medium Priority
+| ID | Description | Impact | Effort | Sprint |
+|----|-------------|--------|--------|--------|
+| TD-002 | [Description] | H/M/L | S/M/L | [N] |
+
+---
+
+## 5. Security Posture
+
+| Category | Status | Last Audit |
+|----------|--------|------------|
+| XSS Prevention | ✅/⚠️/❌ | [Date] |
+| RBAC Enforcement | ✅/⚠️/❌ | [Date] |
+| Multi-tenant Isolation | ✅/⚠️/❌ | [Date] |
+| JWT Security | ✅/⚠️/❌ | [Date] |
+| Input Validation | ✅/⚠️/❌ | [Date] |
+
+---
+
+## 6. Opportunity Backlog
+
+### Quick Wins (Low effort, High impact)
+- [ ] [Opportunity 1]
+- [ ] [Opportunity 2]
+
+### Strategic Improvements (High effort, High impact)
+- [ ] [Opportunity 3]
+- [ ] [Opportunity 4]
+
+---
+
+## 7. Risk Assessment
+
+### Current Risks
+| Risk | Likelihood | Impact | Mitigation |
+|------|------------|--------|------------|
+| [Risk] | H/M/L | H/M/L | [Action] |
+
+---
+
+## 8. Session Learnings
+
+### [Date] - Session [N]
+
+**Key Insights:**
+- [Insight 1]
+- [Insight 2]
+
+**Decisions Made:**
+- [Decision]: [Rationale]
+
+**For Future Reference:**
+- [Note]
+
+---
+
+## 9. AI Collaboration Metrics
+
+| Metric | Value | Target | Status |
+|--------|-------|--------|--------|
+| CER (Context Efficiency) | [X%] | 85-95% | ✅/⚠️ |
+| TCV (Task Completion) | [X] | 0.9-1.1 | ✅/⚠️ |
+| TES (Token Efficiency) | [X] | >0.60 | ✅/⚠️ |
+| RAI (Right-first-time) | [X%] | 85-95% | ✅/⚠️ |
+
+---
+
+## 10. Action Items
+
+### Immediate (This Sprint)
+- [ ] [Action 1]
+- [ ] [Action 2]
+
+### Short-term (Next 2-3 Sprints)
+- [ ] [Action 3]
+
+### Long-term (Backlog)
+- [ ] [Action 4]
+
+---
+
+**Last Insight Collection**: [DateTime]
+**Next Recommended Review**: [DateTime + 1 week]
+```
+
+---
+
+## PHASE 5: INSIGHT MODES
+
+### Mode A: Full Analysis (`/insights full`)
+
+Runs complete analysis across all categories. Use for:
+- End of sprint reviews
+- Major milestone completion
+- Monthly project health checks
+
+### Mode B: Quick Scan (`/insights quick`)
+
+Fast analysis focusing on:
+- Current sprint status
+- Recent session quality
+- Obvious blockers
+- Quick wins
+
+Output: Summary table + top 5 action items
+
+### Mode C: Specific Focus (`/insights [category]`)
+
+Deep dive into one category:
+- `/insights arch` - Architecture analysis
+- `/insights debt` - Technical debt register
+- `/insights sprint` - Sprint health only
+- `/insights security` - Security posture
+- `/insights velocity` - Session/sprint velocity
+- `/insights session` - Current session learnings
+
+---
+
+## PHASE 6: OUTPUT TO USER
+
+### Step 6.1: Generate Summary
+
+```markdown
+## Insights Collection Complete
+
+**Analysis Type**: [Full/Quick/Focused]
+**Date**: [Date]
+**Files Analyzed**: [N]
+**Current Sprint**: [N] - [Name]
+
+### Key Findings
+
+| Category | Health | Items Found |
+|----------|--------|-------------|
+| Sprint Health | [emoji] | [N] pts / [M] planned |
+| Architecture | [emoji] | [N] issues |
+| Documentation | [emoji] | [N] gaps |
+| Tech Debt | [emoji] | [N] items |
+| Security | [emoji] | [N] concerns |
+| Opportunities | - | [N] ideas |
+
+### Performance Metrics
+
+| Metric | Value | Status |
+|--------|-------|--------|
+| Session Quality | [X/10] | [emoji] |
+| Velocity | [N pts/session] | [emoji] |
+| CER | [X%] | [emoji] |
+| TCV | [X] | [emoji] |
+
+### Top 5 Action Items
+
+1. **[P0]** [Action] - [Reason]
+2. **[P1]** [Action] - [Reason]
+3. **[P1]** [Action] - [Reason]
+4. **[P2]** [Action] - [Reason]
+5. **[P2]** [Action] - [Reason]
+
+### Report Location
+`KARVIA_STRATEGY/4-AUDIT/1-INTERNAL/PROJECT_INSIGHTS.md`
+
+---
+
+**Run `/insights` again after significant changes to track progress.**
+```
+
+---
+
+## WORKFLOW DIAGRAM
+
+```
+/insights [mode]
+   │
+   ├─► PHASE 1: Project Discovery
+   │      ├─► Scan structure, git history, file types
+   │      └─► Load SESSION_LOG.md, PERFORMANCE_METRICS.md
+   │
+   ├─► PHASE 2: Categorize Insights
+   │      ├─► Architecture analysis (microservices, multi-tenancy)
+   │      ├─► Sprint health (velocity, quality)
+   │      ├─► Documentation review
+   │      ├─► Tech debt identification
+   │      ├─► Opportunity discovery
+   │      └─► Risk/Security assessment
+   │
+   ├─► PHASE 3: Session-Specific Insights
+   │      └─► Decisions, trade-offs, learnings
+   │
+   ├─► PHASE 4: Generate Report
+   │      └─► Create/Update PROJECT_INSIGHTS.md
+   │
+   ├─► PHASE 5: Apply Mode Filter
+   │      └─► Full / Quick / Focused
+   │
+   └─► PHASE 6: Output Summary
+          └─► Display findings + action items
+```
+
+---
+
+## INTEGRATION WITH OTHER COMMANDS
+
+| Command | Integration |
+|---------|-------------|
+| `/init` | Load previous insights for context |
+| `/close` | Prompt for session learnings |
+| `/audit` | Use insights as audit input |
+| `/strategy` | Reference insights for planning |
+| `/sprint-review` | Cross-reference sprint health |
+
+---
+
+## KARVIA-SPECIFIC CHECKS
+
+### OKR System Health
+- [ ] Objective → KR → Goal → Task cascade intact
+- [ ] Date service functioning correctly
+- [ ] AI context service building properly
+
+### Assessment System Health
+- [ ] SSI scoring calculating correctly
+- [ ] 12-block diagnostic working
+- [ ] Anonymous survey flow functional
+
+### Multi-tenant Isolation
+- [ ] All queries filter by company_id
+- [ ] CONSULTANT role can access multiple companies
+- [ ] No data leakage between tenants
+
+---
+
+## QUICK REFERENCE
+
+| Command | Purpose |
+|---------|---------|
+| `/insights` | Full analysis (default) |
+| `/insights quick` | Fast scan, top issues only |
+| `/insights arch` | Architecture deep dive |
+| `/insights debt` | Technical debt register |
+| `/insights sprint` | Sprint health only |
+| `/insights security` | Security posture |
+| `/insights velocity` | Performance metrics |
+| `/insights session` | Current session learnings |
+
+---
+
+**This command helps maintain KARVIA Business project health visibility and continuous improvement.**

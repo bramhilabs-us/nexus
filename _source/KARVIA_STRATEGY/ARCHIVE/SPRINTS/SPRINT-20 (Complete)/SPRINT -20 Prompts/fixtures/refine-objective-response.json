@@ -1,0 +1,12 @@
+{
+  "refined_objective": {
+    "title": "Reduce new-client time-to-value through a standardized onboarding experience",
+    "description": "Create a consistent onboarding journey that speeds activation, improves early client confidence, and strengthens retention."
+  },
+  "rationale": "This keeps the user's onboarding intent but reframes it around business outcomes instead of a document deliverable.",
+  "smart_notes": [
+    "The objective now states a clear business outcome: lower time-to-value.",
+    "The description links the work to activation and retention."
+  ],
+  "ask_user": null
+}

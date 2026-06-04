@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Clients Tab - Sprint 14 Mockup V6</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .navy-btn {
+            background: #1e3a5f;
+        }
+        .navy-btn:hover {
+            background: #2d5a87;
+        }
+        .tab-active {
+            background: #1e3a5f;
+            color: white;
+        }
+
+        /* 3D Culture Emoji Effect */
+        .culture-emoji {
+            font-size: 1.75rem;
+            filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.15));
+            transform: perspective(100px) rotateY(-5deg);
+            transition: transform 0.2s ease;
+        }
+        .culture-emoji:hover {
+            transform: perspective(100px) rotateY(0deg) scale(1.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white border-b border-slate-200 px-6 py-3">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-indigo-600 rounded flex items-center justify-center">
+                        <span class="text-white text-xs font-bold">CD</span>
+                    </div>
+                    <span class="text-xs text-slate-500">CULTURAL<br>DISCIPLINE</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="text-slate-600 hover:text-slate-900">Dashboard</a>
+                    <a href="#" class="text-slate-600 hover:text-slate-900">Objectives</a>
+                    <a href="#" class="text-slate-900 font-medium border-b-2 border-indigo-600 pb-1">Assessments</a>
+                    <a href="#" class="text-slate-600 hover:text-slate-900">Teams</a>
+                    <a href="#" class="text-slate-600 hover:text-slate-900">Planning</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="flex items-center gap-2 px-3 py-1.5 border border-slate-200 rounded-lg text-sm">
+                    <span>📋</span> Select Company (1)
+                </button>
+                <div class="flex items-center gap-2">
+                    <span class="text-sm text-slate-600">Rsm Consultant</span>
+                    <div class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center text-sm font-medium">RC</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="max-w-6xl mx-auto px-6 py-6">
+
+        <!-- ============================================== -->
+        <!-- HEADER: Title + KPIs in one row               -->
+        <!-- ============================================== -->
+        <div class="flex items-start justify-between mb-6">
+            <!-- Left: Title -->
+            <div>
+                <h1 class="text-2xl font-bold text-slate-800">Assessments Hub</h1>
+                <p class="text-slate-500">Manage assessments, templates, and track progress.</p>
+            </div>
+
+            <!-- Right: KPI Stats (number on top, label below) -->
+            <div class="flex items-center gap-6">
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-amber-500">0</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-wide">Pending</div>
+                </div>
+                <div class="w-px h-10 bg-slate-200"></div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-blue-500">0</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-wide">Templates</div>
+                </div>
+                <div class="w-px h-10 bg-slate-200"></div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-orange-500">3</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-wide">Sent</div>
+                </div>
+                <div class="w-px h-10 bg-slate-200"></div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-green-500">0</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-wide">Completed</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- TABS: My Clients first                        -->
+        <!-- ============================================== -->
+        <div class="flex gap-3 mb-6">
+            <button class="tab-active px-5 py-2.5 rounded-lg flex items-center gap-2 font-medium text-sm">
+                <span>🏢</span> My Clients <span class="bg-white/20 px-2 py-0.5 rounded text-xs ml-1">6</span>
+            </button>
+            <button class="px-5 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-600 flex items-center gap-2 text-sm hover:bg-slate-50">
+                <span>📁</span> My Templates
+            </button>
+            <button class="px-5 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-600 flex items-center gap-2 text-sm hover:bg-slate-50">
+                <span>📤</span> Sent by Me
+            </button>
+            <button class="px-5 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-600 flex items-center gap-2 text-sm hover:bg-slate-50">
+                <span>✨</span> Assigned to Me <span class="bg-slate-100 px-2 py-0.5 rounded text-xs ml-1">2</span>
+            </button>
+        </div>
+
+        <!-- My Clients Content -->
+        <div class="flex items-center justify-between mb-4">
+            <p class="text-slate-600 text-sm">6 client companies</p>
+            <button class="navy-btn text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 text-sm">
+                <span>+</span> Add Client
+            </button>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- CLIENT CARDS GRID V6                          -->
+        <!-- ============================================== -->
+
+        <div class="grid grid-cols-3 gap-4">
+
+            <!-- Client Card 1: miMobi (SSI: 7-8-5) -->
+            <div class="bg-white rounded-xl border border-slate-200 p-4 hover:shadow-lg transition-all cursor-pointer">
+                <!-- Header: Logo + Name + Status + SSI Ring -->
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                        M
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-semibold text-slate-800 truncate">miMobi</h3>
+                            <span class="w-2 h-2 rounded-full bg-green-500 flex-shrink-0"></span>
+                        </div>
+                        <p class="text-xs text-slate-500">Technology / SaaS</p>
+                    </div>
+                    <!-- SSI Broken Ring: 7-8-5 -->
+                    <div class="relative flex-shrink-0" title="⚡Speed: 7 | 🛡Strength: 8 | 🧠Intelligence: 5">
+                        <svg width="40" height="40" viewBox="0 0 40 40">
+                            <path d="M 20 4 A 16 16 0 0 1 33.8 12"
+                                  fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 35.5 16 A 16 16 0 0 1 20 36"
+                                  fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 16 35.5 A 16 16 0 0 1 4.5 12"
+                                  fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+                            <text x="20" y="7" font-size="6" text-anchor="middle">⚡</text>
+                            <text x="34" y="26" font-size="6" text-anchor="middle">🛡</text>
+                            <text x="6" y="26" font-size="6" text-anchor="middle">🧠</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Objective Box with Culture Emoji -->
+                <div class="relative bg-slate-50 rounded-lg p-3 mb-3">
+                    <div class="text-[10px] text-slate-400 uppercase tracking-wide mb-1">Objective</div>
+                    <p class="text-sm text-slate-700 leading-snug line-clamp-2 pr-8">"Set up miMobi in Bangalore with 1 paying customer"</p>
+                    <div class="absolute -right-2 -bottom-2 culture-emoji" title="Culture Score: Neutral">
+                        😐
+                    </div>
+                </div>
+
+                <!-- Contact Row -->
+                <div class="flex items-center gap-3 pt-3 border-t border-slate-100">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+                         class="w-8 h-8 rounded-full object-cover">
+                    <div class="flex-1 min-w-0">
+                        <div class="text-sm font-medium text-slate-800 truncate">Ravindra MD</div>
+                        <div class="text-xs text-slate-400">Primary Contact</div>
+                    </div>
+                    <button class="text-xs px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 font-medium">Message</button>
+                </div>
+            </div>
+
+            <!-- Client Card 2: Acme Corp (SSI: 8-9-8) -->
+            <div class="bg-white rounded-xl border border-slate-200 p-4 hover:shadow-lg transition-all cursor-pointer">
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                        A
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-semibold text-slate-800 truncate">Acme Corp</h3>
+                            <span class="w-2 h-2 rounded-full bg-green-500 flex-shrink-0"></span>
+                        </div>
+                        <p class="text-xs text-slate-500">Financial Services</p>
+                    </div>
+                    <div class="relative flex-shrink-0" title="⚡Speed: 8 | 🛡Strength: 9 | 🧠Intelligence: 8">
+                        <svg width="40" height="40" viewBox="0 0 40 40">
+                            <path d="M 20 4 A 16 16 0 0 1 33.8 12"
+                                  fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 35.5 16 A 16 16 0 0 1 20 36"
+                                  fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 16 35.5 A 16 16 0 0 1 4.5 12"
+                                  fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
+                            <text x="20" y="7" font-size="6" text-anchor="middle">⚡</text>
+                            <text x="34" y="26" font-size="6" text-anchor="middle">🛡</text>
+                            <text x="6" y="26" font-size="6" text-anchor="middle">🧠</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="relative bg-slate-50 rounded-lg p-3 mb-3">
+                    <div class="text-[10px] text-slate-400 uppercase tracking-wide mb-1">Objective</div>
+                    <p class="text-sm text-slate-700 leading-snug line-clamp-2 pr-8">"Increase AUM by 25% through client referrals"</p>
+                    <div class="absolute -right-2 -bottom-2 culture-emoji" title="Culture Score: Thriving">
+                        😊
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 pt-3 border-t border-slate-100">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white font-bold text-xs">
+                        MG
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="text-sm font-medium text-slate-800 truncate">Maria Garcia</div>
+                        <div class="text-xs text-slate-400">Primary Contact</div>
+                    </div>
+                    <button class="text-xs px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 font-medium">Message</button>
+                </div>
+            </div>
+
+            <!-- Client Card 3: Roth Institut (At Risk) -->
+            <div class="bg-white rounded-xl border-2 border-amber-200 p-4 hover:shadow-lg transition-all cursor-pointer">
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                        R
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-semibold text-slate-800 truncate">Roth Institut</h3>
+                            <span class="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0"></span>
+                        </div>
+                        <p class="text-xs text-slate-500">Consulting</p>
+                    </div>
+                    <div class="relative flex-shrink-0" title="⚡Speed: 5 | 🛡Strength: 6 | 🧠Intelligence: 5">
+                        <svg width="40" height="40" viewBox="0 0 40 40">
+                            <path d="M 20 4 A 16 16 0 0 1 33.8 12"
+                                  fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 35.5 16 A 16 16 0 0 1 20 36"
+                                  fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 16 35.5 A 16 16 0 0 1 4.5 12"
+                                  fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+                            <text x="20" y="7" font-size="6" text-anchor="middle">⚡</text>
+                            <text x="34" y="26" font-size="6" text-anchor="middle">🛡</text>
+                            <text x="6" y="26" font-size="6" text-anchor="middle">🧠</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="relative bg-amber-50 rounded-lg p-3 mb-3">
+                    <div class="text-[10px] text-slate-400 uppercase tracking-wide mb-1">Objective</div>
+                    <p class="text-sm text-slate-700 leading-snug line-clamp-2 pr-8">"Launch OKR training program in DACH region"</p>
+                    <div class="absolute -right-2 -bottom-2 culture-emoji" title="Culture Score: Needs Attention">
+                        😟
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 pt-3 border-t border-slate-100">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-slate-400 to-slate-600 flex items-center justify-center text-white font-bold text-xs">
+                        HW
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="text-sm font-medium text-slate-800 truncate">Hans Weber</div>
+                        <div class="text-xs text-slate-400">Primary Contact</div>
+                    </div>
+                    <button class="text-xs px-3 py-1.5 bg-amber-50 text-amber-600 rounded-lg hover:bg-amber-100 font-medium">Nudge</button>
+                </div>
+            </div>
+
+            <!-- Client Card 4: TechStart (Onboarding) -->
+            <div class="bg-white rounded-xl border border-blue-200 p-4 hover:shadow-lg transition-all cursor-pointer">
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-700 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                        T
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-semibold text-slate-800 truncate">TechStart GmbH</h3>
+                            <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse flex-shrink-0"></span>
+                        </div>
+                        <p class="text-xs text-slate-500">Technology</p>
+                    </div>
+                    <div class="relative flex-shrink-0 opacity-40" title="Awaiting assessment">
+                        <svg width="40" height="40" viewBox="0 0 40 40">
+                            <path d="M 20 4 A 16 16 0 0 1 33.8 12"
+                                  fill="none" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 3"/>
+                            <path d="M 35.5 16 A 16 16 0 0 1 20 36"
+                                  fill="none" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 3"/>
+                            <path d="M 16 35.5 A 16 16 0 0 1 4.5 12"
+                                  fill="none" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 3"/>
+                            <text x="20" y="7" font-size="6" text-anchor="middle" opacity="0.5">⚡</text>
+                            <text x="34" y="26" font-size="6" text-anchor="middle" opacity="0.5">🛡</text>
+                            <text x="6" y="26" font-size="6" text-anchor="middle" opacity="0.5">🧠</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="relative bg-blue-50 rounded-lg p-3 mb-3">
+                    <div class="text-[10px] text-slate-400 uppercase tracking-wide mb-1">Objective</div>
+                    <p class="text-sm text-slate-400 italic leading-snug pr-8">Awaiting first assessment...</p>
+                    <div class="absolute -right-2 -bottom-2 culture-emoji opacity-30" title="Pending">
+                        🔮
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 pt-3 border-t border-slate-100">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-bold text-xs">
+                        LC
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="text-sm font-medium text-slate-800 truncate">Lisa Chen</div>
+                        <div class="text-xs text-slate-400">Primary Contact</div>
+                    </div>
+                    <button class="text-xs px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 font-medium">Message</button>
+                </div>
+            </div>
+
+            <!-- Client Card 5: Swiss Mobility -->
+            <div class="bg-white rounded-xl border border-slate-200 p-4 hover:shadow-lg transition-all cursor-pointer">
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                        S
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-semibold text-slate-800 truncate">Swiss Mobility</h3>
+                            <span class="w-2 h-2 rounded-full bg-green-500 flex-shrink-0"></span>
+                        </div>
+                        <p class="text-xs text-slate-500">Transportation</p>
+                    </div>
+                    <div class="relative flex-shrink-0" title="⚡Speed: 7 | 🛡Strength: 8 | 🧠Intelligence: 8">
+                        <svg width="40" height="40" viewBox="0 0 40 40">
+                            <path d="M 20 4 A 16 16 0 0 1 33.8 12"
+                                  fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 35.5 16 A 16 16 0 0 1 20 36"
+                                  fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 16 35.5 A 16 16 0 0 1 4.5 12"
+                                  fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
+                            <text x="20" y="7" font-size="6" text-anchor="middle">⚡</text>
+                            <text x="34" y="26" font-size="6" text-anchor="middle">🛡</text>
+                            <text x="6" y="26" font-size="6" text-anchor="middle">🧠</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="relative bg-slate-50 rounded-lg p-3 mb-3">
+                    <div class="text-[10px] text-slate-400 uppercase tracking-wide mb-1">Objective</div>
+                    <p class="text-sm text-slate-700 leading-snug line-clamp-2 pr-8">"Expand fleet management to 3 new cities"</p>
+                    <div class="absolute -right-2 -bottom-2 culture-emoji" title="Culture Score: Good">
+                        🙂
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 pt-3 border-t border-slate-100">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center text-white font-bold text-xs">
+                        MD
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="text-sm font-medium text-slate-800 truncate">Marc Dubois</div>
+                        <div class="text-xs text-slate-400">Primary Contact</div>
+                    </div>
+                    <button class="text-xs px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 font-medium">Message</button>
+                </div>
+            </div>
+
+            <!-- Client Card 6: FAIRTIQ India -->
+            <div class="bg-white rounded-xl border border-slate-200 p-4 hover:shadow-lg transition-all cursor-pointer">
+                <div class="flex items-start gap-3 mb-3">
+                    <div class="w-11 h-11 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-700 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                        F
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-semibold text-slate-800 truncate">FAIRTIQ India</h3>
+                            <span class="w-2 h-2 rounded-full bg-green-500 flex-shrink-0"></span>
+                        </div>
+                        <p class="text-xs text-slate-500">Professional Services</p>
+                    </div>
+                    <div class="relative flex-shrink-0" title="⚡Speed: 6 | 🛡Strength: 7 | 🧠Intelligence: 6">
+                        <svg width="40" height="40" viewBox="0 0 40 40">
+                            <path d="M 20 4 A 16 16 0 0 1 33.8 12"
+                                  fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 35.5 16 A 16 16 0 0 1 20 36"
+                                  fill="none" stroke="#22c55e" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 16 35.5 A 16 16 0 0 1 4.5 12"
+                                  fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+                            <text x="20" y="7" font-size="6" text-anchor="middle">⚡</text>
+                            <text x="34" y="26" font-size="6" text-anchor="middle">🛡</text>
+                            <text x="6" y="26" font-size="6" text-anchor="middle">🧠</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="relative bg-slate-50 rounded-lg p-3 mb-3">
+                    <div class="text-[10px] text-slate-400 uppercase tracking-wide mb-1">Objective</div>
+                    <p class="text-sm text-slate-700 leading-snug line-clamp-2 pr-8">"Become the SaaS reseller in India"</p>
+                    <div class="absolute -right-2 -bottom-2 culture-emoji" title="Culture Score: Neutral">
+                        😐
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 pt-3 border-t border-slate-100">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-bold text-xs">
+                        RV
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="text-sm font-medium text-slate-800 truncate">Ravi Verma</div>
+                        <div class="text-xs text-slate-400">Primary Contact</div>
+                    </div>
+                    <button class="text-xs px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 font-medium">Message</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

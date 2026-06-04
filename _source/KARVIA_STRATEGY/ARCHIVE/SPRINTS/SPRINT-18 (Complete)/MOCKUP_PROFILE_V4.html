@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Profile | Karvia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1e3a5f;
+      --purple: #8b5cf6;
+      --purple-light: #ede9fe;
+      --gold: #d4a853;
+      --gold-light: #fef3c7;
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --green: #10b981;
+      --green-light: #d1fae5;
+      --orange: #f59e0b;
+      --orange-light: #fef3c7;
+      --red: #ef4444;
+      --red-light: #fee2e2;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.15s ease; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--gray-100);
+      color: var(--gray-700);
+      line-height: 1.5;
+    }
+
+    /* ========================================
+       TOP NAV
+    ======================================== */
+    .top-nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .nav-link {
+      color: var(--gray-500);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .nav-link:hover { color: var(--gray-700); }
+    .nav-link.active { color: var(--navy); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      background: var(--purple-light);
+      border-radius: 50%;
+      color: var(--purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* ========================================
+       MAIN CONTAINER
+    ======================================== */
+    .main-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* ========================================
+       PAGE HEADER (Compact White)
+    ======================================== */
+    .page-header {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Maturity Ring */
+    .completion-ring {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .completion-ring svg {
+      position: absolute;
+      transform: rotate(-90deg);
+    }
+
+    .completion-ring circle {
+      fill: none;
+      stroke-width: 5;
+    }
+
+    .completion-ring .bg { stroke: var(--gray-200); }
+    .completion-ring .progress {
+      stroke: url(#gradient);
+      stroke-linecap: round;
+    }
+
+    .completion-ring .value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--purple);
+      z-index: 1;
+    }
+
+    .header-info h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .header-info p {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-bottom: 8px;
+    }
+
+    /* Stage dots */
+    .stage-dots {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .stage-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gray-300);
+    }
+
+    .stage-dot.complete { background: var(--green); }
+    .stage-dot.current { background: var(--purple); }
+
+    .stage-label { color: var(--gray-400); }
+    .stage-label.current { color: var(--purple); font-weight: 600; }
+
+    /* AI Knows Panel */
+    .ai-knows-panel {
+      background: linear-gradient(135deg, var(--gray-50), var(--purple-light));
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 14px 18px;
+      min-width: 260px;
+    }
+
+    .ai-knows-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ai-knows-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .ai-item {
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ai-item.done { color: var(--green); }
+    .ai-item.missing { color: var(--orange); }
+
+    .header-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .save-status {
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+
+    .btn-save {
+      padding: 8px 20px;
+      background: var(--purple);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-save:hover { background: #7c3aed; }
+
+    /* ========================================
+       STAGE TABS (Main Navigation)
+    ======================================== */
+    .stage-tabs {
+      display: flex;
+      background: var(--white);
+      border-radius: 12px 12px 0 0;
+      border: 1px solid var(--gray-200);
+      border-bottom: none;
+    }
+
+    .stage-tab {
+      flex: 1;
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-500);
+      cursor: pointer;
+      border: none;
+      background: none;
+      border-bottom: 2px solid transparent;
+    }
+
+    .stage-tab:hover {
+      color: var(--gray-700);
+      background: var(--gray-50);
+    }
+
+    .stage-tab.active {
+      color: var(--purple);
+      border-bottom-color: var(--purple);
+      background: var(--white);
+    }
+
+    .stage-tab.complete { color: var(--green); }
+    .stage-tab.locked { color: var(--gray-400); }
+
+    /* ========================================
+       CONTENT AREA
+    ======================================== */
+    .content-area {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      min-height: 400px;
+    }
+
+    .stage-content { display: none; }
+    .stage-content.active { display: block; }
+
+    /* Sub-tabs within stages */
+    .sub-tabs {
+      display: flex;
+      gap: 8px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--gray-100);
+      background: var(--gray-50);
+    }
+
+    .sub-tab {
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-500);
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sub-tab:hover { border-color: var(--gray-300); }
+
+    .sub-tab.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: var(--white);
+    }
+
+    .sub-tab .badge {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .sub-tab .badge.complete {
+      background: var(--green-light);
+      color: var(--green);
+    }
+
+    .sub-tab.active .badge.complete {
+      background: rgba(255,255,255,0.2);
+      color: var(--white);
+    }
+
+    /* Content Panel */
+    .content-panel {
+      padding: 20px;
+      display: none;
+    }
+
+    .content-panel.active { display: block; }
+
+    /* ========================================
+       QUESTION CARD (V2 Style)
+    ======================================== */
+    .question-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .question-card:hover { border-color: var(--gray-300); }
+
+    .question-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .question-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    .why-link {
+      font-size: 11px;
+      color: var(--purple);
+      cursor: pointer;
+    }
+
+    .why-link:hover { text-decoration: underline; }
+
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      padding: 3px 8px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: var(--white);
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* ========================================
+       CHIPS (V2 Style)
+    ======================================== */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 8px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      background: var(--white);
+      color: var(--gray-600);
+    }
+
+    .chip:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+      transform: scale(1.02);
+    }
+
+    .chip.selected {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    /* Sub-options indent */
+    .sub-options {
+      margin-top: 12px;
+      padding-left: 16px;
+      border-left: 2px solid var(--purple-light);
+    }
+
+    .sub-options .sub-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gray-500);
+      margin-bottom: 8px;
+    }
+
+    /* ========================================
+       HORIZONTAL LAYOUT (Space Optimization)
+    ======================================== */
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    /* ========================================
+       COMPACT SLIDER
+    ======================================== */
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .slider-track {
+      flex: 1;
+    }
+
+    .slider-track input[type="range"] {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--gray-200);
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .slider-track input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--purple);
+      cursor: grab;
+      border: 3px solid var(--white);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--gray-400);
+      margin-top: 4px;
+    }
+
+    .slider-value {
+      text-align: right;
+      min-width: 80px;
+    }
+
+    .slider-value .number {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .slider-value .unit {
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+
+    /* ========================================
+       TEXT INPUT / TEXTAREA
+    ======================================== */
+    .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      font-size: 13px;
+      font-family: inherit;
+      resize: none;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+    }
+
+    .form-input::placeholder { color: var(--gray-400); }
+
+    .char-count {
+      font-size: 10px;
+      color: var(--gray-400);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    .quick-add {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .quick-add span { font-size: 11px; color: var(--gray-500); }
+
+    .quick-add button {
+      font-size: 11px;
+      padding: 4px 10px;
+      background: var(--gray-100);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--gray-600);
+    }
+
+    .quick-add button:hover { background: var(--gray-200); }
+
+    /* ========================================
+       METRICS GRID (V2 Style)
+    ======================================== */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .metric-card {
+      background: var(--gray-50);
+      border: 2px dashed var(--gray-200);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .metric-card:hover { border-color: var(--purple); }
+    .metric-card:focus-within {
+      border-color: var(--purple);
+      border-style: solid;
+      background: var(--white);
+    }
+
+    .metric-card.filled {
+      border-color: var(--green);
+      border-style: solid;
+      background: var(--green-light);
+    }
+
+    .metric-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .metric-input-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .metric-prefix {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    .metric-input {
+      width: 70px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      border: none;
+      background: transparent;
+    }
+
+    .metric-input:focus { outline: none; }
+    .metric-input::placeholder { color: var(--gray-300); font-weight: 400; }
+
+    .metric-suffix {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    /* ========================================
+       PRIORITY BOX (V2 Style)
+    ======================================== */
+    .priority-card {
+      background: linear-gradient(135deg, #fef9f0, #fdf6e9);
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .priority-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .priority-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
+      background: var(--purple);
+      color: var(--white);
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .priority-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .priority-hint {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-bottom: 12px;
+    }
+
+    .priority-input {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      background: var(--white);
+    }
+
+    .priority-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+
+    /* ========================================
+       SSI CARDS
+    ======================================== */
+    .ssi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .ssi-card {
+      background: var(--white);
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .ssi-card.weak {
+      border-color: var(--orange);
+      background: var(--orange-light);
+    }
+
+    .ssi-icon { font-size: 28px; margin-bottom: 8px; }
+    .ssi-score { font-size: 36px; font-weight: 700; color: var(--navy); }
+    .ssi-label { font-size: 14px; color: var(--gray-600); margin-top: 4px; }
+
+    .ssi-bar {
+      height: 6px;
+      background: var(--gray-200);
+      border-radius: 3px;
+      margin-top: 12px;
+      overflow: hidden;
+    }
+
+    .ssi-bar-fill { height: 100%; border-radius: 3px; }
+
+    .ssi-insight {
+      font-size: 11px;
+      margin-top: 10px;
+      color: var(--gray-500);
+    }
+
+    .ssi-card.weak .ssi-insight {
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    .ai-insight-box {
+      background: var(--purple-light);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: var(--purple);
+      margin-top: 20px;
+    }
+
+    /* ========================================
+       LOCKED STATE
+    ======================================== */
+    .locked-banner {
+      background: linear-gradient(90deg, var(--gray-100), var(--gray-50));
+      border-bottom: 1px solid var(--gray-200);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .locked-banner-text {
+      font-size: 12px;
+      color: var(--gray-500);
+      font-weight: 500;
+    }
+
+    .locked-reqs-mini {
+      display: flex;
+      gap: 12px;
+      margin-left: auto;
+      font-size: 11px;
+    }
+
+    .req-done { color: var(--green); }
+    .req-pending { color: var(--gray-400); }
+
+    .locked-preview {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .preview-card {
+      background: var(--white);
+      border: 1px dashed var(--gray-300);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .preview-icon { font-size: 24px; opacity: 0.5; margin-bottom: 8px; }
+    .preview-label { font-size: 11px; color: var(--gray-500); margin-bottom: 4px; }
+    .preview-value { font-size: 20px; font-weight: 700; color: var(--gray-400); }
+    .preview-hint { font-size: 10px; color: var(--gray-400); margin-top: 4px; }
+
+    .preview-insight {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 12px;
+      color: var(--gray-600);
+      margin-top: 16px;
+    }
+
+    /* ========================================
+       FOOTER
+    ======================================== */
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+      z-index: 100;
+    }
+
+    .auto-save {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--green);
+    }
+
+    .progress-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .progress-text {
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+
+    .progress-text .highlight {
+      color: var(--purple);
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      padding: 10px 24px;
+      background: var(--purple);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover { background: #7c3aed; }
+
+    /* Spacer for fixed footer */
+    .footer-spacer { height: 80px; }
+
+    /* ========================================
+       RESPONSIVE
+    ======================================== */
+    @media (max-width: 900px) {
+      .row-2, .ssi-grid { grid-template-columns: 1fr; }
+      .metrics-grid, .preview-grid { grid-template-columns: repeat(2, 1fr); }
+      .page-header { flex-direction: column; gap: 16px; align-items: stretch; }
+      .ai-knows-panel { min-width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <div class="logo">KARVIA</div>
+    <div class="nav-links">
+      <a href="#" class="nav-link">Dashboard</a>
+      <a href="#" class="nav-link">Objectives</a>
+      <a href="#" class="nav-link active">Planning</a>
+    </div>
+    <div class="nav-right">
+      KARVIA Consulting
+      <div class="avatar">KC</div>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="main-container">
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <div class="header-left">
+        <div class="completion-ring">
+          <svg width="72" height="72" viewBox="0 0 72 72">
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#667eea"/>
+                <stop offset="100%" style="stop-color:#d4af37"/>
+              </linearGradient>
+            </defs>
+            <circle class="bg" cx="36" cy="36" r="30"></circle>
+            <circle class="progress" cx="36" cy="36" r="30" stroke-dasharray="188" stroke-dashoffset="20"></circle>
+          </svg>
+          <span class="value">89%</span>
+        </div>
+        <div class="header-info">
+          <h1>Company Profile</h1>
+          <p>Build your organizational context for AI-powered OKR generation</p>
+          <div class="stage-dots">
+            <span class="stage-dot complete"></span>
+            <span class="stage-label">Discovery</span>
+            <span style="color: var(--gray-300); margin: 0 4px;">→</span>
+            <span class="stage-dot current"></span>
+            <span class="stage-label current">Assessment</span>
+            <span style="color: var(--gray-300); margin: 0 4px;">→</span>
+            <span class="stage-dot"></span>
+            <span class="stage-label">Execution</span>
+            <span style="color: var(--gray-300); margin: 0 4px;">→</span>
+            <span class="stage-dot"></span>
+            <span class="stage-label">Learning</span>
+            <span style="color: var(--gray-300); margin: 0 4px;">→</span>
+            <span class="stage-dot"></span>
+            <span class="stage-label">Mastery</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="ai-knows-panel">
+          <div class="ai-knows-title">🧠 What AI knows about you</div>
+          <div class="ai-knows-list">
+            <span class="ai-item done">✓ Industry: Consulting (IT focus)</span>
+            <span class="ai-item done">✓ Business model defined</span>
+            <span class="ai-item missing">○ Missing: Strategic priority</span>
+            <span class="ai-item missing">○ Missing: Revenue metrics</span>
+          </div>
+        </div>
+        <div class="save-status">All changes saved</div>
+        <button class="btn-save">Save</button>
+      </div>
+    </header>
+
+    <!-- Stage Tabs -->
+    <div class="stage-tabs">
+      <button class="stage-tab complete" onclick="showStage(0)">✓ Discovery</button>
+      <button class="stage-tab active" onclick="showStage(1)">Assessment</button>
+      <button class="stage-tab" onclick="showStage(2)">Execution</button>
+      <button class="stage-tab locked" onclick="showStage(3)">🔒 Learning</button>
+      <button class="stage-tab locked" onclick="showStage(4)">🔒 Mastery</button>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+
+      <!-- ==========================================
+           STAGE 0: DISCOVERY
+      ========================================== -->
+      <div class="stage-content" id="stage-0">
+        <div class="sub-tabs">
+          <button class="sub-tab active" onclick="showSubTab(0, 'business')">The Business <span class="badge complete">85%</span></button>
+          <button class="sub-tab" onclick="showSubTab(0, 'numbers')">The Numbers <span class="badge" style="background: var(--orange-light); color: var(--orange);">40%</span></button>
+          <button class="sub-tab" onclick="showSubTab(0, 'vision')">The Vision <span class="badge" style="background: var(--red-light); color: var(--red);">15%</span></button>
+        </div>
+
+        <!-- The Business -->
+        <div class="content-panel active" id="stage-0-business">
+
+          <!-- Row 1: Company Name + Founded Year + Industry -->
+          <div class="row-3">
+            <div class="question-card" style="padding: 16px;">
+              <div class="question-header" style="margin-bottom: 8px;">
+                <span class="question-label">Company Name <span style="color: var(--purple);">*</span></span>
+              </div>
+              <input type="text" class="form-input" value="KARVIA Consulting" style="padding: 10px 12px;">
+            </div>
+            <div class="question-card" style="padding: 16px;">
+              <div class="question-header" style="margin-bottom: 8px;">
+                <span class="question-label">Founded Year</span>
+              </div>
+              <input type="number" class="form-input" value="2024" style="padding: 10px 12px;">
+            </div>
+            <div class="question-card" style="padding: 16px;">
+              <div class="question-header" style="margin-bottom: 8px;">
+                <span class="question-label">Website</span>
+              </div>
+              <input type="text" class="form-input" placeholder="yourcompany.com" style="padding: 10px 12px;">
+            </div>
+          </div>
+
+          <!-- Row 2: Industry + Employee/Revenue Model -->
+          <div class="row-2">
+            <div class="question-card">
+              <div class="question-header">
+                <span class="question-label">What industry are you in? <span style="color: var(--purple);">*</span></span>
+                <span class="why-link">Why this matters →</span>
+              </div>
+              <div class="chips">
+                <span class="chip selected">Consulting</span>
+                <span class="chip">Financial Services</span>
+                <span class="chip">Healthcare</span>
+                <span class="chip">Professional Services</span>
+                <span class="chip">Other</span>
+              </div>
+              <div class="sub-options">
+                <div class="sub-label">What type of consulting?</div>
+                <div class="chips">
+                  <span class="chip selected">IT Consulting</span>
+                  <span class="chip">Management</span>
+                  <span class="chip">Strategy</span>
+                  <span class="chip">HR/Talent</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="question-card">
+              <!-- Employee Count -->
+              <div class="question-header">
+                <span class="question-label">How many employees? <span style="color: var(--purple);">*</span></span>
+              </div>
+              <div class="slider-row" style="margin-bottom: 16px;">
+                <div class="slider-track">
+                  <input type="range" min="1" max="500" value="275" id="employeeSlider">
+                  <div class="slider-labels">
+                    <span>1</span>
+                    <span>Small (1-50)</span>
+                    <span>Medium (51-200)</span>
+                    <span>500</span>
+                  </div>
+                </div>
+                <div class="slider-value">
+                  <div class="number" id="employeeValue">275</div>
+                  <div class="unit">employees</div>
+                </div>
+              </div>
+
+              <!-- Revenue Model (same card) -->
+              <div class="question-header" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--gray-200);">
+                <span class="question-label">How do you charge clients?</span>
+              </div>
+              <div class="chips">
+                <span class="chip selected">Project-based</span>
+                <span class="chip">Retainer</span>
+                <span class="chip">Hourly</span>
+                <span class="chip">Value-based</span>
+                <span class="chip">Subscription</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3: Business Description + Value Proposition -->
+          <div class="row-2">
+            <div class="question-card">
+              <div class="question-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span class="question-label">Business Description</span>
+                  <span class="ai-badge">High AI Impact</span>
+                </div>
+              </div>
+              <textarea class="form-input" rows="3" placeholder="We help [target clients] achieve [outcome] by [method/approach]...">We are an AI transformation consulting firm focused on helping small and medium-sized businesses adopt artificial intelligence safely, practically, and profitably.</textarea>
+              <div class="char-count">124/500</div>
+            </div>
+
+            <div class="question-card">
+              <div class="question-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span class="question-label">Value Proposition</span>
+                  <span class="ai-badge">High AI Impact</span>
+                </div>
+              </div>
+              <textarea class="form-input" rows="3" placeholder="What makes you different from competitors? Why do clients choose you?">We combine deep technical AI expertise with practical business experience, ensuring implementations that actually work and deliver measurable ROI.</textarea>
+              <div class="char-count">142/500</div>
+            </div>
+          </div>
+
+          <!-- Row 4: Primary Revenue Driver + Target Market -->
+          <div class="row-2">
+            <div class="question-card" style="padding: 16px;">
+              <div class="question-header" style="margin-bottom: 8px;">
+                <span class="question-label">Primary Revenue Driver</span>
+                <span class="why-link">Why this matters →</span>
+              </div>
+              <input type="text" class="form-input" placeholder="e.g., Implementation projects, Strategy consulting, Training" style="padding: 10px 12px;">
+              <p style="font-size: 10px; color: var(--gray-400); margin-top: 6px;">What service/product generates most of your revenue?</p>
+            </div>
+
+            <div class="question-card" style="padding: 16px;">
+              <div class="question-header" style="margin-bottom: 8px;">
+                <span class="question-label">Target Market / Ideal Client</span>
+              </div>
+              <input type="text" class="form-input" placeholder="e.g., Mid-market tech companies, 50-500 employees" style="padding: 10px 12px;">
+              <p style="font-size: 10px; color: var(--gray-400); margin-top: 6px;">Who are your best-fit clients?</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Numbers -->
+        <div class="content-panel" id="stage-0-numbers">
+          <!-- Current Metrics -->
+          <div class="question-card">
+            <div class="question-header">
+              <span class="question-label">Current Performance</span>
+              <span class="ai-badge">Enables baseline KRs</span>
+            </div>
+            <p style="font-size: 12px; color: var(--gray-500); margin-bottom: 14px;">Quick fill: Just the essentials for AI to understand your business</p>
+            <div class="metrics-grid">
+              <div class="metric-card filled">
+                <div class="metric-label">Annual Revenue</div>
+                <div class="metric-input-row">
+                  <span class="metric-prefix">$</span>
+                  <input type="text" class="metric-input" value="2.4M">
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">YoY Growth</div>
+                <div class="metric-input-row">
+                  <input type="text" class="metric-input" placeholder="0">
+                  <span class="metric-suffix">%</span>
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Profit Margin</div>
+                <div class="metric-input-row">
+                  <input type="text" class="metric-input" placeholder="0">
+                  <span class="metric-suffix">%</span>
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Active Clients</div>
+                <div class="metric-input-row">
+                  <input type="text" class="metric-input" placeholder="0">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Concentration Risk -->
+          <div class="row-2">
+            <div class="question-card" style="padding: 16px; border-left: 3px solid var(--orange);">
+              <div class="question-header" style="margin-bottom: 8px;">
+                <span class="question-label">Top 5 Clients Revenue %</span>
+                <span style="font-size: 10px; padding: 2px 6px; background: var(--orange-light); color: var(--orange); border-radius: 4px; font-weight: 600;">Risk Indicator</span>
+              </div>
+              <div class="slider-row">
+                <div class="slider-track" style="flex: 1;">
+                  <input type="range" min="0" max="100" value="45" id="concentrationSlider">
+                  <div class="slider-labels">
+                    <span style="color: var(--green);">0% (Low risk)</span>
+                    <span style="color: var(--orange);">50%</span>
+                    <span style="color: var(--red);">100% (High risk)</span>
+                  </div>
+                </div>
+                <div class="slider-value" style="min-width: 60px;">
+                  <div class="number" id="concentrationValue" style="font-size: 22px;">45</div>
+                  <div class="unit">%</div>
+                </div>
+              </div>
+              <p style="font-size: 10px; color: var(--gray-500); margin-top: 8px;">High concentration = AI prioritizes retention over growth</p>
+            </div>
+
+            <div class="question-card" style="padding: 16px;">
+              <div class="question-header" style="margin-bottom: 8px;">
+                <span class="question-label">Client Retention Rate</span>
+              </div>
+              <div class="slider-row">
+                <div class="slider-track" style="flex: 1;">
+                  <input type="range" min="0" max="100" value="85" id="retentionSlider">
+                  <div class="slider-labels">
+                    <span>0%</span>
+                    <span>Industry avg: 80%</span>
+                    <span>100%</span>
+                  </div>
+                </div>
+                <div class="slider-value" style="min-width: 60px;">
+                  <div class="number" id="retentionValue" style="font-size: 22px; color: var(--green);">85</div>
+                  <div class="unit">%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12-Month Targets -->
+          <div class="question-card">
+            <div class="question-header">
+              <span class="question-label">12-Month Targets</span>
+              <span class="ai-badge">Enables "from X to Y" KRs</span>
+            </div>
+            <p style="font-size: 12px; color: var(--gray-500); margin-bottom: 14px;">Where do you want to be in 12 months?</p>
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <div class="metric-label">Target Revenue</div>
+                <div class="metric-input-row">
+                  <span class="metric-prefix">$</span>
+                  <input type="text" class="metric-input" placeholder="0">
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Target Growth %</div>
+                <div class="metric-input-row">
+                  <input type="text" class="metric-input" placeholder="0">
+                  <span class="metric-suffix">%</span>
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Target Clients</div>
+                <div class="metric-input-row">
+                  <input type="text" class="metric-input" placeholder="0">
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Target Team Size</div>
+                <div class="metric-input-row">
+                  <input type="text" class="metric-input" placeholder="0">
+                </div>
+              </div>
+            </div>
+            <div style="background: var(--gold-light); padding: 10px 14px; border-radius: 8px; font-size: 11px; color: var(--navy); margin-top: 14px;">
+              <strong>Why this matters:</strong> Targets enable specific "from $2.4M to $3M" Key Results instead of generic "increase revenue"
+            </div>
+          </div>
+        </div>
+
+        <!-- The Vision -->
+        <div class="content-panel" id="stage-0-vision">
+          <!-- #1 Priority - THE KEY FIELD -->
+          <div class="priority-card">
+            <div class="priority-header">
+              <span class="priority-badge">Most Important</span>
+              <span class="priority-label">What's your #1 priority for the next 12 months? <span style="color: var(--purple);">*</span></span>
+            </div>
+            <p class="priority-hint">This directly shapes your first AI-generated objective</p>
+            <div class="chips" style="margin-bottom: 12px;">
+              <span class="chip">Scale client base</span>
+              <span class="chip">Increase revenue per client</span>
+              <span class="chip">Build team capacity</span>
+              <span class="chip">Systematize operations</span>
+              <span class="chip">Enter new market</span>
+            </div>
+            <input type="text" class="priority-input" placeholder="Or type your own priority...">
+          </div>
+
+          <!-- Blocker + One Thing (side by side) -->
+          <div class="row-2">
+            <div class="question-card">
+              <div class="question-header">
+                <span class="question-label">Biggest Blocker</span>
+                <span class="ai-badge">Creates Objectives</span>
+              </div>
+              <p style="font-size: 11px; color: var(--gray-500); margin-bottom: 10px;">What's preventing you from reaching that priority?</p>
+              <div class="chips" style="margin-bottom: 10px;">
+                <span class="chip">Finding talent</span>
+                <span class="chip">Cash flow</span>
+                <span class="chip">Time/bandwidth</span>
+                <span class="chip">Market awareness</span>
+              </div>
+              <input type="text" class="form-input" placeholder="Or describe your blocker..." style="padding: 10px 12px;">
+            </div>
+
+            <div class="question-card">
+              <div class="question-header">
+                <span class="question-label">If you could change ONE thing?</span>
+              </div>
+              <p style="font-size: 11px; color: var(--gray-500); margin-bottom: 10px;">This reveals your deepest strategic need</p>
+              <textarea class="form-input" rows="3" placeholder="e.g., 'More predictable revenue' or 'Less dependency on founder'"></textarea>
+            </div>
+          </div>
+
+          <!-- Key Challenges (Multi-select) -->
+          <div class="question-card">
+            <div class="question-header">
+              <span class="question-label">Current Challenges (select all that apply)</span>
+            </div>
+            <div class="chips" data-multi="true">
+              <span class="chip selected">Scaling operations</span>
+              <span class="chip">Hiring & retaining talent</span>
+              <span class="chip selected">Client acquisition</span>
+              <span class="chip">Client retention</span>
+              <span class="chip">Cash flow management</span>
+              <span class="chip">Technology gaps</span>
+              <span class="chip">Market competition</span>
+              <span class="chip">Process inefficiency</span>
+              <span class="chip">Leadership development</span>
+              <span class="chip">Work-life balance</span>
+            </div>
+          </div>
+
+          <!-- 3-5 Year Vision -->
+          <div class="question-card">
+            <div class="question-header">
+              <span class="question-label">Where do you see the company in 3-5 years?</span>
+            </div>
+            <p style="font-size: 11px; color: var(--gray-500); margin-bottom: 10px;">Helps AI align short-term objectives with long-term vision</p>
+            <textarea class="form-input" rows="2" placeholder="e.g., 'Leading AI consultancy in the region with 50+ team members and $10M revenue'"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           STAGE 1: ASSESSMENT
+      ========================================== -->
+      <div class="stage-content active" id="stage-1">
+        <div class="sub-tabs">
+          <button class="sub-tab active" onclick="showSubTab(1, 'ops-ssi')">Ops - SSI <span class="badge complete">62</span></button>
+          <button class="sub-tab" onclick="showSubTab(1, 'culture')">Culture Score <span class="badge" style="background: var(--green-light); color: var(--green);">73</span></button>
+          <button class="sub-tab" onclick="showSubTab(1, 'financial')">Financial Score <span class="badge" style="background: var(--gray-100); color: var(--gray-400);">--</span></button>
+        </div>
+
+        <!-- ========== OPS - SSI SUB-TAB ========== -->
+        <div class="content-panel active" id="stage-1-ops-ssi">
+          <div class="question-card" style="border: none; padding: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <div>
+                <span class="question-label" style="font-size: 15px;">Operational SSI</span>
+                <span style="font-size: 11px; color: var(--gray-500); margin-left: 8px;">Strategic Strength Index</span>
+              </div>
+              <a href="#" style="font-size: 12px; color: var(--purple); text-decoration: none;">Retake Assessment →</a>
+            </div>
+            <div class="ssi-grid">
+              <div class="ssi-card">
+                <div class="ssi-icon">⚡</div>
+                <div class="ssi-score">72</div>
+                <div class="ssi-label">Speed</div>
+                <div class="ssi-bar"><div class="ssi-bar-fill" style="width:72%; background: #3b82f6;"></div></div>
+                <div class="ssi-insight">Strong decision velocity</div>
+              </div>
+              <div class="ssi-card weak">
+                <div class="ssi-icon">💪</div>
+                <div class="ssi-score">48</div>
+                <div class="ssi-label">Strength</div>
+                <div class="ssi-bar"><div class="ssi-bar-fill" style="width:48%; background: var(--orange);"></div></div>
+                <div class="ssi-insight">⚠️ Focus area</div>
+              </div>
+              <div class="ssi-card">
+                <div class="ssi-icon">🧠</div>
+                <div class="ssi-score">65</div>
+                <div class="ssi-label">Intelligence</div>
+                <div class="ssi-bar"><div class="ssi-bar-fill" style="width:65%; background: var(--purple);"></div></div>
+                <div class="ssi-insight">Good learning agility</div>
+              </div>
+            </div>
+            <div class="ai-insight-box">
+              <strong>AI Insight:</strong> Your "Strength" dimension scores lowest. We'll prioritize objectives that build operational capacity.
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== CULTURE SCORE (PTH) SUB-TAB ========== -->
+        <div class="content-panel" id="stage-1-culture">
+          <div class="question-card" style="border: none; padding: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <div>
+                <span class="question-label" style="font-size: 15px;">Culture Score</span>
+                <span style="font-size: 11px; color: var(--gray-500); margin-left: 8px;">Powered by iBrain PTH</span>
+              </div>
+              <span style="font-size: 10px; padding: 4px 10px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 4px; font-weight: 600;">iBrain</span>
+            </div>
+
+            <!-- PTH Score Cards -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px;">
+              <div style="background: linear-gradient(135deg, #19ac8610, #19ac8605); border: 1px solid #19ac8630; border-radius: 12px; padding: 20px; text-align: center;">
+                <div style="font-size: 32px; font-weight: 700; color: #19ac86;">78</div>
+                <div style="font-size: 13px; font-weight: 600; color: #19ac86; margin-top: 4px;">Progress</div>
+                <div style="font-size: 10px; color: var(--gray-500); margin-top: 6px;">Goal momentum & execution</div>
+              </div>
+              <div style="background: linear-gradient(135deg, #315e8010, #315e8005); border: 1px solid #315e8030; border-radius: 12px; padding: 20px; text-align: center;">
+                <div style="font-size: 32px; font-weight: 700; color: #315e80;">71</div>
+                <div style="font-size: 13px; font-weight: 600; color: #315e80; margin-top: 4px;">Trust</div>
+                <div style="font-size: 10px; color: var(--gray-500); margin-top: 6px;">Team reliability & commitment</div>
+              </div>
+              <div style="background: linear-gradient(135deg, #8B5CF610, #8B5CF605); border: 1px solid #8B5CF630; border-radius: 12px; padding: 20px; text-align: center;">
+                <div style="font-size: 32px; font-weight: 700; color: #8B5CF6;">69</div>
+                <div style="font-size: 13px; font-weight: 600; color: #8B5CF6; margin-top: 4px;">Health</div>
+                <div style="font-size: 10px; color: var(--gray-500); margin-top: 6px;">Sustainability & balance</div>
+              </div>
+            </div>
+
+            <!-- 5D Breakdown -->
+            <div class="question-card" style="background: var(--gray-50); margin-bottom: 0;">
+              <div class="question-header" style="margin-bottom: 12px;">
+                <span class="question-label" style="font-size: 13px;">5D Dimension Breakdown</span>
+                <span style="font-size: 10px; color: var(--gray-500);">Backend metrics powering PTH</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
+                <div style="text-align: center;">
+                  <div style="font-size: 18px; font-weight: 600; color: var(--navy);">72</div>
+                  <div style="font-size: 10px; color: var(--gray-500);">Clarity</div>
+                  <div style="height: 4px; background: var(--gray-200); border-radius: 2px; margin-top: 6px;">
+                    <div style="height: 100%; width: 72%; background: var(--purple); border-radius: 2px;"></div>
+                  </div>
+                </div>
+                <div style="text-align: center;">
+                  <div style="font-size: 18px; font-weight: 600; color: var(--navy);">85</div>
+                  <div style="font-size: 10px; color: var(--gray-500);">Commitment</div>
+                  <div style="height: 4px; background: var(--gray-200); border-radius: 2px; margin-top: 6px;">
+                    <div style="height: 100%; width: 85%; background: var(--green); border-radius: 2px;"></div>
+                  </div>
+                </div>
+                <div style="text-align: center;">
+                  <div style="font-size: 18px; font-weight: 600; color: var(--navy);">68</div>
+                  <div style="font-size: 10px; color: var(--gray-500);">Adaptability</div>
+                  <div style="height: 4px; background: var(--gray-200); border-radius: 2px; margin-top: 6px;">
+                    <div style="height: 100%; width: 68%; background: var(--purple); border-radius: 2px;"></div>
+                  </div>
+                </div>
+                <div style="text-align: center;">
+                  <div style="font-size: 18px; font-weight: 600; color: var(--orange);">61</div>
+                  <div style="font-size: 10px; color: var(--gray-500);">Competency</div>
+                  <div style="height: 4px; background: var(--gray-200); border-radius: 2px; margin-top: 6px;">
+                    <div style="height: 100%; width: 61%; background: var(--orange); border-radius: 2px;"></div>
+                  </div>
+                </div>
+                <div style="text-align: center;">
+                  <div style="font-size: 18px; font-weight: 600; color: var(--orange);">55</div>
+                  <div style="font-size: 10px; color: var(--gray-500);">Opportunity</div>
+                  <div style="height: 4px; background: var(--gray-200); border-radius: 2px; margin-top: 6px;">
+                    <div style="height: 100%; width: 55%; background: var(--orange); border-radius: 2px;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ai-insight-box" style="margin-top: 16px;">
+              <strong>Culture Insight:</strong> Strong commitment (85) but opportunity awareness is low (55). Consider objectives that expand market visibility and networking.
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== FINANCIAL SCORE SUB-TAB ========== -->
+        <div class="content-panel" id="stage-1-financial">
+          <div class="question-card" style="border: none; padding: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <div>
+                <span class="question-label" style="font-size: 15px;">Financial Score</span>
+                <span style="font-size: 11px; color: var(--gray-500); margin-left: 8px;">Coming from iBrain</span>
+              </div>
+              <span style="font-size: 10px; padding: 4px 10px; background: var(--gray-100); color: var(--gray-500); border-radius: 4px; font-weight: 600;">Coming Soon</span>
+            </div>
+
+            <!-- Coming Soon Preview -->
+            <div style="background: linear-gradient(135deg, var(--gray-50), var(--gray-100)); border: 2px dashed var(--gray-300); border-radius: 16px; padding: 40px; text-align: center;">
+              <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.4;">💰</div>
+              <div style="font-size: 18px; font-weight: 600; color: var(--gray-600); margin-bottom: 8px;">Financial Health Score</div>
+              <div style="font-size: 13px; color: var(--gray-500); max-width: 400px; margin: 0 auto 24px;">
+                Comprehensive financial health assessment powered by iBrain analytics
+              </div>
+
+              <!-- Preview Cards -->
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px;">
+                <div style="background: white; border: 1px dashed var(--gray-300); border-radius: 8px; padding: 16px; opacity: 0.6;">
+                  <div style="font-size: 24px; margin-bottom: 8px;">📊</div>
+                  <div style="font-size: 11px; color: var(--gray-500);">Cash Flow Health</div>
+                  <div style="font-size: 20px; font-weight: 700; color: var(--gray-400);">--</div>
+                </div>
+                <div style="background: white; border: 1px dashed var(--gray-300); border-radius: 8px; padding: 16px; opacity: 0.6;">
+                  <div style="font-size: 24px; margin-bottom: 8px;">📈</div>
+                  <div style="font-size: 11px; color: var(--gray-500);">Revenue Stability</div>
+                  <div style="font-size: 20px; font-weight: 700; color: var(--gray-400);">--</div>
+                </div>
+                <div style="background: white; border: 1px dashed var(--gray-300); border-radius: 8px; padding: 16px; opacity: 0.6;">
+                  <div style="font-size: 24px; margin-bottom: 8px;">💵</div>
+                  <div style="font-size: 11px; color: var(--gray-500);">Profit Efficiency</div>
+                  <div style="font-size: 20px; font-weight: 700; color: var(--gray-400);">--</div>
+                </div>
+                <div style="background: white; border: 1px dashed var(--gray-300); border-radius: 8px; padding: 16px; opacity: 0.6;">
+                  <div style="font-size: 24px; margin-bottom: 8px;">🎯</div>
+                  <div style="font-size: 11px; color: var(--gray-500);">Growth Potential</div>
+                  <div style="font-size: 20px; font-weight: 700; color: var(--gray-400);">--</div>
+                </div>
+              </div>
+
+              <div style="background: var(--gold-light); padding: 12px 20px; border-radius: 8px; font-size: 12px; color: var(--navy); margin-top: 24px; display: inline-block;">
+                <strong>Coming in Phase 2:</strong> iBrain will analyze your financial data to generate actionable insights
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           STAGE 2: EXECUTION
+      ========================================== -->
+      <div class="stage-content" id="stage-2">
+        <div class="sub-tabs">
+          <button class="sub-tab active" onclick="showSubTab(2, 'detailed')">Detailed Metrics</button>
+          <button class="sub-tab" onclick="showSubTab(2, 'gaps')">Gap Analysis</button>
+          <button class="sub-tab" onclick="showSubTab(2, 'trajectory')">YoY Trajectory</button>
+        </div>
+
+        <div class="content-panel active" id="stage-2-detailed">
+          <div class="question-card">
+            <div class="question-header">
+              <span class="question-label">Detailed Performance</span>
+            </div>
+            <p style="color: var(--gray-500); font-size: 12px; margin-bottom: 16px;">
+              Detailed metrics enable specific "from $2.4M to $3M" Key Results
+            </p>
+            <div class="metrics-grid">
+              <div class="metric-card filled">
+                <div class="metric-label">Annual Revenue</div>
+                <div class="metric-input-row">
+                  <span class="metric-prefix">$</span>
+                  <input type="text" class="metric-input" value="2.4M">
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Profit Margin</div>
+                <div class="metric-input-row">
+                  <input type="text" class="metric-input" placeholder="0">
+                  <span class="metric-suffix">%</span>
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Clients</div>
+                <div class="metric-input-row">
+                  <input type="text" class="metric-input" placeholder="0">
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Retention</div>
+                <div class="metric-input-row">
+                  <input type="text" class="metric-input" placeholder="0">
+                  <span class="metric-suffix">%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-panel" id="stage-2-gaps">
+          <div class="question-card">
+            <div class="question-header">
+              <span class="question-label">12-Month Targets vs Current</span>
+            </div>
+            <p style="color: var(--gray-500); font-size: 13px;">Gap analysis drives objective prioritization</p>
+          </div>
+        </div>
+
+        <div class="content-panel" id="stage-2-trajectory">
+          <div class="question-card">
+            <div class="question-header">
+              <span class="question-label">Year-over-Year Changes</span>
+            </div>
+            <p style="color: var(--gray-500); font-size: 13px;">Historical trajectory validates target realism</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           STAGE 3: LEARNING (Locked Preview)
+      ========================================== -->
+      <div class="stage-content" id="stage-3">
+        <div class="locked-banner">
+          <span>🔒</span>
+          <span class="locked-banner-text">Preview Mode — Unlocks after completing 50+ tasks and 1 OKR cycle</span>
+          <div class="locked-reqs-mini">
+            <span class="req-done">✓ Discovery</span>
+            <span class="req-done">✓ SSI</span>
+            <span class="req-pending">○ Metrics</span>
+            <span class="req-pending">○ 50 tasks</span>
+          </div>
+        </div>
+
+        <div class="sub-tabs">
+          <button class="sub-tab active">Execution Patterns</button>
+          <button class="sub-tab">OKR Outcomes</button>
+          <button class="sub-tab">Lessons Learned</button>
+        </div>
+
+        <div class="content-panel active locked-preview">
+          <div class="question-card" style="border: none; padding: 0;">
+            <div class="question-header">
+              <span class="question-label">How Your Team Executes</span>
+              <span class="ai-badge" style="background: var(--gray-400);">Auto-tracked</span>
+            </div>
+            <div class="preview-grid">
+              <div class="preview-card">
+                <div class="preview-icon">📊</div>
+                <div class="preview-label">Task Completion</div>
+                <div class="preview-value">—%</div>
+                <div class="preview-hint">After 50 tasks</div>
+              </div>
+              <div class="preview-card">
+                <div class="preview-icon">⚡</div>
+                <div class="preview-label">Avg Velocity</div>
+                <div class="preview-value">—</div>
+                <div class="preview-hint">Tasks/week</div>
+              </div>
+              <div class="preview-card">
+                <div class="preview-icon">🎯</div>
+                <div class="preview-label">Goal Achievement</div>
+                <div class="preview-value">—%</div>
+                <div class="preview-hint">Weekly goals hit</div>
+              </div>
+              <div class="preview-card">
+                <div class="preview-icon">📅</div>
+                <div class="preview-label">On-Time Delivery</div>
+                <div class="preview-value">—%</div>
+                <div class="preview-hint">By due date</div>
+              </div>
+            </div>
+            <div class="preview-insight">
+              <strong>What AI will learn:</strong> Your team's execution patterns help AI suggest realistic timelines and workload distribution.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           STAGE 4: MASTERY (Locked Preview)
+      ========================================== -->
+      <div class="stage-content" id="stage-4">
+        <div class="locked-banner">
+          <span>🔒</span>
+          <span class="locked-banner-text">Preview Mode — Unlocks after 4+ OKR cycles with outcome tracking</span>
+          <div class="locked-reqs-mini">
+            <span class="req-done">✓ Discovery</span>
+            <span class="req-done">✓ Assessment</span>
+            <span class="req-pending">○ Execution</span>
+            <span class="req-pending">○ 4 cycles</span>
+          </div>
+        </div>
+
+        <div class="sub-tabs">
+          <button class="sub-tab active">AI Predictions</button>
+          <button class="sub-tab">Org Patterns</button>
+          <button class="sub-tab">Smart Recommendations</button>
+        </div>
+
+        <div class="content-panel active locked-preview">
+          <div class="question-card" style="border: none; padding: 0;">
+            <div class="question-header">
+              <span class="question-label">Predictive Intelligence</span>
+              <span class="ai-badge" style="background: linear-gradient(135deg, var(--gold), #b8860b);">Full AI Power</span>
+            </div>
+            <div class="preview-grid">
+              <div class="preview-card">
+                <div class="preview-icon">🔮</div>
+                <div class="preview-label">Success Prediction</div>
+                <div class="preview-value">—%</div>
+                <div class="preview-hint">Per objective</div>
+              </div>
+              <div class="preview-card">
+                <div class="preview-icon">⚠️</div>
+                <div class="preview-label">Risk Alerts</div>
+                <div class="preview-value">—</div>
+                <div class="preview-hint">Proactive warnings</div>
+              </div>
+              <div class="preview-card">
+                <div class="preview-icon">🎯</div>
+                <div class="preview-label">Target Calibration</div>
+                <div class="preview-value">—</div>
+                <div class="preview-hint">Based on history</div>
+              </div>
+              <div class="preview-card">
+                <div class="preview-icon">🧠</div>
+                <div class="preview-label">Pattern Insights</div>
+                <div class="preview-value">—</div>
+                <div class="preview-hint">Org DNA</div>
+              </div>
+            </div>
+            <div class="preview-insight">
+              <strong>What you'll get at Mastery:</strong> Objectives pre-scored for success probability, KRs calibrated to your actual achievement patterns, proactive risk warnings.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- End content-area -->
+
+    <div class="footer-spacer"></div>
+  </div><!-- End main-container -->
+
+  <!-- Footer -->
+  <footer class="footer-bar">
+    <div class="auto-save">✓ All changes saved automatically</div>
+    <div class="progress-info">
+      <span class="progress-text">Profile: <span class="highlight">89%</span> → Stage 2 at 100%</span>
+      <button class="btn-primary">Generate OKRs →</button>
+    </div>
+  </footer>
+
+  <script>
+    let currentStage = 1;
+
+    // Switch between stage tabs
+    function showStage(stageNum) {
+      currentStage = stageNum;
+
+      // Update stage tabs
+      document.querySelectorAll('.stage-tab').forEach((tab, i) => {
+        tab.classList.remove('active');
+        if (i === stageNum) tab.classList.add('active');
+      });
+
+      // Show/hide stage content
+      document.querySelectorAll('.stage-content').forEach((content, i) => {
+        content.classList.remove('active');
+        if (i === stageNum) content.classList.add('active');
+      });
+
+      // Reset sub-tabs
+      const stageContent = document.getElementById('stage-' + stageNum);
+      if (stageContent) {
+        const subTabs = stageContent.querySelectorAll('.sub-tab');
+        const panels = stageContent.querySelectorAll('.content-panel');
+        subTabs.forEach((t, i) => t.classList.toggle('active', i === 0));
+        panels.forEach((p, i) => p.classList.toggle('active', i === 0));
+      }
+    }
+
+    // Switch sub-tabs within a stage
+    function showSubTab(stageNum, subTabId) {
+      const stageContent = document.getElementById('stage-' + stageNum);
+      if (!stageContent) return;
+
+      stageContent.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+
+      stageContent.querySelectorAll('.content-panel').forEach(p => p.classList.remove('active'));
+      const panel = document.getElementById('stage-' + stageNum + '-' + subTabId);
+      if (panel) panel.classList.add('active');
+    }
+
+    // Chip selection (single or multi-select)
+    document.querySelectorAll('.chips').forEach(container => {
+      container.addEventListener('click', e => {
+        if (e.target.classList.contains('chip')) {
+          // Check if multi-select
+          const isMulti = container.dataset.multi === 'true' ||
+                          container.closest('.question-card')?.querySelector('.question-label')?.textContent?.toLowerCase().includes('select all') ||
+                          container.closest('.question-card')?.querySelector('.question-label')?.textContent?.toLowerCase().includes('challenges') ||
+                          container.closest('.question-card')?.querySelector('.question-label')?.textContent?.toLowerCase().includes('values');
+
+          if (isMulti) {
+            // Multi-select: toggle
+            e.target.classList.toggle('selected');
+          } else {
+            // Single-select: deselect others
+            container.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+            e.target.classList.add('selected');
+          }
+        }
+      });
+    });
+
+    // All sliders
+    const sliders = [
+      { slider: 'employeeSlider', display: 'employeeValue' },
+      { slider: 'concentrationSlider', display: 'concentrationValue' },
+      { slider: 'retentionSlider', display: 'retentionValue' }
+    ];
+
+    sliders.forEach(({ slider, display }) => {
+      const sliderEl = document.getElementById(slider);
+      const displayEl = document.getElementById(display);
+      if (sliderEl && displayEl) {
+        sliderEl.addEventListener('input', () => {
+          displayEl.textContent = sliderEl.value;
+          // Color coding for concentration risk
+          if (slider === 'concentrationSlider') {
+            const val = parseInt(sliderEl.value);
+            if (val < 30) displayEl.style.color = 'var(--green)';
+            else if (val < 50) displayEl.style.color = 'var(--orange)';
+            else displayEl.style.color = 'var(--red)';
+          }
+          // Color coding for retention
+          if (slider === 'retentionSlider') {
+            const val = parseInt(sliderEl.value);
+            if (val >= 80) displayEl.style.color = 'var(--green)';
+            else if (val >= 60) displayEl.style.color = 'var(--orange)';
+            else displayEl.style.color = 'var(--red)';
+          }
+        });
+      }
+    });
+
+    // Auto-save simulation
+    let saveTimeout;
+    document.querySelectorAll('input, textarea, select').forEach(input => {
+      input.addEventListener('change', () => {
+        clearTimeout(saveTimeout);
+        const saveStatus = document.querySelector('.save-status');
+        const autoSave = document.querySelector('.auto-save');
+        if (saveStatus) saveStatus.textContent = 'Saving...';
+        if (autoSave) autoSave.innerHTML = '⏳ Saving...';
+        saveTimeout = setTimeout(() => {
+          if (saveStatus) saveStatus.textContent = 'All changes saved';
+          if (autoSave) autoSave.innerHTML = '✓ All changes saved automatically';
+        }, 800);
+      });
+    });
+  </script>
+
+</body>
+</html>

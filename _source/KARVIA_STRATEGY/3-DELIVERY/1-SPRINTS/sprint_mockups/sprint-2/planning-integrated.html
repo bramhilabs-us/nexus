@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planning - Karvia Business</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9fafb;
+        }
+        .karvia-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .objective-tab {
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        .objective-tab:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+        .objective-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom: 3px solid #667eea;
+        }
+        .kr-card {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .kr-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .kr-card.selected {
+            border-left: 4px solid #667eea;
+            background: linear-gradient(to right, rgba(102, 126, 234, 0.05), transparent);
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.2s ease;
+        }
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        .filter-btn {
+            transition: all 0.2s ease;
+        }
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-8">
+                    <div class="flex items-center">
+                        <span class="text-2xl">📊</span>
+                        <span class="ml-2 text-lg font-semibold">Karvia Business</span>
+                    </div>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="#" class="text-gray-600 hover:text-gray-900">Dashboard</a>
+                        <a href="#" class="text-gray-600 hover:text-gray-900">Objectives</a>
+                        <a href="#" class="text-gray-600 hover:text-gray-900">Assessments</a>
+                        <a href="#" class="text-gray-600 hover:text-gray-900">Teams</a>
+                        <a href="#" class="text-purple-600 font-medium">Planning</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">john acme</span>
+                    <div class="w-8 h-8 rounded-full karvia-gradient flex items-center justify-center text-white text-sm font-medium">
+                        JA
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Page Header -->
+        <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900 mb-2">Planning</h1>
+                    <p class="text-gray-600">Convert Key Results into actionable weekly goals</p>
+                </div>
+                <div class="karvia-gradient rounded-lg px-4 py-2">
+                    <div class="flex items-center space-x-2 text-white">
+                        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"/>
+                        </svg>
+                        <span class="text-sm font-medium">Q1 2025</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Objective Tabs -->
+        <div class="bg-white border border-gray-200 rounded-xl mb-6">
+            <div class="flex overflow-x-auto">
+                <div class="objective-tab active flex-1 px-6 py-4 text-center font-medium" onclick="selectObjective(0, this)">
+                    <span class="text-lg">📊</span> Accelerate Revenue Growth
+                </div>
+                <div class="objective-tab flex-1 px-6 py-4 text-center font-medium text-gray-600" onclick="selectObjective(1, this)">
+                    <span class="text-lg">⚡</span> Improve Operational Efficiency
+                </div>
+                <div class="objective-tab flex-1 px-6 py-4 text-center font-medium text-gray-600" onclick="selectObjective(2, this)">
+                    <span class="text-lg">👥</span> Build High-Performance Culture
+                </div>
+                <div class="objective-tab flex-1 px-6 py-4 text-center font-medium text-gray-600" onclick="selectObjective(3, this)">
+                    <span class="text-lg">🌍</span> Expand Market Presence
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Planning Layout -->
+        <div class="grid md:grid-cols-12 gap-6">
+            <!-- Left Panel - Key Results -->
+            <div class="md:col-span-5">
+                <div class="bg-white border border-gray-200 rounded-xl p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Key Results</h3>
+
+                    <!-- KR Cards -->
+                    <div class="space-y-4" id="krList">
+                        <!-- KR 1 -->
+                        <div class="kr-card bg-white border border-gray-200 rounded-lg p-4">
+                            <div class="flex justify-between items-start mb-3">
+                                <h4 class="font-medium text-gray-900">Increase MRR from $2M to $2.5M</h4>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600 mb-3">
+                                <span>Current: $2.1M</span>
+                                <span>Target: $2.5M</span>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-2 mb-3">
+                                <div class="progress-bar h-2 rounded-full" style="width: 25%;"></div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-orange-600 font-medium">2 of 12 weeks planned</span>
+                                <div class="flex space-x-2">
+                                    <button onclick="planKR('kr1')" class="px-3 py-1 bg-purple-600 text-white text-xs rounded-lg hover:bg-purple-700">
+                                        📋 Plan Remaining
+                                    </button>
+                                    <button class="px-3 py-1 border border-gray-300 text-gray-600 text-xs rounded-lg hover:bg-gray-50">
+                                        👁 View
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- KR 2 -->
+                        <div class="kr-card bg-white border border-gray-200 rounded-lg p-4">
+                            <div class="flex justify-between items-start mb-3">
+                                <h4 class="font-medium text-gray-900">Achieve 85% customer retention rate</h4>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600 mb-3">
+                                <span>Current: 78%</span>
+                                <span>Target: 85%</span>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-2 mb-3">
+                                <div class="progress-bar h-2 rounded-full" style="width: 0%;"></div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-500">Not planned</span>
+                                <button onclick="planKR('kr2')" class="px-3 py-1 bg-purple-600 text-white text-xs rounded-lg hover:bg-purple-700">
+                                    📋 Create Plan
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- KR 3 -->
+                        <div class="kr-card bg-white border border-gray-200 rounded-lg p-4">
+                            <div class="flex justify-between items-start mb-3">
+                                <h4 class="font-medium text-gray-900">Launch 2 new product features</h4>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600 mb-3">
+                                <span>Current: 0</span>
+                                <span>Target: 2</span>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-2 mb-3">
+                                <div class="progress-bar h-2 rounded-full" style="width: 0%;"></div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-500">Not planned</span>
+                                <button onclick="planKR('kr3')" class="px-3 py-1 bg-purple-600 text-white text-xs rounded-lg hover:bg-purple-700">
+                                    📋 Create Plan
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- KR 4 -->
+                        <div class="kr-card bg-white border border-gray-200 rounded-lg p-4">
+                            <div class="flex justify-between items-start mb-3">
+                                <h4 class="font-medium text-gray-900">Reduce CAC by 20%</h4>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600 mb-3">
+                                <span>Current: $5000</span>
+                                <span>Target: $4000</span>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-2 mb-3">
+                                <div class="progress-bar h-2 rounded-full" style="width: 0%;"></div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-500">Not planned</span>
+                                <button onclick="planKR('kr4')" class="px-3 py-1 bg-purple-600 text-white text-xs rounded-lg hover:bg-purple-700">
+                                    📋 Create Plan
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Planning Workspace -->
+            <div class="md:col-span-7">
+                <div class="bg-white border border-gray-200 rounded-xl p-6 min-h-[600px]">
+                    <!-- Empty State -->
+                    <div id="emptyState" class="flex flex-col items-center justify-center h-full text-center py-12">
+                        <div class="w-20 h-20 rounded-full bg-purple-50 flex items-center justify-center mb-4">
+                            <span class="text-3xl">📋</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Select a Key Result to Plan</h3>
+                        <p class="text-gray-600 max-w-sm">Choose a KR from the left panel to create weekly goals</p>
+                    </div>
+
+                    <!-- Planning Form -->
+                    <div id="planningForm" class="hidden">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-6">Create Weekly Goals</h2>
+
+                        <!-- KR Context -->
+                        <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-4 mb-6">
+                            <div class="text-sm text-gray-600 mb-1">Key Result</div>
+                            <div id="selectedKRTitle" class="font-semibold text-purple-700 mb-2">Increase MRR from $2M to $2.5M</div>
+                            <div class="flex space-x-6 text-sm">
+                                <span class="text-gray-600">Gap to close: <span class="font-semibold text-gray-900" id="gapValue">$400K</span></span>
+                                <span class="text-gray-600">Weeks planned: <span class="font-semibold text-gray-900" id="weeksPlanned">2</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Form Fields -->
+                        <div class="grid md:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Timeline (Weeks)</label>
+                                <input type="number" id="timelineInput" min="1" max="12" value="10"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                <span class="text-xs text-gray-500 mt-1">Maximum 12 weeks</span>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Default Owner</label>
+                                <select id="ownerSelect"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                    <option value="">Select team member</option>
+                                    <optgroup label="Sales Team">
+                                        <option value="john">John Smith</option>
+                                        <option value="sarah">Sarah Johnson</option>
+                                    </optgroup>
+                                    <optgroup label="Marketing Team">
+                                        <option value="mike">Mike Chen</option>
+                                        <option value="emily">Emily Davis</option>
+                                    </optgroup>
+                                    <optgroup label="Product Team">
+                                        <option value="alex">Alex Wilson</option>
+                                        <option value="lisa">Lisa Anderson</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button onclick="generatePlan()" class="generate-btn w-full py-3 text-white font-medium rounded-lg">
+                            🤖 Generate AI Plan
+                        </button>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="loadingState" class="hidden flex flex-col items-center justify-center py-12">
+                        <div class="w-12 h-12 border-3 border-purple-200 border-t-purple-600 rounded-full animate-spin mb-4"></div>
+                        <p class="text-gray-600">AI is generating your plan...</p>
+                    </div>
+
+                    <!-- Plan Review -->
+                    <div id="planReview" class="hidden">
+                        <h2 class="text-lg font-semibold text-gray-900 mb-6">Review Generated Plan</h2>
+
+                        <div id="weeklyPlan" class="space-y-4 mb-6">
+                            <!-- Generated plan will appear here -->
+                        </div>
+
+                        <div class="flex space-x-3">
+                            <button onclick="createGoals()" class="flex-1 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700">
+                                ✅ Create Goals
+                            </button>
+                            <button onclick="regeneratePlan()" class="flex-1 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50">
+                                🔄 Regenerate Plan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedKR = null;
+
+        function selectObjective(index, element) {
+            // Update tab selection
+            document.querySelectorAll('.objective-tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.classList.add('text-gray-600');
+            });
+            element.classList.add('active');
+            element.classList.remove('text-gray-600');
+        }
+
+        function planKR(krId) {
+            selectedKR = krId;
+
+            // Update UI states
+            document.getElementById('emptyState').classList.add('hidden');
+            document.getElementById('planningForm').classList.remove('hidden');
+            document.getElementById('planReview').classList.add('hidden');
+
+            // Highlight selected KR
+            document.querySelectorAll('.kr-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.target.closest('.kr-card').classList.add('selected');
+
+            // Update context based on KR
+            if (krId === 'kr1') {
+                document.getElementById('selectedKRTitle').textContent = 'Increase MRR from $2M to $2.5M';
+                document.getElementById('gapValue').textContent = '$400K';
+                document.getElementById('weeksPlanned').textContent = '2';
+            }
+        }
+
+        function generatePlan() {
+            const timeline = document.getElementById('timelineInput').value;
+            const owner = document.getElementById('ownerSelect').value;
+
+            if (!owner) {
+                alert('Please select an owner');
+                return;
+            }
+
+            if (timeline < 1 || timeline > 12) {
+                alert('Timeline must be between 1 and 12 weeks');
+                return;
+            }
+
+            // Show loading
+            document.getElementById('planningForm').classList.add('hidden');
+            document.getElementById('loadingState').classList.remove('hidden');
+
+            // Simulate AI generation
+            setTimeout(() => {
+                document.getElementById('loadingState').classList.add('hidden');
+                document.getElementById('planReview').classList.remove('hidden');
+
+                // Generate sample plan
+                const weeklyTarget = 400000 / timeline;
+                let planHTML = '';
+
+                for (let i = 3; i <= Math.min(parseInt(timeline) + 2, 12); i++) {
+                    planHTML += `
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <div class="flex justify-between items-center mb-3">
+                                <h4 class="font-medium text-gray-900">Week ${i}</h4>
+                                <span class="text-sm font-semibold text-purple-600">Target: $${Math.round(weeklyTarget/1000)}K MRR</span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-xs text-gray-600">Owner:</label>
+                                <select class="ml-2 px-2 py-1 text-sm border border-gray-300 rounded">
+                                    <option>John Smith</option>
+                                    <option>Sarah Johnson</option>
+                                </select>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-start">
+                                    <span class="text-purple-600 mr-2">•</span>
+                                    <span class="text-sm text-gray-700">Contact ${5 + i} enterprise prospects</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="text-purple-600 mr-2">•</span>
+                                    <span class="text-sm text-gray-700">Complete ${Math.ceil(i/3)} product demos</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="text-purple-600 mr-2">•</span>
+                                    <span class="text-sm text-gray-700">Close deals worth $${Math.round(weeklyTarget/3000)}K</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                document.getElementById('weeklyPlan').innerHTML = planHTML;
+            }, 2000);
+        }
+
+        function createGoals() {
+            alert('✅ Goals created successfully! Weekly goals have been added to the system.');
+
+            // Reset to empty state
+            document.getElementById('planReview').classList.add('hidden');
+            document.getElementById('emptyState').classList.remove('hidden');
+
+            // Update KR card status
+            const selectedCard = document.querySelector('.kr-card.selected');
+            if (selectedCard) {
+                const statusSpan = selectedCard.querySelector('.text-gray-500, .text-orange-600');
+                statusSpan.textContent = '12 of 12 weeks planned';
+                statusSpan.classList.remove('text-gray-500');
+                statusSpan.classList.add('text-green-600');
+
+                const progressBar = selectedCard.querySelector('.progress-bar');
+                progressBar.style.width = '100%';
+            }
+        }
+
+        function regeneratePlan() {
+            document.getElementById('planReview').classList.add('hidden');
+            document.getElementById('planningForm').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

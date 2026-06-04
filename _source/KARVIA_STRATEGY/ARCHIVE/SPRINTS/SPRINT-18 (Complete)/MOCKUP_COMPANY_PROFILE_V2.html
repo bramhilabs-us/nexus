@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprint 18 - Company Profile V2 Mockup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; }
+
+        /* Karvia colors */
+        :root {
+            --navy: #1e3a5f;
+            --gold: #d4af37;
+            --navy-light: #2d4a6f;
+        }
+
+        /* Smooth transitions */
+        * { transition: all 0.2s ease; }
+
+        /* Maturity ring animation */
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .maturity-ring { animation: pulse-ring 3s infinite ease-in-out; }
+
+        /* Card hover effects */
+        .context-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        /* Chip/Tag styles */
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .chip:hover { transform: scale(1.02); }
+        .chip.selected {
+            background: var(--navy);
+            color: white;
+            border-color: var(--navy);
+        }
+        .chip.unselected {
+            background: white;
+            color: #64748b;
+            border-color: #e2e8f0;
+        }
+        .chip.unselected:hover {
+            border-color: var(--navy);
+            color: var(--navy);
+        }
+
+        /* Question card style */
+        .question-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            border: 1px solid #e2e8f0;
+        }
+        .question-card:hover {
+            border-color: #cbd5e1;
+        }
+
+        /* AI badge pulse */
+        .ai-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            animation: pulse-ring 2s infinite;
+        }
+
+        /* Progress bar */
+        .progress-segment {
+            height: 6px;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        /* Inline edit style */
+        .inline-input {
+            border: none;
+            background: transparent;
+            border-bottom: 2px solid transparent;
+            padding: 4px 0;
+            font-size: inherit;
+            width: 100%;
+        }
+        .inline-input:focus {
+            outline: none;
+            border-bottom-color: var(--navy);
+        }
+        .inline-input::placeholder {
+            color: #94a3b8;
+        }
+
+        /* Stage indicator */
+        .stage-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .stage-dot.active { background: var(--gold); }
+        .stage-dot.complete { background: #10b981; }
+        .stage-dot.pending { background: #e2e8f0; }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+        }
+        .tooltip::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 12px;
+            background: #1e293b;
+            color: white;
+            font-size: 12px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            margin-bottom: 8px;
+        }
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Design Notes Banner -->
+    <div class="bg-amber-50 border-b border-amber-200 px-6 py-3">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-bold">MOCKUP</span>
+                <span class="text-amber-800 text-sm">Sprint 18 - Company Profile V2 Design Vision</span>
+            </div>
+            <div class="text-amber-700 text-sm">
+                Key changes: Maturity indicator, chip-based inputs, guided flow, AI context visibility
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation (simplified) -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-8">
+                <span class="font-bold text-lg" style="color: var(--navy);">KARVIA</span>
+                <div class="flex space-x-6 text-sm text-gray-600">
+                    <a href="#" class="hover:text-gray-900">Dashboard</a>
+                    <a href="#" class="hover:text-gray-900">Objectives</a>
+                    <a href="#" class="hover:text-gray-900">Planning</a>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span class="text-sm text-gray-600">KARVIA Consulting</span>
+                <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 text-sm font-medium">KC</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-5xl mx-auto px-6 py-8">
+
+        <!-- NEW: Maturity-Focused Header -->
+        <div class="bg-white rounded-2xl border border-gray-200 p-6 mb-8">
+            <div class="flex items-start justify-between">
+                <!-- Left: Title + Maturity Stage -->
+                <div class="flex items-start space-x-6">
+                    <!-- Maturity Ring (NEW) -->
+                    <div class="maturity-ring relative">
+                        <svg class="w-24 h-24" viewBox="0 0 100 100">
+                            <!-- Background circle -->
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="#e2e8f0" stroke-width="6"/>
+                            <!-- Progress circle (Stage 1 = 32%) -->
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="url(#gradient)" stroke-width="6"
+                                    stroke-dasharray="283" stroke-dashoffset="192"
+                                    stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#667eea"/>
+                                    <stop offset="100%" style="stop-color:#d4af37"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-2xl font-bold text-gray-900">1</span>
+                            <span class="text-xs text-gray-500">Stage</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center space-x-3 mb-2">
+                            <h1 class="text-xl font-bold text-gray-900">Your AI Context</h1>
+                            <span class="ai-badge px-3 py-1 rounded-full text-white text-xs font-medium">
+                                Assessment Stage
+                            </span>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-4">The more context you provide, the smarter your OKRs become</p>
+
+                        <!-- Stage Progress Bar (NEW) -->
+                        <div class="flex items-center space-x-2">
+                            <div class="flex space-x-1">
+                                <div class="stage-dot complete" title="Discovery"></div>
+                                <div class="stage-dot active" title="Assessment"></div>
+                                <div class="stage-dot pending" title="Execution"></div>
+                                <div class="stage-dot pending" title="Learning"></div>
+                                <div class="stage-dot pending" title="Mastery"></div>
+                            </div>
+                            <span class="text-xs text-gray-500 ml-2">
+                                Discovery → <span class="font-medium text-purple-600">Assessment</span> → Execution → Learning → Mastery
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: What AI Knows (NEW) -->
+                <div class="bg-gradient-to-br from-slate-50 to-purple-50 rounded-xl p-4 w-72">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"/>
+                        </svg>
+                        <span class="text-sm font-medium text-gray-700">What AI knows about you</span>
+                    </div>
+                    <ul class="space-y-2 text-xs">
+                        <li class="flex items-center text-green-600">
+                            <svg class="w-3 h-3 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Industry: Consulting (IT focus)
+                        </li>
+                        <li class="flex items-center text-green-600">
+                            <svg class="w-3 h-3 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Business model defined
+                        </li>
+                        <li class="flex items-center text-amber-600">
+                            <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"/></svg>
+                            Missing: Strategic priority
+                        </li>
+                        <li class="flex items-center text-amber-600">
+                            <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"/></svg>
+                            Missing: Revenue metrics
+                        </li>
+                    </ul>
+                    <button class="mt-3 text-xs text-purple-600 font-medium hover:text-purple-700">
+                        Complete profile to reach Stage 2 →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: Category Progress Cards -->
+        <div class="grid grid-cols-3 gap-4 mb-8">
+            <div class="context-card bg-white rounded-xl border border-gray-200 p-4 cursor-pointer" onclick="scrollToSection('business')">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-medium text-gray-700">The Business</span>
+                    <span class="text-xs font-bold text-green-600">85%</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-2">
+                    <div class="progress-segment bg-green-500" style="width: 85%"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">Who you are and what you do</p>
+            </div>
+
+            <div class="context-card bg-white rounded-xl border border-gray-200 p-4 cursor-pointer" onclick="scrollToSection('numbers')">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-medium text-gray-700">The Numbers</span>
+                    <span class="text-xs font-bold text-amber-600">40%</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-2">
+                    <div class="progress-segment bg-amber-500" style="width: 40%"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">Metrics for gap analysis</p>
+            </div>
+
+            <div class="context-card bg-white rounded-xl border border-gray-200 p-4 cursor-pointer" onclick="scrollToSection('vision')">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-medium text-gray-700">The Vision</span>
+                    <span class="text-xs font-bold text-red-500">15%</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-2">
+                    <div class="progress-segment bg-red-400" style="width: 15%"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">Where you're headed</p>
+            </div>
+        </div>
+
+        <!-- SECTION 1: THE BUSINESS (Redesigned) -->
+        <div id="business" class="mb-8">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-semibold text-gray-900">The Business</h2>
+                <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">85% complete</span>
+            </div>
+
+            <!-- Question 1: Industry (Chip-based) -->
+            <div class="question-card">
+                <div class="flex items-center justify-between mb-3">
+                    <label class="text-sm font-medium text-gray-700">What industry are you in?</label>
+                    <span class="tooltip text-xs text-purple-600 cursor-help" data-tip="Helps AI select relevant benchmarks and OKR templates">
+                        Why this matters →
+                    </span>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="chip selected">Consulting</span>
+                    <span class="chip unselected">Financial Services</span>
+                    <span class="chip unselected">Healthcare</span>
+                    <span class="chip unselected">Professional Services</span>
+                    <span class="chip unselected">Trade/Contractor</span>
+                    <span class="chip unselected">Other</span>
+                </div>
+
+                <!-- Subtype (appears after selection) -->
+                <div class="mt-4 pl-4 border-l-2 border-purple-200">
+                    <label class="text-xs font-medium text-gray-600 block mb-2">What type of consulting?</label>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="chip selected">IT Consulting</span>
+                        <span class="chip unselected">Management</span>
+                        <span class="chip unselected">Strategy</span>
+                        <span class="chip unselected">HR/Talent</span>
+                        <span class="chip unselected">Operations</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2: Company Size (Slider-based) -->
+            <div class="question-card">
+                <div class="flex items-center justify-between mb-3">
+                    <label class="text-sm font-medium text-gray-700">How many employees?</label>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <input type="range" min="1" max="500" value="45" class="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-purple-600">
+                    <div class="text-center">
+                        <span class="text-2xl font-bold text-gray-900">45</span>
+                        <span class="text-xs text-gray-500 block">employees</span>
+                    </div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-400 mt-1">
+                    <span>1</span>
+                    <span>Small (1-50)</span>
+                    <span>Medium (51-200)</span>
+                    <span>500</span>
+                </div>
+            </div>
+
+            <!-- Question 3: Business Description (Guided) -->
+            <div class="question-card">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center space-x-2">
+                        <label class="text-sm font-medium text-gray-700">Describe your business in one paragraph</label>
+                        <span class="ai-badge px-2 py-0.5 rounded text-white text-xs">High AI Impact</span>
+                    </div>
+                </div>
+
+                <!-- Simplified text area with helper prompts -->
+                <div class="relative">
+                    <textarea class="w-full p-4 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                              rows="3"
+                              placeholder="We help [target clients] achieve [outcome] by [method/approach]...">We are an AI transformation consulting firm focused on helping small and medium-sized businesses adopt artificial intelligence safely, practically, and profitably.</textarea>
+                    <div class="absolute bottom-3 right-3 text-xs text-gray-400">124/500</div>
+                </div>
+
+                <!-- Quick suggestions -->
+                <div class="mt-3 flex items-center space-x-2">
+                    <span class="text-xs text-gray-500">Quick add:</span>
+                    <button class="text-xs bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded">+ Target market</button>
+                    <button class="text-xs bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded">+ Unique value</button>
+                    <button class="text-xs bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded">+ Founded year</button>
+                </div>
+            </div>
+
+            <!-- Question 4: Revenue Model (Single select chips) -->
+            <div class="question-card">
+                <div class="flex items-center justify-between mb-3">
+                    <label class="text-sm font-medium text-gray-700">How do you charge clients?</label>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="chip selected">Project-based</span>
+                    <span class="chip unselected">Retainer/Monthly</span>
+                    <span class="chip unselected">Hourly</span>
+                    <span class="chip unselected">Value-based</span>
+                    <span class="chip unselected">Subscription</span>
+                    <span class="chip unselected">Hybrid</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: THE NUMBERS (Redesigned - Quick Input Mode) -->
+        <div id="numbers" class="mb-8">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-semibold text-gray-900">The Numbers</h2>
+                <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full">40% complete</span>
+                <span class="ai-badge px-2 py-0.5 rounded text-white text-xs ml-2">15% AI Impact</span>
+            </div>
+
+            <!-- Quick Metrics Grid (NEW - More visual) -->
+            <div class="question-card">
+                <p class="text-sm text-gray-600 mb-4">Quick fill: Just the essentials for AI to understand your business</p>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Revenue -->
+                    <div class="bg-gray-50 rounded-xl p-4 border-2 border-dashed border-gray-200 hover:border-purple-300 cursor-pointer">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-medium text-gray-500 uppercase">Annual Revenue</span>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                            </svg>
+                        </div>
+                        <div class="flex items-baseline space-x-1">
+                            <span class="text-xs text-gray-500">$</span>
+                            <input type="text" value="2.5M" class="inline-input text-2xl font-bold text-gray-900 w-24" placeholder="0">
+                        </div>
+                    </div>
+
+                    <!-- Growth -->
+                    <div class="bg-gray-50 rounded-xl p-4 border-2 border-dashed border-gray-200 hover:border-purple-300 cursor-pointer">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-medium text-gray-500 uppercase">YoY Growth</span>
+                        </div>
+                        <div class="flex items-baseline space-x-1">
+                            <input type="text" value="15" class="inline-input text-2xl font-bold text-green-600 w-16" placeholder="0">
+                            <span class="text-lg text-gray-500">%</span>
+                        </div>
+                    </div>
+
+                    <!-- Clients -->
+                    <div class="bg-gray-50 rounded-xl p-4 border-2 border-dashed border-gray-200 hover:border-purple-300 cursor-pointer">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-medium text-gray-500 uppercase">Active Clients</span>
+                        </div>
+                        <input type="text" value="24" class="inline-input text-2xl font-bold text-gray-900 w-20" placeholder="0">
+                    </div>
+
+                    <!-- Retention -->
+                    <div class="bg-gray-50 rounded-xl p-4 border-2 border-dashed border-gray-200 hover:border-purple-300 cursor-pointer">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-medium text-gray-500 uppercase">Client Retention</span>
+                        </div>
+                        <div class="flex items-baseline space-x-1">
+                            <input type="text" value="92" class="inline-input text-2xl font-bold text-gray-900 w-16" placeholder="0">
+                            <span class="text-lg text-gray-500">%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="mt-4 text-sm text-purple-600 font-medium hover:text-purple-700">
+                    + Add more metrics (optional)
+                </button>
+            </div>
+
+            <!-- Concentration Risk Warning (NEW - AI-driven insight) -->
+            <div class="question-card border-l-4 border-amber-400 bg-amber-50">
+                <div class="flex items-start space-x-3">
+                    <svg class="w-5 h-5 text-amber-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                    <div>
+                        <p class="text-sm font-medium text-amber-800">AI Insight: Revenue Concentration</p>
+                        <p class="text-xs text-amber-700 mt-1">With 24 clients, your top 5 likely represent significant revenue. Adding "Top 5 Revenue %" helps AI recommend diversification goals.</p>
+                        <button class="mt-2 text-xs bg-amber-200 text-amber-800 px-3 py-1 rounded-full hover:bg-amber-300">
+                            + Add Top 5 Revenue %
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: THE VISION (Redesigned - Guided Questions) -->
+        <div id="vision" class="mb-8">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-semibold text-gray-900">The Vision</h2>
+                <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">15% complete</span>
+                <span class="ai-badge px-2 py-0.5 rounded text-white text-xs ml-2">10% AI Impact</span>
+            </div>
+
+            <!-- Priority #1 (Most important!) -->
+            <div class="question-card border-2 border-purple-200 bg-purple-50">
+                <div class="flex items-center space-x-2 mb-3">
+                    <span class="bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded">MOST IMPORTANT</span>
+                    <span class="text-sm font-medium text-gray-700">What's your #1 priority for the next 12 months?</span>
+                </div>
+                <p class="text-xs text-gray-500 mb-3">This directly shapes every AI-generated objective</p>
+
+                <!-- Smart suggestions based on industry -->
+                <div class="flex flex-wrap gap-2 mb-3">
+                    <button class="chip unselected">Scale client base</button>
+                    <button class="chip unselected">Increase revenue per client</button>
+                    <button class="chip unselected">Build team capacity</button>
+                    <button class="chip unselected">Systematize operations</button>
+                    <button class="chip unselected">Enter new market</button>
+                </div>
+
+                <div class="relative">
+                    <input type="text"
+                           class="w-full p-3 border border-purple-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white"
+                           placeholder="Or type your own priority..."
+                           value="">
+                </div>
+            </div>
+
+            <!-- Biggest Blocker -->
+            <div class="question-card">
+                <label class="text-sm font-medium text-gray-700 block mb-3">What's the biggest obstacle to achieving that priority?</label>
+                <div class="flex flex-wrap gap-2 mb-3">
+                    <button class="chip unselected">Finding qualified talent</button>
+                    <button class="chip unselected">Cash flow constraints</button>
+                    <button class="chip unselected">Time/bandwidth</button>
+                    <button class="chip unselected">Market awareness</button>
+                    <button class="chip unselected">Operational inefficiency</button>
+                </div>
+                <input type="text"
+                       class="w-full p-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                       placeholder="Or describe your blocker...">
+            </div>
+
+            <!-- One Thing -->
+            <div class="question-card">
+                <label class="text-sm font-medium text-gray-700 block mb-2">If you could change ONE thing about your business, what would it be?</label>
+                <p class="text-xs text-gray-500 mb-3">This reveals your deepest strategic need</p>
+                <textarea class="w-full p-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                          rows="2"
+                          placeholder="e.g., 'More predictable revenue' or 'Less dependency on founder'"></textarea>
+            </div>
+        </div>
+
+        <!-- Floating Save Bar -->
+        <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-lg">
+            <div class="max-w-5xl mx-auto flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="text-sm text-gray-600">All changes saved automatically</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-500">Profile: <span class="font-medium text-purple-600">47% → Stage 2 at 65%</span></span>
+                    <button class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-medium text-sm">
+                        Generate OKRs →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spacer for floating bar -->
+        <div class="h-20"></div>
+    </div>
+
+    <!-- Design Notes -->
+    <div class="max-w-5xl mx-auto px-6 py-8 mb-20">
+        <div class="bg-slate-800 text-white rounded-2xl p-6">
+            <h3 class="font-bold text-lg mb-4">Sprint 18 Design Changes Summary</h3>
+            <div class="grid grid-cols-2 gap-6 text-sm">
+                <div>
+                    <h4 class="font-medium text-purple-300 mb-2">Epic CP1: Maturity Visibility</h4>
+                    <ul class="space-y-1 text-gray-300">
+                        <li>• Maturity ring replaces simple % completion</li>
+                        <li>• Stage progression dots (Discovery → Mastery)</li>
+                        <li>• "What AI knows about you" summary panel</li>
+                        <li>• Category progress cards (clickable navigation)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium text-purple-300 mb-2">Epic CP2: Guided Completion</h4>
+                    <ul class="space-y-1 text-gray-300">
+                        <li>• Chip-based selections (less typing)</li>
+                        <li>• "High AI Impact" badges on key fields</li>
+                        <li>• Tooltips explaining "Why this matters"</li>
+                        <li>• Smart suggestions based on industry</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium text-purple-300 mb-2">Epic CP3: Metrics Enhancement</h4>
+                    <ul class="space-y-1 text-gray-300">
+                        <li>• Quick input cards (inline editing)</li>
+                        <li>• Visual metrics grid (not form fields)</li>
+                        <li>• AI-driven insights/warnings</li>
+                        <li>• Progressive disclosure for advanced metrics</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium text-purple-300 mb-2">Epic CP4: Vision Focus</h4>
+                    <ul class="space-y-1 text-gray-300">
+                        <li>• Priority #1 highlighted as MOST IMPORTANT</li>
+                        <li>• Pre-built suggestions by industry</li>
+                        <li>• Simple question flow (not forms)</li>
+                        <li>• Direct connection to OKR generation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-6 border-t border-slate-600">
+                <h4 class="font-medium text-green-300 mb-2">UX Improvements</h4>
+                <div class="grid grid-cols-3 gap-4 text-gray-300 text-sm">
+                    <div>
+                        <span class="text-white font-medium">Before:</span> 14 text fields
+                        <br><span class="text-white font-medium">After:</span> 6 text fields + chips
+                    </div>
+                    <div>
+                        <span class="text-white font-medium">Before:</span> No guidance
+                        <br><span class="text-white font-medium">After:</span> Contextual help everywhere
+                    </div>
+                    <div>
+                        <span class="text-white font-medium">Before:</span> Hidden value
+                        <br><span class="text-white font-medium">After:</span> Clear AI impact visibility
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chip selection toggle
+        document.querySelectorAll('.chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                // For single-select groups
+                const siblings = this.parentElement.querySelectorAll('.chip');
+                siblings.forEach(s => {
+                    s.classList.remove('selected');
+                    s.classList.add('unselected');
+                });
+                this.classList.remove('unselected');
+                this.classList.add('selected');
+            });
+        });
+
+        // Smooth scroll to section
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Range slider value display
+        document.querySelector('input[type="range"]').addEventListener('input', function() {
+            this.nextElementSibling.querySelector('span').textContent = this.value;
+        });
+    </script>
+</body>
+</html>

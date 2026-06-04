@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprint 13 - Planning Mockup | Chief AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FAFAFA;
+            color: #1F2937;
+            line-height: 1.5;
+        }
+
+        /* ========================================
+           NAVIGATION BAR
+           ======================================== */
+        .nav {
+            background: white;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            border-bottom: 1px solid #F0F0F0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo svg {
+            height: 80px;
+            width: auto;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .nav-item {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            text-decoration: none;
+            color: #6B7280;
+            font-size: 13px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item:hover { color: #1F2937; }
+        .nav-item.active { color: #1F2937; }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 16px;
+            right: 16px;
+            height: 2px;
+            background: transparent;
+            transition: background 0.2s ease;
+        }
+
+        .nav-item[data-philosophy="play"].active::after,
+        .nav-item[data-philosophy="play"]:hover::after { background: #8B5CF6; }
+        .nav-item[data-philosophy="assess"].active::after,
+        .nav-item[data-philosophy="assess"]:hover::after { background: #3B82F6; }
+        .nav-item[data-philosophy="align"].active::after,
+        .nav-item[data-philosophy="align"]:hover::after { background: #22c55e; }
+        .nav-item[data-philosophy="plan"].active::after,
+        .nav-item[data-philosophy="plan"]:hover::after { background: #F59E0B; }
+
+        .nav-divider {
+            width: 1px;
+            height: 24px;
+            background: #E5E7EB;
+        }
+
+        .nav-item .tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+            background: #1F2937;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 400;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease 0.5s, visibility 0.15s ease 0.5s;
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        .nav-item .tooltip::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 6px 6px 6px;
+            border-style: solid;
+            border-color: transparent transparent #1F2937 transparent;
+        }
+
+        .nav-item:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .nav-user:hover {
+            background: #F5F5F5;
+        }
+
+        .nav-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .nav-user-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        /* Main Layout */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 32px;
+        }
+
+        /* Content Layout - Two Panel */
+        .content-layout {
+            display: flex;
+            gap: 24px;
+        }
+
+        /* Left Panel - KR List */
+        .left-panel {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .left-panel-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #9CA3AF;
+            margin-bottom: 12px;
+        }
+
+        /* Right Panel - Weekly Goals */
+        .right-panel {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* Page Header */
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .page-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        /* Objectives Row at Top - Minimalist */
+        .objectives-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .obj-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 180px;
+            flex: 1;
+            max-width: 220px;
+        }
+
+        .obj-card:hover {
+            border-color: #F59E0B;
+            background: #FFFBEB;
+        }
+
+        .obj-card.selected {
+            border-color: #F59E0B;
+            border-width: 2px;
+            background: #FFFBEB;
+        }
+
+        .obj-card-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .obj-card-top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .obj-card-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #9CA3AF;
+        }
+
+        .obj-card-category {
+            font-size: 9px;
+            font-weight: 600;
+            padding: 1px 5px;
+            border-radius: 3px;
+            background: #EEF2FF;
+            color: #4F46E5;
+        }
+
+        .obj-card-category.growth { background: #DCFCE7; color: #166534; }
+        .obj-card-category.ops { background: #FEF3C7; color: #92400E; }
+        .obj-card-category.people { background: #FCE7F3; color: #9D174D; }
+
+        .obj-card-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .obj-card-owner {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 2px;
+        }
+
+        .obj-card-owner-avatar {
+            width: 14px;
+            height: 14px;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 7px;
+            font-weight: 600;
+        }
+
+        .obj-card-owner-name {
+            font-size: 10px;
+            color: #6B7280;
+        }
+
+        .obj-card-progress {
+            width: 36px;
+            height: 36px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .obj-card-progress svg { transform: rotate(-90deg); }
+        .obj-card-progress .bg { fill: none; stroke: #F3F4F6; stroke-width: 3; }
+        .obj-card-progress .progress { fill: none; stroke: #F59E0B; stroke-width: 3; stroke-linecap: round; }
+        .obj-card-progress .pct {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 9px;
+            font-weight: 700;
+            color: #F59E0B;
+        }
+
+        /* KR Selector - Left Panel Vertical - Full Width Cards */
+        .kr-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .kr-card {
+            display: flex;
+            flex-direction: column;
+            padding: 12px 14px;
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .kr-card:hover {
+            border-color: #F59E0B;
+            background: #FFFBEB;
+        }
+
+        .kr-card.selected {
+            border-color: #F59E0B;
+            border-width: 2px;
+            background: #FFFBEB;
+        }
+
+        .kr-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .kr-card-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #9CA3AF;
+        }
+
+        .kr-card-pct {
+            font-size: 11px;
+            font-weight: 700;
+            color: #F59E0B;
+        }
+
+        .kr-card-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+
+        .kr-card-progress {
+            height: 4px;
+            background: #F3F4F6;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+
+        .kr-card-progress-fill {
+            height: 100%;
+            background: #F59E0B;
+            border-radius: 2px;
+        }
+
+        .kr-card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #9CA3AF;
+        }
+
+        .kr-card-status {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: #F3F4F6;
+            color: #6B7280;
+        }
+
+        .kr-card-status.planned {
+            background: #DCFCE7;
+            color: #166534;
+        }
+
+        .kr-card-status.in-progress {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        /* Quarter Selector */
+        .quarter-selector {
+            display: flex;
+            gap: 4px;
+            background: #F3F4F6;
+            padding: 4px;
+            border-radius: 10px;
+        }
+
+        .quarter-btn {
+            padding: 8px 16px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quarter-btn:hover {
+            color: #374151;
+            background: rgba(255,255,255,0.5);
+        }
+
+        .quarter-btn.active {
+            background: white;
+            color: #F59E0B;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* KR Header */
+        .kr-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .kr-header-info h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 4px;
+        }
+
+        .kr-header-info p {
+            font-size: 12px;
+            color: #6B7280;
+        }
+
+        .btn-generate-plan {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-generate-plan:hover {
+            opacity: 0.9;
+            box-shadow: 0 4px 12px rgba(30, 58, 95, 0.3);
+        }
+
+        .btn-generate-plan svg { width: 16px; height: 16px; }
+
+        /* Week Cards - Stacked */
+        .weeks-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .week-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .week-card.current {
+            border-color: #F59E0B;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.15);
+        }
+
+        .week-card.completed {
+            border-color: #BBF7D0;
+            background: #F0FDF4;
+        }
+
+        /* Week Header - Collapsible */
+        .week-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background: #F9FAFB;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .week-card.current .week-header { background: #FFFBEB; }
+        .week-card.completed .week-header { background: #ECFDF5; }
+
+        .week-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .week-chevron {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .week-chevron svg { width: 16px; height: 16px; color: #6B7280; }
+
+        .week-card.collapsed .week-chevron { transform: rotate(-90deg); }
+
+        .week-number {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .week-date {
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        .week-goal-inline {
+            font-size: 13px;
+            font-weight: 500;
+            color: #6B7280;
+            margin-left: 8px;
+            padding-left: 12px;
+            border-left: 1px solid #E5E7EB;
+        }
+
+        .week-card.current .week-goal-inline { color: #92400E; }
+        .week-card.completed .week-goal-inline { color: #047857; }
+
+        .week-header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .week-progress-mini {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .week-progress-bar {
+            width: 80px;
+            height: 4px;
+            background: #E5E7EB;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .week-progress-fill {
+            height: 100%;
+            border-radius: 2px;
+        }
+
+        .week-progress-fill.high { background: #22c55e; }
+        .week-progress-fill.medium { background: #F59E0B; }
+        .week-progress-fill.low { background: #8B5CF6; }
+
+        .week-progress-text {
+            font-size: 11px;
+            font-weight: 600;
+            color: #6B7280;
+        }
+
+        .btn-generate-week {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-generate-week:hover {
+            opacity: 0.9;
+            box-shadow: 0 2px 8px rgba(30, 58, 95, 0.3);
+        }
+
+        .btn-generate-week svg { width: 12px; height: 12px; }
+
+        /* Week Body - Collapsible content */
+        .week-body {
+            padding: 16px;
+            border-top: 1px solid #F3F4F6;
+        }
+
+        .week-card.collapsed .week-body { display: none; }
+
+        .week-goal-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #1F2937;
+            margin-bottom: 12px;
+        }
+
+        /* Tasks */
+        .tasks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: #FAFAFA;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .task-item:hover {
+            background: white;
+            border-color: #D1D5DB;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .task-item:hover .task-actions {
+            opacity: 1;
+        }
+
+        .task-icon {
+            width: 18px;
+            height: 18px;
+            color: #9CA3AF;
+            flex-shrink: 0;
+        }
+
+        .task-title {
+            flex: 1;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .task-actions {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .task-action-btn {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #6B7280;
+            transition: all 0.15s;
+        }
+
+        .task-action-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .task-action-btn.postpone:hover {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+
+        .task-action-btn.assign:hover {
+            background: #DBEAFE;
+            color: #2563EB;
+        }
+
+        .task-action-btn.regenerate:hover {
+            background: #E0E7FF;
+            color: #4F46E5;
+        }
+
+        .task-action-btn.edit:hover {
+            background: #F3F4F6;
+            color: #374151;
+        }
+
+        /* Week Footer */
+        .week-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid #F3F4F6;
+        }
+
+        .week-tasks-count {
+            font-size: 11px;
+            color: #6B7280;
+        }
+
+        .week-owner {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px 4px 4px;
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .week-owner:hover {
+            border-color: #F59E0B;
+            background: #FFFBEB;
+        }
+
+        .week-owner-avatar {
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        .week-owner-name {
+            font-size: 11px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .btn-add-task {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            width: 100%;
+            padding: 8px;
+            background: white;
+            border: 1px dashed #D1D5DB;
+            border-radius: 6px;
+            font-size: 11px;
+            color: #6B7280;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+
+        .btn-add-task:hover {
+            border-color: #F59E0B;
+            color: #F59E0B;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #9CA3AF;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .empty-state-text {
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        /* Design Notes */
+        .design-notes {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1F2937;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-size: 12px;
+            max-width: 260px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .design-notes-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .design-notes-list {
+            list-style: none;
+            color: #D1D5DB;
+            line-height: 1.8;
+        }
+
+        .design-notes-list li::before {
+            content: '✓ ';
+            color: #22c55e;
+        }
+
+        .design-notes-close {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: #6B7280;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 75">
+                <defs>
+                    <linearGradient id="chiefGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1e3a5f"/>
+                        <stop offset="100%" style="stop-color:#2d5a87"/>
+                    </linearGradient>
+                </defs>
+                <path d="M25 10L27 20L35 15L29 23L42 25L29 27L35 35L27 30L25 40L23 30L15 35L21 27L8 25L21 23L15 15L23 20L25 10Z" fill="url(#chiefGrad)"/>
+                <circle cx="25" cy="25" r="3" fill="#d4a853"/>
+                <text x="50" y="31" font-family="Inter" font-size="22" font-weight="700" fill="#1e3a5f">Chief</text>
+                <text x="108" y="31" font-family="Inter" font-size="22" font-weight="500" fill="#d4a853">AI</text>
+                <text x="50" y="48" font-family="Inter" font-size="9" font-weight="400" fill="#6B7280">Your AI Chief of Staff</text>
+            </svg>
+        </div>
+        <div class="nav-center">
+            <a href="dashboard-redesign.html" class="nav-item" data-philosophy="play">
+                Dashboard
+                <span class="tooltip">Play - Your daily focus</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="assessment-hub.html" class="nav-item" data-philosophy="assess">
+                Assessments
+                <span class="tooltip">Assess - Understand your org</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="teams-redesign.html" class="nav-item" data-philosophy="align">
+                Teams
+                <span class="tooltip">Align - Get everyone aligned</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="objectives-redesign.html" class="nav-item" data-philosophy="plan">
+                Objectives
+                <span class="tooltip">Plan - Strategic direction</span>
+            </a>
+            <a href="planning-redesign.html" class="nav-item active" data-philosophy="plan">
+                Planning
+                <span class="tooltip">Plan - Weekly execution</span>
+            </a>
+        </div>
+        <div class="nav-user">
+            <div class="nav-avatar">JD</div>
+            <span class="nav-user-name">John Doe</span>
+            <svg width="14" height="14" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6"/>
+            </svg>
+        </div>
+    </nav>
+
+    <!-- Main Layout - Single Panel -->
+    <div class="main">
+        <!-- Page Header with Quarter Selector -->
+        <div class="page-header">
+            <h1 class="page-title">Planning</h1>
+            <div class="quarter-selector">
+                <button class="quarter-btn" onclick="selectQuarter('Q4 2025')">Q4 2025</button>
+                <button class="quarter-btn active">Q1 2026</button>
+                <button class="quarter-btn" onclick="selectQuarter('Q2 2026')">Q2 2026</button>
+            </div>
+        </div>
+
+        <!-- Objectives Row at Top - Minimalist -->
+        <div class="objectives-row">
+            <div class="obj-card selected" onclick="selectObjective(1)">
+                <div class="obj-card-left">
+                    <div class="obj-card-top">
+                        <span class="obj-card-label">Obj 1</span>
+                        <span class="obj-card-category growth">Growth</span>
+                    </div>
+                    <span class="obj-card-title">Revenue Growth</span>
+                    <div class="obj-card-owner">
+                        <span class="obj-card-owner-avatar">JD</span>
+                        <span class="obj-card-owner-name">John Doe</span>
+                    </div>
+                </div>
+                <div class="obj-card-progress">
+                    <svg width="36" height="36" viewBox="0 0 36 36">
+                        <circle class="bg" cx="18" cy="18" r="14"/>
+                        <circle class="progress" cx="18" cy="18" r="14" stroke-dasharray="88" stroke-dashoffset="57.2"/>
+                    </svg>
+                    <span class="pct">35%</span>
+                </div>
+            </div>
+            <div class="obj-card" onclick="selectObjective(2)">
+                <div class="obj-card-left">
+                    <div class="obj-card-top">
+                        <span class="obj-card-label">Obj 2</span>
+                        <span class="obj-card-category ops">Ops</span>
+                    </div>
+                    <span class="obj-card-title">Customer NPS</span>
+                    <div class="obj-card-owner">
+                        <span class="obj-card-owner-avatar">SM</span>
+                        <span class="obj-card-owner-name">Sarah Miller</span>
+                    </div>
+                </div>
+                <div class="obj-card-progress">
+                    <svg width="36" height="36" viewBox="0 0 36 36">
+                        <circle class="bg" cx="18" cy="18" r="14"/>
+                        <circle class="progress" cx="18" cy="18" r="14" stroke-dasharray="88" stroke-dashoffset="35.2"/>
+                    </svg>
+                    <span class="pct">60%</span>
+                </div>
+            </div>
+            <div class="obj-card" onclick="selectObjective(3)">
+                <div class="obj-card-left">
+                    <div class="obj-card-top">
+                        <span class="obj-card-label">Obj 3</span>
+                        <span class="obj-card-category people">People</span>
+                    </div>
+                    <span class="obj-card-title">Team Growth</span>
+                    <div class="obj-card-owner">
+                        <span class="obj-card-owner-avatar">MC</span>
+                        <span class="obj-card-owner-name">Mike Chen</span>
+                    </div>
+                </div>
+                <div class="obj-card-progress">
+                    <svg width="36" height="36" viewBox="0 0 36 36">
+                        <circle class="bg" cx="18" cy="18" r="14"/>
+                        <circle class="progress" cx="18" cy="18" r="14" stroke-dasharray="88" stroke-dashoffset="48.4"/>
+                    </svg>
+                    <span class="pct">45%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Two Panel Layout -->
+        <div class="content-layout">
+            <!-- Left Panel - KR List -->
+            <div class="left-panel">
+                <div class="left-panel-title">Key Results</div>
+                <div class="kr-selector">
+                    <!-- KR 1 - In Progress -->
+                    <div class="kr-card selected" onclick="selectKR(1)">
+                        <div class="kr-card-header">
+                            <span class="kr-card-label">KR 1</span>
+                            <span class="kr-card-pct">45%</span>
+                        </div>
+                        <div class="kr-card-title">Close $500K in new deals</div>
+                        <div class="kr-card-progress">
+                            <div class="kr-card-progress-fill" style="width: 45%;"></div>
+                        </div>
+                        <div class="kr-card-meta">
+                            <span>$225K / $500K</span>
+                            <span class="kr-card-status in-progress">In Progress</span>
+                        </div>
+                    </div>
+                    <!-- KR 2 - Planned -->
+                    <div class="kr-card" onclick="selectKR(2)">
+                        <div class="kr-card-header">
+                            <span class="kr-card-label">KR 2</span>
+                            <span class="kr-card-pct">30%</span>
+                        </div>
+                        <div class="kr-card-title">Reduce churn to &lt;5%</div>
+                        <div class="kr-card-progress">
+                            <div class="kr-card-progress-fill" style="width: 30%;"></div>
+                        </div>
+                        <div class="kr-card-meta">
+                            <span>Currently 7%</span>
+                            <span class="kr-card-status planned">Planned</span>
+                        </div>
+                    </div>
+                    <!-- KR 3 - No Plan -->
+                    <div class="kr-card" onclick="selectKR(3)">
+                        <div class="kr-card-header">
+                            <span class="kr-card-label">KR 3</span>
+                            <span class="kr-card-pct">0%</span>
+                        </div>
+                        <div class="kr-card-title">Launch 2 new products</div>
+                        <div class="kr-card-progress">
+                            <div class="kr-card-progress-fill" style="width: 0%;"></div>
+                        </div>
+                        <div class="kr-card-meta">
+                            <span>0 / 2 launched</span>
+                            <span class="kr-card-status">No Plan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Weekly Goals -->
+            <div class="right-panel">
+                <!-- KR Header with Generate Button -->
+                <div class="kr-header">
+                    <div class="kr-header-info">
+                        <h2>KR: Close $500K in new deals</h2>
+                        <p>Weekly Goals · 12 weeks · 45% complete · $225K achieved</p>
+                    </div>
+                    <button class="btn-generate-plan" onclick="generateFullPlan()">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        Generate Weekly Goals
+                    </button>
+                </div>
+
+            <!-- Weeks Stack -->
+            <div class="weeks-stack">
+                <!-- Week 1 - Completed, Collapsed -->
+                <div class="week-card completed collapsed">
+                    <div class="week-header" onclick="toggleWeek(this)">
+                        <div class="week-header-left">
+                            <div class="week-chevron">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                            <span class="week-number">Week 1</span>
+                            <span class="week-date">Jan 6-12</span>
+                            <span class="week-goal-inline">Outreach to 50 leads</span>
+                        </div>
+                        <div class="week-header-right">
+                            <div class="week-progress-mini">
+                                <div class="week-progress-bar">
+                                    <div class="week-progress-fill high" style="width: 100%;"></div>
+                                </div>
+                                <span class="week-progress-text">100%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="week-body">
+                        <div class="tasks-list">
+                            <div class="task-item">
+                                <svg class="task-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
+                                <span class="task-title">Research top 50 prospects</span>
+                                <div class="task-actions">
+                                    <button class="task-action-btn postpone" title="Postpone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></button>
+                                    <button class="task-action-btn assign" title="Assign"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></button>
+                                    <button class="task-action-btn regenerate" title="Regenerate"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></button>
+                                    <button class="task-action-btn edit" title="Edit"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <svg class="task-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
+                                <span class="task-title">Send personalized emails</span>
+                                <div class="task-actions">
+                                    <button class="task-action-btn postpone" title="Postpone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></button>
+                                    <button class="task-action-btn assign" title="Assign"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></button>
+                                    <button class="task-action-btn regenerate" title="Regenerate"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></button>
+                                    <button class="task-action-btn edit" title="Edit"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <svg class="task-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
+                                <span class="task-title">Schedule follow-up calls</span>
+                                <div class="task-actions">
+                                    <button class="task-action-btn postpone" title="Postpone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></button>
+                                    <button class="task-action-btn assign" title="Assign"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></button>
+                                    <button class="task-action-btn regenerate" title="Regenerate"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></button>
+                                    <button class="task-action-btn edit" title="Edit"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="week-footer">
+                            <span class="week-tasks-count">3 tasks</span>
+                            <div class="week-owner" onclick="assignOwner(event)">
+                                <span class="week-owner-avatar">JD</span>
+                                <span class="week-owner-name">John</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Week 2 - Current, Expanded -->
+                <div class="week-card current">
+                    <div class="week-header" onclick="toggleWeek(this)">
+                        <div class="week-header-left">
+                            <div class="week-chevron">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                            <span class="week-number">Week 2</span>
+                            <span class="week-date">Jan 13-19 · This Week</span>
+                            <span class="week-goal-inline">Close 5 deals worth $50K</span>
+                        </div>
+                        <div class="week-header-right">
+                            <div class="week-progress-mini">
+                                <div class="week-progress-bar">
+                                    <div class="week-progress-fill medium" style="width: 40%;"></div>
+                                </div>
+                                <span class="week-progress-text">40%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="week-body">
+                        <div class="tasks-list">
+                            <div class="task-item">
+                                <svg class="task-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
+                                <span class="task-title">Finalize proposal for Acme Corp</span>
+                                <div class="task-actions">
+                                    <button class="task-action-btn postpone" title="Postpone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></button>
+                                    <button class="task-action-btn assign" title="Assign"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></button>
+                                    <button class="task-action-btn regenerate" title="Regenerate"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></button>
+                                    <button class="task-action-btn edit" title="Edit"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <svg class="task-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
+                                <span class="task-title">Send contract to TechStart</span>
+                                <div class="task-actions">
+                                    <button class="task-action-btn postpone" title="Postpone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></button>
+                                    <button class="task-action-btn assign" title="Assign"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></button>
+                                    <button class="task-action-btn regenerate" title="Regenerate"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></button>
+                                    <button class="task-action-btn edit" title="Edit"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <svg class="task-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
+                                <span class="task-title">Follow up with 3 warm leads</span>
+                                <div class="task-actions">
+                                    <button class="task-action-btn postpone" title="Postpone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></button>
+                                    <button class="task-action-btn assign" title="Assign"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></button>
+                                    <button class="task-action-btn regenerate" title="Regenerate"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></button>
+                                    <button class="task-action-btn edit" title="Edit"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <svg class="task-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
+                                <span class="task-title">Close deal with DataFlow Inc</span>
+                                <div class="task-actions">
+                                    <button class="task-action-btn postpone" title="Postpone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></button>
+                                    <button class="task-action-btn assign" title="Assign"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></button>
+                                    <button class="task-action-btn regenerate" title="Regenerate"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></button>
+                                    <button class="task-action-btn edit" title="Edit"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <svg class="task-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></svg>
+                                <span class="task-title">Review pricing with finance</span>
+                                <div class="task-actions">
+                                    <button class="task-action-btn postpone" title="Postpone"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></button>
+                                    <button class="task-action-btn assign" title="Assign"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></button>
+                                    <button class="task-action-btn regenerate" title="Regenerate"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></button>
+                                    <button class="task-action-btn edit" title="Edit"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-add-task">+ Add Task</button>
+                        <div class="week-footer">
+                            <span class="week-tasks-count">5 tasks</span>
+                            <div class="week-owner" onclick="assignOwner(event)">
+                                <span class="week-owner-avatar">JD</span>
+                                <span class="week-owner-name">John</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Week 3 - No tasks, needs generation -->
+                <div class="week-card">
+                    <div class="week-header" onclick="toggleWeek(this)">
+                        <div class="week-header-left">
+                            <div class="week-chevron">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                            <span class="week-number">Week 3</span>
+                            <span class="week-date">Jan 20-26</span>
+                            <span class="week-goal-inline">Follow up on 30 warm leads</span>
+                        </div>
+                        <div class="week-header-right">
+                            <div class="week-progress-mini">
+                                <div class="week-progress-bar">
+                                    <div class="week-progress-fill low" style="width: 0%;"></div>
+                                </div>
+                                <span class="week-progress-text">0%</span>
+                            </div>
+                            <button class="btn-generate-week" onclick="generateWeekTasks(3, event)">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                                Generate Tasks
+                            </button>
+                        </div>
+                    </div>
+                    <div class="week-body">
+                        <div style="text-align: center; padding: 20px; color: #9CA3AF; font-size: 12px;">
+                            No tasks yet. Click "Generate Tasks" to create tasks for this goal.
+                        </div>
+                        <div class="week-footer">
+                            <span class="week-tasks-count">0 tasks</span>
+                            <div class="week-owner" onclick="assignOwner(event)">
+                                <span class="week-owner-avatar">SM</span>
+                                <span class="week-owner-name">Sarah</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Week 4 - Collapsed -->
+                <div class="week-card collapsed">
+                    <div class="week-header" onclick="toggleWeek(this)">
+                        <div class="week-header-left">
+                            <div class="week-chevron">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                            <span class="week-number">Week 4</span>
+                            <span class="week-date">Jan 27-Feb 2</span>
+                            <span class="week-goal-inline">Close 8 deals worth $80K</span>
+                        </div>
+                        <div class="week-header-right">
+                            <div class="week-progress-mini">
+                                <div class="week-progress-bar">
+                                    <div class="week-progress-fill low" style="width: 0%;"></div>
+                                </div>
+                                <span class="week-progress-text">0%</span>
+                            </div>
+                            <button class="btn-generate-week" onclick="generateWeekTasks(4, event)">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                                Generate Tasks
+                            </button>
+                        </div>
+                    </div>
+                    <div class="week-body">
+                        <div style="text-align: center; padding: 20px; color: #9CA3AF; font-size: 12px;">
+                            No tasks yet. Click "Generate Tasks" to create tasks for this goal.
+                        </div>
+                        <div class="week-footer">
+                            <span class="week-tasks-count">0 tasks</span>
+                            <div class="week-owner" onclick="assignOwner(event)">
+                                <span class="week-owner-avatar">JD</span>
+                                <span class="week-owner-name">John</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Week 5-12 collapsed - No goal yet -->
+                <div class="week-card collapsed">
+                    <div class="week-header" onclick="toggleWeek(this)">
+                        <div class="week-header-left">
+                            <div class="week-chevron">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </div>
+                            <span class="week-number">Week 5</span>
+                            <span class="week-date">Feb 3-9</span>
+                            <span class="week-goal-inline" style="color: #9CA3AF; font-style: italic;">No goal set</span>
+                        </div>
+                        <div class="week-header-right">
+                            <span style="font-size: 11px; color: #9CA3AF;">Not planned</span>
+                        </div>
+                    </div>
+                    <div class="week-body">
+                        <div style="text-align: center; padding: 20px; color: #9CA3AF; font-size: 12px;">
+                            Use "Generate Weekly Goals" to create goals for all weeks.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div><!-- /right-panel -->
+        </div><!-- /content-layout -->
+    </div>
+
+    <!-- Design Notes -->
+    <div class="design-notes" id="designNotes">
+        <button class="design-notes-close" onclick="document.getElementById('designNotes').style.display='none'">×</button>
+        <div class="design-notes-title">Planning v11 (KARVIA)</div>
+        <ul class="design-notes-list">
+            <li>KARVIA color palette</li>
+            <li>Green: #22c55e (success)</li>
+            <li>Two-panel KR layout</li>
+            <li>Unified 32px padding</li>
+            <li>Max-width: 1200px</li>
+        </ul>
+    </div>
+
+    <script>
+        function selectObjective(num) {
+            document.querySelectorAll('.obj-card').forEach(c => c.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+        }
+
+        function selectKR(num) {
+            document.querySelectorAll('.kr-card').forEach(c => c.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+        }
+
+        function selectQuarter(quarter) {
+            document.querySelectorAll('.quarter-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            alert(`Loading plan for ${quarter}...\n\nThis will show all objectives, KRs, and weekly goals for ${quarter}.`);
+        }
+
+        function toggleWeek(header) {
+            const card = header.closest('.week-card');
+            card.classList.toggle('collapsed');
+        }
+
+        function generateFullPlan() {
+            alert('Generate Weekly Goals\n\nThis will create 12 weekly goals (steps) needed to achieve the KR:\n"Close $500K in new deals"\n\n• Week 1: Outreach to 50 leads\n• Week 2: Close 5 deals worth $50K\n• Week 3: Follow up on 30 warm leads\n• ... and 9 more weeks');
+        }
+
+        function generateWeekTasks(weekNum, e) {
+            e.stopPropagation();
+            alert(`Generate Tasks for Week ${weekNum}\n\nThis will create 3-5 actionable tasks to achieve this week's goal.\n\nExample tasks:\n• Research target prospects\n• Schedule discovery calls\n• Send follow-up emails`);
+        }
+
+        function assignOwner(e) {
+            e.stopPropagation();
+            alert('Select owner:\n\n- John Doe (JD)\n- Sarah Miller (SM)\n- Mike Chen (MC)');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KARVIA Pro - 2026 Product Roadmap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { font-family: 'Inter', sans-serif; }
+
+        body {
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #8b5cf6;
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        .nav-dot:not(.active) {
+            background: #d1d5db;
+        }
+
+        .aspect-16-9 {
+            aspect-ratio: 16/9;
+            max-height: 100vh;
+        }
+
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: #f1f5f9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .card.expanded {
+            background: #f1f5f9;
+        }
+
+        .must-have { border-left: 3px solid #8b5cf6; }
+        .nice-to-have { border-left: 3px solid #06b6d4; }
+        .customer { border-left: 3px solid #10b981; }
+        .marketing { border-left: 3px solid #f59e0b; }
+
+        .milestone {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            color: white;
+        }
+
+        .month-marker {
+            border-left: 1px dashed #e2e8f0;
+        }
+
+        .toggle-btn {
+            background: #f8fafc;
+        }
+
+        .toggle-btn.active {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: #8b5cf6;
+        }
+
+        .phase-mvp { background: linear-gradient(90deg, rgba(139,92,246,0.1) 0%, transparent 100%); }
+        .phase-beta { background: linear-gradient(90deg, rgba(6,182,212,0.1) 0%, transparent 100%); }
+        .phase-growth { background: linear-gradient(90deg, rgba(16,185,129,0.1) 0%, transparent 100%); }
+
+        .hidden-card { display: none; }
+
+        /* Flip card styles */
+        .flip-card {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 0.75rem;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.5); border-radius: 3px; }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-[1600px] mx-auto">
+
+        <!-- Header -->
+        <header class="flex items-center justify-between mb-6 px-4">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center font-bold text-xl text-white shadow-lg">K</div>
+                <div>
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">KARVIA Pro</h1>
+                    <p class="text-xs text-gray-500">Your AI Strategy Partner</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-[10px] font-medium text-purple-600 bg-purple-100 px-2 py-0.5 rounded">Desktop</span>
+                        <a href="mobile_ver/roadmap.html" class="text-[10px] text-gray-400 hover:text-purple-600 transition">Mobile</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex items-center gap-1.5">
+                    <div class="nav-dot"></div>
+                    <div class="nav-dot"></div>
+                    <div class="nav-dot active"></div>
+                    <div class="nav-dot"></div>
+                </div>
+                <div class="flex items-center gap-1 md:gap-2 text-xs md:text-sm">
+                    <a href="index.html" class="text-gray-500 hover:text-purple-600 transition">Overview</a>
+                    <span class="text-gray-300 hidden sm:inline">→</span>
+                    <a href="backlog.html" class="text-gray-500 hover:text-purple-600 transition">Backlogs</a>
+                    <span class="text-gray-300 hidden sm:inline">→</span>
+                    <span class="font-semibold text-purple-600">Roadmap</span>
+                    <span class="text-gray-300 hidden sm:inline">→</span>
+                    <a href="investment.html" class="text-gray-500 hover:text-purple-600 transition">Investment</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Filters & Summary Bar -->
+        <div class="flex items-center justify-between mb-4 px-4">
+            <div class="flex items-center gap-2">
+                <button onclick="toggleFilter('must-have')" class="toggle-btn active px-3 py-1.5 text-xs rounded-lg border border-purple-300 text-purple-700 hover:bg-purple-50 transition" data-filter="must-have">
+                    <span class="inline-block w-2 h-2 rounded-full bg-purple-500 mr-1.5"></span>Must-Have
+                </button>
+                <button onclick="toggleFilter('nice-to-have')" class="toggle-btn active px-3 py-1.5 text-xs rounded-lg border border-cyan-300 text-cyan-700 hover:bg-cyan-50 transition" data-filter="nice-to-have">
+                    <span class="inline-block w-2 h-2 rounded-full bg-cyan-500 mr-1.5"></span>Nice-to-Have
+                </button>
+                <button onclick="toggleFilter('customer')" class="toggle-btn active px-3 py-1.5 text-xs rounded-lg border border-emerald-300 text-emerald-700 hover:bg-emerald-50 transition" data-filter="customer">
+                    <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-1.5"></span>Customer
+                </button>
+                <button onclick="toggleFilter('marketing')" class="toggle-btn active px-3 py-1.5 text-xs rounded-lg border border-amber-300 text-amber-700 hover:bg-amber-50 transition" data-filter="marketing">
+                    <span class="inline-block w-2 h-2 rounded-full bg-amber-500 mr-1.5"></span>Marketing
+                </button>
+            </div>
+            <div class="flex items-center gap-4 text-xs text-gray-500">
+                <div><span class="text-gray-800 font-semibold" id="totalPoints">516</span> pts</div>
+                <div><span class="text-gray-800 font-semibold">24</span> items</div>
+                <div class="text-purple-600 font-medium cursor-pointer hover:underline">Team TBD</div>
+            </div>
+        </div>
+
+        <!-- Phase Labels -->
+        <div class="grid grid-cols-12 gap-0 mb-1 text-[10px] font-medium">
+            <div class="col-span-3 phase-mvp rounded-l-lg px-2 py-1 text-purple-700">MVP TESTING (3 customers)</div>
+            <div class="col-span-3 phase-beta px-2 py-1 text-cyan-700">BETA (6+ customers)</div>
+            <div class="col-span-6 phase-growth rounded-r-lg px-2 py-1 text-emerald-700">GROWTH & SCALE</div>
+        </div>
+
+        <!-- Timeline Header -->
+        <div class="grid grid-cols-12 gap-0 mb-2">
+            <div class="text-center text-[10px] text-gray-400 py-1 month-marker">Jan</div>
+            <div class="text-center text-[10px] text-gray-400 py-1 month-marker">Feb</div>
+            <div class="text-center text-[10px] text-purple-600 py-1 month-marker font-semibold">Mar</div>
+            <div class="text-center text-[10px] text-gray-400 py-1 month-marker">Apr</div>
+            <div class="text-center text-[10px] text-gray-400 py-1 month-marker">May</div>
+            <div class="text-center text-[10px] text-cyan-600 py-1 month-marker font-semibold">Jun</div>
+            <div class="text-center text-[10px] text-gray-400 py-1 month-marker">Jul</div>
+            <div class="text-center text-[10px] text-gray-400 py-1 month-marker">Aug</div>
+            <div class="text-center text-[10px] text-gray-400 py-1 month-marker">Sep</div>
+            <div class="text-center text-[10px] text-gray-400 py-1 month-marker">Oct</div>
+            <div class="text-center text-[10px] text-gray-400 py-1 month-marker">Nov</div>
+            <div class="text-center text-[10px] text-emerald-600 py-1 font-semibold">Dec</div>
+        </div>
+
+        <!-- Milestones -->
+        <div class="grid grid-cols-12 gap-0 mb-3">
+            <div class="col-span-3 flex justify-end pr-1">
+                <div class="milestone text-[9px] px-2 py-0.5 rounded-full font-medium">MVP Test Complete</div>
+            </div>
+            <div class="col-span-3 flex justify-end pr-1">
+                <div class="milestone text-[9px] px-2 py-0.5 rounded-full font-medium">Beta Complete</div>
+            </div>
+            <div class="col-span-6 flex justify-end pr-1">
+                <div class="milestone text-[9px] px-2 py-0.5 rounded-full font-medium">Full Platform</div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-12 gap-2" id="roadmapGrid">
+
+            <!-- Jan: Dashboard + Survey -->
+            <div class="col-span-1 space-y-1">
+                <div class="card must-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="must-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Dashboard</span>
+                        <span class="text-[9px] text-purple-600 font-medium">35</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Task Mgmt</div>
+                    <div class="details hidden mt-2 pt-2 border-t border-gray-200 text-[9px] text-gray-600">
+                        <div>8 stories</div>
+                        <div class="text-gray-400">Cards, Actions, Filters</div>
+                        <div class="mt-1 text-purple-600">Unlocks: SSI, Notif</div>
+                    </div>
+                </div>
+                <div class="card customer rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="customer">
+                    <div class="text-[10px] font-semibold text-emerald-600">Survey</div>
+                    <div class="text-[9px] text-gray-500">Pre-launch</div>
+                    <div class="details hidden mt-2 pt-2 border-t border-gray-200 text-[9px] text-gray-600">
+                        <div>5 pts</div>
+                        <div class="text-gray-400">Validate priorities</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feb: SSI + Planning -->
+            <div class="col-span-1 space-y-1">
+                <div class="card must-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="must-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">SSI Report</span>
+                        <span class="text-[9px] text-purple-600 font-medium">20</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Analytics</div>
+                    <div class="details hidden mt-2 pt-2 border-t border-gray-200 text-[9px] text-gray-600">
+                        <div>5 stories</div>
+                        <div class="text-gray-400">Diagnostic reports</div>
+                        <div class="mt-1 text-purple-600">Needs: Dashboard</div>
+                    </div>
+                </div>
+                <div class="card must-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="must-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Planning+</span>
+                        <span class="text-[9px] text-purple-600 font-medium">20</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Core UX</div>
+                    <div class="details hidden mt-2 pt-2 border-t border-gray-200 text-[9px] text-gray-600">
+                        <div>Enhanced AI planning</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mar: Profiles + Notifications + Beta Launch -->
+            <div class="col-span-1 space-y-1">
+                <div class="card must-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="must-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Profiles</span>
+                        <span class="text-[9px] text-purple-600 font-medium">25</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">User + Company</div>
+                    <div class="details hidden mt-2 pt-2 border-t border-gray-200 text-[9px] text-gray-600">
+                        <div>Profile + Company pages</div>
+                    </div>
+                </div>
+                <div class="card must-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="must-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Notifs</span>
+                        <span class="text-[9px] text-purple-600 font-medium">25</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Alerts</div>
+                    <div class="details hidden mt-2 pt-2 border-t border-gray-200 text-[9px] text-gray-600">
+                        <div>Email + In-app</div>
+                        <div class="mt-1 text-purple-600">Needs: Dashboard</div>
+                    </div>
+                </div>
+                <div class="card marketing rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="marketing">
+                    <div class="text-[10px] font-semibold text-amber-600">Beta Launch</div>
+                    <div class="text-[9px] text-gray-500">6+ users</div>
+                </div>
+            </div>
+
+            <!-- Apr: Assessment P1 + Feedback -->
+            <div class="col-span-1 space-y-1">
+                <div class="card must-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="must-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Assess P1</span>
+                        <span class="text-[9px] text-purple-600 font-medium">20</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Individual</div>
+                    <div class="details hidden mt-2 pt-2 border-t border-gray-200 text-[9px] text-gray-600">
+                        <div>Assessment tying</div>
+                        <div class="mt-1 text-purple-600">Needs: SSI</div>
+                    </div>
+                </div>
+                <div class="card customer rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="customer">
+                    <div class="text-[10px] font-semibold text-emerald-600">Feedback</div>
+                    <div class="text-[9px] text-gray-500">Beta users</div>
+                    <div class="details hidden mt-2 pt-2 border-t border-gray-200 text-[9px] text-gray-600">
+                        <div>Feature requests</div>
+                        <div>Bug reports</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- May: Assessment P2 + Consultant P1 -->
+            <div class="col-span-1 space-y-1">
+                <div class="card must-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="must-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Assess P2</span>
+                        <span class="text-[9px] text-purple-600 font-medium">20</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Team/Func</div>
+                </div>
+                <div class="card must-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="must-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Consult P1</span>
+                        <span class="text-[9px] text-purple-600 font-medium">15</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Dashboard</div>
+                    <div class="details hidden mt-2 pt-2 border-t border-gray-200 text-[9px] text-gray-600">
+                        <div class="text-purple-600">Needs: Dash, SSI, Assess</div>
+                    </div>
+                </div>
+                <div class="card marketing rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="marketing">
+                    <div class="text-[10px] font-semibold text-amber-600">GA Prep</div>
+                    <div class="text-[9px] text-gray-500">Launch prep</div>
+                </div>
+            </div>
+
+            <!-- Jun: Consultant P2 + UI + GA Launch -->
+            <div class="col-span-1 space-y-1">
+                <div class="card must-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="must-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Consult P2</span>
+                        <span class="text-[9px] text-purple-600 font-medium">15</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Complete</div>
+                </div>
+                <div class="card must-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="must-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">UI P1</span>
+                        <span class="text-[9px] text-purple-600 font-medium">10</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Polish</div>
+                </div>
+                <div class="card marketing rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="marketing">
+                    <div class="text-[10px] font-semibold text-amber-600">GA Launch</div>
+                    <div class="text-[9px] text-gray-500">15 pts</div>
+                </div>
+                <div class="card customer rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="customer">
+                    <div class="text-[10px] font-semibold text-emerald-600">NPS</div>
+                    <div class="text-[9px] text-gray-500">Post-launch</div>
+                </div>
+            </div>
+
+            <!-- Jul: Analytics Dashboard -->
+            <div class="col-span-1 space-y-1">
+                <div class="card nice-to-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="nice-to-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Analytics</span>
+                        <span class="text-[9px] text-cyan-600 font-medium">30</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Insights</div>
+                    <div class="details hidden mt-2 pt-2 border-t border-gray-200 text-[9px] text-gray-600">
+                        <div>Company metrics</div>
+                        <div>Trends & predictions</div>
+                        <div class="mt-1 text-cyan-600">Needs: SSI, Assess</div>
+                    </div>
+                </div>
+                <div class="card customer rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="customer">
+                    <div class="text-[10px] font-semibold text-emerald-600">Interviews</div>
+                    <div class="text-[9px] text-gray-500">Q2 review</div>
+                </div>
+            </div>
+
+            <!-- Aug: Templates + Collaboration -->
+            <div class="col-span-1 space-y-1">
+                <div class="card nice-to-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="nice-to-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Templates</span>
+                        <span class="text-[9px] text-cyan-600 font-medium">15</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Goal library</div>
+                </div>
+                <div class="card nice-to-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="nice-to-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Collab</span>
+                        <span class="text-[9px] text-cyan-600 font-medium">25</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Comments</div>
+                    <div class="details hidden mt-2 pt-2 border-t border-gray-200 text-[9px] text-gray-600">
+                        <div>@mentions, activity</div>
+                        <div class="mt-1 text-cyan-600">Needs: Notifs</div>
+                    </div>
+                </div>
+                <div class="card marketing rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="marketing">
+                    <div class="text-[10px] font-semibold text-amber-600">Features</div>
+                    <div class="text-[9px] text-gray-500">Spotlight</div>
+                </div>
+            </div>
+
+            <!-- Sep: Import/Export + Integrations -->
+            <div class="col-span-1 space-y-1">
+                <div class="card nice-to-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="nice-to-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Import</span>
+                        <span class="text-[9px] text-cyan-600 font-medium">15</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">CSV/Excel</div>
+                </div>
+                <div class="card nice-to-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="nice-to-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Slack</span>
+                        <span class="text-[9px] text-cyan-600 font-medium">20</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">+ Teams</div>
+                    <div class="details hidden mt-2 pt-2 border-t border-gray-200 text-[9px] text-gray-600">
+                        <div class="text-cyan-600">Needs: Notifs</div>
+                    </div>
+                </div>
+                <div class="card customer rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="customer">
+                    <div class="text-[10px] font-semibold text-emerald-600">Advisory</div>
+                    <div class="text-[9px] text-gray-500">Board</div>
+                </div>
+            </div>
+
+            <!-- Oct: Mobile PWA -->
+            <div class="col-span-1 space-y-1">
+                <div class="card nice-to-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="nice-to-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Mobile</span>
+                        <span class="text-[9px] text-cyan-600 font-medium">35</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">PWA</div>
+                    <div class="details hidden mt-2 pt-2 border-t border-gray-200 text-[9px] text-gray-600">
+                        <div>Offline support</div>
+                        <div class="mt-1 text-cyan-600">Needs: UI Polish</div>
+                    </div>
+                </div>
+                <div class="card marketing rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="marketing">
+                    <div class="text-[10px] font-semibold text-amber-600">Cases</div>
+                    <div class="text-[9px] text-gray-500">Studies</div>
+                </div>
+            </div>
+
+            <!-- Nov: Reports + UI P2 -->
+            <div class="col-span-1 space-y-1">
+                <div class="card nice-to-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="nice-to-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Reports</span>
+                        <span class="text-[9px] text-cyan-600 font-medium">25</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Builder</div>
+                    <div class="details hidden mt-2 pt-2 border-t border-gray-200 text-[9px] text-gray-600">
+                        <div>PDF export</div>
+                        <div class="mt-1 text-cyan-600">Needs: Analytics</div>
+                    </div>
+                </div>
+                <div class="card must-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="must-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">UI P2</span>
+                        <span class="text-[9px] text-purple-600 font-medium">10</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Final polish</div>
+                </div>
+                <div class="card customer rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="customer">
+                    <div class="text-[10px] font-semibold text-emerald-600">Q4 Int</div>
+                    <div class="text-[9px] text-gray-500">Reviews</div>
+                </div>
+            </div>
+
+            <!-- Dec: Audit + API + Buffer -->
+            <div class="col-span-1 space-y-1">
+                <div class="card nice-to-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="nice-to-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">Audit</span>
+                        <span class="text-[9px] text-cyan-600 font-medium">20</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Compliance</div>
+                </div>
+                <div class="card nice-to-have rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="nice-to-have">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[10px] font-semibold truncate text-gray-800">API</span>
+                        <span class="text-[9px] text-cyan-600 font-medium">25</span>
+                    </div>
+                    <div class="text-[9px] text-gray-500">Webhooks</div>
+                </div>
+                <div class="card marketing rounded-lg p-2 cursor-pointer" onclick="toggleCard(this)" data-type="marketing">
+                    <div class="text-[10px] font-semibold text-amber-600">2027</div>
+                    <div class="text-[9px] text-gray-500">Preview</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Summary -->
+        <footer class="mt-4 pt-3 border-t border-gray-200 flex items-center justify-between text-[10px] text-gray-500">
+            <div class="flex items-center gap-6">
+                <div><span class="text-purple-600 font-medium">Must-Have:</span> 215 pts (9 epics)</div>
+                <div><span class="text-cyan-600 font-medium">Nice-to-Have:</span> 210 pts (9 epics)</div>
+                <div><span class="text-emerald-600 font-medium">Customer:</span> 35 pts (6 activities)</div>
+                <div><span class="text-amber-600 font-medium">Marketing:</span> 56 pts (6 campaigns)</div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div>Dec 2025: MVP with 3 customers</div>
+                <div>|</div>
+                <div>Mar: 6+ customers</div>
+                <div>|</div>
+                <div>Jun: GA Launch</div>
+                <div>|</div>
+                <div>Dec: Full Platform</div>
+            </div>
+        </footer>
+
+        <!-- Resource Planning Section -->
+        <section class="mt-6 pt-4 border-t border-gray-100">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-4">
+                    <h2 class="text-sm font-semibold text-gray-700">Resource Plan by Customer Milestone</h2>
+                    <!-- Track Tabs -->
+                    <div class="flex bg-gray-100 rounded-lg p-0.5">
+                        <button onclick="switchResourceTrack('bootstrap')" id="track-bootstrap" class="track-tab px-3 py-1 text-[10px] font-medium rounded-md text-gray-600">
+                            Bootstrap
+                        </button>
+                        <button onclick="switchResourceTrack('growth')" id="track-growth" class="track-tab px-3 py-1 text-[10px] font-medium rounded-md bg-emerald-500 text-white">
+                            Growth
+                        </button>
+                        <button onclick="switchResourceTrack('enterprise')" id="track-enterprise" class="track-tab px-3 py-1 text-[10px] font-medium rounded-md text-gray-600">
+                            Enterprise
+                        </button>
+                    </div>
+                </div>
+                <button onclick="toggleResourceSection()" id="resourceToggle" class="text-[10px] text-purple-600 hover:underline">Hide</button>
+            </div>
+
+            <div id="resourceSection">
+                <!-- Resource Cost Reference -->
+                <div class="mb-4 flex items-center gap-6 text-[10px] text-gray-400">
+                    <span>Monthly rates:</span>
+                    <span>PM <span class="text-gray-600">$400/hr</span></span>
+                    <span>Dev <span class="text-gray-600">$6k</span></span>
+                    <span>Design <span class="text-gray-600">$5k</span></span>
+                    <span>Intern <span class="text-gray-600">$3k</span></span>
+                </div>
+
+                <!-- GROWTH TRACK Milestone Cards -->
+                <div id="growth-milestones" class="grid grid-cols-4 gap-3">
+
+                    <!-- Stage 1: MVP Testing & Beta (0 → 1 design partner) -->
+                    <div class="flip-card h-[200px]" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <!-- Front: Cost & Team -->
+                            <div class="flip-card-front bg-gradient-to-b from-purple-50 to-white p-4 border border-purple-100">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-purple-700">Testing</div>
+                                    <div class="text-[9px] text-gray-400">Jan-Mar '26</div>
+                                </div>
+                                <div class="text-[20px] font-bold text-gray-800 mb-1">$14k<span class="text-[10px] font-normal text-gray-400">/mo</span></div>
+                                <div class="space-y-1 mb-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">PM (You)</span>
+                                        <span class="text-gray-700">20 hrs ($8k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Developer</span>
+                                        <span class="text-gray-700">1 ($6k)</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-purple-100">
+                                    <div class="text-[9px] font-medium text-purple-600 mb-1">KPIs</div>
+                                    <div class="space-y-0.5 text-[9px] text-gray-500">
+                                        <div>1 design partner (beta)</div>
+                                        <div>MVP ready for launch</div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-7 right-2 text-[9px] text-purple-600 font-medium">$47k total</div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-purple-400">click to flip</div>
+                            </div>
+                            <!-- Back: Revenue -->
+                            <div class="flip-card-back bg-gradient-to-b from-purple-100 to-purple-50 p-4 border border-purple-200">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-purple-700">Beta Phase</div>
+                                    <div class="text-[9px] text-gray-500">No revenue</div>
+                                </div>
+                                <div class="space-y-1.5">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Paying Customers</span>
+                                        <span class="font-semibold text-gray-800">0</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Beta Partners</span>
+                                        <span class="font-semibold text-purple-700">1</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">MRR</span>
+                                        <span class="font-bold text-purple-700">$0</span>
+                                    </div>
+                                    <div class="pt-2 border-t border-purple-200">
+                                        <div class="flex items-center justify-between text-[10px]">
+                                            <span class="text-gray-600">3-mo Cost</span>
+                                            <span class="text-red-500">-$47,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-[10px] mt-1">
+                                            <span class="font-medium text-gray-700">Net</span>
+                                            <span class="font-bold text-red-600">-$47,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-purple-400">click to flip</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 2: 1 → 3 Customers -->
+                    <div class="flip-card h-[200px]" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <!-- Front: Cost & Team -->
+                            <div class="flip-card-front bg-gradient-to-b from-purple-50 to-white p-4 border border-purple-100">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-purple-700">1 → 3</div>
+                                    <div class="text-[9px] text-gray-400">Apr-Jun '26</div>
+                                </div>
+                                <div class="text-[20px] font-bold text-gray-800 mb-1">$21k<span class="text-[10px] font-normal text-gray-400">/mo</span></div>
+                                <div class="space-y-1 mb-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">PM (You)</span>
+                                        <span class="text-gray-700">30 hrs ($12k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Developer</span>
+                                        <span class="text-gray-700">1 ($6k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Discovery Intern</span>
+                                        <span class="text-gray-700">1 ($3k)</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-purple-100">
+                                    <div class="text-[9px] font-medium text-purple-600 mb-1">KPIs</div>
+                                    <div class="space-y-0.5 text-[9px] text-gray-500">
+                                        <div>3 paying customers</div>
+                                        <div>NPS > 40</div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-7 right-2 text-[9px] text-purple-600 font-medium">$63k total</div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-purple-400">click to flip</div>
+                            </div>
+                            <!-- Back: Revenue -->
+                            <div class="flip-card-back bg-gradient-to-b from-purple-100 to-purple-50 p-4 border border-purple-200">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-purple-700">Revenue</div>
+                                    <div class="text-[9px] text-gray-500">+2 customers</div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Customers</span>
+                                        <span class="font-semibold text-gray-800">3</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Total Users</span>
+                                        <span class="font-semibold text-purple-700">60</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">MRR</span>
+                                        <span class="font-bold text-purple-700">$11,940</span>
+                                    </div>
+                                    <div class="pt-2 border-t border-purple-200">
+                                        <div class="flex items-center justify-between text-[10px]">
+                                            <span class="text-gray-600">Cost</span>
+                                            <span class="text-red-500">-$21,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-[10px] mt-1">
+                                            <span class="font-medium text-gray-700">Net</span>
+                                            <span class="font-bold text-red-600">-$9,060</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-purple-400">click to flip</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 3: 3 → 10 Customers -->
+                    <div class="flip-card h-[200px]" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <!-- Front: Cost & Team -->
+                            <div class="flip-card-front bg-gradient-to-b from-cyan-50 to-white p-4 border border-cyan-100">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-cyan-700">3 → 10</div>
+                                    <div class="text-[9px] text-gray-400">Jul-Sep '26</div>
+                                </div>
+                                <div class="text-[20px] font-bold text-gray-800 mb-1">$31k<span class="text-[10px] font-normal text-gray-400">/mo</span></div>
+                                <div class="space-y-1 mb-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">PM (You)</span>
+                                        <span class="text-gray-700">40 hrs ($16k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Developer</span>
+                                        <span class="text-gray-700">2 ($12k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Marketing Intern</span>
+                                        <span class="text-gray-700">1 ($3k)</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-cyan-100">
+                                    <div class="text-[9px] font-medium text-cyan-600 mb-1">KPIs</div>
+                                    <div class="space-y-0.5 text-[9px] text-gray-500">
+                                        <div>10 paying customers</div>
+                                        <div>Product-market fit</div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-7 right-2 text-[9px] text-cyan-600 font-medium">$93k total</div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-cyan-400">click to flip</div>
+                            </div>
+                            <!-- Back: Revenue -->
+                            <div class="flip-card-back bg-gradient-to-b from-cyan-100 to-cyan-50 p-4 border border-cyan-200">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-cyan-700">Revenue</div>
+                                    <div class="text-[9px] text-gray-500">+7 customers</div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Customers</span>
+                                        <span class="font-semibold text-gray-800">10</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Total Users</span>
+                                        <span class="font-semibold text-cyan-700">200</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">MRR</span>
+                                        <span class="font-bold text-cyan-700">$39,800</span>
+                                    </div>
+                                    <div class="pt-2 border-t border-cyan-200">
+                                        <div class="flex items-center justify-between text-[10px]">
+                                            <span class="text-gray-600">Cost</span>
+                                            <span class="text-red-500">-$31,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-[10px] mt-1">
+                                            <span class="font-medium text-gray-700">Net</span>
+                                            <span class="font-bold text-emerald-600">+$8,800</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-cyan-400">click to flip</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 4: 10 → 25 Customers -->
+                    <div class="flip-card h-[200px]" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <!-- Front: Cost & Team -->
+                            <div class="flip-card-front bg-gradient-to-b from-emerald-50 to-white p-4 border border-emerald-100">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-emerald-700">10 → 25</div>
+                                    <div class="text-[9px] text-gray-400">Oct '26 - Apr '27</div>
+                                </div>
+                                <div class="text-[20px] font-bold text-gray-800 mb-1">$37.5k<span class="text-[10px] font-normal text-gray-400">/mo</span></div>
+                                <div class="space-y-1 mb-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">PM (You)</span>
+                                        <span class="text-gray-700">50 hrs ($20k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Developer</span>
+                                        <span class="text-gray-700">2 ($12k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Designer</span>
+                                        <span class="text-gray-700">0.5 ($2.5k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Marketing</span>
+                                        <span class="text-gray-700">1 ($3k)</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-emerald-100">
+                                    <div class="text-[9px] font-medium text-emerald-600 mb-1">KPIs</div>
+                                    <div class="text-[9px] text-gray-500">25 customers, CAC:LTV 1:3</div>
+                                </div>
+                                <div class="absolute bottom-7 right-2 text-[9px] text-emerald-600 font-medium">$188k total</div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-emerald-400">click to flip</div>
+                            </div>
+                            <!-- Back: Revenue -->
+                            <div class="flip-card-back bg-gradient-to-b from-emerald-100 to-emerald-50 p-4 border border-emerald-200">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-emerald-700">Revenue</div>
+                                    <div class="text-[9px] text-gray-500">+15 customers</div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Customers</span>
+                                        <span class="font-semibold text-gray-800">25</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Total Users</span>
+                                        <span class="font-semibold text-emerald-700">500</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">MRR</span>
+                                        <span class="font-bold text-emerald-700">$99,500</span>
+                                    </div>
+                                    <div class="pt-2 border-t border-emerald-200">
+                                        <div class="flex items-center justify-between text-[10px]">
+                                            <span class="text-gray-600">Cost</span>
+                                            <span class="text-red-500">-$37,500</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-[10px] mt-1">
+                                            <span class="font-medium text-gray-700">Net</span>
+                                            <span class="font-bold text-emerald-600">+$62,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-emerald-400">click to flip</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BOOTSTRAP TRACK Milestone Cards -->
+                <div id="bootstrap-milestones" class="hidden grid grid-cols-4 gap-3">
+
+                    <!-- Stage 1: MVP Testing & Beta (Bootstrap) -->
+                    <div class="flip-card h-[200px]" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-gradient-to-b from-amber-50 to-white p-4 border border-amber-100">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-amber-700">Testing</div>
+                                    <div class="text-[9px] text-gray-400">Jan-Mar '26</div>
+                                </div>
+                                <div class="text-[20px] font-bold text-gray-800 mb-1">$10k<span class="text-[10px] font-normal text-gray-400">/mo</span></div>
+                                <div class="space-y-1 mb-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">PM (You)</span>
+                                        <span class="text-gray-700">10 hrs ($4k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Developer</span>
+                                        <span class="text-gray-700">1 ($6k)</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-amber-100">
+                                    <div class="text-[9px] font-medium text-amber-600 mb-1">KPIs</div>
+                                    <div class="space-y-0.5 text-[9px] text-gray-500">
+                                        <div>1 design partner (beta)</div>
+                                        <div>MVP ready for launch</div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-7 right-2 text-[9px] text-amber-600 font-medium">$33k total</div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-amber-400">click to flip</div>
+                            </div>
+                            <div class="flip-card-back bg-gradient-to-b from-amber-100 to-amber-50 p-4 border border-amber-200">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-amber-700">Beta Phase</div>
+                                    <div class="text-[9px] text-gray-500">No revenue</div>
+                                </div>
+                                <div class="space-y-1.5">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Paying Customers</span>
+                                        <span class="font-semibold text-gray-800">0</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Beta Partners</span>
+                                        <span class="font-semibold text-amber-700">1</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">MRR</span>
+                                        <span class="font-bold text-amber-700">$0</span>
+                                    </div>
+                                    <div class="pt-2 border-t border-amber-200">
+                                        <div class="flex items-center justify-between text-[10px]">
+                                            <span class="text-gray-600">3-mo Cost</span>
+                                            <span class="text-red-500">-$33,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-[10px] mt-1">
+                                            <span class="font-medium text-gray-700">Net</span>
+                                            <span class="font-bold text-red-600">-$33,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-amber-400">click to flip</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 2: 1 → 3 Customers (Bootstrap) -->
+                    <div class="flip-card h-[200px]" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-gradient-to-b from-amber-50 to-white p-4 border border-amber-100">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-amber-700">1 → 3</div>
+                                    <div class="text-[9px] text-gray-400">Apr-Jun '26</div>
+                                </div>
+                                <div class="text-[20px] font-bold text-gray-800 mb-1">$12k<span class="text-[10px] font-normal text-gray-400">/mo</span></div>
+                                <div class="space-y-1 mb-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">PM (You)</span>
+                                        <span class="text-gray-700">15 hrs ($6k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Developer</span>
+                                        <span class="text-gray-700">1 ($6k)</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-amber-100">
+                                    <div class="text-[9px] font-medium text-amber-600 mb-1">KPIs</div>
+                                    <div class="space-y-0.5 text-[9px] text-gray-500">
+                                        <div>3 paying customers</div>
+                                        <div>NPS > 40</div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-7 right-2 text-[9px] text-amber-600 font-medium">$36k total</div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-amber-400">click to flip</div>
+                            </div>
+                            <div class="flip-card-back bg-gradient-to-b from-amber-100 to-amber-50 p-4 border border-amber-200">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-amber-700">Revenue</div>
+                                    <div class="text-[9px] text-gray-500">+2 customers</div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Customers</span>
+                                        <span class="font-semibold text-gray-800">3</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Total Users</span>
+                                        <span class="font-semibold text-amber-700">60</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">MRR</span>
+                                        <span class="font-bold text-amber-700">$11,940</span>
+                                    </div>
+                                    <div class="pt-2 border-t border-amber-200">
+                                        <div class="flex items-center justify-between text-[10px]">
+                                            <span class="text-gray-600">Cost</span>
+                                            <span class="text-red-500">-$12,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-[10px] mt-1">
+                                            <span class="font-medium text-gray-700">Net</span>
+                                            <span class="font-bold text-red-600">-$60</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-amber-400">click to flip</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 3: 3 → 10 Customers (Bootstrap) -->
+                    <div class="flip-card h-[200px]" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-gradient-to-b from-amber-50 to-white p-4 border border-amber-100">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-amber-700">3 → 10</div>
+                                    <div class="text-[9px] text-gray-400">Jul-Sep '26</div>
+                                </div>
+                                <div class="text-[20px] font-bold text-gray-800 mb-1">$14k<span class="text-[10px] font-normal text-gray-400">/mo</span></div>
+                                <div class="space-y-1 mb-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">PM (You)</span>
+                                        <span class="text-gray-700">20 hrs ($8k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Developer</span>
+                                        <span class="text-gray-700">1 ($6k)</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-amber-100">
+                                    <div class="text-[9px] font-medium text-amber-600 mb-1">KPIs</div>
+                                    <div class="space-y-0.5 text-[9px] text-gray-500">
+                                        <div>10 paying customers</div>
+                                        <div>Product-market fit</div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-7 right-2 text-[9px] text-amber-600 font-medium">$42k total</div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-amber-400">click to flip</div>
+                            </div>
+                            <div class="flip-card-back bg-gradient-to-b from-amber-100 to-amber-50 p-4 border border-amber-200">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-amber-700">Revenue</div>
+                                    <div class="text-[9px] text-gray-500">+7 customers</div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Customers</span>
+                                        <span class="font-semibold text-gray-800">10</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Total Users</span>
+                                        <span class="font-semibold text-amber-700">200</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">MRR</span>
+                                        <span class="font-bold text-amber-700">$39,800</span>
+                                    </div>
+                                    <div class="pt-2 border-t border-amber-200">
+                                        <div class="flex items-center justify-between text-[10px]">
+                                            <span class="text-gray-600">Cost</span>
+                                            <span class="text-red-500">-$14,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-[10px] mt-1">
+                                            <span class="font-medium text-gray-700">Net</span>
+                                            <span class="font-bold text-emerald-600">+$25,800</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-amber-400">click to flip</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 4: 10 → 25 Customers (Bootstrap) -->
+                    <div class="flip-card h-[200px]" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-gradient-to-b from-amber-50 to-white p-4 border border-amber-100">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-amber-700">10 → 15</div>
+                                    <div class="text-[9px] text-gray-400">Oct '26 - Apr '27</div>
+                                </div>
+                                <div class="text-[20px] font-bold text-gray-800 mb-1">$16k<span class="text-[10px] font-normal text-gray-400">/mo</span></div>
+                                <div class="space-y-1 mb-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">PM (You)</span>
+                                        <span class="text-gray-700">25 hrs ($10k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Developer</span>
+                                        <span class="text-gray-700">1 ($6k)</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-amber-100">
+                                    <div class="text-[9px] font-medium text-amber-600 mb-1">KPIs</div>
+                                    <div class="text-[9px] text-gray-500">25 customers, CAC:LTV 1:3</div>
+                                </div>
+                                <div class="absolute bottom-7 right-2 text-[9px] text-amber-600 font-medium">$80k total</div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-amber-400">click to flip</div>
+                            </div>
+                            <div class="flip-card-back bg-gradient-to-b from-amber-100 to-amber-50 p-4 border border-amber-200">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-amber-700">Revenue</div>
+                                    <div class="text-[9px] text-gray-500">+15 customers</div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Customers</span>
+                                        <span class="font-semibold text-gray-800">25</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Total Users</span>
+                                        <span class="font-semibold text-amber-700">500</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">MRR</span>
+                                        <span class="font-bold text-amber-700">$99,500</span>
+                                    </div>
+                                    <div class="pt-2 border-t border-amber-200">
+                                        <div class="flex items-center justify-between text-[10px]">
+                                            <span class="text-gray-600">Cost</span>
+                                            <span class="text-red-500">-$16,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-[10px] mt-1">
+                                            <span class="font-medium text-gray-700">Net</span>
+                                            <span class="font-bold text-emerald-600">+$83,500</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-amber-400">click to flip</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ENTERPRISE TRACK Milestone Cards -->
+                <div id="enterprise-milestones" class="hidden grid grid-cols-4 gap-3">
+
+                    <!-- Stage 1: 0 → 3 Customers (Enterprise) -->
+                    <div class="flip-card h-[200px]" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-gradient-to-b from-indigo-50 to-white p-4 border border-indigo-100">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-indigo-700">0 → 3</div>
+                                    <div class="text-[9px] text-gray-400">Jan-Feb '26</div>
+                                </div>
+                                <div class="text-[20px] font-bold text-gray-800 mb-1">$45k<span class="text-[10px] font-normal text-gray-400">/mo</span></div>
+                                <div class="space-y-1 mb-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">PM (You)</span>
+                                        <span class="text-gray-700">50 hrs ($20k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Developer</span>
+                                        <span class="text-gray-700">3 ($18k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">ML Engineer</span>
+                                        <span class="text-gray-700">1 ($7k)</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-indigo-100">
+                                    <div class="text-[9px] font-medium text-indigo-600 mb-1">KPIs</div>
+                                    <div class="text-[9px] text-gray-500">3 enterprise pilots</div>
+                                </div>
+                                <div class="absolute bottom-7 right-2 text-[9px] text-indigo-600 font-medium">$90k total</div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-indigo-400">click to flip</div>
+                            </div>
+                            <div class="flip-card-back bg-gradient-to-b from-indigo-100 to-indigo-50 p-4 border border-indigo-200">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-indigo-700">Revenue</div>
+                                    <div class="text-[9px] text-gray-500">+3 customers</div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Customers</span>
+                                        <span class="font-semibold text-gray-800">3</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Total Users</span>
+                                        <span class="font-semibold text-indigo-700">60</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">MRR</span>
+                                        <span class="font-bold text-indigo-700">$11,940</span>
+                                    </div>
+                                    <div class="pt-2 border-t border-indigo-200">
+                                        <div class="flex items-center justify-between text-[10px]">
+                                            <span class="text-gray-600">Cost</span>
+                                            <span class="text-red-500">-$45,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-[10px] mt-1">
+                                            <span class="font-medium text-gray-700">Net</span>
+                                            <span class="font-bold text-red-600">-$33,060</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-indigo-400">click to flip</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 2: 3 → 10 Customers (Enterprise) -->
+                    <div class="flip-card h-[200px]" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-gradient-to-b from-indigo-50 to-white p-4 border border-indigo-100">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-indigo-700">3 → 10</div>
+                                    <div class="text-[9px] text-gray-400">Mar-May '26</div>
+                                </div>
+                                <div class="text-[20px] font-bold text-gray-800 mb-1">$55k<span class="text-[10px] font-normal text-gray-400">/mo</span></div>
+                                <div class="space-y-1 mb-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">PM (You)</span>
+                                        <span class="text-gray-700">60 hrs ($24k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Developer</span>
+                                        <span class="text-gray-700">4 ($24k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">ML Engineer</span>
+                                        <span class="text-gray-700">1 ($7k)</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-indigo-100">
+                                    <div class="text-[9px] font-medium text-indigo-600 mb-1">+ GPU Infra</div>
+                                    <div class="text-[9px] text-gray-500">Llama deployment @ $750/mo</div>
+                                </div>
+                                <div class="absolute bottom-7 right-2 text-[9px] text-indigo-600 font-medium">$165k total</div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-indigo-400">click to flip</div>
+                            </div>
+                            <div class="flip-card-back bg-gradient-to-b from-indigo-100 to-indigo-50 p-4 border border-indigo-200">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-indigo-700">Revenue</div>
+                                    <div class="text-[9px] text-gray-500">+7 customers</div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Customers</span>
+                                        <span class="font-semibold text-gray-800">10</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Total Users</span>
+                                        <span class="font-semibold text-indigo-700">200</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">MRR</span>
+                                        <span class="font-bold text-indigo-700">$39,800</span>
+                                    </div>
+                                    <div class="pt-2 border-t border-indigo-200">
+                                        <div class="flex items-center justify-between text-[10px]">
+                                            <span class="text-gray-600">Cost</span>
+                                            <span class="text-red-500">-$55,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-[10px] mt-1">
+                                            <span class="font-medium text-gray-700">Net</span>
+                                            <span class="font-bold text-red-600">-$15,200</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-indigo-400">click to flip</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 3: 10 → 25 Customers (Enterprise) -->
+                    <div class="flip-card h-[200px]" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-gradient-to-b from-indigo-50 to-white p-4 border border-indigo-100">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-indigo-700">10 → 25</div>
+                                    <div class="text-[9px] text-gray-400">Jun-Aug '26</div>
+                                </div>
+                                <div class="text-[20px] font-bold text-gray-800 mb-1">$60k<span class="text-[10px] font-normal text-gray-400">/mo</span></div>
+                                <div class="space-y-1 mb-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">PM (You)</span>
+                                        <span class="text-gray-700">65 hrs ($26k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Developers</span>
+                                        <span class="text-gray-700">5 ($30k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Design</span>
+                                        <span class="text-gray-700">0.5 ($2.5k)</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-indigo-100">
+                                    <div class="text-[9px] font-medium text-indigo-600 mb-1">KPIs</div>
+                                    <div class="text-[9px] text-gray-500">SOC 2 + HIPAA prep</div>
+                                </div>
+                                <div class="absolute bottom-7 right-2 text-[9px] text-indigo-600 font-medium">$180k total</div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-indigo-400">click to flip</div>
+                            </div>
+                            <div class="flip-card-back bg-gradient-to-b from-indigo-100 to-indigo-50 p-4 border border-indigo-200">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-indigo-700">Revenue</div>
+                                    <div class="text-[9px] text-gray-500">+15 customers</div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Customers</span>
+                                        <span class="font-semibold text-gray-800">25</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Total Users</span>
+                                        <span class="font-semibold text-indigo-700">500</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">MRR</span>
+                                        <span class="font-bold text-indigo-700">$99,500</span>
+                                    </div>
+                                    <div class="pt-2 border-t border-indigo-200">
+                                        <div class="flex items-center justify-between text-[10px]">
+                                            <span class="text-gray-600">Cost</span>
+                                            <span class="text-red-500">-$60,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-[10px] mt-1">
+                                            <span class="font-medium text-gray-700">Net</span>
+                                            <span class="font-bold text-emerald-600">+$39,500</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-indigo-400">click to flip</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage 4: 25 → 40 Customers (Enterprise) -->
+                    <div class="flip-card h-[200px]" onclick="this.classList.toggle('flipped')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-gradient-to-b from-indigo-50 to-white p-4 border border-indigo-100">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-indigo-700">25 → 40</div>
+                                    <div class="text-[9px] text-gray-400">Sep-Dec '26</div>
+                                </div>
+                                <div class="text-[20px] font-bold text-gray-800 mb-1">$58k<span class="text-[10px] font-normal text-gray-400">/mo</span></div>
+                                <div class="space-y-1 mb-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">PM (You)</span>
+                                        <span class="text-gray-700">60 hrs ($24k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Developers</span>
+                                        <span class="text-gray-700">5 ($30k)</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-500">Sales</span>
+                                        <span class="text-gray-700">1 ($4k)</span>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-indigo-100">
+                                    <div class="text-[9px] font-medium text-indigo-600 mb-1">KPIs</div>
+                                    <div class="text-[9px] text-gray-500">40 customers, CAC:LTV 1:4</div>
+                                </div>
+                                <div class="absolute bottom-7 right-2 text-[9px] text-indigo-600 font-medium">$232k total</div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-indigo-400">click to flip</div>
+                            </div>
+                            <div class="flip-card-back bg-gradient-to-b from-indigo-100 to-indigo-50 p-4 border border-indigo-200">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="text-[11px] font-semibold text-indigo-700">Revenue</div>
+                                    <div class="text-[9px] text-gray-500">+15 customers</div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Customers</span>
+                                        <span class="font-semibold text-gray-800">40</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">Total Users</span>
+                                        <span class="font-semibold text-indigo-700">800</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-[10px]">
+                                        <span class="text-gray-600">MRR</span>
+                                        <span class="font-bold text-indigo-700">$159,200</span>
+                                    </div>
+                                    <div class="pt-2 border-t border-indigo-200">
+                                        <div class="flex items-center justify-between text-[10px]">
+                                            <span class="text-gray-600">Cost</span>
+                                            <span class="text-red-500">-$58,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-[10px] mt-1">
+                                            <span class="font-medium text-gray-700">Net</span>
+                                            <span class="font-bold text-emerald-600">+$101,200</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-2 right-2 text-[8px] text-indigo-400">click to flip</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Cumulative Investment -->
+                <div class="mt-4 flex items-center justify-between text-[10px] text-gray-500 bg-gray-50 rounded-lg px-4 py-2">
+                    <div class="flex items-center gap-6">
+                        <div><span class="text-gray-700 font-medium">12-Month Investment:</span> <span id="cumulative-investment">~$548k (Dev $450k + Sec $65k + QA $15k + Infra $18k)</span></div>
+                        <div><span class="text-gray-700 font-medium">Breakeven:</span> <span id="breakeven-point">~10 customers (Aug '26)</span></div>
+                        <div><span class="text-emerald-600 font-medium" id="dec-mrr-text">Dec MRR:</span> <span id="dec-mrr-value">$99.5k</span></div>
+                    </div>
+                    <div class="text-gray-400">ARPU $199/user | 20 users/company avg | PM @ $400/hr included</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Calculator Modal -->
+        <div id="teamModal" class="hidden fixed inset-0 bg-black/30 flex items-center justify-center z-50">
+            <div class="bg-white rounded-xl p-6 max-w-md border border-gray-200 shadow-xl">
+                <h3 class="text-lg font-semibold mb-4 text-gray-800">Team Calculator</h3>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Total Dev Points:</span>
+                        <span class="font-medium text-gray-800">425 pts</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Dev Velocity:</span>
+                        <span class="font-medium text-gray-800">40-50 pts/month/dev</span>
+                    </div>
+                    <hr class="border-gray-200">
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">1 Dev Timeline:</span>
+                        <span class="text-amber-600 font-medium">10-11 months (tight)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">2 Dev Timeline:</span>
+                        <span class="text-emerald-600 font-medium">5-6 months (recommended)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">3 Dev Timeline:</span>
+                        <span class="text-cyan-600 font-medium">3-4 months (aggressive)</span>
+                    </div>
+                </div>
+                <button onclick="closeTeamModal()" class="mt-4 w-full py-2 bg-purple-600 text-white rounded-lg text-sm hover:bg-purple-700 transition">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Filter state
+        const filters = {
+            'must-have': true,
+            'nice-to-have': true,
+            'customer': true,
+            'marketing': true
+        };
+
+        function toggleFilter(type) {
+            filters[type] = !filters[type];
+
+            // Update button state
+            const btn = document.querySelector(`[data-filter="${type}"]`);
+            btn.classList.toggle('active', filters[type]);
+
+            // Update cards visibility
+            document.querySelectorAll(`[data-type="${type}"]`).forEach(card => {
+                card.classList.toggle('hidden-card', !filters[type]);
+            });
+
+            updateTotalPoints();
+        }
+
+        function toggleCard(card) {
+            const details = card.querySelector('.details');
+            if (details) {
+                details.classList.toggle('hidden');
+                card.classList.toggle('expanded');
+            }
+        }
+
+        function updateTotalPoints() {
+            let total = 0;
+            document.querySelectorAll('.card:not(.hidden-card)').forEach(card => {
+                const pts = card.querySelector('[class*="text-purple-600"], [class*="text-cyan-600"]');
+                if (pts && !isNaN(parseInt(pts.textContent))) {
+                    total += parseInt(pts.textContent);
+                }
+            });
+            document.getElementById('totalPoints').textContent = total || 516;
+        }
+
+        function closeTeamModal() {
+            document.getElementById('teamModal').classList.add('hidden');
+        }
+
+        // Click "Team TBD" to open calculator
+        document.querySelector('.text-purple-600.font-medium').addEventListener('click', () => {
+            document.getElementById('teamModal').classList.remove('hidden');
+        });
+
+        // Toggle resource section
+        function toggleResourceSection() {
+            const section = document.getElementById('resourceSection');
+            const toggle = document.getElementById('resourceToggle');
+            if (section.classList.contains('hidden')) {
+                section.classList.remove('hidden');
+                toggle.textContent = 'Hide';
+            } else {
+                section.classList.add('hidden');
+                toggle.textContent = 'Show';
+            }
+        }
+
+        // Switch between Growth and Bootstrap tracks
+        function switchResourceTrack(track) {
+            const tabs = {
+                bootstrap: document.getElementById('track-bootstrap'),
+                growth: document.getElementById('track-growth'),
+                enterprise: document.getElementById('track-enterprise')
+            };
+            const milestones = {
+                bootstrap: document.getElementById('bootstrap-milestones'),
+                growth: document.getElementById('growth-milestones'),
+                enterprise: document.getElementById('enterprise-milestones')
+            };
+            const colors = {
+                bootstrap: 'amber',
+                growth: 'emerald',
+                enterprise: 'indigo'
+            };
+            const trackData = {
+                bootstrap: {
+                    investment: '~$268k (Dev $220k + Sec $32k + QA $8k + Infra $8k)',
+                    breakeven: '~5 customers (May \'26)',
+                    mrr: '$59.7k'
+                },
+                growth: {
+                    investment: '~$548k (Dev $450k + Sec $65k + QA $15k + Infra $18k)',
+                    breakeven: '~10 customers (Aug \'26)',
+                    mrr: '$99.5k'
+                },
+                enterprise: {
+                    investment: '~$690k (Dev $550k + Sec $85k + QA $25k + Infra $30k)',
+                    breakeven: '~15 customers (Jul \'26)',
+                    mrr: '$159.2k'
+                }
+            };
+
+            // Reset all tabs and milestones
+            Object.keys(tabs).forEach(t => {
+                tabs[t].classList.remove('bg-' + colors[t] + '-500', 'text-white');
+                tabs[t].classList.add('text-gray-600');
+                milestones[t].classList.add('hidden');
+            });
+
+            // Activate selected track
+            tabs[track].classList.add('bg-' + colors[track] + '-500', 'text-white');
+            tabs[track].classList.remove('text-gray-600');
+            milestones[track].classList.remove('hidden');
+
+            // Update cumulative values
+            document.getElementById('cumulative-investment').textContent = trackData[track].investment;
+            document.getElementById('breakeven-point').textContent = trackData[track].breakeven;
+            document.getElementById('dec-mrr-value').textContent = trackData[track].mrr;
+        }
+    </script>
+</body>
+</html>

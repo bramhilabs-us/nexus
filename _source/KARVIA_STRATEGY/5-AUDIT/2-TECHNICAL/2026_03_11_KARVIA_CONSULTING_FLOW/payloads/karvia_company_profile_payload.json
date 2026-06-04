@@ -1,0 +1,49 @@
+{
+  "name": "KARVIA Consulting",
+  "industry": "consulting",
+  "industry_subtype": "it_consulting",
+  "employee_count": 58,
+  "website": "https://karvia-consulting.com",
+  "business_context": {
+    "profile": {
+      "description": "KARVIA Consulting helps mid-market service companies design and execute AI-enabled operating models. We combine strategy, data modernization, and implementation sprints to deliver measurable business impact in 90-day cycles.",
+      "founded_year": 2017,
+      "business_model": "Hybrid model: strategy advisory retainers + fixed-fee implementation sprints + managed optimization support.",
+      "value_proposition": "We turn AI strategy into executed workflows, with clear commercial and operational outcomes, not just recommendations.",
+      "primary_revenue_driver": "Monthly AI advisory retainers and implementation sprints",
+      "client_profile": "US-based service businesses (50-500 employees, $10M-$200M revenue) with fragmented operations and growth pressure."
+    },
+    "metrics": {
+      "current": {
+        "annual_revenue": { "value": 6800000, "source": "manual" },
+        "revenue_growth_pct": { "value": 9.2, "source": "manual" },
+        "profit_margin_pct": { "value": 18.5, "source": "manual" },
+        "top_5_clients_revenue_pct": { "value": 43, "source": "manual" },
+        "total_client_families": { "value": 84, "source": "manual" },
+        "client_retention_rate_pct": { "value": 88, "source": "manual" },
+        "avg_client_tenure_years": { "value": 2.8, "source": "manual" },
+        "next_gen_engagement_pct": { "value": 22, "source": "manual" },
+        "clients_over_65_pct": { "value": 0, "source": "manual" },
+        "succession_plans_active": { "value": 4, "source": "manual" },
+        "total_advisors": { "value": 36, "source": "manual" },
+        "clients_per_advisor": { "value": 7, "source": "manual" },
+        "avg_advisor_age": { "value": 37, "source": "manual" },
+        "support_staff_count": { "value": 22, "source": "manual" }
+      }
+    },
+    "targets": {
+      "annual_revenue": 8200000,
+      "revenue_growth_pct": 20,
+      "client_retention_rate_pct": 92,
+      "clients_per_advisor": 8.5,
+      "next_gen_engagement_pct": 40,
+      "target_period": "Next 12 Months"
+    },
+    "strategic_vision": {
+      "priority_one": "Scale recurring AI advisory revenue to 40% of total revenue while maintaining delivery quality.",
+      "biggest_blocker": "Inconsistent delivery playbooks and utilization volatility across consultant teams.",
+      "one_thing": "Standardize service packaging and implementation methods into repeatable offerings.",
+      "growth_aspirations": "Become the most trusted AI transformation partner for mid-market service firms on the US West Coast, with productized services, 120 active clients, and 30% EBITDA."
+    }
+  }
+}

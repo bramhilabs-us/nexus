@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karvia Feedback Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #6366f1 0%, #764ba2 100%);
+      --text-dark: #1f2937;
+      --text-medium: #4b5563;
+      --text-light: #9ca3af;
+      --bg-soft: #f8faff;
+      --border-soft: #e5e7eb;
+      --card-radius: 16px;
+      --transition: all 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: #ffffff;
+      color: var(--text-dark);
+      padding: 40px 16px 96px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: block;
+      margin: 0 auto 32px;
+      max-width: 220px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 3vw, 3.5rem);
+      background: var(--primary-gradient);
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      font-size: 1.05rem;
+      color: var(--text-medium);
+      line-height: 1.6;
+      max-width: 720px;
+      margin: 0 auto 16px;
+    }
+
+    .callout {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      border: 1px solid rgba(99, 102, 241, 0.15);
+      color: #4338ca;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+
+    .tile {
+      border: 1px solid var(--border-soft);
+      border-radius: var(--card-radius);
+      padding: 28px 24px;
+      background: #ffffff;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 15px 35px rgba(99, 102, 241, 0.08);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--primary-gradient);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .tile:hover {
+      transform: translateY(-4px);
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .tile:hover::after {
+      opacity: 0.05;
+    }
+
+    .tile span {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--bg-soft);
+      color: #4338ca;
+      font-weight: 700;
+      margin-bottom: 18px;
+      font-size: 1.2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tile h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tile p {
+      color: var(--text-medium);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-wrapper {
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--card-radius);
+      padding: 40px 32px;
+      box-shadow: 0 25px 60px rgba(76, 29, 149, 0.08);
+      display: none;
+    }
+
+    .form-wrapper.active {
+      display: block;
+    }
+
+    .form-header {
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .form-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 2.8vw, 2.7rem);
+      background: var(--primary-gradient);
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+
+    .form-header p {
+      color: var(--text-medium);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    form {
+      display: grid;
+      gap: 24px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="datetime-local"],
+    select,
+    textarea {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #d1d5db;
+      padding: 14px 16px;
+      font-size: 0.98rem;
+      color: var(--text-dark);
+      transition: var(--transition);
+      background: #ffffff;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    }
+
+    .checkbox-group,
+    .radio-group {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #f9fafb;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      transition: var(--transition);
+    }
+
+    .option:hover {
+      border-color: #6366f1;
+      background: #f0f4ff;
+    }
+
+    .option input {
+      accent-color: #6366f1;
+      width: 18px;
+      height: 18px;
+    }
+
+    .hint {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-top: 6px;
+    }
+
+    .submit-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    button[type="submit"] {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 32px;
+      font-weight: 600;
+      font-size: 1rem;
+      background: var(--primary-gradient);
+      color: #ffffff;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(99, 102, 241, 0.35);
+    }
+
+    .back-link {
+      border: none;
+      background: transparent;
+      color: #4338ca;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 0.95rem;
+    }
+
+    .email-note {
+      margin-top: 8px;
+      font-size: 0.88rem;
+      color: var(--text-medium);
+      text-align: center;
+    }
+
+    @media (max-width: 720px) {
+      .tiles {
+        grid-template-columns: 1fr;
+      }
+
+      .form-wrapper {
+        padding: 32px 20px;
+      }
+
+      body {
+        padding: 24px 12px 72px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Karvia Feedback Hub</h1>
+      <p>Pick the card that best matches what you want to share. Each form takes 3 minutes or less and sends directly to our customer team.</p>
+      <div class="callout">
+        Everything routes to <strong>rsm@karvia.ai</strong>
+      </div>
+    </header>
+
+    <section class="tiles" id="tiles">
+      <button class="tile" data-target="customer-feedback">
+        <span>01</span>
+        <h3>Customer Feedback</h3>
+        <p>Tell us what’s working, what’s confusing, and the top improvement you’d love to see next.</p>
+      </button>
+
+      <button class="tile" data-target="bug-report">
+        <span>02</span>
+        <h3>Bug Report</h3>
+        <p>Flag errors or unexpected behaviour. No technical language needed—just describe what happened.</p>
+      </button>
+
+      <button class="tile" data-target="feature-request">
+        <span>03</span>
+        <h3>Feature Request</h3>
+        <p>Suggest new capabilities or workflows that would make Karvia more valuable for your team.</p>
+      </button>
+
+      <button class="tile" data-target="ssi-survey">
+        <span>04</span>
+        <h3>SSI Pulse Survey</h3>
+        <p>3-minute check-in covering Speed, Strength, and Intelligence to guide the OKR planning engine.</p>
+      </button>
+    </section>
+
+    <section class="form-wrapper" id="customer-feedback">
+      <div class="form-header">
+        <h2>Customer Feedback</h2>
+        <p>Share highlights, pain points, and the one improvement that would help you most this week.</p>
+      </div>
+      <form action="mailto:rsm@karvia.ai" method="post" enctype="text/plain">
+        <div>
+          <label for="cf-name">Your name (optional)</label>
+          <input id="cf-name" name="Name" type="text" placeholder="e.g., Alex Morgan">
+        </div>
+        <div>
+          <label for="cf-role">Role</label>
+          <select id="cf-role" name="Role">
+            <option value="" selected disabled>Select your role</option>
+            <option>Consultant</option>
+            <option>Executive</option>
+            <option>Manager</option>
+            <option>Team Member</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="cf-company">Company or team (optional)</label>
+          <input id="cf-company" name="Company" type="text" placeholder="Company / Team name">
+        </div>
+        <div>
+          <label>Areas you used today</label>
+          <div class="checkbox-group">
+            <label class="option"><input type="checkbox" name="Area Used" value="Company setup & onboarding">Company setup & onboarding</label>
+            <label class="option"><input type="checkbox" name="Area Used" value="Assessment / business snapshot">Assessment / business snapshot</label>
+            <label class="option"><input type="checkbox" name="Area Used" value="OKR planner">OKR planner (objectives & key results)</label>
+            <label class="option"><input type="checkbox" name="Area Used" value="Goals & tasks">Goals or task tracking</label>
+            <label class="option"><input type="checkbox" name="Area Used" value="Dashboards & analytics">Dashboards / analytics</label>
+            <label class="option"><input type="checkbox" name="Area Used" value="Invitations & access">Invitations & access management</label>
+            <label class="option"><input type="checkbox" name="Area Used" value="Other">Other</label>
+          </div>
+        </div>
+        <div>
+          <label for="cf-highlight">What worked well?</label>
+          <textarea id="cf-highlight" name="Highlights" placeholder="Share one or two highlights that made your job easier."></textarea>
+        </div>
+        <div>
+          <label for="cf-friction">What felt confusing or slowed you down?</label>
+          <textarea id="cf-friction" name="Pain points" placeholder="Let us know where you lost time or needed extra help."></textarea>
+        </div>
+        <div>
+          <label for="cf-improvement">One improvement you’d love next</label>
+          <textarea id="cf-improvement" name="Top improvement" placeholder="If we fix one thing this week, what should it be?"></textarea>
+        </div>
+        <div>
+          <label for="cf-links">Links or screenshots (optional)</label>
+          <input id="cf-links" name="Links" type="text" placeholder="Paste shareable link to files or screenshots">
+        </div>
+        <div class="submit-wrapper">
+          <button type="submit">Send feedback</button>
+          <p class="email-note">Submitting opens your email client with a pre-filled draft to rsm@karvia.ai.</p>
+          <button type="button" class="back-link" data-back>Back to tiles</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="form-wrapper" id="bug-report">
+      <div class="form-header">
+        <h2>Bug Report</h2>
+        <p>Describe what went wrong. We only need the basics to reproduce and fix the issue fast.</p>
+      </div>
+      <form action="mailto:rsm@karvia.ai" method="post" enctype="text/plain">
+        <div>
+          <label for="bug-name">Name or team (optional)</label>
+          <input id="bug-name" name="Reporter" type="text" placeholder="e.g., Ops Team / Jordan P.">
+        </div>
+        <div>
+          <label for="bug-contact">Best contact for follow-up</label>
+          <input id="bug-contact" name="Contact" type="email" placeholder="you@example.com">
+          <p class="hint">We’ll only reach out if we need more detail.</p>
+        </div>
+        <div>
+          <label for="bug-summary">Brief description</label>
+          <input id="bug-summary" name="Issue summary" type="text" placeholder="e.g., Goal board not saving updates">
+        </div>
+        <div>
+          <label for="bug-when">When did it happen?</label>
+          <input id="bug-when" name="Date & time" type="datetime-local">
+        </div>
+        <div>
+          <label for="bug-frequency">How often does it happen?</label>
+          <select id="bug-frequency" name="Frequency">
+            <option value="" selected disabled>Select frequency</option>
+            <option>Every time</option>
+            <option>Sometimes</option>
+            <option>Rarely</option>
+          </select>
+        </div>
+        <div>
+          <label>Where were you?</label>
+          <div class="checkbox-group">
+            <label class="option"><input type="checkbox" name="Location" value="Sign up / Login">Signing up / logging in</label>
+            <label class="option"><input type="checkbox" name="Location" value="Company setup wizard">Company setup wizard</label>
+            <label class="option"><input type="checkbox" name="Location" value="Invitations">Invitations (individual or bulk)</label>
+            <label class="option"><input type="checkbox" name="Location" value="Assessment flow">Assessment flow</label>
+            <label class="option"><input type="checkbox" name="Location" value="OKR planner">OKR planner</label>
+            <label class="option"><input type="checkbox" name="Location" value="Goals / tasks board">Goals or task board</label>
+            <label class="option"><input type="checkbox" name="Location" value="Dashboards">Dashboards / analytics</label>
+            <label class="option"><input type="checkbox" name="Location" value="Multi-company switcher">Multi-company switcher</label>
+            <label class="option"><input type="checkbox" name="Location" value="Other">Other</label>
+          </div>
+        </div>
+        <div>
+          <label for="bug-steps">Steps you took (if you remember)</label>
+          <textarea id="bug-steps" name="Steps to reproduce" placeholder='e.g., "Clicked Add Team → filled details → pressed Save → error appeared."'></textarea>
+        </div>
+        <div>
+          <label for="bug-expected">What did you expect?</label>
+          <textarea id="bug-expected" name="Expected result" placeholder="Tell us what should have happened."></textarea>
+        </div>
+        <div>
+          <label for="bug-actual">What happened instead?</label>
+          <textarea id="bug-actual" name="Actual result" placeholder="Include error messages or what you saw on screen."></textarea>
+        </div>
+        <div>
+          <label for="bug-links">Links or screenshots (optional)</label>
+          <input id="bug-links" name="Links" type="text" placeholder="Paste shareable link to screenshots / logs">
+        </div>
+        <div class="submit-wrapper">
+          <button type="submit">Send bug report</button>
+          <p class="email-note">Submitting opens your email client with a pre-filled draft to rsm@karvia.ai.</p>
+          <button type="button" class="back-link" data-back>Back to tiles</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="form-wrapper" id="feature-request">
+      <div class="form-header">
+        <h2>Feature Request</h2>
+        <p>Help us prioritise the next releases. Focus on the problem you want solved and the impact it will have.</p>
+      </div>
+      <form action="mailto:rsm@karvia.ai" method="post" enctype="text/plain">
+        <div>
+          <label for="fr-name">Your name (optional)</label>
+          <input id="fr-name" name="Name" type="text" placeholder="e.g., Priya S.">
+        </div>
+        <div>
+          <label for="fr-role">Role or team</label>
+          <input id="fr-role" name="Role / Team" type="text" placeholder="e.g., Consultant, Ops Lead">
+        </div>
+        <div>
+          <label for="fr-company-size">Company size</label>
+          <select id="fr-company-size" name="Company size">
+            <option value="" selected disabled>Select range</option>
+            <option>Solo</option>
+            <option>2-10</option>
+            <option>11-50</option>
+            <option>51-200</option>
+            <option>200+</option>
+          </select>
+        </div>
+        <div>
+          <label for="fr-problem">What problem are you trying to solve?</label>
+          <textarea id="fr-problem" name="Problem" placeholder="Describe the workflow or pain point in one or two sentences."></textarea>
+        </div>
+        <div>
+          <label>Where would this live?</label>
+          <div class="checkbox-group">
+            <label class="option"><input type="checkbox" name="Area" value="Company setup & onboarding">Company setup & onboarding</label>
+            <label class="option"><input type="checkbox" name="Area" value="Assessments & insights">Assessments & insights</label>
+            <label class="option"><input type="checkbox" name="Area" value="OKR planning">OKR planning (objectives & key results)</label>
+            <label class="option"><input type="checkbox" name="Area" value="Goals & tasks execution">Goals / tasks execution</label>
+            <label class="option"><input type="checkbox" name="Area" value="Dashboards & analytics">Dashboards & analytics</label>
+            <label class="option"><input type="checkbox" name="Area" value="Invitations & permissions">Invitations, permissions, or multi-company access</label>
+            <label class="option"><input type="checkbox" name="Area" value="Something new">Something new</label>
+          </div>
+        </div>
+        <div>
+          <label for="fr-success">What would success look like?</label>
+          <textarea id="fr-success" name="Success definition" placeholder="Explain what would be easier, faster, or clearer once this feature exists."></textarea>
+        </div>
+        <div>
+          <label for="fr-workaround">Current workaround (if any)</label>
+          <textarea id="fr-workaround" name="Current workaround" placeholder="Tell us how you handle this today."></textarea>
+        </div>
+        <div>
+          <label>Priority for you</label>
+          <div class="radio-group">
+            <label class="option"><input type="radio" name="Priority" value="Nice to have">Nice to have</label>
+            <label class="option"><input type="radio" name="Priority" value="Important soon">Important soon</label>
+            <label class="option"><input type="radio" name="Priority" value="Critical / blocking">Critical / blocking</label>
+          </div>
+        </div>
+        <div>
+          <label for="fr-extras">Links or extra context (optional)</label>
+          <input id="fr-extras" name="Links" type="text" placeholder="Share mock-ups, documents, or references">
+        </div>
+        <div class="submit-wrapper">
+          <button type="submit">Send feature request</button>
+          <p class="email-note">Submitting opens your email client with a pre-filled draft to rsm@karvia.ai.</p>
+          <button type="button" class="back-link" data-back>Back to tiles</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="form-wrapper" id="ssi-survey">
+      <div class="form-header">
+        <h2>SSI Pulse Survey</h2>
+        <p>3-minute assessment across Speed, Strength, and Intelligence. Perfect for consultants and managers to guide the OKR engine.</p>
+      </div>
+      <form action="mailto:rsm@karvia.ai" method="post" enctype="text/plain">
+        <div>
+          <label for="ssi-name">Your name</label>
+          <input id="ssi-name" name="Name" type="text" placeholder="e.g., Taylor R.">
+        </div>
+        <div>
+          <label for="ssi-company">Company / team</label>
+          <input id="ssi-company" name="Company" type="text" placeholder="Company or team name">
+        </div>
+        <div>
+          <label for="ssi-role">Role</label>
+          <input id="ssi-role" name="Role" type="text" placeholder="e.g., Consultant, Executive Sponsor">
+        </div>
+
+        <div>
+          <label>Speed – How quickly do we turn ideas into action?</label>
+          <textarea name="Speed Insights" placeholder="Where are we fast? Where do we slow down?"></textarea>
+        </div>
+
+        <div>
+          <label>Strength – How reliable are our systems and team execution?</label>
+          <textarea name="Strength Insights" placeholder="What feels strong today? Anything brittle or risky?"></textarea>
+        </div>
+
+        <div>
+          <label>Intelligence – How well do we learn and adapt from data?</label>
+          <textarea name="Intelligence Insights" placeholder="Do we have the signals we need to steer the business?"></textarea>
+        </div>
+
+        <div>
+          <label for="ssi-score">Overall SSI confidence (0–10)</label>
+          <select id="ssi-score" name="SSI score">
+            <option value="" selected disabled>Select a score</option>
+            <option>10 - Exceptional</option>
+            <option>9</option>
+            <option>8</option>
+            <option>7</option>
+            <option>6</option>
+            <option>5</option>
+            <option>4</option>
+            <option>3</option>
+            <option>2</option>
+            <option>1</option>
+            <option>0 - Critical risk</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="ssi-focus">One focus area for the next sprint</label>
+          <textarea id="ssi-focus" name="Next sprint focus" placeholder="Where should we focus to move the SSI needle fastest?"></textarea>
+        </div>
+
+        <div>
+          <label for="ssi-support">How can Karvia support you?</label>
+          <textarea id="ssi-support" name="Support needed" placeholder="Tell us what tools, data, or nudges would help."></textarea>
+        </div>
+
+        <div>
+          <label for="ssi-links">Supporting links (optional)</label>
+          <input id="ssi-links" name="Links" type="text" placeholder="Share dashboards, docs, or notes">
+        </div>
+
+        <div class="submit-wrapper">
+          <button type="submit">Submit SSI pulse</button>
+          <p class="email-note">Submitting opens your email client with a pre-filled draft to rsm@karvia.ai.</p>
+          <button type="button" class="back-link" data-back>Back to tiles</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    const tiles = document.querySelectorAll('.tile');
+    const forms = document.querySelectorAll('.form-wrapper');
+    const backButtons = document.querySelectorAll('[data-back]');
+
+    tiles.forEach(tile => {
+      tile.addEventListener('click', () => {
+        const target = tile.dataset.target;
+        forms.forEach(form => {
+          form.classList.toggle('active', form.id === target);
+          if (form.id === target) {
+            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+        document.getElementById('tiles').style.display = 'none';
+      });
+    });
+
+    backButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        forms.forEach(form => form.classList.remove('active'));
+        document.getElementById('tiles').style.display = 'grid';
+        document.getElementById('tiles').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>

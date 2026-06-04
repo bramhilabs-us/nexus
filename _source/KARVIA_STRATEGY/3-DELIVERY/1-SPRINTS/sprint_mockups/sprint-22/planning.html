@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprint 22 Planning Page - Design Changes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../../client/css/s13-patterns.css">
+    <style>
+        /* ════════════════════════════════════════════════════════════════════
+           SPRINT 22 PLANNING PAGE — DESIGN DELTA SPEC
+           Live page: client/pages/planning-v2.html (1,651 lines)
+
+           THIS MOCKUP SHOWS ONLY THE CHANGES. EVERYTHING ELSE IS PRESERVED.
+
+           ┌───────────────────────────────────────────────────────────────┐
+           │  WHAT STAYS (do NOT touch in implementation):                 │
+           │  - Production navigation (<nav> + /js/navigation.js)          │
+           │  - Page header                                                 │
+           │  - Quarter selector (Q1/Q2/Q3/Q4 tabs) — used as filter        │
+           │  - Objectives row                                              │
+           │  - Two-panel layout (left: objectives, right: details)         │
+           │  - All existing modals (CRUD: weekly goal create/edit)         │
+           │                                                                │
+           │  WHAT CHANGES (Sprint 22 — Epic H budget inside Epic G, 5 pts):│
+           │  - Weekly goals: 4 weeks → 12-13 weeks (full quarter)          │
+           │  - Group weeks by month (April / May / June)                   │
+           │  - Collapsible month sections (month header chevron)           │
+           │  - AI presets: 4 / 8 / 12 week generation options              │
+           │                                                                │
+           │  Sprint 22 theme tokens come from client/css/s13-patterns.css. │
+           └───────────────────────────────────────────────────────────────┘
+           ════════════════════════════════════════════════════════════════════ */
+
+        :root {
+            /* Sprint 22 Theme — Navy/Gold (matches s13-patterns.css --s22-* tokens) */
+            --s22-navy: #1F2937;
+            --s22-gold: #F59E0B;
+            --s22-gold-bg: #FFFBEB;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FAFAFA;
+            color: #1F2937;
+            margin: 0;
+            padding: 24px;
+        }
+
+        .spec-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .spec-header {
+            background: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+            color: white;
+            padding: 32px;
+            border-radius: 16px;
+            margin-bottom: 32px;
+        }
+
+        .spec-header h1 {
+            font-size: 28px;
+            margin: 0 0 8px 0;
+        }
+
+        .spec-header p {
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        .spec-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .spec-section h2 {
+            font-size: 18px;
+            color: #1F2937;
+            margin: 0 0 16px 0;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .badge-old {
+            background: #FEE2E2;
+            color: #DC2626;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .badge-new {
+            background: #ECFDF5;
+            color: #059669;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 16px;
+        }
+
+        .comparison-box {
+            padding: 16px;
+            border-radius: 12px;
+            border: 2px dashed #E5E7EB;
+        }
+
+        .comparison-box.old {
+            background: #FEF2F2;
+            border-color: #FECACA;
+        }
+
+        .comparison-box.new {
+            background: #ECFDF5;
+            border-color: #A7F3D0;
+        }
+
+        .comparison-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: #6B7280;
+        }
+
+        /* ========================================
+           MONTHLY GROUPING PREVIEW
+           ======================================== */
+        .month-section {
+            margin-bottom: 16px;
+            background: #F9FAFB;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .month-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px 12px 0 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .month-header:hover {
+            background: #F9FAFB;
+        }
+
+        .month-header.collapsed {
+            border-radius: 12px;
+        }
+
+        .month-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .month-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1F2937;
+        }
+
+        .month-badge {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #E5E7EB;
+            color: #6B7280;
+        }
+
+        .month-badge.active {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+
+        .month-chevron {
+            width: 20px;
+            height: 20px;
+            color: #9CA3AF;
+            transition: transform 0.2s;
+        }
+
+        .month-header.collapsed .month-chevron {
+            transform: rotate(-90deg);
+        }
+
+        .month-content {
+            padding: 12px;
+            border: 1px solid #E5E7EB;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .month-header.collapsed + .month-content {
+            display: none;
+        }
+
+        /* Week Rows */
+        .week-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 1px solid #E5E7EB;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .week-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .week-row:hover {
+            border-color: #F59E0B;
+        }
+
+        .week-row.current {
+            border-color: #F59E0B;
+            background: #FFFBEB;
+        }
+
+        .week-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .week-number {
+            font-size: 11px;
+            font-weight: 700;
+            color: #9CA3AF;
+            min-width: 40px;
+        }
+
+        .week-dates {
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .week-goal-count {
+            font-size: 12px;
+            color: #6B7280;
+            background: #F3F4F6;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .week-goal-count.empty {
+            color: #9CA3AF;
+            background: #F9FAFB;
+        }
+
+        /* Current Week Indicator */
+        .current-week-tag {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: #F59E0B;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         NOTE: This file is a DESIGN DELTA SPEC, not a runnable page.
+         The live page (client/pages/planning-v2.html) already includes:
+           <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+               <div id="main-navigation"></div>
+           </nav>
+           <script src="/js/navigation.js"></script>
+         Implementation must NOT alter that nav block.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <div class="spec-container">
+        <header class="spec-header">
+            <h1>Sprint 22 Planning Page Changes</h1>
+            <p>Design specification for planning-v2.html updates</p>
+        </header>
+
+        <!-- CHANGE 1: Week Count -->
+        <section class="spec-section">
+            <h2>1. Full Quarter Display (12-13 weeks)</h2>
+            <p style="color: #6B7280; margin-bottom: 16px;">Show all weeks in the quarter, not just 4</p>
+
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid #F3F4F6;">
+                    <th style="text-align: left; padding: 12px; font-size: 12px; color: #6B7280; text-transform: uppercase;">Aspect</th>
+                    <th style="text-align: left; padding: 12px; font-size: 12px; color: #6B7280; text-transform: uppercase;">Current</th>
+                    <th style="text-align: left; padding: 12px; font-size: 12px; color: #6B7280; text-transform: uppercase;">Sprint 22</th>
+                </tr>
+                <tr style="border-bottom: 1px solid #F3F4F6;">
+                    <td style="padding: 12px;">Weeks per quarter</td>
+                    <td><span class="badge-old">4 weeks</span></td>
+                    <td><span class="badge-new">12-13 weeks</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F3F4F6;">
+                    <td style="padding: 12px;">Week grouping</td>
+                    <td><span class="badge-old">None (flat list)</span></td>
+                    <td><span class="badge-new">By month</span></td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px;">Collapsible sections</td>
+                    <td><span class="badge-old">No</span></td>
+                    <td><span class="badge-new">Yes (by month)</span></td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- CHANGE 2: Monthly Grouping -->
+        <section class="spec-section">
+            <h2>2. Monthly Grouping (NEW)</h2>
+            <p style="color: #6B7280; margin-bottom: 16px;">Group weeks by month with collapsible headers</p>
+
+            <!-- Live Preview -->
+            <div style="background: #F9FAFB; padding: 20px; border-radius: 12px;">
+                <!-- April (Expanded) -->
+                <div class="month-section">
+                    <div class="month-header">
+                        <div class="month-title">
+                            <svg class="month-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                            <span class="month-name">April 2026</span>
+                            <span class="month-badge active">Current</span>
+                        </div>
+                        <span style="font-size: 12px; color: #6B7280;">4 weeks &bull; 2 goals</span>
+                    </div>
+                    <div class="month-content">
+                        <div class="week-row">
+                            <div class="week-info">
+                                <span class="week-number">W14</span>
+                                <span class="week-dates">Mar 30 - Apr 5</span>
+                            </div>
+                            <span class="week-goal-count">1 goal</span>
+                        </div>
+                        <div class="week-row current">
+                            <div class="week-info">
+                                <span class="week-number">W15</span>
+                                <span class="week-dates">Apr 6 - Apr 12</span>
+                                <span class="current-week-tag">Current</span>
+                            </div>
+                            <span class="week-goal-count">1 goal</span>
+                        </div>
+                        <div class="week-row">
+                            <div class="week-info">
+                                <span class="week-number">W16</span>
+                                <span class="week-dates">Apr 13 - Apr 19</span>
+                            </div>
+                            <span class="week-goal-count empty">No goals</span>
+                        </div>
+                        <div class="week-row">
+                            <div class="week-info">
+                                <span class="week-number">W17</span>
+                                <span class="week-dates">Apr 20 - Apr 26</span>
+                            </div>
+                            <span class="week-goal-count empty">No goals</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- May (Collapsed) -->
+                <div class="month-section">
+                    <div class="month-header collapsed">
+                        <div class="month-title">
+                            <svg class="month-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                            <span class="month-name">May 2026</span>
+                        </div>
+                        <span style="font-size: 12px; color: #6B7280;">4 weeks &bull; 0 goals</span>
+                    </div>
+                    <div class="month-content">
+                        <!-- Hidden when collapsed -->
+                    </div>
+                </div>
+
+                <!-- June (Collapsed) -->
+                <div class="month-section">
+                    <div class="month-header collapsed">
+                        <div class="month-title">
+                            <svg class="month-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                            <span class="month-name">June 2026</span>
+                        </div>
+                        <span style="font-size: 12px; color: #6B7280;">5 weeks &bull; 0 goals</span>
+                    </div>
+                    <div class="month-content">
+                        <!-- Hidden when collapsed -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHANGE 3: AI Generation -->
+        <section class="spec-section">
+            <h2>3. AI Weekly Goal Generation (Enhancement)</h2>
+            <p style="color: #6B7280; margin-bottom: 16px;">Add preset options for AI-generated weekly goals</p>
+
+            <div style="background: #F9FAFB; padding: 20px; border-radius: 12px;">
+                <p style="font-size: 13px; color: #374151; margin-bottom: 16px;">When generating weekly goals from a Quarterly Goal:</p>
+
+                <div style="display: flex; gap: 12px;">
+                    <button style="padding: 10px 20px; background: white; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 13px; cursor: pointer;">
+                        Generate 4 weeks
+                    </button>
+                    <button style="padding: 10px 20px; background: white; border: 1px solid #E5E7EB; border-radius: 8px; font-size: 13px; cursor: pointer;">
+                        Generate 8 weeks
+                    </button>
+                    <button style="padding: 10px 20px; background: #1F2937; color: white; border: none; border-radius: 8px; font-size: 13px; cursor: pointer;">
+                        Generate 12 weeks
+                    </button>
+                </div>
+
+                <p style="font-size: 11px; color: #9CA3AF; margin-top: 12px;">AI will distribute weekly goals across the selected timeframe, skipping holidays/breaks as configured.</p>
+            </div>
+        </section>
+
+        <!-- UNCHANGED ELEMENTS -->
+        <section class="spec-section">
+            <h2>4. What Stays the Same</h2>
+            <ul style="color: #6B7280; line-height: 2;">
+                <li>Navigation bar</li>
+                <li>Page header with title</li>
+                <li>Quarter selector tabs (Q1 / Q2 / Q3 / Q4)</li>
+                <li>Objectives row (horizontal cards)</li>
+                <li>Two-panel layout structure</li>
+                <li>Left panel: Objective details + Key Results</li>
+                <li>Right panel: Goal details when selected</li>
+                <li>Color theme (already uses Gold accent)</li>
+                <li>All existing click interactions</li>
+            </ul>
+        </section>
+
+        <!-- CSS CHANGES -->
+        <section class="spec-section">
+            <h2>5. New CSS Classes Required</h2>
+
+            <pre style="background: #1F2937; color: #F9FAFB; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 13px;">
+/* Monthly grouping styles */
+.month-section {
+    margin-bottom: 16px;
+    background: #F9FAFB;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.month-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px 12px 0 0;
+    cursor: pointer;
+}
+
+.month-header.collapsed {
+    border-radius: 12px;
+}
+
+.month-header.collapsed + .month-content {
+    display: none;
+}
+
+.month-chevron {
+    transition: transform 0.2s;
+}
+
+.month-header.collapsed .month-chevron {
+    transform: rotate(-90deg);
+}
+
+.month-content {
+    padding: 12px;
+    border: 1px solid #E5E7EB;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+}
+
+/* Current week indicator */
+.current-week-tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #F59E0B;
+    color: white;
+}
+            </pre>
+        </section>
+
+        <!-- IMPLEMENTATION NOTES -->
+        <section class="spec-section">
+            <h2>6. Implementation Notes</h2>
+            <ul style="color: #6B7280; line-height: 2;">
+                <li><strong>Week calculation:</strong> Use DateService to get all weeks in the quarter</li>
+                <li><strong>Month grouping:</strong> Group weeks by month start date</li>
+                <li><strong>Current week:</strong> Highlight with gold badge and border</li>
+                <li><strong>Default state:</strong> Current month expanded, others collapsed</li>
+                <li><strong>Empty weeks:</strong> Show "No goals" in muted style, allow click to create</li>
+                <li><strong>AI presets:</strong> 4/8/12 week options in generate modal</li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>

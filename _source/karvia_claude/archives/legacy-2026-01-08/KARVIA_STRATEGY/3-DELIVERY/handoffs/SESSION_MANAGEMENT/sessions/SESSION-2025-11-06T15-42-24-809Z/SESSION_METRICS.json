@@ -1,0 +1,80 @@
+{
+  "sessionId": "SESSION-2025-11-06T15-42-24-809Z",
+  "startTime": null,
+  "endTime": "2025-11-06T15:42:24.801Z",
+  "duration": 480,
+  "tasks": {
+    "completed": [
+      "c"
+    ],
+    "inProgress": [],
+    "blocked": []
+  },
+  "files": {
+    "created": [
+      "KARVIA_STRATEGY/",
+      "ZERO_CONTEXT_ROADMAP.md",
+      "../.session-config.json",
+      "../KARVIA_STRATEGY/3-DELIVERY/1-SPRINTS/SPRINT_1/",
+      "../KARVIA_STRATEGY/3-DELIVERY/handoffs/SESSION_MANAGEMENT/MASTER_TREE_CODE.md",
+      "../KARVIA_STRATEGY/3-DELIVERY/handoffs/SESSION_MANAGEMENT/MASTER_TREE_DOCS.md",
+      "../client/pages/invitation-accept.html",
+      "../server/tests/"
+    ],
+    "modified": [
+      "3-CLAUDE_AI/claude-automation/README.md",
+      "3-CLAUDE_AI/claude-automation/end-session.js",
+      "../.gitignore",
+      "../Karvia_OKR_Product_Planning/MASTER_IMPROVEMENTS_LIST.md",
+      "../client/pages/assessment-hub.html",
+      "../client/pages/assessment-question-library.html",
+      "../client/pages/login.html",
+      "../client/pages/scripts/teams.js",
+      "../client/pages/signup.html",
+      "../engines/iam/index.js",
+      "../server/models/Invitation.js",
+      "../server/models/User.js",
+      "../server/routes/assessmentTemplates.js",
+      "../server/routes/auth.js",
+      "../server/routes/invitations.js",
+      "../server/services/mailjetService.js"
+    ],
+    "deleted": []
+  },
+  "metrics": {
+    "CER": {
+      "contextLoaded": 10,
+      "contextUsed": 10,
+      "value": "100.0"
+    },
+    "TCV": {
+      "tasksPlanned": 3,
+      "tasksCompleted": 1,
+      "value": "0.33"
+    },
+    "TES": {
+      "businessValue": 240,
+      "tokensUsed": 120000,
+      "value": "2.00"
+    },
+    "RAI": {
+      "firstAttempts": 1,
+      "totalAttempts": 2,
+      "value": "50.0"
+    }
+  },
+  "nextSession": {
+    "priorities": [
+      "Continue from last session tasks",
+      "Review and test recent changes",
+      "Check for any remaining TODOs"
+    ],
+    "blockers": [],
+    "context": [
+      "3-CLAUDE_AI/claude-automation/README.md",
+      "3-CLAUDE_AI/claude-automation/end-session.js",
+      "../.gitignore",
+      "../Karvia_OKR_Product_Planning/MASTER_IMPROVEMENTS_LIST.md"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "key_results": [
+    {
+      "title": "Reduce average new-client time-to-value from 21 days to 14 days",
+      "description": "Shorter activation time confirms the onboarding flow is helping clients realize value faster.",
+      "metric_type": "number",
+      "target_value": 14,
+      "baseline_value": 21,
+      "unit": "days",
+      "quarter": 1
+    },
+    {
+      "title": "Increase onboarding milestone completion rate from 62% to 85%",
+      "description": "Higher milestone completion indicates more clients are progressing through the full onboarding path.",
+      "metric_type": "percentage",
+      "target_value": 85,
+      "baseline_value": 62,
+      "unit": "percent",
+      "quarter": 2
+    },
+    {
+      "title": "Raise 30-day onboarding satisfaction score from 7.1 to 8.5",
+      "description": "A stronger early satisfaction score signals that the onboarding experience is becoming more useful and less confusing.",
+      "metric_type": "number",
+      "target_value": 8.5,
+      "baseline_value": 7.1,
+      "unit": "score",
+      "quarter": 3
+    },
+    {
+      "title": "Improve new-client 90-day retention from 88% to 92%",
+      "description": "Better early retention confirms the onboarding experience is creating stronger long-term client engagement.",
+      "metric_type": "percentage",
+      "target_value": 92,
+      "baseline_value": 88,
+      "unit": "percent",
+      "quarter": 4
+    }
+  ],
+  "set_rationale": "The KR set covers onboarding speed, adoption, experience quality, and downstream retention without repeating the same metric.",
+  "assumptions": [],
+  "confidence": {
+    "level": "high",
+    "rationale": "All four KRs use known onboarding and retention baselines."
+  }
+}

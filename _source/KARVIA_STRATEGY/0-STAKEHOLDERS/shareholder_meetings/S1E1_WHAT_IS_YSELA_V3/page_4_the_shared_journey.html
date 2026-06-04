@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E1 - Page 4: The First Buyers | YSELA.AI</title>
+    <style>
+        @page {
+            size: landscape;
+            margin: 0;
+        }
+        @media print {
+            html, body {
+                width: 100%;
+                height: 100%;
+            }
+            .page {
+                height: 100%;
+                page-break-after: avoid;
+            }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto 1fr auto auto;
+            gap: 24px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator {
+            font-size: 12px;
+            color: #888;
+            text-align: right;
+        }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+
+        /* Opening */
+        .opening {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .opening-text {
+            font-size: 22px;
+            font-weight: 300;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        .opening-text em {
+            font-style: normal;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        /* Roles Grid */
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .role-card {
+            background: #FAFAFA;
+            border-radius: 20px;
+            padding: 28px 24px;
+            border: 1px solid #F0F0F0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .role-icon {
+            width: 64px;
+            height: 64px;
+            background: white;
+            border: 2px solid #E0E0E0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .role-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+
+        .role-title {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 16px;
+        }
+
+        .role-question {
+            font-size: 13px;
+            color: #444;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            min-height: 40px;
+        }
+
+        .role-divider {
+            width: 40px;
+            height: 2px;
+            background: #C9A227;
+            margin-bottom: 16px;
+        }
+
+        .role-tasks-label {
+            font-size: 9px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .role-tasks {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* The Truth */
+        .truth-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            padding: 20px 0;
+        }
+
+        .truth-box {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 24px 40px;
+            text-align: center;
+        }
+
+        .truth-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .truth-text {
+            font-size: 18px;
+            color: white;
+            font-weight: 300;
+        }
+
+        .truth-text em {
+            font-style: normal;
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        .truth-side {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .truth-side strong {
+            color: #1a1a2e;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-nav a {
+            color: #888;
+            text-decoration: none;
+        }
+
+        .footer-nav a:hover {
+            color: #C9A227;
+        }
+
+        .footer-nav .next {
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 20px; gap: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .page-indicator { text-align: left; }
+            .opening-text { font-size: 18px; }
+            .roles-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+            .role-card { padding: 20px 16px; }
+            .role-icon { width: 48px; height: 48px; font-size: 22px; }
+            .role-name { font-size: 13px; }
+            .role-question { font-size: 12px; min-height: auto; }
+            .truth-section { flex-direction: column; gap: 20px; padding: 10px 0; }
+            .truth-box { padding: 20px; }
+            .truth-text { font-size: 16px; }
+            .truth-side { max-width: 100%; text-align: center; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .opening-text { font-size: 16px; }
+            .roles-grid { grid-template-columns: 1fr; gap: 12px; }
+            .role-icon { width: 40px; height: 40px; font-size: 18px; }
+            .role-name { font-size: 14px; }
+            .truth-text { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E1: Strategic Overview V3</div>
+            </div>
+            <div class="page-indicator">
+                <div>Page <span class="current">4</span> of 6</div>
+                <div style="margin-top: 4px; color: #1a1a2e; font-weight: 500;">The First Buyers</div>
+            </div>
+        </header>
+
+        <!-- Opening -->
+        <div class="opening">
+            <div class="opening-text">
+                They want to <em>distribute ownership</em>—<br>
+                but lack the structure, coaching, or team size to do it alone.
+            </div>
+        </div>
+
+        <!-- Roles Grid -->
+        <div class="roles-grid">
+            <div class="role-card">
+                <div class="role-icon">&#128188;</div>
+                <div class="role-name">Service Business Owner</div>
+                <div class="role-title">10–50 employees</div>
+                <div class="role-question">"How do I get my team to make decisions without me—while I focus on growth?"</div>
+                <div class="role-divider"></div>
+                <div class="role-tasks-label">Their Gap</div>
+                <div class="role-tasks">
+                    No coaching staff<br>
+                    No HR function<br>
+                    Limited formal training
+                </div>
+            </div>
+
+            <div class="role-card">
+                <div class="role-icon">&#128081;</div>
+                <div class="role-name">Progressive Manager</div>
+                <div class="role-title">Team Lead</div>
+                <div class="role-question">"How do I motivate my team without becoming a micromanager?"</div>
+                <div class="role-divider"></div>
+                <div class="role-tasks-label">Their Gap</div>
+                <div class="role-tasks">
+                    Wants culture<br>
+                    Not surveillance<br>
+                    Needs a system
+                </div>
+            </div>
+
+            <div class="role-card">
+                <div class="role-icon">&#128100;</div>
+                <div class="role-name">Moonshot Team</div>
+                <div class="role-title">Non-Repetitive Work</div>
+                <div class="role-question">"How do we build trust and show progress when the work cannot be templated?"</div>
+                <div class="role-divider"></div>
+                <div class="role-tasks-label">Their Gap</div>
+                <div class="role-tasks">
+                    No playbook<br>
+                    Ambiguous output<br>
+                    Coordination pain
+                </div>
+            </div>
+
+            <div class="role-card">
+                <div class="role-icon">&#128170;</div>
+                <div class="role-name">Consultant / Coach</div>
+                <div class="role-title">External Partner</div>
+                <div class="role-question">"How do I help clients sustain change after the workshop ends?"</div>
+                <div class="role-divider"></div>
+                <div class="role-tasks-label">Their Gap</div>
+                <div class="role-tasks">
+                    Diagnosis is easy<br>
+                    Reinforcement is hard<br>
+                    Needs a platform
+                </div>
+            </div>
+        </div>
+
+        <!-- The Truth -->
+        <div class="truth-section">
+            <div class="truth-side">
+                <strong>They share a common gap:</strong><br>
+                Limited business education.<br>
+                Too small for HR or coaching.<br>
+                Too ambitious to stay stuck.
+            </div>
+
+            <div class="truth-box">
+                <div class="truth-label">What They Want</div>
+                <div class="truth-text">
+                    To distribute <em>risk, ownership, and accountability</em>—<br>
+                    through motivation, not tracking.
+                </div>
+            </div>
+
+            <div class="truth-side">
+                <strong>Why YSELA fits:</strong><br>
+                Self-reflection, not surveillance.<br>
+                Assessments as conversation starters.<br>
+                Reinforcement without policing.
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_3_the_path.html">&larr; The Pilot Wedge</a>
+                <a href="page_5_the_connection.html" class="next">Next: The Product Bridge &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

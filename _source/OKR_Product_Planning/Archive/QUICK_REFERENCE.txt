@@ -1,0 +1,132 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                     KARVIA MASTER LISTS - QUICK REFERENCE                     ║
+║                        Last Updated: 2025-10-13 18:30                         ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  📋 THE 3 LISTS (Single Source of Truth)                                      ║
+║                                                                               ║
+║  1. MASTER_DEV_LIST.md          ⭐ Nov 30 active development (40 tasks)      ║
+║  2. MASTER_IMPROVEMENTS_LIST.md 📝 Post-MVP & Beta features (67 items)       ║
+║  3. MASTER_ISSUES_LIST.md       🐛 Known issues & bugs (23 items)            ║
+║                                                                               ║
+║  TOTAL ITEMS TRACKED: 130 (40 + 67 + 23)                                     ║
+║  TOTAL CROSS-REFERENCES: 296 links                                           ║
+║                                                                               ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  🎯 TASK ID SYSTEM                                                            ║
+║                                                                               ║
+║  DEV-XXX  →  Development tasks for Nov 30 release                            ║
+║  IMP-XXX  →  Improvements (Beta, Phase 2, Future)                            ║
+║  ISS-XXX  →  Issues, bugs, technical debt                                    ║
+║                                                                               ║
+║  PRIORITIES:                                                                  ║
+║  P0 - BLOCKING (fix immediately)                                              ║
+║  P1 - HIGH (current sprint)                                                   ║
+║  P2 - MEDIUM (next sprint)                                                    ║
+║  P3 - LOW (future)                                                            ║
+║                                                                               ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  🤖 AUTOMATED SYNC                                                            ║
+║                                                                               ║
+║  RUN SYNC:  node scripts/sync-master-lists.js                                ║
+║                                                                               ║
+║  WHAT IT DOES:                                                                ║
+║  • Validates 296 cross-references                                             ║
+║  • Updates timestamps in all 3 files                                          ║
+║  • Generates detailed sync report                                             ║
+║  • Detects broken links                                                       ║
+║                                                                               ║
+║  GIT HOOK (optional):                                                         ║
+║  Auto-sync on every git commit                                                ║
+║  Setup: See MASTER_LISTS_README.md                                            ║
+║                                                                               ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  📅 WEEK 0 PRIORITY TASKS (Oct 13-17)                                         ║
+║                                                                               ║
+║  Day 1:  DEV-001 Create Goal Model                                            ║
+║          DEV-002 Create Task Model                                            ║
+║                                                                               ║
+║  Day 2:  DEV-003 Create Invitation Model                                      ║
+║          DEV-004 Create Assessment Model                                      ║
+║          DEV-005 Test All Models                                              ║
+║                                                                               ║
+║  Day 3:  DEV-006 Implement Goals API (6 endpoints)                            ║
+║                                                                               ║
+║  Day 4:  DEV-007 Implement Tasks API (7 endpoints)                            ║
+║                                                                               ║
+║  Day 5:  DEV-008 Connect OpenAI to Planner                                    ║
+║          DEV-009 Feature Flags Service ⭐                                      ║
+║          DEV-010 Admin Toggle for iBrain ⭐                                    ║
+║          DEV-011 End-to-End Testing                                           ║
+║          DEV-012 Week 0 Summary                                               ║
+║                                                                               ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  🚨 CRITICAL BLOCKERS (P0) - MUST FIX IMMEDIATELY                             ║
+║                                                                               ║
+║  ISS-002: Hard-Coded Secrets (security risk)                                  ║
+║  ISS-003: Goal Model Missing (blocks Week 4+)                                 ║
+║  ISS-004: Task Model Missing (blocks Week 5+)                                 ║
+║  ISS-005: Placeholder API Routes (blocks all features)                        ║
+║                                                                               ║
+║  Resolution: All addressed in Week 0 (DEV-001 to DEV-012)                     ║
+║                                                                               ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  📊 QUICK STATS                                                               ║
+║                                                                               ║
+║  • Nov 30 Release: 40 DEV tasks                                               ║
+║  • Beta (Q1 2026): 35 IMP items                                               ║
+║  • Phase 2 (Q2 2026): 20 IMP items                                            ║
+║  • Open Issues: 20 (5 P0, 11 P1, 4 P2)                                        ║
+║  • Resolved Issues: 3                                                         ║
+║                                                                               ║
+║  COMPLETION:                                                                  ║
+║  Week 0:   ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0/12 tasks (0%)                              ║
+║  Weeks 4-10: ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 0/28 tasks (0%)                            ║
+║  Overall: 45% infrastructure, 0% core features                                ║
+║                                                                               ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  🔗 QUICK LINKS                                                               ║
+║                                                                               ║
+║  • MASTER_LISTS_README.md - Complete documentation                            ║
+║  • SUMMARY_OF_CHANGES.md - What was created today                             ║
+║  • IMPLEMENTATION_STATUS_REPORT.md - Current state analysis                   ║
+║  • CUSTOMER_EMAIL_SIMPLE.md - Weekly deliverables for customer                ║
+║  • Daily_Handoffs/ - Daily progress tracking                                  ║
+║                                                                               ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  📝 DAILY WORKFLOW                                                            ║
+║                                                                               ║
+║  MORNING:                                                                     ║
+║  1. Check MASTER_DEV_LIST.md for today's tasks                                ║
+║  2. Note any blockers in MASTER_ISSUES_LIST.md                                ║
+║  3. Start coding                                                              ║
+║                                                                               ║
+║  END OF DAY:                                                                  ║
+║  1. Update task status in MASTER_DEV_LIST.md                                  ║
+║  2. Create daily handoff document                                             ║
+║  3. Run: node scripts/sync-master-lists.js                                    ║
+║  4. Commit changes                                                            ║
+║                                                                               ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║  🎯 NEXT ACTION                                                               ║
+║                                                                               ║
+║  START:  DEV-001 (Create Goal Model)                                          ║
+║  WHEN:   Monday, October 13, 2025 (tomorrow morning)                          ║
+║  TIME:   9:00 AM (after daily standup)                                        ║
+║  GOAL:   Complete Week 0 by Oct 17, 5:00 PM                                   ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+DOCUMENTATION:  Karvia_OKR_Product_Planning/MASTER_LISTS_README.md
+SUPPORT:        Engineering Lead or Product Manager
+CREATED:        October 13, 2025
+STATUS:         ✅ READY TO USE
+

@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Profile - Stage Journey | Karvia</title>
+  <style>
+    :root {
+      --navy: #1e3a5f;
+      --navy-light: #2d4a6f;
+      --gold: #d4a853;
+      --gold-light: #e8c97a;
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --green: #10b981;
+      --green-light: #d1fae5;
+      --blue: #3b82f6;
+      --blue-light: #dbeafe;
+      --purple: #8b5cf6;
+      --purple-light: #ede9fe;
+      --orange: #f59e0b;
+      --orange-light: #fef3c7;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-700);
+      line-height: 1.5;
+    }
+
+    /* ========================================
+       HEADER
+    ======================================== */
+    .header {
+      background: var(--navy);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: var(--gold);
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--gray-300);
+      font-size: 14px;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    /* ========================================
+       MAIN CONTAINER
+    ======================================== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    /* ========================================
+       PAGE HEADER WITH MATURITY RING
+    ======================================== */
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .page-title-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .maturity-ring {
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+
+    .maturity-ring svg {
+      transform: rotate(-90deg);
+    }
+
+    .maturity-ring circle {
+      fill: none;
+      stroke-width: 6;
+    }
+
+    .maturity-ring .bg {
+      stroke: var(--gray-200);
+    }
+
+    .maturity-ring .progress {
+      stroke: var(--gold);
+      stroke-linecap: round;
+      stroke-dasharray: 226;
+      stroke-dashoffset: 181; /* 20% complete */
+      transition: stroke-dashoffset 0.5s ease;
+    }
+
+    .maturity-ring .center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .maturity-ring .percentage {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .maturity-ring .label {
+      font-size: 9px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .page-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .page-subtitle {
+      color: var(--gray-500);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .ai-knows-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: var(--white);
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    .ai-knows-badge .icon {
+      font-size: 20px;
+    }
+
+    .ai-knows-badge .text {
+      color: var(--gray-300);
+    }
+
+    .ai-knows-badge .value {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ========================================
+       STAGE TABS (The Journey)
+    ======================================== */
+    .stage-journey {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .stage-tabs {
+      display: flex;
+      background: var(--gray-100);
+      padding: 8px;
+      gap: 4px;
+    }
+
+    .stage-tab {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      background: transparent;
+      text-align: left;
+    }
+
+    .stage-tab.active {
+      background: var(--white);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .stage-tab.locked {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .stage-tab.completed {
+      background: var(--green-light);
+    }
+
+    .stage-tab.completed .stage-number {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .stage-number {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--gray-200);
+      color: var(--gray-600);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .stage-tab.active .stage-number {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .stage-tab-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .stage-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+
+    .stage-tab.locked .stage-name {
+      color: var(--gray-400);
+    }
+
+    .stage-unlock {
+      font-size: 11px;
+      color: var(--gray-500);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .stage-tab.completed .stage-unlock {
+      color: var(--green);
+    }
+
+    .stage-connector {
+      width: 24px;
+      height: 2px;
+      background: var(--gray-300);
+      flex-shrink: 0;
+    }
+
+    .stage-connector.active {
+      background: var(--gold);
+    }
+
+    /* ========================================
+       STAGE CONTENT PANELS
+    ======================================== */
+    .stage-content {
+      padding: 32px;
+      display: none;
+    }
+
+    .stage-content.active {
+      display: block;
+    }
+
+    /* Stage Header */
+    .stage-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .stage-info h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .stage-info p {
+      color: var(--gray-500);
+      font-size: 15px;
+      max-width: 500px;
+    }
+
+    .stage-reward {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      padding: 16px 24px;
+      border-radius: 12px;
+      text-align: right;
+    }
+
+    .reward-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--navy);
+      opacity: 0.7;
+    }
+
+    .reward-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-top: 4px;
+    }
+
+    /* ========================================
+       FORM SECTIONS
+    ======================================== */
+    .form-section {
+      margin-bottom: 32px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .section-title .badge {
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-required {
+      background: var(--orange-light);
+      color: var(--orange);
+    }
+
+    .badge-optional {
+      background: var(--gray-100);
+      color: var(--gray-500);
+    }
+
+    .badge-impact {
+      background: var(--purple-light);
+      color: var(--purple);
+    }
+
+    .section-progress {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+
+    .section-progress .done {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    /* Form Grid */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .form-grid.single {
+      grid-template-columns: 1fr;
+    }
+
+    /* Form Groups */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-600);
+    }
+
+    .form-label .ai-impact {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: var(--gold-light);
+      color: var(--navy);
+    }
+
+    .form-input {
+      padding: 12px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: 10px;
+      font-size: 15px;
+      transition: all 0.2s;
+      background: var(--white);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.1);
+    }
+
+    .form-input:not(:placeholder-shown) {
+      border-color: var(--green);
+    }
+
+    .form-input::placeholder {
+      color: var(--gray-400);
+    }
+
+    /* Chip Select */
+    .chip-select {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 10px 18px;
+      border: 2px solid var(--gray-200);
+      border-radius: 100px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--white);
+      color: var(--gray-600);
+    }
+
+    .chip:hover {
+      border-color: var(--gray-300);
+      background: var(--gray-50);
+    }
+
+    .chip.selected {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .chip.selected::before {
+      content: "✓ ";
+    }
+
+    /* The Magic Question */
+    .magic-question {
+      background: linear-gradient(135deg, #f8f4ed, #fef9f0);
+      border: 2px solid var(--gold);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .magic-question .label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .magic-question .label .star {
+      font-size: 20px;
+    }
+
+    .magic-question textarea {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      resize: none;
+      min-height: 80px;
+      background: var(--white);
+    }
+
+    .magic-question textarea:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.2);
+    }
+
+    .magic-question .hint {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Quick Suggestions */
+    .quick-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .suggestion {
+      padding: 8px 14px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .suggestion:hover {
+      border-color: var(--gold);
+      background: var(--gold-light);
+    }
+
+    /* ========================================
+       STAGE 1: SSI RESULTS (Read-Only)
+    ======================================== */
+    .ssi-overview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .ssi-dimension {
+      background: var(--white);
+      border: 2px solid var(--gray-100);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .ssi-dimension.weak {
+      border-color: var(--orange-light);
+      background: linear-gradient(to bottom, var(--orange-light), var(--white));
+    }
+
+    .ssi-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .ssi-score {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .ssi-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-600);
+      margin-top: 4px;
+    }
+
+    .ssi-bar {
+      height: 6px;
+      background: var(--gray-200);
+      border-radius: 3px;
+      margin-top: 16px;
+      overflow: hidden;
+    }
+
+    .ssi-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.5s;
+    }
+
+    .ssi-bar-fill.speed { background: var(--blue); }
+    .ssi-bar-fill.strength { background: var(--green); }
+    .ssi-bar-fill.intelligence { background: var(--purple); }
+
+    .ssi-insight {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 12px;
+    }
+
+    .ssi-insight.alert {
+      color: var(--orange);
+      font-weight: 500;
+    }
+
+    /* ========================================
+       STAGE 2: METRICS QUICK INPUT
+    ======================================== */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .metric-card {
+      background: var(--white);
+      border: 2px solid var(--gray-100);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .metric-card.filled {
+      border-color: var(--green);
+    }
+
+    .metric-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .metric-card.filled .metric-icon {
+      background: var(--green-light);
+    }
+
+    .metric-content {
+      flex: 1;
+    }
+
+    .metric-label {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 4px;
+    }
+
+    .metric-value {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .metric-input {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--navy);
+      border: none;
+      background: transparent;
+      width: 120px;
+    }
+
+    .metric-input:focus {
+      outline: none;
+    }
+
+    .metric-input::placeholder {
+      color: var(--gray-300);
+    }
+
+    .metric-unit {
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+
+    .metric-change {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .metric-change.up {
+      background: var(--green-light);
+      color: var(--green);
+    }
+
+    .metric-change.down {
+      background: #fee2e2;
+      color: #ef4444;
+    }
+
+    /* ========================================
+       STAGE 3: BEHAVIORAL DATA (Read-Only)
+    ======================================== */
+    .behavior-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .behavior-card {
+      background: var(--white);
+      border: 2px solid var(--gray-100);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .behavior-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .behavior-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .behavior-badge {
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: var(--blue-light);
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .behavior-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .behavior-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .behavior-unit {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    .behavior-trend {
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .behavior-trend .positive {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .behavior-mini-chart {
+      height: 40px;
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      margin-top: 16px;
+    }
+
+    .bar {
+      flex: 1;
+      background: var(--gray-200);
+      border-radius: 3px;
+      transition: height 0.3s;
+    }
+
+    .bar.active {
+      background: var(--gold);
+    }
+
+    /* ========================================
+       STAGE 4: AI SUMMARY
+    ======================================== */
+    .ai-summary {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      border-radius: 16px;
+      padding: 32px;
+      color: var(--white);
+    }
+
+    .ai-summary-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .ai-icon-large {
+      width: 56px;
+      height: 56px;
+      background: var(--gold);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .ai-summary-title {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .ai-summary-subtitle {
+      font-size: 14px;
+      color: var(--gray-300);
+      margin-top: 4px;
+    }
+
+    .ai-insights {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .ai-insight {
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .ai-insight-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .ai-insight-value {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ========================================
+       LOCKED STATE
+    ======================================== */
+    .locked-overlay {
+      position: relative;
+      padding: 60px 32px;
+      text-align: center;
+    }
+
+    .locked-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.3;
+    }
+
+    .locked-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--gray-400);
+      margin-bottom: 8px;
+    }
+
+    .locked-description {
+      font-size: 14px;
+      color: var(--gray-400);
+      max-width: 400px;
+      margin: 0 auto 24px;
+    }
+
+    .locked-requirements {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: left;
+      background: var(--gray-50);
+      padding: 16px 24px;
+      border-radius: 12px;
+    }
+
+    .requirement {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    .requirement.done {
+      color: var(--green);
+    }
+
+    .requirement .icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .requirement.done .icon {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    /* ========================================
+       FOOTER ACTION
+    ======================================== */
+    .stage-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 32px;
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-100);
+    }
+
+    .completion-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .completion-bar {
+      width: 200px;
+      height: 8px;
+      background: var(--gray-200);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .completion-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 4px;
+      transition: width 0.3s;
+    }
+
+    .completion-text {
+      font-size: 14px;
+      color: var(--gray-600);
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:disabled {
+      background: var(--gray-200);
+      color: var(--gray-400);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--navy);
+      border: 2px solid var(--gray-200);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--navy);
+    }
+
+    /* ========================================
+       RESPONSIVE
+    ======================================== */
+    @media (max-width: 1024px) {
+      .stage-tabs {
+        flex-wrap: wrap;
+      }
+
+      .stage-tab {
+        flex: 1 1 calc(50% - 4px);
+      }
+
+      .stage-connector {
+        display: none;
+      }
+
+      .form-grid,
+      .metrics-grid,
+      .behavior-grid,
+      .ai-insights {
+        grid-template-columns: 1fr;
+      }
+
+      .ssi-overview {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">Karvia</div>
+    <div class="user-info">
+      <span>Acme Financial Services</span>
+      <div class="avatar">JD</div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="container">
+
+    <!-- Page Header with Maturity Ring -->
+    <div class="page-header">
+      <div class="page-title-section">
+        <div class="maturity-ring">
+          <svg width="80" height="80">
+            <circle class="bg" cx="40" cy="40" r="36"></circle>
+            <circle class="progress" cx="40" cy="40" r="36"></circle>
+          </svg>
+          <div class="center-text">
+            <div class="percentage">20%</div>
+            <div class="label">Stage 1</div>
+          </div>
+        </div>
+        <div>
+          <h1 class="page-title">Your AI Journey</h1>
+          <p class="page-subtitle">Complete each stage to unlock smarter recommendations</p>
+        </div>
+      </div>
+      <div class="ai-knows-badge">
+        <span class="icon">🧠</span>
+        <div>
+          <span class="text">AI understands</span>
+          <span class="value">20%</span>
+          <span class="text">of your business</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stage Journey Tabs -->
+    <div class="stage-journey">
+      <div class="stage-tabs">
+        <!-- Stage 0: Discovery -->
+        <button class="stage-tab completed" onclick="showStage(0)">
+          <div class="stage-number">✓</div>
+          <div class="stage-tab-content">
+            <div class="stage-name">Discovery</div>
+            <div class="stage-unlock">First Win Unlocked!</div>
+          </div>
+        </button>
+
+        <!-- Stage 1: Assessment -->
+        <button class="stage-tab active" onclick="showStage(1)">
+          <div class="stage-number">1</div>
+          <div class="stage-tab-content">
+            <div class="stage-name">Assessment</div>
+            <div class="stage-unlock">SSI + Business Context</div>
+          </div>
+        </button>
+
+        <!-- Stage 2: Execution -->
+        <button class="stage-tab" onclick="showStage(2)">
+          <div class="stage-number">2</div>
+          <div class="stage-tab-content">
+            <div class="stage-name">Execution</div>
+            <div class="stage-unlock">Metrics & Targets</div>
+          </div>
+        </button>
+
+        <!-- Stage 3: Learning -->
+        <button class="stage-tab locked" onclick="showStage(3)">
+          <div class="stage-number">3</div>
+          <div class="stage-tab-content">
+            <div class="stage-name">Learning</div>
+            <div class="stage-unlock">Unlock at 65%</div>
+          </div>
+        </button>
+
+        <!-- Stage 4: Mastery -->
+        <button class="stage-tab locked" onclick="showStage(4)">
+          <div class="stage-number">4</div>
+          <div class="stage-tab-content">
+            <div class="stage-name">Mastery</div>
+            <div class="stage-unlock">Unlock at 80%</div>
+          </div>
+        </button>
+      </div>
+
+      <!-- ==========================================
+           STAGE 0: DISCOVERY (First Win)
+      ========================================== -->
+      <div class="stage-content" id="stage-0">
+        <div class="stage-header">
+          <div class="stage-info">
+            <h2>🎯 Discovery — Your First Win</h2>
+            <p>Tell us the basics and get your first personalized objective in under 2 minutes.</p>
+          </div>
+          <div class="stage-reward">
+            <div class="reward-label">You Unlocked</div>
+            <div class="reward-value">First Personalized Objective</div>
+          </div>
+        </div>
+
+        <!-- Identity Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <div class="section-title">
+              <h3>Who You Are</h3>
+              <span class="badge badge-required">Required</span>
+            </div>
+            <span class="section-progress"><span class="done">3</span> / 3</span>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">
+                Industry
+                <span class="ai-impact">High Impact</span>
+              </label>
+              <div class="chip-select">
+                <span class="chip selected">Financial Services</span>
+                <span class="chip">Healthcare</span>
+                <span class="chip">Technology</span>
+                <span class="chip">Professional Services</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                Subtype
+                <span class="ai-impact">High Impact</span>
+              </label>
+              <div class="chip-select">
+                <span class="chip selected">Legacy & Succession</span>
+                <span class="chip">Wealth Management</span>
+                <span class="chip">Insurance</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Team Size</label>
+              <div class="chip-select">
+                <span class="chip">1-10</span>
+                <span class="chip selected">11-50</span>
+                <span class="chip">51-200</span>
+                <span class="chip">200+</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Annual Revenue (Optional)</label>
+              <div class="chip-select">
+                <span class="chip">Under $1M</span>
+                <span class="chip selected">$1M - $5M</span>
+                <span class="chip">$5M - $10M</span>
+                <span class="chip">$10M+</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Magic Question -->
+        <div class="magic-question">
+          <label class="label">
+            <span class="star">✨</span>
+            What's your #1 priority for the next 12 months?
+          </label>
+          <textarea placeholder="e.g., Grow client base by 25% while maintaining service quality...">Increase next-generation client engagement to secure long-term AUM growth</textarea>
+          <div class="hint">
+            💡 This becomes your first personalized objective
+          </div>
+          <div class="quick-suggestions">
+            <span class="suggestion">Grow revenue</span>
+            <span class="suggestion">Improve retention</span>
+            <span class="suggestion">Expand team</span>
+            <span class="suggestion">Operational efficiency</span>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="stage-footer">
+          <div class="completion-status">
+            <div class="completion-bar">
+              <div class="completion-fill" style="width: 100%"></div>
+            </div>
+            <span class="completion-text">Stage Complete</span>
+          </div>
+          <button class="btn btn-primary" onclick="showStage(1)">
+            Continue to Assessment →
+          </button>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           STAGE 1: ASSESSMENT
+      ========================================== -->
+      <div class="stage-content active" id="stage-1">
+        <div class="stage-header">
+          <div class="stage-info">
+            <h2>📊 Assessment — Know Your Strengths</h2>
+            <p>Your SSI results help AI identify gaps and create targeted objectives.</p>
+          </div>
+          <div class="stage-reward">
+            <div class="reward-label">Unlocks</div>
+            <div class="reward-value">Gap-Based Objectives</div>
+          </div>
+        </div>
+
+        <!-- SSI Results (Read-Only) -->
+        <div class="form-section">
+          <div class="section-header">
+            <div class="section-title">
+              <h3>Your SSI Profile</h3>
+              <span class="badge badge-impact">Read Only</span>
+            </div>
+            <a href="#" style="font-size: 13px; color: var(--blue);">Retake Assessment →</a>
+          </div>
+
+          <div class="ssi-overview">
+            <div class="ssi-dimension">
+              <div class="ssi-icon">⚡</div>
+              <div class="ssi-score">72</div>
+              <div class="ssi-label">Speed</div>
+              <div class="ssi-bar">
+                <div class="ssi-bar-fill speed" style="width: 72%"></div>
+              </div>
+              <div class="ssi-insight">Strong decision velocity</div>
+            </div>
+
+            <div class="ssi-dimension weak">
+              <div class="ssi-icon">💪</div>
+              <div class="ssi-score">48</div>
+              <div class="ssi-label">Strength</div>
+              <div class="ssi-bar">
+                <div class="ssi-bar-fill strength" style="width: 48%"></div>
+              </div>
+              <div class="ssi-insight alert">⚠️ Focus area for objectives</div>
+            </div>
+
+            <div class="ssi-dimension">
+              <div class="ssi-icon">🧠</div>
+              <div class="ssi-score">65</div>
+              <div class="ssi-label">Intelligence</div>
+              <div class="ssi-bar">
+                <div class="ssi-bar-fill intelligence" style="width: 65%"></div>
+              </div>
+              <div class="ssi-insight">Good learning agility</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Business Context -->
+        <div class="form-section">
+          <div class="section-header">
+            <div class="section-title">
+              <h3>Business Context</h3>
+              <span class="badge badge-optional">Enhances AI</span>
+            </div>
+            <span class="section-progress"><span class="done">1</span> / 3</span>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label class="form-label">
+                What does your company do?
+                <span class="ai-impact">High Impact</span>
+              </label>
+              <textarea class="form-input" rows="2" placeholder="Describe your business in 1-2 sentences...">We help high-net-worth families navigate wealth transitions across generations, specializing in succession planning and estate management.</textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Business Model</label>
+              <div class="chip-select">
+                <span class="chip selected">Fee-based</span>
+                <span class="chip">AUM-based</span>
+                <span class="chip">Commission</span>
+                <span class="chip">Hybrid</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Primary Revenue Driver</label>
+              <input type="text" class="form-input" placeholder="e.g., Financial planning fees" value="">
+            </div>
+          </div>
+        </div>
+
+        <!-- Biggest Blocker -->
+        <div class="form-section">
+          <div class="section-header">
+            <div class="section-title">
+              <h3>Challenges</h3>
+              <span class="badge badge-impact">AI Priority</span>
+            </div>
+          </div>
+
+          <div class="form-grid single">
+            <div class="form-group">
+              <label class="form-label">
+                What's your biggest obstacle right now?
+                <span class="ai-impact">Creates Objectives</span>
+              </label>
+              <textarea class="form-input" rows="2" placeholder="What's blocking your growth?"></textarea>
+              <div class="quick-suggestions" style="margin-top: 8px;">
+                <span class="suggestion">Hiring talent</span>
+                <span class="suggestion">Client retention</span>
+                <span class="suggestion">Scaling operations</span>
+                <span class="suggestion">Technology gaps</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="stage-footer">
+          <div class="completion-status">
+            <div class="completion-bar">
+              <div class="completion-fill" style="width: 40%"></div>
+            </div>
+            <span class="completion-text">40% complete • 3 fields remaining</span>
+          </div>
+          <div style="display: flex; gap: 12px;">
+            <button class="btn btn-secondary" onclick="showStage(0)">← Back</button>
+            <button class="btn btn-primary" onclick="showStage(2)">Continue to Metrics →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           STAGE 2: EXECUTION (Metrics)
+      ========================================== -->
+      <div class="stage-content" id="stage-2">
+        <div class="stage-header">
+          <div class="stage-info">
+            <h2>📈 Execution — The Numbers</h2>
+            <p>Add metrics for specific "from X to Y" Key Results instead of generic targets.</p>
+          </div>
+          <div class="stage-reward">
+            <div class="reward-label">Unlocks</div>
+            <div class="reward-value">Specific "From X to Y" KRs</div>
+          </div>
+        </div>
+
+        <!-- Quick Metrics -->
+        <div class="form-section">
+          <div class="section-header">
+            <div class="section-title">
+              <h3>Core Metrics</h3>
+              <span class="badge badge-required">Required for Stage 2</span>
+            </div>
+            <span class="section-progress"><span class="done">2</span> / 4</span>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric-card filled">
+              <div class="metric-icon">💰</div>
+              <div class="metric-content">
+                <div class="metric-label">Annual Revenue</div>
+                <div class="metric-value">
+                  <span style="color: var(--gray-400);">$</span>
+                  <input type="text" class="metric-input" value="3,200,000" placeholder="0">
+                  <span class="metric-change up">↑ 8%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="metric-card filled">
+              <div class="metric-icon">👥</div>
+              <div class="metric-content">
+                <div class="metric-label">Client Families</div>
+                <div class="metric-value">
+                  <input type="text" class="metric-input" value="142" placeholder="0">
+                  <span class="metric-change up">↑ 12</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon">📊</div>
+              <div class="metric-content">
+                <div class="metric-label">Client Retention Rate</div>
+                <div class="metric-value">
+                  <input type="text" class="metric-input" placeholder="e.g., 94">
+                  <span class="metric-unit">%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon">🎯</div>
+              <div class="metric-content">
+                <div class="metric-label">Assets Under Management</div>
+                <div class="metric-value">
+                  <span style="color: var(--gray-400);">$</span>
+                  <input type="text" class="metric-input" placeholder="e.g., 250M">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Risk Indicators -->
+        <div class="form-section">
+          <div class="section-header">
+            <div class="section-title">
+              <h3>Risk Indicators</h3>
+              <span class="badge badge-impact">Shapes Priorities</span>
+            </div>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-icon">👴</div>
+              <div class="metric-content">
+                <div class="metric-label">Clients Over 65</div>
+                <div class="metric-value">
+                  <input type="text" class="metric-input" placeholder="e.g., 42">
+                  <span class="metric-unit">%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon">👶</div>
+              <div class="metric-content">
+                <div class="metric-label">Next-Gen Engagement</div>
+                <div class="metric-value">
+                  <input type="text" class="metric-input" placeholder="e.g., 15">
+                  <span class="metric-unit">%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Targets Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <div class="section-title">
+              <h3>12-Month Targets</h3>
+              <span class="badge badge-optional">Enables Gap Analysis</span>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Target Revenue</label>
+              <input type="text" class="form-input" placeholder="e.g., $3,500,000">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Target Client Families</label>
+              <input type="text" class="form-input" placeholder="e.g., 165">
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="stage-footer">
+          <div class="completion-status">
+            <div class="completion-bar">
+              <div class="completion-fill" style="width: 50%"></div>
+            </div>
+            <span class="completion-text">50% complete • Add 2 metrics for Stage 2</span>
+          </div>
+          <div style="display: flex; gap: 12px;">
+            <button class="btn btn-secondary" onclick="showStage(1)">← Back</button>
+            <button class="btn btn-primary" disabled>Complete Stage 2 to Continue</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           STAGE 3: LEARNING (System Observed)
+      ========================================== -->
+      <div class="stage-content" id="stage-3">
+        <div class="locked-overlay">
+          <div class="locked-icon">🔒</div>
+          <h3 class="locked-title">Learning Stage Locked</h3>
+          <p class="locked-description">
+            This stage tracks how your team executes and what works. It unlocks automatically as you use Karvia.
+          </p>
+          <div class="locked-requirements">
+            <div class="requirement done">
+              <span class="icon">✓</span>
+              <span>Complete profile (Discovery)</span>
+            </div>
+            <div class="requirement done">
+              <span class="icon">✓</span>
+              <span>SSI Assessment completed</span>
+            </div>
+            <div class="requirement">
+              <span class="icon">○</span>
+              <span>Add baseline metrics (Stage 2)</span>
+            </div>
+            <div class="requirement">
+              <span class="icon">○</span>
+              <span>Complete 50+ tasks</span>
+            </div>
+            <div class="requirement">
+              <span class="icon">○</span>
+              <span>Complete 1 OKR cycle</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           STAGE 4: MASTERY (Full AI)
+      ========================================== -->
+      <div class="stage-content" id="stage-4">
+        <div class="locked-overlay">
+          <div class="locked-icon">🔒</div>
+          <h3 class="locked-title">Mastery Stage Locked</h3>
+          <p class="locked-description">
+            Full AI capabilities unlock after multiple OKR cycles with outcome tracking.
+          </p>
+          <div class="locked-requirements">
+            <div class="requirement done">
+              <span class="icon">✓</span>
+              <span>Complete Discovery stage</span>
+            </div>
+            <div class="requirement done">
+              <span class="icon">✓</span>
+              <span>Complete Assessment stage</span>
+            </div>
+            <div class="requirement">
+              <span class="icon">○</span>
+              <span>Complete Execution stage</span>
+            </div>
+            <div class="requirement">
+              <span class="icon">○</span>
+              <span>Complete Learning stage</span>
+            </div>
+            <div class="requirement">
+              <span class="icon">○</span>
+              <span>4+ OKR cycles with outcomes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- End stage-journey -->
+
+  </div><!-- End container -->
+
+  <script>
+    function showStage(stageNum) {
+      // Hide all content
+      document.querySelectorAll('.stage-content').forEach(el => {
+        el.classList.remove('active');
+      });
+
+      // Show selected content
+      document.getElementById('stage-' + stageNum).classList.add('active');
+
+      // Update tab states
+      document.querySelectorAll('.stage-tab').forEach((tab, index) => {
+        tab.classList.remove('active');
+        if (index === stageNum) {
+          tab.classList.add('active');
+        }
+      });
+    }
+
+    // Chip selection
+    document.querySelectorAll('.chip-select').forEach(container => {
+      container.addEventListener('click', (e) => {
+        if (e.target.classList.contains('chip')) {
+          // For single select, remove selected from siblings
+          container.querySelectorAll('.chip').forEach(chip => {
+            chip.classList.remove('selected');
+          });
+          e.target.classList.add('selected');
+        }
+      });
+    });
+
+    // Quick suggestion click
+    document.querySelectorAll('.suggestion').forEach(suggestion => {
+      suggestion.addEventListener('click', () => {
+        const textarea = suggestion.closest('.form-group, .magic-question')?.querySelector('textarea');
+        if (textarea) {
+          textarea.value = suggestion.textContent;
+          textarea.focus();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

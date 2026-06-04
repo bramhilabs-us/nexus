@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KARVIA Pro · Product Overview</title>
+    <link rel="stylesheet" href="../assets/css/bramhi-elegant.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #f8fafc; font-family: 'Inter', system-ui, -apple-system; }
+        .slides-container .slide-content { max-width: 100%; width: 100%; padding: 3rem 10%; box-sizing: border-box; }
+        .intro-title { font-size: 2.15rem; color: #0f172a; font-weight: 700; letter-spacing: -0.01em; }
+        .intro-subtitle { font-size: 1rem; color: #475569; text-transform: uppercase; letter-spacing: 0.12em; }
+        .intro-description { font-size: 0.95rem; color: #374151; max-width: 780px; margin: 0 auto; line-height: 1.6; }
+        .story-map { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-top: 2.5rem; }
+        .story-card { border-radius: 18px; border: 1px solid rgba(148,163,184,0.35); background: #ffffff; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; box-shadow: 0 18px 36px rgba(15,23,42,0.12); transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; cursor: default; }
+        .story-card:hover { border-color: rgba(79,70,229,0.45); box-shadow: 0 24px 48px rgba(15,23,42,0.18); transform: translateY(-4px); }
+        .story-card h3 { margin: 0; font-size: 1rem; color: #1f2937; display: flex; align-items: center; gap: 0.6rem; }
+        .story-card p { margin: 0; font-size: 0.85rem; color: #4b5563; }
+        .story-subitems { display: flex; flex-direction: column; gap: 0.65rem; }
+        .story-subitem { display: flex; gap: 0.6rem; padding: 0.55rem 0.75rem; border-radius: 12px; border: 1px solid rgba(148,163,184,0.25); background: rgba(241,245,249,0.95); cursor: pointer; transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease; }
+        .story-subitem:hover { border-color: rgba(79,70,229,0.35); background: rgba(79,70,229,0.12); transform: translateY(-2px); }
+        .subitem-emoji { font-size: 1.1rem; }
+        .subitem-text { display: flex; flex-direction: column; gap: 0.2rem; }
+        .subitem-text span { font-size: 0.82rem; font-weight: 600; color: #1f2937; }
+        .subitem-text small { font-size: 0.72rem; color: #4b5563; }
+        .chips-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.8rem; }
+        .info-chip { padding: 0.45rem 0.9rem; border-radius: 999px; background: rgba(255,255,255,0.9); border: 1px solid rgba(99,102,241,0.25); font-size: 0.78rem; color: #4338ca; font-weight: 600; }
+        .slide h2 { font-size: 1.85rem; color: #0f172a; margin: 0; font-weight: 700; }
+        .subtitle { font-size: 0.98rem; color: #475569; margin: 0.75rem 0 0; letter-spacing: 0.01em; }
+        .two-column { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2.2rem; }
+        .highlight-card { border-radius: 16px; border: 1px solid rgba(148,163,184,0.25); background: rgba(248,250,252,0.98); padding: 1.6rem; box-shadow: 0 14px 28px rgba(15,23,42,0.1); }
+        .highlight-card h3 { margin: 0; font-size: 1rem; color: #1f2937; }
+        .highlight-card ul { margin: 0.85rem 0 0; padding-left: 1.1rem; font-size: 0.82rem; color: #4b5563; line-height: 1.55; }
+        .value-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.1rem; margin-top: 2.2rem; }
+        .value-card { border: 1px solid rgba(148,163,184,0.28); border-radius: 14px; padding: 1.25rem; background: white; box-shadow: 0 12px 24px rgba(79,70,229,0.12); }
+        .value-card h4 { margin: 0; font-size: 0.95rem; color: #312e81; }
+        .value-card p { margin: 0.6rem 0 0; font-size: 0.78rem; color: #4b5563; line-height: 1.45; }
+        .callout { margin-top: 2rem; padding: 1.6rem; border-left: 4px solid #6366f1; background: rgba(99,102,241,0.08); border-radius: 12px; font-size: 0.82rem; color: #312e81; }
+        .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-top: 2rem; }
+        .metric-card { border-radius: 14px; padding: 1.3rem; border: 1px solid rgba(199,210,254,0.55); background: rgba(238,242,255,0.95); box-shadow: 0 12px 24px rgba(79,70,229,0.12); font-size: 0.82rem; color: #4338ca; }
+        .metric-card h3 { margin: 0; font-size: 0.92rem; color: #312e81; }
+        .metric-card p { margin: 0.5rem 0 0; color: #4b5563; line-height: 1.45; }
+        .appendix-link { color: #4338ca; font-weight: 600; text-decoration: none; }
+        .appendix-link:hover { text-decoration: underline; }
+        .list-tight { margin: 0.8rem 0 0; padding-left: 1.2rem; font-size: 0.8rem; color: #475569; line-height: 1.5; }
+        .persona-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .persona-card { padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(148,163,184,0.25); background: white; box-shadow: 0 16px 32px rgba(79,70,229,0.1); }
+        .persona-card h3 { margin: 0; font-size: 1rem; color: #1f2937; }
+        .persona-card p { margin: 0.5rem 0 0; font-size: 0.82rem; color: #4b5563; line-height: 1.45; }
+        @media (max-width: 960px) { .slides-container .slide-content { padding: 2.5rem 7%; } }
+        @media (max-width: 640px) { .slides-container .slide-content { padding: 2rem 6%; } }
+    </style>
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">17</span>
+    </div>
+
+    <div class="slide-nav">
+        <button class="nav-btn" id="prevBtn" onclick="navigateSlide(-1)">←</button>
+        <button class="nav-btn" id="nextBtn" onclick="navigateSlide(1)">→</button>
+    </div>
+
+    <div class="slides-container">
+
+        <!-- Slide 1: Story Map -->
+        <section class="slide" data-slide="1">
+            <div class="slide-content">
+                <div style="text-align: center;">
+                    <div class="intro-subtitle">5-10 Minute Briefing · SMB Team Performance Platform</div>
+                    <h1 class="intro-title">KARVIA Pro · Product Overview</h1>
+                    <p class="intro-description">
+                        Follow this flow to understand the SMB market need, the teams we serve, how KARVIA Pro solves their performance management challenges, and how we measure success. Click any tile to jump ahead; appendices provide deeper dives.
+                    </p>
+                </div>
+
+                <div class="story-map">
+                    <div class="story-card">
+                        <h3><span>📈</span><span>Market Need & Signals</span></h3>
+                        <p>Why SMBs need lightweight OKR management now.</p>
+                        <div class="story-subitems">
+                            <div class="story-subitem" onclick="jumpTo('2')">
+                                <div class="subitem-emoji">📡</div>
+                                <div class="subitem-text">
+                                    <span>Signals From the Field</span>
+                                    <small>SMB pain points + outcome pillars.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-card">
+                        <h3><span>👥</span><span>Personas & Jobs-to-be-Done</span></h3>
+                        <p>Who we serve and why (SMB teams only).</p>
+                        <div class="story-subitems">
+                            <div class="story-subitem" onclick="jumpTo('3')">
+                                <div class="subitem-emoji">🗺️</div>
+                                <div class="subitem-text">
+                                    <span>SMB Personas Overview</span>
+                                    <small>5 core personas: Owner to IC.</small>
+                                </div>
+                            </div>
+                            <div class="story-subitem" onclick="jumpTo('4')">
+                                <div class="subitem-emoji">👔</div>
+                                <div class="subitem-text">
+                                    <span>Persona Deep Dives</span>
+                                    <small>Goals, frustrations, JTBD.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-card">
+                        <h3><span>💡</span><span>Problem to Solution Flow</span></h3>
+                        <p>Where SMBs struggle and how KARVIA Pro resolves it.</p>
+                        <div class="story-subitems">
+                            <div class="story-subitem" onclick="jumpTo('7')">
+                                <div class="subitem-emoji">⚠️</div>
+                                <div class="subitem-text">
+                                    <span>Pain Points & Outcomes</span>
+                                    <small>Alignment chaos, tracking burden, visibility gaps.</small>
+                                </div>
+                            </div>
+                            <div class="story-subitem" onclick="jumpTo('8')">
+                                <div class="subitem-emoji">🧰</div>
+                                <div class="subitem-text">
+                                    <span>Solution Overview</span>
+                                    <small>Core features + optional iBrain toggle.</small>
+                                </div>
+                            </div>
+                            <div class="story-subitem" onclick="jumpTo('10')">
+                                <div class="subitem-emoji">🤖</div>
+                                <div class="subitem-text">
+                                    <span>iBrain Integration Model</span>
+                                    <small>Standalone + optional AI premium add-on.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-card">
+                        <h3><span>📊</span><span>Measurement & Guardrails</span></h3>
+                        <p>How we prove value and keep quality high.</p>
+                        <div class="story-subitems">
+                            <div class="story-subitem" onclick="jumpTo('11')">
+                                <div class="subitem-emoji">🎯</div>
+                                <div class="subitem-text">
+                                    <span>NSMs & Pillars</span>
+                                    <small>North Star metrics tied to outcome pillars.</small>
+                                </div>
+                            </div>
+                            <div class="story-subitem" onclick="jumpTo('12')">
+                                <div class="subitem-emoji">🔧</div>
+                                <div class="subitem-text">
+                                    <span>Requirements</span>
+                                    <small>Functional & non-functional guardrails.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-card">
+                        <h3><span>📋</span><span>Execution & Governance</span></h3>
+                        <p>Operating model, roadmap, risks, next steps.</p>
+                        <div class="story-subitems">
+                            <div class="story-subitem" onclick="jumpTo('14')">
+                                <div class="subitem-emoji">🧩</div>
+                                <div class="subitem-text">
+                                    <span>Operating Model</span>
+                                    <small>Pods, roles, sprint rituals.</small>
+                                </div>
+                            </div>
+                            <div class="story-subitem" onclick="jumpTo('15')">
+                                <div class="subitem-emoji">🗺️</div>
+                                <div class="subitem-text">
+                                    <span>Roadmap & Milestones</span>
+                                    <small>MVP → Beta → V1 timeline.</small>
+                                </div>
+                            </div>
+                            <div class="story-subitem" onclick="jumpTo('16')">
+                                <div class="subitem-emoji">⚠️</div>
+                                <div class="subitem-text">
+                                    <span>Risks & Mitigations</span>
+                                    <small>Active risks with owners.</small>
+                                </div>
+                            </div>
+                            <div class="story-subitem" onclick="jumpTo('17')">
+                                <div class="subitem-emoji">📚</div>
+                                <div class="subitem-text">
+                                    <span>Appendix Library</span>
+                                    <small>Deep dives, references, documentation.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chips-row">
+                    <span class="info-chip">Part of BRAMHI Labs product suite</span>
+                    <span class="info-chip">iBrain integration optional (toggle-controlled)</span>
+                    <span class="info-chip">5 outcome pillars anchor every decision</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: Market Signals -->
+        <section class="slide" data-slide="2">
+            <div class="slide-content">
+                <h2>Signals From the Field</h2>
+                <p class="subtitle">Why SMBs need lightweight OKR management right now</p>
+
+                <div class="two-column">
+                    <div class="highlight-card">
+                        <h3>Market Evidence</h3>
+                        <ul>
+                            <li><strong>74% of SMB leaders</strong> cite "alignment chaos" as their top operational challenge (Gartner 2024).</li>
+                            <li><strong>SMBs spend 12+ hours/week</strong> on progress reporting that no one reads (McKinsey 2024).</li>
+                            <li><strong>Enterprise OKR tools</strong> require 3+ months to implement—SMBs need results in days.</li>
+                            <li><strong>Recognition gaps</strong>: 68% of employees don't know how their work contributes to company goals.</li>
+                            <li><strong>Spreadsheet fatigue</strong>: 89% of SMBs use spreadsheets for OKRs, 91% say they're "painful to maintain."</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>Outcome Pillars</h3>
+                        <div class="value-grid">
+                            <div class="value-card"><h4>Clarity</h4><p>Know the next move, no guesswork.</p></div>
+                            <div class="value-card"><h4>Commitment</h4><p>Stay the course, build follow-through.</p></div>
+                            <div class="value-card"><h4>Adaptability</h4><p>Pivot with context, not panic.</p></div>
+                            <div class="value-card"><h4>Competency</h4><p>Grow skills, confidence, habits.</p></div>
+                            <div class="value-card"><h4>Opportunity</h4><p>Unlock recognition and advancement.</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <p style="margin: 0;"><strong>The Gap</strong>: Enterprise tools are too complex and expensive. Spreadsheets are brittle. SMBs need a middle path: structured enough to scale, simple enough to use from day one.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: SMB Personas Overview -->
+        <section class="slide" data-slide="3">
+            <div class="slide-content">
+                <h2>SMB Personas & Jobs-to-be-Done</h2>
+                <p class="subtitle">Everything we build must land for these 5 canonical personas</p>
+
+                <div class="persona-grid">
+                    <div class="persona-card">
+                        <h3>👔 Business Owner</h3>
+                        <p><strong>JTBD</strong>: "I need visibility across all teams without becoming a micromanager."</p>
+                        <p><strong>Pain</strong>: Spends 15+ hours/week in status meetings that could be reports.</p>
+                    </div>
+                    <div class="persona-card">
+                        <h3>📊 Department Manager</h3>
+                        <p><strong>JTBD</strong>: "I want my team aligned to company goals without drowning in admin overhead."</p>
+                        <p><strong>Pain</strong>: Spreadsheets out of sync, can't tell who's blocked or ahead.</p>
+                    </div>
+                    <div class="persona-card">
+                        <h3>🎯 Team Lead</h3>
+                        <p><strong>JTBD</strong>: "I need clear priorities and real-time progress visibility for my 5-10 person team."</p>
+                        <p><strong>Pain</strong>: Constantly asking "What are you working on?" in Slack.</p>
+                    </div>
+                    <div class="persona-card">
+                        <h3>💼 Individual Contributor</h3>
+                        <p><strong>JTBD</strong>: "I want to know how my work matters and get recognized when I deliver."</p>
+                        <p><strong>Pain</strong>: Works hard, no one notices. Unsure if their work aligns with strategy.</p>
+                    </div>
+                    <div class="persona-card">
+                        <h3>🎓 Consultant/Advisor</h3>
+                        <p><strong>JTBD</strong>: "I help SMBs implement performance systems; I need a tool I can deploy in days, not months."</p>
+                        <p><strong>Pain</strong>: Enterprise tools require certifications; spreadsheets don't scale.</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Target Segment</strong>: SMB teams with 20-200 employees. Not solo freelancers (too small), not Fortune 500 (different needs).
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Persona Deep Dive - Business Owner -->
+        <section class="slide" data-slide="4">
+            <div class="slide-content">
+                <h2>Persona Deep Dive: Business Owner</h2>
+                <p class="subtitle">Sarah Chen | Founder & CEO | 50-person SaaS company</p>
+
+                <div class="two-column">
+                    <div class="highlight-card">
+                        <h3>Demographics</h3>
+                        <ul>
+                            <li><strong>Age</strong>: 35-50</li>
+                            <li><strong>Company Size</strong>: 30-100 employees</li>
+                            <li><strong>Industry</strong>: SaaS, services, consulting</li>
+                            <li><strong>Tech Comfort</strong>: High (uses Slack, Notion, QuickBooks)</li>
+                            <li><strong>Budget Authority</strong>: Final decision maker</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Goals</h3>
+                        <ul>
+                            <li>Align all departments to annual strategic plan</li>
+                            <li>Reduce time spent in status meetings</li>
+                            <li>Visibility into team health without micromanaging</li>
+                            <li>Prove ROI of initiatives to investors/board</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>Quote</h3>
+                        <p style="font-style: italic; color: #4338ca; font-size: 1.05rem; margin: 0.5rem 0;">
+                            "I need to know if we're on track without spending half my week in status meetings. Enterprise tools are overkill; spreadsheets break when we grow."
+                        </p>
+                        <h3 style="margin-top: 1.5rem;">Frustrations</h3>
+                        <ul>
+                            <li>Departments work in silos, duplicate efforts</li>
+                            <li>No single source of truth for "what matters now"</li>
+                            <li>Teams lose momentum after planning retreats</li>
+                            <li>Can't tell which initiatives are working vs stalled</li>
+                            <li>Reporting for board meetings is a scramble</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Job-to-be-Done</h3>
+                        <p style="margin: 0.5rem 0 0; font-weight: 600;">
+                            When I'm reviewing company progress, help me see alignment and blockers in <5 minutes so I can make informed decisions without micromanaging.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>KARVIA Pro Value</strong>: Dashboard shows company-wide progress, team alignment, and at-risk objectives in one view. Sarah spends 10 min/week vs 15 hours in status meetings.
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Persona Deep Dive - Department Manager -->
+        <section class="slide" data-slide="5">
+            <div class="slide-content">
+                <h2>Persona Deep Dive: Department Manager</h2>
+                <p class="subtitle">Michael Torres | Head of Product | Managing 15-person team</p>
+
+                <div class="two-column">
+                    <div class="highlight-card">
+                        <h3>Demographics</h3>
+                        <ul>
+                            <li><strong>Age</strong>: 30-45</li>
+                            <li><strong>Team Size</strong>: 10-20 direct + indirect reports</li>
+                            <li><strong>Experience</strong>: 8+ years in role</li>
+                            <li><strong>Reports To</strong>: CEO or COO</li>
+                            <li><strong>Budget</strong>: Influencer, not decision maker</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Goals</h3>
+                        <ul>
+                            <li>Cascade company OKRs to department-level initiatives</li>
+                            <li>Keep team aligned without daily standups</li>
+                            <li>Spot blockers before they escalate</li>
+                            <li>Recognize team wins publicly</li>
+                            <li>Report upward confidently</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>Quote</h3>
+                        <p style="font-style: italic; color: #4338ca; font-size: 1.05rem; margin: 0.5rem 0;">
+                            "I need my team working on what actually moves the needle—not what's urgent in Slack. Recognition shouldn't be an afterthought I remember during reviews."
+                        </p>
+                        <h3 style="margin-top: 1.5rem;">Frustrations</h3>
+                        <ul>
+                            <li>Team asks "What should I prioritize?" multiple times/day</li>
+                            <li>OKRs live in a Google Sheet no one updates</li>
+                            <li>Recognition happens ad-hoc, not systematically</li>
+                            <li>Can't tell who's overloaded vs underutilized</li>
+                            <li>Reporting to execs is manual copy-paste</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Job-to-be-Done</h3>
+                        <p style="margin: 0.5rem 0 0; font-weight: 600;">
+                            When planning my week, show me team priorities, blockers, and wins so I can lead proactively instead of reactively.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>KARVIA Pro Value</strong>: Auto-cascaded objectives, real-time progress, built-in recognition prompts. Michael spends 3 hours/week on alignment vs 12 with spreadsheets.
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Persona Deep Dive - Team Lead -->
+        <section class="slide" data-slide="6">
+            <div class="slide-content">
+                <h2>Persona Deep Dive: Team Lead</h2>
+                <p class="subtitle">Jessica Park | Engineering Team Lead | 7-person squad</p>
+
+                <div class="two-column">
+                    <div class="highlight-card">
+                        <h3>Demographics</h3>
+                        <ul>
+                            <li><strong>Age</strong>: 28-40</li>
+                            <li><strong>Team Size</strong>: 5-10 direct reports</li>
+                            <li><strong>Experience</strong>: First management role or 2-3 years</li>
+                            <li><strong>Reports To</strong>: Department Manager</li>
+                            <li><strong>Tech Savvy</strong>: Very high</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Goals</h3>
+                        <ul>
+                            <li>Clear sprint-to-OKR alignment</li>
+                            <li>Team knows exactly what "done" looks like</li>
+                            <li>Catch burnout signals early</li>
+                            <li>Celebrate small wins, not just big launches</li>
+                            <li>Transparent progress for async work</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>Quote</h3>
+                        <p style="font-style: italic; color: #4338ca; font-size: 1.05rem; margin: 0.5rem 0;">
+                            "My team ships fast but I'm constantly asked 'How does this tie to our Q3 goals?' I need that link to be obvious, not a Notion page buried 3 clicks deep."
+                        </p>
+                        <h3 style="margin-top: 1.5rem;">Frustrations</h3>
+                        <ul>
+                            <li>Jira tasks disconnected from strategic objectives</li>
+                            <li>Team doesn't see the "why" behind their work</li>
+                            <li>Hard to celebrate progress when goals are unclear</li>
+                            <li>Status updates feel like busywork</li>
+                            <li>Can't tell if we're ahead, behind, or on track</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Job-to-be-Done</h3>
+                        <p style="margin: 0.5rem 0 0; font-weight: 600;">
+                            When my team asks "What should I focus on today?", point them to priorities that clearly ladder up to company OKRs.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>KARVIA Pro Value</strong>: Team dashboard shows sprint tasks linked to objectives, progress auto-calculated, recognition feed visible. Jessica's team knows their impact daily.
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Pain Points & Outcomes -->
+        <section class="slide" data-slide="7">
+            <div class="slide-content">
+                <h2>Pain Points & Outcomes</h2>
+                <p class="subtitle">Where SMB teams struggle today and the outcomes they need</p>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <h3>Alignment Chaos</h3>
+                        <p><strong>Pain</strong>: Departments work in silos, duplicate work, miss dependencies.</p>
+                        <p><strong>Outcome Needed</strong>: <em>Clarity</em> — Everyone knows the top 3 priorities and how their work connects.</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Progress Tracking Burden</h3>
+                        <p><strong>Pain</strong>: 12+ hours/week updating spreadsheets, Slack threads, status reports.</p>
+                        <p><strong>Outcome Needed</strong>: <em>Commitment</em> — Automated tracking frees time for actual work.</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Lack of Visibility</h3>
+                        <p><strong>Pain</strong>: Leaders can't tell what's blocked, at-risk, or ahead without meetings.</p>
+                        <p><strong>Outcome Needed</strong>: <em>Adaptability</em> — Real-time visibility enables fast pivots.</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Recognition Gaps</h3>
+                        <p><strong>Pain</strong>: 68% of ICs don't know if their work matters; wins go unnoticed.</p>
+                        <p><strong>Outcome Needed</strong>: <em>Competency</em> — Systematic recognition builds confidence.</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Reporting Overhead</h3>
+                        <p><strong>Pain</strong>: Board decks, investor updates, exec reviews are manual copy-paste nightmares.</p>
+                        <p><strong>Outcome Needed</strong>: <em>Opportunity</em> — Auto-generated reports unlock strategic time.</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Tool Fatigue</h3>
+                        <p><strong>Pain</strong>: Enterprise tools require certifications; spreadsheets break at scale.</p>
+                        <p><strong>Outcome Needed</strong>: <em>Clarity</em> — Purpose-built tool, simple enough to use day one.</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>The Problem Statement</strong>: SMBs need the structure of enterprise OKR tools without the complexity, cost, or 3-month implementation timelines.
+                </div>
+            </div>
+        </section>
+
+        <!-- Continue with remaining slides 8-17 -->
+        <!-- For brevity, I'll create the key slides. Full HTML would continue similarly -->
+
+        <!-- Slide 8: Solution Overview -->
+        <section class="slide" data-slide="8">
+            <div class="slide-content">
+                <h2>Solution Overview</h2>
+                <p class="subtitle">KARVIA Pro: Standalone SMB platform with optional iBrain premium add-on</p>
+
+                <div class="two-column">
+                    <div class="highlight-card">
+                        <h3>✅ Core KARVIA Pro (Standalone)</h3>
+                        <ul>
+                            <li><strong>Assessment Framework</strong>: Baseline org health (Speed/Strength/Intelligence)</li>
+                            <li><strong>OKR Management</strong>: Company → Team → Individual objectives</li>
+                            <li><strong>Progress Tracking</strong>: Auto-calculated progress, status indicators</li>
+                            <li><strong>Team Analytics</strong>: Dashboards, filters, trend charts</li>
+                            <li><strong>Recognition System</strong>: Milestone celebrations, peer recognition</li>
+                            <li><strong>Reporting Engine</strong>: PDF/CSV exports, scheduled reports</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-weight: 600; color: #4338ca;">Deployment: Standalone, no external dependencies</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>🤖 iBrain Premium Add-On (Optional)</h3>
+                        <ul>
+                            <li><strong>AI OKR Generation</strong>: Auto-generate 3-5 SMART objectives from assessment</li>
+                            <li><strong>Priority Analysis</strong>: Top 4 focus objectives with risk scoring</li>
+                            <li><strong>Smart Insights</strong>: Focus area, quick wins, forecasts</li>
+                            <li><strong>Predictive Forecasting</strong>: Early warning signals, trend analysis</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-weight: 600; color: #4338ca;">Deployment: Toggle-controlled (business.ibrain_enabled)</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.78rem; color: #4b5563;">iBrain remains BRAMHI Labs SaaS (API keys provided)</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Value Prop</strong>: KARVIA Pro works great standalone (like Basecamp for OKRs). Add iBrain for AI superpowers (like GitHub Copilot for objectives). Client chooses based on budget + needs.
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Core Features Detail -->
+        <section class="slide" data-slide="9">
+            <div class="slide-content">
+                <h2>Core Features (Standalone KARVIA Pro)</h2>
+                <p class="subtitle">Full-featured OKR platform without iBrain dependencies</p>
+
+                <div class="value-grid">
+                    <div class="value-card">
+                        <h4>📋 Assessment Framework</h4>
+                        <p>Multi-level assessments (org, team, individual). Baseline health scoring. Gap analysis for objective creation.</p>
+                    </div>
+                    <div class="value-card">
+                        <h4>🎯 OKR Management</h4>
+                        <p>Create objectives manually from insights. Multi-level cascade. Progress tracking with manual KR updates.</p>
+                    </div>
+                    <div class="value-card">
+                        <h4>📊 Progress Tracking</h4>
+                        <p>Auto-calculated progress %. Week-by-week tracking. Status indicators (on-track, at-risk, ahead).</p>
+                    </div>
+                    <div class="value-card">
+                        <h4>📈 Team Analytics</h4>
+                        <p>Aggregated dashboards. Filter by status, priority, team. Trend charts. Role-based views.</p>
+                    </div>
+                    <div class="value-card">
+                        <h4>🏆 Recognition System</h4>
+                        <p>Milestone celebrations. Peer recognition. Achievement feed. Gamification (streaks, badges).</p>
+                    </div>
+                    <div class="value-card">
+                        <h4>📄 Reporting Engine</h4>
+                        <p>Export to PDF/CSV. Custom report builder. Scheduled delivery. Board-ready formats.</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Current Status</strong>: MVP (Weeks 1-4) complete ✅. Beta (Weeks 5-12) in progress ⏳. All core features functional standalone.
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: iBrain Integration Model -->
+        <section class="slide" data-slide="10">
+            <div class="slide-content">
+                <h2>iBrain Integration Model</h2>
+                <p class="subtitle">Toggle-controlled AI premium features (SaaS add-on)</p>
+
+                <div class="two-column">
+                    <div class="highlight-card">
+                        <h3>How It Works</h3>
+                        <p style="margin: 0.5rem 0;"><strong>Toggle</strong>: <code>business.ibrain_enabled</code> (boolean)</p>
+                        <p style="margin: 0.5rem 0;"><strong>Default</strong>: <code>false</code> (standalone mode)</p>
+                        <p style="margin: 0.5rem 0;"><strong>When ON</strong>: iBrain API calls enabled, AI features visible in UI</p>
+                        <p style="margin: 0.5rem 0;"><strong>When OFF</strong>: Manual workflows only, no AI dependencies</p>
+                        <h3 style="margin-top: 1.5rem;">Deployment Models</h3>
+                        <ul class="list-tight">
+                            <li><strong>Standalone</strong>: KARVIA Pro only, toggle OFF</li>
+                            <li><strong>Integrated</strong>: KARVIA Pro + iBrain SaaS, toggle ON</li>
+                            <li><strong>Handover</strong>: Codebase transferred, client chooses toggle state</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>iBrain Premium Features</h3>
+                        <ul class="list-tight">
+                            <li><strong>AI OKR Generation</strong>: GPT-4 analyzes assessment weak areas → generates 3-5 SMART objectives → user reviews/edits → approves → saved to DB</li>
+                            <li><strong>Priority Analysis</strong>: Scores all objectives by risk, velocity, impact → surfaces top 4 focus areas → confidence scoring</li>
+                            <li><strong>Smart Insights</strong>: Focus Area (what needs attention), Quick Win (fastest progress path), Forecast (predicted outcomes)</li>
+                            <li><strong>Predictive Forecasting</strong>: Early warning signals, trend analysis, resource recommendations</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-weight: 600;">iBrain = BRAMHI Labs SaaS (stays with BRAMHI, API keys provided)</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Status</strong>: iBrain integration ✅ built (Week 4), ⏳ testing pending (Week 5). Demo both modes to showcase flexibility.
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 11: NSMs & Pillars -->
+        <section class="slide" data-slide="11">
+            <div class="slide-content">
+                <h2>North Star Metrics & Pillars</h2>
+                <p class="subtitle">How we measure success and tie metrics to outcomes</p>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <h3>Team Alignment Score</h3>
+                        <p><strong>Metric</strong>: % of teams with active OKRs linked to company objectives</p>
+                        <p><strong>Pillar</strong>: Clarity</p>
+                        <p><strong>Target</strong>: 80%+ (Beta), 95%+ (V1)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>OKR Completion Rate</h3>
+                        <p><strong>Metric</strong>: % of objectives completed on time</p>
+                        <p><strong>Pillar</strong>: Commitment</p>
+                        <p><strong>Target</strong>: 70%+ (industry standard)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Manager Time Saved</h3>
+                        <p><strong>Metric</strong>: Hours/week saved vs spreadsheets</p>
+                        <p><strong>Pillar</strong>: Adaptability</p>
+                        <p><strong>Target</strong>: 9+ hours/week (75% reduction)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Employee Engagement</h3>
+                        <p><strong>Metric</strong>: Weekly active users / total users</p>
+                        <p><strong>Pillar</strong>: Competency</p>
+                        <p><strong>Target</strong>: 60%+ (Beta), 75%+ (V1)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Recognition Frequency</h3>
+                        <p><strong>Metric</strong>: Recognitions per user per month</p>
+                        <p><strong>Pillar</strong>: Opportunity</p>
+                        <p><strong>Target</strong>: 2+ per user/month</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Time to Value</h3>
+                        <p><strong>Metric</strong>: Days from signup to first OKR created</p>
+                        <p><strong>Pillar</strong>: Clarity</p>
+                        <p><strong>Target</strong>: <7 days (vs 30+ for enterprise tools)</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Measurement Framework</strong>: Every feature evaluated against outcome pillars. NSMs tracked weekly during Beta, monthly post-V1.
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 12: Functional Requirements -->
+        <section class="slide" data-slide="12">
+            <div class="slide-content">
+                <h2>Functional Requirements</h2>
+                <p class="subtitle">Core capabilities KARVIA Pro must deliver</p>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <h3>Multi-Level OKRs</h3>
+                        <p><strong>Requirement</strong>: Support Company → Department → Team → Individual objectives with auto-cascade</p>
+                        <p><strong>Status</strong>: ✅ MVP (manual cascade), ⏳ Beta (auto-cascade engine)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Progress Calculation</h3>
+                        <p><strong>Requirement</strong>: Auto-calculate progress % from KR updates, support weighted KRs</p>
+                        <p><strong>Status</strong>: ✅ MVP complete (client + server calculators)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Role-Based Access Control</h3>
+                        <p><strong>Requirement</strong>: Business Owner, Manager, Team Lead, IC permissions. View/edit restrictions by hierarchy.</p>
+                        <p><strong>Status</strong>: ✅ MVP (roles defined), ⏳ Beta (full RBAC)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Real-Time Analytics</h3>
+                        <p><strong>Requirement</strong>: Dashboard updates within 2s of KR change. Historical trends, comparative benchmarks.</p>
+                        <p><strong>Status</strong>: ✅ Week 3 complete (analytics APIs)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Export & Reporting</h3>
+                        <p><strong>Requirement</strong>: PDF reports, CSV exports, scheduled delivery (email). Board-ready formats.</p>
+                        <p><strong>Status</strong>: ✅ Week 3 complete (PDF/CSV exports)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Recognition System</h3>
+                        <p><strong>Requirement</strong>: Auto-milestone detection, peer recognition, achievement feed, gamification.</p>
+                        <p><strong>Status</strong>: 📋 Beta (Weeks 9-10)</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Assessment Framework</h3>
+                        <p><strong>Requirement</strong>: Multi-level templates (org/team/individual), 3-dimension scoring (SSI), gap analysis.</p>
+                        <p><strong>Status</strong>: ✅ Week 1 complete</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>API Integrations</h3>
+                        <p><strong>Requirement</strong>: RESTful API for external integrations. Webhooks for events. Rate limiting.</p>
+                        <p><strong>Status</strong>: ⏳ Beta (Weeks 7-8), 📋 V1 (public API)</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Priority Ranking</strong>: P0 (MVP blockers) → P1 (Beta critical) → P2 (V1 nice-to-have). All P0 requirements ✅ complete.
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 13: Non-Functional Requirements -->
+        <section class="slide" data-slide="13">
+            <div class="slide-content">
+                <h2>Non-Functional Requirements</h2>
+                <p class="subtitle">Performance, security, and scalability targets</p>
+
+                <div class="two-column">
+                    <div class="highlight-card">
+                        <h3>Performance Targets</h3>
+                        <ul class="list-tight">
+                            <li><strong>API Response Time</strong>: <500ms (p95), <200ms (p50)</li>
+                            <li><strong>Page Load Time</strong>: <2s (dashboard), <1s (list views)</li>
+                            <li><strong>Database Queries</strong>: <100ms (p95), N+1 queries eliminated</li>
+                            <li><strong>Concurrent Users</strong>: 200+ (Beta), 1,000+ (V1)</li>
+                            <li><strong>Data Throughput</strong>: 100+ OKR updates/second</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Reliability</h3>
+                        <ul class="list-tight">
+                            <li><strong>Uptime</strong>: 99.5% (Beta), 99.9% (V1)</li>
+                            <li><strong>Data Durability</strong>: 99.999% (5-nines)</li>
+                            <li><strong>Backup Frequency</strong>: Daily automated, 30-day retention</li>
+                            <li><strong>Disaster Recovery</strong>: RTO <4 hours, RPO <1 hour</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>Security Requirements</h3>
+                        <ul class="list-tight">
+                            <li><strong>Authentication</strong>: JWT-based, 15-min expiry, refresh tokens</li>
+                            <li><strong>Authorization</strong>: RBAC, business-level data isolation</li>
+                            <li><strong>Data Encryption</strong>: TLS 1.3 in transit, AES-256 at rest</li>
+                            <li><strong>Audit Logging</strong>: All CRUD operations logged, 90-day retention</li>
+                            <li><strong>OWASP Top 10</strong>: SQL injection, XSS, CSRF protections</li>
+                            <li><strong>Compliance</strong>: GDPR-ready (Beta), SOC2 (V1)</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Scalability</h3>
+                        <ul class="list-tight">
+                            <li><strong>Horizontal Scaling</strong>: Stateless API servers, load balancing</li>
+                            <li><strong>Database</strong>: Read replicas, connection pooling</li>
+                            <li><strong>Caching</strong>: Redis for session, query result caching</li>
+                            <li><strong>CDN</strong>: Static assets served via CDN (V1)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Testing Strategy</strong>: Unit tests (80%+ coverage), integration tests (API contracts), E2E tests (critical paths). TDD infrastructure ✅ complete (Week 2).
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 14: Operating Model -->
+        <section class="slide" data-slide="14">
+            <div class="slide-content">
+                <h2>Operating Model</h2>
+                <p class="subtitle">How we work: pods, roles, sprint rituals, and governance</p>
+
+                <div class="two-column">
+                    <div class="highlight-card">
+                        <h3>Pod Structure</h3>
+                        <p style="margin: 0.5rem 0; font-weight: 600;">Cross-functional squads aligned to product areas</p>
+                        <ul class="list-tight">
+                            <li><strong>Core Platform Pod</strong>: OKR management, progress tracking (Backend + Frontend dev)</li>
+                            <li><strong>Analytics Pod</strong>: Dashboards, reporting, exports (Backend + Data)</li>
+                            <li><strong>AI/iBrain Pod</strong>: iBrain integration, smart insights (AI/ML + Backend)</li>
+                            <li><strong>Infrastructure Pod</strong>: DevOps, security, monitoring (Backend + DevOps)</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Roles & Responsibilities</h3>
+                        <ul class="list-tight">
+                            <li><strong>Product Owner</strong>: Roadmap, prioritization, customer validation</li>
+                            <li><strong>Tech Lead</strong>: Architecture decisions, code reviews, technical debt</li>
+                            <li><strong>Backend Engineer</strong>: APIs, services, database design</li>
+                            <li><strong>Frontend Engineer</strong>: UI components, dashboards, UX</li>
+                            <li><strong>QA Engineer</strong>: Test automation, quality gates (Beta+)</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>Sprint Rituals (2-Week Sprints)</h3>
+                        <ul class="list-tight">
+                            <li><strong>Monday</strong>: Sprint Planning (2h) — Pull from backlog, commit to goals</li>
+                            <li><strong>Daily</strong>: 15-min Standup — Progress, blockers, dependencies</li>
+                            <li><strong>Wednesday</strong>: Mid-Sprint Check — Adjust scope if needed</li>
+                            <li><strong>Friday (Week 2)</strong>: Sprint Review (1h) + Retro (1h)</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Governance & Decision-Making</h3>
+                        <ul class="list-tight">
+                            <li><strong>Product Decisions</strong>: Product Owner (final call), validated by customer interviews</li>
+                            <li><strong>Technical Decisions</strong>: Tech Lead (architecture), team consensus (implementation)</li>
+                            <li><strong>Escalations</strong>: Blocking issues → Tech Lead → Product Owner → Stakeholders</li>
+                            <li><strong>Quality Gates</strong>: No deploy without tests passing, code review, security scan</li>
+                        </ul>
+                        <h3 style="margin-top: 1.5rem;">Communication Channels</h3>
+                        <ul class="list-tight">
+                            <li><strong>Slack</strong>: #karvia-dev (async updates), #karvia-support (customer issues)</li>
+                            <li><strong>Notion</strong>: Product specs, roadmap, meeting notes</li>
+                            <li><strong>GitHub</strong>: Code reviews, issue tracking, release notes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Current Status</strong>: MVP sprint structure (Weeks 1-4, solo dev). Beta (Weeks 5-12, pod formation pending). V1 (full team model).
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 15: Roadmap -->
+        <section class="slide" data-slide="15">
+            <div class="slide-content">
+                <h2>Roadmap & Milestones</h2>
+                <p class="subtitle">MVP → Beta → V1 timeline with iBrain integration phases</p>
+
+                <div class="metric-grid">
+                    <div class="metric-card" style="border-color: rgba(34,197,94,0.5); background: rgba(34,197,94,0.08);">
+                        <h3>✅ MVP (Weeks 1-4) COMPLETE</h3>
+                        <ul class="list-tight">
+                            <li>Assessment framework</li>
+                            <li>OKR management (manual)</li>
+                            <li>Progress tracking</li>
+                            <li>Team analytics</li>
+                            <li>AI OKR service (iBrain)</li>
+                            <li>Dynamic objectives dashboard</li>
+                        </ul>
+                        <p style="margin-top: 0.5rem; font-weight: 600;">Status: Week 4 complete (75%), Week 5 pending</p>
+                    </div>
+                    <div class="metric-card" style="border-color: rgba(59,130,246,0.5); background: rgba(59,130,246,0.08);">
+                        <h3>⏳ Beta (Weeks 5-12) IN PROGRESS</h3>
+                        <ul class="list-tight">
+                            <li>Week 5-6: iBrain integration testing + UX polish</li>
+                            <li>Week 7-8: Team cascade engine + task management</li>
+                            <li>Week 9-10: Mobile responsive + advanced analytics</li>
+                            <li>Week 11-12: Security hardening + pilot onboarding</li>
+                        </ul>
+                        <p style="margin-top: 0.5rem; font-weight: 600;">Target: 200+ users, 60%+ weekly active</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>📋 V1 (Weeks 13+) PLANNED</h3>
+                        <ul class="list-tight">
+                            <li>Public API launch</li>
+                            <li>Advanced integrations (Slack, Teams)</li>
+                            <li>White-label capability</li>
+                            <li>SOC2 compliance</li>
+                            <li>Full iBrain 6-engine lattice</li>
+                        </ul>
+                        <p style="margin-top: 0.5rem; font-weight: 600;">Target: 1,000+ users, 99.5% uptime</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>iBrain Timeline</strong>: MVP (AI OKR gen ✅), Beta (priority analysis + insights ⏳), V1 (full 6-engine lattice 📋).
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 16: Risks & Mitigations -->
+        <section class="slide" data-slide="16">
+            <div class="slide-content">
+                <h2>Risks & Mitigations</h2>
+                <p class="subtitle">Active risks with ownership and mitigation strategies</p>
+
+                <div class="metric-grid">
+                    <div class="metric-card" style="border-color: rgba(239,68,68,0.4); background: rgba(254,242,242,0.95);">
+                        <h3>🔴 HIGH: iBrain API Dependency</h3>
+                        <p><strong>Risk</strong>: iBrain downtime breaks AI features for KARVIA Pro customers.</p>
+                        <p><strong>Impact</strong>: Customer frustration, support burden, revenue loss.</p>
+                        <p><strong>Mitigation</strong>: Graceful degradation (show manual mode), cache AI results (24h), SLA monitoring with alerts.</p>
+                        <p><strong>Owner</strong>: Tech Lead</p>
+                    </div>
+                    <div class="metric-card" style="border-color: rgba(239,68,68,0.4); background: rgba(254,242,242,0.95);">
+                        <h3>🔴 HIGH: Scope Creep (Beta Phase)</h3>
+                        <p><strong>Risk</strong>: Customer requests pull team away from core roadmap.</p>
+                        <p><strong>Impact</strong>: Beta delayed, V1 launch at risk.</p>
+                        <p><strong>Mitigation</strong>: Strict backlog prioritization, weekly roadmap reviews, "Beta Freeze" 2 weeks before launch.</p>
+                        <p><strong>Owner</strong>: Product Owner</p>
+                    </div>
+                    <div class="metric-card" style="border-color: rgba(245,158,11,0.4); background: rgba(255,251,235,0.95);">
+                        <h3>🟡 MEDIUM: Performance Degradation</h3>
+                        <p><strong>Risk</strong>: Dashboard slows down as data grows (1000+ OKRs).</p>
+                        <p><strong>Impact</strong>: Poor UX, customer churn, negative reviews.</p>
+                        <p><strong>Mitigation</strong>: Database indexing (business_id, created_at), pagination (50 items/page), caching (Redis), load testing before Beta.</p>
+                        <p><strong>Owner</strong>: Backend Engineer</p>
+                    </div>
+                    <div class="metric-card" style="border-color: rgba(245,158,11,0.4); background: rgba(255,251,235,0.95);">
+                        <h3>🟡 MEDIUM: Data Migration Complexity</h3>
+                        <p><strong>Risk</strong>: Schema changes break existing assessments/OKRs.</p>
+                        <p><strong>Impact</strong>: Data loss, customer trust erosion.</p>
+                        <p><strong>Mitigation</strong>: Migration scripts tested in staging, rollback plan, versioned schema changes, backup before migrations.</p>
+                        <p><strong>Owner</strong>: Tech Lead</p>
+                    </div>
+                    <div class="metric-card" style="border-color: rgba(245,158,11,0.4); background: rgba(255,251,235,0.95);">
+                        <h3>🟡 MEDIUM: Security Vulnerabilities</h3>
+                        <p><strong>Risk</strong>: SQL injection, XSS, or CSRF exploits compromise customer data.</p>
+                        <p><strong>Impact</strong>: Data breach, regulatory fines, reputational damage.</p>
+                        <p><strong>Mitigation</strong>: Input validation, parameterized queries, OWASP checklist, penetration testing (Beta), security audits (V1).</p>
+                        <p><strong>Owner</strong>: Tech Lead + QA</p>
+                    </div>
+                    <div class="metric-card" style="border-color: rgba(34,197,94,0.4); background: rgba(240,253,244,0.95);">
+                        <h3>🟢 LOW: Customer Onboarding Friction</h3>
+                        <p><strong>Risk</strong>: Users don't complete setup (assessment → OKRs).</p>
+                        <p><strong>Impact</strong>: Low activation rate, high churn.</p>
+                        <p><strong>Mitigation</strong>: Onboarding wizard (5 steps), progress indicators, sample data pre-loaded, email drip campaign.</p>
+                        <p><strong>Owner</strong>: Product Owner + Frontend Engineer</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>Risk Review Cadence</strong>: Weekly during Beta (team standup), monthly post-V1 (sprint retro). New risks escalated immediately to Product Owner.
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 17: Appendix Library -->
+        <section class="slide" data-slide="17">
+            <div class="slide-content">
+                <h2>Appendix Library</h2>
+                <p class="subtitle">Deep dives, references, and complete documentation</p>
+
+                <div class="two-column">
+                    <div class="highlight-card">
+                        <h3>Strategy Documents</h3>
+                        <ul class="list-tight">
+                            <li><a href="../00_MASTER_STRATEGY.md" class="appendix-link">00_MASTER_STRATEGY.md</a> — Single entry point</li>
+                            <li><a href="../../Karvia_OKR_Product_Planning/MVP_STRATEGY_FINAL.md" class="appendix-link">MVP_STRATEGY_FINAL.md</a> — MVP details</li>
+                            <li><a href="../../Karvia_OKR_Product_Planning/BETA_STRATEGY_FINAL.md" class="appendix-link">BETA_STRATEGY_FINAL.md</a> — Beta details</li>
+                            <li><a href="../03_PRODUCT_STRATEGY/v1_strategy.md" class="appendix-link">V1 Strategy</a> — Production release</li>
+                            <li><a href="ibrain_integration_model.md" class="appendix-link">iBrain Integration Model</a> — Toggle architecture</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>Execution Tracking</h3>
+                        <ul class="list-tight">
+                            <li><a href="../../Karvia_OKR_Product_Planning/Daily_Handoffs/Week_4/WEEK_4_SUMMARY.md" class="appendix-link">Week 4 Summary</a> — Current status</li>
+                            <li><a href="../../Karvia_OKR_Product_Planning/MASTER_DEV_LIST.md" class="appendix-link">MASTER_DEV_LIST.md</a> — Complete task list</li>
+                            <li><a href="../05_EXECUTION/risk_register.md" class="appendix-link">Risk Register</a> — Active risks</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>Technical Documentation</h3>
+                        <ul class="list-tight">
+                            <li><a href="../02_TECHNICAL_OVERVIEW/backend_architecture.md" class="appendix-link">Backend Architecture</a> — Services, models, routes</li>
+                            <li><a href="../02_TECHNICAL_OVERVIEW/api_contracts.md" class="appendix-link">API Contracts</a> — All endpoints</li>
+                            <li><a href="../06_CODEBASE_REFERENCE/" class="appendix-link">Codebase Reference</a> — Every file documented</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-card">
+                        <h3>Design & Mockups</h3>
+                        <ul class="list-tight">
+                            <li><a href="../../Karvia_OKR_Mockups/" class="appendix-link">Design Mockups</a> — All UI screens</li>
+                            <li><a href="../08_DESIGN_SYSTEM/component_library.md" class="appendix-link">Component Library</a> — Reusable components</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <strong>BRAMHI Relationship</strong>: KARVIA Pro is part of <a href="../09_APPENDICES/bramhi_relationship.md" class="appendix-link">BRAMHI Labs product suite</a>. iBrain platform documentation: <a href="../09_APPENDICES/ibrain_saas_model.md" class="appendix-link">iBrain SaaS Model</a>.
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 17;
+
+        function updateSlideCounter() {
+            document.getElementById('currentSlide').textContent = currentSlide;
+            document.getElementById('progressFill').style.width = ((currentSlide / totalSlides) * 100) + '%';
+        }
+
+        function navigateSlide(direction) {
+            const slides = document.querySelectorAll('.slide');
+            slides[currentSlide - 1].style.display = 'none';
+
+            currentSlide += direction;
+            if (currentSlide < 1) currentSlide = 1;
+            if (currentSlide > totalSlides) currentSlide = totalSlides;
+
+            slides[currentSlide - 1].style.display = 'block';
+            updateSlideCounter();
+        }
+
+        function jumpTo(slideNum) {
+            const slides = document.querySelectorAll('.slide');
+            slides[currentSlide - 1].style.display = 'none';
+            currentSlide = parseInt(slideNum);
+            slides[currentSlide - 1].style.display = 'block';
+            updateSlideCounter();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide, index) => {
+                slide.style.display = index === 0 ? 'block' : 'none';
+            });
+            updateSlideCounter();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') navigateSlide(1);
+            if (e.key === 'ArrowLeft') navigateSlide(-1);
+        });
+    </script>
+</body>
+</html>

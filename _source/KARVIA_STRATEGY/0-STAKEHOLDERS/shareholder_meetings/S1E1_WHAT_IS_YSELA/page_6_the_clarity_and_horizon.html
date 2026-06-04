@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E1 - Page 6: The Clarity and Horizon | YSELA.AI</title>
+    <style>
+        @page {
+            size: landscape;
+            margin: 0;
+        }
+        @media print {
+            html, body {
+                width: 100%;
+                height: 100%;
+            }
+            .page {
+                height: 100%;
+                page-break-after: avoid;
+            }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto 1fr auto auto;
+            gap: 24px;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator {
+            font-size: 12px;
+            color: #888;
+            text-align: right;
+        }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+
+        /* Main Content Area */
+        .left-col, .center-col, .right-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Left - The Clarity */
+        .section-header {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .clarity-intro {
+            font-size: 15px;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .clarity-intro em {
+            font-style: normal;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        .clarity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding: 14px;
+            background: #FAFAFA;
+            border-radius: 12px;
+            border: 1px solid #F0F0F0;
+        }
+
+        .clarity-icon {
+            width: 36px;
+            height: 36px;
+            background: #E8F5E9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #2E7D32;
+            flex-shrink: 0;
+        }
+
+        .clarity-content {
+            flex: 1;
+        }
+
+        .clarity-stat {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 2px;
+        }
+
+        .clarity-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Center - The Horizon */
+        .horizon-intro {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .horizon-item {
+            padding: 16px;
+            background: #FAFAFA;
+            border-radius: 14px;
+            border: 1px solid #F0F0F0;
+            margin-bottom: 14px;
+        }
+
+        .horizon-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .horizon-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .horizon-item.ibrain .horizon-icon { background: #EEF2FF; }
+        .horizon-item.culture .horizon-icon { background: #E8F5E9; }
+        .horizon-item.attention .horizon-icon { background: #FEF3C7; }
+
+        .horizon-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .horizon-desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .horizon-note {
+            font-size: 10px;
+            color: #888;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* Right - The Promise */
+        .promise-box {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .promise-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .promise-text {
+            font-size: 14px;
+            color: white;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .promise-text em {
+            font-style: normal;
+            color: #C9A227;
+        }
+
+        .promise-text .highlight {
+            display: block;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 13px;
+        }
+
+        .closing-note {
+            background: #FAFAFA;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .closing-text {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .closing-text strong {
+            color: #1a1a2e;
+        }
+
+        /* Promise Section - Bottom */
+        .promise-section {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px 0;
+            border-top: 1px solid #F0F0F0;
+        }
+
+        .final-message {
+            text-align: center;
+            max-width: 700px;
+        }
+
+        .final-question {
+            font-size: 18px;
+            color: #888;
+            font-weight: 300;
+            margin-bottom: 8px;
+        }
+
+        .final-answer {
+            font-size: 22px;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        .final-answer em {
+            font-style: normal;
+            color: #C9A227;
+        }
+
+        /* Footer */
+        .footer {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-nav a {
+            color: #888;
+            text-decoration: none;
+        }
+
+        .footer-nav a:hover {
+            color: #C9A227;
+        }
+
+        .footer-nav .complete {
+            color: #C9A227;
+            font-weight: 500;
+        }
+        .footer-nav .next {
+            color: #C9A227;
+            font-weight: 500;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 20px; grid-template-columns: 1fr; gap: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .page-indicator { text-align: left; }
+            .left-col, .center-col, .right-col { grid-column: 1; }
+            .clarity-stat { font-size: 16px; }
+            .horizon-item { padding: 14px; }
+            .horizon-name { font-size: 13px; }
+            .promise-box { padding: 18px; }
+            .promise-text { font-size: 13px; }
+            .final-question { font-size: 14px; }
+            .final-answer { font-size: 18px; }
+            .promise-section { padding: 12px 0; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .clarity-stat { font-size: 14px; }
+            .clarity-desc { font-size: 11px; }
+            .horizon-desc { font-size: 11px; }
+            .promise-text { font-size: 12px; }
+            .final-question { font-size: 12px; }
+            .final-answer { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E1: What Is YSELA, Really?</div>
+            </div>
+            <div class="page-indicator">
+                <div>Page <span class="current">6</span> of 6</div>
+                <div style="margin-top: 4px; color: #1a1a2e; font-weight: 500;">The Clarity & Horizon</div>
+            </div>
+        </header>
+
+        <!-- Left - The Clarity -->
+        <div class="left-col">
+            <div class="section-header">What Changes</div>
+
+            <div class="clarity-intro">
+                When the mirror is <em>clear</em>,<br>
+                everything shifts.
+            </div>
+
+            <div class="clarity-item">
+                <div class="clarity-icon">&#10003;</div>
+                <div class="clarity-content">
+                    <div class="clarity-stat">2 hours to deploy</div>
+                    <div class="clarity-desc">Clarity doesn't need complexity.</div>
+                </div>
+            </div>
+
+            <div class="clarity-item">
+                <div class="clarity-icon">&#10003;</div>
+                <div class="clarity-content">
+                    <div class="clarity-stat">15+ hours returned</div>
+                    <div class="clarity-desc">Meetings to create visibility become unnecessary.</div>
+                </div>
+            </div>
+
+            <div class="clarity-item">
+                <div class="clarity-icon">&#10003;</div>
+                <div class="clarity-content">
+                    <div class="clarity-stat">One platform</div>
+                    <div class="clarity-desc">Same mirror. Same cycle. Every role.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center - The Horizon -->
+        <div class="center-col">
+            <div class="section-header">What's Next</div>
+
+            <div class="horizon-intro">
+                This is the foundation.<br>
+                What comes next builds on it.
+            </div>
+
+            <div class="horizon-item ibrain">
+                <div class="horizon-header">
+                    <div class="horizon-icon">&#127918;</div>
+                    <div class="horizon-name">Gamification Engine</div>
+                </div>
+                <div class="horizon-desc">
+                    The cycle is endless. That's the truth.<br>
+                    Gamification doesn't pretend otherwise.<br>
+                    It makes the journey itself satisfying.
+                </div>
+                <div class="horizon-note">Progress you can feel, not just measure.</div>
+            </div>
+
+            <div class="horizon-item culture">
+                <div class="horizon-header">
+                    <div class="horizon-icon">&#128153;</div>
+                    <div class="horizon-name">Culture Score</div>
+                </div>
+                <div class="horizon-desc">
+                    Not a survey. A pattern made visible.<br>
+                    Is this team moving together, or just moving?
+                </div>
+                <div class="horizon-note">You can't fix culture. You can only see it — and choose.</div>
+            </div>
+
+            <div class="horizon-item attention">
+                <div class="horizon-header">
+                    <div class="horizon-icon">&#9201;</div>
+                    <div class="horizon-name">Attention Flow</div>
+                </div>
+                <div class="horizon-desc">
+                    The most valuable resource isn't budget. It's attention.<br>
+                    Where do people choose to invest their focus?
+                </div>
+            </div>
+        </div>
+
+        <!-- Right - The Promise -->
+        <div class="right-col">
+            <div class="section-header">The Promise</div>
+
+            <div class="promise-box">
+                <div class="promise-label">We Are In This Cycle Too</div>
+                <div class="promise-text">
+                    The clarity we build, we also seek.<br>
+                    The question you ask, we ask too.<br><br>
+                    This is not something we <em>give</em> to you.<br>
+                    It's something we <em>practice</em> together.
+
+                    <span class="highlight">
+                        See honestly.<br>
+                        Move intentionally.<br>
+                        Learn always.
+                    </span>
+                </div>
+            </div>
+
+            <div class="closing-note">
+                <div class="closing-text">
+                    <strong>The mirror shows what is.</strong><br>
+                    You decide what becomes.
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Promise Section -->
+        <div class="promise-section">
+            <div class="final-message">
+                <div class="final-question">The question was never "How do I manage better?"</div>
+                <div class="final-answer">The question was always: <em>"What should I do today that matters?"</em></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_5_the_connection.html">&larr; The Connection</a>
+                <a href="page_7_infrastructure_ready.html" class="next">Next: Infrastructure Ready &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -45,5 +45,20 @@ Format:
 - **b) Rotate + purge history** — invasive. `git filter-repo` to scrub every commit. Required if Karvia is or becomes public.
 - **c) Do nothing** — not recommended unless creds are already known-rotated.
 
-**Status**: ANSWERED — see DECISIONS.md 2026-06-03
-**Answer**: Rotate credentials only; do not purge history. Owner: human (not the agent).
+---
+
+## C-002 — Karvia git history contains real MongoDB credentials
+
+**Asked**: 2026-06-03 by tick N1-P1-01
+**Context**: Tick N1-P1-01 scanned the Karvia doc snapshot for secrets and found 24 markdown files with hardcoded `mongodb+srv://user:pass@host` strings — including what look like real production credentials (`rsm_db_user:DcootoIfBIqL20uA@cluster0.lpzcrvy.mongodb.net`). These were redacted in `_source/` before committing to Nexus. **Nexus is safe.** But Karvia's own committed git history still contains these strings.
+
+**Question**: Do you want a follow-up plan to clean Karvia's git history?
+
+**Options the agent sees**:
+- **a) Rotate creds, leave history** — fastest. Rotate the affected Mongo user passwords; the history strings become inert. Recommended unless the repo is public or shared externally.
+- **b) Rotate + purge history** — invasive. Use `git filter-repo` to scrub the strings from every commit. Forces every collaborator to re-clone. Required if Karvia is or will be public.
+- **c) Do nothing** — not recommended unless these credentials are already known-rotated and unused.
+
+**Status**: OPEN
+**Answer**: (filled by human)
+

@@ -1,0 +1,1806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprint 13 - Teams Redesign Mockup | Chief AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FAFAFA;
+            color: #1F2937;
+            line-height: 1.5;
+        }
+
+        /* ========================================
+           NAVIGATION BAR
+           ======================================== */
+        .nav {
+            background: white;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            border-bottom: 1px solid #F0F0F0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo svg {
+            height: 80px;
+            width: auto;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .nav-item {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            text-decoration: none;
+            color: #6B7280;
+            font-size: 13px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item:hover {
+            color: #1F2937;
+        }
+
+        .nav-item.active {
+            color: #1F2937;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 16px;
+            right: 16px;
+            height: 2px;
+            background: transparent;
+            transition: background 0.2s ease;
+        }
+
+        .nav-item[data-philosophy="play"].active::after,
+        .nav-item[data-philosophy="play"]:hover::after { background: #8B5CF6; }
+        .nav-item[data-philosophy="assess"].active::after,
+        .nav-item[data-philosophy="assess"]:hover::after { background: #3B82F6; }
+        .nav-item[data-philosophy="align"].active::after,
+        .nav-item[data-philosophy="align"]:hover::after { background: #22c55e; }
+        .nav-item[data-philosophy="plan"].active::after,
+        .nav-item[data-philosophy="plan"]:hover::after { background: #F59E0B; }
+
+        .nav-divider {
+            width: 1px;
+            height: 24px;
+            background: #E5E7EB;
+        }
+
+        .nav-item .tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+            background: #1F2937;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 400;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease 0.5s, visibility 0.15s ease 0.5s;
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        .nav-item .tooltip::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 6px 6px 6px;
+            border-style: solid;
+            border-color: transparent transparent #1F2937 transparent;
+        }
+
+        .nav-item:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .nav-user:hover {
+            background: #F5F5F5;
+        }
+
+        .nav-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .nav-user-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        /* ========================================
+           MAIN CONTENT
+           ======================================== */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        /* ========================================
+           PAGE HEADER
+           ======================================== */
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .page-header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .page-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .page-subtitle {
+            font-size: 13px;
+            color: #9CA3AF;
+        }
+
+        .page-header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* ========================================
+           BUTTONS
+           ======================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            box-shadow: 0 2px 8px rgba(30, 58, 95, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #374151;
+            border: 1px solid #E5E7EB;
+        }
+
+        .btn-secondary:hover {
+            background: #F9FAFB;
+            border-color: #D1D5DB;
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ========================================
+           STATS ROW
+           ======================================== */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #EBEBEB;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .stat-icon.green { background: #ECFDF5; color: #059669; }
+        .stat-icon.blue { background: #EFF6FF; color: #2563EB; }
+        .stat-icon.purple { background: #F5F3FF; color: #7C3AED; }
+        .stat-icon.amber { background: #FFFBEB; color: #D97706; }
+
+        .stat-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #9CA3AF;
+        }
+
+        /* ========================================
+           FILTER BAR
+           ======================================== */
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 12px;
+        }
+
+        .filter-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-chip {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid #E5E7EB;
+            background: white;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-chip:hover {
+            border-color: #D1D5DB;
+            background: #F9FAFB;
+        }
+
+        .filter-chip.active {
+            background: #22c55e;
+            color: white;
+            border-color: #22c55e;
+        }
+
+        .search-input {
+            padding: 8px 14px 8px 36px;
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
+            font-size: 13px;
+            font-family: inherit;
+            width: 240px;
+            background: white;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.08);
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-wrapper svg {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            color: #9CA3AF;
+        }
+
+        /* ========================================
+           TEAMS GRID
+           ======================================== */
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        /* ========================================
+           TEAM CARD
+           ======================================== */
+        .team-card {
+            background: white;
+            border: 1px solid #EBEBEB;
+            border-radius: 12px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .team-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            border-color: #D1D5DB;
+        }
+
+        .team-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .team-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .team-icon.sales { background: #EFF6FF; }
+        .team-icon.engineering { background: #F5F3FF; }
+        .team-icon.marketing { background: #FFF7ED; }
+        .team-icon.operations { background: #ECFDF5; }
+        .team-icon.finance { background: #FFFBEB; }
+        .team-icon.hr { background: #FFF1F2; }
+
+        .team-status-badge {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .team-status-badge.active {
+            background: #ECFDF5;
+            color: #059669;
+        }
+
+        .team-status-badge.setup {
+            background: #FFFBEB;
+            color: #D97706;
+        }
+
+        .team-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .team-department {
+            font-size: 12px;
+            color: #9CA3AF;
+            margin-bottom: 16px;
+        }
+
+        /* Team meta row */
+        .team-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #F3F4F6;
+        }
+
+        .team-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #6B7280;
+        }
+
+        .team-meta-item svg {
+            width: 14px;
+            height: 14px;
+            color: #9CA3AF;
+        }
+
+        /* Manager avatar */
+        .manager-avatar {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 9px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* Member avatars stack */
+        .member-avatars {
+            display: flex;
+            align-items: center;
+        }
+
+        .member-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 600;
+            color: white;
+            margin-left: -6px;
+        }
+
+        .member-avatar:first-child {
+            margin-left: 0;
+        }
+
+        .member-avatar.a { background: #3B82F6; }
+        .member-avatar.b { background: #8B5CF6; }
+        .member-avatar.c { background: #22c55e; }
+        .member-avatar.d { background: #F59E0B; }
+        .member-avatar.e { background: #EF4444; }
+
+        .member-avatar.more {
+            background: #E5E7EB;
+            color: #6B7280;
+            font-size: 8px;
+        }
+
+        /* Team progress bar */
+        .team-progress {
+            margin-top: 14px;
+        }
+
+        .team-progress-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .team-progress-label {
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        .team-progress-value {
+            font-size: 11px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .team-progress-bar {
+            height: 4px;
+            background: #E5E7EB;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .team-progress-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .team-progress-fill.green { background: #22c55e; }
+        .team-progress-fill.amber { background: #F59E0B; }
+        .team-progress-fill.red { background: #EF4444; }
+        .team-progress-fill.blue { background: #3B82F6; }
+
+        /* Card footer actions */
+        .team-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid #F3F4F6;
+        }
+
+        .team-link {
+            font-size: 12px;
+            color: #22c55e;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .team-link:hover {
+            text-decoration: underline;
+        }
+
+        .team-actions {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .team-card:hover .team-actions {
+            opacity: 1;
+        }
+
+        .team-action-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: none;
+            background: transparent;
+            color: #9CA3AF;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+
+        .team-action-btn:hover {
+            background: #F3F4F6;
+            color: #6B7280;
+        }
+
+        .team-action-btn.delete:hover {
+            background: #FEE2E2;
+            color: #DC2626;
+        }
+
+        .team-action-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ========================================
+           EMPTY STATE
+           ======================================== */
+        .empty-state {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 64px 32px;
+            text-align: center;
+            background: white;
+            border: 1px dashed #D1D5DB;
+            border-radius: 12px;
+        }
+
+        .empty-state-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: #F0FDF4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: #22c55e;
+        }
+
+        .empty-state-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .empty-state-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 6px;
+        }
+
+        .empty-state-text {
+            font-size: 13px;
+            color: #9CA3AF;
+            margin-bottom: 20px;
+            max-width: 360px;
+        }
+
+        /* ========================================
+           MODAL
+           ======================================== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 500;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 16px;
+            width: 560px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .modal-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: #9CA3AF;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+
+        .modal-close:hover {
+            background: #F3F4F6;
+            color: #374151;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .form-label .required {
+            color: #EF4444;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: inherit;
+            color: #1F2937;
+            background: white;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.08);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 72px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .form-hint {
+            font-size: 11px;
+            color: #9CA3AF;
+            margin-top: 4px;
+        }
+
+        /* Members checkbox list */
+        .members-list {
+            max-height: 180px;
+            overflow-y: auto;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 8px;
+        }
+
+        .member-check-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .member-check-row:hover {
+            background: #F9FAFB;
+        }
+
+        .member-check-row input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #22c55e;
+        }
+
+        .member-check-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .member-check-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #1F2937;
+        }
+
+        .member-check-role {
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        .modal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 16px 24px;
+            border-top: 1px solid #F0F0F0;
+        }
+
+        .btn-cancel {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid #E5E7EB;
+            background: white;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-cancel:hover {
+            background: #F9FAFB;
+        }
+
+        /* ========================================
+           TEAM DETAILS PANEL (side panel)
+           ======================================== */
+        .detail-panel-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 400;
+        }
+
+        .detail-panel-overlay.open {
+            display: block;
+        }
+
+        .detail-panel {
+            position: fixed;
+            top: 0;
+            right: -480px;
+            width: 480px;
+            height: 100vh;
+            background: white;
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+            z-index: 450;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .detail-panel.open {
+            right: 0;
+        }
+
+        .detail-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            border-bottom: 1px solid #F0F0F0;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+        }
+
+        .detail-panel-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .detail-panel-body {
+            padding: 24px;
+        }
+
+        /* Detail info section */
+        .detail-info-section {
+            margin-bottom: 24px;
+        }
+
+        .detail-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            background: #F9FAFB;
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .detail-info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .detail-info-label {
+            font-size: 11px;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .detail-info-value {
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        /* Detail members */
+        .detail-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .detail-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-member-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            transition: background 0.15s;
+        }
+
+        .detail-member-row:hover {
+            background: #F9FAFB;
+        }
+
+        .detail-member-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .detail-member-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .detail-member-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #1F2937;
+        }
+
+        .detail-member-email {
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        .detail-member-role {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .detail-member-role.manager {
+            background: #EDE9FE;
+            color: #7C3AED;
+        }
+
+        .detail-member-role.employee {
+            background: #F3F4F6;
+            color: #6B7280;
+        }
+
+        .detail-member-remove {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: none;
+            background: transparent;
+            color: #D1D5DB;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.15s;
+        }
+
+        .detail-member-row:hover .detail-member-remove {
+            opacity: 1;
+        }
+
+        .detail-member-remove:hover {
+            background: #FEE2E2;
+            color: #DC2626;
+        }
+
+        .detail-member-remove svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Pending invitations */
+        .pending-badge {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #FEF3C7;
+            color: #D97706;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 900px) {
+            .teams-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-center {
+                display: none;
+            }
+
+            .main {
+                padding: 20px 16px;
+            }
+
+            .teams-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .detail-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================
+         NAVIGATION
+         ======================================== -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 75">
+                <defs>
+                    <linearGradient id="chiefGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1e3a5f"/>
+                        <stop offset="100%" style="stop-color:#2d5a87"/>
+                    </linearGradient>
+                </defs>
+                <path d="M25 10L27 20L35 15L29 23L42 25L29 27L35 35L27 30L25 40L23 30L15 35L21 27L8 25L21 23L15 15L23 20L25 10Z" fill="url(#chiefGrad)"/>
+                <circle cx="25" cy="25" r="3" fill="#d4a853"/>
+                <text x="50" y="31" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1e3a5f">Chief</text>
+                <text x="108" y="31" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="500" fill="#d4a853">AI</text>
+                <text x="50" y="48" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="400" fill="#6B7280">Your AI Chief of Staff</text>
+            </svg>
+        </div>
+
+        <div class="nav-center">
+            <a href="dashboard-redesign.html" class="nav-item" data-philosophy="play">
+                Dashboard
+                <span class="tooltip">Play - Your daily focus</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="assessment-hub.html" class="nav-item" data-philosophy="assess">
+                Assessments
+                <span class="tooltip">Assess - Understand your org</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="teams-redesign.html" class="nav-item active" data-philosophy="align">
+                Teams
+                <span class="tooltip">Align - Get everyone aligned</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="objectives-redesign.html" class="nav-item" data-philosophy="plan">
+                Objectives
+                <span class="tooltip">Plan - Strategic direction</span>
+            </a>
+            <a href="planning-redesign.html" class="nav-item" data-philosophy="plan">
+                Planning
+                <span class="tooltip">Plan - Weekly execution</span>
+            </a>
+        </div>
+
+        <div class="nav-user">
+            <div class="nav-avatar">JD</div>
+            <span class="nav-user-name">John Doe</span>
+            <svg width="14" height="14" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6"/>
+            </svg>
+        </div>
+    </nav>
+
+    <!-- ========================================
+         MAIN CONTENT
+         ======================================== -->
+    <div class="main">
+
+        <!-- PAGE HEADER -->
+        <!-- API: GET /api/teams + GET /api/auth/users -->
+        <div class="page-header">
+            <div class="page-header-left">
+                <h1 class="page-title">Team Management</h1>
+                <p class="page-subtitle">Create and manage organizational teams</p>
+            </div>
+            <div class="page-header-right">
+                <!-- Visible: CONSULTANT, BUSINESS_OWNER, EXECUTIVE only -->
+                <button class="btn btn-primary" onclick="openCreateTeamModal()">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                    Create Team
+                </button>
+            </div>
+        </div>
+
+        <!-- STATS ROW -->
+        <!-- API: Derived from GET /api/teams response -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-total-teams">5</span>
+                    <span class="stat-label">Total Teams</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-total-members">32</span>
+                    <span class="stat-label">Total Members</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon purple">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-avg-size">6.4</span>
+                    <span class="stat-label">Avg. Team Size</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon amber">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-active-assessments">3</span>
+                    <span class="stat-label">Active Assessments</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FILTER BAR -->
+        <div class="filter-bar">
+            <div class="filter-left">
+                <span class="filter-chip active">All Teams</span>
+                <span class="filter-chip">Sales</span>
+                <span class="filter-chip">Engineering</span>
+                <span class="filter-chip">Marketing</span>
+                <span class="filter-chip">Operations</span>
+            </div>
+            <div class="search-wrapper">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input class="search-input" type="text" placeholder="Search teams..." oninput="console.log('Search teams:', this.value)">
+            </div>
+        </div>
+
+        <!-- TEAMS GRID -->
+        <!-- API: GET /api/teams -->
+        <div class="teams-grid" id="teams-grid">
+
+            <!-- Team Card 1: Sales -->
+            <div class="team-card" onclick="console.log('Open team details: salesTeamId')">
+                <div class="team-card-header">
+                    <div class="team-icon sales">&#128176;</div>
+                    <span class="team-status-badge active">Active</span>
+                </div>
+                <div class="team-name">Sales Team</div>
+                <div class="team-department">Revenue &middot; Sales</div>
+                <div class="team-meta">
+                    <div class="team-meta-item">
+                        <div class="manager-avatar">SM</div>
+                        Sarah Mitchell
+                    </div>
+                    <div class="team-meta-item">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                        8 members
+                    </div>
+                </div>
+                <div class="team-progress">
+                    <div class="team-progress-header">
+                        <span class="team-progress-label">OKR Progress</span>
+                        <span class="team-progress-value">72%</span>
+                    </div>
+                    <div class="team-progress-bar">
+                        <div class="team-progress-fill green" style="width: 72%"></div>
+                    </div>
+                </div>
+                <div class="team-card-footer">
+                    <a href="#" class="team-link" onclick="event.stopPropagation(); console.log('View details: salesTeamId')">
+                        View Details
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <div class="team-actions">
+                        <button class="team-action-btn" onclick="event.stopPropagation(); console.log('Edit: salesTeamId')" title="Edit">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </button>
+                        <button class="team-action-btn delete" onclick="event.stopPropagation(); console.log('Delete: salesTeamId')" title="Delete">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Card 2: Engineering -->
+            <div class="team-card" onclick="console.log('Open team details: engTeamId')">
+                <div class="team-card-header">
+                    <div class="team-icon engineering">&#9881;&#65039;</div>
+                    <span class="team-status-badge active">Active</span>
+                </div>
+                <div class="team-name">Engineering</div>
+                <div class="team-department">Product &middot; Engineering</div>
+                <div class="team-meta">
+                    <div class="team-meta-item">
+                        <div class="manager-avatar">AK</div>
+                        Alex Kumar
+                    </div>
+                    <div class="team-meta-item">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                        12 members
+                    </div>
+                </div>
+                <div class="team-progress">
+                    <div class="team-progress-header">
+                        <span class="team-progress-label">OKR Progress</span>
+                        <span class="team-progress-value">58%</span>
+                    </div>
+                    <div class="team-progress-bar">
+                        <div class="team-progress-fill amber" style="width: 58%"></div>
+                    </div>
+                </div>
+                <div class="team-card-footer">
+                    <a href="#" class="team-link" onclick="event.stopPropagation(); console.log('View details: engTeamId')">
+                        View Details
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <div class="team-actions">
+                        <button class="team-action-btn" onclick="event.stopPropagation(); console.log('Edit: engTeamId')" title="Edit">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </button>
+                        <button class="team-action-btn delete" onclick="event.stopPropagation(); console.log('Delete: engTeamId')" title="Delete">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Card 3: Marketing -->
+            <div class="team-card" onclick="console.log('Open team details: mktTeamId')">
+                <div class="team-card-header">
+                    <div class="team-icon marketing">&#128226;</div>
+                    <span class="team-status-badge active">Active</span>
+                </div>
+                <div class="team-name">Marketing</div>
+                <div class="team-department">Revenue &middot; Marketing</div>
+                <div class="team-meta">
+                    <div class="team-meta-item">
+                        <div class="manager-avatar">JL</div>
+                        Jamie Lee
+                    </div>
+                    <div class="team-meta-item">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                        5 members
+                    </div>
+                </div>
+                <div class="team-progress">
+                    <div class="team-progress-header">
+                        <span class="team-progress-label">OKR Progress</span>
+                        <span class="team-progress-value">45%</span>
+                    </div>
+                    <div class="team-progress-bar">
+                        <div class="team-progress-fill amber" style="width: 45%"></div>
+                    </div>
+                </div>
+                <div class="team-card-footer">
+                    <a href="#" class="team-link" onclick="event.stopPropagation(); console.log('View details: mktTeamId')">
+                        View Details
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <div class="team-actions">
+                        <button class="team-action-btn" onclick="event.stopPropagation(); console.log('Edit: mktTeamId')" title="Edit">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </button>
+                        <button class="team-action-btn delete" onclick="event.stopPropagation(); console.log('Delete: mktTeamId')" title="Delete">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Card 4: Operations -->
+            <div class="team-card" onclick="console.log('Open team details: opsTeamId')">
+                <div class="team-card-header">
+                    <div class="team-icon operations">&#9881;&#65039;</div>
+                    <span class="team-status-badge setup">Setup</span>
+                </div>
+                <div class="team-name">Operations</div>
+                <div class="team-department">Operations &middot; Logistics</div>
+                <div class="team-meta">
+                    <div class="team-meta-item">
+                        <div class="manager-avatar">RP</div>
+                        Raj Patel
+                    </div>
+                    <div class="team-meta-item">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                        4 members
+                    </div>
+                </div>
+                <div class="team-progress">
+                    <div class="team-progress-header">
+                        <span class="team-progress-label">OKR Progress</span>
+                        <span class="team-progress-value">15%</span>
+                    </div>
+                    <div class="team-progress-bar">
+                        <div class="team-progress-fill red" style="width: 15%"></div>
+                    </div>
+                </div>
+                <div class="team-card-footer">
+                    <a href="#" class="team-link" onclick="event.stopPropagation(); console.log('View details: opsTeamId')">
+                        View Details
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <div class="team-actions">
+                        <button class="team-action-btn" onclick="event.stopPropagation(); console.log('Edit: opsTeamId')" title="Edit">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </button>
+                        <button class="team-action-btn delete" onclick="event.stopPropagation(); console.log('Delete: opsTeamId')" title="Delete">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Card 5: Finance -->
+            <div class="team-card" onclick="console.log('Open team details: finTeamId')">
+                <div class="team-card-header">
+                    <div class="team-icon finance">&#128200;</div>
+                    <span class="team-status-badge active">Active</span>
+                </div>
+                <div class="team-name">Finance & Accounting</div>
+                <div class="team-department">Finance &middot; Accounting</div>
+                <div class="team-meta">
+                    <div class="team-meta-item">
+                        <div class="manager-avatar">LW</div>
+                        Lisa Wang
+                    </div>
+                    <div class="team-meta-item">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                        3 members
+                    </div>
+                </div>
+                <div class="team-progress">
+                    <div class="team-progress-header">
+                        <span class="team-progress-label">OKR Progress</span>
+                        <span class="team-progress-value">88%</span>
+                    </div>
+                    <div class="team-progress-bar">
+                        <div class="team-progress-fill green" style="width: 88%"></div>
+                    </div>
+                </div>
+                <div class="team-card-footer">
+                    <a href="#" class="team-link" onclick="event.stopPropagation(); console.log('View details: finTeamId')">
+                        View Details
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <div class="team-actions">
+                        <button class="team-action-btn" onclick="event.stopPropagation(); console.log('Edit: finTeamId')" title="Edit">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </button>
+                        <button class="team-action-btn delete" onclick="event.stopPropagation(); console.log('Delete: finTeamId')" title="Delete">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- EMPTY STATE (shown when no teams) -->
+        <div class="empty-state" id="empty-state">
+            <div class="empty-state-icon">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <div class="empty-state-title">No Teams Yet</div>
+            <div class="empty-state-text">Create your first team to start organizing your workforce and assigning OKR responsibilities.</div>
+            <button class="btn btn-primary" onclick="openCreateTeamModal()">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16" height="16"><path d="M12 5v14M5 12h14"/></svg>
+                Create First Team
+            </button>
+        </div>
+
+    </div>
+
+    <!-- ========================================
+         CREATE TEAM MODAL
+         ======================================== -->
+    <!-- API: POST /api/teams/create -->
+    <!-- API: GET /api/auth/users (populate manager dropdown + member checkboxes) -->
+    <div class="modal-overlay" id="create-team-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title">Create New Team</span>
+                <button class="modal-close" onclick="closeCreateTeamModal()">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Team Name <span class="required">*</span></label>
+                    <input class="form-input" type="text" id="team-name" placeholder="e.g., Sales Team, Engineering">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-textarea" id="team-description" placeholder="Brief description of team purpose"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Department</label>
+                        <input class="form-input" type="text" id="team-department" placeholder="e.g., Sales, Engineering">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Function</label>
+                        <input class="form-input" type="text" id="team-function" placeholder="e.g., Revenue, Product">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Team Manager <span class="required">*</span></label>
+                    <!-- API: populated from GET /api/auth/users filtered by role MANAGER/EXECUTIVE/BUSINESS_OWNER/CONSULTANT -->
+                    <select class="form-select" id="team-manager">
+                        <option value="">Select a manager...</option>
+                        <option value="user1">Sarah Mitchell (MANAGER)</option>
+                        <option value="user2">Alex Kumar (EXECUTIVE)</option>
+                        <option value="user3">Lisa Wang (MANAGER)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Initial Members</label>
+                    <div class="form-hint">Select team members to add immediately</div>
+                    <!-- API: populated from GET /api/auth/users -->
+                    <div class="members-list">
+                        <label class="member-check-row">
+                            <input type="checkbox" name="member" value="user4">
+                            <div class="member-check-info">
+                                <span class="member-check-name">David Chen</span>
+                                <span class="member-check-role">EMPLOYEE</span>
+                            </div>
+                        </label>
+                        <label class="member-check-row">
+                            <input type="checkbox" name="member" value="user5">
+                            <div class="member-check-info">
+                                <span class="member-check-name">Emma Rodriguez</span>
+                                <span class="member-check-role">EMPLOYEE</span>
+                            </div>
+                        </label>
+                        <label class="member-check-row">
+                            <input type="checkbox" name="member" value="user6">
+                            <div class="member-check-info">
+                                <span class="member-check-name">Raj Patel</span>
+                                <span class="member-check-role">MANAGER</span>
+                            </div>
+                        </label>
+                        <label class="member-check-row">
+                            <input type="checkbox" name="member" value="user7">
+                            <div class="member-check-info">
+                                <span class="member-check-name">Nina Kowalski</span>
+                                <span class="member-check-role">EMPLOYEE</span>
+                            </div>
+                        </label>
+                        <label class="member-check-row">
+                            <input type="checkbox" name="member" value="user8">
+                            <div class="member-check-info">
+                                <span class="member-check-name">Tom Garcia</span>
+                                <span class="member-check-role">EMPLOYEE</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeCreateTeamModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="console.log('Create team:', { name: document.getElementById('team-name').value, manager: document.getElementById('team-manager').value })">Create Team</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         TEAM DETAILS SIDE PANEL
+         ======================================== -->
+    <!-- API: GET /api/teams/:teamId -->
+    <!-- API: GET /api/invitations?team_id=:teamId&status=pending -->
+    <div class="detail-panel-overlay" id="detail-overlay" onclick="closeDetailPanel()"></div>
+    <div class="detail-panel" id="detail-panel">
+        <div class="detail-panel-header">
+            <span class="detail-panel-title">Sales Team</span>
+            <button class="modal-close" onclick="closeDetailPanel()">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="detail-panel-body">
+
+            <!-- Team Info -->
+            <div class="detail-info-section">
+                <div class="detail-info-grid">
+                    <div class="detail-info-item">
+                        <span class="detail-info-label">Department</span>
+                        <span class="detail-info-value">Revenue</span>
+                    </div>
+                    <div class="detail-info-item">
+                        <span class="detail-info-label">Function</span>
+                        <span class="detail-info-value">Sales</span>
+                    </div>
+                    <div class="detail-info-item">
+                        <span class="detail-info-label">Manager</span>
+                        <span class="detail-info-value">Sarah Mitchell</span>
+                    </div>
+                    <div class="detail-info-item">
+                        <span class="detail-info-label">Created</span>
+                        <span class="detail-info-value">Jan 15, 2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OKR Progress summary -->
+            <div class="detail-info-section">
+                <div class="team-progress">
+                    <div class="team-progress-header">
+                        <span class="team-progress-label">Team OKR Progress</span>
+                        <span class="team-progress-value">72%</span>
+                    </div>
+                    <div class="team-progress-bar">
+                        <div class="team-progress-fill green" style="width: 72%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Members list -->
+            <div class="detail-info-section">
+                <div class="detail-section-header">
+                    <span class="detail-section-title">Members (8)</span>
+                    <!-- Visible: CONSULTANT, BUSINESS_OWNER, EXECUTIVE, or team manager -->
+                    <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="console.log('Add member to team')">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="12" height="12"><path d="M12 5v14M5 12h14"/></svg>
+                        Add Member
+                    </button>
+                </div>
+
+                <!-- API: GET /api/teams/:teamId populates members -->
+                <div class="detail-member-row">
+                    <div class="detail-member-avatar" style="background: linear-gradient(135deg, #1e3a5f, #2d5a87);">SM</div>
+                    <div class="detail-member-info">
+                        <div class="detail-member-name">Sarah Mitchell</div>
+                        <div class="detail-member-email">sarah@company.com</div>
+                    </div>
+                    <span class="detail-member-role manager">Manager</span>
+                </div>
+
+                <div class="detail-member-row">
+                    <div class="detail-member-avatar" style="background: #3B82F6;">DC</div>
+                    <div class="detail-member-info">
+                        <div class="detail-member-name">David Chen</div>
+                        <div class="detail-member-email">david@company.com</div>
+                    </div>
+                    <span class="detail-member-role employee">Employee</span>
+                    <button class="detail-member-remove" onclick="console.log('Remove member: davidId')" title="Remove member">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
+                </div>
+
+                <div class="detail-member-row">
+                    <div class="detail-member-avatar" style="background: #8B5CF6;">ER</div>
+                    <div class="detail-member-info">
+                        <div class="detail-member-name">Emma Rodriguez</div>
+                        <div class="detail-member-email">emma@company.com</div>
+                    </div>
+                    <span class="detail-member-role employee">Employee</span>
+                    <button class="detail-member-remove" onclick="console.log('Remove member: emmaId')" title="Remove member">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
+                </div>
+
+                <div class="detail-member-row">
+                    <div class="detail-member-avatar" style="background: #22c55e;">TG</div>
+                    <div class="detail-member-info">
+                        <div class="detail-member-name">Tom Garcia</div>
+                        <div class="detail-member-email">tom@company.com</div>
+                    </div>
+                    <span class="detail-member-role employee">Employee</span>
+                    <button class="detail-member-remove" onclick="console.log('Remove member: tomId')" title="Remove member">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pending Invitations -->
+            <div class="detail-info-section">
+                <div class="detail-section-header">
+                    <span class="detail-section-title">Pending Invitations</span>
+                    <span class="pending-badge">2 Pending</span>
+                </div>
+
+                <!-- API: GET /api/invitations?team_id=:teamId&status=pending -->
+                <div class="detail-member-row" style="background: #FFFBEB; border-radius: 8px; padding: 10px 12px;">
+                    <div class="detail-member-avatar" style="background: #F59E0B;">NK</div>
+                    <div class="detail-member-info">
+                        <div class="detail-member-name">Nina Kowalski</div>
+                        <div class="detail-member-email">nina@company.com &middot; Sent Jan 20</div>
+                    </div>
+                    <button class="btn btn-secondary" style="padding: 3px 8px; font-size: 10px;" onclick="console.log('Resend invitation: ninaInvId')">Resend</button>
+                </div>
+
+                <div class="detail-member-row" style="background: #FFFBEB; border-radius: 8px; padding: 10px 12px; margin-top: 6px;">
+                    <div class="detail-member-avatar" style="background: #EF4444;">MJ</div>
+                    <div class="detail-member-info">
+                        <div class="detail-member-name">Mike Johnson</div>
+                        <div class="detail-member-email">mike@company.com &middot; Sent Jan 22</div>
+                    </div>
+                    <button class="btn btn-secondary" style="padding: 3px 8px; font-size: 10px;" onclick="console.log('Resend invitation: mikeInvId')">Resend</button>
+                </div>
+            </div>
+
+            <!-- Panel footer actions -->
+            <div style="display: flex; gap: 10px; margin-top: 8px;">
+                <!-- Visible: CONSULTANT, BUSINESS_OWNER, EXECUTIVE -->
+                <button class="btn btn-secondary" style="flex: 1;" onclick="console.log('Change manager for team')">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>
+                    Change Manager
+                </button>
+                <button class="btn btn-secondary delete" style="flex: 1; color: #DC2626; border-color: #FECACA;" onclick="console.log('Delete team: salesTeamId')">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                    Delete Team
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ========================================
+         JAVASCRIPT HANDLERS
+         ======================================== -->
+    <script>
+        // ---- Modal Controls ----
+        function openCreateTeamModal() {
+            document.getElementById('create-team-modal').classList.add('open');
+            console.log('API: GET /api/auth/users → populate manager dropdown + member checkboxes');
+        }
+
+        function closeCreateTeamModal() {
+            document.getElementById('create-team-modal').classList.remove('open');
+        }
+
+        // ---- Detail Panel Controls ----
+        function openDetailPanel(teamId) {
+            document.getElementById('detail-overlay').classList.add('open');
+            document.getElementById('detail-panel').classList.add('open');
+            console.log('API: GET /api/teams/' + teamId);
+            console.log('API: GET /api/invitations?team_id=' + teamId + '&status=pending');
+        }
+
+        function closeDetailPanel() {
+            document.getElementById('detail-overlay').classList.remove('open');
+            document.getElementById('detail-panel').classList.remove('open');
+        }
+
+        // ---- Filter Chips ----
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                console.log('Filter teams by:', this.textContent.trim());
+            });
+        });
+
+        // ---- Team Card Click → Open Detail Panel ----
+        document.querySelectorAll('.team-card').forEach(card => {
+            card.addEventListener('click', function() {
+                openDetailPanel('teamId');
+            });
+        });
+
+        // ---- Close modal on overlay click ----
+        document.getElementById('create-team-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeCreateTeamModal();
+        });
+
+        // ---- Close panel on Escape ----
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCreateTeamModal();
+                closeDetailPanel();
+            }
+        });
+
+        console.log('Teams page loaded. Role-gated elements: Create Team button (CONSULTANT/BUSINESS_OWNER/EXECUTIVE), Delete (CONSULTANT/BUSINESS_OWNER/EXECUTIVE), Add/Remove Members (admin + team manager)');
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Clients - Sprint 14 Mockup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --navy-primary: #1e3a5f;
+            --navy-secondary: #2d5a87;
+            --gold-accent: #d4a853;
+        }
+        .gradient-navy {
+            background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-secondary) 100%);
+        }
+        .culture-emoji {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+
+    <!-- Header -->
+    <div class="bg-white border-b border-slate-200 px-6 py-4">
+        <div class="flex items-center justify-between max-w-7xl mx-auto">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-800">My Clients</h1>
+                <p class="text-sm text-slate-500">Manage your client portfolio</p>
+            </div>
+            <button onclick="openWizard()" class="gradient-navy text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 hover:shadow-lg transition-shadow">
+                <span>+</span> Add Client
+            </button>
+        </div>
+    </div>
+
+    <!-- Portfolio Stats -->
+    <div class="max-w-7xl mx-auto px-6 py-6">
+        <div class="bg-white rounded-xl border border-slate-200 p-4 mb-6">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-sm font-semibold text-slate-600 uppercase tracking-wide">Portfolio Overview</h2>
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+                <div class="text-center p-3 bg-slate-50 rounded-lg">
+                    <div class="text-2xl font-bold text-slate-800">6</div>
+                    <div class="text-xs text-slate-500">Total Clients</div>
+                </div>
+                <div class="text-center p-3 bg-green-50 rounded-lg">
+                    <div class="text-2xl font-bold text-green-600">4</div>
+                    <div class="text-xs text-slate-500">Active</div>
+                </div>
+                <div class="text-center p-3 bg-yellow-50 rounded-lg">
+                    <div class="text-2xl font-bold text-yellow-600">1</div>
+                    <div class="text-xs text-slate-500">At Risk</div>
+                </div>
+                <div class="text-center p-3 bg-blue-50 rounded-lg">
+                    <div class="text-2xl font-bold text-blue-600">68</div>
+                    <div class="text-xs text-slate-500">Avg SSI Score</div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex items-center gap-2 mt-4 pt-4 border-t border-slate-100">
+                <button class="px-3 py-1.5 bg-slate-800 text-white text-sm rounded-full">All</button>
+                <button class="px-3 py-1.5 bg-slate-100 text-slate-600 text-sm rounded-full hover:bg-slate-200">Active</button>
+                <button class="px-3 py-1.5 bg-slate-100 text-slate-600 text-sm rounded-full hover:bg-slate-200">Onboarding</button>
+                <button class="px-3 py-1.5 bg-slate-100 text-slate-600 text-sm rounded-full hover:bg-slate-200">Needs Attention</button>
+                <div class="flex-1"></div>
+                <input type="text" placeholder="Search clients..." class="px-3 py-1.5 border border-slate-200 rounded-lg text-sm w-48">
+            </div>
+        </div>
+
+        <!-- Client Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Client Card 1: miMobi -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
+                <!-- Header -->
+                <div class="p-4 border-b border-slate-100">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white font-bold text-lg">
+                                M
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-slate-800">miMobi</h3>
+                                <p class="text-xs text-slate-500">Technology / SaaS</p>
+                            </div>
+                        </div>
+                        <span class="w-3 h-3 rounded-full bg-green-500" title="Active"></span>
+                    </div>
+                </div>
+
+                <!-- Body -->
+                <div class="p-4 flex gap-4">
+                    <!-- Left: Objective + Scores -->
+                    <div class="flex-1">
+                        <!-- Objective -->
+                        <div class="bg-slate-50 rounded-lg p-3 mb-3">
+                            <div class="text-xs text-slate-500 mb-1">Objective:</div>
+                            <div class="text-sm text-slate-700 font-medium leading-snug">
+                                "Set up miMobi in Bangalore with 1 paying customer"
+                            </div>
+                        </div>
+
+                        <!-- SSI + Culture Score -->
+                        <div class="flex gap-3">
+                            <div class="bg-slate-50 rounded-lg p-3 text-center flex-1">
+                                <div class="text-xs text-slate-500 mb-1">SSI</div>
+                                <div class="font-bold text-slate-800">7-8-5</div>
+                                <div class="text-xs text-slate-400 mt-0.5">
+                                    <span title="Speed">⚡</span>
+                                    <span title="Strength">🛡️</span>
+                                    <span title="Intelligence">🧠</span>
+                                </div>
+                            </div>
+                            <div class="bg-slate-50 rounded-lg p-3 text-center flex-1">
+                                <div class="text-xs text-slate-500 mb-1">Cultural Score</div>
+                                <div class="culture-emoji">😐</div>
+                                <div class="text-xs text-slate-400 mt-0.5">iBrain</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Contact -->
+                    <div class="w-32 text-center">
+                        <div class="text-xs text-slate-500 mb-2"># primary Contact</div>
+                        <div class="relative inline-block mb-2">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+                                 class="w-16 h-16 rounded-full object-cover border-2 border-white shadow">
+                            <span class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></span>
+                        </div>
+                        <div class="text-sm font-medium text-slate-800">Ravindra MD</div>
+
+                        <!-- Actions -->
+                        <div class="flex gap-2 mt-3">
+                            <button class="flex-1 px-2 py-1.5 bg-blue-50 text-blue-600 text-xs font-medium rounded-lg hover:bg-blue-100">
+                                Message
+                            </button>
+                            <button class="flex-1 px-2 py-1.5 bg-orange-50 text-orange-600 text-xs font-medium rounded-lg hover:bg-orange-100">
+                                Nudge
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Card 2: Acme Corp -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
+                <div class="p-4 border-b border-slate-100">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white font-bold text-lg">
+                                A
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-slate-800">Acme Corp</h3>
+                                <p class="text-xs text-slate-500">Financial Services</p>
+                            </div>
+                        </div>
+                        <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                    </div>
+                </div>
+                <div class="p-4 flex gap-4">
+                    <div class="flex-1">
+                        <div class="bg-slate-50 rounded-lg p-3 mb-3">
+                            <div class="text-xs text-slate-500 mb-1">Objective:</div>
+                            <div class="text-sm text-slate-700 font-medium leading-snug">
+                                "Increase AUM by 25% through client referrals"
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="bg-slate-50 rounded-lg p-3 text-center flex-1">
+                                <div class="text-xs text-slate-500 mb-1">SSI</div>
+                                <div class="font-bold text-slate-800">8-9-8</div>
+                                <div class="text-xs text-slate-400 mt-0.5">⚡🛡️🧠</div>
+                            </div>
+                            <div class="bg-green-50 rounded-lg p-3 text-center flex-1">
+                                <div class="text-xs text-slate-500 mb-1">Cultural Score</div>
+                                <div class="culture-emoji">😊</div>
+                                <div class="text-xs text-slate-400 mt-0.5">iBrain</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-32 text-center">
+                        <div class="text-xs text-slate-500 mb-2"># primary Contact</div>
+                        <div class="relative inline-block mb-2">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white font-bold text-xl border-2 border-white shadow">
+                                MG
+                            </div>
+                            <span class="absolute bottom-0 right-0 w-4 h-4 bg-slate-400 rounded-full border-2 border-white"></span>
+                        </div>
+                        <div class="text-sm font-medium text-slate-800">Maria Garcia</div>
+                        <div class="flex gap-2 mt-3">
+                            <button class="flex-1 px-2 py-1.5 bg-blue-50 text-blue-600 text-xs font-medium rounded-lg">Message</button>
+                            <button class="flex-1 px-2 py-1.5 bg-orange-50 text-orange-600 text-xs font-medium rounded-lg">Nudge</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Card 3: Roth Institut (At Risk) -->
+            <div class="bg-white rounded-xl border-2 border-yellow-200 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
+                <div class="p-4 border-b border-slate-100 bg-yellow-50">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center text-white font-bold text-lg">
+                                R
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-slate-800">Roth Institut</h3>
+                                <p class="text-xs text-slate-500">Consulting</p>
+                            </div>
+                        </div>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500" title="At Risk"></span>
+                    </div>
+                </div>
+                <div class="p-4 flex gap-4">
+                    <div class="flex-1">
+                        <div class="bg-slate-50 rounded-lg p-3 mb-3">
+                            <div class="text-xs text-slate-500 mb-1">Objective:</div>
+                            <div class="text-sm text-slate-700 font-medium leading-snug">
+                                "Launch OKR training program in DACH region"
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="bg-slate-50 rounded-lg p-3 text-center flex-1">
+                                <div class="text-xs text-slate-500 mb-1">SSI</div>
+                                <div class="font-bold text-slate-800">5-6-5</div>
+                                <div class="text-xs text-slate-400 mt-0.5">⚡🛡️🧠</div>
+                            </div>
+                            <div class="bg-yellow-50 rounded-lg p-3 text-center flex-1">
+                                <div class="text-xs text-slate-500 mb-1">Cultural Score</div>
+                                <div class="culture-emoji">😟</div>
+                                <div class="text-xs text-slate-400 mt-0.5">iBrain</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-32 text-center">
+                        <div class="text-xs text-slate-500 mb-2"># primary Contact</div>
+                        <div class="relative inline-block mb-2">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-slate-400 to-slate-600 flex items-center justify-center text-white font-bold text-xl border-2 border-white shadow">
+                                HW
+                            </div>
+                            <span class="absolute bottom-0 right-0 w-4 h-4 bg-slate-400 rounded-full border-2 border-white"></span>
+                        </div>
+                        <div class="text-sm font-medium text-slate-800">Hans Weber</div>
+                        <div class="flex gap-2 mt-3">
+                            <button class="flex-1 px-2 py-1.5 bg-blue-50 text-blue-600 text-xs font-medium rounded-lg">Message</button>
+                            <button class="flex-1 px-2 py-1.5 bg-orange-50 text-orange-600 text-xs font-medium rounded-lg">Nudge</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Card 4: TechStart (Onboarding) -->
+            <div class="bg-white rounded-xl border border-blue-200 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
+                <div class="p-4 border-b border-slate-100 bg-blue-50">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-700 flex items-center justify-center text-white font-bold text-lg">
+                                T
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-slate-800">TechStart GmbH</h3>
+                                <p class="text-xs text-slate-500">Technology</p>
+                            </div>
+                        </div>
+                        <span class="w-3 h-3 rounded-full bg-blue-500 animate-pulse" title="Onboarding"></span>
+                    </div>
+                </div>
+                <div class="p-4 flex gap-4">
+                    <div class="flex-1">
+                        <div class="bg-slate-50 rounded-lg p-3 mb-3">
+                            <div class="text-xs text-slate-500 mb-1">Objective:</div>
+                            <div class="text-sm text-slate-700 font-medium leading-snug italic">
+                                Awaiting first assessment...
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="bg-slate-100 rounded-lg p-3 text-center flex-1">
+                                <div class="text-xs text-slate-500 mb-1">SSI</div>
+                                <div class="font-bold text-slate-400">--</div>
+                                <div class="text-xs text-slate-300 mt-0.5">⚡🛡️🧠</div>
+                            </div>
+                            <div class="bg-slate-100 rounded-lg p-3 text-center flex-1">
+                                <div class="text-xs text-slate-500 mb-1">Cultural Score</div>
+                                <div class="culture-emoji">❓</div>
+                                <div class="text-xs text-slate-400 mt-0.5">Pending</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-32 text-center">
+                        <div class="text-xs text-slate-500 mb-2"># primary Contact</div>
+                        <div class="relative inline-block mb-2">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white font-bold text-xl border-2 border-white shadow">
+                                LC
+                            </div>
+                            <span class="absolute bottom-0 right-0 w-4 h-4 bg-slate-400 rounded-full border-2 border-white"></span>
+                        </div>
+                        <div class="text-sm font-medium text-slate-800">Lisa Chen</div>
+                        <div class="flex gap-2 mt-3">
+                            <button class="flex-1 px-2 py-1.5 bg-blue-50 text-blue-600 text-xs font-medium rounded-lg">Message</button>
+                            <button class="flex-1 px-2 py-1.5 bg-orange-50 text-orange-600 text-xs font-medium rounded-lg">Nudge</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Card 5: Swiss Mobility -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
+                <div class="p-4 border-b border-slate-100">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white font-bold text-lg">
+                                S
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-slate-800">Swiss Mobility</h3>
+                                <p class="text-xs text-slate-500">Transportation</p>
+                            </div>
+                        </div>
+                        <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                    </div>
+                </div>
+                <div class="p-4 flex gap-4">
+                    <div class="flex-1">
+                        <div class="bg-slate-50 rounded-lg p-3 mb-3">
+                            <div class="text-xs text-slate-500 mb-1">Objective:</div>
+                            <div class="text-sm text-slate-700 font-medium leading-snug">
+                                "Expand fleet management to 3 new cities"
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="bg-slate-50 rounded-lg p-3 text-center flex-1">
+                                <div class="text-xs text-slate-500 mb-1">SSI</div>
+                                <div class="font-bold text-slate-800">7-8-8</div>
+                                <div class="text-xs text-slate-400 mt-0.5">⚡🛡️🧠</div>
+                            </div>
+                            <div class="bg-blue-50 rounded-lg p-3 text-center flex-1">
+                                <div class="text-xs text-slate-500 mb-1">Cultural Score</div>
+                                <div class="culture-emoji">🙂</div>
+                                <div class="text-xs text-slate-400 mt-0.5">iBrain</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-32 text-center">
+                        <div class="text-xs text-slate-500 mb-2"># primary Contact</div>
+                        <div class="relative inline-block mb-2">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center text-white font-bold text-xl border-2 border-white shadow">
+                                MD
+                            </div>
+                            <span class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></span>
+                        </div>
+                        <div class="text-sm font-medium text-slate-800">Marc Dubois</div>
+                        <div class="flex gap-2 mt-3">
+                            <button class="flex-1 px-2 py-1.5 bg-blue-50 text-blue-600 text-xs font-medium rounded-lg">Message</button>
+                            <button class="flex-1 px-2 py-1.5 bg-orange-50 text-orange-600 text-xs font-medium rounded-lg">Nudge</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client Card 6: NewClient (Invited) -->
+            <div class="bg-white rounded-xl border border-dashed border-slate-300 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer opacity-75">
+                <div class="p-4 border-b border-slate-100 bg-slate-50">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-slate-300 to-slate-500 flex items-center justify-center text-white font-bold text-lg">
+                                N
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-slate-800">NewClient Inc</h3>
+                                <p class="text-xs text-slate-500">Retail</p>
+                            </div>
+                        </div>
+                        <span class="text-xs px-2 py-1 bg-slate-200 text-slate-600 rounded-full">Invited</span>
+                    </div>
+                </div>
+                <div class="p-4 flex gap-4">
+                    <div class="flex-1">
+                        <div class="bg-slate-100 rounded-lg p-3 mb-3">
+                            <div class="text-xs text-slate-500 mb-1">Objective:</div>
+                            <div class="text-sm text-slate-400 font-medium leading-snug italic">
+                                Pending client acceptance...
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="bg-slate-100 rounded-lg p-3 text-center flex-1">
+                                <div class="text-xs text-slate-400 mb-1">SSI</div>
+                                <div class="font-bold text-slate-300">--</div>
+                                <div class="text-xs text-slate-300 mt-0.5">⚡🛡️🧠</div>
+                            </div>
+                            <div class="bg-slate-100 rounded-lg p-3 text-center flex-1">
+                                <div class="text-xs text-slate-400 mb-1">Cultural Score</div>
+                                <div class="culture-emoji opacity-50">⏳</div>
+                                <div class="text-xs text-slate-300 mt-0.5">Pending</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-32 text-center">
+                        <div class="text-xs text-slate-400 mb-2"># primary Contact</div>
+                        <div class="relative inline-block mb-2">
+                            <div class="w-16 h-16 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 font-bold text-xl border-2 border-white shadow">
+                                ?
+                            </div>
+                        </div>
+                        <div class="text-sm font-medium text-slate-400">Pending invite</div>
+                        <div class="flex gap-2 mt-3">
+                            <button class="flex-1 px-2 py-1.5 bg-slate-100 text-slate-500 text-xs font-medium rounded-lg">Resend</button>
+                            <button class="flex-1 px-2 py-1.5 bg-red-50 text-red-500 text-xs font-medium rounded-lg">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 3-Step Wizard Modal -->
+    <div id="wizard-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50" onclick="closeWizard(event)">
+        <div class="bg-white rounded-2xl w-full max-w-2xl mx-4 shadow-2xl" onclick="event.stopPropagation()">
+
+            <!-- Wizard Header -->
+            <div class="p-6 border-b border-slate-100">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-bold text-slate-800">Add New Client</h2>
+                    <button onclick="closeWizard()" class="text-slate-400 hover:text-slate-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Progress Steps -->
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2" id="step1-indicator">
+                        <div class="w-8 h-8 rounded-full gradient-navy text-white flex items-center justify-center text-sm font-bold">1</div>
+                        <span class="text-sm font-medium text-slate-800">Company</span>
+                    </div>
+                    <div class="flex-1 h-0.5 bg-slate-200"></div>
+                    <div class="flex items-center gap-2" id="step2-indicator">
+                        <div class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold">2</div>
+                        <span class="text-sm font-medium text-slate-400">Strategy</span>
+                    </div>
+                    <div class="flex-1 h-0.5 bg-slate-200"></div>
+                    <div class="flex items-center gap-2" id="step3-indicator">
+                        <div class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold">3</div>
+                        <span class="text-sm font-medium text-slate-400">Contact</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 1: Company Identity -->
+            <div id="step1" class="p-6">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Company Name *</label>
+                        <input type="text" placeholder="e.g., miMobi" class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Industry *</label>
+                            <select class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                <option>Select industry...</option>
+                                <option>Technology / SaaS</option>
+                                <option>Financial Services</option>
+                                <option>Consulting</option>
+                                <option>Healthcare</option>
+                                <option>Retail</option>
+                                <option>Manufacturing</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Company Size *</label>
+                            <select class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                <option>Select size...</option>
+                                <option>1-10 employees</option>
+                                <option>11-50 employees</option>
+                                <option>51-200 employees</option>
+                                <option>201-500 employees</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">What does this company do? *</label>
+                        <textarea rows="3" placeholder="Brief description of the company's business..." class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Business Model</label>
+                            <select class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                <option>Select...</option>
+                                <option>B2B</option>
+                                <option>B2C</option>
+                                <option>B2B2C</option>
+                                <option>Marketplace</option>
+                                <option>SaaS</option>
+                                <option>Services</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Founded Year</label>
+                            <input type="number" placeholder="2024" class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Strategic Context (hidden by default) -->
+            <div id="step2" class="p-6 hidden">
+                <div class="bg-blue-50 border border-blue-100 rounded-lg p-3 mb-4">
+                    <p class="text-sm text-blue-700">
+                        <span class="font-semibold">💡 Tip:</span> This information helps iBrain generate highly relevant objectives for your client.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">What is the primary goal for the next 12 months? *</label>
+                        <textarea rows="2" placeholder="e.g., Set up in Bangalore with 1 paying customer" class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Key Challenge Right Now *</label>
+                        <select class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option>Select challenge...</option>
+                            <option>Market Entry / Customer Acquisition</option>
+                            <option>Product Development / Innovation</option>
+                            <option>Team Building / Talent</option>
+                            <option>Operational Efficiency</option>
+                            <option>Cash Flow / Funding</option>
+                            <option>Partnership Development</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Target Market</label>
+                        <input type="text" placeholder="e.g., Mid-size logistics companies in India" class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Current Revenue Stage</label>
+                        <div class="flex flex-wrap gap-3 mt-2">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="revenue" class="text-blue-600">
+                                <span class="text-sm text-slate-600">Pre-revenue</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="revenue" class="text-blue-600">
+                                <span class="text-sm text-slate-600">Early (&lt;$100K)</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="revenue" class="text-blue-600">
+                                <span class="text-sm text-slate-600">Growth ($100K-$1M)</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="revenue" class="text-blue-600">
+                                <span class="text-sm text-slate-600">Scale ($1M+)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Contact & Assessment (hidden by default) -->
+            <div id="step3" class="p-6 hidden">
+                <div class="space-y-4">
+                    <div class="bg-slate-50 border border-slate-100 rounded-lg p-4">
+                        <h3 class="font-semibold text-slate-800 mb-3">Primary Contact (Business Owner)</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">First Name *</label>
+                                <input type="text" placeholder="Ravindra" class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Last Name *</label>
+                                <input type="text" placeholder="MD" class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 mt-3">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Email *</label>
+                                <input type="email" placeholder="ravindra@mimobi.in" class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Role</label>
+                                <select class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                    <option>Founder / CEO</option>
+                                    <option>Managing Director</option>
+                                    <option>Business Owner</option>
+                                    <option>Executive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 border border-green-100 rounded-lg p-4">
+                        <h3 class="font-semibold text-slate-800 mb-3">Initial Assessment</h3>
+                        <label class="flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" checked class="mt-1 text-green-600 rounded">
+                            <div>
+                                <span class="font-medium text-slate-700">Send SSI Assessment to Business Owner</span>
+                                <p class="text-sm text-slate-500 mt-0.5">Helps generate better objectives based on company culture</p>
+                            </div>
+                        </label>
+                        <div class="mt-3 ml-7">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Assessment Template</label>
+                            <select class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white">
+                                <option>Quick Start SSI (15 questions, ~5 min)</option>
+                                <option>Standard SSI (30 questions, ~10 min)</option>
+                                <option>Comprehensive SSI (50 questions, ~15 min)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer with Progress & Actions -->
+            <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm text-slate-500">Profile Completion:</span>
+                        <div class="w-32 h-2 bg-slate-200 rounded-full overflow-hidden">
+                            <div id="progress-bar" class="h-full bg-green-500 rounded-full transition-all" style="width: 40%"></div>
+                        </div>
+                        <span id="progress-text" class="text-sm font-medium text-slate-700">40%</span>
+                    </div>
+                    <div class="flex gap-3">
+                        <button id="back-btn" onclick="prevStep()" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg hidden">Back</button>
+                        <button id="next-btn" onclick="nextStep()" class="px-6 py-2 gradient-navy text-white rounded-lg font-medium">Next</button>
+                        <button id="create-btn" onclick="createClient()" class="px-6 py-2 bg-green-600 text-white rounded-lg font-medium hidden">Create Client</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+
+        function openWizard() {
+            document.getElementById('wizard-modal').classList.remove('hidden');
+            document.getElementById('wizard-modal').classList.add('flex');
+        }
+
+        function closeWizard(event) {
+            if (!event || event.target === event.currentTarget) {
+                document.getElementById('wizard-modal').classList.add('hidden');
+                document.getElementById('wizard-modal').classList.remove('flex');
+                currentStep = 1;
+                updateWizardUI();
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < 3) {
+                currentStep++;
+                updateWizardUI();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateWizardUI();
+            }
+        }
+
+        function updateWizardUI() {
+            // Hide all steps
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step3').classList.add('hidden');
+
+            // Show current step
+            document.getElementById('step' + currentStep).classList.remove('hidden');
+
+            // Update indicators
+            for (let i = 1; i <= 3; i++) {
+                const indicator = document.getElementById('step' + i + '-indicator');
+                const circle = indicator.querySelector('div');
+                const text = indicator.querySelector('span');
+
+                if (i < currentStep) {
+                    circle.className = 'w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center text-sm font-bold';
+                    circle.innerHTML = '✓';
+                    text.className = 'text-sm font-medium text-green-600';
+                } else if (i === currentStep) {
+                    circle.className = 'w-8 h-8 rounded-full gradient-navy text-white flex items-center justify-center text-sm font-bold';
+                    circle.innerHTML = i;
+                    text.className = 'text-sm font-medium text-slate-800';
+                } else {
+                    circle.className = 'w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold';
+                    circle.innerHTML = i;
+                    text.className = 'text-sm font-medium text-slate-400';
+                }
+            }
+
+            // Update buttons
+            document.getElementById('back-btn').classList.toggle('hidden', currentStep === 1);
+            document.getElementById('next-btn').classList.toggle('hidden', currentStep === 3);
+            document.getElementById('create-btn').classList.toggle('hidden', currentStep !== 3);
+
+            // Update progress
+            const progress = currentStep === 1 ? 40 : currentStep === 2 ? 75 : 95;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = progress + '%';
+        }
+
+        function createClient() {
+            alert('Client created successfully! Welcome email sent.');
+            closeWizard();
+        }
+    </script>
+
+</body>
+</html>

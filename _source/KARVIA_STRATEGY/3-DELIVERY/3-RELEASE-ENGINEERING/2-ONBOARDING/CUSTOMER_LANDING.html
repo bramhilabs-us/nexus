@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chief AI — Your AI Chief of Staff</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .chief-gradient { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); }
+        .chief-gradient-text {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gold-accent { color: #d4a853; }
+    </style>
+</head>
+<body class="bg-gray-50 h-screen overflow-hidden">
+
+    <div class="h-screen flex flex-col p-4">
+
+        <!-- Main Content: Two Columns -->
+        <div class="flex-1 grid lg:grid-cols-2 gap-6 min-h-0">
+
+            <!-- LEFT: Chief AI Message + CTA -->
+            <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm flex flex-col">
+
+                <!-- Logo + Brand -->
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-14 h-14 bg-white rounded-xl shadow-lg flex items-center justify-center">
+                        <svg width="36" height="36" viewBox="0 0 28 28" fill="none">
+                            <defs>
+                                <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#1e3a5f"/>
+                                    <stop offset="100%" style="stop-color:#2d5a87"/>
+                                </linearGradient>
+                            </defs>
+                            <path d="M14 2L15.5 10L22 6L17 12L26 14L17 16L22 22L15.5 18L14 26L12.5 18L6 22L11 16L2 14L11 12L6 6L12.5 10L14 2Z" fill="url(#navyGrad)"/>
+                            <circle cx="14" cy="14" r="2" fill="#d4a853"/>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <div>
+                            <span class="text-3xl font-bold chief-gradient-text">Chief</span>
+                            <span class="text-3xl font-medium gold-accent ml-1">AI</span>
+                        </div>
+                        <span class="text-sm text-gray-500">Your AI Chief of Staff</span>
+                    </div>
+                </div>
+
+                <!-- Core Message -->
+                <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-5">
+                    Running a service business is complex.<br>
+                    <span class="chief-gradient-text">Your goals don't have to be.</span>
+                </h1>
+
+                <p class="text-lg text-gray-600 mb-6">
+                    Chief AI turns team insights into clear plans everyone can follow.
+                </p>
+
+                <!-- Value Statement -->
+                <div class="bg-gradient-to-r from-slate-50 to-blue-50 border-l-4 border-[#1e3a5f] rounded-r-xl p-5 mb-8">
+                    <p class="text-gray-800">
+                        <span class="font-semibold text-[#1e3a5f] text-lg">Better matches, better outcomes.</span><br>
+                        <span class="text-gray-600">When work matches strengths, your team delivers their best—and your clients feel the difference.</span>
+                    </p>
+                </div>
+
+                <!-- CTA -->
+                <div class="mt-auto">
+                    <a href="https://karvia-business.onrender.com"
+                       class="block chief-gradient text-white font-bold py-4 rounded-xl hover:shadow-lg transition-all text-center text-lg">
+                        Get Started Free →
+                    </a>
+                    <p class="text-center text-gray-400 text-sm mt-3">5-minute assessment • No credit card required</p>
+                </div>
+            </div>
+
+            <!-- RIGHT: Journey Steps with Logo in Center -->
+            <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm flex flex-col">
+
+                <h2 class="text-xl font-bold text-gray-900 mb-1 text-center">Your journey starts here</h2>
+                <p class="text-gray-500 text-sm mb-6 text-center">Four steps to transform how your team works</p>
+
+                <!-- 2x2 Grid with Logo in Center -->
+                <div class="flex-1 flex items-center justify-center relative">
+                    <!-- Center Logo (absolute) -->
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                        <div class="w-12 h-12 bg-white rounded-lg shadow-lg border-2 border-[#1e3a5f]/20 flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 28 28" fill="none">
+                                <defs>
+                                    <linearGradient id="navyGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#1e3a5f"/>
+                                        <stop offset="100%" style="stop-color:#2d5a87"/>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M14 2L15.5 10L22 6L17 12L26 14L17 16L22 22L15.5 18L14 26L12.5 18L6 22L11 16L2 14L11 12L6 6L12.5 10L14 2Z" fill="url(#navyGrad2)"/>
+                                <circle cx="14" cy="14" r="2" fill="#d4a853"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- 2x2 Grid -->
+                    <div class="grid grid-cols-2 gap-x-16 gap-y-6">
+                        <!-- Assess -->
+                        <div class="bg-gray-50 rounded-lg p-3 border border-gray-100 hover:border-[#2d5a87]/40 hover:shadow-md transition-all w-52">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <div class="w-8 h-8 chief-gradient rounded-full flex items-center justify-center text-sm shadow-md">📊</div>
+                                <div>
+                                    <h3 class="font-bold text-gray-900 text-sm leading-tight">Assess</h3>
+                                    <span class="text-[9px] text-[#1e3a5f] font-medium">→ Assessment</span>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-[11px] leading-snug">
+                                <span class="font-medium">5-15 min</span> to measure <span class="font-medium">Speed, Strength, Intelligence</span>—how fast you deliver, how resilient you are, how smartly you adapt.
+                            </p>
+                        </div>
+
+                        <!-- Align -->
+                        <div class="bg-gray-50 rounded-lg p-3 border border-gray-100 hover:border-[#2d5a87]/40 hover:shadow-md transition-all w-52">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <div class="w-8 h-8 chief-gradient rounded-full flex items-center justify-center text-sm shadow-md">🎯</div>
+                                <div>
+                                    <h3 class="font-bold text-gray-900 text-sm leading-tight">Align</h3>
+                                    <span class="text-[9px] text-[#1e3a5f] font-medium">→ Objectives</span>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-[11px] leading-snug">
+                                Goals shaped by your SSI profile—<span class="font-medium">leverage speed, build strengths, sharpen intelligence</span>. Not generic templates.
+                            </p>
+                        </div>
+
+                        <!-- Plan -->
+                        <div class="bg-gray-50 rounded-lg p-3 border border-gray-100 hover:border-[#2d5a87]/40 hover:shadow-md transition-all w-52">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <div class="w-8 h-8 chief-gradient rounded-full flex items-center justify-center text-sm shadow-md">📋</div>
+                                <div>
+                                    <h3 class="font-bold text-gray-900 text-sm leading-tight">Plan</h3>
+                                    <span class="text-[9px] text-[#1e3a5f] font-medium">→ Planning</span>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-[11px] leading-snug">
+                                <span class="font-medium">Fast movers</span> get time-sensitive work. <span class="font-medium">Strong performers</span> handle pressure. <span class="font-medium">Sharp thinkers</span> solve complex problems.
+                            </p>
+                        </div>
+
+                        <!-- Play -->
+                        <div class="bg-gray-50 rounded-lg p-3 border border-gray-100 hover:border-[#2d5a87]/40 hover:shadow-md transition-all w-52">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <div class="w-8 h-8 chief-gradient rounded-full flex items-center justify-center text-sm shadow-md">✨</div>
+                                <div>
+                                    <h3 class="font-bold text-gray-900 text-sm leading-tight">Play</h3>
+                                    <span class="text-[9px] text-[#1e3a5f] font-medium">→ Dashboard</span>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-[11px] leading-snug">
+                                Focus on <span class="font-medium">the task at hand</span>. Track progress across all three dimensions. Get <span class="font-medium">faster, stronger, smarter</span>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Industries -->
+                <div class="mt-4 bg-gray-50 rounded-lg p-2 text-center">
+                    <p class="text-[10px] text-gray-500">
+                        <span class="font-semibold text-[#1e3a5f]">Built for:</span>
+                        Consulting • Marketing • Wellness • Healthcare • Accounting • Trades • IT • Real Estate
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center py-2 mt-2">
+            <div class="flex items-center justify-center gap-2">
+                <span class="text-xs text-gray-400">Powered by</span>
+                <img src="CD_Logo_NoSlogan.png" alt="Cultural Discipline" class="h-6" />
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

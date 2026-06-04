@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E2 - Page 3: The Real ICP | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            grid-template-rows: auto 1fr auto;
+            gap: 30px;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: #888; text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .page-title { margin-top: 4px; color: #1a1a2e; font-weight: 500; }
+
+        /* Left Column */
+        .left-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .opening {
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 24px;
+        }
+
+        .opening em {
+            font-style: normal;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        .example-card {
+            background: #FAFAFA;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #F0F0F0;
+            margin-bottom: 12px;
+        }
+
+        .example-icon {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .example-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+
+        .example-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Center - Concentric Circles */
+        .center-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icp-container {
+            width: 400px;
+            height: 400px;
+            position: relative;
+        }
+
+        /* Outer Ring - Attributes */
+        .outer-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px dashed #E0E0E0;
+            border-radius: 50%;
+        }
+
+        .attribute {
+            position: absolute;
+            font-size: 10px;
+            color: #666;
+            background: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            border: 1px solid #E0E0E0;
+            white-space: nowrap;
+        }
+
+        .attribute.a1 { top: -12px; left: 50%; transform: translateX(-50%); }
+        .attribute.a2 { top: 12%; right: -30px; }
+        .attribute.a3 { top: 38%; right: -40px; }
+        .attribute.a4 { bottom: 12%; right: -30px; }
+        .attribute.a5 { bottom: -12px; left: 50%; transform: translateX(-50%); }
+        .attribute.a6 { bottom: 12%; left: -30px; }
+        .attribute.a7 { top: 38%; left: -50px; }
+        .attribute.a8 { top: 12%; left: -30px; }
+
+        /* Middle Ring - Examples */
+        .middle-ring {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid #C9A227;
+            border-radius: 50%;
+            background: rgba(201, 162, 39, 0.05);
+        }
+
+        .example-bubble {
+            position: absolute;
+            font-size: 10px;
+            color: #1a1a2e;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 14px;
+            border: 2px solid #C9A227;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .example-bubble.e1 { top: 25px; left: 50%; transform: translateX(-50%); }
+        .example-bubble.e2 { top: 50%; right: 25px; transform: translateY(-50%); }
+        .example-bubble.e3 { bottom: 25px; left: 50%; transform: translateX(-50%); }
+        .example-bubble.e4 { top: 50%; left: 25px; transform: translateY(-50%); }
+
+        /* Center - The Buyer */
+        .center-buyer {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a2e;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .buyer-icon {
+            font-size: 28px;
+            margin-bottom: 4px;
+        }
+
+        .buyer-label {
+            font-size: 9px;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .buyer-title {
+            font-size: 12px;
+            color: #C9A227;
+            font-weight: 600;
+        }
+
+        /* Right Column */
+        .right-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .icp-box {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .icp-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .icp-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .icp-row:last-child {
+            border-bottom: none;
+        }
+
+        .icp-key {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .icp-value {
+            font-size: 12px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .closing-note {
+            font-size: 14px;
+            color: #444;
+            line-height: 1.6;
+            padding: 16px;
+            background: #FAFAFA;
+            border-radius: 12px;
+            border-left: 3px solid #C9A227;
+        }
+
+        /* Footer */
+        .footer {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .next { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 20px; grid-template-columns: 1fr; gap: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .icp-container { width: 300px; height: 300px; }
+            .middle-ring { width: 180px; height: 180px; }
+            .center-buyer { width: 80px; height: 80px; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E2: Market Opportunity</div>
+            </div>
+            <div class="page-indicator">
+                <div>Page <span class="current">3</span> of 9</div>
+                <div class="page-title">The Real ICP</div>
+            </div>
+        </header>
+
+        <!-- Left Column -->
+        <div class="left-col">
+            <div class="opening">
+                The first 100 customers<br>
+                look exactly like this:<br><br>
+                <em>Service businesses where the owner<br>
+                is still the bottleneck.</em>
+            </div>
+
+            <div class="example-card">
+                <div class="example-icon">🏠</div>
+                <div class="example-title">Home Services Company</div>
+                <div class="example-desc">20 field technicians, 3 coordinators, owner doing everything else.</div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-icon">🏥</div>
+                <div class="example-title">Healthcare Practice</div>
+                <div class="example-desc">15 staff (front desk, techs, providers), owner managing patient experience.</div>
+            </div>
+
+            <div class="example-card">
+                <div class="example-icon">💼</div>
+                <div class="example-title">Professional Services Firm</div>
+                <div class="example-desc">18 consultants, 3 account managers, founder on every client call.</div>
+            </div>
+        </div>
+
+        <!-- Center - Concentric Circles -->
+        <div class="center-col">
+            <div class="icp-container">
+                <!-- Outer Ring - Attributes -->
+                <div class="outer-ring"></div>
+                <div class="attribute a1">15–40 employees</div>
+                <div class="attribute a2">$2M–$8M revenue</div>
+                <div class="attribute a3">Growth plateauing</div>
+                <div class="attribute a4">Tools are messy</div>
+                <div class="attribute a5">No HR function</div>
+                <div class="attribute a6">No formal training</div>
+                <div class="attribute a7">Founder overworked</div>
+                <div class="attribute a8">Service-based</div>
+
+                <!-- Middle Ring - Examples -->
+                <div class="middle-ring"></div>
+                <div class="example-bubble e1">Home Services</div>
+                <div class="example-bubble e2">Healthcare</div>
+                <div class="example-bubble e3">Prof. Services</div>
+                <div class="example-bubble e4">Consulting</div>
+
+                <!-- Center - The Buyer -->
+                <div class="center-buyer">
+                    <div class="buyer-icon">👤</div>
+                    <div class="buyer-label">The Buyer</div>
+                    <div class="buyer-title">Owner</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-col">
+            <div class="icp-box">
+                <div class="icp-label">The Perfect First Customer</div>
+                <div class="icp-row">
+                    <span class="icp-key">Employees</span>
+                    <span class="icp-value">15–40</span>
+                </div>
+                <div class="icp-row">
+                    <span class="icp-key">Founder</span>
+                    <span class="icp-value">Overworked</span>
+                </div>
+                <div class="icp-row">
+                    <span class="icp-key">Revenue</span>
+                    <span class="icp-value">$2M–$8M</span>
+                </div>
+                <div class="icp-row">
+                    <span class="icp-key">Tools</span>
+                    <span class="icp-value">Messy</span>
+                </div>
+                <div class="icp-row">
+                    <span class="icp-key">Growth</span>
+                    <span class="icp-value">Plateauing</span>
+                </div>
+            </div>
+
+            <div class="closing-note">
+                The owner is the buyer.<br>
+                They feel the pain every day.<br><br>
+                <strong>Next: A day in their life.</strong>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_2_the_mirror.html">&larr; The Strategic Lens</a>
+                <a href="page_4_the_shared_journey.html" class="next">Next: The Owner's Day &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprint 13 - Dashboard Redesign Mockup | Chief AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FAFAFA;
+            color: #1F2937;
+            line-height: 1.5;
+        }
+
+        /* ========================================
+           NAVIGATION BAR
+           ======================================== */
+        .nav {
+            background: white;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            border-bottom: 1px solid #F0F0F0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo svg {
+            height: 80px;
+            width: auto;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .nav-item {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            text-decoration: none;
+            color: #6B7280;
+            font-size: 13px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item:hover {
+            color: #1F2937;
+        }
+
+        .nav-item.active {
+            color: #1F2937;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 16px;
+            right: 16px;
+            height: 2px;
+            background: transparent;
+            transition: background 0.2s ease;
+        }
+
+        .nav-item[data-philosophy="play"].active::after,
+        .nav-item[data-philosophy="play"]:hover::after { background: #8B5CF6; }
+        .nav-item[data-philosophy="assess"].active::after,
+        .nav-item[data-philosophy="assess"]:hover::after { background: #3B82F6; }
+        .nav-item[data-philosophy="align"].active::after,
+        .nav-item[data-philosophy="align"]:hover::after { background: #22c55e; }
+        .nav-item[data-philosophy="plan"].active::after,
+        .nav-item[data-philosophy="plan"]:hover::after { background: #F59E0B; }
+
+        .nav-divider {
+            width: 1px;
+            height: 24px;
+            background: #E5E7EB;
+        }
+
+        .nav-item .tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+            background: #1F2937;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 400;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease 0.5s, visibility 0.15s ease 0.5s;
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        .nav-item .tooltip::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 6px 6px 6px;
+            border-style: solid;
+            border-color: transparent transparent #1F2937 transparent;
+        }
+
+        .nav-item:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .nav-user:hover {
+            background: #F5F5F5;
+        }
+
+        .nav-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .nav-user-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        /* ========================================
+           MAIN CONTENT
+           ======================================== */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 32px;
+        }
+
+        /* ========================================
+           SECTION 1: HEADER
+           ======================================== */
+        .header {
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        /* Header Top Row (Title left, Date right) */
+        .header-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .header-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .header-date {
+            font-size: 13px;
+            color: #9CA3AF;
+            font-weight: 400;
+        }
+
+        /* Second Row: Objectives left, Tasks right */
+        .header-content-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        /* Task Stats - Vertical Stack */
+        .task-stats-group {
+            display: flex;
+            align-items: flex-end;
+            gap: 16px;
+        }
+
+        .task-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            cursor: pointer;
+        }
+
+        .task-stat svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .task-stat.overdue svg { color: #EF4444; }
+        .task-stat.today svg { color: #8B5CF6; }
+        .task-stat.tomorrow svg { color: #6B7280; }
+
+        .task-stat-count {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .task-stat.overdue .task-stat-count { color: #EF4444; }
+        .task-stat.today .task-stat-count { color: #8B5CF6; }
+        .task-stat.tomorrow .task-stat-count { color: #6B7280; }
+
+        .task-stat-label {
+            font-size: 10px;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Objectives Row */
+        .objectives-row-full {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Objectives Row */
+        .objectives-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .obj-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .obj-card:hover {
+            background: #F5F5F5;
+            border-color: #D1D5DB;
+        }
+
+        .obj-card.active {
+            background: #FFFBEB;
+            border-color: #F59E0B;
+        }
+
+        .obj-progress-mini {
+            width: 36px;
+            height: 36px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .obj-progress-mini svg {
+            transform: rotate(-90deg);
+        }
+
+        .obj-progress-mini .bg {
+            fill: none;
+            stroke: #E5E7EB;
+            stroke-width: 3;
+        }
+
+        .obj-progress-mini .progress {
+            fill: none;
+            stroke-width: 3;
+            stroke-linecap: round;
+        }
+
+        .obj-progress-mini .progress.orange { stroke: #F59E0B; }
+        .obj-progress-mini .progress.blue { stroke: #3B82F6; }
+        .obj-progress-mini .progress.green { stroke: #22c55e; }
+
+        .obj-progress-mini .percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 9px;
+            font-weight: 700;
+            color: #374151;
+        }
+
+        .obj-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .obj-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .obj-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1F2937;
+        }
+
+        .obj-divider {
+            width: 1px;
+            height: 40px;
+            background: #E5E7EB;
+        }
+
+        /* ========================================
+           SECTION COMMON STYLES
+           ======================================== */
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            flex-shrink: 0;
+        }
+
+        .section-progress {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 200px;
+        }
+
+        .section-progress-bar {
+            flex: 1;
+            height: 4px;
+            background: #E5E7EB;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .section-progress-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .section-progress-fill.tasks { background: #8B5CF6; }
+        .section-progress-fill.goals { background: #F59E0B; }
+
+        .section-progress-text {
+            font-size: 11px;
+            font-weight: 600;
+            color: #9CA3AF;
+            min-width: 32px;
+        }
+
+        .section-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-left: auto;
+        }
+
+        .section-count {
+            font-size: 11px;
+            color: #9CA3AF;
+            font-weight: 400;
+        }
+
+        .section-percent {
+            font-size: 14px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 8px;
+        }
+
+        .section-percent.tasks {
+            background: #EDE9FE;
+            color: #7C3AED;
+        }
+
+        .section-percent.goals {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+
+        /* ========================================
+           3-COLUMN GRID (Tasks & Weeks)
+           ======================================== */
+        .three-col-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        /* ========================================
+           COLUMN CARD (shared by Tasks & Weeks)
+           ======================================== */
+        .column-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #EBEBEB;
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .column-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .column-card.active {
+            border-color: #8B5CF6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.08);
+        }
+
+        .column-card.muted {
+            opacity: 0.7;
+        }
+
+        .column-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .column-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .column-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #9CA3AF;
+        }
+
+        .column-label.overdue { color: #EF4444; }
+        .column-label.today { color: #8B5CF6; }
+        .column-label.done { color: #22c55e; }
+
+        .column-card.active .column-label {
+            color: #8B5CF6;
+        }
+
+        .column-sublabel {
+            font-size: 13px;
+            color: #6B7280;
+            font-weight: 500;
+        }
+
+        .column-badge {
+            font-size: 10px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .column-badge.overdue { background: #FEE2E2; color: #DC2626; }
+        .column-badge.today { background: #EDE9FE; color: #7C3AED; }
+        .column-badge.done { background: #ECFDF5; color: #059669; }
+        .column-badge.upcoming { background: #F3F4F6; color: #6B7280; }
+
+        .column-footer {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid #F3F4F6;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .column-link {
+            font-size: 12px;
+            color: #8B5CF6;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .column-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ========================================
+           TASK ROWS (stacked vertically)
+           ======================================== */
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .task-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #FAFAFA;
+            border-radius: 8px;
+            border: 1px solid #F0F0F0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .task-row:hover {
+            background: #F5F5F5;
+            border-color: #E5E7EB;
+        }
+
+        .task-row.overdue {
+            background: #FFFBFB;
+            border-color: #FECACA;
+        }
+
+        .task-row.today {
+            background: #FDFCFF;
+            border-color: #DDD6FE;
+        }
+
+        .task-row.done {
+            background: #FBFEFC;
+            border-color: #D1FAE5;
+            opacity: 0.7;
+        }
+
+        .task-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #D1D5DB;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: transparent;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .task-check:hover {
+            border-color: #22c55e;
+            background: #ECFDF5;
+            color: #22c55e;
+        }
+
+        .task-row.done .task-check {
+            border-color: #22c55e;
+            background: #22c55e;
+            color: white;
+        }
+
+        .task-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .task-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #1F2937;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .task-row.done .task-title {
+            text-decoration: line-through;
+            color: #9CA3AF;
+        }
+
+        .task-meta {
+            font-size: 11px;
+            color: #9CA3AF;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 2px;
+        }
+
+        .task-row.overdue .task-meta .task-time {
+            color: #EF4444;
+        }
+
+        .task-kr-tag {
+            font-size: 10px;
+            color: #6B7280;
+            background: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #E5E7EB;
+            flex-shrink: 0;
+        }
+
+        /* Task Actions */
+        .task-actions {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .task-row:hover .task-actions {
+            opacity: 1;
+        }
+
+        .task-action-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: none;
+            background: transparent;
+            color: #9CA3AF;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+
+        .task-action-btn:hover {
+            background: #F3F4F6;
+            color: #6B7280;
+        }
+
+        .task-action-btn.postpone:hover {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+
+        .task-action-btn.assign:hover {
+            background: #DBEAFE;
+            color: #2563EB;
+        }
+
+        .task-action-btn.chat:hover {
+            background: #E0E7FF;
+            color: #4F46E5;
+        }
+
+        .task-action-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Empty state in column */
+        .column-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 16px;
+            text-align: center;
+            color: #9CA3AF;
+        }
+
+        .column-empty-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .column-empty-text {
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .column-empty-btn {
+            font-size: 12px;
+            color: #8B5CF6;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .column-empty-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* ========================================
+           WEEKLY GOALS - Goal Rows
+           ======================================== */
+        .goal-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 200px;
+        }
+
+        .goal-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            background: #FAFAFA;
+            border-radius: 10px;
+            border: 1px solid #F0F0F0;
+            transition: all 0.2s ease;
+        }
+
+        .goal-row:hover {
+            background: #F5F5F5;
+            border-color: #E5E7EB;
+        }
+
+        /* Circular progress */
+        .circular-progress {
+            width: 48px;
+            height: 48px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .circular-progress svg {
+            transform: rotate(-90deg);
+        }
+
+        .circular-progress .bg {
+            fill: none;
+            stroke: #E5E7EB;
+            stroke-width: 4;
+        }
+
+        .circular-progress .progress {
+            fill: none;
+            stroke-width: 4;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.3s ease;
+        }
+
+        .circular-progress .progress.high { stroke: #22c55e; }
+        .circular-progress .progress.medium { stroke: #F59E0B; }
+        .circular-progress .progress.low { stroke: #8B5CF6; }
+
+        .circular-progress .percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 11px;
+            font-weight: 700;
+            color: #374151;
+        }
+
+        .goal-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .goal-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1F2937;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 2px;
+        }
+
+        .goal-kr {
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        .goal-tasks {
+            font-size: 11px;
+            font-weight: 600;
+            color: #6B7280;
+            background: white;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #E5E7EB;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ========================================
+           ANIMATIONS
+           ======================================== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .column-card {
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 1100px) {
+            .header-row {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+
+            .header-divider {
+                display: none;
+            }
+
+            .task-summary {
+                order: 2;
+            }
+
+            .objectives-row {
+                order: 3;
+                flex-wrap: wrap;
+                gap: 8px;
+                width: 100%;
+            }
+
+            .obj-card {
+                flex: 1;
+                min-width: 140px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .three-col-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-progress {
+                max-width: 150px;
+            }
+
+            .task-summary-card {
+                flex: 1;
+                justify-content: center;
+            }
+
+            .header-left {
+                width: 100%;
+            }
+
+            .task-summary {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-center {
+                display: none;
+            }
+
+            .task-summary-count {
+                font-size: 18px;
+            }
+
+            .task-summary-label {
+                font-size: 10px;
+            }
+
+            .obj-card {
+                padding: 6px 10px;
+            }
+
+            .obj-title {
+                font-size: 11px;
+            }
+
+            .obj-info {
+                display: none;
+            }
+
+            .obj-progress-mini {
+                width: 32px;
+                height: 32px;
+            }
+
+            .obj-progress-mini .percentage {
+                font-size: 9px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .task-summary {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .task-summary-card {
+                flex: 1;
+                min-width: 60px;
+            }
+
+            .objectives-row {
+                flex-direction: column;
+            }
+
+            .obj-card {
+                width: 100%;
+            }
+
+            .obj-info {
+                display: flex;
+            }
+        }
+
+        /* ========================================
+           DESIGN NOTES PANEL
+           ======================================== */
+        .design-notes {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1F2937;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-size: 12px;
+            max-width: 260px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .design-notes-title {
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .design-notes-list {
+            list-style: none;
+            color: #D1D5DB;
+            line-height: 1.8;
+        }
+
+        .design-notes-list li::before {
+            content: '✓ ';
+            color: #22c55e;
+        }
+
+        .design-notes-close {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: #6B7280;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .design-notes-close:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         NAVIGATION
+         ======================================== -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 75">
+                <defs>
+                    <linearGradient id="chiefGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1e3a5f"/>
+                        <stop offset="100%" style="stop-color:#2d5a87"/>
+                    </linearGradient>
+                </defs>
+                <path d="M25 10L27 20L35 15L29 23L42 25L29 27L35 35L27 30L25 40L23 30L15 35L21 27L8 25L21 23L15 15L23 20L25 10Z" fill="url(#chiefGrad)"/>
+                <circle cx="25" cy="25" r="3" fill="#d4a853"/>
+                <text x="50" y="31" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" fill="#1e3a5f">Chief</text>
+                <text x="108" y="31" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="500" fill="#d4a853">AI</text>
+                <text x="50" y="48" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="400" fill="#6B7280">Your AI Chief of Staff</text>
+            </svg>
+        </div>
+
+        <div class="nav-center">
+            <a href="dashboard-redesign.html" class="nav-item active" data-philosophy="play">
+                Dashboard
+                <span class="tooltip">Play - Your daily focus</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="assessment-hub.html" class="nav-item" data-philosophy="assess">
+                Assessments
+                <span class="tooltip">Assess - Understand your org</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="teams-redesign.html" class="nav-item" data-philosophy="align">
+                Teams
+                <span class="tooltip">Align - Get everyone aligned</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="objectives-redesign.html" class="nav-item" data-philosophy="plan">
+                Objectives
+                <span class="tooltip">Plan - Strategic direction</span>
+            </a>
+            <a href="planning-redesign.html" class="nav-item" data-philosophy="plan">
+                Planning
+                <span class="tooltip">Plan - Weekly execution</span>
+            </a>
+        </div>
+
+        <div class="nav-user">
+            <div class="nav-avatar">JD</div>
+            <span class="nav-user-name">John Doe</span>
+            <svg width="14" height="14" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6"/>
+            </svg>
+        </div>
+    </nav>
+
+    <!-- ========================================
+         MAIN CONTENT
+         ======================================== -->
+    <main class="main">
+        <!-- ========================================
+             SECTION 1: HEADER
+             ======================================== -->
+        <header class="header">
+            <!-- Top Row: Title left, Date right -->
+            <div class="header-top-row">
+                <h1 class="header-title">Dashboard</h1>
+                <span class="header-date">Wed, Jan 14</span>
+            </div>
+
+            <!-- Content Row: Objectives left, Tasks right -->
+            <div class="header-content-row">
+                <!-- Objectives -->
+                <div class="objectives-row-full">
+                    <!-- Objective 1 - Active -->
+                    <div class="obj-card active" onclick="selectObjective(1)">
+                        <div class="obj-progress-mini">
+                            <svg width="36" height="36" viewBox="0 0 36 36">
+                                <circle class="bg" cx="18" cy="18" r="15"/>
+                                <circle class="progress orange" cx="18" cy="18" r="15"
+                                    stroke-dasharray="94.25"
+                                    stroke-dashoffset="61.26"/>
+                            </svg>
+                            <span class="percentage">35%</span>
+                        </div>
+                        <div class="obj-info">
+                            <span class="obj-label">Obj 1</span>
+                            <span class="obj-title">Revenue Growth</span>
+                        </div>
+                    </div>
+
+                    <!-- Objective 2 -->
+                    <div class="obj-card" onclick="selectObjective(2)">
+                        <div class="obj-progress-mini">
+                            <svg width="36" height="36" viewBox="0 0 36 36">
+                                <circle class="bg" cx="18" cy="18" r="15"/>
+                                <circle class="progress blue" cx="18" cy="18" r="15"
+                                    stroke-dasharray="94.25"
+                                    stroke-dashoffset="37.7"/>
+                            </svg>
+                            <span class="percentage">60%</span>
+                        </div>
+                        <div class="obj-info">
+                            <span class="obj-label">Obj 2</span>
+                            <span class="obj-title">Customer NPS</span>
+                        </div>
+                    </div>
+
+                    <!-- Objective 3 -->
+                    <div class="obj-card" onclick="selectObjective(3)">
+                        <div class="obj-progress-mini">
+                            <svg width="36" height="36" viewBox="0 0 36 36">
+                                <circle class="bg" cx="18" cy="18" r="15"/>
+                                <circle class="progress green" cx="18" cy="18" r="15"
+                                    stroke-dasharray="94.25"
+                                    stroke-dashoffset="51.84"/>
+                            </svg>
+                            <span class="percentage">45%</span>
+                        </div>
+                        <div class="obj-info">
+                            <span class="obj-label">Obj 3</span>
+                            <span class="obj-title">Team Growth</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task Stats -->
+                <div class="task-stats-group">
+                    <div class="task-stat overdue">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span class="task-stat-count">2</span>
+                        <span class="task-stat-label">Overdue</span>
+                    </div>
+                    <div class="task-stat today">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <span class="task-stat-count">4</span>
+                        <span class="task-stat-label">Today</span>
+                    </div>
+                    <div class="task-stat tomorrow">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <span class="task-stat-count">2</span>
+                        <span class="task-stat-label">Tomorrow</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ========================================
+             SECTION 2: TASKS (3-Column Layout)
+             ======================================== -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Tasks</h2>
+                <div class="section-progress">
+                    <div class="section-progress-bar">
+                        <div class="section-progress-fill tasks" style="width: 17%;"></div>
+                    </div>
+                </div>
+                <div class="section-right">
+                    <span class="section-count">6 total</span>
+                    <span class="section-percent tasks">17%</span>
+                </div>
+            </div>
+
+            <div class="three-col-grid">
+                <!-- OVERDUE Column -->
+                <div class="column-card">
+                    <div class="column-card-header">
+                        <div class="column-info">
+                            <span class="column-label overdue">Overdue</span>
+                            <span class="column-sublabel">Past due date</span>
+                        </div>
+                        <span class="column-badge overdue">2</span>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-row overdue">
+                            <button class="task-check" onclick="completeTask(this.parentElement)">&#10003;</button>
+                            <div class="task-content">
+                                <div class="task-title">Review Q4 Financial Report</div>
+                                <div class="task-meta">
+                                    <span class="task-time">2 days ago</span>
+                                </div>
+                            </div>
+                            <div class="task-actions">
+                                <button class="task-action-btn postpone" title="Postpone">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                </button>
+                                <button class="task-action-btn assign" title="Assign">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+                                </button>
+                                <button class="task-action-btn chat" title="Chat">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                </button>
+                            </div>
+                            <span class="task-kr-tag">KR 1</span>
+                        </div>
+                        <div class="task-row overdue">
+                            <button class="task-check" onclick="completeTask(this.parentElement)">&#10003;</button>
+                            <div class="task-content">
+                                <div class="task-title">Submit client proposal</div>
+                                <div class="task-meta">
+                                    <span class="task-time">3 days ago</span>
+                                </div>
+                            </div>
+                            <div class="task-actions">
+                                <button class="task-action-btn postpone" title="Postpone">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                </button>
+                                <button class="task-action-btn assign" title="Assign">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+                                </button>
+                                <button class="task-action-btn chat" title="Chat">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                </button>
+                            </div>
+                            <span class="task-kr-tag">KR 2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TODAY Column -->
+                <div class="column-card active">
+                    <div class="column-card-header">
+                        <div class="column-info">
+                            <span class="column-label today">Today</span>
+                            <span class="column-sublabel">Due today</span>
+                        </div>
+                        <span class="column-badge today">4</span>
+                    </div>
+                    <div class="task-list">
+                        <!-- Completed task -->
+                        <div class="task-row done">
+                            <button class="task-check">&#10003;</button>
+                            <div class="task-content">
+                                <div class="task-title">Submit invoice to client</div>
+                                <div class="task-meta">
+                                    <span class="task-time">9:30 AM</span>
+                                </div>
+                            </div>
+                            <div class="task-actions" style="opacity: 0.5;">
+                                <button class="task-action-btn chat" title="Chat">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                </button>
+                            </div>
+                            <span class="task-kr-tag">KR 1</span>
+                        </div>
+                        <!-- Pending tasks -->
+                        <div class="task-row today">
+                            <button class="task-check" onclick="completeTask(this.parentElement)">&#10003;</button>
+                            <div class="task-content">
+                                <div class="task-title">Client discovery call</div>
+                                <div class="task-meta">
+                                    <span class="task-time">2:00 PM</span>
+                                </div>
+                            </div>
+                            <div class="task-actions">
+                                <button class="task-action-btn postpone" title="Postpone">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                </button>
+                                <button class="task-action-btn assign" title="Assign">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+                                </button>
+                                <button class="task-action-btn chat" title="Chat">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                </button>
+                            </div>
+                            <span class="task-kr-tag">KR 1</span>
+                        </div>
+                        <div class="task-row today">
+                            <button class="task-check" onclick="completeTask(this.parentElement)">&#10003;</button>
+                            <div class="task-content">
+                                <div class="task-title">Team standup meeting</div>
+                                <div class="task-meta">
+                                    <span class="task-time">4:00 PM</span>
+                                </div>
+                            </div>
+                            <div class="task-actions">
+                                <button class="task-action-btn postpone" title="Postpone">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                </button>
+                                <button class="task-action-btn assign" title="Assign">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+                                </button>
+                                <button class="task-action-btn chat" title="Chat">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                </button>
+                            </div>
+                            <span class="task-kr-tag">KR 3</span>
+                        </div>
+                        <div class="task-row today">
+                            <button class="task-check" onclick="completeTask(this.parentElement)">&#10003;</button>
+                            <div class="task-content">
+                                <div class="task-title">Update project docs</div>
+                                <div class="task-meta">
+                                    <span class="task-time">EOD</span>
+                                </div>
+                            </div>
+                            <div class="task-actions">
+                                <button class="task-action-btn postpone" title="Postpone">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                </button>
+                                <button class="task-action-btn assign" title="Assign">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+                                </button>
+                                <button class="task-action-btn chat" title="Chat">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                </button>
+                            </div>
+                            <span class="task-kr-tag">KR 2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TOMORROW Column -->
+                <div class="column-card muted">
+                    <div class="column-card-header">
+                        <div class="column-info">
+                            <span class="column-label">Tomorrow</span>
+                            <span class="column-sublabel">Thu, Jan 15</span>
+                        </div>
+                        <span class="column-badge upcoming">2</span>
+                    </div>
+                    <div class="task-list">
+                        <div class="task-row">
+                            <button class="task-check" onclick="completeTask(this.parentElement)">&#10003;</button>
+                            <div class="task-content">
+                                <div class="task-title">Prepare board presentation</div>
+                                <div class="task-meta">
+                                    <span class="task-time">10:00 AM</span>
+                                </div>
+                            </div>
+                            <div class="task-actions">
+                                <button class="task-action-btn postpone" title="Postpone">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                </button>
+                                <button class="task-action-btn assign" title="Assign">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+                                </button>
+                                <button class="task-action-btn chat" title="Chat">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                </button>
+                            </div>
+                            <span class="task-kr-tag">KR 1</span>
+                        </div>
+                        <div class="task-row">
+                            <button class="task-check" onclick="completeTask(this.parentElement)">&#10003;</button>
+                            <div class="task-content">
+                                <div class="task-title">Review team OKRs</div>
+                                <div class="task-meta">
+                                    <span class="task-time">2:00 PM</span>
+                                </div>
+                            </div>
+                            <div class="task-actions">
+                                <button class="task-action-btn postpone" title="Postpone">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                </button>
+                                <button class="task-action-btn assign" title="Assign">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+                                </button>
+                                <button class="task-action-btn chat" title="Chat">
+                                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                                </button>
+                            </div>
+                            <span class="task-kr-tag">KR 3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================
+             SECTION 3: WEEKLY GOALS (3-Column Layout)
+             ======================================== -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Weekly Goals</h2>
+                <div class="section-progress">
+                    <div class="section-progress-bar">
+                        <div class="section-progress-fill goals" style="width: 40%;"></div>
+                    </div>
+                </div>
+                <div class="section-right">
+                    <span class="section-count">2 active</span>
+                    <span class="section-percent goals">40%</span>
+                </div>
+            </div>
+
+            <div class="three-col-grid">
+                <!-- LAST WEEK Column -->
+                <div class="column-card muted" onclick="navigateToPlanning('last')">
+                    <div class="column-card-header">
+                        <div class="column-info">
+                            <span class="column-label">&larr; Last Week</span>
+                            <span class="column-sublabel">Jan 6 - 12</span>
+                        </div>
+                        <span class="column-badge done">Done</span>
+                    </div>
+                    <div class="goal-list">
+                        <div class="goal-row">
+                            <div class="circular-progress">
+                                <svg width="48" height="48" viewBox="0 0 48 48">
+                                    <circle class="bg" cx="24" cy="24" r="20"/>
+                                    <circle class="progress high" cx="24" cy="24" r="20"
+                                        stroke-dasharray="125.66"
+                                        stroke-dashoffset="25.13"/>
+                                </svg>
+                                <span class="percentage">80%</span>
+                            </div>
+                            <div class="goal-info">
+                                <div class="goal-title">Close 3 client deals</div>
+                                <div class="goal-kr">KR 1 &middot; Revenue</div>
+                            </div>
+                            <span class="goal-tasks">4/5</span>
+                        </div>
+                        <div class="goal-row">
+                            <div class="circular-progress">
+                                <svg width="48" height="48" viewBox="0 0 48 48">
+                                    <circle class="bg" cx="24" cy="24" r="20"/>
+                                    <circle class="progress high" cx="24" cy="24" r="20"
+                                        stroke-dasharray="125.66"
+                                        stroke-dashoffset="0"/>
+                                </svg>
+                                <span class="percentage">100%</span>
+                            </div>
+                            <div class="goal-info">
+                                <div class="goal-title">Hire 2 developers</div>
+                                <div class="goal-kr">KR 3 &middot; Team</div>
+                            </div>
+                            <span class="goal-tasks">3/3</span>
+                        </div>
+                    </div>
+                    <div class="column-footer">
+                        <a href="#" class="column-link">View details &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- THIS WEEK Column (Active) -->
+                <div class="column-card active" onclick="navigateToPlanning('current')">
+                    <div class="column-card-header">
+                        <div class="column-info">
+                            <span class="column-label">&#128205; This Week</span>
+                            <span class="column-sublabel">Jan 13 - 19</span>
+                        </div>
+                        <span class="column-badge today">Active</span>
+                    </div>
+                    <div class="goal-list">
+                        <div class="goal-row">
+                            <div class="circular-progress">
+                                <svg width="48" height="48" viewBox="0 0 48 48">
+                                    <circle class="bg" cx="24" cy="24" r="20"/>
+                                    <circle class="progress medium" cx="24" cy="24" r="20"
+                                        stroke-dasharray="125.66"
+                                        stroke-dashoffset="75.4"/>
+                                </svg>
+                                <span class="percentage">40%</span>
+                            </div>
+                            <div class="goal-info">
+                                <div class="goal-title">Survey 50 customers</div>
+                                <div class="goal-kr">KR 2 &middot; NPS</div>
+                            </div>
+                            <span class="goal-tasks">2/5</span>
+                        </div>
+                        <div class="goal-row">
+                            <div class="circular-progress">
+                                <svg width="48" height="48" viewBox="0 0 48 48">
+                                    <circle class="bg" cx="24" cy="24" r="20"/>
+                                    <circle class="progress low" cx="24" cy="24" r="20"
+                                        stroke-dasharray="125.66"
+                                        stroke-dashoffset="100.53"/>
+                                </svg>
+                                <span class="percentage">20%</span>
+                            </div>
+                            <div class="goal-info">
+                                <div class="goal-title">Code review backlog</div>
+                                <div class="goal-kr">KR 4 &middot; Eng</div>
+                            </div>
+                            <span class="goal-tasks">1/4</span>
+                        </div>
+                    </div>
+                    <div class="column-footer">
+                        <a href="#" class="column-link">View details &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- NEXT WEEK Column -->
+                <div class="column-card muted" onclick="navigateToPlanning('next')">
+                    <div class="column-card-header">
+                        <div class="column-info">
+                            <span class="column-label">Next Week &rarr;</span>
+                            <span class="column-sublabel">Jan 20 - 26</span>
+                        </div>
+                        <span class="column-badge upcoming">Upcoming</span>
+                    </div>
+                    <div class="column-empty">
+                        <div class="column-empty-text">No goals set yet</div>
+                        <span class="column-empty-btn">+ Add goal</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Design Notes Panel -->
+    <div class="design-notes" id="designNotes">
+        <button class="design-notes-close" onclick="document.getElementById('designNotes').style.display='none'">&times;</button>
+        <div class="design-notes-title">Dashboard v19 (KARVIA)</div>
+        <ul class="design-notes-list">
+            <li>KARVIA color palette</li>
+            <li>Green: #22c55e (success)</li>
+            <li>Goals match Tasks sizing</li>
+            <li>Unified 32px padding</li>
+            <li>Max-width: 1200px</li>
+        </ul>
+    </div>
+
+    <script>
+        function completeTask(row) {
+            row.classList.remove('overdue', 'today');
+            row.classList.add('done');
+            row.querySelector('.task-title').style.textDecoration = 'line-through';
+            row.querySelector('.task-time').textContent = 'Just now';
+        }
+
+        function navigateToPlanning(week) {
+            alert(`Navigate to Planning page → ${week} week`);
+        }
+
+        function selectObjective(objNum) {
+            // Remove active from all cards
+            document.querySelectorAll('.obj-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            // Add active to clicked card
+            event.currentTarget.classList.add('active');
+
+            // In real implementation, this would filter tasks and goals
+            console.log(`Filtering by Objective ${objNum}`);
+        }
+    </script>
+</body>
+</html>

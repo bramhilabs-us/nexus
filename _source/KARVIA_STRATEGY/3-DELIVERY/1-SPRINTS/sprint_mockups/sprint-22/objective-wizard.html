@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objective Wizard | Sprint 22 Mockup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../../client/css/s13-patterns.css">
+    <link rel="stylesheet" href="../../../../../client/css/objective-wizard.css">
+    <style>
+        /* ════════════════════════════════════════════════════════════════════
+           OBJECTIVE WIZARD — Sprint 22, Epic E (10 pts, P0)
+           Live page: client/pages/objective-wizard.html (existing baseline)
+           Live script: client/pages/scripts/objective-wizard.js
+
+           THIS MOCKUP MIRRORS THE LIVE WIZARD STRUCTURE.
+           Only the per-screen content fields change. Layout, nav, step
+           indicator, container, button row — all preserved verbatim.
+
+           ┌───────────────────────────────────────────────────────────────┐
+           │  WHAT STAYS (do NOT change):                                  │
+           │  - Production navigation (<nav> + /js/navigation.js)          │
+           │  - 3-screen flow + step-dot indicator                         │
+           │  - .wizard-container layout                                   │
+           │  - Cancel/Back/Next button pattern                            │
+           │  - client/css/objective-wizard.css                            │
+           │                                                                │
+           │  WHAT CHANGES (Sprint 22 Epic E):                             │
+           │  - Screen 1: Add SSI impact (area + sub-dimension) fields     │
+           │              + Title field promoted to Screen 1               │
+           │  - Screen 2: Replace any prior content with                   │
+           │              Behavior/Discipline selector grouped by 4        │
+           │              foundations (Discipline/Growth/Accountability/    │
+           │              Maturity), 9 disciplines from config             │
+           │  - Screen 3: Replace prior KR fields with AI KR generation    │
+           │              + manual entry fallback + edit/confirm. Saves    │
+           │              KRs to NEW KeyResult collection (separate model).│
+           │                                                                │
+           │  Backend changes (separate from this mockup):                 │
+           │  - POST /api/objectives  → creates Objective                  │
+           │  - POST /api/key-results → creates N KeyResult records        │
+           │  - POST /api/objectives/generate-krs → AI generation          │
+           └───────────────────────────────────────────────────────────────┘
+
+           Reference: epics/EPIC_E_OBJECTIVE_WIZARD.md
+           ════════════════════════════════════════════════════════════════════ */
+
+        :root {
+            --s22-navy: #1F2937;
+            --s22-navy-light: #374151;
+            --s22-gold: #F59E0B;
+            --s22-gold-light: #FCD34D;
+            --s22-gold-bg: #FFFBEB;
+            --s22-gray-50: #F9FAFB;
+            --s22-gray-100: #F3F4F6;
+            --s22-gray-200: #E5E7EB;
+            --s22-gray-300: #D1D5DB;
+            --s22-gray-500: #6B7280;
+            --s22-gray-700: #374151;
+            --s22-gray-900: #111827;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--s22-gray-50);
+            margin: 0;
+            color: var(--s22-gray-900);
+        }
+
+        /* Spec wrapper for static stacked preview */
+        .preview-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            padding: 32px 24px 64px;
+            max-width: 920px;
+            margin: 0 auto;
+        }
+
+        .preview-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--s22-gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+        }
+
+        /* Wizard scaffolding (mirrors live .wizard-container pattern) */
+        .wizard-screen {
+            background: white;
+            border: 1px solid var(--s22-gray-200);
+            border-radius: 12px;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.04);
+            overflow: hidden;
+        }
+
+        .wizard-container {
+            padding: 32px;
+        }
+
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .step-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--s22-gray-200);
+            transition: all 0.2s;
+        }
+
+        .step-dot.active {
+            background: var(--s22-navy);
+            transform: scale(1.4);
+        }
+
+        .step-dot.done {
+            background: var(--s22-gold);
+        }
+
+        .wizard-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--s22-gray-900);
+            text-align: center;
+            margin: 0 0 6px;
+        }
+
+        .wizard-subtitle {
+            font-size: 13px;
+            color: var(--s22-gray-500);
+            text-align: center;
+            margin: 0 0 28px;
+        }
+
+        /* Form fields */
+        .field { margin-bottom: 18px; }
+        .field-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--s22-gray-700);
+            margin-bottom: 6px;
+        }
+        .field-required::after { content: " *"; color: var(--s22-gold); }
+        .field-input, .field-select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--s22-gray-300);
+            border-radius: 6px;
+            font-size: 13px;
+            background: white;
+            font-family: inherit;
+        }
+        .field-input:focus, .field-select:focus {
+            outline: none;
+            border-color: var(--s22-navy);
+            box-shadow: 0 0 0 3px rgba(31,41,55,0.08);
+        }
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* Category cards (mirrors existing .category-grid) */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .category-card {
+            border: 1px solid var(--s22-gray-200);
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .category-card:hover {
+            border-color: var(--s22-gray-300);
+            background: var(--s22-gray-50);
+        }
+        .category-card.is-selected {
+            border-color: var(--s22-navy);
+            background: var(--s22-gray-50);
+        }
+        .category-icon {
+            font-size: 18px;
+            line-height: 1;
+        }
+        .category-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--s22-gray-900);
+        }
+        .category-desc {
+            font-size: 11px;
+            color: var(--s22-gray-500);
+            margin-top: 2px;
+        }
+
+        /* SSI impact auto-suggest banner */
+        .ssi-suggest {
+            font-size: 12px;
+            background: var(--s22-gold-bg);
+            border: 1px solid var(--s22-gold-light);
+            border-radius: 6px;
+            padding: 8px 12px;
+            color: var(--s22-gray-700);
+            margin-bottom: 8px;
+        }
+        .ssi-suggest strong { color: var(--s22-navy); }
+
+        /* Behavior/Discipline selector (Screen 2) */
+        .foundation-group {
+            margin-bottom: 18px;
+        }
+        .foundation-header {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--s22-gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin: 0 0 8px;
+        }
+        .behavior-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        .behavior-option {
+            display: flex;
+            gap: 8px;
+            padding: 10px 12px;
+            border: 1px solid var(--s22-gray-200);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .behavior-option:hover {
+            border-color: var(--s22-gray-300);
+            background: var(--s22-gray-50);
+        }
+        .behavior-option.is-selected {
+            border-color: var(--s22-navy);
+            background: var(--s22-gray-50);
+        }
+        .behavior-name {
+            font-weight: 600;
+            color: var(--s22-gray-900);
+            display: block;
+        }
+        .behavior-desc {
+            font-size: 11px;
+            color: var(--s22-gray-500);
+        }
+        .behavior-option input[type="checkbox"] {
+            accent-color: var(--s22-navy);
+            margin-top: 2px;
+        }
+        .selection-counter {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--s22-gray-500);
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: var(--s22-gray-50);
+            border-radius: 6px;
+        }
+        .counter-warn {
+            color: var(--s22-gold);
+            font-weight: 500;
+        }
+
+        /* Screen 3: KR list */
+        .kr-actions-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .kr-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .kr-card {
+            border: 1px solid var(--s22-gray-200);
+            border-radius: 8px;
+            padding: 12px 14px;
+            background: white;
+        }
+        .kr-card-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+        .kr-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--s22-gray-900);
+        }
+        .kr-source {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--s22-gold-dark, #D97706);
+            background: var(--s22-gold-bg);
+            padding: 2px 8px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .kr-source.manual {
+            background: var(--s22-gray-100);
+            color: var(--s22-gray-700);
+        }
+        .kr-meta {
+            font-size: 11px;
+            color: var(--s22-gray-500);
+        }
+        .kr-edit {
+            font-size: 11px;
+            color: var(--s22-navy);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .ai-guidance {
+            font-size: 12px;
+            background: var(--s22-gray-50);
+            border-left: 3px solid var(--s22-navy);
+            padding: 10px 12px;
+            color: var(--s22-gray-700);
+            margin-top: 14px;
+            border-radius: 4px;
+        }
+
+        /* Footer (mirrors live wizard buttons) */
+        .wizard-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 32px;
+            border-top: 1px solid var(--s22-gray-200);
+            background: var(--s22-gray-50);
+        }
+        .step-counter {
+            font-size: 12px;
+            color: var(--s22-gray-500);
+            font-weight: 500;
+        }
+        .footer-actions { display: flex; gap: 8px; }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+        .btn-ghost { background: transparent; color: var(--s22-gray-700); }
+        .btn-ghost:hover { background: var(--s22-gray-100); }
+        .btn-secondary {
+            background: white;
+            color: var(--s22-gray-700);
+            border-color: var(--s22-gray-300);
+        }
+        .btn-secondary:hover:not(:disabled) { background: var(--s22-gray-50); }
+        .btn-secondary:disabled { opacity: 0.4; cursor: not-allowed; }
+        .btn-primary { background: var(--s22-navy); color: white; }
+        .btn-primary:hover { background: var(--s22-navy-light); }
+        .btn-gold {
+            background: var(--s22-gold);
+            color: white;
+        }
+        .btn-gold:hover { background: var(--s22-gold-dark, #D97706); }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PRODUCTION NAVIGATION — LOCKED, DO NOT MODIFY
+         Copied verbatim from client/pages/objective-wizard.html lines 18-20.
+         Implementation must preserve this block exactly + load /js/navigation.js.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div id="main-navigation"></div>
+    </nav>
+
+    <div class="preview-stack">
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             SCREEN 1 — Define Objective (title + category + SSI impact)
+             ═══════════════════════════════════════════════════════════════ -->
+        <div>
+            <div class="preview-label">Screen 1 of 3 · Define Objective</div>
+            <div class="wizard-screen">
+                <div class="wizard-container">
+                    <div class="step-indicator">
+                        <div class="step-dot active"></div>
+                        <div class="step-dot"></div>
+                        <div class="step-dot"></div>
+                    </div>
+
+                    <h1 class="wizard-title">Define your objective</h1>
+                    <p class="wizard-subtitle">Set the focus, then connect it to your SSI constraint</p>
+
+                    <div class="field">
+                        <label class="field-label field-required">Objective Title</label>
+                        <input class="field-input" type="text"
+                               placeholder="What outcome do you want to achieve?"
+                               maxlength="200" />
+                        <p class="kr-meta" style="margin-top:4px;">10–200 characters. Be specific and outcome-focused.</p>
+                    </div>
+
+                    <div class="field">
+                        <label class="field-label field-required">Category</label>
+                        <div class="category-grid">
+                            <div class="category-card is-selected">
+                                <span class="category-icon">📈</span>
+                                <div>
+                                    <div class="category-label">Growth</div>
+                                    <div class="category-desc">Revenue, market expansion, sales</div>
+                                </div>
+                            </div>
+                            <div class="category-card">
+                                <span class="category-icon">⚙️</span>
+                                <div>
+                                    <div class="category-label">Operations</div>
+                                    <div class="category-desc">Process, quality, delivery</div>
+                                </div>
+                            </div>
+                            <div class="category-card">
+                                <span class="category-icon">👥</span>
+                                <div>
+                                    <div class="category-label">People & Culture</div>
+                                    <div class="category-desc">Team, engagement, culture</div>
+                                </div>
+                            </div>
+                            <div class="category-card">
+                                <span class="category-icon">💰</span>
+                                <div>
+                                    <div class="category-label">Financial Health</div>
+                                    <div class="category-desc">Cashflow, margin, runway</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="kr-meta" style="margin-top:6px;">Loaded from server/config/categories.js — same source as live wizard.</p>
+                    </div>
+
+                    <div class="ssi-suggest">
+                        💡 Auto-suggested from latest assessment: constraint is <strong>Speed → Decision Making (35/100)</strong>.
+                        You can override below.
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label class="field-label">SSI Impact Area</label>
+                            <select class="field-select">
+                                <option>Speed</option>
+                                <option>Strength</option>
+                                <option>Intelligence</option>
+                                <option value="">— None —</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label class="field-label">Sub-dimension</label>
+                            <select class="field-select">
+                                <option>Decision Making</option>
+                                <option>Market Response</option>
+                                <option>Execution Velocity</option>
+                                <option>Adaptation Rate</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wizard-footer">
+                    <span class="step-counter">Step 1 of 3</span>
+                    <div class="footer-actions">
+                        <button class="btn btn-ghost">Cancel</button>
+                        <button class="btn btn-secondary" disabled>← Back</button>
+                        <button class="btn btn-primary">Next →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             SCREEN 2 — Behavior / Discipline Selection
+             ═══════════════════════════════════════════════════════════════ -->
+        <div>
+            <div class="preview-label">Screen 2 of 3 · Select Disciplines (Behaviors)</div>
+            <div class="wizard-screen">
+                <div class="wizard-container">
+                    <div class="step-indicator">
+                        <div class="step-dot done"></div>
+                        <div class="step-dot active"></div>
+                        <div class="step-dot"></div>
+                    </div>
+
+                    <h1 class="wizard-title">Which disciplines build the behavior?</h1>
+                    <p class="wizard-subtitle">Choose 1–3 disciplines from the 9 available (config-loaded)</p>
+
+                    <!-- Foundation: Discipline -->
+                    <div class="foundation-group">
+                        <h4 class="foundation-header">Discipline</h4>
+                        <div class="behavior-grid">
+                            <label class="behavior-option is-selected">
+                                <input type="checkbox" checked />
+                                <div>
+                                    <span class="behavior-name">Truth</span>
+                                    <span class="behavior-desc">Honesty in all dealings</span>
+                                </div>
+                            </label>
+                            <label class="behavior-option">
+                                <input type="checkbox" />
+                                <div>
+                                    <span class="behavior-name">Order</span>
+                                    <span class="behavior-desc">Structure and clarity</span>
+                                </div>
+                            </label>
+                            <label class="behavior-option">
+                                <input type="checkbox" />
+                                <div>
+                                    <span class="behavior-name">Focus</span>
+                                    <span class="behavior-desc">Deep work, minimal context-switch</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Foundation: Growth -->
+                    <div class="foundation-group">
+                        <h4 class="foundation-header">Growth</h4>
+                        <div class="behavior-grid">
+                            <label class="behavior-option is-selected">
+                                <input type="checkbox" checked />
+                                <div>
+                                    <span class="behavior-name">Curiosity</span>
+                                    <span class="behavior-desc">Question assumptions</span>
+                                </div>
+                            </label>
+                            <label class="behavior-option">
+                                <input type="checkbox" />
+                                <div>
+                                    <span class="behavior-name">Reflection</span>
+                                    <span class="behavior-desc">Weekly review habit</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Foundation: Accountability -->
+                    <div class="foundation-group">
+                        <h4 class="foundation-header">Accountability</h4>
+                        <div class="behavior-grid">
+                            <label class="behavior-option">
+                                <input type="checkbox" />
+                                <div>
+                                    <span class="behavior-name">Ownership</span>
+                                    <span class="behavior-desc">No-excuse delivery</span>
+                                </div>
+                            </label>
+                            <label class="behavior-option">
+                                <input type="checkbox" />
+                                <div>
+                                    <span class="behavior-name">Follow-through</span>
+                                    <span class="behavior-desc">Closing the loop</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Foundation: Maturity -->
+                    <div class="foundation-group">
+                        <h4 class="foundation-header">Maturity</h4>
+                        <div class="behavior-grid">
+                            <label class="behavior-option">
+                                <input type="checkbox" />
+                                <div>
+                                    <span class="behavior-name">Patience</span>
+                                    <span class="behavior-desc">Long-cycle thinking</span>
+                                </div>
+                            </label>
+                            <label class="behavior-option">
+                                <input type="checkbox" />
+                                <div>
+                                    <span class="behavior-name">Composure</span>
+                                    <span class="behavior-desc">Calm under pressure</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="selection-counter">
+                        <span>Selected: <strong>2</strong> of 3 recommended (max 5)</span>
+                        <span>9 disciplines loaded from <code>server/config/disciplines.js</code></span>
+                    </div>
+                </div>
+
+                <div class="wizard-footer">
+                    <span class="step-counter">Step 2 of 3</span>
+                    <div class="footer-actions">
+                        <button class="btn btn-ghost">Cancel</button>
+                        <button class="btn btn-secondary">← Back</button>
+                        <button class="btn btn-primary">Next →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             SCREEN 3 — Key Results (AI generation + manual fallback)
+             ═══════════════════════════════════════════════════════════════ -->
+        <div>
+            <div class="preview-label">Screen 3 of 3 · Key Results (saved to KeyResult collection)</div>
+            <div class="wizard-screen">
+                <div class="wizard-container">
+                    <div class="step-indicator">
+                        <div class="step-dot done"></div>
+                        <div class="step-dot done"></div>
+                        <div class="step-dot active"></div>
+                    </div>
+
+                    <h1 class="wizard-title">How will you measure success?</h1>
+                    <p class="wizard-subtitle">3–5 outcome-based Key Results. AI suggests, you edit.</p>
+
+                    <div class="kr-actions-bar">
+                        <button class="btn btn-gold">⚡ Generate with AI</button>
+                        <button class="btn btn-secondary">+ Add manually</button>
+                    </div>
+
+                    <div class="kr-list">
+                        <div class="kr-card">
+                            <div class="kr-card-head">
+                                <span class="kr-title">Reduce decision cycle from 14 days to 5 days</span>
+                                <span class="kr-source">AI</span>
+                            </div>
+                            <div class="kr-meta">Target: 5 days · Current: 14 days · Quarter: Q2 2026</div>
+                            <div style="margin-top:8px;">
+                                <button class="kr-edit">Edit ✎</button>
+                            </div>
+                        </div>
+
+                        <div class="kr-card">
+                            <div class="kr-card-head">
+                                <span class="kr-title">Increase weekly leadership decisions logged from 3 to 12</span>
+                                <span class="kr-source">AI</span>
+                            </div>
+                            <div class="kr-meta">Target: 12/week · Current: 3/week · Quarter: Q2 2026</div>
+                            <div style="margin-top:8px;">
+                                <button class="kr-edit">Edit ✎</button>
+                            </div>
+                        </div>
+
+                        <div class="kr-card">
+                            <div class="kr-card-head">
+                                <span class="kr-title">Hit 80% on-time delivery for committed quarterly milestones</span>
+                                <span class="kr-source manual">MANUAL</span>
+                            </div>
+                            <div class="kr-meta">Target: 80% · Current: 55% · Quarter: Q2 2026</div>
+                            <div style="margin-top:8px;">
+                                <button class="kr-edit">Edit ✎</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ai-guidance">
+                        <strong>Coaching guidance:</strong> Speed → Decision Making is your tightest constraint.
+                        These KRs measure decision velocity (cycle time) and decision frequency (logged decisions),
+                        which are the two leading indicators that move the SSI sub-score.
+                    </div>
+                </div>
+
+                <div class="wizard-footer">
+                    <span class="step-counter">Step 3 of 3</span>
+                    <div class="footer-actions">
+                        <button class="btn btn-ghost">Cancel</button>
+                        <button class="btn btn-secondary">← Back</button>
+                        <button class="btn btn-primary">Create Objective</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Production navigation loader — DO NOT REMOVE -->
+    <script src="/js/navigation.js"></script>
+
+</body>
+</html>

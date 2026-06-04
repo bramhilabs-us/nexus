@@ -1,0 +1,13 @@
+{
+  "replacement_kr": {
+    "title": "Increase first-30-day product adoption from 54% to 72%",
+    "description": "This focuses the KR on real usage behavior instead of a vague onboarding activity milestone.",
+    "metric_type": "percentage",
+    "target_value": 72,
+    "baseline_value": 54,
+    "unit": "percent",
+    "quarter": 2
+  },
+  "change_summary": "The replacement KR shifts from a task-style milestone to a measurable adoption outcome.",
+  "duplication_check": "This KR measures early product adoption and does not duplicate time-to-value, satisfaction, or retention."
+}

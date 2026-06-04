@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S1E1 - Page 2: The Lens | YSELA.AI</title>
+    <style>
+        @page { size: landscape; margin: 0; }
+        @media print {
+            html, body { width: 100%; height: 100%; }
+            .page { height: 100%; page-break-after: avoid; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FFFFFF;
+            color: #1a1a2e;
+        }
+
+        .page {
+            height: 100vh;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-columns: 1fr 400px 1fr;
+            grid-template-rows: auto 1fr auto;
+            gap: 30px;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #C9A227;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; color: #1a1a2e; }
+        .logo span { color: #C9A227; }
+        .series-tag {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .page-indicator { font-size: 12px; color: #888; text-align: right; }
+        .page-indicator .current { color: #C9A227; font-weight: 600; }
+        .page-title { margin-top: 4px; color: #1a1a2e; font-weight: 500; }
+
+        /* Left Column */
+        .left-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .opening-thought {
+            font-size: 20px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 32px;
+        }
+
+        .opening-thought em {
+            font-style: normal;
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        .truth-box {
+            background: #FAFAFA;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #F0F0F0;
+        }
+
+        .truth-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C9A227;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .truth-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #666;
+        }
+
+        /* Center - The Mirror Visual */
+        .center-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mirror-container {
+            width: 260px;
+            height: 260px;
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .mirror-frame {
+            width: 100%;
+            height: 100%;
+            border: 3px solid #1a1a2e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, #FAFAFA 0%, #F0F0F0 100%);
+        }
+
+        .mirror-content { text-align: center; }
+
+        .mirror-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .mirror-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a1a2e;
+            letter-spacing: 4px;
+        }
+
+        .mirror-subtitle {
+            font-size: 11px;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        /* SSI Dimensions */
+        .dimension {
+            position: absolute;
+            width: 140px;
+            text-align: center;
+        }
+
+        .dimension.speed {
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .dimension.strength {
+            bottom: 0px;
+            left: -90px;
+        }
+
+        .dimension.intelligence {
+            bottom: 0px;
+            right: -90px;
+        }
+
+        .dimension-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .dimension.speed .dimension-icon { background: #E3F2FD; }
+        .dimension.strength .dimension-icon { background: #E8F5E9; }
+        .dimension.intelligence .dimension-icon { background: #FFF3E0; }
+
+        .dimension-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 3px;
+        }
+
+        .dimension-desc {
+            font-size: 11px;
+            color: #888;
+            line-height: 1.4;
+        }
+
+        /* Right Column */
+        .right-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .question-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .question-item {
+            padding-left: 20px;
+            border-left: 3px solid #E0E0E0;
+        }
+
+        .question-item.active { border-left-color: #C9A227; }
+
+        .question-text {
+            font-size: 15px;
+            color: #444;
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+
+        .question-answer {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .question-item.active .question-answer {
+            color: #1a1a2e;
+            font-weight: 500;
+        }
+
+        .closing-note {
+            margin-top: 32px;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            padding: 16px;
+            background: #FAFAFA;
+            border-radius: 12px;
+        }
+
+        /* Footer */
+        .footer {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
+            font-size: 11px;
+            color: #AAA;
+        }
+
+        .footer-nav { display: flex; gap: 24px; }
+        .footer-nav a { color: #888; text-decoration: none; }
+        .footer-nav a:hover { color: #C9A227; }
+        .footer-nav .next { color: #C9A227; font-weight: 500; }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            html, body { height: auto; overflow: auto; }
+            .page { height: auto; min-height: 100vh; padding: 20px; grid-template-columns: 1fr; gap: 20px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .page-indicator { text-align: left; }
+            .left-col, .center-col, .right-col { grid-column: 1; }
+            .mirror-container { width: 200px; height: 200px; margin-top: 80px; }
+            .mirror-title { font-size: 28px; }
+            .dimension { width: 120px; }
+            .dimension.speed { top: -80px; }
+            .dimension.strength { bottom: 10px; left: -60px; }
+            .dimension.intelligence { bottom: 10px; right: -60px; }
+            .opening-thought { font-size: 18px; }
+            .footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .mirror-container { width: 180px; height: 180px; margin-top: 60px; }
+            .mirror-title { font-size: 24px; }
+            .dimension { width: 100px; font-size: 10px; }
+            .dimension-icon { width: 36px; height: 36px; font-size: 14px; }
+            .opening-thought { font-size: 16px; }
+            .question-text { font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <div>
+                <a href="index.html" style="text-decoration: none;"><div class="logo">YSELA<span>.AI</span></div></a>
+                <div class="series-tag">S1E1: Strategic Overview V2</div>
+            </div>
+            <div class="page-indicator">
+                <div>Page <span class="current">2</span> of 6</div>
+                <div class="page-title">The Lens</div>
+            </div>
+        </header>
+
+        <!-- Left Column -->
+        <div class="left-col">
+            <div class="opening-thought">
+                Before we decide what to build,<br>
+                we need to see <em>where value is moving</em>.<br><br>
+                Not away from AI.<br>
+                Through it.
+            </div>
+
+            <div class="truth-box">
+                <div class="truth-label">The Strategic Insight</div>
+                <div class="truth-text">
+                    As digital execution gets cheaper and easier,<br>
+                    the operating environment around people becomes more valuable.<br><br>
+                    Small teams still need speed,<br>
+                    but they also need trust and awareness.
+                </div>
+            </div>
+        </div>
+
+        <!-- Center - Mirror Visual -->
+        <div class="center-col">
+            <div class="mirror-container">
+                <div class="dimension speed">
+                    <div class="dimension-icon">&#9889;</div>
+                    <div class="dimension-name">Speed</div>
+                    <div class="dimension-desc">AI frees time<br>and reduces friction</div>
+                </div>
+
+                <div class="dimension strength">
+                    <div class="dimension-icon">&#128170;</div>
+                    <div class="dimension-name">Strength</div>
+                    <div class="dimension-desc">Trust turns small teams<br>into independent teams</div>
+                </div>
+
+                <div class="dimension intelligence">
+                    <div class="dimension-icon">&#129504;</div>
+                    <div class="dimension-name">Intelligence</div>
+                    <div class="dimension-desc">Awareness helps<br>moonshot work move</div>
+                </div>
+
+                <div class="mirror-frame">
+                    <div class="mirror-content">
+                        <div class="mirror-label">We Use</div>
+                        <div class="mirror-title">SSI</div>
+                        <div class="mirror-subtitle">A strategic lens for small teams</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-col">
+            <div class="question-stack">
+                <div class="question-item">
+                    <div class="question-text">"Is this anti-AI?"</div>
+                    <div class="question-answer">No. It exists because AI is reshaping value.</div>
+                </div>
+
+                <div class="question-item">
+                    <div class="question-text">"Is this anti-EOS?"</div>
+                    <div class="question-answer">No. It complements structure with formation.</div>
+                </div>
+
+                <div class="question-item active">
+                    <div class="question-text">"What are we looking for?"</div>
+                    <div class="question-answer">Teams where trust, awareness, and accountability matter most.</div>
+                </div>
+            </div>
+
+            <div class="closing-note">
+                The question is not whether AI wins.<br>
+                It is where human leverage grows next.
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>&copy; 2026 YSELA.AI &mdash; A Cultural Discipline Product | Platform by BRAMHI Labs</div>
+            <div class="footer-nav">
+                <a href="page_1_the_disconnection.html">&larr; The Market Gap</a>
+                <a href="page_3_the_path.html" class="next">Next: The Entry Path &rarr;</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

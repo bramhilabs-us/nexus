@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprint 13 - Objectives Mockup | Chief AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FAFAFA;
+            color: #1F2937;
+            line-height: 1.5;
+        }
+
+        /* ========================================
+           NAVIGATION BAR
+           ======================================== */
+        .nav {
+            background: white;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            border-bottom: 1px solid #F0F0F0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo svg {
+            height: 80px;
+            width: auto;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .nav-item {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            text-decoration: none;
+            color: #6B7280;
+            font-size: 13px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item:hover { color: #1F2937; }
+        .nav-item.active { color: #1F2937; }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 16px;
+            right: 16px;
+            height: 2px;
+            background: transparent;
+            transition: background 0.2s ease;
+        }
+
+        .nav-item[data-philosophy="play"].active::after,
+        .nav-item[data-philosophy="play"]:hover::after { background: #8B5CF6; }
+        .nav-item[data-philosophy="assess"].active::after,
+        .nav-item[data-philosophy="assess"]:hover::after { background: #3B82F6; }
+        .nav-item[data-philosophy="align"].active::after,
+        .nav-item[data-philosophy="align"]:hover::after { background: #22c55e; }
+        .nav-item[data-philosophy="plan"].active::after,
+        .nav-item[data-philosophy="plan"]:hover::after { background: #F59E0B; }
+
+        .nav-divider {
+            width: 1px;
+            height: 24px;
+            background: #E5E7EB;
+        }
+
+        .nav-item .tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+            background: #1F2937;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 400;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease 0.5s, visibility 0.15s ease 0.5s;
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        .nav-item .tooltip::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 6px 6px 6px;
+            border-style: solid;
+            border-color: transparent transparent #1F2937 transparent;
+        }
+
+        .nav-item:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .nav-user:hover {
+            background: #F5F5F5;
+        }
+
+        .nav-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .nav-user-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        /* Main Layout */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 32px;
+        }
+
+        /* Page Header */
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .page-header-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .page-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        /* Header KPIs - Inline with title */
+        .header-kpis {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-kpi {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            color: #6B7280;
+        }
+
+        .header-kpi svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .header-kpi-value {
+            font-weight: 700;
+            color: #374151;
+        }
+
+        .header-kpi.at-risk .header-kpi-value { color: #EF4444; }
+        .header-kpi.at-risk svg { color: #EF4444; }
+        .header-kpi.progress .header-kpi-value { color: #22c55e; }
+        .header-kpi.progress svg { color: #22c55e; }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Quarter Selector */
+        .quarter-selector {
+            display: flex;
+            gap: 4px;
+            background: #F3F4F6;
+            padding: 4px;
+            border-radius: 10px;
+        }
+
+        .quarter-btn {
+            padding: 8px 16px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quarter-btn:hover {
+            color: #374151;
+            background: rgba(255,255,255,0.5);
+        }
+
+        .quarter-btn.active {
+            background: white;
+            color: #F59E0B;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Add Button */
+        .btn-add {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-add:hover {
+            opacity: 0.9;
+            box-shadow: 0 4px 12px rgba(30, 58, 95, 0.3);
+        }
+
+        .btn-add svg { width: 16px; height: 16px; }
+
+        /* Filter Row - Combined */
+        .filter-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .filter-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* Category Pills */
+        .category-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* Right Side - Quarter Selector */
+        .filter-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .category-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .category-pill:hover {
+            border-color: #F59E0B;
+            background: #FFFBEB;
+        }
+
+        .category-pill.active {
+            border-color: #F59E0B;
+            background: #FFFBEB;
+            color: #92400E;
+        }
+
+        .category-pill-count {
+            background: #F3F4F6;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #374151;
+        }
+
+        .category-pill.active .category-pill-count {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        /* Objectives Grid */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 16px;
+        }
+
+        /* Objective Card - Minimalist */
+        .obj-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .obj-card:hover {
+            border-color: #D1D5DB;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .obj-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .obj-card-left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .obj-card-top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .obj-card-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #9CA3AF;
+        }
+
+        .obj-card-category {
+            font-size: 9px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: #EEF2FF;
+            color: #4F46E5;
+        }
+
+        /* Category Colors - Synchronized with category-icons.js (MECE Categories) */
+        .obj-card-category.growth { background: #D1FAE5; color: #065F46; }           /* emerald */
+        .obj-card-category.customer_success { background: #DBEAFE; color: #1E40AF; } /* blue */
+        .obj-card-category.operations { background: #FEF3C7; color: #92400E; }       /* amber */
+        .obj-card-category.people_culture { background: #FFEDD5; color: #C2410C; }   /* orange */
+        .obj-card-category.innovation { background: #EDE9FE; color: #6D28D9; }       /* purple */
+        .obj-card-category.financial_health { background: #DCFCE7; color: #166534; } /* green */
+        /* Legacy aliases for mockup shorthand */
+        .obj-card-category.ops { background: #FEF3C7; color: #92400E; }
+        .obj-card-category.people { background: #FFEDD5; color: #C2410C; }
+        .obj-card-category.customer { background: #DBEAFE; color: #1E40AF; }
+        .obj-card-category.financial { background: #DCFCE7; color: #166534; }
+
+        .obj-card-status {
+            font-size: 9px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Status Colors - Synchronized with objectives.js (Sprint 10 Standardized) */
+        /* 6 states: Completed, Not Started, Overdue, At Risk, Needs Attention, In Progress */
+        .obj-card-status.completed { background: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0; }
+        .obj-card-status.not-started { background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; }
+        .obj-card-status.overdue { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
+        .obj-card-status.at-risk { background: #FEE2E2; color: #DC2626; border: 1px solid #FECACA; }
+        .obj-card-status.needs-attention { background: #FEF3C7; color: #D97706; border: 1px solid #FDE68A; }
+        .obj-card-status.in-progress { background: #DBEAFE; color: #2563EB; border: 1px solid #BFDBFE; }
+        /* Legacy alias for compatibility */
+        .obj-card-status.on-track { background: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0; }
+
+        /* AI Generated Badge - Synchronized with objectives.js (lines 912-921) */
+        .obj-card-ai-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 6px;
+            background: linear-gradient(135deg, #EDE9FE, #DDD6FE);
+            border: 1px solid #C4B5FD;
+            border-radius: 4px;
+            font-size: 8px;
+            font-weight: 600;
+            color: #6D28D9;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .obj-card-ai-badge svg {
+            width: 10px;
+            height: 10px;
+        }
+
+        .obj-card-edited-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 6px;
+            background: #FEF3C7;
+            border: 1px solid #FDE68A;
+            border-radius: 4px;
+            font-size: 8px;
+            font-weight: 600;
+            color: #92400E;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .obj-card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #111827;
+            line-height: 1.3;
+        }
+
+        /* Owner Assignment - Right Side */
+        .obj-card-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .obj-card-owner {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+        }
+
+        .obj-card-owner:hover {
+            background: #EEF2FF;
+            border-color: #C7D2FE;
+        }
+
+        .obj-card-owner.unassigned {
+            background: #FEF3C7;
+            border-color: #FDE68A;
+            border-style: dashed;
+        }
+
+        .obj-card-owner.unassigned:hover {
+            background: #FEF9C3;
+            border-color: #F59E0B;
+        }
+
+        .obj-card-owner-avatar {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 8px;
+            font-weight: 600;
+        }
+
+        .obj-card-owner-name {
+            font-size: 10px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .obj-card-owner.unassigned .obj-card-owner-avatar {
+            background: #FDE68A;
+            color: #92400E;
+        }
+
+        .obj-card-owner.unassigned .obj-card-owner-name {
+            color: #92400E;
+            font-weight: 600;
+        }
+
+        .obj-card-progress {
+            width: 48px;
+            height: 48px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .obj-card-progress svg { transform: rotate(-90deg); }
+        .obj-card-progress .bg { fill: none; stroke: #F3F4F6; stroke-width: 4; }
+        .obj-card-progress .progress { fill: none; stroke-width: 4; stroke-linecap: round; }
+        .obj-card-progress .progress.green { stroke: #22c55e; }
+        .obj-card-progress .progress.orange { stroke: #F59E0B; }
+        .obj-card-progress .progress.red { stroke: #EF4444; }
+        .obj-card-progress .progress.gray { stroke: #9CA3AF; }
+        .obj-card-progress .pct {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 11px;
+            font-weight: 700;
+            color: #374151;
+        }
+
+        /* Key Results Section */
+        .obj-card-krs {
+            border-top: 1px solid #F3F4F6;
+            padding-top: 12px;
+        }
+
+        .obj-card-krs-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .obj-card-krs-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: #9CA3AF;
+        }
+
+        .obj-card-krs-count {
+            font-size: 10px;
+            color: #6B7280;
+        }
+
+        .kr-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            background: #FAFAFA;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            border-left: 4px solid transparent;
+        }
+
+        .kr-item:last-child { margin-bottom: 0; }
+
+        /* KR Item Colors - Synchronized with objectives.js (lines 450-482) */
+        /* Progress-based border coloring: Not Started, Complete (100%+), 70%+, 40%+, Below 40% */
+        .kr-item.kr-not-started { background: #F8FAFC; border-left-color: #94A3B8; }
+        .kr-item.kr-complete { background: #ECFDF5; border-left-color: #10B981; }
+        .kr-item.kr-70plus { background: #EFF6FF; border-left-color: #3B82F6; }
+        .kr-item.kr-40plus { background: #FFFBEB; border-left-color: #F59E0B; }
+        .kr-item.kr-below-40 { background: #FEF2F2; border-left-color: #EF4444; }
+
+        .kr-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .kr-item-title {
+            font-size: 12px;
+            font-weight: 500;
+            color: #374151;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .kr-num {
+            font-size: 10px;
+            font-weight: 700;
+            color: #9CA3AF;
+            margin-right: 6px;
+        }
+
+        .kr-item-meta {
+            font-size: 10px;
+            color: #9CA3AF;
+        }
+
+        /* KR Percentage - Right aligned */
+        .kr-item-pct {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+
+        .kr-item.kr-complete .kr-item-pct { background: #D1FAE5; color: #065F46; }
+        .kr-item.kr-70plus .kr-item-pct { background: #DBEAFE; color: #1E40AF; }
+        .kr-item.kr-40plus .kr-item-pct { background: #FEF3C7; color: #92400E; }
+        .kr-item.kr-below-40 .kr-item-pct { background: #FEE2E2; color: #991B1B; }
+        .kr-item.kr-not-started .kr-item-pct { background: #F1F5F9; color: #64748B; }
+
+        /* Card Actions */
+        .obj-card-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #F3F4F6;
+        }
+
+        .obj-card-action {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 10px;
+            background: transparent;
+            border: 1px solid #E5E7EB;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .obj-card-action svg { width: 14px; height: 14px; }
+
+        .obj-card-action:hover {
+            border-color: #F59E0B;
+            color: #92400E;
+            background: #FFFBEB;
+        }
+
+        .obj-card-action.primary {
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            border-color: #1e3a5f;
+            color: white;
+        }
+
+        .obj-card-action.primary:hover {
+            opacity: 0.9;
+            box-shadow: 0 2px 8px rgba(30, 58, 95, 0.3);
+        }
+
+        /* Category Coverage Widget - Collapsible & Sleek */
+        .category-coverage {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .category-coverage-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .category-coverage-header:hover {
+            background: #F9FAFB;
+        }
+
+        .category-coverage-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-coverage-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .category-coverage-subtitle {
+            font-size: 10px;
+            color: #9CA3AF;
+        }
+
+        .category-coverage-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-coverage-toggle span {
+            font-size: 10px;
+            color: #6B7280;
+        }
+
+        .category-coverage-toggle svg {
+            width: 14px;
+            height: 14px;
+            color: #9CA3AF;
+            transition: transform 0.2s;
+        }
+
+        .category-coverage.collapsed .category-coverage-toggle svg {
+            transform: rotate(-90deg);
+        }
+
+        .category-coverage-content {
+            padding: 0 14px 10px 14px;
+            transition: max-height 0.3s ease, opacity 0.2s ease;
+            max-height: 80px;
+            opacity: 1;
+        }
+
+        .category-coverage.collapsed .category-coverage-content {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .category-coverage-grid {
+            display: flex;
+            gap: 6px;
+        }
+
+        .category-coverage-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            background: #F9FAFB;
+            border-radius: 6px;
+            transition: all 0.2s;
+            flex: 1;
+        }
+
+        .category-coverage-item:hover {
+            background: #F3F4F6;
+        }
+
+        .category-coverage-item.has-objectives {
+            background: #F0FDF4;
+            border: 1px solid #BBF7D0;
+        }
+
+        .category-coverage-item.no-objectives {
+            background: #FEF2F2;
+            border: 1px dashed #FECACA;
+            opacity: 0.7;
+        }
+
+        .category-coverage-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .category-coverage-icon svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .category-coverage-info {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .category-coverage-label {
+            font-size: 9px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .category-coverage-count {
+            font-size: 10px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        /* Design Notes */
+        .design-notes {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1F2937;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-size: 12px;
+            max-width: 260px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .design-notes-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .design-notes-list {
+            list-style: none;
+            color: #D1D5DB;
+            line-height: 1.8;
+        }
+
+        .design-notes-list li::before {
+            content: '✓ ';
+            color: #22c55e;
+        }
+
+        .design-notes-close {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: #6B7280;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 75">
+                <defs>
+                    <linearGradient id="chiefGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1e3a5f"/>
+                        <stop offset="100%" style="stop-color:#2d5a87"/>
+                    </linearGradient>
+                </defs>
+                <path d="M25 10L27 20L35 15L29 23L42 25L29 27L35 35L27 30L25 40L23 30L15 35L21 27L8 25L21 23L15 15L23 20L25 10Z" fill="url(#chiefGrad)"/>
+                <circle cx="25" cy="25" r="3" fill="#d4a853"/>
+                <text x="50" y="31" font-family="Inter" font-size="22" font-weight="700" fill="#1e3a5f">Chief</text>
+                <text x="108" y="31" font-family="Inter" font-size="22" font-weight="500" fill="#d4a853">AI</text>
+                <text x="50" y="48" font-family="Inter" font-size="9" font-weight="400" fill="#6B7280">Your AI Chief of Staff</text>
+            </svg>
+        </div>
+        <div class="nav-center">
+            <a href="dashboard-redesign.html" class="nav-item" data-philosophy="play">
+                Dashboard
+                <span class="tooltip">Play - Your daily focus</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="assessment-hub.html" class="nav-item" data-philosophy="assess">
+                Assessments
+                <span class="tooltip">Assess - Understand your org</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="teams-redesign.html" class="nav-item" data-philosophy="align">
+                Teams
+                <span class="tooltip">Align - Get everyone aligned</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="objectives-redesign.html" class="nav-item active" data-philosophy="plan">
+                Objectives
+                <span class="tooltip">Plan - Strategic direction</span>
+            </a>
+            <a href="planning-redesign.html" class="nav-item" data-philosophy="plan">
+                Planning
+                <span class="tooltip">Plan - Weekly execution</span>
+            </a>
+        </div>
+        <div class="nav-user">
+            <div class="nav-avatar">JD</div>
+            <span class="nav-user-name">John Doe</span>
+            <svg width="14" height="14" fill="none" stroke="#6B7280" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M6 9l6 6 6-6"/>
+            </svg>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main">
+        <!-- Page Header with Inline KPIs -->
+        <div class="page-header">
+            <div class="page-header-left">
+                <h1 class="page-title">Objectives</h1>
+                <div class="header-kpis">
+                    <div class="header-kpi">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        <span class="header-kpi-value">4</span>
+                        <span>Active</span>
+                    </div>
+                    <div class="header-kpi progress">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 17l5-5-5-5M6 17l5-5-5-5"/></svg>
+                        <span class="header-kpi-value">42%</span>
+                        <span>Progress</span>
+                    </div>
+                    <div class="header-kpi">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                        <span class="header-kpi-value">12</span>
+                        <span>KRs</span>
+                    </div>
+                    <div class="header-kpi at-risk">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        <span class="header-kpi-value">2</span>
+                        <span>At Risk</span>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-add" onclick="addObjective()">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M12 4v16m8-8H4"/>
+                </svg>
+                Add Objective
+            </button>
+        </div>
+
+        <!-- Combined Filter Row -->
+        <div class="filter-row">
+            <!-- Left: Category Pills only -->
+            <div class="filter-left">
+                <div class="category-pills">
+                    <div class="category-pill active">
+                        All <span class="category-pill-count">4</span>
+                    </div>
+                    <div class="category-pill" onclick="filterCategory('growth')">
+                        Growth <span class="category-pill-count">1</span>
+                    </div>
+                    <div class="category-pill" onclick="filterCategory('customer')">
+                        Customer <span class="category-pill-count">1</span>
+                    </div>
+                    <div class="category-pill" onclick="filterCategory('ops')">
+                        Ops <span class="category-pill-count">1</span>
+                    </div>
+                    <div class="category-pill" onclick="filterCategory('people')">
+                        People <span class="category-pill-count">1</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Quarter Selector only -->
+            <div class="filter-right">
+                <div class="quarter-selector">
+                    <button class="quarter-btn">Q4 2025</button>
+                    <button class="quarter-btn active">Q1 2026</button>
+                    <button class="quarter-btn">Q2 2026</button>
+                    <button class="quarter-btn">Year</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Coverage Widget - Collapsible & Sleek -->
+        <div class="category-coverage" id="categoryCoverage">
+            <div class="category-coverage-header" onclick="toggleCategoryCoverage()">
+                <div class="category-coverage-left">
+                    <div class="category-coverage-title">Category Coverage</div>
+                    <div class="category-coverage-subtitle">4 of 6 covered</div>
+                </div>
+                <div class="category-coverage-toggle">
+                    <span>MECE Categories</span>
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                </div>
+            </div>
+            <div class="category-coverage-content">
+                <div class="category-coverage-grid">
+                    <div class="category-coverage-item has-objectives">
+                        <div class="category-coverage-icon" style="background: #D1FAE5; color: #065F46;">
+                            <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/></svg>
+                        </div>
+                        <div class="category-coverage-info">
+                            <span class="category-coverage-label">Growth</span>
+                            <span class="category-coverage-count">1 obj</span>
+                        </div>
+                    </div>
+                    <div class="category-coverage-item has-objectives">
+                        <div class="category-coverage-icon" style="background: #DBEAFE; color: #1E40AF;">
+                            <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/></svg>
+                        </div>
+                        <div class="category-coverage-info">
+                            <span class="category-coverage-label">Customer</span>
+                            <span class="category-coverage-count">1 obj</span>
+                        </div>
+                    </div>
+                    <div class="category-coverage-item has-objectives">
+                        <div class="category-coverage-icon" style="background: #FEF3C7; color: #92400E;">
+                            <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
+                        </div>
+                        <div class="category-coverage-info">
+                            <span class="category-coverage-label">Operations</span>
+                            <span class="category-coverage-count">1 obj</span>
+                        </div>
+                    </div>
+                    <div class="category-coverage-item has-objectives">
+                        <div class="category-coverage-icon" style="background: #FFEDD5; color: #C2410C;">
+                            <svg fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/></svg>
+                        </div>
+                        <div class="category-coverage-info">
+                            <span class="category-coverage-label">People</span>
+                            <span class="category-coverage-count">1 obj</span>
+                        </div>
+                    </div>
+                    <div class="category-coverage-item no-objectives">
+                        <div class="category-coverage-icon" style="background: #F3E8FF; color: #7C3AED;">
+                            <svg fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z"/></svg>
+                        </div>
+                        <div class="category-coverage-info">
+                            <span class="category-coverage-label">Innovation</span>
+                            <span class="category-coverage-count">0 obj</span>
+                        </div>
+                    </div>
+                    <div class="category-coverage-item no-objectives">
+                        <div class="category-coverage-icon" style="background: #DCFCE7; color: #166534;">
+                            <svg fill="currentColor" viewBox="0 0 20 20"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>
+                        </div>
+                        <div class="category-coverage-info">
+                            <span class="category-coverage-label">Financial</span>
+                            <span class="category-coverage-count">0 obj</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Objectives Grid -->
+        <div class="objectives-grid">
+            <!-- Objective 1 - Completed (AI Generated) - Demonstrates: completed status, AI badge, kr-complete coloring -->
+            <div class="obj-card">
+                <div class="obj-card-header">
+                    <div class="obj-card-left">
+                        <div class="obj-card-top">
+                            <span class="obj-card-label">Obj 1</span>
+                            <span class="obj-card-category growth">Growth</span>
+                            <span class="obj-card-status completed">Completed</span>
+                            <span class="obj-card-ai-badge">
+                                <svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.582l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.788l1.599.799L9 4.323V3a1 1 0 011-1z"/></svg>
+                                AI
+                            </span>
+                        </div>
+                        <div class="obj-card-title">Increase Revenue by 40%</div>
+                    </div>
+                    <div class="obj-card-right">
+                        <div class="obj-card-progress">
+                            <svg width="48" height="48" viewBox="0 0 48 48">
+                                <circle class="bg" cx="24" cy="24" r="20"/>
+                                <circle class="progress green" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="0"/>
+                            </svg>
+                            <span class="pct">100%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="obj-card-owner" onclick="assignOwner(event)" title="Click to reassign">
+                    <span class="obj-card-owner-avatar">JD</span>
+                    <span class="obj-card-owner-name">John Doe</span>
+                </div>
+                <div class="obj-card-krs">
+                    <div class="obj-card-krs-header">
+                        <span class="obj-card-krs-label">Key Results</span>
+                        <span class="obj-card-krs-count">3 KRs</span>
+                    </div>
+                    <!-- KR at 100% - kr-complete coloring -->
+                    <div class="kr-item kr-complete">
+                        <div class="kr-item-info">
+                            <div class="kr-item-title"><span class="kr-num">O1-KR1</span> Close $500K in new deals</div>
+                            <div class="kr-item-meta">$500K / $500K</div>
+                        </div>
+                        <span class="kr-item-pct">100%</span>
+                    </div>
+                    <!-- KR at 100% - kr-complete coloring -->
+                    <div class="kr-item kr-complete">
+                        <div class="kr-item-info">
+                            <div class="kr-item-title"><span class="kr-num">O1-KR2</span> Increase MRR to $100K</div>
+                            <div class="kr-item-meta">$100K / $100K</div>
+                        </div>
+                        <span class="kr-item-pct">100%</span>
+                    </div>
+                    <!-- KR at 100% - kr-complete coloring -->
+                    <div class="kr-item kr-complete">
+                        <div class="kr-item-info">
+                            <div class="kr-item-title"><span class="kr-num">O1-KR3</span> Launch 2 new products</div>
+                            <div class="kr-item-meta">2 / 2 launched</div>
+                        </div>
+                        <span class="kr-item-pct">100%</span>
+                    </div>
+                </div>
+                <div class="obj-card-actions">
+                    <button class="obj-card-action primary">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                        Plan
+                    </button>
+                    <button class="obj-card-action">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        Edit
+                    </button>
+                    <button class="obj-card-action">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                        Chat
+                    </button>
+                </div>
+            </div>
+
+            <!-- Objective 2 - At Risk - Demonstrates: at-risk status, kr-below-40 coloring (25%+ behind expected) -->
+            <div class="obj-card">
+                <div class="obj-card-header">
+                    <div class="obj-card-left">
+                        <div class="obj-card-top">
+                            <span class="obj-card-label">Obj 2</span>
+                            <span class="obj-card-category customer">Customer</span>
+                            <span class="obj-card-status at-risk">At Risk</span>
+                        </div>
+                        <div class="obj-card-title">Improve Customer NPS to 70+</div>
+                    </div>
+                    <div class="obj-card-right">
+                        <div class="obj-card-progress">
+                            <svg width="48" height="48" viewBox="0 0 48 48">
+                                <circle class="bg" cx="24" cy="24" r="20"/>
+                                <circle class="progress red" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="100.5"/>
+                            </svg>
+                            <span class="pct">20%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="obj-card-owner" onclick="assignOwner(event)" title="Click to reassign">
+                    <span class="obj-card-owner-avatar">SM</span>
+                    <span class="obj-card-owner-name">Sarah Miller</span>
+                </div>
+                <div class="obj-card-krs">
+                    <div class="obj-card-krs-header">
+                        <span class="obj-card-krs-label">Key Results</span>
+                        <span class="obj-card-krs-count">3 KRs</span>
+                    </div>
+                    <!-- KR at 30% - kr-below-40 coloring (red) -->
+                    <div class="kr-item kr-below-40">
+                        <div class="kr-item-info">
+                            <div class="kr-item-title"><span class="kr-num">O2-KR1</span> Reduce churn to &lt;5%</div>
+                            <div class="kr-item-meta">Currently 7%</div>
+                        </div>
+                        <span class="kr-item-pct">30%</span>
+                    </div>
+                    <!-- KR at 10% - kr-below-40 coloring (red) -->
+                    <div class="kr-item kr-below-40">
+                        <div class="kr-item-info">
+                            <div class="kr-item-title"><span class="kr-num">O2-KR2</span> Response time &lt;2hrs</div>
+                            <div class="kr-item-meta">Currently 4.5hrs</div>
+                        </div>
+                        <span class="kr-item-pct">10%</span>
+                    </div>
+                    <!-- KR at 20% - kr-below-40 coloring (red) -->
+                    <div class="kr-item kr-below-40">
+                        <div class="kr-item-info">
+                            <div class="kr-item-title"><span class="kr-num">O2-KR3</span> CSAT score 90%+</div>
+                            <div class="kr-item-meta">Currently 82%</div>
+                        </div>
+                        <span class="kr-item-pct">20%</span>
+                    </div>
+                </div>
+                <div class="obj-card-actions">
+                    <button class="obj-card-action primary">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                        Plan
+                    </button>
+                    <button class="obj-card-action">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        Edit
+                    </button>
+                    <button class="obj-card-action">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                        Chat
+                    </button>
+                </div>
+            </div>
+
+            <!-- Objective 3 - Needs Attention - Demonstrates: needs-attention status (10-25% behind), mixed KR coloring -->
+            <div class="obj-card">
+                <div class="obj-card-header">
+                    <div class="obj-card-left">
+                        <div class="obj-card-top">
+                            <span class="obj-card-label">Obj 3</span>
+                            <span class="obj-card-category ops">Operations</span>
+                            <span class="obj-card-status needs-attention">Needs Attention</span>
+                        </div>
+                        <div class="obj-card-title">Streamline Operations for Scale</div>
+                    </div>
+                    <div class="obj-card-right">
+                        <div class="obj-card-progress">
+                            <svg width="48" height="48" viewBox="0 0 48 48">
+                                <circle class="bg" cx="24" cy="24" r="20"/>
+                                <circle class="progress orange" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="50.2"/>
+                            </svg>
+                            <span class="pct">60%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="obj-card-owner" onclick="assignOwner(event)" title="Click to reassign">
+                    <span class="obj-card-owner-avatar">MC</span>
+                    <span class="obj-card-owner-name">Mike Chen</span>
+                </div>
+                <div class="obj-card-krs">
+                    <div class="obj-card-krs-header">
+                        <span class="obj-card-krs-label">Key Results</span>
+                        <span class="obj-card-krs-count">3 KRs</span>
+                    </div>
+                    <!-- KR at 80% - kr-70plus coloring (blue) -->
+                    <div class="kr-item kr-70plus">
+                        <div class="kr-item-info">
+                            <div class="kr-item-title"><span class="kr-num">O3-KR1</span> Automate 5 core processes</div>
+                            <div class="kr-item-meta">4 / 5 automated</div>
+                        </div>
+                        <span class="kr-item-pct">80%</span>
+                    </div>
+                    <!-- KR at 50% - kr-40plus coloring (amber) -->
+                    <div class="kr-item kr-40plus">
+                        <div class="kr-item-info">
+                            <div class="kr-item-title"><span class="kr-num">O3-KR2</span> Reduce ops costs by 20%</div>
+                            <div class="kr-item-meta">10% reduced so far</div>
+                        </div>
+                        <span class="kr-item-pct">50%</span>
+                    </div>
+                    <!-- KR at 50% - kr-40plus coloring (amber) -->
+                    <div class="kr-item kr-40plus">
+                        <div class="kr-item-info">
+                            <div class="kr-item-title"><span class="kr-num">O3-KR3</span> Deploy new ERP system</div>
+                            <div class="kr-item-meta">Phase 2 of 4</div>
+                        </div>
+                        <span class="kr-item-pct">50%</span>
+                    </div>
+                </div>
+                <div class="obj-card-actions">
+                    <button class="obj-card-action primary">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                        Plan
+                    </button>
+                    <button class="obj-card-action">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        Edit
+                    </button>
+                    <button class="obj-card-action">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                        Chat
+                    </button>
+                </div>
+            </div>
+
+            <!-- Objective 4 - Not Started (Unassigned) - Demonstrates: not-started status, kr-not-started coloring, unassigned owner -->
+            <div class="obj-card">
+                <div class="obj-card-header">
+                    <div class="obj-card-left">
+                        <div class="obj-card-top">
+                            <span class="obj-card-label">Obj 4</span>
+                            <span class="obj-card-category people">People</span>
+                            <span class="obj-card-status not-started">Not Started</span>
+                        </div>
+                        <div class="obj-card-title">Build World-Class Team Culture</div>
+                    </div>
+                    <div class="obj-card-right">
+                        <div class="obj-card-progress">
+                            <svg width="48" height="48" viewBox="0 0 48 48">
+                                <circle class="bg" cx="24" cy="24" r="20"/>
+                                <circle class="progress gray" cx="24" cy="24" r="20" stroke-dasharray="125.6" stroke-dashoffset="125.6"/>
+                            </svg>
+                            <span class="pct">0%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="obj-card-owner unassigned" onclick="assignOwner(event)" title="Click to assign owner">
+                    <span class="obj-card-owner-avatar">+</span>
+                    <span class="obj-card-owner-name">Assign</span>
+                </div>
+                <div class="obj-card-krs">
+                    <div class="obj-card-krs-header">
+                        <span class="obj-card-krs-label">Key Results</span>
+                        <span class="obj-card-krs-count">3 KRs</span>
+                    </div>
+                    <!-- KR at 0% - kr-not-started coloring (slate/gray) -->
+                    <div class="kr-item kr-not-started">
+                        <div class="kr-item-info">
+                            <div class="kr-item-title"><span class="kr-num">O4-KR1</span> eNPS score 50+</div>
+                            <div class="kr-item-meta">Currently 35</div>
+                        </div>
+                        <span class="kr-item-pct">0%</span>
+                    </div>
+                    <!-- KR at 0% - kr-not-started coloring (slate/gray) -->
+                    <div class="kr-item kr-not-started">
+                        <div class="kr-item-info">
+                            <div class="kr-item-title"><span class="kr-num">O4-KR2</span> Hire 10 senior engineers</div>
+                            <div class="kr-item-meta">0 / 10 hired</div>
+                        </div>
+                        <span class="kr-item-pct">0%</span>
+                    </div>
+                    <!-- KR at 0% - kr-not-started coloring (slate/gray) -->
+                    <div class="kr-item kr-not-started">
+                        <div class="kr-item-info">
+                            <div class="kr-item-title"><span class="kr-num">O4-KR3</span> Reduce turnover to &lt;10%</div>
+                            <div class="kr-item-meta">Currently 15%</div>
+                        </div>
+                        <span class="kr-item-pct">0%</span>
+                    </div>
+                </div>
+                <div class="obj-card-actions">
+                    <button class="obj-card-action primary">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                        Plan
+                    </button>
+                    <button class="obj-card-action">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        Edit
+                    </button>
+                    <button class="obj-card-action">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                        Chat
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Design Notes -->
+    <div class="design-notes" id="designNotes">
+        <button class="design-notes-close" onclick="document.getElementById('designNotes').style.display='none'">x</button>
+        <div class="design-notes-title">Objectives v9 - Simplified KRs</div>
+        <ul class="design-notes-list">
+            <li>KR% badge right-aligned, no status text</li>
+            <li>Unique KR IDs (O1-KR1, O2-KR2...)</li>
+            <li>Color indicates status (no labels)</li>
+            <li>6 Status States preserved</li>
+            <li>Category Coverage (collapsible)</li>
+            <li>Owner at bottom-right corner</li>
+            <li>KARVIA green: #22c55e</li>
+            <li>Max-width: 1200px / 32px pad</li>
+        </ul>
+    </div>
+
+    <script>
+        function filterCategory(cat) {
+            document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        function addObjective() {
+            alert('Add Objective Modal\n\n- Create Manually\n- Generate with AI');
+        }
+
+        function toggleCategoryCoverage() {
+            const widget = document.getElementById('categoryCoverage');
+            widget.classList.toggle('collapsed');
+        }
+
+        function assignOwner(event) {
+            event.stopPropagation();
+            const ownerEl = event.currentTarget;
+            const isUnassigned = ownerEl.classList.contains('unassigned');
+
+            // In real implementation, this would open a modal with team members
+            const selectedOwner = prompt(
+                isUnassigned
+                    ? 'Assign Owner:\n\nSelect team member:'
+                    : 'Reassign Owner:\n\nCurrent: ' + ownerEl.querySelector('.obj-card-owner-name').textContent + '\n\nSelect new owner:',
+                isUnassigned ? '' : ownerEl.querySelector('.obj-card-owner-name').textContent
+            );
+
+            if (selectedOwner && selectedOwner.trim()) {
+                // Update the UI
+                const initials = selectedOwner.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+                ownerEl.querySelector('.obj-card-owner-avatar').textContent = initials;
+                ownerEl.querySelector('.obj-card-owner-name').textContent = selectedOwner;
+                ownerEl.classList.remove('unassigned');
+                ownerEl.title = 'Click to reassign';
+            }
+        }
+    </script>
+</body>
+</html>

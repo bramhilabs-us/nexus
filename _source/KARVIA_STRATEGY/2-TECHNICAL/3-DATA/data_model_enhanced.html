@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karvia Platform Architecture - iBrain Enhanced</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', 'Arial', sans-serif;
+            background: #f8f9fa;
+            color: #2d3748;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .header {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-content h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+        .header-content p {
+            font-size: 15px;
+            color: #718096;
+        }
+
+        /* Enhancement Toggle */
+        .enhancement-control {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+        }
+        .toggle-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 52px;
+            height: 28px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #cbd5e0;
+            transition: .4s;
+            border-radius: 28px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background: #48bb78;
+        }
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+        .ai-status {
+            padding: 6px 14px;
+            background: white;
+            color: #718096;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+        .enhancement-active .ai-status {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* Scenario Controls */
+        .controls {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .controls-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+        }
+        .scenario-btn {
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            color: #4a5568;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .scenario-btn:hover {
+            border-color: #667eea;
+            background: #f7f7ff;
+            color: #667eea;
+            transform: translateY(-1px);
+        }
+        .scenario-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Main Visualization Container */
+        .visualization {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2d3748;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .section-badge {
+            padding: 4px 12px;
+            background: #edf2f7;
+            color: #4a5568;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Frontend Modules Section */
+        .frontend-section {
+            margin-bottom: 32px;
+            padding: 24px;
+            background: #f7fafc;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+        .module-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .module-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .module-card.active {
+            border-color: #f6ad55;
+            background: #fffdf7;
+        }
+        .module-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .module-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+        .module-desc {
+            font-size: 11px;
+            color: #718096;
+            line-height: 1.4;
+        }
+
+        /* Backend Services Section */
+        .backend-section {
+            margin-bottom: 32px;
+            padding: 24px;
+            background: #f3f0ff;
+            border-radius: 10px;
+            border: 2px solid #d6bcfa;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .service-card {
+            background: white;
+            border: 2px solid #d6bcfa;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .service-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        .service-card.active {
+            border-color: #f6ad55;
+            background: #fffdf7;
+        }
+        .service-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        .service-icon-wrap {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+        .ai-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 24px;
+            height: 24px;
+            background: #48bb78;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(72, 187, 120, 0.4);
+        }
+        .enhancement-active .ai-badge {
+            display: flex;
+        }
+        .service-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 6px;
+        }
+        .service-desc {
+            font-size: 12px;
+            color: #718096;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        .service-features {
+            padding-top: 12px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .feature-item {
+            font-size: 11px;
+            color: #4a5568;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .ai-feature {
+            color: #667eea;
+            font-weight: 600;
+            display: none;
+        }
+        .enhancement-active .ai-feature {
+            display: flex;
+        }
+
+        /* Data Models Section */
+        .data-section {
+            padding: 24px;
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .model-card {
+            background: #f7fafc;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .model-card:hover {
+            border-color: #667eea;
+            background: #f7f7ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .model-card.active {
+            border-color: #f6ad55;
+            background: #fffdf7;
+        }
+        .model-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .model-icon {
+            font-size: 24px;
+        }
+        .model-info {
+            flex: 1;
+        }
+        .model-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #2d3748;
+        }
+        .model-type {
+            font-size: 10px;
+            color: #718096;
+            text-transform: uppercase;
+        }
+        .model-fields {
+            padding-top: 12px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .field-item {
+            font-size: 11px;
+            color: #4a5568;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .field-icon {
+            color: #cbd5e0;
+            font-size: 8px;
+        }
+        .ai-field {
+            color: #667eea;
+            font-weight: 600;
+            display: none;
+        }
+        .enhancement-active .ai-field {
+            display: flex;
+        }
+
+        /* Flow Indicators */
+        .flow-indicator {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f6ad55, transparent);
+            opacity: 0;
+            animation: flow 2s linear infinite;
+        }
+        .flow-indicator.active {
+            opacity: 1;
+        }
+        @keyframes flow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Info Panel */
+        .info-panel {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            max-width: 400px;
+            transform: translateX(500px);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+        .info-panel.show {
+            transform: translateX(0);
+        }
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            background: #f7fafc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .info-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2d3748;
+        }
+        .info-content {
+            font-size: 13px;
+            color: #718096;
+            line-height: 1.6;
+        }
+        .info-ai {
+            margin-top: 12px;
+            padding: 12px;
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            border-radius: 8px;
+            display: none;
+        }
+        .enhancement-active .info-ai {
+            display: block;
+        }
+        .info-ai-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 6px;
+        }
+        .info-ai-text {
+            font-size: 12px;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        /* Legend */
+        .legend {
+            position: fixed;
+            top: 100px;
+            right: 24px;
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-size: 12px;
+        }
+        .legend-title {
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        .legend-text {
+            color: #4a5568;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .modules-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .models-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1>Karvia Platform Architecture</h1>
+                <p>Interactive data model visualization with iBrain AI enhancement capabilities</p>
+            </div>
+            <div class="enhancement-control">
+                <span class="toggle-label">iBrain AI</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="aiToggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="ai-status">Standard</span>
+            </div>
+        </div>
+
+        <!-- Scenario Controls -->
+        <div class="controls">
+            <div class="controls-title">Select Scenario</div>
+            <div class="scenario-grid">
+                <button class="scenario-btn active" data-scenario="onboarding">
+                    Employee Onboarding
+                </button>
+                <button class="scenario-btn" data-scenario="assessment">
+                    Dynamic Assessment
+                </button>
+                <button class="scenario-btn" data-scenario="goals">
+                    Goal Setting
+                </button>
+                <button class="scenario-btn" data-scenario="tasks">
+                    Task Management
+                </button>
+                <button class="scenario-btn" data-scenario="tracking">
+                    Progress Tracking
+                </button>
+                <button class="scenario-btn" data-scenario="scoring">
+                    Performance Scoring
+                </button>
+                <button class="scenario-btn" data-scenario="analytics">
+                    Analytics & Reports
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Visualization -->
+        <div class="visualization">
+            <!-- Frontend Modules -->
+            <div class="frontend-section">
+                <div class="section-header">
+                    <div class="section-title">Frontend Modules</div>
+                    <div class="section-badge">React + TypeScript</div>
+                </div>
+                <div class="modules-grid">
+                    <div class="module-card" data-module="auth">
+                        <div class="module-icon">🔐</div>
+                        <div class="module-name">Authentication</div>
+                        <div class="module-desc">Login, SSO, MFA</div>
+                    </div>
+                    <div class="module-card" data-module="dashboard">
+                        <div class="module-icon">📊</div>
+                        <div class="module-name">Dashboard</div>
+                        <div class="module-desc">Overview, KPIs</div>
+                    </div>
+                    <div class="module-card" data-module="assessment">
+                        <div class="module-icon">📋</div>
+                        <div class="module-name">Assessments</div>
+                        <div class="module-desc">Create, Take, Review</div>
+                    </div>
+                    <div class="module-card" data-module="objectives">
+                        <div class="module-icon">🎯</div>
+                        <div class="module-name">Objectives</div>
+                        <div class="module-desc">Company OKRs</div>
+                    </div>
+                    <div class="module-card" data-module="goals">
+                        <div class="module-icon">🎪</div>
+                        <div class="module-name">Goals</div>
+                        <div class="module-desc">Personal Goals</div>
+                    </div>
+                    <div class="module-card" data-module="tasks">
+                        <div class="module-icon">✅</div>
+                        <div class="module-name">Tasks</div>
+                        <div class="module-desc">To-dos, Actions</div>
+                    </div>
+                    <div class="module-card" data-module="progress">
+                        <div class="module-icon">📈</div>
+                        <div class="module-name">Progress</div>
+                        <div class="module-desc">Updates, Status</div>
+                    </div>
+                    <div class="module-card" data-module="teams">
+                        <div class="module-icon">👥</div>
+                        <div class="module-name">Teams</div>
+                        <div class="module-desc">Groups, Hierarchy</div>
+                    </div>
+                    <div class="module-card" data-module="reports">
+                        <div class="module-icon">📑</div>
+                        <div class="module-name">Reports</div>
+                        <div class="module-desc">Analytics, Exports</div>
+                    </div>
+                    <div class="module-card" data-module="settings">
+                        <div class="module-icon">⚙️</div>
+                        <div class="module-name">Settings</div>
+                        <div class="module-desc">Config, Prefs</div>
+                    </div>
+                </div>
+                <div class="flow-indicator"></div>
+            </div>
+
+            <!-- Backend Microservices -->
+            <div class="backend-section">
+                <div class="section-header">
+                    <div class="section-title">Backend Microservice Engines</div>
+                    <div class="section-badge">Node.js + PostgreSQL</div>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card" data-service="iam">
+                        <div class="ai-badge">✓</div>
+                        <div class="service-icon-wrap">🔐</div>
+                        <div class="service-name">IAM Engine</div>
+                        <div class="service-desc">Identity and Access Management service handling authentication, authorization, and multi-tenancy</div>
+                        <div class="service-features">
+                            <div class="feature-item">▪ JWT token management</div>
+                            <div class="feature-item">▪ Role-based access control</div>
+                            <div class="feature-item">▪ Multi-company support</div>
+                            <div class="feature-item ai-feature">✨ Behavioral authentication</div>
+                            <div class="feature-item ai-feature">✨ Risk-based access scoring</div>
+                        </div>
+                    </div>
+
+                    <div class="service-card" data-service="assessment">
+                        <div class="ai-badge">✓</div>
+                        <div class="service-icon-wrap">📋</div>
+                        <div class="service-name">Assessment Engine</div>
+                        <div class="service-desc">Dynamic assessment creation and management with template builder and scoring</div>
+                        <div class="service-features">
+                            <div class="feature-item">▪ Template builder</div>
+                            <div class="feature-item">▪ Question library</div>
+                            <div class="feature-item">▪ Response tracking</div>
+                            <div class="feature-item ai-feature">✨ AI question generation</div>
+                            <div class="feature-item ai-feature">✨ Adaptive difficulty</div>
+                        </div>
+                    </div>
+
+                    <div class="service-card" data-service="planner">
+                        <div class="ai-badge">✓</div>
+                        <div class="service-icon-wrap">🎯</div>
+                        <div class="service-name">Planner Engine</div>
+                        <div class="service-desc">OKR cascade management and goal alignment across organization hierarchy</div>
+                        <div class="service-features">
+                            <div class="feature-item">▪ OKR cascade</div>
+                            <div class="feature-item">▪ Goal decomposition</div>
+                            <div class="feature-item">▪ Timeline management</div>
+                            <div class="feature-item ai-feature">✨ Smart goal suggestions</div>
+                            <div class="feature-item ai-feature">✨ Resource optimization</div>
+                        </div>
+                    </div>
+
+                    <div class="service-card" data-service="scoring">
+                        <div class="ai-badge">✓</div>
+                        <div class="service-icon-wrap">📊</div>
+                        <div class="service-name">Scoring Engine</div>
+                        <div class="service-desc">Performance calculation and metrics aggregation with configurable scoring rules</div>
+                        <div class="service-features">
+                            <div class="feature-item">▪ Score calculations</div>
+                            <div class="feature-item">▪ Weighted averages</div>
+                            <div class="feature-item">▪ Benchmark tracking</div>
+                            <div class="feature-item ai-feature">✨ Predictive scoring</div>
+                            <div class="feature-item ai-feature">✨ Anomaly detection</div>
+                        </div>
+                    </div>
+
+                    <div class="service-card" data-service="observer">
+                        <div class="ai-badge">✓</div>
+                        <div class="service-icon-wrap">👁️</div>
+                        <div class="service-name">Observer Engine</div>
+                        <div class="service-desc">Activity tracking and audit logging for compliance and insights generation</div>
+                        <div class="service-features">
+                            <div class="feature-item">▪ Activity logging</div>
+                            <div class="feature-item">▪ Audit trails</div>
+                            <div class="feature-item">▪ Event streaming</div>
+                            <div class="feature-item ai-feature">✨ Pattern recognition</div>
+                            <div class="feature-item ai-feature">✨ Behavior insights</div>
+                        </div>
+                    </div>
+
+                    <div class="service-card" data-service="tracking">
+                        <div class="ai-badge">✓</div>
+                        <div class="service-icon-wrap">📈</div>
+                        <div class="service-name">Tracking Engine</div>
+                        <div class="service-desc">Progress monitoring and automatic rollup calculations across goal hierarchy</div>
+                        <div class="service-features">
+                            <div class="feature-item">▪ Progress updates</div>
+                            <div class="feature-item">▪ Automatic rollups</div>
+                            <div class="feature-item">▪ Milestone tracking</div>
+                            <div class="feature-item ai-feature">✨ Trend prediction</div>
+                            <div class="feature-item ai-feature">✨ Risk alerts</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flow-indicator"></div>
+            </div>
+
+            <!-- Data Models -->
+            <div class="data-section">
+                <div class="section-header">
+                    <div class="section-title">Data Models</div>
+                    <div class="section-badge">PostgreSQL + Redis</div>
+                </div>
+                <div class="models-grid">
+                    <div class="model-card" data-model="user">
+                        <div class="model-header">
+                            <div class="model-icon">👤</div>
+                            <div class="model-info">
+                                <div class="model-name">User</div>
+                                <div class="model-type">Core Entity</div>
+                            </div>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field-item"><span class="field-icon">▸</span> Multi-tenancy support</div>
+                            <div class="field-item"><span class="field-icon">▸</span> Roles & permissions</div>
+                            <div class="field-item"><span class="field-icon">▸</span> Profile settings</div>
+                            <div class="field-item ai-field">✨ Behavioral profile</div>
+                            <div class="field-item ai-field">✨ Skill predictions</div>
+                        </div>
+                    </div>
+
+                    <div class="model-card" data-model="company">
+                        <div class="model-header">
+                            <div class="model-icon">🏢</div>
+                            <div class="model-info">
+                                <div class="model-name">Company</div>
+                                <div class="model-type">Organization</div>
+                            </div>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field-item"><span class="field-icon">▸</span> Org hierarchy</div>
+                            <div class="field-item"><span class="field-icon">▸</span> Departments</div>
+                            <div class="field-item"><span class="field-icon">▸</span> Teams structure</div>
+                            <div class="field-item ai-field">✨ Culture analysis</div>
+                            <div class="field-item ai-field">✨ Team dynamics</div>
+                        </div>
+                    </div>
+
+                    <div class="model-card" data-model="assessment">
+                        <div class="model-header">
+                            <div class="model-icon">📝</div>
+                            <div class="model-info">
+                                <div class="model-name">Assessment</div>
+                                <div class="model-type">Dynamic</div>
+                            </div>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field-item"><span class="field-icon">▸</span> Template builder</div>
+                            <div class="field-item"><span class="field-icon">▸</span> Question library</div>
+                            <div class="field-item"><span class="field-icon">▸</span> Scoring rules</div>
+                            <div class="field-item ai-field">✨ AI questions</div>
+                            <div class="field-item ai-field">✨ Smart scoring</div>
+                        </div>
+                    </div>
+
+                    <div class="model-card" data-model="objective">
+                        <div class="model-header">
+                            <div class="model-icon">🎯</div>
+                            <div class="model-info">
+                                <div class="model-name">Objective</div>
+                                <div class="model-type">Strategic</div>
+                            </div>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field-item"><span class="field-icon">▸</span> Company goals</div>
+                            <div class="field-item"><span class="field-icon">▸</span> Alignment tree</div>
+                            <div class="field-item"><span class="field-icon">▸</span> Timeframes</div>
+                            <div class="field-item ai-field">✨ Goal suggestions</div>
+                            <div class="field-item ai-field">✨ Impact analysis</div>
+                        </div>
+                    </div>
+
+                    <div class="model-card" data-model="keyresult">
+                        <div class="model-header">
+                            <div class="model-icon">🔑</div>
+                            <div class="model-info">
+                                <div class="model-name">Key Result</div>
+                                <div class="model-type">Measurable</div>
+                            </div>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field-item"><span class="field-icon">▸</span> Metrics definition</div>
+                            <div class="field-item"><span class="field-icon">▸</span> Target values</div>
+                            <div class="field-item"><span class="field-icon">▸</span> Progress tracking</div>
+                            <div class="field-item ai-field">✨ KR generation</div>
+                            <div class="field-item ai-field">✨ Predictions</div>
+                        </div>
+                    </div>
+
+                    <div class="model-card" data-model="goal">
+                        <div class="model-header">
+                            <div class="model-icon">🎪</div>
+                            <div class="model-info">
+                                <div class="model-name">Goal</div>
+                                <div class="model-type">Personal</div>
+                            </div>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field-item"><span class="field-icon">▸</span> Individual goals</div>
+                            <div class="field-item"><span class="field-icon">▸</span> KR linkage</div>
+                            <div class="field-item"><span class="field-icon">▸</span> Deadlines</div>
+                            <div class="field-item ai-field">✨ Smart goals</div>
+                            <div class="field-item ai-field">✨ Path planning</div>
+                        </div>
+                    </div>
+
+                    <div class="model-card" data-model="task">
+                        <div class="model-header">
+                            <div class="model-icon">✅</div>
+                            <div class="model-info">
+                                <div class="model-name">Task</div>
+                                <div class="model-type">Actionable</div>
+                            </div>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field-item"><span class="field-icon">▸</span> Action items</div>
+                            <div class="field-item"><span class="field-icon">▸</span> Dependencies</div>
+                            <div class="field-item"><span class="field-icon">▸</span> Status tracking</div>
+                            <div class="field-item ai-field">✨ Task breakdown</div>
+                            <div class="field-item ai-field">✨ Priority AI</div>
+                        </div>
+                    </div>
+
+                    <div class="model-card" data-model="progress">
+                        <div class="model-header">
+                            <div class="model-icon">📈</div>
+                            <div class="model-info">
+                                <div class="model-name">Progress</div>
+                                <div class="model-type">Tracking</div>
+                            </div>
+                        </div>
+                        <div class="model-fields">
+                            <div class="field-item"><span class="field-icon">▸</span> Update logs</div>
+                            <div class="field-item"><span class="field-icon">▸</span> Rollup calc</div>
+                            <div class="field-item"><span class="field-icon">▸</span> History</div>
+                            <div class="field-item ai-field">✨ Trend analysis</div>
+                            <div class="field-item ai-field">✨ Forecasting</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flow-indicator"></div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-title">Legend</div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #f7fafc; border: 2px solid #e2e8f0;"></div>
+                <span class="legend-text">Default State</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #fffdf7; border: 2px solid #f6ad55;"></div>
+                <span class="legend-text">Active in Flow</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #48bb78;"></div>
+                <span class="legend-text">AI Enhanced</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                <span class="legend-text">iBrain Powered</span>
+            </div>
+        </div>
+
+        <!-- Info Panel -->
+        <div class="info-panel" id="infoPanel">
+            <div class="info-header">
+                <div class="info-icon">📊</div>
+                <div>
+                    <div class="info-title" id="infoTitle">Data Flow Active</div>
+                </div>
+            </div>
+            <div class="info-content" id="infoContent">
+                Select a scenario to see how data flows through the system
+            </div>
+            <div class="info-ai">
+                <div class="info-ai-title">iBrain Enhancement</div>
+                <div class="info-ai-text" id="aiInfo">
+                    AI capabilities enhance core functionality with predictive analytics and intelligent automation
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Scenario configurations
+        const scenarios = {
+            onboarding: {
+                name: 'Employee Onboarding',
+                description: 'New employee joins organization, completes assessment, and receives personalized goals based on role and assessment results.',
+                modules: ['auth', 'assessment', 'goals', 'dashboard'],
+                services: ['iam', 'assessment', 'planner'],
+                models: ['user', 'company', 'assessment', 'goal'],
+                aiEnhancement: 'AI analyzes employee profile to suggest optimal onboarding path, predicts skill gaps, recommends personalized assessments, and generates initial SMART goals'
+            },
+            assessment: {
+                name: 'Dynamic Assessment Creation',
+                description: 'Consultants create custom assessment templates with dynamic questions, scoring rules, and competency mapping.',
+                modules: ['assessment', 'settings'],
+                services: ['assessment', 'scoring'],
+                models: ['assessment', 'user'],
+                aiEnhancement: 'AI generates contextual questions based on role and industry, adapts difficulty based on responses, provides real-time scoring insights and competency predictions'
+            },
+            goals: {
+                name: 'Goal Setting & OKRs',
+                description: 'Leadership sets company objectives, managers cascade to team KRs, employees receive aligned personal goals.',
+                modules: ['objectives', 'goals', 'teams'],
+                services: ['planner', 'scoring'],
+                models: ['objective', 'keyresult', 'goal', 'user'],
+                aiEnhancement: 'AI suggests SMART goals based on company strategy, predicts achievability scores, recommends resource allocation, and identifies potential conflicts'
+            },
+            tasks: {
+                name: 'Task Management',
+                description: 'Goals broken down into actionable tasks, assigned to team members with dependencies and deadlines.',
+                modules: ['tasks', 'teams', 'progress'],
+                services: ['planner', 'tracking'],
+                models: ['task', 'goal', 'user', 'progress'],
+                aiEnhancement: 'AI breaks complex goals into optimal task sequences, suggests task priorities based on impact, predicts completion times, and identifies blockers'
+            },
+            tracking: {
+                name: 'Progress Tracking',
+                description: 'Employees update task progress, system automatically rolls up to goals, KRs, and objectives.',
+                modules: ['progress', 'dashboard', 'reports'],
+                services: ['tracking', 'observer', 'scoring'],
+                models: ['progress', 'task', 'goal', 'keyresult', 'objective'],
+                aiEnhancement: 'AI predicts completion trends, identifies at-risk objectives, suggests interventions for delayed items, and provides predictive analytics'
+            },
+            scoring: {
+                name: 'Performance Scoring',
+                description: 'System calculates performance scores based on goal completion, assessment results, and progress metrics.',
+                modules: ['reports', 'dashboard'],
+                services: ['scoring', 'observer'],
+                models: ['progress', 'assessment', 'goal', 'user'],
+                aiEnhancement: 'AI provides predictive scoring, identifies performance patterns, suggests improvement areas, and generates personalized development plans'
+            },
+            analytics: {
+                name: 'Analytics & Reporting',
+                description: 'Generate comprehensive reports, dashboards, and insights across organization performance metrics.',
+                modules: ['reports', 'dashboard'],
+                services: ['scoring', 'tracking', 'observer'],
+                models: ['progress', 'objective', 'company'],
+                aiEnhancement: 'AI generates automated insights, detects anomalies in performance data, forecasts future trends, and recommends strategic adjustments'
+            }
+        };
+
+        let currentScenario = 'onboarding';
+        let isEnhanced = false;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+            activateScenario('onboarding');
+        });
+
+        function setupEventListeners() {
+            // Scenario buttons
+            document.querySelectorAll('.scenario-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    activateScenario(btn.dataset.scenario);
+                });
+            });
+
+            // AI Toggle
+            document.getElementById('aiToggle').addEventListener('change', (e) => {
+                isEnhanced = e.target.checked;
+                document.body.classList.toggle('enhancement-active', isEnhanced);
+
+                // Update AI status text
+                const statusText = document.querySelector('.ai-status');
+                statusText.textContent = isEnhanced ? 'Enhanced' : 'Standard';
+
+                updateInfoPanel();
+            });
+
+            // Card hover effects
+            document.querySelectorAll('.module-card, .service-card, .model-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    if (card.classList.contains('active')) {
+                        showInfoPanel();
+                    }
+                });
+            });
+        }
+
+        function activateScenario(scenarioKey) {
+            currentScenario = scenarioKey;
+            const scenario = scenarios[scenarioKey];
+
+            // Update button states
+            document.querySelectorAll('.scenario-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.scenario === scenarioKey);
+            });
+
+            // Clear all active states
+            document.querySelectorAll('.module-card, .service-card, .model-card, .flow-indicator').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Activate relevant components with delay for animation
+            setTimeout(() => {
+                scenario.modules.forEach(module => {
+                    const el = document.querySelector(`[data-module="${module}"]`);
+                    if (el) el.classList.add('active');
+                });
+            }, 100);
+
+            setTimeout(() => {
+                scenario.services.forEach(service => {
+                    const el = document.querySelector(`[data-service="${service}"]`);
+                    if (el) el.classList.add('active');
+                });
+            }, 300);
+
+            setTimeout(() => {
+                scenario.models.forEach(model => {
+                    const el = document.querySelector(`[data-model="${model}"]`);
+                    if (el) el.classList.add('active');
+                });
+            }, 500);
+
+            // Activate flow indicators
+            setTimeout(() => {
+                document.querySelectorAll('.flow-indicator').forEach(el => {
+                    el.classList.add('active');
+                });
+            }, 700);
+
+            // Update and show info panel
+            updateInfoPanel();
+            showInfoPanel();
+        }
+
+        function updateInfoPanel() {
+            const scenario = scenarios[currentScenario];
+            document.getElementById('infoTitle').textContent = scenario.name;
+            document.getElementById('infoContent').textContent = scenario.description;
+
+            if (isEnhanced) {
+                document.getElementById('aiInfo').textContent = scenario.aiEnhancement;
+            }
+        }
+
+        function showInfoPanel() {
+            const panel = document.getElementById('infoPanel');
+            panel.classList.add('show');
+
+            // Auto-hide after 8 seconds
+            setTimeout(() => {
+                panel.classList.remove('show');
+            }, 8000);
+        }
+    </script>
+</body>
+</html>

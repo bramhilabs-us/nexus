@@ -1,0 +1,178 @@
+[
+  {
+    "title": "Become the go-to AI growth partner for mid-market service firms",
+    "description": "Drive sustainable growth through recurring advisory expansion and diversified client portfolio.",
+    "category": "growth",
+    "priority": "high",
+    "key_results": [
+      {
+        "title": "Increase annual revenue run-rate from $6.8M to $7.2M",
+        "description": "Q1 run-rate lift from core service expansion",
+        "metric_type": "currency",
+        "target_value": 7200000,
+        "current_value": 6800000,
+        "unit": "$",
+        "quarter": 1
+      },
+      {
+        "title": "Increase revenue growth from 9.2% to 13%",
+        "description": "Sustain higher growth trajectory by Q2",
+        "metric_type": "percentage",
+        "target_value": 13,
+        "current_value": 9.2,
+        "unit": "%",
+        "quarter": 2
+      },
+      {
+        "title": "Increase active client accounts from 84 to 98",
+        "description": "Expand account base while preserving quality",
+        "metric_type": "number",
+        "target_value": 98,
+        "current_value": 84,
+        "unit": "accounts",
+        "quarter": 3
+      },
+      {
+        "title": "Reduce top-5 client concentration from 43% to 35%",
+        "description": "Diversify concentration risk by Q4",
+        "metric_type": "percentage",
+        "target_value": 35,
+        "current_value": 43,
+        "unit": "%",
+        "quarter": 4
+      }
+    ]
+  },
+  {
+    "title": "Deliver consulting outcomes faster with a repeatable execution system",
+    "description": "Systematize delivery to improve throughput, predictability, and quality at scale.",
+    "category": "operations",
+    "priority": "high",
+    "key_results": [
+      {
+        "title": "Improve Delivery SSI block from 5.3 to 6.1",
+        "description": "Increase execution cadence and completion reliability",
+        "metric_type": "number",
+        "target_value": 6.1,
+        "current_value": 5.3,
+        "unit": "score",
+        "quarter": 1
+      },
+      {
+        "title": "Improve Decisions SSI block from 5.6 to 6.4",
+        "description": "Shorten decision cycle with clear operating rhythms",
+        "metric_type": "number",
+        "target_value": 6.4,
+        "current_value": 5.6,
+        "unit": "score",
+        "quarter": 2
+      },
+      {
+        "title": "Increase clients per advisor from 7 to 8.5",
+        "description": "Raise operating leverage with standard playbooks",
+        "metric_type": "number",
+        "target_value": 8.5,
+        "current_value": 7,
+        "unit": "clients/advisor",
+        "quarter": 3
+      },
+      {
+        "title": "Improve project on-time delivery from 71% to 90%",
+        "description": "Drive predictable delivery outcomes by Q4",
+        "metric_type": "percentage",
+        "target_value": 90,
+        "current_value": 71,
+        "unit": "%",
+        "quarter": 4
+      }
+    ]
+  },
+  {
+    "title": "Make every client engagement data-driven and strategy-led",
+    "description": "Embed measurement, roadmap clarity, and strategic discipline in every engagement.",
+    "category": "innovation",
+    "priority": "high",
+    "key_results": [
+      {
+        "title": "Improve Data SSI block from 5.2 to 6.2",
+        "description": "Increase measurable decision quality across engagements",
+        "metric_type": "number",
+        "target_value": 6.2,
+        "current_value": 5.2,
+        "unit": "score",
+        "quarter": 1
+      },
+      {
+        "title": "Improve Strategy SSI block from 5.0 to 6.3",
+        "description": "Raise strategic planning discipline at account level",
+        "metric_type": "number",
+        "target_value": 6.3,
+        "current_value": 5.0,
+        "unit": "score",
+        "quarter": 2
+      },
+      {
+        "title": "Increase engagements with AI KPI dashboards from 20% to 70%",
+        "description": "Standardize dashboard-driven governance",
+        "metric_type": "percentage",
+        "target_value": 70,
+        "current_value": 20,
+        "unit": "%",
+        "quarter": 3
+      },
+      {
+        "title": "Increase clients with 12-month AI roadmap from 15% to 60%",
+        "description": "Institutionalize forward roadmap adoption",
+        "metric_type": "percentage",
+        "target_value": 60,
+        "current_value": 15,
+        "unit": "%",
+        "quarter": 4
+      }
+    ]
+  },
+  {
+    "title": "Build a high-leverage consulting team that scales quality with growth",
+    "description": "Improve retention, utilization, and capability maturity while expanding service capacity.",
+    "category": "people_culture",
+    "priority": "medium",
+    "key_results": [
+      {
+        "title": "Increase client retention from 88% to 90%",
+        "description": "Protect account continuity while scaling",
+        "metric_type": "percentage",
+        "target_value": 90,
+        "current_value": 88,
+        "unit": "%",
+        "quarter": 1
+      },
+      {
+        "title": "Increase consultant utilization from 68% to 75%",
+        "description": "Improve capacity planning and bench management",
+        "metric_type": "percentage",
+        "target_value": 75,
+        "current_value": 68,
+        "unit": "%",
+        "quarter": 2
+      },
+      {
+        "title": "Reduce voluntary consultant attrition from 18% to 12%",
+        "description": "Strengthen retention and career pathways",
+        "metric_type": "percentage",
+        "target_value": 12,
+        "current_value": 18,
+        "unit": "%",
+        "quarter": 3
+      },
+      {
+        "title": "Improve Learning SSI block from 6.0 to 7.0",
+        "description": "Raise coaching and knowledge-sharing effectiveness",
+        "metric_type": "number",
+        "target_value": 7.0,
+        "current_value": 6.0,
+        "unit": "score",
+        "quarter": 4
+      }
+    ]
+  }
+]

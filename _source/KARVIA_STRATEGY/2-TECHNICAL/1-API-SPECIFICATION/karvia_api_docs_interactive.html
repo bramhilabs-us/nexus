@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KARVIA Pro API - Interactive Journey Documentation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f6f8; color: #1f2933; min-height: 100vh; padding: 0;
+        }
+        .container { width: 100%; margin: 0 auto; padding: 32px 40px 48px; }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px; padding: 28px 32px; margin-bottom: 28px;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.25);
+        }
+        .header-content h1 { font-size: 30px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+        .header-content p { font-size: 14px; color: rgba(255,255,255,0.9); }
+        .enhancement-control {
+            display: flex; align-items: center; gap: 15px; padding: 12px 18px;
+            background: rgba(255,255,255,0.15); border-radius: 12px; backdrop-filter: blur(10px);
+        }
+        .toggle-label { font-size: 14px; font-weight: 600; color: #fff; }
+        .toggle-switch { position: relative; width: 52px; height: 28px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255,255,255,0.3); transition: .4s; border-radius: 28px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px;
+            background-color: white; transition: .4s; border-radius: 50%;
+        }
+        input:checked + .slider { background: #fff; }
+        input:checked + .slider:before { transform: translateX(24px); background: linear-gradient(135deg, #667eea, #764ba2); }
+        .ai-status {
+            padding: 6px 14px; background: rgba(255,255,255,0.2); color: #fff;
+            border-radius: 999px; font-size: 12px; font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.3); transition: all 0.3s;
+        }
+        .enhancement-active .ai-status { background: #fff; color: #667eea; border-color: #fff; }
+        .controls {
+            background: #fff; border-radius: 12px; padding: 20px; border: 1px solid #e5e7eb;
+            display: flex; flex-direction: column; gap: 14px; height: 100%;
+        }
+        .controls-title {
+            font-size: 14px; font-weight: 600; color: #4a5568; margin-bottom: 4px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .scenario-grid { display: flex; flex-direction: column; gap: 10px; }
+        .scenario-btn {
+            padding: 10px 12px; border: 1px solid #d1d5db; background: #f9fafb;
+            color: #374151; border-radius: 10px; cursor: pointer; font-size: 13px;
+            font-weight: 500; transition: all 0.2s; text-align: center;
+        }
+        .scenario-btn:hover { border-color: #667eea; background: #eff6ff; color: #667eea; }
+        .scenario-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2); color: white;
+            border-color: #667eea; box-shadow: 0 8px 18px rgba(102, 126, 234, 0.18);
+        }
+        .visualization {
+            background: #fff; border-radius: 12px; padding: 28px 32px;
+            border: 1px solid #e5e7eb; position: relative; min-height: 70vh;
+        }
+        .visual-layout { display: grid; grid-template-columns: 220px 1fr 1fr; gap: 24px; align-items: start; }
+        .section-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #e2e8f0;
+        }
+        .section-title {
+            font-size: 15px; font-weight: 600; color: #111827;
+            text-transform: uppercase; letter-spacing: 0.35px;
+        }
+        .section-badge {
+            padding: 4px 12px; background: #f3f4f6; border-radius: 6px;
+            font-size: 11px; font-weight: 600; color: #6b7280; letter-spacing: 0.5px;
+        }
+        .endpoints-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+        .endpoint-card {
+            background: #f7fafc; border: 2px solid #e2e8f0; border-radius: 10px;
+            padding: 14px; transition: all 0.3s ease; cursor: pointer; opacity: 0.4; position: relative;
+        }
+        .endpoint-card.active {
+            background: #fffdf7; border-color: #f6ad55; opacity: 1;
+            box-shadow: 0 6px 16px rgba(246, 173, 85, 0.15); transform: translateY(-2px);
+        }
+        .endpoint-method {
+            display: inline-block; padding: 3px 8px; border-radius: 4px;
+            font-size: 10px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 8px;
+        }
+        .method-GET { background: #10b981; color: white; }
+        .method-POST { background: #3b82f6; color: white; }
+        .method-PUT { background: #f59e0b; color: white; }
+        .method-DELETE { background: #ef4444; color: white; }
+        .method-PATCH { background: #8b5cf6; color: white; }
+        .endpoint-path {
+            font-family: 'Monaco', 'Menlo', monospace; font-size: 11px;
+            color: #111827; font-weight: 600; margin-bottom: 6px; word-break: break-all;
+        }
+        .endpoint-desc { font-size: 11px; color: #6b7280; line-height: 1.4; }
+        .endpoint-order {
+            position: absolute; top: 8px; right: 8px; width: 24px; height: 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2); color: white;
+            border-radius: 50%; display: none; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 700;
+        }
+        .endpoint-card.active .endpoint-order { display: flex; }
+        .flow-indicator {
+            height: 4px; background: transparent; margin: 16px 0; border-radius: 2px;
+            position: relative; overflow: hidden; transition: all 0.4s ease;
+        }
+        .flow-indicator.active { background: #e2e8f0; }
+        .flow-indicator.active::after {
+            content: ''; position: absolute; top: 0; left: 0; height: 100%; width: 30%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            animation: flowAnimation 2s ease-in-out infinite; border-radius: 2px;
+        }
+        @keyframes flowAnimation { 0%, 100% { left: -30%; } 50% { left: 100%; } }
+        .info-panel {
+            position: fixed; bottom: -300px; right: 32px; width: 380px;
+            background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 14px;
+            padding: 22px; box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+            transition: bottom 0.4s ease; color: white; z-index: 1000;
+        }
+        .info-panel.show { bottom: 28px; }
+        .info-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .info-icon { font-size: 28px; }
+        .info-title { font-size: 16px; font-weight: 700; color: #fff; }
+        .info-content { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.95); margin-bottom: 14px; }
+        .info-ai {
+            background: rgba(255,255,255,0.15); border-radius: 8px;
+            padding: 12px; backdrop-filter: blur(10px);
+        }
+        .info-ai-title { font-size: 12px; font-weight: 600; color: #bfdbfe; margin-bottom: 6px; }
+        .info-ai-text { font-size: 12px; color: #e5e7eb; line-height: 1.5; }
+        .legend {
+            position: fixed; bottom: 28px; left: 32px; background: rgba(255,255,255,0.86);
+            border-radius: 12px; padding: 12px 16px; border: 1px solid rgba(15,23,42,0.08);
+            backdrop-filter: blur(10px); font-size: 12px; display: flex;
+            align-items: center; gap: 14px; flex-wrap: wrap;
+        }
+        .legend-title { font-weight: 700; color: #1f2933; margin: 0; }
+        .legend-item { display: flex; align-items: center; gap: 8px; margin: 0; }
+        .legend-color { width: 20px; height: 20px; border-radius: 4px; }
+        .legend-text { color: #4b5563; }
+        @media (max-width: 1200px) {
+            .visual-layout { grid-template-columns: 1fr; }
+            .endpoints-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>KARVIA Pro API - User Journey Documentation</h1>
+                <p>Interactive API flow visualization - See which endpoints fire for each user journey</p>
+            </div>
+            <div class="enhancement-control">
+                <span class="toggle-label">Show Details</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="aiToggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="ai-status">Simple</span>
+            </div>
+        </div>
+
+        <div class="visualization">
+            <div class="visual-layout">
+                <div class="controls">
+                    <div class="controls-title">Select User Journey</div>
+                    <div class="scenario-grid">
+                        <button class="scenario-btn active" data-scenario="onboarding">Employee Onboarding</button>
+                        <button class="scenario-btn" data-scenario="assessment">Complete Assessment</button>
+                        <button class="scenario-btn" data-scenario="ai-okr">AI OKR Generation</button>
+                        <button class="scenario-btn" data-scenario="objective">Create & Cascade OKR</button>
+                        <button class="scenario-btn" data-scenario="progress">Update Progress</button>
+                        <button class="scenario-btn" data-scenario="analytics">View Analytics</button>
+                        <button class="scenario-btn" data-scenario="invitation">Invite Team Member</button>
+                    </div>
+                </div>
+
+                <div class="auth-section">
+                    <div class="section-header">
+                        <div class="section-title">Authentication APIs</div>
+                        <div class="section-badge">JWT Auth</div>
+                    </div>
+                    <div class="endpoints-grid">
+                        <div class="endpoint-card" data-endpoint="auth-register">
+                            <span class="endpoint-order">1</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/auth/register</div>
+                            <div class="endpoint-desc">Create new user account</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="auth-login">
+                            <span class="endpoint-order">2</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/auth/login</div>
+                            <div class="endpoint-desc">Authenticate user & get JWT token</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="auth-me">
+                            <span class="endpoint-order">3</span>
+                            <div class="endpoint-method method-GET">GET</div>
+                            <div class="endpoint-path">/api/auth/me</div>
+                            <div class="endpoint-desc">Get current user profile</div>
+                        </div>
+                    </div>
+                    <div class="flow-indicator"></div>
+                </div>
+
+                <div class="core-section">
+                    <div class="section-header">
+                        <div class="section-title">Core OKR & Business APIs</div>
+                        <div class="section-badge">Node.js + PostgreSQL</div>
+                    </div>
+                    <div class="endpoints-grid">
+                        <div class="endpoint-card" data-endpoint="companies-get">
+                            <span class="endpoint-order">4</span>
+                            <div class="endpoint-method method-GET">GET</div>
+                            <div class="endpoint-path">/api/companies/{id}</div>
+                            <div class="endpoint-desc">Get company details</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="teams-create">
+                            <span class="endpoint-order">5</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/teams</div>
+                            <div class="endpoint-desc">Create new team</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="teams-members">
+                            <span class="endpoint-order">6</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/teams/{id}/members</div>
+                            <div class="endpoint-desc">Add team members</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="objectives-create">
+                            <span class="endpoint-order">7</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/objectives</div>
+                            <div class="endpoint-desc">Create objective with key results</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="objectives-cascade">
+                            <span class="endpoint-order">8</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/objectives/{id}/cascade</div>
+                            <div class="endpoint-desc">Cascade objective to teams</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="objectives-progress">
+                            <span class="endpoint-order">9</span>
+                            <div class="endpoint-method method-PUT">PUT</div>
+                            <div class="endpoint-path">/api/objectives/{id}/progress</div>
+                            <div class="endpoint-desc">Update key result progress</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="goals-create">
+                            <span class="endpoint-order">10</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/goals</div>
+                            <div class="endpoint-desc">Create personal goal</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="tasks-create">
+                            <span class="endpoint-order">11</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/tasks</div>
+                            <div class="endpoint-desc">Create task from goal</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="tasks-complete">
+                            <span class="endpoint-order">12</span>
+                            <div class="endpoint-method method-PUT">PUT</div>
+                            <div class="endpoint-path">/api/tasks/{id}/complete</div>
+                            <div class="endpoint-desc">Mark task complete</div>
+                        </div>
+                    </div>
+                    <div class="flow-indicator"></div>
+                </div>
+            </div>
+
+            <div class="visual-layout" style="margin-top: 24px;">
+                <div style="width: 220px;"></div>
+                <div class="assessment-section">
+                    <div class="section-header">
+                        <div class="section-title">Assessment & AI APIs</div>
+                        <div class="section-badge">iBrain Powered</div>
+                    </div>
+                    <div class="endpoints-grid">
+                        <div class="endpoint-card" data-endpoint="assessment-start">
+                            <span class="endpoint-order">1</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/assessments/start</div>
+                            <div class="endpoint-desc">Start new assessment</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="assessment-questions">
+                            <span class="endpoint-order">2</span>
+                            <div class="endpoint-method method-GET">GET</div>
+                            <div class="endpoint-path">/api/assessments/questions</div>
+                            <div class="endpoint-desc">Get assessment questions</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="assessment-submit">
+                            <span class="endpoint-order">3</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/assessments/{id}/submit-responses</div>
+                            <div class="endpoint-desc">Submit assessment answers</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="assessment-calculate">
+                            <span class="endpoint-order">4</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/assessments/{id}/calculate</div>
+                            <div class="endpoint-desc">Calculate SSI score</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="assessment-results">
+                            <span class="endpoint-order">5</span>
+                            <div class="endpoint-method method-GET">GET</div>
+                            <div class="endpoint-path">/api/assessments/{id}/results</div>
+                            <div class="endpoint-desc">View assessment results</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="ai-generate">
+                            <span class="endpoint-order">6</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/ai-okr/generate/{assessmentId}</div>
+                            <div class="endpoint-desc">AI generates OKR suggestions</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="ai-approve">
+                            <span class="endpoint-order">7</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/ai-okr/suggestions/{id}/approve</div>
+                            <div class="endpoint-desc">Approve AI suggestion</div>
+                        </div>
+                    </div>
+                    <div class="flow-indicator"></div>
+                </div>
+
+                <div class="utility-section">
+                    <div class="section-header">
+                        <div class="section-title">Analytics & Utility APIs</div>
+                        <div class="section-badge">Insights</div>
+                    </div>
+                    <div class="endpoints-grid">
+                        <div class="endpoint-card" data-endpoint="invitations-create">
+                            <span class="endpoint-order">1</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/invitations</div>
+                            <div class="endpoint-desc">Send email invitation</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="invitations-validate">
+                            <span class="endpoint-order">2</span>
+                            <div class="endpoint-method method-GET">GET</div>
+                            <div class="endpoint-path">/api/invitations/validate/{token}</div>
+                            <div class="endpoint-desc">Validate invitation token</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="invitations-accept">
+                            <span class="endpoint-order">3</span>
+                            <div class="endpoint-method method-POST">POST</div>
+                            <div class="endpoint-path">/api/invitations/accept/{token}</div>
+                            <div class="endpoint-desc">Accept & create account</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="analytics-dashboard">
+                            <span class="endpoint-order">1</span>
+                            <div class="endpoint-method method-GET">GET</div>
+                            <div class="endpoint-path">/api/analytics/dashboard</div>
+                            <div class="endpoint-desc">Get analytics dashboard</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="analytics-team">
+                            <span class="endpoint-order">2</span>
+                            <div class="endpoint-method method-GET">GET</div>
+                            <div class="endpoint-path">/api/analytics/team</div>
+                            <div class="endpoint-desc">Team analytics data</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="analytics-forecast">
+                            <span class="endpoint-order">3</span>
+                            <div class="endpoint-method method-GET">GET</div>
+                            <div class="endpoint-path">/api/analytics/forecast</div>
+                            <div class="endpoint-desc">Predictive analytics</div>
+                        </div>
+                        <div class="endpoint-card" data-endpoint="cascade-alignment">
+                            <span class="endpoint-order">4</span>
+                            <div class="endpoint-method method-GET">GET</div>
+                            <div class="endpoint-path">/api/cascade/alignment-report</div>
+                            <div class="endpoint-desc">OKR alignment report</div>
+                        </div>
+                    </div>
+                    <div class="flow-indicator"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-title">Legend</div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #f7fafc; border: 2px solid #e2e8f0;"></div>
+                <span class="legend-text">Inactive Endpoint</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #fffdf7; border: 2px solid #f6ad55;"></div>
+                <span class="legend-text">Active in Journey</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                <span class="legend-text">API Call Order</span>
+            </div>
+        </div>
+
+        <div class="info-panel" id="infoPanel">
+            <div class="info-header">
+                <div class="info-icon">🚀</div>
+                <div><div class="info-title" id="infoTitle">API Journey Active</div></div>
+            </div>
+            <div class="info-content" id="infoContent">
+                Select a user journey to see which API endpoints are called in sequence
+            </div>
+            <div class="info-ai">
+                <div class="info-ai-title">Technical Details</div>
+                <div class="info-ai-text" id="aiInfo">
+                    APIs are called sequentially. Numbers indicate call order. All authenticated endpoints require JWT Bearer token.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scenarios = {
+            onboarding: {
+                name: 'Employee Onboarding',
+                description: 'New employee receives invitation, creates account, completes profile, and accesses initial dashboard.',
+                endpoints: ['invitations-validate', 'invitations-accept', 'auth-login', 'auth-me', 'companies-get'],
+                details: 'Flow: Invitation Token Validation → Account Creation → Login → Profile Load → Company Data. All endpoints except invitation validation require JWT authentication.'
+            },
+            assessment: {
+                name: 'Complete Assessment',
+                description: 'User starts assessment, answers questions, submits responses, system calculates SSI score, and displays results.',
+                endpoints: ['assessment-start', 'assessment-questions', 'assessment-submit', 'assessment-calculate', 'assessment-results'],
+                details: 'Flow: Start Assessment → Fetch Questions → Submit Answers → Calculate Score → View Results. Assessment engine dynamically generates questions and calculates Strategic Success Indicator (SSI) scores.'
+            },
+            'ai-okr': {
+                name: 'AI OKR Generation',
+                description: 'After assessment completion, AI analyzes results and generates personalized OKR suggestions based on scores and role.',
+                endpoints: ['assessment-results', 'ai-generate', 'ai-approve', 'objectives-create'],
+                details: 'Flow: View Assessment → AI Generates Suggestions → Review & Approve → Create Objectives. iBrain AI engine uses assessment data to generate contextual, achievable objectives with confidence scoring.'
+            },
+            objective: {
+                name: 'Create & Cascade OKR',
+                description: 'Leadership creates company objective with key results, then cascades it down to teams and individuals.',
+                endpoints: ['auth-me', 'teams-create', 'teams-members', 'objectives-create', 'objectives-cascade', 'cascade-alignment'],
+                details: 'Flow: Verify Auth → Create Team → Add Members → Create Objective → Cascade to Team → Check Alignment. Cascading creates child objectives linked to parent with automatic progress rollup.'
+            },
+            progress: {
+                name: 'Update Progress',
+                description: 'Team member updates task completion, which rolls up to goal progress, then to key result and objective progress.',
+                endpoints: ['tasks-complete', 'goals-create', 'objectives-progress', 'analytics-dashboard'],
+                details: 'Flow: Complete Task → Goal Auto-Update → KR Progress Update → Dashboard Refresh. Progress automatically rolls up through hierarchy: Task → Goal → Key Result → Objective.'
+            },
+            analytics: {
+                name: 'View Analytics',
+                description: 'Manager views comprehensive analytics dashboard with team performance, forecasts, and alignment reports.',
+                endpoints: ['auth-me', 'analytics-dashboard', 'analytics-team', 'analytics-forecast', 'cascade-alignment'],
+                details: 'Flow: Auth Check → Load Dashboard → Team Analytics → Predictive Forecasts → Alignment Report. Analytics engine provides real-time insights, trend analysis, and AI-powered predictions.'
+            },
+            invitation: {
+                name: 'Invite Team Member',
+                description: 'Admin invites new team member via email, invitee receives invitation, validates token, and creates account.',
+                endpoints: ['auth-me', 'invitations-create', 'invitations-validate', 'invitations-accept', 'auth-login', 'teams-members'],
+                details: 'Flow: Verify Admin → Send Invitation → Invitee Validates Token → Create Account → Login → Add to Team. Email-based invitation system with token expiration and pre-team assignment.'
+            }
+        };
+
+        let currentScenario = 'onboarding';
+        let isEnhanced = false;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+            activateScenario('onboarding');
+        });
+
+        function setupEventListeners() {
+            document.querySelectorAll('.scenario-btn').forEach(btn => {
+                btn.addEventListener('click', () => activateScenario(btn.dataset.scenario));
+            });
+
+            document.getElementById('aiToggle').addEventListener('change', (e) => {
+                isEnhanced = e.target.checked;
+                document.body.classList.toggle('enhancement-active', isEnhanced);
+                document.querySelector('.ai-status').textContent = isEnhanced ? 'Detailed' : 'Simple';
+                updateInfoPanel();
+            });
+
+            document.querySelectorAll('.endpoint-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    if (card.classList.contains('active')) {
+                        card.style.transform = 'translateY(-4px) scale(1.02)';
+                    }
+                });
+                card.addEventListener('mouseleave', () => {
+                    if (card.classList.contains('active')) {
+                        card.style.transform = 'translateY(-2px)';
+                    }
+                });
+            });
+        }
+
+        function activateScenario(scenarioKey) {
+            currentScenario = scenarioKey;
+            const scenario = scenarios[scenarioKey];
+
+            document.querySelectorAll('.scenario-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.scenario === scenarioKey);
+            });
+
+            document.querySelectorAll('.endpoint-card, .flow-indicator').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            scenario.endpoints.forEach((endpoint, index) => {
+                setTimeout(() => {
+                    const el = document.querySelector(`[data-endpoint="${endpoint}"]`);
+                    if (el) {
+                        el.classList.add('active');
+                        const orderEl = el.querySelector('.endpoint-order');
+                        if (orderEl) orderEl.textContent = index + 1;
+                    }
+                }, 100 * (index + 1));
+            });
+
+            setTimeout(() => {
+                document.querySelectorAll('.flow-indicator').forEach(el => el.classList.add('active'));
+            }, 100 * (scenario.endpoints.length + 1));
+
+            updateInfoPanel();
+            showInfoPanel();
+        }
+
+        function updateInfoPanel() {
+            const scenario = scenarios[currentScenario];
+            document.getElementById('infoTitle').textContent = scenario.name;
+            document.getElementById('infoContent').textContent = scenario.description;
+            document.getElementById('aiInfo').textContent = isEnhanced ? scenario.details : `${scenario.endpoints.length} API endpoints are called in this journey. Toggle "Show Details" for technical information.`;
+        }
+
+        function showInfoPanel() {
+            const panel = document.getElementById('infoPanel');
+            panel.classList.add('show');
+            setTimeout(() => panel.classList.remove('show'), 10000);
+        }
+
+        document.getElementById('infoPanel').addEventListener('click', function() {
+            this.classList.add('show');
+        });
+    </script>
+</body>
+</html>
