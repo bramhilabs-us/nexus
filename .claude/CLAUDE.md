@@ -9,21 +9,37 @@
 
 ## What Nexus is
 
-**Nexus** is a SaaS platform for consultants running **AI Readiness & Transformation** engagements with their clients.
+**Nexus is a Transformation OS.**
 
-It is a **fork of `karvia_business`** with one substantive change: the **Assessment** module is swapped from SSI (business assessment) to **AI Readiness**. Everything else — CRM, Objectives, Key Results, Weekly Goals, Tasks — is preserved but refactored into clean **lego-piece modules**.
+A multi-tenant platform that lets any organization — directly, or through a consultant — run a transformation program end to end: assess readiness, govern the program, set objectives and key results, drive weekly execution, capture institutional knowledge, and measure business outcomes. **AI Readiness is the launch vertical.** The architecture is built so that any future transformation vertical (ESG, digital, ops excellence, M&A integration) plugs in as a new assessment + a new playbook on the same lego blocks.
 
-### Same as Karvia
-- Consultant-driven engagement model (consultant → client → manager → employee → owner)
-- OKR-led delivery cadence
-- Multi-role authority hierarchy
+It is a **fork of `karvia_business`** at the code level — Karvia's CRM + OKR engines are the seed — but Nexus is repositioned and re-architected:
+
+### What Nexus inherits from Karvia
 - Engine-based microservice architecture
+- Multi-role authority hierarchy (org → manager → employee → owner)
+- OKR-led delivery cadence (Objectives → Key Results → Weekly Goals → Tasks)
+- MongoDB + Render + Docker infra patterns
 
-### Different from Karvia
-- Assessment surface: **AI Readiness** instead of SSI
-- Modular pluggable assessment interface (multiple assessment types possible)
+### How Nexus differs
+- **Transformation OS positioning** — not consultant-only; org-direct is a first-class GTM motion
+- **Pluggable Assessment** — Karvia's SSI is one impl; AI Readiness ships v1; the interface is the primitive
+- **Lego-block modules** with published contracts — every capability is composable
+- **Two new first-class modules**: `@nexus/governance` (program oversight) and `@nexus/knowledge` (institutional knowledge capture)
 - Fresh MongoDB instance, fresh tenant model
-- Clean module boundaries: `@nexus/crm`, `@nexus/objectives`, `@nexus/key-results`, `@nexus/weekly-goals`, `@nexus/tasks`, `@nexus/assessment`
+- Multi-program-per-tenant from day one (org runs many transformations concurrently)
+
+### The 8 lego blocks
+```
+@nexus/crm              tenants, organizations, people, roles
+@nexus/assessment       pluggable interface — AI Readiness, SSI, future verticals
+@nexus/objectives       O of OKR
+@nexus/key-results      KR of OKR
+@nexus/weekly-goals     sprint-cadence delivery
+@nexus/tasks            atomic work units
+@nexus/governance       program oversight, accountability, decision rights
+@nexus/knowledge        institutional knowledge capture, outcome evidence
+```
 
 ---
 
