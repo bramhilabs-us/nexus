@@ -39,16 +39,12 @@ Statuses: DONE | BLOCKED | NO-OP | BUDGET-STOP | ABORTED
 
 ---
 
-## 2026-06-04T01:30Z — N1-P2-06 — DONE (supervised)
-**Task**: N1-P2-06 — Engineering principles & improvement bar (added mid-sprint)
-**Branch**: tick/2026-06-04-03-improvement-plan
-**Outcome**: Wrote `NEXUS_STRATEGY/2-TECHNICAL/IMPROVEMENT_PLAN.md` — the opinionated synthesis of what makes Nexus *materially better* than Karvia. 10 named anti-patterns sourced from Karvia evidence, 10 improvements with measurable enforcement, per-PR quality gate checklist, parking lot of explicit non-goals, success criteria table. Doc establishes the bar every Night 2-5 tick is measured against. Made implications for C-003/4/5 explicit (consolidate engines, yes TS, yes Program entity).
+## 2026-06-04T00:30Z — N1-P2-01 — DONE
+**Task**: N1-P2-01 — System architecture map
+**Branch**: tick/2026-06-03-02-system-architecture
+**Outcome**: Wrote `NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md` with 2 Mermaid diagrams (system high-level + request lifecycle) and 8 Nexus deltas. Diagrams committed as `.mmd` sources in `diagrams/`. Major findings: (1) Karvia's engines are NOT microservices — all share `server/models/`. (2) Only main server + IAM run on Render; the other 8 engines are dead code paths in prod. (3) Port 8089 is double-claimed by `insights` and `integrations`. (4) Embedded + standalone KeyResult coexist (dual-write incomplete). (5) Hardcoded SSI question bank in engines/assessment/index.js is the single most important file for Nexus's pluggable assessment refactor. Used the Explore agent for thorough karvia code investigation; Karvia files verified read-only and untouched.
 
-**Files touched**: `NEXUS_STRATEGY/2-TECHNICAL/IMPROVEMENT_PLAN.md` (new), `_agent/SPRINTS_NIGHT_1.md` (added P2-06), `_agent/BACKLOG.md` (added N1-P2-06 DONE), `_agent/JOURNAL.md`
+**Files touched**: `NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md` (new), `NEXUS_STRATEGY/2-TECHNICAL/diagrams/system-high-level.mmd` (new), `NEXUS_STRATEGY/2-TECHNICAL/diagrams/request-lifecycle.mmd` (new), `_agent/clarifications.md` (C-003, C-004, C-005 added), `_agent/JOURNAL.md`, `_agent/BACKLOG.md`
 
-**Why this tick existed**: The user observed (correctly) that the architecture map alone risks Nexus becoming a copy. Adding this improvement bar forces every downstream tick to justify how it materially improves over Karvia, not just port code.
-
-**Lesson for TICK_PROTOCOL**: synthesis ticks like this one are higher-value than the mechanical maps. Future sprint planning should include one "principles" tick per night, not just enumeration tasks.
-
-**Next**: Open PR for human review. After this PR merges + PR #2 merges + C-003/4/5 are answered, the path to autonomous cron is clear.
+**Next**: Open PR for human review. Surfaces C-003/4/5 — these answers shape Night 2's refactor scope significantly, so block N1-P4-01 (modularization plan) on them.
 

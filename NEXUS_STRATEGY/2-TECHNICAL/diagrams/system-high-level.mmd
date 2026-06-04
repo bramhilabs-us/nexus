@@ -1,0 +1,43 @@
+graph TB
+    Client["Vanilla JS Client<br/>HTML / CSS / JS<br/>(no build framework)"]
+
+    Nginx["Nginx Reverse Proxy<br/>:80 / :443<br/>TLS, rate limiting, gzip"]
+
+    Server["Main API Server (Express)<br/>:5000 internal / :8080 Render<br/>middleware, routes, cron jobs"]
+
+    subgraph Engines["10 Node processes — ports 8081–8089, ALL share server/models/"]
+        IAM["iam :8081<br/>auth + JWT"]
+        ASMT["assessment :8082<br/>SSI scoring"]
+        PLAN["planner :8083<br/>OKR generation"]
+        SCOR["scoring :8084<br/>analytics"]
+        OBS["observer :8085<br/>lifecycle"]
+        TRK["tracking :8086<br/>tasks + progress"]
+        COLL["collaboration :8087<br/>comments + feedback"]
+        WL["whitelabel :8088<br/>tenant branding"]
+        INS["insights :8089*<br/>advanced analytics"]
+        INTG["integrations :8089*<br/>Slack / Teams / email"]
+    end
+
+    Mongo[("MongoDB Atlas<br/>shared collections<br/>tenanted by company_id")]
+    Redis[("Redis<br/>cache + Bull queue")]
+
+    OpenAI(["OpenAI API<br/>graceful degradation"])
+    Mailjet(["Mailjet<br/>email"])
+
+    Client -->|HTTPS| Nginx
+    Nginx -->|"/ (static)"| Client
+    Nginx -->|"/api/*"| Server
+    Nginx -->|"/engines/*"| Engines
+
+    Server -->|"verify JWT (or local fallback)"| IAM
+    Server -->|imports server/models| Mongo
+    Engines -->|all engines import server/models| Mongo
+    Server --> Redis
+    OBS --> Redis
+    TRK --> Redis
+
+    Server -.optional.-> OpenAI
+    Server --> Mailjet
+
+    style INS fill:#fee,stroke:#c00
+    style INTG fill:#fee,stroke:#c00
