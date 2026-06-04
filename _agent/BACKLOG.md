@@ -56,14 +56,16 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - 4 journeys with numbered steps + Mermaid sequence diagrams
   - File: `NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md`
 
-### N1-P3-01 — Populate 0-BUSINESS and 1-PRODUCT
-- **Status**: BLOCKED
+### N1-P3-01 — Populate 0-BUSINESS and 1-PRODUCT (Transformation OS framing)
+- **Status**: READY
 - **Size**: M (2 ticks)
-- **Depends on**: N1-P1-01, **clarification C-001 (scope: narrow vs broad)**
+- **Depends on**: N1-P1-01 (DONE — pending PR merge)
 - **Definition of done**:
   - 4 files each in 0-BUSINESS/ and 1-PRODUCT/
+  - Leads with "Transformation OS"; AI Readiness as launch vertical
+  - Both GTM motions covered: consultant-led + direct-to-org
   - Karvia adaptations cited; TODOs flagged where untranslatable
-- **Notes**: Cannot start until C-001 answered.
+- **Notes**: C-001 answered — broad scope (Transformation OS). See DECISIONS.md 2026-06-03.
 
 ### N1-P3-02 — Populate 3-DELIVERY skeleton
 - **Status**: READY

@@ -62,3 +62,42 @@ Format:
 **Consequences**:
 - Schema lives in Mongoose models (Karvia pattern continues)
 - Mongo connection string never appears in committed files — `.env` only
+
+---
+
+## 2026-06-03 — Nexus is a Transformation OS, not just a consultant SaaS (C-001 answered)
+
+**Context**: Two positioning framings were on the table — narrow (SaaS for consultants running AI readiness engagements) and broad (multi-tenant Transformation OS for organizations to run any transformation program). Required answer before writing 0-BUSINESS and 1-PRODUCT docs.
+
+**Decision**: **Broad — Nexus is a Transformation OS.** The platform supports any organization (direct buyer) or consultant (intermediary buyer) running any transformation program. AI Readiness is the first vertical assessment available; the architecture treats it as one pluggable lego block among many.
+
+**Implications for the lego-block architecture**: the broad scope is the *reason* for the modularization, not just a side effect. Every capability — Assessment, Objectives, Key Results, Weekly Goals, Tasks, CRM, Governance, Knowledge Capture, Outcome Measurement — is a composable block. Different transformation programs (AI readiness, ESG, digital, ops excellence, M&A integration) become different compositions of the same blocks plus a vertical assessment.
+
+**Alternatives considered**:
+- Narrow consultant SaaS: rejected — too small for the platform investment; the lego-block work is overkill if the only use case is consultant-led AI readiness.
+
+**Consequences**:
+- Positioning docs lead with "Transformation OS" + "AI Readiness as the launch vertical"
+- The Assessment module's pluggable interface is the *first-class* primitive, not just a Nexus-vs-Karvia delta
+- Two additional modules become first-class: `@nexus/governance` (transformation program oversight) and `@nexus/knowledge` (institutional knowledge capture) — both mentioned in the GitHub repo description
+- GTM positioning: consultant-led is one motion; direct-to-organization is another; same product
+- Pricing model becomes per-tenant + per-active-program, not per-consultant
+
+**Supersedes**: implicit narrow framing in earlier conversation
+
+---
+
+## 2026-06-03 — Karvia git history will NOT be purged; credentials rotated only (C-002 answered)
+
+**Context**: Karvia's committed docs contain live production credentials (OpenAI, Mailjet, JWT, Session, Mongo). Three options were on the table — rotate only, rotate + purge history, or do nothing.
+
+**Decision**: **Rotate credentials only.** Karvia git history stays intact.
+
+**Owner**: human (rotation), not the agent.
+
+**Consequences**:
+- The strings in Karvia's history become inert once credentials are rotated.
+- If Karvia ever becomes public-facing or shared externally, this decision needs revisiting.
+- Nexus's `_source/` keeps the `[REDACTED]` versions — that decision stands regardless.
+- For Nexus itself: secret scanning + push protection are enabled at the bramhilabs-us repo level; the agent must also run `redact-secrets.py` as a pre-commit step on every tick that touches files originating from `_source/`.
+
