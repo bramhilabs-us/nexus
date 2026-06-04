@@ -1,0 +1,44 @@
+sequenceDiagram
+    autonumber
+    participant U as User Browser
+    participant N as Nginx
+    participant S as Main Server
+    participant I as iam :8081
+    participant A as assessment :8082
+    participant M as MongoDB
+
+    Note over U,M: 1. Login
+    U->>N: POST /api/auth/login {email, password}
+    N->>S: forward
+    S->>I: POST /api/auth/login
+    I->>M: find User, verify bcrypt
+    M-->>I: user doc
+    I-->>S: 200 { token, user }<br/>JWT { user_id, role, company_id, managed_businesses }
+    S-->>U: { token, user }
+
+    Note over U,M: 2. Fetch organization's objectives
+    U->>N: GET /api/objectives (Authorization: Bearer)
+    N->>S: forward
+    S->>I: GET /api/auth/verify (sidecar)
+    Note right of S: falls back to local jwt.verify<br/>if IAM unreachable
+    I-->>S: 200 (valid)
+    S->>M: Objective.find({ company_id: ctx })
+    M-->>S: [objectives with KRs]
+    S-->>U: 200 [{ title, key_results, owner, status }]
+
+    Note over U,M: 3. Start an SSI assessment
+    U->>N: GET /api/assessment/questions
+    N->>S: forward
+    S->>A: GET /api/assessment/questions
+    A-->>S: 200 [20 hardcoded SSI questions]
+    S-->>U: questions across speed / strength / intelligence
+
+    Note over U,M: 4. Submit answers, compute scores
+    U->>N: POST /api/assessment/conduct { answers[] }
+    N->>S: forward
+    S->>A: POST /api/assessment/conduct
+    A->>A: weighted scoring per dimension
+    A->>M: Assessment.create({ company_id, user_id, answers, scores })
+    M-->>A: saved
+    A-->>S: 201 { scores: { speed, strength, intelligence }, assessment_id }
+    S-->>U: result

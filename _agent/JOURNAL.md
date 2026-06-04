@@ -37,3 +37,14 @@ Statuses: DONE | BLOCKED | NO-OP | BUDGET-STOP | ABORTED
 
 **Next**: Open PR for human review. Once merged, downstream tasks N1-P2-01 through N1-P5-02 unblock.
 
+---
+
+## 2026-06-04T00:30Z — N1-P2-01 — DONE
+**Task**: N1-P2-01 — System architecture map
+**Branch**: tick/2026-06-03-02-system-architecture
+**Outcome**: Wrote `NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md` with 2 Mermaid diagrams (system high-level + request lifecycle) and 8 Nexus deltas. Diagrams committed as `.mmd` sources in `diagrams/`. Major findings: (1) Karvia's engines are NOT microservices — all share `server/models/`. (2) Only main server + IAM run on Render; the other 8 engines are dead code paths in prod. (3) Port 8089 is double-claimed by `insights` and `integrations`. (4) Embedded + standalone KeyResult coexist (dual-write incomplete). (5) Hardcoded SSI question bank in engines/assessment/index.js is the single most important file for Nexus's pluggable assessment refactor. Used the Explore agent for thorough karvia code investigation; Karvia files verified read-only and untouched.
+
+**Files touched**: `NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md` (new), `NEXUS_STRATEGY/2-TECHNICAL/diagrams/system-high-level.mmd` (new), `NEXUS_STRATEGY/2-TECHNICAL/diagrams/request-lifecycle.mmd` (new), `_agent/clarifications.md` (C-003, C-004, C-005 added), `_agent/JOURNAL.md`, `_agent/BACKLOG.md`
+
+**Next**: Open PR for human review. Surfaces C-003/4/5 — these answers shape Night 2's refactor scope significantly, so block N1-P4-01 (modularization plan) on them.
+

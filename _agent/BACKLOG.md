@@ -16,13 +16,14 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: Mechanical. Hooks must NOT fire on karvia path (reads only).
 
 ### N1-P2-01 — System architecture map
-- **Status**: READY
-- **Size**: M (2 ticks)
-- **Depends on**: N1-P1-01
+- **Status**: DONE (PR pending merge — tick 2026-06-03-02)
+- **Size**: M (2 ticks; completed in 1)
+- **Depends on**: N1-P1-01 (DONE, merged)
 - **Definition of done**:
-  - `NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md` written
-  - 2 Mermaid diagrams (high-level + request lifecycle)
-  - Nexus deltas section at bottom
+  - ✓ `NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md` written
+  - ✓ 2 Mermaid diagrams (high-level + request lifecycle)
+  - ✓ 8 Nexus deltas with rationale
+  - ✓ Opened C-003 / C-004 / C-005 on architecture questions
 
 ### N1-P2-02 — Data models catalogue
 - **Status**: READY
@@ -82,9 +83,9 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - INTERVIEW_TEMPLATE, FEEDBACK_LOG, EVIDENCE_INDEX, METRICS templates
 
 ### N1-P4-01 — Modularization plan + contract drafts
-- **Status**: READY
+- **Status**: BLOCKED on C-003, C-004, C-005
 - **Size**: M (2 ticks)
-- **Depends on**: N1-P2-04 (module graph), N1-P2-02 (data models)
+- **Depends on**: N1-P2-04 (module graph), N1-P2-02 (data models), C-003 (consolidate vs deploy), C-004 (TS vs JS), C-005 (Program entity)
 - **Definition of done**:
   - MODULARIZATION_PLAN.md with 6 modules + assessment impls
   - MODULE_CONTRACTS_DRAFT.md with TS interface signatures

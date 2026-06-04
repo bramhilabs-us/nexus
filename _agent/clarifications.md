@@ -48,3 +48,55 @@ Format:
 **Status**: ANSWERED — see DECISIONS.md 2026-06-03
 **Answer**: Rotate credentials only; do not purge history. Owner: human (not the agent).
 
+---
+
+## C-003 — Consolidate engines into main server, or genuinely deploy them?
+
+**Asked**: 2026-06-03 by tick N1-P2-01
+**Context**: Karvia has 10 engines (separate Node processes locally) but Render only runs the main server + IAM sidecar. The other 8 engines are dead in production. Nexus must pick one path before Night 2's refactor.
+
+**Question**: For Nexus v1, do we consolidate engines into the main server process (matching the actual Render deployment), or deploy them as real separate services?
+
+**Options the agent sees**:
+- **a) Consolidate** — single Express app with module boundaries enforced by TS contracts, not process boundaries. Lowest ops overhead. Recommended for v1.
+- **b) Genuinely deploy** — each engine becomes its own Render service with its own URL. Higher cost, real service isolation, but premature for current load.
+- **c) Hybrid** — main server + a few high-value sidecars (e.g., AI work, scheduled jobs) split out, rest consolidated.
+
+**Status**: OPEN
+**Answer**: (filled by human)
+
+---
+
+## C-004 — Move to TypeScript in Night 2, or stay JS?
+
+**Asked**: 2026-06-03 by tick N1-P2-01
+**Context**: Module contracts are the core of the lego-block architecture. TypeScript interfaces enforce them at compile time; JS + JSDoc enforces them by convention only. The TS migration has up-front cost.
+
+**Question**: Server-side language for Nexus modules?
+
+**Options the agent sees**:
+- **a) TypeScript** — adds setup cost in Night 2 but enforces contracts mechanically. Strongly recommended for an autonomous-agent codebase (the agent makes type errors humans wouldn't).
+- **b) JS + strict JSDoc** — lower migration cost, weaker enforcement, agent will drift.
+- **c) Gradual** — TS for new modules (governance, knowledge, ai-readiness), JS for lifted Karvia modules until they're touched.
+
+**Status**: OPEN
+**Answer**: (filled by human)
+
+---
+
+## C-005 — Introduce `Program` as a new top-level tenant key?
+
+**Asked**: 2026-06-03 by tick N1-P2-01
+**Context**: Karvia's tenancy is `Company → User → Objective`. To support Transformation OS (multiple transformation programs per org running concurrently), Nexus likely needs `Company → Program → Objective`. This is a non-trivial data model change touching every domain model.
+
+**Question**: Add `Program` as a first-class entity, with `Objective.program_id`, `Assessment.program_id`, etc.?
+
+**Options the agent sees**:
+- **a) Yes — add Program** — proper modeling for the multi-program-per-org case. Required for the Transformation OS positioning to be real, not aspirational.
+- **b) Defer** — start with one implicit program per org, retrofit later. Faster v1 but locks in a single-program assumption.
+- **c) Tag, not entity** — use a `program: string` field on existing models, no separate collection. Lightest weight, fragile.
+
+**Status**: OPEN
+**Answer**: (filled by human)
+
+
