@@ -71,6 +71,17 @@ Agent reads Karvia code (READ-ONLY) and produces:
 - One Mermaid graph; flag cycles in red.
 - This is the input to Night 2's refactor — the cycles are what we need to break.
 
+### N1-P2-06 — Engineering principles & improvement bar **(added mid-sprint 2026-06-04)**
+
+- File: `NEXUS_STRATEGY/2-TECHNICAL/IMPROVEMENT_PLAN.md`
+- Synthesize Karvia anti-patterns (from N1-P2-01 deltas) into named rejections with enforcement
+- List the improvements Nexus adopts with measurable gates
+- Parking lot: things we explicitly will NOT do, with reasons
+- Success criteria: a measurable comparison table Karvia vs Nexus
+- Per-PR quality gate checklist
+- Implications for C-003/4/5 made explicit
+- This is the doc every Night 2-5 tick is measured against
+
 ### N1-P2-05 — User journeys
 
 - File: `NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md`

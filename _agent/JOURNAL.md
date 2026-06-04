@@ -37,3 +37,18 @@ Statuses: DONE | BLOCKED | NO-OP | BUDGET-STOP | ABORTED
 
 **Next**: Open PR for human review. Once merged, downstream tasks N1-P2-01 through N1-P5-02 unblock.
 
+---
+
+## 2026-06-04T01:30Z — N1-P2-06 — DONE (supervised)
+**Task**: N1-P2-06 — Engineering principles & improvement bar (added mid-sprint)
+**Branch**: tick/2026-06-04-03-improvement-plan
+**Outcome**: Wrote `NEXUS_STRATEGY/2-TECHNICAL/IMPROVEMENT_PLAN.md` — the opinionated synthesis of what makes Nexus *materially better* than Karvia. 10 named anti-patterns sourced from Karvia evidence, 10 improvements with measurable enforcement, per-PR quality gate checklist, parking lot of explicit non-goals, success criteria table. Doc establishes the bar every Night 2-5 tick is measured against. Made implications for C-003/4/5 explicit (consolidate engines, yes TS, yes Program entity).
+
+**Files touched**: `NEXUS_STRATEGY/2-TECHNICAL/IMPROVEMENT_PLAN.md` (new), `_agent/SPRINTS_NIGHT_1.md` (added P2-06), `_agent/BACKLOG.md` (added N1-P2-06 DONE), `_agent/JOURNAL.md`
+
+**Why this tick existed**: The user observed (correctly) that the architecture map alone risks Nexus becoming a copy. Adding this improvement bar forces every downstream tick to justify how it materially improves over Karvia, not just port code.
+
+**Lesson for TICK_PROTOCOL**: synthesis ticks like this one are higher-value than the mechanical maps. Future sprint planning should include one "principles" tick per night, not just enumeration tasks.
+
+**Next**: Open PR for human review. After this PR merges + PR #2 merges + C-003/4/5 are answered, the path to autonomous cron is clear.
+
