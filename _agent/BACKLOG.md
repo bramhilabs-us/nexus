@@ -128,11 +128,11 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - ✓ SPRINT_PROCESS.md, RELEASE_PROCESS.md, CI_CD.md written — each with IM-11 reflection record, wired as EXECUTION_PLAYBOOK children
 
 ### N1-P3-03 — Populate 4-CUSTOMER skeleton
-- **Status**: READY
+- **Status**: DONE (tick 2026-06-10-16, PR pending merge)
 - **Size**: S (1 tick)
 - **Depends on**: N1-P1-01
 - **Definition of done**:
-  - INTERVIEW_TEMPLATE, FEEDBACK_LOG, EVIDENCE_INDEX, METRICS templates
+  - ✓ INTERVIEW_TEMPLATE, FEEDBACK_LOG, EVIDENCE_INDEX, METRICS templates + tier README — all governed T4 nodes under PRODUCT_STRATEGY
 
 ### N1-P4-01 — Modularization plan + contract drafts
 - **Status**: READY (C-003/4/5 all answered — see DECISIONS.md 2026-06-04)
