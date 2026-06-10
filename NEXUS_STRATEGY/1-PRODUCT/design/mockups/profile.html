@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexus — Profile (player card mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../../client/css/tokens.css">
+<link rel="stylesheet" href="shell.css">
+</head>
+<body>
+
+<header class="nx-topbar">
+  <span class="nx-wordmark">Nexus</span>
+  <nav class="nx-nav">
+    <a href="my-clients.html">My Clients</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="objectives.html">Objectives</a>
+    <a href="assessments.html">Assessments</a>
+    <a href="teams.html">Teams</a>
+    <a href="planning.html">Planning</a>
+  </nav>
+  <div class="nx-account">
+    <button class="nx-avatar" aria-haspopup="true">JM</button>
+    <div class="nx-dropdown">
+      <a class="active" href="profile.html">Profile</a>
+      <a href="#">Company Profile</a>
+      <a href="#">Configuration</a>
+      <a href="#">Settings</a>
+      <hr>
+      <a href="#">Feedback</a>
+    </div>
+  </div>
+</header>
+
+<main class="nx-page" style="max-width:760px">
+
+  <div class="nx-page-head">
+    <div>
+      <h1 class="nx-page-title">Profile</h1>
+      <p class="nx-page-sub">Who the player is — this card helps route the right work to you</p>
+    </div>
+    <div class="nx-cta-pair">
+      <button class="nx-btn-primary">Edit profile</button>
+    </div>
+  </div>
+
+  <!-- Identity + role per program -->
+  <section class="nx-panel">
+    <div style="display:flex; gap:var(--nx-space-6); align-items:center; margin-bottom:var(--nx-space-4)">
+      <div class="nx-avatar" style="width:64px; height:64px; font-size:var(--nx-text-xl)">JM</div>
+      <div class="grow">
+        <h2 class="nx-card-title">Jonah Mensah</h2>
+        <p class="nx-card-sub">jonah.m@meridianlogistics.com</p>
+      </div>
+    </div>
+    <div class="nx-row"><span class="grow nx-card-sub">AI transformation program</span><span class="nx-tags"><span class="nx-tag">Worker</span><span class="nx-tag">Dispatch analyst</span></span></div>
+    <div class="nx-row"><span class="grow nx-card-sub">Dispatch Copilot v1 (Builder)</span><span class="nx-tags"><span class="nx-tag">Worker</span><span class="nx-tag">Pilot champion</span></span></div>
+    <p class="nx-card-sub" style="margin-top:var(--nx-space-3)">Role labels map to one of the four archetypes — added by your admin in Configuration, never hard-coded.</p>
+  </section>
+
+  <!-- Match-grade signals: tags, never prose. ◆ = fed by an assessment instrument -->
+  <section class="nx-panel">
+    <h2 class="nx-panel-title">Skills <span class="nx-card-sub">◆ = from your workforce assessment (AIR Day 7)</span></h2>
+    <div class="nx-tags">
+      <span class="nx-tag assessed">routing-systems</span>
+      <span class="nx-tag assessed">data-analysis</span>
+      <span class="nx-tag">sql</span>
+      <span class="nx-tag">carrier-ops</span>
+      <span class="nx-tag assessed">process-mapping</span>
+      <button class="nx-tag-add">+ add skill</button>
+    </div>
+  </section>
+
+  <section class="nx-panel">
+    <h2 class="nx-panel-title">Intrinsic motivations</h2>
+    <div class="nx-tags">
+      <span class="nx-tag assessed">fixing-broken-processes</span>
+      <span class="nx-tag assessed">teaching-others</span>
+      <span class="nx-tag">measurable-wins</span>
+      <button class="nx-tag-add">+ add</button>
+    </div>
+  </section>
+
+  <section class="nx-panel">
+    <h2 class="nx-panel-title">Interests</h2>
+    <div class="nx-tags">
+      <span class="nx-tag">automation</span>
+      <span class="nx-tag assessed">ai-tools</span>
+      <span class="nx-tag">logistics-tech</span>
+      <button class="nx-tag-add">+ add</button>
+    </div>
+  </section>
+
+  <section class="nx-panel">
+    <h2 class="nx-panel-title">Working style</h2>
+    <div class="nx-tags">
+      <span class="nx-tag">deep-focus-mornings</span>
+      <span class="nx-tag">prefers-written-handoffs</span>
+      <button class="nx-tag-add">+ add</button>
+    </div>
+  </section>
+
+  <p class="mock-note">
+    The fit thesis made visible: every field is a tag (a future join key), never prose. Profile (who) + Company Profile (what the team plays for) +
+    Objective (the goal) join at the backend to route the best task to the best person — v1 captures the signals; the matcher is parked post-beta.
+    Strictly personal settings (notifications, appearance) live in Settings, not here.
+  </p>
+
+</main>
+</body>
+</html>
