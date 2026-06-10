@@ -63,12 +63,16 @@ Handover is a program-lifecycle event, not a migration: the consultant's access 
 
 Per C-001/C-006, consultant-led is the beachhead and org-direct remains first-class. Per C-005, every role operates inside a **Program** (an org can run several concurrently).
 
-| Role | Home page | What they came to do |
+**Four archetypes, unlimited roles.** At the highest level there are always exactly four player archetypes — permissions, home pages, and page contracts bind to these and only these:
+
+| Archetype | Home page | What they came to do |
 |---|---|---|
-| **Consultant** | My Clients | Scan all client engagements in < 20 seconds; advance the pipeline |
-| **Business Owner** | Dashboard | See whether the program is on track; unblock what isn't |
-| **Manager** | Objectives | Drive their objectives; turn assessment results into OKRs |
-| **Employee** | Planning | Know this week's goals and tasks; execute and log progress |
+| **Consultant** | My Clients | Scan all client engagements in < 20 seconds; advance the pipeline. Exists only to help the other players play better — never owns the company's game. |
+| **Business Owner** | Dashboard | See whether the program is on track; unblock what isn't. Owns the Company Profile (with Managers). |
+| **Manager** | Objectives | Drive their objectives; turn assessment results into OKRs. Co-owns the Company Profile. |
+| **Worker** | Planning | Any individual contributor — employee, architect, delivery manager, designer. Knows the current milestone's tasks; executes and logs progress. |
+
+Below the archetypes, **roles are extensible labels**: adding "Architect" or "Delivery Manager" is creating a label that maps to the Worker archetype — one admin action in Configuration, zero permission redesign. The label slots into the Company Profile (org structure); the *skill set* behind it lives in the person's Profile (match-grade, per the fit thesis). New role ≠ new code, ever.
 
 In org-direct/Builder mode there is no Consultant; My Clients hides, and the journey starts at Assessments or Objectives.
 
@@ -97,7 +101,7 @@ Every page declares all eight fields. A page that can't fill in a field is a pag
 | Primary role | Consultant (their home page / landing page after login) |
 | Entry points | Consultant login (default landing); global nav |
 | Exit points | **Company page** of a client (the natural drill-down); Assessments (start an assessment for a prospect) |
-| Primary CTA | **Add Client** |
+| Primary CTA | **Add Client** — and adding a client **auto-initiates the entry assessment (AIR)**: no manual send; the assessment module owns delivery from this moment, and cadenced re-assessments keep the maturity ladder moving (BOQ_FRAMEWORK § maturity journey) |
 | Secondary CTA | **Open company page** (per client card) |
 | Analytics strip | First-time: Clients count. Hundredth-time: **Need Attention**, **Avg assessment score**, **At Risk** — the triage numbers. |
 | Empty state | "Add your first client" — one card-sized explainer of the engagement journey |
@@ -199,7 +203,7 @@ The six pages are the game board. The account-menu surfaces (Karvia's avatar dro
 |---|---|---|---|
 | **Profile** | Who the player is | Per user | Skills, **intrinsic motivations, interests**, working style, role per program. Partially populated by assessment instruments (AIR Day 7 workforce assessment feeds it). |
 | **Company Profile** | What the team is playing for | Per company | Industry, size, **goals and strategic priorities**, context. AIR's Day 1 Business Context Canvas lands here — the engagement fills the card, not a separate form. |
-| **Configuration** | What the admin shapes | Per company/program (admin only) | Installed assessment blocks, program defaults, feature flags, integrations (srishti), roles & permissions |
+| **Configuration** | What the admin shapes — the game's tuning knobs | Per company/program (admin only) | Installed assessment blocks, program defaults, feature flags, integrations (srishti), **custom role labels** (mapped to the 4 archetypes), **game weights** (team weightings, score thresholds — every number in the game is admin-tunable config data, never code, AP-3) |
 | **Settings** | What each user adjusts | Per user | Notifications, appearance, locale. Strictly personal — anything affecting others belongs in Configuration, never here. |
 | **Feedback** | The meta-loop | Per user → BRAMHI | Feature ideas, bugs, pulse. Flows into **Nexus's own backlog**: triaged, prioritized, status visible to the submitter ("you said → we did"). This is IM-9 dogfooding with a pipe: every tenant is a product-development sensor. |
 

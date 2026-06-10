@@ -13,6 +13,7 @@ summary: >
 parents:
   - NEXUS_STRATEGY/00_NORTH_STAR.md
 children:
+  - NEXUS_STRATEGY/0-BUSINESS/BOQ_FRAMEWORK.md
   - NEXUS_STRATEGY/1-PRODUCT/PRODUCT_STRATEGY.md
   - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
 revisit:
@@ -39,6 +40,10 @@ This is the business card of the pack: how BRAMHI runs a world-class AI transfor
 - Target: **founder-led, service-heavy, product-development SMBs**, $10M–$100M revenue, 20–200 employees, North America first.
 
 ---
+
+## Where AIR sits in the BRAMHI score universe
+
+AIR is the **entry diagnostic** of a larger framework: [BOQ_FRAMEWORK.md](BOQ_FRAMEWORK.md) — the BRAMHI Organizational Quotient (0–100), the North Star metric a transformed company ultimately adopts. The two-week sprint's instruments are Layer-3 **signal collectors** in BOQ terms; the BRAMHI Baseline is the first signal snapshot; cadenced re-assessments keep the signals flowing until BOQ comes online. The engagement sells AIR; the relationship matures into BOQ.
 
 ## Positioning
 

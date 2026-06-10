@@ -126,3 +126,13 @@ Statuses: DONE | BLOCKED | NO-OP | BUDGET-STOP | ABORTED
 **Quality**: 9/10 — directive encoded as enforceable principles + a mockup checkpoint; mechanics intentionally left to PQ-4 rather than invented.
 **Files**: PRODUCT_STRATEGY.md, design/DESIGN_LANGUAGE.md, TECH_STRATEGY.md, _agent/{BACKLOG,JOURNAL}.md
 **Next**: Unchanged card — N1-P2-04 module graph, then tokens, then mockups (now incl. Profile card + assessment flashcard deck).
+
+---
+
+## 2026-06-09T21:30Z — session-2026-06-09-07 — DONE
+**Task**: BOQ framework + role archetypes + client maturity ladder (founder direction, three messages consolidated)
+**Branch**: session/2026-06-09-07-boq-roles
+**Outcome**: (1) NEW `0-BUSINESS/BOQ_FRAMEWORK.md` (T0, status: draft — deliberately evolving): the 4-layer stack (Market → Capabilities → Replication Drivers → Signals) with the binding rule "L3 is the only direct measurement, every score decomposes to signals"; AIRscore as the diagnostic lens; score family (ARS/BRQ/BPI/Knowledge/CRT/KRP → BOQ 0–100); the Bridge as signature visual (compounding middle loop BPI↔Knowledge↔CRT); settled-vs-evolving table; the maturity ladder — **Add Client auto-initiates AIR → cadenced re-assessments → end state: company adopts BOQ as its North Star metric, with Nexus as the delivery engine of the whole ladder**. (2) Role modularity: 4 fixed archetypes (Consultant/BO/Manager/**Worker**) + extensible role labels (Architect, Delivery Manager → map to archetype; admin-added in Configuration, zero code); Company Profile owned by BO/Manager, consultant only helps the players play better. PRODUCT_STRATEGY roles section rewritten; DATA_MODELS User disposition gains archetype+role_label. (3) Configuration = the game's tuning knobs (weights, thresholds — config data, AP-3). (4) TECH_STRATEGY reserves two seams: client.added event → auto-assessment; score calculators as lego blocks over a signal store (engine N4; formulas non-binding). (5) Playbook positions AIR inside the BOQ universe.
+**Quality**: 9/10 — three rapid-fire founder directives consolidated into one coherent layer without breaking the evolving-by-design intent; -1: BOQ doc inherits ChatGPT-draft terminology (CRT/KRP definitions) that will need founder finalization passes.
+**Files**: NEXUS_STRATEGY/0-BUSINESS/BOQ_FRAMEWORK.md (new), AI_CONSULTING_PLAYBOOK.md, 00_NORTH_STAR.md, PRODUCT_STRATEGY.md, TECH_STRATEGY.md, DATA_MODELS.md, _agent/JOURNAL.md
+**Next**: Unchanged card — N1-P2-04 module graph, then Path B queue. BOQ score-engine design lands N4 per revisit triggers.
