@@ -4,7 +4,7 @@ title: Nexus Tech Strategy — three layers, eight blocks
 tier: T2
 status: active
 owner: founder
-updated: 2026-06-09
+updated: 2026-06-10
 summary: >
   The architecture card: page contracts as code, lifecycle + roll-up engines,
   private program-scoped data, 8-block module anatomy, the generalized
@@ -22,6 +22,7 @@ children:
   - client/README.md
   - tests/README.md
   - NEXUS_STRATEGY/2-TECHNICAL/DATA_MODELS.md
+  - NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md
 revisit:
   - on: "any module contract.ts diverges from the anatomy or contracts described here"
     stage: N2

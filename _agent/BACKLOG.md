@@ -91,12 +91,12 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: First visible product. Throwaway-quality is NOT acceptable — these are the Night 3 spec (Karvia lesson #174-3).
 
 ### N1-P2-05 — User journeys
-- **Status**: READY
-- **Size**: M (2 ticks)
+- **Status**: DONE (tick 2026-06-10-13, PR pending merge)
+- **Size**: M (2 ticks — done in 1)
 - **Depends on**: N1-P1-01
 - **Definition of done**:
-  - 4 journeys with numbered steps + Mermaid sequence diagrams
-  - File: `NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md`
+  - ✓ 4 journeys (one per archetype) with numbered steps + Mermaid sequence diagrams
+  - ✓ `NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md` + journey↔contract index for N1-P4-01
 
 ### N1-P0-02 — Strategy pack: North Star + product/tech/execution cards
 - **Status**: DONE (PR pending merge — interactive session 2026-06-09-01)
