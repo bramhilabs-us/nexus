@@ -136,3 +136,13 @@ Statuses: DONE | BLOCKED | NO-OP | BUDGET-STOP | ABORTED
 **Quality**: 9/10 — three rapid-fire founder directives consolidated into one coherent layer without breaking the evolving-by-design intent; -1: BOQ doc inherits ChatGPT-draft terminology (CRT/KRP definitions) that will need founder finalization passes.
 **Files**: NEXUS_STRATEGY/0-BUSINESS/BOQ_FRAMEWORK.md (new), AI_CONSULTING_PLAYBOOK.md, 00_NORTH_STAR.md, PRODUCT_STRATEGY.md, TECH_STRATEGY.md, DATA_MODELS.md, _agent/JOURNAL.md
 **Next**: Unchanged card — N1-P2-04 module graph, then Path B queue. BOQ score-engine design lands N4 per revisit triggers.
+
+---
+
+## 2026-06-09T22:15Z — session-2026-06-09-08 — DONE
+**Task**: Research folder + design feel references (founder's final input before tonight's loop)
+**Branch**: session/2026-06-09-08-research-refs
+**Outcome**: (1) NEW `NEXUS_STRATEGY/research/` (T4, genome-wired, child of NORTH_STAR) with `boq/` holding the BRAMHI BOQ strategy whitepaper; README indexes theses (layered evidence reveal, measured-vs-proxy BPI, CRT 20/80 refinement, methodology-is-the-IP, phased IP build). BOQ_FRAMEWORK gains a Research-base section folding those theses in as finalization input. (2) Two investor decks copied to `1-PRODUCT/design/references/`; DESIGN_LANGUAGE gains "Reference visuals" with concrete extracted CSS cues (gradient near-white surfaces, white panels w/ purple-tinted shadows, slate 3-step text hierarchy, gold sparingly, 8px radius) + the Comfortaa-vs-brand-fonts question routed to the token session. (3) N1-P2-07 tokens DoD updated to consume the reference cues.
+**Quality**: 9/10 — references preserved in-repo (not just linked), cues extracted to actionable tokens rather than vibes.
+**Files**: NEXUS_STRATEGY/research/README.md (new) + research/boq/*.html (new), 1-PRODUCT/design/references/*.html (new, 2), 00_NORTH_STAR.md, BOQ_FRAMEWORK.md, DESIGN_LANGUAGE.md, _agent/{BACKLOG,JOURNAL}.md
+**Next**: Unchanged card — N1-P2-04 module graph → tokens → mockups. Loop start is on the human: /loop 30m /nexus-tick.

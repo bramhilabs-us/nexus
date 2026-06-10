@@ -115,6 +115,10 @@ A 50-person firm runs HubSpot + Asana + Notion + Slack + Confluence ($40–80k/y
 | Game telemetry (decision latency, rework, meeting load) accrues from normal Nexus usage — the product *is* a signal collector | TECH_STRATEGY domain events; knowledge module |
 | Score tiles on pages render whatever calculators are installed (like assessment score columns) | PRODUCT_STRATEGY analytics doctrine |
 
+## Research base
+
+Primary source: the **BRAMHI BOQ strategy whitepaper** ([research/boq/](../research/README.md)). Theses it adds beyond this doc, to fold in as scores are finalized: the public metric stays simple while **evidence reveals in layers**; **measured BPI** (from platform telemetry) must be kept separate from **public-company proxy BPI** (benchmarks); CRT refined as *"how fast an AI-native system can replicate the 20% of capabilities that produce 80% of customer value"*; the phased IP build (publish → assess → implement → benchmark); and the strategic frame — **the methodology is the IP, BOQ is the front door, Nexus is the implementation engine**.
+
 ## Open questions
 
 Tracked via revisit triggers (deliberately not clarifications — the founder finalizes these as engagements teach us): signal sets, weights/formulas, sub-score sequencing, signature visual.

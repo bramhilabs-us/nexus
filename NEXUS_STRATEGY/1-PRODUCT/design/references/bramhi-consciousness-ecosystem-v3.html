@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAMHI - Shared Understanding v3</title>
+    <link rel="icon" href="../../../../assets/images/BRAMHI_LABS_full_logo.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --page-bg: linear-gradient(180deg, #f8fafc 0%, #f5f3ff 50%, #f8fafc 100%);
+            --panel-bg: #ffffff;
+            --soft-line: #e2e8f0;
+            --panel-shadow: 0 8px 32px rgba(118, 75, 162, 0.06);
+            --accent-purple: #764ba2;
+            --accent-purple-dark: #5c3a7e;
+            --accent-indigo: #667eea;
+            --accent-gold: #bd8e2d;
+            --accent-teal: #229d83;
+            --text-primary: #2d3748;
+            --text-secondary: #64748b;
+            --text-tertiary: #94a3b8;
+            --radius: 8px;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: Comfortaa, system-ui, -apple-system, sans-serif;
+            background: var(--page-bg);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page-shell {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        .proposal-page {
+            min-height: calc(100vh - 4rem);
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            position: relative;
+            border-radius: var(--radius);
+            border: 1px solid var(--soft-line);
+            background: var(--panel-bg);
+            box-shadow: var(--panel-shadow);
+        }
+
+        /* ===== PAGE INDICATOR ===== */
+        .page-indicator {
+            position: absolute;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.9rem;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border-radius: var(--radius);
+            border: 1px solid var(--soft-line);
+            z-index: 4;
+        }
+
+        .page-indicator a {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--soft-line);
+            transition: all 0.2s;
+        }
+
+        .page-indicator a:hover {
+            background: var(--accent-indigo);
+            transform: scale(1.25);
+        }
+
+        .page-indicator a.active {
+            background: var(--accent-purple);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 4rem);
+            padding: 4rem 3rem 3rem;
+            text-align: center;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.08), transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.06), transparent 40%),
+                linear-gradient(135deg, #ffffff 0%, #f8f7ff 50%, #f5f3ff 100%);
+        }
+
+        .hero-logo {
+            position: absolute;
+            top: 1.25rem;
+            left: 1.25rem;
+            height: 160px;
+            overflow: hidden;
+        }
+
+        .hero-logo img {
+            height: 190px;
+            width: auto;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        .section-logo {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+        }
+
+        .section-logo img {
+            height: 150px;
+            width: auto;
+            opacity: 0.92;
+        }
+
+        .hero-kicker, .section-kicker {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            margin: 0 0 1.5rem;
+            max-width: 900px;
+            font-size: 3.25rem;
+            font-weight: 700;
+            line-height: 1.12;
+            color: var(--text-primary);
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: 2.25rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.4rem 1rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            border-radius: var(--radius);
+        }
+
+        .badge-purple { background: #f3e8ff; color: var(--accent-purple-dark); }
+        .badge-gold { background: #F7F3FF; color: #92400e; }
+        .badge-indigo { background: #e0e7ff; color: #3730a3; }
+        .badge-teal { background: #d1fae5; color: #065f46; }
+
+        /* ===== NAVIGATION CARDS ===== */
+        .hero-card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 2rem;
+        }
+
+        .nav-card {
+            min-height: 140px;
+            padding: 1.25rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--soft-line);
+            background: white;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s;
+        }
+
+        .nav-card:hover {
+            border-color: rgba(118, 75, 162, 0.45);
+            box-shadow: 0 12px 30px rgba(118, 75, 162, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .nav-card b {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+        }
+
+        .nav-card h3 {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        .nav-card p {
+            margin: 0;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .jump-nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            padding: 0.85rem 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius);
+            border: 1px solid var(--soft-line);
+            box-shadow: 0 4px 20px rgba(118, 75, 162, 0.08);
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.55rem 0.95rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: inherit;
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: all 0.2s;
+            background: transparent;
+            color: var(--accent-purple);
+            border: 1px solid transparent;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent-purple);
+            color: white;
+        }
+
+        /* ===== CONTENT PAGES ===== */
+        .content-page {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 2.5rem 4rem 3rem;
+            min-height: calc(100vh - 4rem);
+        }
+
+        .section-header {
+            text-align: center;
+            margin: 0.5rem auto 2rem;
+            max-width: 760px;
+        }
+
+        .section-header h2 {
+            margin: 0 auto;
+            font-size: 1.95rem;
+            font-weight: 700;
+            line-height: 1.35;
+            color: var(--text-primary);
+        }
+
+        .section-header h2 span {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-intro {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            max-width: 680px;
+            margin: 0.75rem auto 0;
+            text-align: center;
+        }
+
+        /* ===== STAT CARDS (Page 2) ===== */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            min-height: 200px;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--soft-line);
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-purple-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            margin: 0;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .source-note {
+            display: block;
+            font-size: 0.66rem;
+            color: var(--text-tertiary);
+            line-height: 1.4;
+            text-decoration: none;
+            margin-top: auto;
+            padding-top: 1rem;
+        }
+
+        .source-note:hover { color: var(--accent-purple); }
+
+        /* ===== FLOW PANEL (Page 2) ===== */
+        .flow-panel {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .journey-card {
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--soft-line);
+            background: #fafcfd;
+        }
+
+        .journey-card h4 {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin: 0 0 1rem;
+            text-align: center;
+        }
+
+        .journey-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .journey-step {
+            text-align: center;
+            padding: 0.75rem 0.5rem;
+            border-radius: var(--radius);
+            background: white;
+            border: 1px solid var(--soft-line);
+        }
+
+        .journey-step strong {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--accent-purple-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .journey-step span {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        .journey-arrow {
+            font-size: 2.5rem;
+            color: var(--accent-purple);
+            font-weight: 700;
+        }
+
+        /* ===== OPPORTUNITY CARDS (Page 3) ===== */
+        .opportunity-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .opportunity-card {
+            padding: 1.75rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--soft-line);
+            background: white;
+        }
+
+        .mini-kicker {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent-purple-dark);
+            margin-bottom: 0.65rem;
+        }
+
+        .opportunity-card h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .opportunity-card p {
+            margin: 0;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            margin-top: auto;
+        }
+
+        .cta-section h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem;
+        }
+
+        .cta-section p {
+            opacity: 0.9;
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== ECOSYSTEM CANVAS (Page 3) - LOTUS WITH SATELLITES ===== */
+        .ecosystem-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+            padding: 0 1rem;
+        }
+
+        /* Main ecosystem layout - products on sides */
+        .ecosystem-layout {
+            display: grid;
+            grid-template-columns: 140px 1fr 140px;
+            grid-template-rows: auto auto auto;
+            gap: 1rem;
+            align-items: center;
+            justify-items: center;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        /* Lotus Container - spans middle column */
+        .lotus-consciousness {
+            grid-column: 2;
+            grid-row: 1 / 4;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ===== FLIPPABLE PETALS ===== */
+        .petal-flip {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .petal-flip .flip-inner {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+        }
+
+        .petal-flip:hover .flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .petal-flip .flip-face {
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .petal-flip .flip-face.back {
+            position: absolute;
+            inset: 0;
+            transform: rotateY(180deg);
+        }
+
+        /* Top Petal - iBrain (solid, alive) */
+        .petal-top {
+            z-index: 3;
+            margin-bottom: -25px;
+        }
+
+        .petal-top .flip-inner {
+            width: 200px;
+            height: 110px;
+        }
+
+        .petal-top .flip-face {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg,
+                rgba(34, 157, 131, 0.22) 0%,
+                rgba(34, 157, 131, 0.12) 60%,
+                rgba(34, 157, 131, 0.04) 100%);
+            border: 2px solid rgba(34, 157, 131, 0.4);
+            border-bottom: none;
+            border-radius: 100px 100px 0 0;
+            padding: 1rem 1rem 1.5rem;
+        }
+
+        .petal-top .flip-face.front h3 {
+            margin: 0;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+        }
+
+        .petal-top .flip-face.front .petal-role {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            margin-top: 0.2rem;
+        }
+
+        .petal-top .flip-face.back {
+            background: linear-gradient(180deg,
+                rgba(34, 157, 131, 0.3) 0%,
+                rgba(34, 157, 131, 0.18) 100%);
+            padding: 0.75rem;
+        }
+
+        .petal-top .flip-face.back h4 {
+            margin: 0 0 0.4rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .engine-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.25rem;
+        }
+
+        .engine-pills span {
+            padding: 0.2rem 0.4rem;
+            font-size: 0.52rem;
+            font-weight: 700;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #047857;
+            border: 1px solid rgba(34, 157, 131, 0.4);
+        }
+
+        /* Center Core - BRAMHI */
+        .lotus-core {
+            position: relative;
+            z-index: 5;
+            width: 280px;
+            height: 160px;
+            background:
+                radial-gradient(ellipse at 50% 30%, rgba(102, 126, 234, 0.18), transparent 55%),
+                radial-gradient(ellipse at 50% 70%, rgba(118, 75, 162, 0.12), transparent 55%),
+                linear-gradient(135deg, #ffffff 0%, #f8f7ff 50%, #f5f3ff 100%);
+            border: 2px solid rgba(118, 75, 162, 0.3);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow:
+                0 12px 40px rgba(118, 75, 162, 0.12),
+                inset 0 -4px 20px rgba(118, 75, 162, 0.04);
+        }
+
+        .lotus-core .core-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-purple-dark);
+            margin-bottom: 0.15rem;
+        }
+
+        .lotus-core .core-subtitle {
+            font-size: 0.68rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.6rem;
+        }
+
+        .lotus-core .values-ring {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.3rem;
+            max-width: 240px;
+        }
+
+        .lotus-core .values-ring span {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.55rem;
+            font-weight: 600;
+            border-radius: 2rem;
+            background: rgba(118, 75, 162, 0.1);
+            color: var(--accent-purple-dark);
+            border: 1px solid rgba(118, 75, 162, 0.2);
+        }
+
+        /* Bottom Petal - Srishti (ethereal, forming) */
+        .petal-bottom {
+            z-index: 3;
+            margin-top: -25px;
+        }
+
+        .petal-bottom .flip-inner {
+            width: 200px;
+            height: 110px;
+        }
+
+        .petal-bottom .flip-face {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg,
+                rgba(189, 142, 45, 0.12) 0%,
+                rgba(189, 142, 45, 0.06) 60%,
+                rgba(189, 142, 45, 0.02) 100%);
+            border: 1px dashed rgba(189, 142, 45, 0.35);
+            border-top: none;
+            border-radius: 0 0 100px 100px;
+            padding: 1.5rem 1rem 1rem;
+            opacity: 0.85;
+        }
+
+        .petal-bottom:hover .flip-face {
+            opacity: 1;
+        }
+
+        .petal-bottom .flip-face.front h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+
+        .petal-bottom .flip-face.front .petal-role {
+            font-size: 0.72rem;
+            color: var(--text-tertiary);
+            margin-top: 0.2rem;
+        }
+
+        .petal-bottom .flip-face.back {
+            background: linear-gradient(0deg,
+                rgba(189, 142, 45, 0.18) 0%,
+                rgba(189, 142, 45, 0.1) 100%);
+            padding: 0.75rem;
+            opacity: 1;
+        }
+
+        .petal-bottom .flip-face.back h4 {
+            margin: 0 0 0.4rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .agent-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.25rem;
+        }
+
+        .agent-pills span {
+            padding: 0.2rem 0.4rem;
+            font-size: 0.52rem;
+            font-weight: 700;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.85);
+            color: #b45309;
+            border: 1px solid rgba(189, 142, 45, 0.4);
+        }
+
+        /* ===== SATELLITE PRODUCTS ===== */
+        .product-satellite {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--soft-line);
+            background: white;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .product-satellite:hover {
+            border-color: rgba(118, 75, 162, 0.3);
+            box-shadow: 0 6px 20px rgba(118, 75, 162, 0.1);
+        }
+
+        .product-satellite h3 {
+            margin: 0;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .product-satellite .product-type {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-top: 0.15rem;
+        }
+
+        .product-satellite .product-tagline {
+            font-size: 0.58rem;
+            font-style: italic;
+            color: var(--text-tertiary);
+            margin-top: 0.1rem;
+        }
+
+        /* Left product - YSELA */
+        .product-left {
+            grid-column: 1;
+            grid-row: 2;
+            border-color: var(--accent-purple);
+            border-width: 2px;
+        }
+
+        .product-left h3 {
+            color: var(--accent-purple-dark);
+        }
+
+        /* Right product - KARVIA */
+        .product-right {
+            grid-column: 3;
+            grid-row: 2;
+            border-style: dashed;
+            opacity: 0.85;
+        }
+
+        .product-right:hover {
+            opacity: 1;
+        }
+
+        /* Connection lines to core */
+        .connection-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg,
+                rgba(118, 75, 162, 0.15),
+                rgba(118, 75, 162, 0.3),
+                rgba(118, 75, 162, 0.15));
+            top: 50%;
+            z-index: 1;
+        }
+
+        .connection-line.left {
+            left: -60px;
+            width: 60px;
+        }
+
+        .connection-line.right {
+            right: -60px;
+            width: 60px;
+        }
+
+        /* Future product - below */
+        .product-future {
+            grid-column: 2;
+            margin-top: 0.5rem;
+            border-style: dashed;
+            opacity: 0.6;
+            max-width: 140px;
+        }
+
+        .product-future:hover {
+            opacity: 0.9;
+        }
+
+
+        /* ===== YSELA CYCLE (Page 4) ===== */
+        .ysela-cycle-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            padding: 1rem 0;
+        }
+
+        .ysela-cycle {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .cycle-step {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 120px;
+        }
+
+        .step-assess { top: 0; left: 50%; transform: translateX(-50%); }
+        .step-reflect { top: 50%; right: 0; transform: translateY(-50%); }
+        .step-align { bottom: 0; left: 50%; transform: translateX(-50%); }
+        .step-evolve { top: 50%; left: 0; transform: translateY(-50%); }
+
+        .cycle-step .step-icon {
+            width: 56px;
+            height: 56px;
+            background: white;
+            border: 3px solid var(--accent-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 4px 12px rgba(118, 75, 162, 0.15);
+        }
+
+        .cycle-step .step-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.15rem;
+        }
+
+        .cycle-step .step-desc {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .cycle-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, rgba(118, 75, 162, 0.08), rgba(102, 126, 234, 0.06));
+            border: 2px solid var(--accent-purple);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(118, 75, 162, 0.12);
+        }
+
+        .cycle-center .center-name {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--accent-purple-dark);
+        }
+
+        .cycle-center .center-tagline {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            margin-top: 0.15rem;
+        }
+
+        .cycle-arrows {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            pointer-events: none;
+            opacity: 0.85;
+        }
+
+        /* ===== FINAL PAGE (Page 6) ===== */
+        .final-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .final-card {
+            padding: 1.75rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--soft-line);
+            background: white;
+            text-align: center;
+        }
+
+        .final-card h4 {
+            margin: 0 0 0.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .final-card p {
+            margin: 0;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .final-logo {
+            display: block;
+            height: 140px;
+            width: auto;
+            margin: 0 auto 1.25rem;
+            object-fit: contain;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.85rem 2.25rem;
+            background: white;
+            color: var(--accent-purple);
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border-radius: var(--radius);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ===== ABOUT PAGE ===== */
+        .about-page {
+            flex: 1;
+            position: relative;
+            min-height: calc(100vh - 4rem);
+            padding: 3rem;
+            background: #ffffff;
+        }
+
+        .about-heading {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-heading h1 {
+            margin: 0;
+            font-size: 3rem;
+            font-weight: 400;
+            color: #1a1a1a;
+        }
+
+        /* Map container with overlaid circles */
+        .bio-map-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            height: 480px;
+            margin: 0 auto;
+        }
+
+        .bio-map-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Orbital rings */
+        .orbital-ring {
+            fill: none;
+            stroke: #d1d5db;
+            stroke-width: 1.5;
+        }
+
+        /* Continents */
+        .land-mass {
+            fill: #cbd5e1;
+            opacity: 0.7;
+        }
+
+        /* Location circles overlaid on map */
+        .loc-circle {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .photo-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+            border: 3px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #9ca3af;
+        }
+
+        .loc-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .loc-logos {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 160px;
+        }
+
+        .mini-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 6px;
+            background: white;
+            padding: 0.4rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            object-fit: contain;
+        }
+
+        .mini-logo.wide {
+            width: 120px;
+            height: 60px;
+        }
+
+        /* Position each location */
+        .loc-seattle { left: 12%; top: 18%; }
+        .loc-nashville { left: 28%; top: 55%; }
+        .loc-germany { left: 52%; top: 12%; }
+        .loc-switzerland { left: 54%; top: 48%; }
+        .loc-bangalore { left: 78%; top: 52%; }
+
+        .about-next {
+            position: absolute;
+            right: 3rem;
+            bottom: 3rem;
+            z-index: 5;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1rem;
+            border: 1px solid rgba(118, 75, 162, 0.22);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.94);
+            color: var(--accent-purple-dark);
+            text-decoration: none;
+            font-size: 0.78rem;
+            font-weight: 700;
+            box-shadow: 0 8px 24px rgba(118, 75, 162, 0.08);
+        }
+
+        .about-next:hover {
+            border-color: rgba(118, 75, 162, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1100px) {
+            .hero-card-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-grid, .opportunity-grid, .final-grid, .capability-grid { grid-template-columns: 1fr 1fr; }
+            .ysela-hero .hero-name { font-size: 2rem; }
+            .under-hood-content { gap: 1rem; }
+            .ecosystem-layout {
+                grid-template-columns: 100px 1fr 100px;
+                gap: 0.75rem;
+            }
+            .product-satellite { padding: 0.75rem; }
+            .product-satellite h3 { font-size: 0.8rem; }
+            .product-satellite .product-type { font-size: 0.6rem; }
+        }
+
+        @media (max-width: 720px) {
+            .page-shell { padding: 1rem; }
+            .hero { padding: 5rem 1.5rem 3rem; }
+            .content-page { padding: 2rem 1.5rem 3rem; }
+            .hero h1 { font-size: 2rem; line-height: 1.2; }
+            .hero-desc { font-size: 0.88rem; }
+            .section-header h2 { font-size: 1.4rem; }
+            .hero-card-grid, .stat-grid, .opportunity-grid, .capability-grid, .final-grid { grid-template-columns: 1fr; }
+            .ysela-hero { padding: 1.5rem; }
+            .ysela-hero .hero-name { font-size: 1.75rem; }
+            .ysela-hero .hero-tagline { font-size: 0.95rem; }
+            .under-hood-content { flex-direction: column; gap: 0.75rem; }
+            .hood-arrow { transform: rotate(90deg); }
+            .flow-panel { grid-template-columns: 1fr; gap: 1rem; }
+            .journey-arrow { text-align: center; transform: rotate(90deg); }
+            .hero-logo { height: 80px; }
+            .hero-logo img { height: 100px; }
+            .section-logo img { height: 90px; }
+            /* Ecosystem stacks vertically on mobile */
+            .ecosystem-layout {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 1rem;
+            }
+            .lotus-consciousness {
+                grid-column: 1;
+                grid-row: auto;
+            }
+            .product-left, .product-right {
+                grid-column: 1;
+                grid-row: auto;
+                max-width: 160px;
+                margin: 0 auto;
+            }
+            .product-future {
+                grid-column: 1;
+                max-width: 140px;
+                margin: 0 auto;
+            }
+            .connection-line { display: none; }
+            .lotus-core { width: 240px; height: 140px; }
+            .petal-top .flip-inner,
+            .petal-bottom .flip-inner { width: 170px; height: 95px; }
+            .about-page { padding: 2rem 1.5rem 3rem; }
+            .about-heading h1 { font-size: 2.2rem; }
+            .about-map { position: relative; min-height: 540px; margin-top: 1.5rem; }
+            .location-photo { width: 90px; height: 90px; }
+            .company-logo { width: 55px; height: 55px; }
+            .company-logo.large { width: 110px; height: 65px; }
+            .about-next { right: 1.5rem; bottom: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.65rem; }
+            .section-header h2 { font-size: 1.15rem; }
+            .journey-steps { grid-template-columns: 1fr; }
+            .lotus-core .values-ring span { font-size: 0.5rem; padding: 0.2rem 0.4rem; }
+            /* YSELA Cycle responsive */
+            .ysela-cycle { width: 280px; height: 280px; }
+            .cycle-step { width: 90px; }
+            .cycle-step .step-icon { width: 42px; height: 42px; font-size: 1.1rem; }
+            .cycle-step .step-name { font-size: 0.85rem; }
+            .cycle-step .step-desc { font-size: 0.62rem; }
+            .cycle-center { width: 100px; height: 100px; }
+            .cycle-center .center-name { font-size: 1rem; }
+            .cycle-arrows { width: 200px; height: 200px; }
+            .about-map { min-height: 500px; }
+            .location-photo { width: 70px; height: 70px; }
+            .company-logo { width: 45px; height: 45px; }
+            .company-logo.large { width: 90px; height: 55px; }
+            .location-label { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+    <main class="page-shell">
+
+        <!-- ==================== PAGE 1: ABOUT ME ==================== -->
+        <div class="proposal-page" id="page-1">
+            <section class="about-page card">
+                <div class="page-indicator">
+                    <a href="#page-1" class="active" title="About Me"></a>
+                    <a href="#page-2" title="Overview"></a>
+                    <a href="#page-3" title="The Gap"></a>
+                    <a href="#page-4" title="The Model"></a>
+                    <a href="#page-5" title="The Proof"></a>
+                    <a href="#page-6" title="Join the Journey"></a>
+                </div>
+
+                <div class="about-heading">
+                    <h1>About Me I</h1>
+                </div>
+
+                <!-- Bio Map with Overlaid Locations -->
+                <div class="bio-map-wrapper">
+                    <!-- World Map SVG Background -->
+                    <svg class="bio-map-svg" viewBox="0 0 1000 480">
+                        <!-- Orbital rings -->
+                        <ellipse class="orbital-ring" cx="500" cy="240" rx="480" ry="230"/>
+                        <ellipse class="orbital-ring" cx="320" cy="250" rx="300" ry="180"/>
+                        <ellipse class="orbital-ring" cx="680" cy="250" rx="300" ry="180"/>
+
+                        <!-- Continents - gray blobs -->
+                        <!-- North America -->
+                        <ellipse class="land-mass" cx="280" cy="230" rx="140" ry="120" transform="rotate(-15 280 230)"/>
+                        <ellipse class="land-mass" cx="250" cy="195" rx="85" ry="75" transform="rotate(-20 250 195)"/>
+
+                        <!-- Europe/Middle -->
+                        <ellipse class="land-mass" cx="510" cy="200" rx="100" ry="80" transform="rotate(10 510 200)"/>
+                        <ellipse class="land-mass" cx="545" cy="245" rx="90" ry="75" transform="rotate(-5 545 245)"/>
+
+                        <!-- Asia -->
+                        <ellipse class="land-mass" cx="730" cy="235" rx="160" ry="130" transform="rotate(-12 730 235)"/>
+                        <ellipse class="land-mass" cx="790" cy="195" rx="75" ry="60" transform="rotate(8 790 195)"/>
+
+                        <!-- Southern regions -->
+                        <ellipse class="land-mass" cx="360" cy="360" rx="70" ry="55"/>
+                        <ellipse class="land-mass" cx="780" cy="375" rx="90" ry="70"/>
+                    </svg>
+
+                    <!-- Seattle -->
+                    <div class="loc-circle loc-seattle">
+                        <div class="photo-circle">📷</div>
+                        <div class="loc-name">Seattle</div>
+                        <div class="loc-logos">
+                            <img class="mini-logo wide" src="../../../../assets/images/BRAMHI_LABS_full_logo.svg" alt="BRAMHI">
+                        </div>
+                    </div>
+
+                    <!-- Nashville -->
+                    <div class="loc-circle loc-nashville">
+                        <div class="photo-circle">📷</div>
+                        <div class="loc-name">Nashville</div>
+                        <div class="loc-logos">
+                            <img class="mini-logo" src="assets/logos/spendebt-logo.png" alt="Spendebt">
+                            <img class="mini-logo" src="assets/logos/growfrom-logo.png" alt="Growfrom">
+                        </div>
+                    </div>
+
+                    <!-- Germany -->
+                    <div class="loc-circle loc-germany">
+                        <div class="photo-circle">📷</div>
+                        <div class="loc-name">Germany</div>
+                        <div class="loc-logos">
+                            <div class="mini-logo" style="display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;color:#9ca3af">RytleX</div>
+                        </div>
+                    </div>
+
+                    <!-- Switzerland -->
+                    <div class="loc-circle loc-switzerland">
+                        <div class="photo-circle">📷</div>
+                        <div class="loc-name">Switzerland</div>
+                        <div class="loc-logos">
+                            <div class="mini-logo" style="display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;color:#9ca3af">Fairtiq</div>
+                        </div>
+                    </div>
+
+                    <!-- Bangalore -->
+                    <div class="loc-circle loc-bangalore">
+                        <div class="photo-circle">📷</div>
+                        <div class="loc-name">Bangalore</div>
+                        <div class="loc-logos">
+                            <div class="mini-logo" style="display:flex;align-items:center;justify-content:center;font-size:0.55rem;font-weight:700;color:#9ca3af">Broadcom</div>
+                            <div class="mini-logo" style="display:flex;align-items:center;justify-content:center;font-size:0.55rem;font-weight:700;color:#9ca3af">Symphony</div>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="about-next" href="#page-2">BRAMHI story &rarr;</a>
+            </section>
+        </div>
+
+        <!-- ==================== PAGE 2: HERO ==================== -->
+        <div class="proposal-page" id="page-2">
+            <section class="hero card">
+                <div class="page-indicator">
+                    <a href="#page-1" title="About Me"></a>
+                    <a href="#page-2" class="active" title="Overview"></a>
+                    <a href="#page-3" title="The Gap"></a>
+                    <a href="#page-4" title="The Model"></a>
+                    <a href="#page-5" title="The Proof"></a>
+                    <a href="#page-6" title="Join the Journey"></a>
+                </div>
+
+                <a href="#page-2" class="hero-logo">
+                    <img src="../../../../assets/images/BRAMHI_LABS_full_logo.svg" alt="BRAMHI">
+                </a>
+
+                <div class="hero-kicker">Ecosystem Overview</div>
+                <h1>BRAMHI, <span>nurturing consciousness</span>.</h1>
+                <p class="hero-desc">
+                    The infrastructure layer for products that evolve together. Direction gets sharper. Products get smarter. Communities grow together.
+                </p>
+
+                <div class="chip-row">
+                    <span class="badge badge-purple">Shared Understanding</span>
+                    <span class="badge badge-indigo">Orchestrated Alignment</span>
+                    <span class="badge badge-teal">Behavioral Intelligence</span>
+                    <span class="badge badge-gold">Thriving Communities</span>
+                </div>
+
+                <div class="hero-card-grid">
+                    <a class="nav-card" href="#page-3">
+                        <b>03</b>
+                        <h3>The Gap</h3>
+                        <p>Learning is transforming. Communities will shape it.</p>
+                    </a>
+                    <a class="nav-card" href="#page-4">
+                        <b>04</b>
+                        <h3>The Model</h3>
+                        <p>Infrastructure that reads signal, aligns, and evolves.</p>
+                    </a>
+                    <a class="nav-card" href="#page-5">
+                        <b>05</b>
+                        <h3>The Proof</h3>
+                        <p>YSELA: Empowering teams to perform and evolve.</p>
+                    </a>
+                    <a class="nav-card" href="#page-6">
+                        <b>06</b>
+                        <h3>The Horizon</h3>
+                        <p>The foundation is laid. First teams will shape what runs on it.</p>
+                    </a>
+                </div>
+
+                            </section>
+        </div>
+
+        <!-- ==================== PAGE 3: THE GAP ==================== -->
+        <div class="proposal-page" id="page-3">
+            <section class="content-page card">
+                <div class="page-indicator">
+                    <a href="#page-1" title="About Me"></a>
+                    <a href="#page-2" title="Overview"></a>
+                    <a href="#page-3" class="active" title="The Gap"></a>
+                    <a href="#page-4" title="The Model"></a>
+                    <a href="#page-5" title="The Proof"></a>
+                    <a href="#page-6" title="Join the Journey"></a>
+                </div>
+
+                <a href="#page-2" class="section-logo">
+                    <img src="../../../../assets/images/BRAMHI_LABS_full_logo.svg" alt="Home">
+                </a>
+
+                <div class="section-header">
+                    <div class="section-kicker">The Gap</div>
+                    <h2>Learning is transforming. <span>Communities will shape it</span>.</h2>
+                    <p class="section-intro">Skills are not formed in isolation anymore. They emerge from directed practice, feedback loops, and shared intelligence. Individual consumption gives way to collective growth.</p>
+                </div>
+
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div>
+                            <div class="stat-value">59%</div>
+                            <p>of workers may require training by 2030.</p>
+                        </div>
+                        <a class="source-note" href="https://www.weforum.org/press/2025/01/future-of-jobs-report-2025-78-million-new-job-opportunities-by-2030-but-urgent-upskilling-needed-to-prepare-workforces/" target="_blank" rel="noopener">World Economic Forum, Future of Jobs 2025</a>
+                    </div>
+                    <div class="stat-card">
+                        <div>
+                            <div class="stat-value">75%</div>
+                            <p>of knowledge workers already using AI at work.</p>
+                        </div>
+                        <a class="source-note" href="https://www.microsoft.com/en-us/worklab/work-trend-index/ai-at-work-is-here-now-comes-the-hard-part" target="_blank" rel="noopener">Microsoft + LinkedIn Work Trend Index 2024</a>
+                    </div>
+                    <div class="stat-card">
+                        <div>
+                            <div class="stat-value">66%</div>
+                            <p>faster skill change in AI-exposed jobs.</p>
+                        </div>
+                        <a class="source-note" href="https://www.pwc.com/mt/en/publications/technology/the-fearless-future-2025-global-ai-jobs-barometer.html" target="_blank" rel="noopener">PwC 2025 Global AI Jobs Barometer</a>
+                    </div>
+                </div>
+
+                <div class="flow-panel">
+                    <div class="journey-card">
+                        <h4>Learning Alone</h4>
+                        <div class="journey-steps">
+                            <div class="journey-step"><strong>Consume</strong><span>Content</span></div>
+                            <div class="journey-step"><strong>Finish</strong><span>Course</span></div>
+                            <div class="journey-step"><strong>Plateau</strong><span>Alone</span></div>
+                        </div>
+                    </div>
+                    <div class="journey-arrow">→</div>
+                    <div class="journey-card">
+                        <h4>Growing Together</h4>
+                        <div class="journey-steps">
+                            <div class="journey-step"><strong>Practice</strong><span>Daily</span></div>
+                            <div class="journey-step"><strong>Build</strong><span>Real Work</span></div>
+                            <div class="journey-step"><strong>Thrive</strong><span>Together</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <h3>The shift is already happening</h3>
+                    <p>Communities are the heart. They deserve infrastructure that upholds their values, aligns with what matters, and helps them thrive.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== PAGE 4: THE MODEL ==================== -->
+        <div class="proposal-page" id="page-4">
+            <section class="content-page card">
+                <div class="page-indicator">
+                    <a href="#page-1" title="About Me"></a>
+                    <a href="#page-2" title="Overview"></a>
+                    <a href="#page-3" title="The Gap"></a>
+                    <a href="#page-4" class="active" title="The Model"></a>
+                    <a href="#page-5" title="The Proof"></a>
+                    <a href="#page-6" title="Join the Journey"></a>
+                </div>
+
+                <a href="#page-2" class="section-logo">
+                    <img src="../../../../assets/images/BRAMHI_LABS_full_logo.svg" alt="Home">
+                </a>
+
+                <div class="section-header">
+                    <div class="section-kicker">The Model</div>
+                    <h2>Infrastructure that reads signal, <span>aligns, and evolves</span>.</h2>
+                    <p class="section-intro">BRAMHI is the shared understanding. iBrain reads signal and aligns toward shared values. Srishti creates products that help communities thrive.</p>
+                </div>
+
+                <div class="ecosystem-wrapper" id="ecosystem">
+
+                    <div class="ecosystem-layout">
+
+                        <!-- Left Product - YSELA -->
+                        <div class="product-satellite product-left">
+                            <h3>YSELA</h3>
+                            <p class="product-type">Behavioral Intelligence to Empower Teams</p>
+                        </div>
+
+                        <!-- LOTUS CONSCIOUSNESS -->
+                        <div class="lotus-consciousness">
+
+                            <!-- Top Petal - iBrain (solid, alive) -->
+                            <div class="petal-top petal-flip">
+                                <div class="flip-inner">
+                                    <div class="flip-face front">
+                                        <h3>iBrain</h3>
+                                        <p class="petal-role">Orchestrator</p>
+                                    </div>
+                                    <div class="flip-face back">
+                                        <h4>8 Engines</h4>
+                                        <div class="engine-pills">
+                                            <span>Scoring</span>
+                                            <span>Tracking</span>
+                                            <span>Observer</span>
+                                            <span>Assessment</span>
+                                            <span>Planner</span>
+                                            <span>IAM</span>
+                                            <span>Adapter</span>
+                                            <span>iMint</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Center Core - BRAMHI Consciousness -->
+                            <div class="lotus-core">
+                                <div class="connection-line left"></div>
+                                <div class="connection-line right"></div>
+                                <div class="core-title">BRAMHI</div>
+                                <div class="core-subtitle">Shared Understanding</div>
+                                <div class="values-ring">
+                                    <span>Values</span>
+                                    <span>Rules</span>
+                                    <span>Beliefs</span>
+                                    <span>Memory</span>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Petal - Srishti (ethereal, forming) -->
+                            <div class="petal-bottom petal-flip">
+                                <div class="flip-inner">
+                                    <div class="flip-face front">
+                                        <h3>Srishti</h3>
+                                        <p class="petal-role">Creator</p>
+                                    </div>
+                                    <div class="flip-face back">
+                                        <h4>Creation Chain</h4>
+                                        <div class="agent-pills">
+                                            <span>ARIA</span>
+                                            <span>SYNTH</span>
+                                            <span>CODEX</span>
+                                            <span>VALIDAR</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Right Product - KARVIA -->
+                        <div class="product-satellite product-right">
+                            <h3>KARVIA</h3>
+                            <p class="product-type">Individual Growth</p>
+                        </div>
+
+                        <!-- Future Product - Below -->
+                        <div class="product-satellite product-future">
+                            <h3>Future</h3>
+                            <p class="product-type">Next Surface</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="cta-section">
+                    <h3>Infrastructure with purpose</h3>
+                    <p>BRAMHI is the shared understanding that connects products to the communities they serve. YSELA is the first proof — and the opportunity to shape what's next.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== PAGE 5: THE PROOF ==================== -->
+        <div class="proposal-page" id="page-5">
+            <section class="content-page card">
+                <div class="page-indicator">
+                    <a href="#page-1" title="About Me"></a>
+                    <a href="#page-2" title="Overview"></a>
+                    <a href="#page-3" title="The Gap"></a>
+                    <a href="#page-4" title="The Model"></a>
+                    <a href="#page-5" class="active" title="The Proof"></a>
+                    <a href="#page-6" title="Join the Journey"></a>
+                </div>
+
+                <a href="#page-2" class="section-logo">
+                    <img src="../../../../assets/images/BRAMHI_LABS_full_logo.svg" alt="Home">
+                </a>
+
+                <div class="section-header">
+                    <div class="section-kicker">The Proof</div>
+                    <h2>YSELA: <span>Behavioral Intelligence</span> for Teams.</h2>
+                    <p class="section-intro">Self-reflection builds trust. Awareness reinforces behavior. Teams grow together.</p>
+                </div>
+
+                <!-- YSELA Cycle Diagram -->
+                <div class="ysela-cycle-wrapper">
+                    <div class="ysela-cycle">
+                        <div class="cycle-step step-assess">
+                            <div class="step-icon">&#128269;</div>
+                            <div class="step-name">Assess</div>
+                            <div class="step-desc">Surface what matters</div>
+                        </div>
+                        <div class="cycle-step step-reflect">
+                            <div class="step-icon">&#128161;</div>
+                            <div class="step-name">Reflect</div>
+                            <div class="step-desc">Build self-awareness</div>
+                        </div>
+                        <div class="cycle-step step-align">
+                            <div class="step-icon">&#10022;</div>
+                            <div class="step-name">Align</div>
+                            <div class="step-desc">Move toward shared goals</div>
+                        </div>
+                        <div class="cycle-step step-evolve">
+                            <div class="step-icon">&#10038;</div>
+                            <div class="step-name">Evolve</div>
+                            <div class="step-desc">Behaviors shape culture</div>
+                        </div>
+                        <div class="cycle-center">
+                            <div class="center-name">YSELA</div>
+                            <div class="center-tagline">Teams grow together</div>
+                        </div>
+                        <svg class="cycle-arrows" viewBox="0 0 300 300">
+                            <defs>
+                                <marker id="arrow1" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                    <polygon points="0 2, 8 5, 0 8" fill="#764ba2"/>
+                                </marker>
+                            </defs>
+                            <!-- Arc segments with arrows: Assess→Reflect→Align→Evolve→Assess -->
+                            <!-- Top-right arc (Assess → Reflect) -->
+                            <path d="M168 68 A82 82 0 0 1 232 132" fill="none" stroke="#764ba2" stroke-width="2.5" marker-end="url(#arrow1)"/>
+                            <!-- Bottom-right arc (Reflect → Align) -->
+                            <path d="M232 168 A82 82 0 0 1 168 232" fill="none" stroke="#764ba2" stroke-width="2.5" marker-end="url(#arrow1)"/>
+                            <!-- Bottom-left arc (Align → Evolve) -->
+                            <path d="M132 232 A82 82 0 0 1 68 168" fill="none" stroke="#764ba2" stroke-width="2.5" marker-end="url(#arrow1)"/>
+                            <!-- Top-left arc (Evolve → Assess) -->
+                            <path d="M68 132 A82 82 0 0 1 132 68" fill="none" stroke="#764ba2" stroke-width="2.5" marker-end="url(#arrow1)"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <h3>The first proof is forming</h3>
+                    <p>YSELA is where infrastructure meets purpose. The foundation is being laid for a product that helps teams perform and grow together.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== PAGE 6: JOIN THE JOURNEY ==================== -->
+        <div class="proposal-page" id="page-6">
+            <section class="content-page card">
+                <div class="page-indicator">
+                    <a href="#page-1" title="About Me"></a>
+                    <a href="#page-2" title="Overview"></a>
+                    <a href="#page-3" title="The Gap"></a>
+                    <a href="#page-4" title="The Model"></a>
+                    <a href="#page-5" title="The Proof"></a>
+                    <a href="#page-6" class="active" title="Join the Journey"></a>
+                </div>
+
+                <a href="#page-2" class="section-logo">
+                    <img src="../../../../assets/images/BRAMHI_LABS_full_logo.svg" alt="Home">
+                </a>
+
+                <div class="section-header">
+                    <img class="final-logo" src="../../../../assets/images/BRAMHI_LABS_full_logo.svg" alt="BRAMHI">
+                    <div class="section-kicker">The Horizon</div>
+                    <h2>The foundation is laid. <span>The understanding is forming</span>.</h2>
+                    <p class="section-intro">BRAMHI provides shared understanding. YSELA shapes behavior toward shared goals. The architecture is defined. First teams will shape what runs on it.</p>
+                </div>
+
+                <div class="final-grid">
+                    <div class="final-card">
+                        <h4>The Foundation</h4>
+                        <p>Infrastructure for shared understanding and behavior shaping. Architecture defined. Ready for products.</p>
+                    </div>
+                    <div class="final-card">
+                        <h4>The First</h4>
+                        <p>First teams shape the patterns. First signals validate the model. Direction emerges from use.</p>
+                    </div>
+                    <div class="final-card">
+                        <h4>What's Next</h4>
+                        <p>Teams. Communities. Individuals. One shared understanding. <span style="background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 600;">Products that shape the next generation of learning and growth.</span></p>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <h3>The future takes shape.</h3>
+                    <p>Shared understanding deepens. Behavior aligns. Products evolve with the communities they serve.</p>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <script>
+        // Flip cards work via CSS hover - no JS needed for basic interaction
+        // This script adds touch support for mobile devices
+        document.querySelectorAll('.petal-flip').forEach((card) => {
+            card.addEventListener('click', function() {
+                // Toggle flipped state on click for touch devices
+                this.classList.toggle('flipped');
+            });
+        });
+
+        // Add CSS for flipped state
+        const style = document.createElement('style');
+        style.textContent = `
+            .petal-flip.flipped .flip-inner {
+                transform: rotateY(180deg);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
