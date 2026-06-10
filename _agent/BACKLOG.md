@@ -112,7 +112,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Size**: M (2 ticks)
 - **Depends on**: N1-P2-04 (module graph), N1-P2-02 (data models)
 - **Definition of done**:
-  - MODULARIZATION_PLAN.md with 8 modules (CRM, Objectives, KeyResults, WeeklyGoals, Tasks, Assessment + Governance + Knowledge) + assessment impls (SSI, AI-Readiness)
+  - MODULARIZATION_PLAN.md with 8 modules (CRM, Objectives, KeyResults, WeeklyGoals, Tasks, Assessment + Governance + Knowledge) + assessment impl (AIR — SSI dropped per C-006, Karvia reference only)
   - MODULE_CONTRACTS_DRAFT.md with TS interface signatures
   - Reflects ratified decisions: consolidate engines, TypeScript strict, Program as first-class entity
 - **Notes**: All 3 architectural clarifications now answered (2026-06-04). N1-P4-02 also unblocked.

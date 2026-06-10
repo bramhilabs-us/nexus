@@ -52,8 +52,8 @@ A session that produces no deliverable is journaled NO-OP and still counts — p
 |---|---|---|---|
 | **Night 1 — Strategy** (in flight) | This pack of cards; catalogues (data models, API surface, module graph, test inventory); modularization plan; Night 2 sprint | **18** | Every N1 BACKLOG task DONE; contracts drafted on paper |
 | **Night 2 — Foundation** | TS toolchain, pnpm workspace, CI gates wired; 6 OKR-chain + CRM modules lifted contract-first; Program entity; one KeyResult representation | **24** | `pnpm bootstrap` < 10 min; contract tests green across lifted modules; AP-1 lint live |
-| **Night 3 — Vertical proof** | Assessment provider interface; SSI impl (extracted, data-driven); AI Readiness impl; 6 UI pages on page contracts; first-value journey E2E | **18** | Third-provider drill done in hours; first-value journey passes E2E |
-| **Night 4 — Transformation OS** | Governance + Knowledge modules; multi-program UX (switcher, memberships); SaaS plumbing (fresh Mongo, secrets, flags) | **16** | Two concurrent programs run cleanly in one tenant; knowledge module dogfooded (IM-9) |
+| **Night 3 — Vertical proof** | Assessment provider interface; **AIR impl** (instruments, evidence, scoring, deliverable generators — all data-driven; SSI not carried over per C-006); 6 UI pages on page contracts + minimalistic design system; first-value journey E2E | **18** | Second-provider drill done in hours; first-value journey passes E2E |
+| **Night 4 — Transformation OS** | Governance + Knowledge modules; multi-program UX (switcher, memberships); **handover transition + Builder mode**; srishti seam reserved; SaaS plumbing (fresh Mongo, secrets, flags) | **16** | Two concurrent programs run cleanly in one tenant; handover flips a program to Builder mode; knowledge module dogfooded (IM-9) |
 | **Night 5 — Launch** | Deploy honesty pass, observability live, rollback runbook, perf, beta polish | **10** | Deployed beta; all IMPROVEMENT_PLAN success-criteria dimensions measured |
 | **Buffer** | Hotfixes, retro-driven protocol fixes, unknowns | **4** | — |
 

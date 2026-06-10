@@ -2,23 +2,23 @@
 
 **Status**: Active
 **Last Updated**: 2026-06-09
-**Owner**: Founder + agent (interactive session 2026-06-09)
+**Owner**: Founder + agent (interactive sessions 2026-06-09)
 **Tier**: T2
-**Depends on**: [00_NORTH_STAR.md](../00_NORTH_STAR.md), [SYSTEM_ARCHITECTURE.md](SYSTEM_ARCHITECTURE.md), [IMPROVEMENT_PLAN.md](IMPROVEMENT_PLAN.md), `_agent/DECISIONS.md` (C-003, C-004, C-005)
+**Depends on**: [00_NORTH_STAR.md](../00_NORTH_STAR.md), [0-BUSINESS/AI_CONSULTING_PLAYBOOK.md](../0-BUSINESS/AI_CONSULTING_PLAYBOOK.md), [SYSTEM_ARCHITECTURE.md](SYSTEM_ARCHITECTURE.md), [IMPROVEMENT_PLAN.md](IMPROVEMENT_PLAN.md), `_agent/DECISIONS.md` (C-003…C-006)
 
 ---
 
 ## Purpose
 
-This is the tech card of the pack: how Nexus is structured so that every capability is a swappable lego block. It defines the three layers, the eight module contracts, the pluggable assessment as the proof-piece, and the calculation engine that makes progress roll up truthfully. It does **not** re-describe Karvia (that's `SYSTEM_ARCHITECTURE.md`) or restate the quality bar (that's `IMPROVEMENT_PLAN.md`); it builds on both and on the three ratified decisions.
+This is the tech card of the pack: how Nexus is structured so that every capability is a swappable lego block. It defines the three layers, the eight module contracts, the generalized assessment interface (with AIR as the first implementation), the calculation engine, the handover mechanics, and the srishti boundary. It does **not** re-describe Karvia (that's `SYSTEM_ARCHITECTURE.md`) or restate the quality bar (that's `IMPROVEMENT_PLAN.md`); it builds on both and on the ratified decisions.
 
 ## TL;DR
 
 - **One process, many modules** (C-003): a single TypeScript-strict Express app (C-004); module boundaries enforced by contracts and lint, not ports.
 - **Three layers, one rule per layer**: UI renders page contracts; business logic owns lifecycles and roll-ups; data is private to its module.
 - **Eight blocks, black-box discipline**: you ask a module through its published interface; you never import its models. Karvia's shared-`server/models/` pattern (AP-1) is the one thing Nexus must never recreate.
-- **Assessment is the proof of modularity**: an `AssessmentProvider` contract; SSI and AI Readiness are just two implementations. Shipping a third in hours is the acceptance test of the whole architecture.
-- **Same domain, better plumbing**: Karvia's OKR hierarchy and models carry over conceptually — re-typed, program-scoped (C-005), and with one KeyResult representation instead of two.
+- **The assessment block is fully generic**: an `AssessmentProvider` contract covering instruments, evidence, scoring, and deliverable generation. **AIR is the first implementation; SSI is not carried over** (C-006). Shipping any future assessment in hours, touching only its impl folder, is the acceptance test of the whole architecture.
+- **Handover is a first-class lifecycle event**, and **srishti is an external add-on behind a published integration contract** — never a coupled dependency.
 
 ---
 
@@ -37,6 +37,7 @@ interface PageContract {
   emptyState: EmptyStateSpec;           // teaches purpose, points at primaryCta
   entryPoints: PageRef[];               // for nav/journey tests
   exitPoints: PageRef[];
+  modes: ('engagement' | 'builder')[];  // which operating modes show this page
 }
 ```
 
@@ -45,6 +46,8 @@ Consequences:
 - **Role-based landing** is data: login resolves `user.role` (within the active program) → the page whose `primaryRole` matches.
 - **Journey tests are generated**: the first-value journey is a walk across `entryPoints`/`exitPoints`; E2E tests assert the walk exists and each step's primary CTA is reachable.
 - **Analytics tiles are one component** fed by `TileSpec`, each backed by a module query — no per-page bespoke dashboard code, no hardcoded numbers (AP-3).
+- **Extension slots**: pages that host pluggable content (Assessments above all) declare typed slots; installed blocks render into them. The page never imports an impl.
+- **Design system as a constraint**: one small component set (tile, card, stage ribbon, CTA pair, empty state) shared by all pages, per the minimalistic design language (PRODUCT_STRATEGY § design; specs land in `1-PRODUCT/design/`).
 - Client stays vanilla JS for v1 (C-004); the contract types live server-side and serve the client a typed JSON shell config.
 
 ## Layer 2 — Business logic: lifecycles and roll-ups
@@ -58,11 +61,11 @@ State machines, declared as data, executed synchronously inside the request (or 
 | Entity | States | Transition triggers |
 |---|---|---|
 | Objective | Identified → Handed off → Sustained | completion threshold met → handoff confirmed → sustained review cadence established |
-| Client (CRM stage) | Prospect → Onboarding → Active | assessment sent → team onboarded + assessment done → first objective Identified |
-| Program | active → completed / paused | outcome recorded / human action |
-| Assessment | draft → sent → in-progress → scored | provider lifecycle hooks (see contract below) |
+| Client (pipeline stage) | Prospect → Assessing → Engaged → Handed over | assessment started → deliverables accepted + objectives seeded → program handover |
+| Program | active → handed_over → completed / paused | handover event / outcome recorded / human action |
+| Assessment | draft → in_progress → scored → delivered | provider lifecycle hooks (see contract below) |
 
-Every transition emits a typed domain event on an in-process event bus (one process per C-003 — no message broker needed, but events are first-class so tiles, notifications, and the knowledge module subscribe instead of polling Mongo (fixes "eventual consistency by accident").
+Every transition emits a typed domain event on an in-process event bus (one process per C-003 — no message broker needed), but events are first-class so tiles, notifications, and the knowledge module subscribe instead of polling Mongo.
 
 ### The roll-up engine
 
@@ -82,7 +85,7 @@ Rules: calculations are pure functions over typed inputs (unit-testable without 
 
 - Tenancy is `Company → Program → …` (C-005): every domain doc carries `company_id` + `program_id`, both indexed; users hold `program_memberships[]` (role per program).
 - **One KeyResult representation** — standalone collection only; the embedded-array dual-write from Karvia is not lifted (AP-4, delta D6).
-- Domain data is data (AP-3): question banks, scoring rubrics, report templates, lifecycle definitions are seeds/config, never literals in handlers.
+- Domain data is data (AP-3): instruments, scoring rubrics, deliverable templates, lifecycle definitions are seeds/config, never literals in handlers. (Karvia's hardcoded SSI question bank is the canonical counter-example — studied, not lifted.)
 - Each module owns its collections privately. Cross-module reads go through the owning module's interface — enforced by `no-restricted-imports` (AP-1).
 
 ## The eight blocks
@@ -95,11 +98,11 @@ graph LR
     subgraph OKR["OKR chain"]
         OBJ["@nexus/objectives"] --> KR["@nexus/key-results"] --> WG["@nexus/weekly-goals"] --> TSK["@nexus/tasks"]
     end
-    ASMT["@nexus/assessment<br/>provider interface<br/>impls: ssi, ai-readiness"]
+    ASMT["@nexus/assessment<br/>provider interface<br/>impls: air (v1), future verticals"]
     GOV["@nexus/governance<br/>oversight, decision rights"]
-    KNOW["@nexus/knowledge<br/>capture, outcome evidence"]
+    KNOW["@nexus/knowledge<br/>capture, outcome evidence<br/>srishti integration point"]
 
-    ASMT -->|"seeds objectives"| OBJ
+    ASMT -->|"deliverables seed objectives"| OBJ
     CRM --- OKR
     GOV -.->|observes events| OKR
     KNOW -.->|captures events| OKR
@@ -123,21 +126,57 @@ src/modules/<name>/
 
 ## Pluggable assessment — the proof-piece
 
-The single most important refactor (Karvia hardcoded SSI's 20 questions inside `engines/assessment/index.js` while its template schemas sat unused). The contract:
+The founder's standing requirement: *"tomorrow I want to change to another assessment — I should be able to just add it."* The contract is therefore broader than question-and-score; it covers how evidence is gathered, how it's scored, and what deliverables come out:
 
 ```ts
 interface AssessmentProvider {
-  id: string;                              // 'ssi' | 'ai-readiness' | ...
+  id: string;                               // 'air' | future verticals
   meta: { name: string; description: string; dimensions: Dimension[] };
-  questionBank(ctx: ProgramContext): Promise<Question[]>;     // data, never literals
-  score(answers: Answer[]): Score;                            // pure, 0–10 per dimension
-  report(score: Score, ctx: ProgramContext): Report;          // credible result narrative
-  seedObjectives(score: Score): ObjectiveDraft[];             // the Assessments→Objectives handoff
-  lifecycle: { onSent?, onCompleted?, onScored? };            // domain-event hooks
+
+  // How evidence is gathered. An instrument can be a survey, a structured
+  // interview, a workshop canvas, a floor observation, a document review —
+  // each declares its own zod-validated evidence shape and UI slot renderer.
+  instruments(ctx: ProgramContext): Promise<Instrument[]>;
+
+  // Pure scoring over collected evidence: 0–10 (or 0–100) per dimension.
+  score(evidence: Evidence[]): Score;
+
+  // Deliverable generation — report, registers, roadmaps. Each deliverable is
+  // a typed artifact other modules can consume.
+  deliverables(score: Score, evidence: Evidence[], ctx: ProgramContext): Deliverable[];
+
+  // The handoff that seeds the OKR chain (e.g., from an opportunity register).
+  seedObjectives(deliverables: Deliverable[]): ObjectiveDraft[];
+
+  lifecycle: { onStarted?, onEvidenceAdded?, onScored?, onDelivered? };  // domain-event hooks
 }
 ```
 
-What registration buys, with zero changes elsewhere: a *Create {name} assessment* option on the Assessments page, a score column on My Clients tiles, dimension tiles in analytics, and assessment-seeded objective drafts. **Acceptance test of the entire architecture**: implementing a third provider (e.g., MBTI-style) touches only `assessment/impls/<new>/` and takes hours, not days.
+What registration buys, with zero changes elsewhere: a *Create {name} assessment* option on the Assessments page, the provider's instruments rendered into the page's slots, a score column on My Clients tiles, dimension tiles in analytics, and deliverable-seeded objective drafts.
+
+**AIR is the first implementation** (`assessment/impls/air/`): five dimensions (Leadership, Workforce, Process, Data, Execution); instruments mirroring the two-week sprint (executive workshop canvas, leadership interviews, value-stream observation, journey maps, knowledge map, finance model, workforce survey, opportunity workshop, validation, scoring workshop); deliverable generators for the AIR Score, Opportunity Register, Risk Register, 90-day plan, 12-month roadmap, and BRAMHI baseline. All of it — dimensions, instruments, rubrics, templates — is **seed data and config inside the impl folder**, nothing hardcoded in handlers (AP-3), nothing referenced outside the block.
+
+**SSI is not shipped** (C-006). It survives only as the reference counter-example in `_source/`. A survey-style provider is trivially expressible in this contract (one survey instrument, pure score, one report deliverable) — which is exactly the point.
+
+**Acceptance test of the entire architecture**: implementing a second provider touches only `assessment/impls/<new>/` and takes hours, not days. This drill runs in Night 3 and the result is journaled.
+
+## Handover — engagement becomes product
+
+Handover (the consulting playbook's step 5) is a program lifecycle transition, not a data migration. C-005's tenancy makes it cheap:
+
+- All data already belongs to the client's `company_id`/`program_id` — nothing moves.
+- The transition: program status → `handed_over`; the consultant's `program_membership` is revoked (or downgraded to time-boxed read-only); an org-side owner is confirmed; the event is captured by `@nexus/knowledge` as outcome evidence (with the BRAMHI baseline snapshot for future re-assessment).
+- UI flips to **Builder mode** (page contracts' `modes` field): My Clients disappears for the org; everything else continues uninterrupted.
+- Re-engagement (re-assessment a year later) is just a new assessment in the same program history — longitudinal comparison against the stored baseline.
+
+## srishti — the intelligence add-on boundary
+
+srishti (document management / model care, LLM-connected) is **its own product**; Nexus integrates, never embeds. The boundary:
+
+- One integration contract, owned by `@nexus/knowledge`: link/attach srishti documents to Nexus entities (programs, objectives, assessment evidence), and subscribe srishti to Nexus domain events. Shape: a small typed API + webhook/event feed, versioned like any module contract.
+- Nexus must be fully functional without srishti installed (same discipline as Karvia's iBrain toggle, done properly: declared OPTIONAL dependency with tested fallback, AP-8).
+- LLM intelligence features inside Nexus follow the parking-lot rule: every AI feature has a non-AI fallback and an explicit cost ceiling.
+- Detailed contract spec is deferred until srishti's own interfaces stabilize — tracked as TQ-3.
 
 ## Cross-cutting (by reference)
 
@@ -154,3 +193,4 @@ What registration buys, with zero changes elsewhere: a *Create {name} assessment
 
 - **TQ-1** — Event bus implementation: Node `EventEmitter` with typed wrapper vs a tiny library. Decide in the Night 2 toolchain session; default to the simplest thing that types well.
 - **TQ-2** — Denormalized roll-up storage shape (on-doc fields vs a progress collection). Decide alongside the data-models catalogue (N1-P2-02).
+- **TQ-3** — srishti integration contract spec: blocked on srishti's interfaces stabilizing; until then `@nexus/knowledge` reserves the seam (attachment refs + event feed) without implementing it.

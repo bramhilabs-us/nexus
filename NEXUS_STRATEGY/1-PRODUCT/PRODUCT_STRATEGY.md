@@ -1,24 +1,24 @@
-# Nexus Product Strategy — the six pages
+# Nexus Product Strategy — six pages, two modes
 
 **Status**: Active
 **Last Updated**: 2026-06-09
-**Owner**: Founder + agent (interactive session 2026-06-09)
+**Owner**: Founder + agent (interactive sessions 2026-06-09)
 **Tier**: T1
-**Depends on**: [00_NORTH_STAR.md](../00_NORTH_STAR.md), `_agent/DECISIONS.md` (C-001, C-005), `_source/KARVIA_STRATEGY/00_MASTER_STRATEGY.md`
+**Depends on**: [00_NORTH_STAR.md](../00_NORTH_STAR.md), [0-BUSINESS/AI_CONSULTING_PLAYBOOK.md](../0-BUSINESS/AI_CONSULTING_PLAYBOOK.md), `_agent/DECISIONS.md` (C-001, C-005, C-006)
 
 ---
 
 ## Purpose
 
-This document is the UI-layer card of the pack. It defines the **page contract** — the common structure every page obeys — and applies it to the six pages Nexus inherits from Karvia. Any session that touches what a user sees or does draws this card first. The goal: a user always knows why they are on a page, what to do first, and where they go next.
+This document is the UI-layer card of the pack. It defines the **page contract** — the common structure every page obeys — and applies it to the six pages Nexus inherits from Karvia, now serving **two operating modes**: the consulting engagement and the post-handover product team. Any session that touches what a user sees or does draws this card first. The goal: a user always knows why they are on a page, what to do first, and where they go next.
 
 ## TL;DR
 
-- Nexus keeps Karvia's **six pages**: My Clients, Dashboard, Objectives, Assessments, Teams, Planning. Same flow, same clicks — better purpose-clarity per page.
+- Nexus keeps Karvia's **six pages**: My Clients, Dashboard, Objectives, Assessments, Teams, Planning. Same flow, same clicks — better purpose-clarity per page, **new minimalistic design language** (founder's design docs, incoming).
 - Every page obeys one **page contract**: purpose, primary role, entry points, exit points, primary CTA, secondary CTA, analytics strip, empty state.
-- Each page is the **home page for one role**: My Clients → Consultant; Dashboard → Business Owner/Manager; Planning → Employee.
+- Two modes, one product: **Engagement mode** (consultant runs an AIR engagement end to end) and **Builder mode** (the handed-over client's product team runs product development on the same pages).
+- The Assessments page is **assessment-agnostic**: it renders whatever assessment blocks are installed. AIR is simply the first. Nothing on any page hardcodes AIR.
 - Analytics answer two different users: the **first-time** visitor (am I set up right?) and the **hundredth-time** visitor (what changed, what needs me?). Minimum space, no vanity numbers.
-- The product's pulse is the **objective lifecycle**: Identified → Handed off → Sustained — gamified, visible on every relevant page.
 
 ---
 
@@ -26,18 +26,33 @@ This document is the UI-layer card of the pack. It defines the **page contract**
 
 Nexus is more than an OKR tool: it makes strategy a rhythm instead of a one-off. An objective is achieved through a definitive number of steps — each step a task measured in hours; several tasks complete a milestone (weekly goal); several milestones complete a key result; a key result is roughly 25% of the way to an objective (4–5 KRs per objective, ideally). Small teams coordinate through this cadence, and management overhead collapses because strategy, planning, and execution live in one recursive loop — not in a project tool someone "regularly looks at."
 
+## Two operating modes
+
+The same six pages serve two lives of a client account:
+
+| | **Engagement mode** | **Builder mode** |
+|---|---|---|
+| When | From onboarding through handover | After handover, indefinitely |
+| Driver | Consultant running the AIR engagement | The client's product/delivery teams |
+| Programs | The transformation program (assessment → roadmap → execution) | Product-development programs (any application being built) |
+| Assessments page | Evidence capture + scoring + deliverables for the active assessment | Re-assessment / new verticals as needed |
+| Objectives source | Seeded from the Opportunity Register | Created by the team's own planning |
+| Add-on | — | **srishti** (documents + model care, LLM-connected) |
+
+Handover is a program-lifecycle event, not a migration: the consultant's access ends, the client keeps everything (tech card owns the mechanics). The product bet: a team that ran its transformation in Nexus keeps running its product development in Nexus — **the single tool an AI product builder needs for project and coordination management**, with srishti for documents and LLMs for intelligence.
+
 ## Roles and their home pages
 
-Per C-001, both GTM motions are first-class: consultant-led and org-direct. Per C-005, every role operates inside a **Program** (an org can run several concurrently).
+Per C-001/C-006, consultant-led is the beachhead and org-direct remains first-class. Per C-005, every role operates inside a **Program** (an org can run several concurrently).
 
 | Role | Home page | What they came to do |
 |---|---|---|
-| **Consultant** | My Clients | Scan all client programs in < 20 seconds; onboard the next client |
-| **Business Owner** | Dashboard | See whether the transformation is on track; unblock what isn't |
+| **Consultant** | My Clients | Scan all client engagements in < 20 seconds; advance the pipeline |
+| **Business Owner** | Dashboard | See whether the program is on track; unblock what isn't |
 | **Manager** | Objectives | Drive their objectives; turn assessment results into OKRs |
 | **Employee** | Planning | Know this week's goals and tasks; execute and log progress |
 
-In org-direct mode there is simply no Consultant in the loop; My Clients hides, and the Business Owner's journey starts at Assessments.
+In org-direct/Builder mode there is no Consultant; My Clients hides, and the journey starts at Assessments or Objectives.
 
 ## The page contract
 
@@ -56,20 +71,20 @@ Every page declares all eight fields. A page that can't fill in a field is a pag
 
 ## The six pages
 
-### 1. My Clients — the consultant's CRM
+### 1. My Clients — the consulting pipeline
 
 | Field | Contract |
 |---|---|
-| Purpose | One-glance overview of every client: assessment score, objectives, status — scannable in **< 20 seconds**. This is a CRM shaped for transformation work. |
+| Purpose | One-glance overview of every client engagement: assessment score, objectives, pipeline stage — scannable in **< 20 seconds**. A CRM shaped for transformation work. |
 | Primary role | Consultant (their home page / landing page after login) |
 | Entry points | Consultant login (default landing); global nav |
-| Exit points | **Company page** of a client (the natural drill-down); Assessments (send assessment to a prospect) |
+| Exit points | **Company page** of a client (the natural drill-down); Assessments (start an assessment for a prospect) |
 | Primary CTA | **Add Client** |
 | Secondary CTA | **Open company page** (per client card) |
 | Analytics strip | First-time: Clients count. Hundredth-time: **Need Attention**, **Avg assessment score**, **At Risk** — the triage numbers. |
-| Empty state | "Add your first client" — one card-sized explainer of the consultant journey |
+| Empty state | "Add your first client" — one card-sized explainer of the engagement journey |
 
-Per-client tile shows: company + contact, assessment score (ring), objectives total, on-track count, % complete, stage badge (Prospect → Onboarding → Active), assessed-members count. A Prospect tile's inline CTA is **Send assessment** — the tile itself advances the journey.
+Per-client tile shows: company + contact, score ring per installed assessment (AIR today; columns appear per assessment block, never hardcoded), objectives total, on-track count, % complete, pipeline stage badge (Prospect → Assessing → Engaged → Handed over), assessed-members count. A Prospect tile's inline CTA is **Start assessment** — the tile itself advances the journey.
 
 ### 2. Dashboard — the pulse
 
@@ -84,18 +99,20 @@ Per-client tile shows: company + contact, assessment score (ring), objectives to
 | Analytics strip | First-time: setup completeness (team onboarded? assessment done? objectives created?). Hundredth-time: program % complete, on-track/at-risk objectives, this week's task completion rate, overdue count. |
 | Empty state | Setup checklist mirroring the first-value journey (below) |
 
+In Builder mode the Dashboard is the product team's delivery pulse — same tiles, program = the application being built.
+
 ### 3. Objectives — the lifecycle board
 
 | Field | Contract |
 |---|---|
 | Purpose | Create and track objectives through their three lifecycle stages; the gamified heart of the product |
 | Primary role | Manager (home page); Business Owner |
-| Entry points | Nav; Dashboard drill-down; Assessments ("create objectives from this result") |
+| Entry points | Nav; Dashboard drill-down; Assessments ("create objectives from these results") |
 | Exit points | Planning (break a KR into weekly goals); Dashboard (zoom back out) |
-| Primary CTA | **Create objective** — pre-seeded from assessment results when arriving from Assessments |
+| Primary CTA | **Create objective** — pre-seeded from assessment deliverables (e.g., AIR's Opportunity Register) when arriving from Assessments |
 | Secondary CTA | Update progress / check-in on a KR |
 | Analytics strip | Objectives by stage (Identified / Handed off / Sustained), on-track vs at-risk, avg % complete |
-| Empty state | "Your assessment found these focus areas — create your first objective" (assessment-driven, never a blank form) |
+| Empty state | "Your assessment found these opportunities — create your first objective" (assessment-driven, never a blank form) |
 
 **The objective lifecycle** (gamified, shown as a stage ribbon on every objective):
 
@@ -107,16 +124,16 @@ Per-client tile shows: company + contact, assessment score (ring), objectives to
 
 | Field | Contract |
 |---|---|
-| Purpose | Run any assessment vertical against a company/team and produce a credible, score-backed result that seeds objectives |
-| Primary role | Consultant (sends), Business Owner (takes/reviews) |
-| Entry points | My Clients ("Send assessment" on a prospect tile); nav; invitation email (assessee's entry) |
-| Exit points | **Objectives** ("create objectives from this result") — the single most important handoff in the product |
-| Primary CTA | **Create assessment** — typed by vertical: *Create SSI assessment*, *Create AI Readiness assessment*, … (one button per installed assessment block) |
-| Secondary CTA | Review/share a completed result |
-| Analytics strip | Completion rate of sent assessments, scores by dimension, assessed vs total members |
+| Purpose | Run any installed assessment against a company/team, capture its evidence, and produce a credible, score-backed result with deliverables that seed objectives |
+| Primary role | Consultant (runs), Business Owner (participates/reviews) |
+| Entry points | My Clients ("Start assessment" on a prospect tile); nav; invitation email (a participant's entry) |
+| Exit points | **Objectives** ("create objectives from these results") — the single most important handoff in the product |
+| Primary CTA | **Create assessment** — typed by installed block: *Create AIR Strategic Assessment*, *Create {next vertical} assessment*, … (one option per installed assessment block) |
+| Secondary CTA | Review/share completed results and deliverables |
+| Analytics strip | Defined by the assessment block (AIR: evidence coverage across the sprint days, dimension scores, participants assessed vs planned) |
 | Empty state | Gallery of installed assessment types with one-line descriptions |
 
-This page is where the lego architecture is *visible*: installing a new assessment block adds a new "Create X assessment" option and a new score column on My Clients — nothing else changes. (Contract: `TECH_STRATEGY.md` § pluggable assessment.)
+This page is a **shell**: every assessment-specific surface — instruments, evidence capture, scoring views, deliverables — is rendered *by the installed assessment block* into the shell's slots. For AIR that means the two-week sprint becomes a workspace: per-day instruments (workshops, interviews, floor observations, surveys), artifact capture (Business Context Canvas, Value Stream Map, …), the scoring workshop, and the generated deliverables (AIR Score, Opportunity Register, Risk Register, 90-day plan, 12-month roadmap). For a survey-style assessment it's just questions and a score. **Nothing outside the block knows the difference** — installing a new assessment adds a "Create X" option and a score column on My Clients; nothing else changes. SSI is not shipped; it remains a Karvia-reference example only (C-006).
 
 ### 5. Teams — the people fabric
 
@@ -149,14 +166,24 @@ This page is where the lego architecture is *visible*: installing a new assessme
 The journey every new engagement walks; the Dashboard empty state, the demo script, and the E2E test suite are all this list:
 
 1. Consultant logs in → lands on **My Clients** → **Add Client** (or BO signs up directly → starts at step 3).
-2. Client appears as Prospect → consultant clicks **Send assessment**.
-3. Client onboards their team (**Teams**) and takes the assessment (**Assessments**) → scored 0–10 per dimension.
-4. Result lands → BO/Manager clicks **Create objectives from this result** (**Objectives**) → objective *Identified*, 4–5 KRs defined.
+2. Client appears as Prospect → consultant clicks **Start assessment** (AIR Strategic Assessment).
+3. Client onboards their team (**Teams**); the engagement runs in **Assessments** — evidence captured per the assessment's instruments, scored, deliverables generated.
+4. Deliverables land → BO/Manager clicks **Create objectives from these results** (**Objectives**) → objectives *Identified*, 4–5 KRs each, seeded from the Opportunity Register / 90-day plan.
 5. Manager plans the first week (**Planning**) → weekly goals → tasks with hour estimates.
 6. Team executes; task completion rolls up task → milestone → KR → objective; **Dashboard** shows the pulse.
-7. Objective completes → *Handed off* → over time becomes a *Sustained* KPI tracked year over year.
+7. Objectives complete → *Handed off* → program handover → **Builder mode**: the product team keeps Nexus (+ srishti) as their development OS; objectives become *Sustained* KPIs tracked year over year.
 
-**North-star metric**: time from consultant's first login (or org signup) to the client's first objective reaching *Identified* with a planned week. Everything in the UI exists to shorten this.
+**North-star metric**: time from consultant's first login (or org signup) to the client's first objective reaching *Identified* with a planned week. Everything in the UI exists to shorten this. **Second metric** (the moat): % of handed-over clients still active in Builder mode 90 days after handover.
+
+## Design language
+
+New, minimalistic — Nexus does not inherit Karvia's visual design. Governing intent until the founder's design docs land (they exist and will be added under `1-PRODUCT/design/`):
+
+- Few words, strong visual hierarchy; executive-dashboard feel, not consulting-flyer (the same standard set for the one-pager collateral).
+- Minimum chrome: one primary CTA visually dominant per page, analytics tiles ≤ 4, whitespace over borders.
+- One small component set shared by all six pages (tile, card, stage ribbon, CTA pair, empty state) — the design system is itself a lego constraint.
+
+**Dependency**: `DESIGN_DOCS-TBD` — page-level specs must not be finalized in code until the design docs are in the repo. Tracked as PQ-3 below.
 
 ## Analytics doctrine
 
@@ -168,3 +195,4 @@ The journey every new engagement walks; the Dashboard empty state, the demo scri
 
 - **PQ-1** — Dashboard primary CTA final wording ("Push task completion" vs "Nudge owners"): settle during Night 3 UI build; not blocking.
 - **PQ-2** — Exact tile sets per page beyond the four named on My Clients: derive from real usage in beta; start with the contracts above.
+- **PQ-3** — **Design docs**: founder to add the minimalistic design system docs under `1-PRODUCT/design/`. UI build sessions are blocked on this; everything else proceeds.
