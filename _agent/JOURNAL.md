@@ -106,3 +106,13 @@ Statuses: DONE | BLOCKED | NO-OP | BUDGET-STOP | ABORTED
 **Quality**: 10/10 — small groom, fully landed.
 **Files**: _agent/BACKLOG.md, _agent/NEXT_SESSION.md, _agent/JOURNAL.md
 **Next**: Unchanged card — N1-P2-04 Module dependency graph, then the Path B queue.
+
+---
+
+## 2026-06-09T20:00Z — session-2026-06-09-05 — DONE
+**Task**: Player cards + fit thesis + feedback meta-loop (founder philosophical direction, encoded into strategy)
+**Branch**: session/2026-06-09-04-player-cards
+**Outcome**: (1) PRODUCT_STRATEGY gains "Secondary surfaces — player cards and the meta-loop": light contracts for Profile (who the player is — intrinsic motivations/skills/interests, fed by AIR Day 7), Company Profile (what the team plays for — fed by AIR Day 1 Business Context Canvas), Configuration (admin scope), Settings (strictly personal scope), Feedback (the meta-loop: tenant ideas/bugs → Nexus's own backlog, status visible to submitter). (2) The **fit thesis** named: Profile + Company Profile + Objective joined at the backend = best task to best person. v1 captures match-grade signals (tags/enums, never prose); the matcher is parked (new IMPROVEMENT_PLAN parking-lot row with the capture-now rule). (3) TECH_STRATEGY Layer 3 gains the match-grade capture rule. (4) DATA_MODELS: User + Company dispositions gain match-grade profile fields; **Feedback flipped Defer → Lift+redesign** as the meta-loop. (5) N1-P2-08 mockups DoD: shell includes the account dropdown + a Profile mockup.
+**Quality**: 9/10 — clean encode of a fuzzy philosophical brief into enforceable doc rules; -1: the fit thesis deserves a worked example (which profile tags join to which task fields) — deferred to the Profile schema design in N2.
+**Files**: PRODUCT_STRATEGY.md, TECH_STRATEGY.md, DATA_MODELS.md, IMPROVEMENT_PLAN.md, _agent/{BACKLOG,JOURNAL}.md
+**Next**: Unchanged card — N1-P2-04 Module dependency graph, then Path B queue (tokens → mockups, now incl. Profile mockup).

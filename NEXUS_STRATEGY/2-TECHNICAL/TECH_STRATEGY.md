@@ -113,6 +113,7 @@ Rules: calculations are pure functions over typed inputs (unit-testable without 
 - Tenancy is `Company → Program → …` (C-005): every domain doc carries `company_id` + `program_id`, both indexed; users hold `program_memberships[]` (role per program).
 - **One KeyResult representation** — standalone collection only; the embedded-array dual-write from Karvia is not lifted (AP-4, delta D6).
 - Domain data is data (AP-3): instruments, scoring rubrics, deliverable templates, lifecycle definitions are seeds/config, never literals in handlers. (Karvia's hardcoded SSI question bank is the canonical counter-example — studied, not lifted.)
+- **Match-grade capture** (fit thesis, PRODUCT_STRATEGY): User profile signals (motivations, skills, interests), Company Profile goals/priorities, and Task metadata are structured fields (tags/enums/scored dimensions), never prose blobs — the post-beta fit engine must be a query over existing data, not a migration.
 - Each module owns its collections privately. Cross-module reads go through the owning module's interface — enforced by `no-restricted-imports` (AP-1).
 
 ## The eight blocks

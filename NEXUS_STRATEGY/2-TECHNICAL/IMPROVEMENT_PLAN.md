@@ -228,6 +228,7 @@ Things Nexus will **not** do in Nights 1–5, and why. Each rejected item has a 
 | Rewrite the OKR domain beyond NOF | NOF (C-008) is the ratified, measured redesign: Objective → KR → Milestone → Task, dynamic + outcome-measured. No further domain redesign in v1. |
 | AI-everywhere | Every AI feature has a non-AI fallback and an explicit cost ceiling. No AI-required code paths. |
 | Real-time collaboration | Socket.IO exists in Karvia but lightly used; Nexus defers real-time to post-v1. |
+| Fit engine (task–person matching) | The *matcher* is post-beta. But v1 **captures the signals**: User profile (motivations/skills/interests), Company Profile (goals/priorities), and Task metadata are structured/tagged per the fit thesis (PRODUCT_STRATEGY) — so the matcher becomes a query, not a schema migration. |
 | Mobile apps | Web-first, mobile-responsive. Native apps deferred. |
 
 A tick that proposes one of these is rejected with reference to this section.
