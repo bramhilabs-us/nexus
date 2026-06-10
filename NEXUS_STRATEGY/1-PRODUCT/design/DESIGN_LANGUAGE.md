@@ -32,6 +32,15 @@ Translate the BRAMHI Labs brand guide ([brand/Brand Guide Bramhi.png](brand/Bran
 - **Minimalism is enforced, not aspired to**: one dominant primary CTA per page, ≤4 analytics tiles, whitespace over borders, no decoration that doesn't change a decision.
 - **Tokens before mockups, always** (Karvia lesson #174-3): every color/space/type value is a CSS custom property defined once; no inline hex in pages or mockups.
 
+## Reference visuals — what "classy, minimalistic" means here
+
+Two BRAMHI investor decks are the **feel** references, preserved in [references/](references/) (`bramhi-consciousness-ecosystem-v3.html`, `bramhi-intro-v1.html`). Concrete cues extracted from their CSS — the starting point for the Night-1 token session:
+
+- **Surfaces**: near-white gradient page background (`#f8fafc → #f5f3ff → #f8fafc`), pure-white panels, soft purple-tinted shadows (`rgba(118,75,162,0.06)`), hairline borders (`#e2e8f0`), 8px radius — depth from light, never from heavy borders.
+- **Color**: the purple family as accent (`#764ba2`, `#5c3a7e`, indigo `#667eea`), **gold sparingly** (`#bd8e2d` — emphasis, never decoration), teal (`#229d83`) for positive signal.
+- **Text**: three-step slate hierarchy (`#2d3748` primary / `#64748b` secondary / `#94a3b8` tertiary) — hierarchy by tone, not by size inflation.
+- **Type note**: decks use Comfortaa; the brand guide says Cinzel/Playfair display + Inter body. Resolve in the token session — current lean: brand-guide fonts for product UI, the decks govern *spacing, surface, and restraint*, not typeface.
+
 ## Token-first workflow
 
 Karvia's mockups referenced `--s22-navy` weeks before the token existed; authors hardcoded fallback hex values and the canonical navy drifted across pages. The Nexus rule:

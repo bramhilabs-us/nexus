@@ -71,7 +71,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Size**: S (1 session)
 - **Depends on**: DESIGN_LANGUAGE.md (DONE), N1-P2-04 (sequencing only — tokens session follows the module graph)
 - **Definition of done**:
-  - `client/css/tokens.css` — semantic tokens (`--nx-primary`, `--nx-ink`, `--nx-surface`, type/spacing/radius scales) extracted from `1-PRODUCT/design/brand/` assets
+  - `client/css/tokens.css` — semantic tokens (`--nx-primary`, `--nx-ink`, `--nx-surface`, type/spacing/radius scales) extracted from `1-PRODUCT/design/brand/` assets **+ the reference-deck cues in DESIGN_LANGUAGE § reference visuals** (soft gradient surfaces, purple-tinted shadows, slate text hierarchy, gold sparingly); resolve the Comfortaa vs Cinzel/Inter type question there
   - Hex/scale table recorded in DESIGN_LANGUAGE.md (filling its declared placeholder)
   - Zero inline hex anywhere; tokens are the only color source from here on
 - **Notes**: Path B decision (2026-06-09): mockups pulled forward from Night 3 — they depend only on page contracts + design language, both done. Tokens-before-mockups per SESSION_PRACTICES rule 3.

@@ -19,6 +19,7 @@ children:
   - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
   - NEXUS_STRATEGY/3-DELIVERY/EXECUTION_PLAYBOOK.md
   - NEXUS_STRATEGY/DOCUMENTATION_GRAPH.md
+  - NEXUS_STRATEGY/research/README.md
 revisit:
   - on: "any C-xxx decision in _agent/DECISIONS.md is ratified or reversed"
     stage: always

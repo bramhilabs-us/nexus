@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAMHI &middot; Intro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --page-bg: linear-gradient(180deg, #f8fafc 0%, #f5f3ff 50%, #f8fafc 100%);
+            --soft-line: #e2e8f0;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --text-tertiary: #6b7280;
+            --accent-purple: #764ba2;
+            --accent-purple-dark: #5b21b6;
+            --accent-indigo: #667eea;
+            --accent-gold: #bd8e2d;
+            --accent-teal: #14b8a6;
+            --radius: 14px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: Comfortaa, system-ui, sans-serif;
+            background: var(--page-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .page-shell {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--page-bg);
+            min-height: 100vh;
+        }
+        .proposal-page {
+            scroll-snap-align: start;
+        }
+        .card {
+            background: linear-gradient(135deg, #ffffff 0%, #fafbff 55%, #f7f4ff 100%);
+            border-radius: var(--radius);
+            border: 1px solid var(--soft-line);
+            padding: 4rem 3rem 3.5rem;
+            min-height: calc(100vh - 4rem);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 12px 36px rgba(118, 75, 162, 0.08), 0 4px 18px rgba(15, 23, 42, 0.04);
+        }
+
+        /* ===== PAGE NAV (subtle arrows below) ===== */
+        .page-nav {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+            z-index: 5;
+        }
+        .page-nav a {
+            font-family: Comfortaa, sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.2s, transform 0.2s;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .page-nav a:hover {
+            color: var(--accent-purple);
+        }
+        .page-nav a.prev:hover { transform: translateX(-2px); }
+        .page-nav a.next:hover { transform: translateX(2px); }
+        .page-nav .page-counter {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 0.78rem;
+            color: var(--text-tertiary);
+            letter-spacing: 0.06em;
+        }
+
+        /* ===== LOGO ===== */
+        .intro-logo {
+            display: block;
+            margin: 0 auto 2rem;
+            object-fit: contain;
+        }
+        .intro-logo.small { height: 50px; width: auto; opacity: 0.85; }
+        .intro-logo.large { height: 110px; width: auto; }
+        .intro-logo.hero {
+            height: 220px;
+            width: auto;
+            background: transparent;
+            mix-blend-mode: multiply;
+            margin-bottom: 0.5rem;
+        }
+        .intro-logo.page1 {
+            height: 200px;
+            width: auto;
+            margin-bottom: 2rem;
+            background: transparent;
+            mix-blend-mode: multiply;
+        }
+
+        /* ===== PAGE 1 · HOOK ===== */
+        .hook-headline {
+            font-family: Comfortaa, sans-serif;
+            font-weight: 500;
+            font-size: 4.5rem;
+            line-height: 1.05;
+            color: var(--text-primary);
+            margin: 1rem 0 0.5rem;
+            letter-spacing: -0.01em;
+        }
+        .hook-headline span {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        .hook-subhead {
+            font-family: Comfortaa, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            letter-spacing: 0.04em;
+            margin: 0.75rem 0 2.5rem;
+        }
+        .hook-divider {
+            display: block;
+            width: 90px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
+            margin: 1.5rem auto;
+        }
+        .hook-floorline {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            color: var(--accent-purple-dark);
+            letter-spacing: 0.02em;
+            margin-top: 0.5rem;
+        }
+        .hook-footnote {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.72rem;
+            color: var(--text-tertiary);
+            letter-spacing: 0.03em;
+            text-align: center;
+            font-weight: 400;
+        }
+        .hook-footnote a {
+            color: var(--accent-purple);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--accent-purple);
+        }
+
+        /* ===== PAGE 2 · TENSION ===== */
+        .tension-header {
+            font-family: Comfortaa, sans-serif;
+            font-weight: 500;
+            font-size: 2.25rem;
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .tension-sub {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+        .cohort-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 950px;
+            margin-bottom: 3rem;
+        }
+        .cohort-card {
+            background: white;
+            border: 1px solid var(--soft-line);
+            border-radius: var(--radius);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            position: relative;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .cohort-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(118, 75, 162, 0.1);
+        }
+        .cohort-card::before {
+            content: "";
+            display: block;
+            width: 36px;
+            height: 3px;
+            background: var(--accent-purple);
+            margin: 0 auto 1.25rem;
+            border-radius: 2px;
+        }
+        .cohort-card.skills::before { background: #19ac86; }
+        .cohort-card.careers::before { background: var(--accent-gold); }
+        .cohort-card.teams::before { background: var(--accent-purple); }
+        .cohort-name {
+            font-family: Comfortaa, sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+        .cohort-card.skills .cohort-name { color: #065f46; }
+        .cohort-card.careers .cohort-name { color: #92400e; }
+        .cohort-card.teams .cohort-name { color: var(--accent-purple-dark); }
+        .cohort-state {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+        }
+        .cohort-cap {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--accent-purple-dark);
+            border-top: 1px solid var(--soft-line);
+            padding-top: 1rem;
+        }
+        .tension-resolve {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1.45rem;
+            color: var(--text-primary);
+            max-width: 720px;
+            line-height: 1.45;
+        }
+        .tension-resolve strong {
+            font-family: Comfortaa, sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== PAGE 3 · RESOLUTION ===== */
+        .resolution-headline {
+            font-family: Comfortaa, sans-serif;
+            font-weight: 500;
+            font-size: 2.5rem;
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin: 1rem 0 0.75rem;
+            max-width: 800px;
+        }
+        .resolution-headline span {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        .resolution-sub {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 680px;
+        }
+
+        /* ===== ECOSYSTEM CANVAS (ported from main deck) ===== */
+        .ecosystem-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 0 1rem;
+            position: relative;
+            width: 100%;
+            margin: 1rem 0 2rem;
+        }
+        .ecosystem-layout {
+            display: grid;
+            grid-template-columns: 140px 1fr 140px;
+            grid-template-rows: auto auto auto;
+            gap: 1rem;
+            align-items: center;
+            justify-items: center;
+            max-width: 700px;
+            width: 100%;
+        }
+        .lotus-consciousness {
+            grid-column: 2;
+            grid-row: 1 / 4;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .petal-flip { perspective: 1000px; cursor: pointer; }
+        .petal-flip .flip-inner {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+        }
+        .petal-flip:hover .flip-inner { transform: rotateY(180deg); }
+        .petal-flip .flip-face {
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .petal-flip .flip-face.back {
+            position: absolute;
+            inset: 0;
+            transform: rotateY(180deg);
+        }
+
+        /* Top petal — iBrain (static 2D) */
+        .petal-top { z-index: 3; margin-bottom: -25px; }
+        .petal-top .flip-face {
+            width: 200px;
+            height: 110px;
+            background: linear-gradient(180deg, rgba(34,157,131,0.22) 0%, rgba(34,157,131,0.12) 60%, rgba(34,157,131,0.04) 100%);
+            border: 2px solid rgba(34,157,131,0.4);
+            border-bottom: none;
+            border-radius: 100px 100px 0 0;
+            padding: 1rem 1rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .petal-top .flip-face.front h3 { margin: 0; font-size: 1.15rem; font-weight: 700; color: var(--accent-teal); }
+        .petal-top .flip-face.front .petal-role { font-size: 0.72rem; color: var(--text-secondary); margin-top: 0.2rem; }
+        .petal-top .flip-face.back {
+            background: linear-gradient(180deg, rgba(34,157,131,0.3) 0%, rgba(34,157,131,0.18) 100%);
+            padding: 0.75rem;
+        }
+        .petal-top .flip-face.back h4 {
+            margin: 0 0 0.4rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        .engine-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem; }
+        .engine-pills span {
+            padding: 0.2rem 0.4rem;
+            font-size: 0.52rem;
+            font-weight: 700;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.9);
+            color: #047857;
+            border: 1px solid rgba(34,157,131,0.4);
+        }
+
+        /* Center core — BRAMHI */
+        .lotus-core {
+            position: relative;
+            z-index: 5;
+            width: 280px;
+            height: 160px;
+            background:
+                radial-gradient(ellipse at 50% 30%, rgba(102,126,234,0.18), transparent 55%),
+                radial-gradient(ellipse at 50% 70%, rgba(118,75,162,0.12), transparent 55%),
+                linear-gradient(135deg, #ffffff 0%, #f8f7ff 50%, #f5f3ff 100%);
+            border: 2px solid rgba(118,75,162,0.3);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 40px rgba(118,75,162,0.12), inset 0 -4px 20px rgba(118,75,162,0.04);
+        }
+        .lotus-core .core-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-purple-dark);
+            margin-bottom: 0.15rem;
+        }
+        .lotus-core .core-subtitle { font-size: 0.68rem; color: var(--text-secondary); margin-bottom: 0.6rem; }
+        .lotus-core .values-ring { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.3rem; max-width: 240px; }
+        .lotus-core .values-ring span {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.55rem;
+            font-weight: 600;
+            border-radius: 2rem;
+            background: rgba(118,75,162,0.1);
+            color: var(--accent-purple-dark);
+            border: 1px solid rgba(118,75,162,0.2);
+        }
+
+        /* Bottom petal — Srishti (static 2D) */
+        .petal-bottom { z-index: 3; margin-top: -25px; }
+        .petal-bottom .flip-face {
+            width: 200px;
+            height: 110px;
+            background: linear-gradient(0deg, rgba(189,142,45,0.12) 0%, rgba(189,142,45,0.06) 60%, rgba(189,142,45,0.02) 100%);
+            border: 1px dashed rgba(189,142,45,0.35);
+            border-top: none;
+            border-radius: 0 0 100px 100px;
+            padding: 1.5rem 1rem 1rem;
+            opacity: 0.85;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .petal-bottom:hover .flip-face { opacity: 1; }
+        .petal-bottom .flip-face.front h3 { margin: 0; font-size: 1.1rem; font-weight: 700; color: var(--accent-gold); }
+        .petal-bottom .flip-face.front .petal-role { font-size: 0.72rem; color: var(--text-tertiary); margin-top: 0.2rem; }
+        .petal-bottom .flip-face.back {
+            background: linear-gradient(0deg, rgba(189,142,45,0.18) 0%, rgba(189,142,45,0.1) 100%);
+            padding: 0.75rem;
+            opacity: 1;
+        }
+        .petal-bottom .flip-face.back h4 {
+            margin: 0 0 0.4rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        .agent-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem; }
+        .agent-pills span {
+            padding: 0.2rem 0.4rem;
+            font-size: 0.52rem;
+            font-weight: 700;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.85);
+            color: #b45309;
+            border: 1px solid rgba(189,142,45,0.4);
+        }
+
+        /* Satellites */
+        .product-satellite {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--soft-line);
+            background: white;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+        .product-satellite:hover { border-color: rgba(118,75,162,0.3); box-shadow: 0 6px 20px rgba(118,75,162,0.1); }
+        .product-satellite h3 { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text-primary); letter-spacing: 0.04em; }
+        .product-satellite .audience-kicker {
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-tertiary);
+            margin-bottom: 0.4rem;
+        }
+        .product-satellite .product-descriptor {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            margin-top: 0.35rem;
+        }
+        .product-satellite .product-type { font-size: 0.65rem; font-weight: 600; color: var(--text-secondary); margin-top: 0.15rem; }
+
+        .objective-badge {
+            display: inline-block;
+            font-size: 0.55rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0.15rem 0.45rem;
+            border-radius: 999px;
+            margin-top: 0.35rem;
+        }
+        .objective-badge.team { background: #ede9fe; color: #5b21b6; }
+        .objective-badge.career { background: #d1fae5; color: #065f46; }
+        .objective-badge.individual { background: #F7F3FF; color: #92400e; }
+
+        .product-left { grid-column: 1; grid-row: 2; border-color: var(--accent-purple); border-width: 2px; }
+        .product-left h3 { color: var(--accent-purple-dark); }
+        .product-right { grid-column: 3; grid-row: 2; border-style: dashed; opacity: 0.85; }
+        .product-right:hover { opacity: 1; }
+
+        .connection-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(118,75,162,0.15), rgba(118,75,162,0.3), rgba(118,75,162,0.15));
+            top: 50%;
+            z-index: 1;
+        }
+        .connection-line.left { left: -60px; width: 60px; }
+        .connection-line.right { right: -60px; width: 60px; }
+
+        .product-bottom {
+            grid-column: 2;
+            margin-top: 0.75rem;
+            border-color: #19ac86;
+            border-width: 2px;
+            max-width: 175px;
+            position: relative;
+            z-index: 2;
+        }
+        .product-bottom h3 { color: #315e80; letter-spacing: 0.02em; }
+        .product-bottom h3 .prodify-space { color: #19ac86; font-weight: 700; }
+        .product-bottom:hover { box-shadow: 0 8px 22px rgba(25,172,134,0.18); }
+
+        /* Built-by-Srishti overlay */
+        .built-by-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .built-by-label {
+            position: absolute;
+            font-family: Comfortaa, sans-serif;
+            font-size: 0.58rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #bd8e2d;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 0.15rem 0.45rem;
+            border-radius: 999px;
+            border: 1px dashed rgba(189, 142, 45, 0.55);
+            pointer-events: none;
+            z-index: 3;
+            white-space: nowrap;
+        }
+
+        .resolution-closer {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            line-height: 1.5;
+            max-width: 720px;
+            margin-top: 0.5rem;
+        }
+        .partner-note {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 3.5rem;
+            font-size: 0.62rem;
+            color: var(--text-tertiary);
+            letter-spacing: 0.02em;
+            line-height: 1.3;
+            text-align: center;
+            opacity: 0.8;
+            margin: 0;
+            white-space: nowrap;
+        }
+        .partner-note strong {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .product-satellite h3 sup {
+            font-size: 0.55em;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            margin-left: 0.1em;
+            vertical-align: super;
+        }
+        .resolution-closer strong {
+            font-family: Comfortaa, sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            color: var(--accent-purple-dark);
+        }
+
+        /* ===== PRINT / PDF (A4 landscape) ===== */
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+        @media print {
+            html, body {
+                background: white;
+                margin: 0;
+                padding: 0;
+                width: 297mm;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .page-shell {
+                background: var(--page-bg);
+                padding: 0;
+                gap: 0;
+                max-width: none;
+                margin: 0;
+                width: 297mm;
+            }
+            .proposal-page {
+                width: 297mm;
+                height: 210mm;
+                max-height: 210mm;
+                overflow: hidden;
+                page-break-after: always;
+                page-break-inside: avoid;
+                break-after: page;
+                break-inside: avoid;
+            }
+            .proposal-page:last-child {
+                page-break-after: auto;
+                break-after: auto;
+            }
+            .card {
+                width: 297mm;
+                height: 210mm;
+                min-height: auto;
+                max-height: 210mm;
+                border-radius: 0;
+                border: none;
+                box-shadow: none;
+                padding: 1.25rem 3rem;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                overflow: hidden;
+            }
+            .page-nav { display: none; }
+
+            /* ---- UNDO RESPONSIVE COLLAPSES (Chrome print may emulate narrow viewport) ---- */
+            .cohort-grid {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 1.25rem !important;
+                width: 100%;
+                max-width: 950px;
+            }
+            .ecosystem-layout {
+                display: grid !important;
+                grid-template-columns: 160px 1fr 160px !important;
+                grid-template-rows: auto auto auto !important;
+                gap: 0.85rem !important;
+                max-width: 720px;
+            }
+            .lotus-consciousness {
+                grid-column: 2 !important;
+                grid-row: 1 / 4 !important;
+                position: relative !important;
+            }
+            .product-left { grid-column: 1 !important; grid-row: 2 !important; }
+            .product-right { grid-column: 3 !important; grid-row: 2 !important; }
+            .product-bottom { grid-column: 2 !important; grid-row: auto !important; margin: 0.5rem auto 0 !important; }
+            .connection-line { display: block !important; }
+            .built-by-overlay { display: block !important; }
+
+            /* ---- FIX GRADIENT TEXT for print (background-clip: text fails in print) ---- */
+            .hook-headline span,
+            .resolution-headline span,
+            .tension-resolve strong {
+                background: none !important;
+                -webkit-text-fill-color: initial !important;
+                color: var(--accent-purple) !important;
+            }
+
+            /* ---- PAGE 1 TIGHTEN ---- */
+            .hook-headline { font-size: 3.5rem; margin: 0.4rem 0; }
+            .hook-subhead { font-size: 1.3rem; margin: 0.4rem 0 1.25rem; }
+            .hook-floorline { font-size: 1.3rem; }
+            .intro-logo.page1 { height: 170px; margin-bottom: 1.25rem; }
+
+            /* ---- PAGE 2 TIGHTEN ---- */
+            .tension-header { font-size: 1.95rem; margin-bottom: 0.3rem; }
+            .tension-sub { margin-bottom: 1.75rem; }
+            .cohort-grid { margin-bottom: 1.75rem; }
+            .cohort-card { padding: 1.4rem 1.25rem; }
+            .cohort-name { font-size: 1.2rem; }
+            .cohort-state { font-size: 0.88rem; }
+            .cohort-cap { font-size: 0.9rem; }
+            .tension-resolve { font-size: 1.25rem; }
+
+            /* ---- PAGE 3 TIGHTEN ---- */
+            /* Logo grown to ~16% of page height for brand-reveal presence;
+               vertical breathing room reclaimed by tightening margins, not type. */
+            .intro-logo.hero { height: 130px; margin-bottom: 0.4rem; }
+            .resolution-headline { font-size: 1.85rem; margin: 0.25rem 0 0.25rem; }
+            .resolution-sub { font-size: 0.95rem; margin-bottom: 0.45rem; }
+            .ecosystem-wrapper { margin: 0.25rem 0 0.45rem; padding: 0; gap: 0.6rem; }
+            .lotus-core { width: 230px; height: 130px; }
+            .lotus-core .core-title { font-size: 1.1rem; }
+            .lotus-core .values-ring span { font-size: 0.5rem; padding: 0.18rem 0.4rem; }
+            .petal-top .flip-face { width: 180px; height: 95px; padding: 0.75rem 0.75rem 1.25rem; }
+            .petal-bottom .flip-face { width: 180px; height: 95px; padding: 1.25rem 0.75rem 0.75rem; }
+            .petal-top .flip-face.front h3,
+            .petal-bottom .flip-face.front h3 { font-size: 1rem; }
+            .petal-top .flip-face.front .petal-role,
+            .petal-bottom .flip-face.front .petal-role { font-size: 0.65rem; }
+            .product-satellite { padding: 0.7rem; }
+            .product-satellite h3 { font-size: 0.9rem; }
+            .product-satellite .audience-kicker { font-size: 0.55rem; margin-bottom: 0.25rem; }
+            .product-satellite .product-descriptor { font-size: 0.7rem; }
+            .resolution-closer { font-size: 1.05rem; margin-top: 0.25rem; }
+            .built-by-label { font-size: 0.5rem; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .card { padding: 3rem 1.5rem; min-height: auto; }
+            .hook-headline { font-size: 2.8rem; }
+            .hook-subhead { font-size: 1.1rem; }
+            .hook-floorline { font-size: 1.15rem; }
+            .tension-header { font-size: 1.65rem; }
+            .cohort-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .resolution-headline { font-size: 1.8rem; }
+            .ecosystem-layout {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 1rem;
+            }
+            .lotus-consciousness { grid-column: 1; grid-row: auto; }
+            .product-left, .product-right { grid-column: 1; grid-row: auto; max-width: 200px; margin: 0 auto; }
+            .product-bottom { grid-column: 1; max-width: 175px; margin: 0 auto; }
+            .connection-line { display: none; }
+            .lotus-core { width: 240px; height: 140px; }
+            .petal-top .flip-inner, .petal-bottom .flip-inner { width: 170px; height: 95px; }
+            .built-by-overlay { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <main class="page-shell">
+
+        <!-- ==================== PAGE 1 · HOOK ==================== -->
+        <div class="proposal-page" id="page-1">
+            <section class="card">
+                <img class="intro-logo page1" src="../../../../assets/images/BRAMHI_LABS_full_logo.svg" alt="BRAMHI Labs">
+
+                <h1 class="hook-headline">Every playbook<br>is <span>breaking</span>.</h1>
+                <p class="hook-subhead">Skill. Career. Team.</p>
+
+                <span class="hook-divider"></span>
+
+                <p class="hook-floorline">AI moved the floor.</p>
+
+                <p class="hook-footnote">
+                    59% of workers will need to re-skill by 2030 &nbsp;&middot;&nbsp;
+                    <a href="https://www.weforum.org/press/2025/01/future-of-jobs-report-2025-78-million-new-job-opportunities-by-2030-but-urgent-upskilling-needed-to-prepare-workforces/" target="_blank" rel="noopener">WEF Future of Jobs 2025</a>
+                </p>
+
+                <div class="page-nav">
+                    <span class="page-counter">1 / 3</span>
+                    <a class="next" href="#page-2">Next &rarr;</a>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== PAGE 2 · TENSION ==================== -->
+        <div class="proposal-page" id="page-2">
+            <section class="card">
+                <h2 class="tension-header">Three cohorts are in motion.</h2>
+                <p class="tension-sub">All three need a new anchor.</p>
+
+                <div class="cohort-grid">
+                    <div class="cohort-card skills">
+                        <div class="cohort-name">Skills</div>
+                        <p class="cohort-state">Half-life shrinking.<br>Faster than you can learn.</p>
+                        <div class="cohort-cap">Alone doesn't work.</div>
+                    </div>
+                    <div class="cohort-card careers">
+                        <div class="cohort-name">Careers</div>
+                        <p class="cohort-state">Paths dissolving.<br>The next role exists in people.</p>
+                        <div class="cohort-cap">Alone doesn't work.</div>
+                    </div>
+                    <div class="cohort-card teams">
+                        <div class="cohort-name">Teams</div>
+                        <p class="cohort-state">Playbooks aging.<br>Coordination is now learning.</p>
+                        <div class="cohort-cap">Alone doesn't work.</div>
+                    </div>
+                </div>
+
+                <p class="tension-resolve">
+                    What's held humans through every prior shift &mdash;<br>
+                    <strong>community.</strong>
+                </p>
+
+                <div class="page-nav">
+                    <a class="prev" href="#page-1">&larr; Previous</a>
+                    <span class="page-counter">2 / 3</span>
+                    <a class="next" href="#page-3">Next &rarr;</a>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== PAGE 3 · RESOLUTION ==================== -->
+        <div class="proposal-page" id="page-3">
+            <section class="card">
+                <img class="intro-logo hero" src="../../../../assets/images/BRAMHI_LABS_full_logo.svg" alt="BRAMHI Labs">
+
+                <h2 class="resolution-headline">Shared understanding for <span>community-scale growth</span>.</h2>
+                <p class="resolution-sub">One layer underneath. Three product surfaces above. Same engine, every cohort.</p>
+
+                <!-- Full lotus ecosystem (ported from main deck) -->
+                <div class="ecosystem-wrapper">
+                    <div class="ecosystem-layout">
+
+                        <!-- Left product - YSELA -->
+                        <div class="product-satellite product-left">
+                            <div class="audience-kicker">For teams</div>
+                            <h3>YSELA<sup>*</sup></h3>
+                            <p class="product-descriptor">coordination &middot; delivery</p>
+                        </div>
+
+                        <!-- LOTUS CONSCIOUSNESS -->
+                        <div class="lotus-consciousness">
+
+                            <!-- Top petal - iBrain (2D, static) -->
+                            <div class="petal-top">
+                                <div class="flip-face front">
+                                    <h3>iBrain</h3>
+                                    <p class="petal-role">Orchestrator</p>
+                                </div>
+                            </div>
+
+                            <!-- Center core - BRAMHI -->
+                            <div class="lotus-core">
+                                <div class="connection-line left"></div>
+                                <div class="connection-line right"></div>
+                                <div class="core-title">BRAMHI</div>
+                                <div class="core-subtitle">Shared Understanding</div>
+                                <div class="values-ring">
+                                    <span>Values</span>
+                                    <span>Rules</span>
+                                    <span>Beliefs</span>
+                                    <span>Memory</span>
+                                </div>
+                            </div>
+
+                            <!-- Bottom petal - Srishti (2D, static) -->
+                            <div class="petal-bottom">
+                                <div class="flip-face front">
+                                    <h3>Srishti</h3>
+                                    <p class="petal-role">Creator</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Right product - KARVIA -->
+                        <div class="product-satellite product-right">
+                            <div class="audience-kicker">For individuals</div>
+                            <h3>KARVIA<sup>*</sup></h3>
+                            <p class="product-descriptor">discipline &middot; growth</p>
+                        </div>
+
+                        <!-- Bottom product - PRODIFY.space -->
+                        <div class="product-satellite product-bottom">
+                            <div class="audience-kicker">For careers</div>
+                            <h3>prodify<span class="prodify-space">.space</span></h3>
+                            <p class="product-descriptor">trajectory &middot; next role</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Built-by-Srishti dotted-line annotations -->
+                    <div class="built-by-overlay" aria-hidden="true">
+                        <span class="built-by-label" style="left: 18%; bottom: 42%;">&middot;&middot;&middot; Built by Srishti</span>
+                        <span class="built-by-label" style="left: 50%; bottom: 8%; transform: translateX(-50%);">&middot;&middot;&middot; Built by Srishti</span>
+                    </div>
+                </div>
+
+                <p class="partner-note">*Built in partnership with <strong>Cultural Discipline</strong></p>
+
+                <p class="resolution-closer">
+                    Same engine. Three surfaces.<br>
+                    <strong>Community-scale value.</strong>
+                </p>
+
+                <div class="page-nav">
+                    <a class="prev" href="#page-2">&larr; Previous</a>
+                    <span class="page-counter">3 / 3</span>
+                </div>
+            </section>
+        </div>
+
+    </main>
+</body>
+</html>
