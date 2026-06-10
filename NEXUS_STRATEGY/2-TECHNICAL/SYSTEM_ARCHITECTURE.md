@@ -4,7 +4,7 @@ title: System Architecture — Karvia as-is map
 tier: T2
 status: active
 owner: agent
-updated: 2026-06-03
+updated: 2026-06-09
 summary: >
   The as-is map of karvia_business grounding all Nexus refactors: monolith with
   10 engines (8 dead in prod), shared server/models coupling, request
@@ -17,6 +17,7 @@ children:
   - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
   - NEXUS_STRATEGY/2-TECHNICAL/DATA_MODELS.md
   - NEXUS_STRATEGY/2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md
+  - NEXUS_STRATEGY/2-TECHNICAL/API_SURFACE.md
 revisit:
   - on: "a Night 2 lift discovers the Karvia map was wrong somewhere"
     stage: N2
