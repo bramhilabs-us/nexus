@@ -84,8 +84,10 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |       |-- 2-TECHNICAL/IMPROVEMENT_PLAN.md .. T2 | quality bar: 10 APs, 10 IMs, gates
 |       |-- 2-TECHNICAL/DATA_MODELS.md ....... T2 | 19 schemas + Nexus dispositions
 |       |       (parents: + TECH_STRATEGY)
-|       `-- 2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md  T2 | who touches what; shadow-schema cycles
-|               (parents: + DATA_MODELS)
+|       |-- 2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md  T2 | who touches what; shadow-schema cycles
+|       |       (parents: + DATA_MODELS)
+|       `-- 2-TECHNICAL/API_SURFACE.md ....... T2 | 410 routes shape-tagged + dispositions
+|               (parents: + MODULE_DEPENDENCY_GRAPH)
 |
 |-- 2-TECHNICAL/TECH_STRATEGY.md ............. T2 | 3 layers, 8 blocks, AssessmentProvider
 |       |   (parents: NORTH_STAR, PLAYBOOK, PRODUCT_STRATEGY,

@@ -37,12 +37,12 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: Surfaced C-008 (Goal/Move layer) — ANSWERED same day by the founder: **NOF** (`1-PRODUCT/NOF.md`, DECISIONS C-008/C-009). N1-P4-01 fully unblocked; dispositions updated in DATA_MODELS.md.
 
 ### N1-P2-03 — API surface catalogue
-- **Status**: READY
-- **Size**: M (2 ticks)
+- **Status**: DONE (tick 2026-06-09-11, PR pending merge)
+- **Size**: M (2 ticks — done in 1)
 - **Depends on**: N1-P1-01
 - **Definition of done**:
-  - `NEXUS_STRATEGY/2-TECHNICAL/API_SURFACE.md` per-engine route tables
-  - Shape-tagging (CRM-shape, OKR-shape, Assessment-shape) per route
+  - ✓ `NEXUS_STRATEGY/2-TECHNICAL/API_SURFACE.md` — all 28 server route files (313 routes) + 10 engines (97 routes)
+  - ✓ Shape-tagging per route (CRM / OKR / ASMT + COMPOSE/AI/SIGNAL/CONF/META aux) with per-route Nexus dispositions
 
 ### N1-P2-04 — Module dependency graph
 - **Status**: DONE (tick 2026-06-09-09, PR pending merge)

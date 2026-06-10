@@ -16,7 +16,8 @@ summary: >
 parents:
   - NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md
   - NEXUS_STRATEGY/2-TECHNICAL/DATA_MODELS.md
-children: []
+children:
+  - NEXUS_STRATEGY/2-TECHNICAL/API_SURFACE.md
 revisit:
   - on: "N1-P4-01 modularization plan consumes this; any contract it draws must cite the edge here"
     stage: N1
