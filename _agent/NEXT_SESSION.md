@@ -2,15 +2,18 @@
 
 > Written by the previous session per `/close`. `/init` reads this and starts. Overwritten every session — history lives in JOURNAL.md.
 
-**Type**: interactive founder review (IN PROGRESS — the cron loop is STOPPED; do not resume ticks until the founder restarts /loop)
-**Task**: Founder-led strategy review & rework, 2026-06-10
+**Type**: STRATEGY SESSION (interactive, founder present) — the cron loop is OFF; do not tick.
+**Task**: Ratify and execute the 2026-06-10 strategy review — ecosystem repositioning (BRAMHI/iBrain/Nexus), unified scoring model, assessment mechanics, Company Journey, two-tier brand + sidebar layout.
 
-**Agenda being worked through (state lives in the session, summary here)**:
-- A. Assessment & scoring strategy: conduct model, question sourcing (gap), scoring calculation (gap), score interpretation (gap)
-- B. Company journey (NEW first-class doc: ARS → sub-scores → BOQ stage transitions) + user-journeys re-review
-- C. New brand guide (`design/brand/NEXUS_BRAND GUIDE.png` — Nexus-branded, Sora/Manrope type, new palette) → re-extract tokens + DESIGN_LANGUAGE; adopt the application-example **sidebar layout** across all 10 mockups
-- D. Propagate: BOQ_FRAMEWORK, AI_CONSULTING_PLAYBOOK, PRODUCT_STRATEGY, USER_JOURNEYS, new COMPANY_JOURNEY; validator green
+**READ FIRST**: `_agent/STRATEGY_SESSION_BRIEF_2026-06-10.md` — the complete synthesis: the new ecosystem truth (iBrain = all engine capability; the Karvia-engines→iBrain lineage), 13 pending decisions (proposed C-010…C-013) with recommendations, the 12-item document work list, and the source map (BOQ whitepaper, ExternalCom/bramhi corpus, official_dev/iBrain docs, NEXUS brand guide).
 
-**Context**: PRs #21 (mockups s3) + #22 (business docs) merged at session start — main holds the full 10-surface mockup set + the 0-BUSINESS tier. N1-P2-08's founder review is happening NOW in this session (its feedback = this agenda's C items). N1-P3-01 part 2 (CAPABILITIES, ROADMAP) still pending — fold into or after this review.
+**Session flow**:
+1. Walk the founder through the 13 decisions (§7 of the brief) — rapid ratification, record in DECISIONS.md as C-010…C-013
+2. Execute the doc work list (§8) in order — BOQ_FRAMEWORK revision and TECH_STRATEGY iBrain architecture are the load-bearing ones
+3. Brand/layout rework last (tokens v2 from the NEXUS guide, sidebar shell, 10 mockups re-skin)
+4. Then: N1-P3-01 part 2 (CAPABILITIES, ROADMAP) reflecting everything, Night-1 close-out groom, SPRINTS_NIGHT_2 draft
 
-**If a fresh session picks this up mid-review**: read the JOURNAL tail for where the review stopped, ask the founder where to resume. Do not guess.
+**Watch out for**:
+- Nothing in the brief is canon until ratified — it is a proposal, not a decision record
+- The brief flags which iBrain docs were NOT yet read in depth (API_REFERENCE, KARVIA integration folder, MVP strategy) — read them before drawing the Nexus↔iBrain contract
+- BACKLOG state: N1-P2-08 NEEDS-FOUNDER-REVIEW is effectively superseded by this session's brand/layout rework (the founder's review IS the rework); N1-P4-01 waits for the new architecture decisions
