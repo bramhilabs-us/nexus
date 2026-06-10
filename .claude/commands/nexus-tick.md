@@ -12,7 +12,7 @@ You are running one tick of the Nexus autonomous loop. Follow the protocol exact
 2. `.claude/TICK_PROTOCOL.md` — the loop steps you must follow
 3. `.claude/SESSION_PRACTICES.md` — pre-scan discipline, quality scoring
 4. `_agent/AUTONOMY.md` — current level + budget status
-5. `_agent/NEXT_SESSION.md` — the card: if it names a tick-executable task, that IS your pick (skip BACKLOG scanning)
+5. `_agent/NEXT_SESSION.md` — the card: if it names a tick-executable task, that IS your pick (skip BACKLOG scanning). **Level-0 rule**: first run `gh pr list` — if the card's task (or any BACKLOG item) already has an open PR, it is in-flight: skip it and pick the next READY item with no open PR and no dependency on in-flight work. Never duplicate or stack onto an unmerged branch.
 6. `_agent/JOURNAL.md` — tail, last 5 entries (skip if empty)
 7. `_agent/BACKLOG.md` — full file only if the card is missing/blocked (fallback queue)
 8. `_agent/clarifications.md` — check for human answers since last tick
