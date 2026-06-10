@@ -96,3 +96,13 @@ Statuses: DONE | BLOCKED | NO-OP | BUDGET-STOP | ABORTED
 **Quality**: 9/10 — full T1-decision cascade landed in one pass with graph green; -1 for an Edit miss on a stale string (caught immediately).
 **Files**: NEXUS_STRATEGY/1-PRODUCT/NOF.md (new), TECH_STRATEGY.md, PRODUCT_STRATEGY.md, DATA_MODELS.md, 00_NORTH_STAR.md, IMPROVEMENT_PLAN.md, EXECUTION_PLAYBOOK.md, diagrams/er-okr.mmd, .claude/{CLAUDE.md,SESSION_PRACTICES.md}, src/modules/{weekly-goals→milestones}/README.md, src/README.md, _agent/{DECISIONS,clarifications,BACKLOG,NEXT_SESSION,JOURNAL}.md
 **Next**: Per NEXT_SESSION.md — strategy session, N1-P2-04 Module dependency graph (now with NOF rulings to label goal/move imports as dead).
+
+---
+
+## 2026-06-09T19:00Z — session-2026-06-09-04 — DONE (groom)
+**Task**: Path B ratified — mockups pulled forward from Night 3 to ≈ sessions 8–10 (founder decision after future-visualization exercise)
+**Branch**: session/2026-06-09-03-path-b-groom
+**Outcome**: Added N1-P2-07 (design tokens from Brandguide, S) and N1-P2-08 (six static token-first page mockups, M, founder review checkpoint) to BACKLOG; queue order written into NEXT_SESSION (module graph → tokens → mockups → Night 1 remainder). Rationale: mockups depend only on page contracts + DESIGN_LANGUAGE (both done); founder feedback lands before N1-P4-01 freezes contracts; cost ~3 sessions absorbed by Night 1 headroom (5 used vs ~12 budgeted by this point).
+**Quality**: 10/10 — small groom, fully landed.
+**Files**: _agent/BACKLOG.md, _agent/NEXT_SESSION.md, _agent/JOURNAL.md
+**Next**: Unchanged card — N1-P2-04 Module dependency graph, then the Path B queue.
