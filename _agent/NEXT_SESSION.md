@@ -2,33 +2,30 @@
 
 > Written by the previous session per `/close`. `/init` reads this and starts. Overwritten every session — history lives in JOURNAL.md.
 
-**Type**: coding (mockups — first visible product) — **with a Level-0 gate, read first**
+**Type**: coding (mockups — first visible product)
 **Task**: `N1-P2-08` — Six page mockups, session 1 of 2–3 (static HTML, token-first)
-**Gate**: N1-P2-08 consumes `client/css/tokens.css`, which lives on **PR #14 (unmerged)**. Run `gh pr list` first:
-- **#14 merged** → proceed with N1-P2-08 below.
-- **#14 still open** → mockups are blocked on in-flight work; pick `N1-P2-05` — User journeys instead (READY, depends only on merged N1-P1-01; DoD: 4 journeys with numbered steps + Mermaid sequence diagrams in `NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md`; draw PRODUCT_STRATEGY journeys + page contracts, NOF.md, AI_CONSULTING_PLAYBOOK). Do NOT start mockups without tokens — inline hex is the exact failure SESSION_PRACTICES rule 3 exists to prevent.
-- Also in-flight: PR for tick-11 (API_SURFACE) — N1-P4-01 cites its tables, so N1-P4-01 is blocked until that merges too.
+**Why it's next**: tokens merged (N1-P2-07 ✓, PR #14), API surface merged (N1-P2-03 ✓, PR #15) — founder merged both before leaving 2026-06-10; the Path B queue is fully unblocked and mockups are the founder review checkpoint that feeds N1-P4-01 contracts and becomes the Night 3 build spec.
 
-**Queue (Path B)**: mockups (2–3 sessions, founder review checkpoint) → Night 1 remainder (N1-P3-01, N1-P4-01 — P4-01 needs API_SURFACE merged).
+**Queue (Path B)**: this session (+1–2 more mockup sessions, founder review checkpoint) → Night 1 remainder (N1-P3-01, N1-P4-01 — now has architecture, data models, dependency graph AND the API surface tables).
 
-**N1-P2-08 session-1 scope** (when unblocked):
+**Session 1 scope** (size M, 2–3 sessions total — don't chain past one PR):
 - The shared shell: nav, account dropdown with the 5 secondary surfaces (Profile, Company Profile, Configuration, Settings, Feedback), page scaffold consuming `var(--nx-*)` only
 - 2–3 Engagement-mode pages (e.g., My Clients, Dashboard) against their page contracts
 - Later sessions: remaining pages + Builder variants, Profile player card, assessment flashcard deck (PQ-4)
 
-**Cards to draw (mockups)**:
+**Cards to draw**:
 - `client/css/tokens.css` — the only color/type/space source; zero inline hex (review-blocking)
-- `NEXUS_STRATEGY/1-PRODUCT/design/DESIGN_LANGUAGE.md` — § Token table, component set, minimalism rules
+- `NEXUS_STRATEGY/1-PRODUCT/design/DESIGN_LANGUAGE.md` — § Token table, component set (Tile, Card, Stage ribbon, CTA pair, Empty state, Score ring, Flashcard), minimalism rules
 - `NEXUS_STRATEGY/1-PRODUCT/PRODUCT_STRATEGY.md` — page contracts (one dominant CTA, ≤4 tiles, empty states), § player cards, § assessment delivery experience
-- `NEXUS_STRATEGY/1-PRODUCT/design/references/` — the two decks for feel
+- `NEXUS_STRATEGY/1-PRODUCT/design/references/` — the two decks for feel (spacing, surface, restraint)
 
-**Definition of done (mockups slice)**:
-- Mockups in `NEXUS_STRATEGY/1-PRODUCT/design/mockups/`, `var(--token)` only; each implements its page contract exactly
-- `grep -rE '#[0-9a-fA-F]{3,6}' mockups/` returns nothing before commit
-- Fonts: Inter UI; Playfair display moments only; Cinzel/Cormorant never in app chrome
-- Graph: if mockups/ gains a governed node, wire parents (DESIGN_LANGUAGE) + validator green
+**Definition of done** (per BACKLOG N1-P2-08, this session's slice):
+- Mockups in `NEXUS_STRATEGY/1-PRODUCT/design/mockups/`, consuming `var(--token)` only
+- Each implements its page contract exactly
+- `grep -rE '#[0-9a-fA-F]{3,6}' mockups/` returns nothing before commit (tokens.css is the only hex)
+- Graph: if mockups/ gains a governed node, wire parents (DESIGN_LANGUAGE) and run validator
 
 **Watch out for**:
 - Throwaway quality NOT acceptable — these are the Night 3 spec (Karvia lesson #174-3)
-- Level 0: open PR, don't merge; never stack onto an unmerged branch
-- Morning human TODO: merge PR #13 (settings), #14 (tokens), and the tick-11 API_SURFACE PR to unblock the queue
+- Fonts: Inter for UI; Playfair Display display moments only; Cinzel/Cormorant never in app chrome (DESIGN_LANGUAGE § Token table)
+- Level 0: open PR, don't merge; check `gh pr list` first — if this task's PR is already open and unmerged, skip to the next READY item without an open PR (fallback: N1-P2-05 user journeys)
