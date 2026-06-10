@@ -325,3 +325,131 @@ body {
   border-top: 1px dashed var(--nx-border);
   padding-top: var(--nx-space-4);
 }
+
+/* ---------- Flashcard deck (assessment delivery — never survey forms) ---------- */
+.nx-deck-stage {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--nx-space-8);
+  padding: var(--nx-space-8);
+}
+.nx-deck-why {
+  font-size: var(--nx-text-sm);
+  color: var(--nx-text-secondary);
+  max-width: 480px;
+  text-align: center;
+}
+.nx-flashcard {
+  position: relative;
+  width: min(560px, 100%);
+  background: var(--nx-surface);
+  border-radius: var(--nx-radius-lg);
+  box-shadow: var(--nx-shadow-card);
+  padding: var(--nx-space-12) var(--nx-space-8);
+  text-align: center;
+}
+/* the next card peeking behind — the deck is felt, not counted */
+.nx-flashcard.stacked::before {
+  content: '';
+  position: absolute;
+  inset: var(--nx-space-2) var(--nx-space-4) calc(-1 * var(--nx-space-2));
+  background: var(--nx-surface);
+  border-radius: var(--nx-radius-lg);
+  box-shadow: var(--nx-shadow-card);
+  z-index: -1;
+  opacity: 0.6;
+}
+.nx-flashcard-kicker {
+  font-size: var(--nx-text-xs);
+  font-weight: var(--nx-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nx-primary);
+  margin-bottom: var(--nx-space-3);
+}
+.nx-flashcard h2 {
+  font-family: var(--nx-font-display);
+  font-size: var(--nx-text-xl);
+  font-weight: var(--nx-weight-medium);
+  color: var(--nx-ink);
+  line-height: var(--nx-leading-tight);
+  margin-bottom: var(--nx-space-2);
+}
+.nx-flashcard .context {
+  font-size: var(--nx-text-sm);
+  color: var(--nx-text-tertiary);
+  margin-bottom: var(--nx-space-6);
+}
+
+/* Answer inputs — large tap targets, never form controls */
+.nx-answer-scale { display: flex; gap: var(--nx-space-3); justify-content: center; }
+.nx-answer-scale button {
+  width: 56px; height: 56px;
+  border-radius: var(--nx-radius);
+  border: 1px solid var(--nx-border);
+  background: var(--nx-surface);
+  font-family: var(--nx-font-ui);
+  font-size: var(--nx-text-lg);
+  font-weight: var(--nx-weight-medium);
+  color: var(--nx-text);
+  cursor: pointer;
+}
+.nx-answer-scale button:hover { border-color: var(--nx-primary-tint); background: var(--nx-primary-faint); }
+.nx-answer-scale button.selected { background: var(--nx-primary-faint); border-color: var(--nx-primary); color: var(--nx-primary); }
+.nx-answer-scale .scale-ends {
+  display: flex; justify-content: space-between;
+  font-size: var(--nx-text-xs); color: var(--nx-text-tertiary);
+  margin-top: var(--nx-space-2);
+}
+.nx-answer-choice { display: grid; gap: var(--nx-space-3); max-width: 420px; margin: 0 auto; }
+.nx-answer-choice button {
+  padding: var(--nx-space-4) var(--nx-space-6);
+  border-radius: var(--nx-radius);
+  border: 1px solid var(--nx-border);
+  background: var(--nx-surface);
+  font-family: var(--nx-font-ui);
+  font-size: var(--nx-text-base);
+  color: var(--nx-text);
+  cursor: pointer;
+  text-align: left;
+}
+.nx-answer-choice button:hover { border-color: var(--nx-primary-tint); background: var(--nx-primary-faint); }
+.nx-answer-choice button.selected { background: var(--nx-primary-faint); border-color: var(--nx-primary); color: var(--nx-primary); font-weight: var(--nx-weight-medium); }
+.nx-answer-binary { display: flex; gap: var(--nx-space-4); justify-content: center; }
+.nx-answer-binary button {
+  min-width: 140px;
+  padding: var(--nx-space-4) var(--nx-space-8);
+  border-radius: var(--nx-radius-pill);
+  border: 1px solid var(--nx-border);
+  background: var(--nx-surface);
+  font-family: var(--nx-font-ui);
+  font-size: var(--nx-text-base);
+  font-weight: var(--nx-weight-medium);
+  color: var(--nx-text);
+  cursor: pointer;
+}
+.nx-answer-binary button:hover, .nx-answer-binary button.selected { background: var(--nx-primary-faint); border-color: var(--nx-primary); color: var(--nx-primary); }
+
+/* Deck progress — dots, never counters */
+.nx-deck-dots { display: flex; gap: var(--nx-space-2); justify-content: center; }
+.nx-deck-dots span {
+  width: 8px; height: 8px;
+  border-radius: var(--nx-radius-pill);
+  background: var(--nx-gray-light);
+}
+.nx-deck-dots span.done { background: var(--nx-primary-soft); }
+.nx-deck-dots span.current { background: var(--nx-primary); transform: scale(1.25); }
+
+/* Delta chip — recurring decks greet with change vs taker's own history */
+.nx-delta {
+  display: inline-block;
+  font-size: var(--nx-text-xs);
+  font-weight: var(--nx-weight-semibold);
+  padding: var(--nx-space-1) var(--nx-space-3);
+  border-radius: var(--nx-radius-pill);
+  background: var(--nx-gradient-soft);
+  color: var(--nx-positive);
+}

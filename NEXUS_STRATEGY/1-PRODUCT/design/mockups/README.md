@@ -28,6 +28,9 @@ Open any `.html` file directly in a browser (tokens load via relative path to `c
 | `shell.css` | Shared shell: topbar, nav, account dropdown (5 secondary surfaces), tiles, cards, stage badge/ribbon, score ring, CTA pair, empty state | session 1 |
 | `my-clients.html` | My Clients (Engagement) — pipeline cards, prospect inline CTA, triage tiles, empty state | session 1 |
 | `dashboard.html` | Dashboard (Engagement) — pulse tiles, needs-you-today, objectives ribbons, setup empty state | session 1 |
-| *objectives, assessments (+ flashcard deck, PQ-4), teams, planning, Builder variants, Profile player card* | — | sessions 2–3 |
+| `objectives.html` | Objectives (Engagement) — lifecycle board: stage tiles, KR cards + ribbons across all 3 stages, assessment-driven empty state | session 2 |
+| `assessments.html` | Assessments (Engagement) — pluggable shell: AIR sprint workspace in block slots, score + deliverables → objectives handoff, gallery empty state | session 2 |
+| `assessment-flashcards.html` | **PQ-4 exploration** — taker's deck: why-card, scale/choice/binary cards, dot progress, recurring-delta greeting, completion card; alternatives noted for founder | session 2 |
+| *teams, planning, Builder variants, Profile player card* | — | session 3 |
 
 **Rules enforced here**: every page = its PRODUCT_STRATEGY contract (one dominant CTA, ≤4 tiles, empty state teaches the purpose); colors/type/space only via `var(--nx-*)` — `grep -rE '#[0-9a-fA-F]{3,6}' mockups/` must return nothing; fonts per DESIGN_LANGUAGE § Token table (Inter UI; Playfair Display only in the empty-state display moment; never Cinzel/Cormorant in chrome). Each mockup also shows its empty state below a dashed `mock-note` separator — mockup convention, not a product surface.

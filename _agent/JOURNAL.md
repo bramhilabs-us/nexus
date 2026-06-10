@@ -208,6 +208,17 @@ Statuses: DONE | BLOCKED | NO-OP | BUDGET-STOP | ABORTED
 **Next**: If PR #16 merged → mockups session 2 (flashcard deck, PQ-4). Else → N1-P3-03 4-CUSTOMER skeleton (S, last fully-independent READY item before N1-P3-01).
 ---
 
+## 2026-06-10T07:45Z — tick-2026-06-10-15 — DONE
+**Task**: N1-P2-08 — Mockups session 2 of 3: Objectives + Assessments + the assessment flashcard deck (PQ-4 exploration). Queue was clear (founder merged #16/#17/#18) so the card's task was the pick.
+**Branch**: tick/2026-06-10-15-mockups-2
+**Outcome**: (1) **objectives.html** — lifecycle board per contract: Create-objective primary CTA, stage tiles (Identified/Handed off/Sustained + avg complete), 4 objective cards spanning all three lifecycle stages with per-KR progress rows and ribbons (incl. a Handed-off card showing its outcome record vs baseline, and a Sustained YoY KPI card), assessment-driven empty state. (2) **assessments.html** — the pluggable shell per contract: typed Create-AIR CTA, the 4 analytics tiles explicitly marked as AIR block slots, the two-week sprint workspace as block-rendered rows (days done/today/upcoming with artifact links), a completed assessment with AIR 74 + dimension scores + the Create-objectives-from-results handoff (the page's exit), gallery empty state. (3) **assessment-flashcards.html** — PQ-4: chrome-less taker surface (invitation context, no app nav), the live moment (stacked card + dot progress + scale input + the always-on why line), then five card states below mock-notes for founder review: why-card, choice card, binary card, recurring-deck delta greeting, completion card. Direction taken (stacked card / dots / one input family per card / deliberate Next beat) + three alternatives recorded in the closing mock-note (swipe-carousel, auto-advance, numbered counters — last one rejected with reason). (4) Component-set rule honored: DESIGN_LANGUAGE table gained **Deck progress** and **Answer input** rows BEFORE styles were written; shell.css extended with the flashcard/deck/answer/delta components. mockups/README table updated.
+**Quality**: 9/10 — all three contracts implemented exactly, PQ-4 explored with named alternatives rather than a single silent choice; -1: card transitions (flip vs slide) can't be honestly shown in static HTML — flagged as the Night 3 motion decision in the mock-note.
+**Files**: mockups/{objectives,assessments,assessment-flashcards}.html (new), mockups/shell.css (deck components appended), mockups/README.md (table), DESIGN_LANGUAGE.md (2 component rows), _agent/{BACKLOG,NEXT_SESSION,JOURNAL}.md
+**Verification**: hex scan = zero non-anchor matches; every consumed var(--nx-*) exists in tokens.css; validator green (31 docs, 0 errors).
+**Next**: Mockups session 3 — Teams + Planning + Builder variants + Profile player card → the full founder review checkpoint.
+
+---
+
 ## 2026-06-10T08:15Z — tick-2026-06-10-16 — DONE
 **Task**: N1-P3-03 — 4-CUSTOMER skeleton (card's mockups-s3 gated: PR #19 open → card's named fallback)
 **Branch**: tick/2026-06-10-16-customer-skeleton

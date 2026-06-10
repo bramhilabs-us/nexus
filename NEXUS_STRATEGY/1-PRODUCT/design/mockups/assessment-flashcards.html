@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexus — Assessment flashcard deck (PQ-4 exploration)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../../client/css/tokens.css">
+<link rel="stylesheet" href="shell.css">
+</head>
+<body>
+
+<!-- No app chrome: the taker (often accountless, via invitation link) sees only the deck.
+     A minimal bar tells them where they are and who's asking. -->
+<header class="nx-topbar" style="justify-content:space-between">
+  <span class="nx-wordmark">Nexus</span>
+  <span class="nx-card-sub">Workforce assessment · Halcyon Health · ~6 minutes</span>
+</header>
+
+<!-- ============ The live moment: question card on the stage ============ -->
+<main class="nx-deck-stage">
+
+  <div class="nx-deck-dots" aria-label="deck progress">
+    <span class="done"></span><span class="done"></span><span class="done"></span>
+    <span class="current"></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <article class="nx-flashcard stacked">
+    <div class="nx-flashcard-kicker">Your tools today</div>
+    <h2>When a task feels repetitive, how often do you reach for a tool to automate it?</h2>
+    <p class="context">There's no right answer — this maps where automation help would land best.</p>
+    <div>
+      <div class="nx-answer-scale">
+        <button>1</button><button>2</button><button class="selected">3</button><button>4</button><button>5</button>
+      </div>
+      <div class="scale-ends" style="max-width:296px; margin:var(--nx-space-2) auto 0"><span>never</span><span>always</span></div>
+    </div>
+    <div style="margin-top:var(--nx-space-8)">
+      <button class="nx-btn-primary">Next card</button>
+    </div>
+  </article>
+
+  <p class="nx-deck-why">Why this assessment, now: Halcyon is mapping where AI helps your team first — your answers shape what gets built, and you'll see the results.</p>
+
+</main>
+
+<!-- ============ Card states for founder review (mock-only below) ============ -->
+<div class="nx-page">
+
+  <p class="mock-note">Card 0 — the why-card that opens every deck (nobody takes a mystery quiz)</p>
+  <section class="nx-deck-stage" style="min-height:0">
+    <article class="nx-flashcard">
+      <div class="nx-flashcard-kicker">Before we start</div>
+      <h2>Why this assessment, and why now</h2>
+      <p class="context" style="max-width:420px; margin-left:auto; margin-right:auto">
+        Halcyon Health is mapping where AI can genuinely help your team — not replacing work, finding the friction.
+        Eight cards, about six minutes. Your answers go to the readiness picture, and the results come back to you.
+      </p>
+      <button class="nx-btn-primary">Begin</button>
+    </article>
+  </section>
+
+  <p class="mock-note">Choice card — one input family per card, large targets, never radio buttons</p>
+  <section class="nx-deck-stage" style="min-height:0">
+    <article class="nx-flashcard stacked">
+      <div class="nx-flashcard-kicker">Your week</div>
+      <h2>If a perfect digital assistant joined tomorrow, what would you hand it first?</h2>
+      <p class="context">Pick the one that would free the most of your time.</p>
+      <div class="nx-answer-choice">
+        <button>Writing the same updates and reports</button>
+        <button class="selected">Hunting for information across systems</button>
+        <button>Scheduling, routing, and follow-ups</button>
+        <button>Double-checking data someone else entered</button>
+      </div>
+      <div style="margin-top:var(--nx-space-8)"><button class="nx-btn-primary">Next card</button></div>
+    </article>
+  </section>
+
+  <p class="mock-note">Binary card — fastest rhythm beat in the deck</p>
+  <section class="nx-deck-stage" style="min-height:0">
+    <article class="nx-flashcard stacked">
+      <div class="nx-flashcard-kicker">Confidence</div>
+      <h2>Have you used an AI tool for real work in the last month?</h2>
+      <p class="context">Real work — not just trying it out.</p>
+      <div class="nx-answer-binary">
+        <button class="selected">Yes</button>
+        <button>Not yet</button>
+      </div>
+      <div style="margin-top:var(--nx-space-8)"><button class="nx-btn-primary">Next card</button></div>
+    </article>
+  </section>
+
+  <p class="mock-note">Recurring deck greeting — the taker's own deltas, not a fresh interrogation</p>
+  <section class="nx-deck-stage" style="min-height:0">
+    <article class="nx-flashcard">
+      <div class="nx-flashcard-kicker">Welcome back</div>
+      <h2>Three months since your last check-in</h2>
+      <p class="context" style="max-width:420px; margin-left:auto; margin-right:auto">
+        Last time, finding information was your biggest friction. <span class="nx-delta">team confidence +12 since then</span><br>
+        Five quick cards today — they focus on what changed.
+      </p>
+      <button class="nx-btn-primary">Begin</button>
+    </article>
+  </section>
+
+  <p class="mock-note">Completion card — what happens with the answers, said plainly</p>
+  <section class="nx-deck-stage" style="min-height:0">
+    <article class="nx-flashcard">
+      <div class="nx-deck-dots" style="margin-bottom:var(--nx-space-6)">
+        <span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span>
+        <span class="done"></span><span class="done"></span><span class="done"></span><span class="done"></span>
+      </div>
+      <div class="nx-flashcard-kicker">That's all</div>
+      <h2>Thank you — here's what happens next</h2>
+      <p class="context" style="max-width:420px; margin-left:auto; margin-right:auto">
+        Your answers join the team's readiness picture. The results — and what Halcyon decides to do about them — will be shared with everyone who took part.
+      </p>
+    </article>
+  </section>
+
+  <p class="mock-note">
+    PQ-4 direction taken: stacked single card + dot progress + per-card input family (scale/choice/binary), advance via one primary button.
+    Alternatives considered for the founder: (a) horizontal swipe/carousel feel with edge-peek of the next card — livelier, riskier on desktop;
+    (b) typeform-style auto-advance on answer — faster but removes the deliberate "Next" beat;
+    (c) numbered progress ("4 of 8") — rejected: counters make progress dreaded, dots keep it felt (DESIGN_LANGUAGE § Deck progress).
+    Transitions (flip vs slide) are a Night 3 motion decision; static mockups can't show them honestly.
+  </p>
+
+</div>
+</body>
+</html>
