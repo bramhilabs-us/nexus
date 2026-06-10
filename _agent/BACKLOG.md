@@ -45,12 +45,13 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - Shape-tagging (CRM-shape, OKR-shape, Assessment-shape) per route
 
 ### N1-P2-04 — Module dependency graph
-- **Status**: READY
-- **Size**: M (2 ticks)
+- **Status**: DONE (tick 2026-06-09-09, PR pending merge)
+- **Size**: M (2 ticks — done in 1)
 - **Depends on**: N1-P1-01
 - **Definition of done**:
-  - `NEXUS_STRATEGY/2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md` with Mermaid
-  - Cycles flagged red — these are Night 2 refactor targets
+  - ✓ `NEXUS_STRATEGY/2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md` with Mermaid (+ `diagrams/module-dependency.mmd`)
+  - ✓ Cycles flagged red — shadow-schema collisions (Task ×3, User ×2, Objective ×2) ranked as Night 2 refactor targets
+  - ✓ Every engine + route-cluster mapped to actual grepped imports; each cross-boundary edge labeled stays-in-module / contract call / domain event / dies (NOF or SSI)
 
 ### N1-P2-06 — Engineering principles & improvement bar
 - **Status**: DONE (PR pending merge — tick 2026-06-04-03)

@@ -14,7 +14,8 @@ summary: >
 parents:
   - NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md
   - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
-children: []
+children:
+  - NEXUS_STRATEGY/2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md
 revisit:
   - on: "any module's models/ diverge from the dispositions here"
     stage: N2

@@ -2,23 +2,26 @@
 
 > Written by the previous session per `/close`. `/init` reads this and starts. Overwritten every session — history lives in JOURNAL.md.
 
-**Type**: strategy
-**Task**: `N1-P2-04` — Module dependency graph
-**Why it's next**: with data models catalogued (N1-P2-02 ✓), the module graph is the last input N1-P4-01 (modularization plan + contracts) needs.
+**Type**: coding (CSS tokens — first code artifact)
+**Task**: `N1-P2-07` — Design tokens from the Brandguide (Path B)
+**Why it's next**: module graph done (N1-P2-04 ✓, tick 2026-06-09-09) — Path B queue ratified 2026-06-09 says tokens come next, and SESSION_PRACTICES rule 3 (tokens before mockups) gates N1-P2-08 on this.
 
-**Queue (Path B, ratified 2026-06-09)**: this session → `N1-P2-07` design tokens → `N1-P2-08` six page mockups (first visible product, ≈ sessions 8–10) → resume Night 1 remainder. Mockup feedback feeds N1-P4-01.
+**Queue (Path B)**: this session → `N1-P2-08` six page mockups (2–3 sessions, founder review checkpoint) → resume Night 1 remainder (N1-P2-03 API surface, N1-P3-01, N1-P4-01 — which now has all three technical inputs).
 
 **Cards to draw**:
-- `NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md` — engine inventory + shared-model coupling
-- `NEXUS_STRATEGY/2-TECHNICAL/DATA_MODELS.md` — which models each engine touches
-- Karvia engine code via read-only `karvia_business/engines/*/index.js` (grep the `require('../../server/models/...)` imports)
+- `NEXUS_STRATEGY/1-PRODUCT/design/DESIGN_LANGUAGE.md` — palette/typography rules + § Reference visuals (extracted deck cues) + the declared token-table placeholder
+- `NEXUS_STRATEGY/1-PRODUCT/design/brand/` — Brandguide assets (source of truth for hex values)
+- `NEXUS_STRATEGY/1-PRODUCT/design/references/` — the two investor decks (gradient near-white surfaces, purple-tinted shadows, slate text hierarchy, gold sparingly, 8px radius)
 
-**Definition of done**:
-- `NEXUS_STRATEGY/2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md` — every Karvia engine/route-cluster mapped to the models it reads/writes; Mermaid graph with **cycles flagged red** (Night 2 refactor targets)
-- Each dependency labeled with its Nexus resolution: stays in-module / becomes a contract call / becomes a domain event
-- Wired into the doc graph; validator green
+**Definition of done** (per BACKLOG N1-P2-07):
+- `client/css/tokens.css` — semantic tokens (`--nx-primary`, `--nx-ink`, `--nx-surface`, type/spacing/radius scales) from Brandguide + reference cues
+- Comfortaa vs Cinzel/Inter type question resolved and recorded
+- Hex/scale table recorded in DESIGN_LANGUAGE.md (fills its placeholder)
+- Zero inline hex from here on; tokens are the only color source
+- Graph: client/README.md already a governed node — tokens.css needs no genome, but DESIGN_LANGUAGE's update bumps `updated:`; validator green
 
 **Watch out for**:
-- `karvia_business/` is READ-ONLY (hard rule 1)
-- Engines lie about their boundaries (all import shared models) — map *actual* imports, not the engine names
-- **C-008 ANSWERED → NOF** (`1-PRODUCT/NOF.md`): 4 levels, Goal/Move dropped, Milestone replaces WeeklyGoal, dynamic objective-relative timelines. N1-P4-01 fully unblocked; map Karvia's goal/move imports as "dies with NOF"
+- SESSION_PRACTICES rule 3 is the whole point: token first, reference second, no inline hex ever
+- The brand assets are files, not docs — extract values, don't guess from memory
+- If Comfortaa vs brand-fonts can't be resolved from the assets alone, it's a founder call → clarifications (PQ-style), pick sensible default, flag in PR
+- Level 0: open PR, don't merge; check `gh pr list` first — if this task's PR is already open and unmerged, skip to the next READY item without an open PR

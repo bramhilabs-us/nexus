@@ -81,7 +81,11 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |               `-- design/brand/* (assets, exempt)
 |
 |-- 2-TECHNICAL/SYSTEM_ARCHITECTURE.md ....... T2 | Karvia as-is map (reference)
-|       `-- 2-TECHNICAL/IMPROVEMENT_PLAN.md .. T2 | quality bar: 10 APs, 10 IMs, gates
+|       |-- 2-TECHNICAL/IMPROVEMENT_PLAN.md .. T2 | quality bar: 10 APs, 10 IMs, gates
+|       |-- 2-TECHNICAL/DATA_MODELS.md ....... T2 | 19 schemas + Nexus dispositions
+|       |       (parents: + TECH_STRATEGY)
+|       `-- 2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md  T2 | who touches what; shadow-schema cycles
+|               (parents: + DATA_MODELS)
 |
 |-- 2-TECHNICAL/TECH_STRATEGY.md ............. T2 | 3 layers, 8 blocks, AssessmentProvider
 |       |   (parents: NORTH_STAR, PLAYBOOK, PRODUCT_STRATEGY,
@@ -98,7 +102,7 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 `-- DOCUMENTATION_GRAPH.md ................... T0 | this file
 ```
 
-Tree = containment + reachability. The dependency overlay is in each node's `parents` list (a node can have parents across branches — e.g., `TECH_STRATEGY` is fed by five docs). Night 1's remaining catalogues (DATA_MODELS, API_SURFACE, MODULE_DEPENDENCY_GRAPH, USER_JOURNEYS, QA docs) join as children of `SYSTEM_ARCHITECTURE` / `TECH_STRATEGY` / `EXECUTION_PLAYBOOK` as they're written — **a doc PR that doesn't wire the new doc into this graph fails review**.
+Tree = containment + reachability. The dependency overlay is in each node's `parents` list (a node can have parents across branches — e.g., `TECH_STRATEGY` is fed by five docs). Night 1's remaining catalogues (API_SURFACE, USER_JOURNEYS, QA docs) join as children of `SYSTEM_ARCHITECTURE` / `TECH_STRATEGY` / `EXECUTION_PLAYBOOK` as they're written — **a doc PR that doesn't wire the new doc into this graph fails review**.
 
 ## Propagation rules
 
