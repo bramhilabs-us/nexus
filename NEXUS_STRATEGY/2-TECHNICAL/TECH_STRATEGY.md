@@ -161,9 +161,13 @@ interface AssessmentProvider {
   id: string;                               // 'air' | future verticals
   meta: { name: string; description: string; dimensions: Dimension[] };
 
-  // How evidence is gathered. An instrument can be a survey, a structured
-  // interview, a workshop canvas, a floor observation, a document review —
-  // each declares its own zod-validated evidence shape and UI slot renderer.
+  // How evidence is gathered. An instrument can be a question deck, a
+  // structured interview, a workshop canvas, a floor observation, a document
+  // review — each declares its zod-validated evidence shape, its UI slot
+  // renderer, and its delivery moment ('first_time' | 'recurring' | 'pulse').
+  // Question-type instruments render through the shell's FLASHCARD deck
+  // (one card per question — never a survey form; PRODUCT_STRATEGY § delivery
+  // experience). Recurring decks receive the taker's history for delta display.
   instruments(ctx: ProgramContext): Promise<Instrument[]>;
 
   // Pure scoring over collected evidence: 0–10 (or 0–100) per dimension.

@@ -85,6 +85,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - Engagement + Builder variants for My Clients, Dashboard, Assessments
   - Each mockup implements its page contract exactly: one dominant primary CTA, ≤4 analytics tiles, empty state teaching the purpose
   - Shell includes the account dropdown with the 5 secondary surfaces (Profile, Company Profile, Configuration, Settings, Feedback) per PRODUCT_STRATEGY § player cards; one mockup of Profile (the player card) included
+  - One **assessment flashcard deck** mockup (PQ-4): the "why this assessment" intro card + 2–3 question cards + progress feel — flashcards, never survey forms
   - Founder review checkpoint — feedback feeds N1-P4-01 contracts and becomes the Night 3 build spec
 - **Notes**: First visible product. Throwaway-quality is NOT acceptable — these are the Night 3 spec (Karvia lesson #174-3).
 

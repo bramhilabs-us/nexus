@@ -151,6 +151,18 @@ In Builder mode the Dashboard is the product team's delivery pulse — same tile
 | Analytics strip | Defined by the assessment block (AIR: evidence coverage across the sprint days, dimension scores, participants assessed vs planned) |
 | Empty state | Gallery of installed assessment types with one-line descriptions |
 
+**Assessment delivery experience — flashcards, never surveys** (founder directive 2026-06-09). Nexus explicitly rejects Karvia's survey-form assessment UX. The principles:
+
+1. **Every question is a flashcard** — one card at a time, a flip/advance rhythm, progress *felt* rather than dreaded. Unique presentation per card, not a numbered form. (Flashcard is a first-class component: DESIGN_LANGUAGE.)
+2. **Delivery format follows the assessment moment** — these are different experiences, not one form reused:
+   - **First-time** — onboarding-grade: sets the tone of the whole engagement; this is most client employees' *first ever* Nexus experience, so it IS the funnel.
+   - **Recurring/regular** — lighter, familiar, shows deltas against the taker's own history ("here's what changed since last time").
+   - **In-between pulses** — short, targeted, purposeful; minutes not sessions.
+3. **The why is always on screen** — every assessment opens by telling the taker why *this* assessment, *now*, and what happens with the result. Nobody takes a mystery quiz.
+4. **People should love taking it.** If completion feels like a chore, the design failed — assessment completion rate and taker sentiment are product metrics, not afterthoughts.
+
+Interaction design for the flashcard deck is deliberately open (PQ-4) — explored in the N1-P2-08 mockups with the founder, settled in Night 3.
+
 This page is a **shell**: every assessment-specific surface — instruments, evidence capture, scoring views, deliverables — is rendered *by the installed assessment block* into the shell's slots. For AIR that means the two-week sprint becomes a workspace: per-day instruments (workshops, interviews, floor observations, surveys), artifact capture (Business Context Canvas, Value Stream Map, …), the scoring workshop, and the generated deliverables (AIR Score, Opportunity Register, Risk Register, 90-day plan, 12-month roadmap). For a survey-style assessment it's just questions and a score. **Nothing outside the block knows the difference** — installing a new assessment adds a "Create X" option and a score column on My Clients; nothing else changes. SSI is not shipped; it remains a Karvia-reference example only (C-006).
 
 ### 5. Teams — the people fabric
@@ -232,3 +244,4 @@ Page-level mockups are produced during Night 3 *from* these rules, token-first (
 - **PQ-1** — Dashboard primary CTA final wording ("Push task completion" vs "Nudge owners"): settle during Night 3 UI build; not blocking.
 - **PQ-2** — Exact tile sets per page beyond the four named on My Clients: derive from real usage in beta; start with the contracts above.
 - ~~**PQ-3** — Design docs~~ — **RESOLVED 2026-06-09**: BRAMHI brand guide landed in `design/brand/`; [design/DESIGN_LANGUAGE.md](design/DESIGN_LANGUAGE.md) governs. UI build unblocked.
+- **PQ-4** — Flashcard assessment interaction design (card transitions, answer inputs per question type, deck progress, delta-display for recurring): founder has the principle, not yet the mechanics. Explore via N1-P2-08 mockups (assessment flashcard mockup included); settle in Night 3.
