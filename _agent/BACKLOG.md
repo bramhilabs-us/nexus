@@ -121,11 +121,11 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: C-001 answered — broad scope (Transformation OS). See DECISIONS.md 2026-06-03.
 
 ### N1-P3-02 — Populate 3-DELIVERY skeleton
-- **Status**: READY
+- **Status**: DONE (tick 2026-06-10-14, PR pending merge)
 - **Size**: S (1 tick)
 - **Depends on**: N1-P1-01
 - **Definition of done**:
-  - SPRINT_PROCESS.md, RELEASE_PROCESS.md, CI_CD.md written
+  - ✓ SPRINT_PROCESS.md, RELEASE_PROCESS.md, CI_CD.md written — each with IM-11 reflection record, wired as EXECUTION_PLAYBOOK children
 
 ### N1-P3-03 — Populate 4-CUSTOMER skeleton
 - **Status**: READY

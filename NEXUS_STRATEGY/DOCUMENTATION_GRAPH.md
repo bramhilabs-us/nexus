@@ -102,7 +102,10 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |               `-- tests/README.md .......... T3 | test strategy per module
 |
 |-- 3-DELIVERY/EXECUTION_PLAYBOOK.md ......... T3 | session types, 90-step budgets
-|       (parents: NORTH_STAR, IMPROVEMENT_PLAN)
+|       |   (parents: NORTH_STAR, IMPROVEMENT_PLAN)
+|       |-- 3-DELIVERY/SPRINT_PROCESS.md ..... T3 | the per-night cycle, DoD, card chain
+|       |-- 3-DELIVERY/RELEASE_PROCESS.md .... T3 | 2 envs, release train, <5min rollback
+|       `-- 3-DELIVERY/CI_CD.md .............. T3 | IM-5 gates as pipeline + deploy legs
 |
 `-- DOCUMENTATION_GRAPH.md ................... T0 | this file
 ```
