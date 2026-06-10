@@ -77,8 +77,11 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |
 |-- 1-PRODUCT/PRODUCT_STRATEGY.md ............ T1 | 6 page contracts, 2 modes, journeys
 |       |--> feeds: TECH_STRATEGY (page contracts as code)
+|       |-- 2-TECHNICAL/USER_JOURNEYS.md ..... T2 | 4 archetype journeys + seq diagrams
+|       |       (parents: + TECH_STRATEGY)
 |       `-- 1-PRODUCT/design/DESIGN_LANGUAGE.md  T1 | BRAMHI brand → Nexus UI rules
-|               `-- design/brand/* (assets, exempt)
+|               |-- design/brand/* (assets, exempt)
+|               `-- design/mockups/README.md . T1 | token-first page mockups (N3 spec)
 |
 |-- 2-TECHNICAL/SYSTEM_ARCHITECTURE.md ....... T2 | Karvia as-is map (reference)
 |       |-- 2-TECHNICAL/IMPROVEMENT_PLAN.md .. T2 | quality bar: 10 APs, 10 IMs, gates

@@ -4,7 +4,7 @@ title: Nexus Design Language — BRAMHI brand applied
 tier: T1
 status: active
 owner: founder
-updated: 2026-06-09
+updated: 2026-06-10
 summary: >
   How the BRAMHI Labs brand guide (brand/ assets) becomes Nexus's minimalistic
   UI: palette, typography, component rules, the token-first workflow that
@@ -14,6 +14,7 @@ parents:
   - NEXUS_STRATEGY/1-PRODUCT/PRODUCT_STRATEGY.md
 children:
   - client/README.md
+  - NEXUS_STRATEGY/1-PRODUCT/design/mockups/README.md
 revisit:
   - on: "the BRAMHI brand guide is updated, or page-level design specs are added"
     stage: N3

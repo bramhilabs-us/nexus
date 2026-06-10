@@ -179,6 +179,26 @@ Statuses: DONE | BLOCKED | NO-OP | BUDGET-STOP | ABORTED
 
 ---
 
+## 2026-06-10T06:00Z — tick-2026-06-10-12 — DONE
+**Task**: N1-P2-08 — Six page mockups, session 1 of 2–3 (shell + My Clients + Dashboard, Engagement mode)
+**Branch**: tick/2026-06-10-12-mockups-1
+**Outcome**: First visible product. `design/mockups/` created: (1) `shell.css` — the shared component set from DESIGN_LANGUAGE built token-first (topbar + nav, account dropdown with the 5 secondary surfaces, Tile, Card, stage badge + lifecycle Stage ribbon, Score ring (conic-gradient, --ring-value/--ring-color slots for assessment blocks), CTA pair (filled pill primary / quiet secondary), progress bar, panel rows, Empty state with the page's one Playfair display moment, mock-note annotation strip). (2) `my-clients.html` — full page contract: Add Client primary CTA, 4 triage tiles (Clients / Need attention / Avg AIR score / At risk), 4 client cards covering all pipeline stages (Prospect tile carries the inline Start-assessment CTA; Handed-over card shows Builder-mode/sustained-KPI life), empty state teaching the page. (3) `dashboard.html` — pulse contract: Push-task-completion primary CTA (PQ-1 wording noted inline), 4 pulse tiles, "Needs you today" rows converting visibility→action (nudge buttons), objectives list with NOF self-rolling day counts + lifecycle ribbons (incl. one Sustained KPI), setup-checklist empty state mirroring the first-value journey. **Verification**: hex scan over mockups/ = zero matches (tokens are the only color source); every consumed var(--nx-*) exists in tokens.css (comm check); doc-graph green — mockups/README.md added as governed T1 node under DESIGN_LANGUAGE (27 docs, 0 errors).
+**Quality**: 9/10 — session-1 slice fully per contracts with all three verification gates green; -1: desktop-only (no responsive pass) and dropdown is hover-only — acceptable for static founder review, must not survive into Night 3 build.
+**Files**: NEXUS_STRATEGY/1-PRODUCT/design/mockups/{shell.css,my-clients.html,dashboard.html,README.md} (new), DESIGN_LANGUAGE.md (child edge, updated bump), DOCUMENTATION_GRAPH.md (registry), _agent/{BACKLOG,NEXT_SESSION,JOURNAL}.md
+**Next**: Mockups session 2 — Objectives + Assessments incl. the flashcard deck exploration (PQ-4, the founder's open interaction question).
+
+---
+
+## 2026-06-10T06:30Z — tick-2026-06-10-13 — DONE
+**Task**: N1-P2-05 — User journeys (card's mockups-s2 gated: PR #16 open/unmerged → Level-0 fallback per the card's own gate)
+**Branch**: tick/2026-06-10-13-user-journeys
+**Outcome**: `NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md` — four canonical journeys, one per archetype, each with numbered steps + a Mermaid sequence diagram over the module contracts: **J1 consultant first-value** (Add Client → client.added auto-initiates AIR → sprint → deliverables → Create-objectives-from-results → first planned milestone; the north-star-metric clock annotated start/stop), **J2 assessment taker** (invitation token → why-card → flashcard deck → submit → Workforce dimension + match-grade Profile signals; recurring decks greet with deltas), **J3 worker weekly loop** (Planning → task hours → the pure NOF roll-up chain task→milestone→KR→objective→program, no stored progress fields; milestone advance; block/unblock), **J4 close → handover → Builder** (objective.closed → outcome record → Handed off → governance.handover revokes consultant access → Builder mode → Sustained YoY KPIs → cadenced re-assessment; 90-day retention metric starts at handover). Closes with a **journey↔contract index** mapping every step's contract call/event to J1–J4 — these are the acceptance criteria for N1-P4-01's contract drafts. Graph wired (parents PRODUCT_STRATEGY + TECH_STRATEGY, registry line); validator green (27 docs, 0 errors).
+**Quality**: 9/10 — M task done in 1 tick, journeys grounded in PRODUCT_STRATEGY/NOF/playbook with no invented mechanics; -1: J2 deck mechanics deliberately thin (PQ-4 still open — mockups session 2 explores them; journeys will need a one-line update if the founder changes the interaction).
+**Files**: NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md (new), PRODUCT_STRATEGY.md + TECH_STRATEGY.md (children edges, updated bumps), DOCUMENTATION_GRAPH.md (registry), _agent/{BACKLOG,NEXT_SESSION,JOURNAL}.md
+**Next**: If PR #16 merged → mockups session 2 (Objectives + Assessments + flashcard deck, PQ-4). Else → N1-P3-02 3-DELIVERY skeleton (S, no in-flight deps).
+
+---
+
 ## 2026-06-10T07:00Z — tick-2026-06-10-14 — DONE
 **Task**: N1-P3-02 — 3-DELIVERY skeleton (card's mockups-s2 still gated: PRs #16 + #17 open → card's named fallback)
 **Branch**: tick/2026-06-10-14-delivery-skeleton

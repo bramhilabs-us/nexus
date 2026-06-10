@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexus — Dashboard (Engagement mode mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../../client/css/tokens.css">
+<link rel="stylesheet" href="shell.css">
+</head>
+<body>
+
+<header class="nx-topbar">
+  <span class="nx-wordmark">Nexus</span>
+  <nav class="nx-nav">
+    <a href="my-clients.html">My Clients</a>
+    <a class="active" href="dashboard.html">Dashboard</a>
+    <a href="#">Objectives</a>
+    <a href="#">Assessments</a>
+    <a href="#">Teams</a>
+    <a href="#">Planning</a>
+  </nav>
+  <div class="nx-account">
+    <button class="nx-avatar" aria-haspopup="true">AR</button>
+    <div class="nx-dropdown">
+      <a href="#">Profile</a>
+      <a href="#">Company Profile</a>
+      <a href="#">Configuration</a>
+      <a href="#">Settings</a>
+      <hr>
+      <a href="#">Feedback</a>
+    </div>
+  </div>
+</header>
+
+<main class="nx-page">
+
+  <div class="nx-page-head">
+    <div>
+      <h1 class="nx-page-title">Dashboard</h1>
+      <p class="nx-page-sub">Meridian Logistics · AI transformation program · week 14</p>
+    </div>
+    <div class="nx-cta-pair">
+      <!-- PQ-1: wording "Push task completion" vs "Nudge owners" — settled N3 -->
+      <button class="nx-btn-primary">Push task completion</button>
+    </div>
+  </div>
+
+  <!-- Analytics strip: hundredth-time pulse (≤4 tiles) -->
+  <section class="nx-tiles" aria-label="analytics">
+    <div class="nx-tile"><div class="nx-tile-number">62%</div><div class="nx-tile-label">Program complete</div></div>
+    <div class="nx-tile"><div class="nx-tile-number ok">5 / 6</div><div class="nx-tile-label">Objectives on track</div></div>
+    <div class="nx-tile"><div class="nx-tile-number">81%</div><div class="nx-tile-label">Week task completion</div></div>
+    <div class="nx-tile"><div class="nx-tile-number alert">4</div><div class="nx-tile-label">Overdue tasks</div></div>
+  </section>
+
+  <!-- Needs you today: visibility → action; every number is an entrance -->
+  <section class="nx-panel" aria-label="needs you today">
+    <h2 class="nx-panel-title">Needs you today</h2>
+    <div class="nx-row">
+      <span class="nx-pill risk">at risk</span>
+      <span class="grow">
+        <strong>Automate intake triage</strong>
+        <span class="nx-card-sub" style="display:block">KR 2 · milestone "Pilot on east region" · 3 tasks overdue · Owner: D. Okafor</span>
+      </span>
+      <button class="nx-btn-secondary">Nudge owner</button>
+    </div>
+    <div class="nx-row">
+      <span class="nx-pill risk">overdue</span>
+      <span class="grow">
+        <strong>Data quality baseline</strong>
+        <span class="nx-card-sub" style="display:block">KR 1 · milestone "Warehouse audit" · due yesterday · Owner: L. Chen</span>
+      </span>
+      <button class="nx-btn-secondary">Nudge owner</button>
+    </div>
+    <div class="nx-row">
+      <span class="nx-pill ok">unblocked</span>
+      <span class="grow">
+        <strong>Forecasting copilot rollout</strong>
+        <span class="nx-card-sub" style="display:block">Blocker cleared this morning — milestone resumes today</span>
+      </span>
+      <button class="nx-btn-quiet">View →</button>
+    </div>
+  </section>
+
+  <!-- Objectives pulse: ribbon = lifecycle (Identified / Handed off / Sustained) -->
+  <section class="nx-panel" aria-label="objectives">
+    <h2 class="nx-panel-title">Objectives</h2>
+
+    <div class="nx-row">
+      <span class="grow">
+        <strong>Cut order-to-ship time 30%</strong>
+        <span class="nx-card-sub" style="display:block">4 KRs · self-rolling · day 38 of 90</span>
+      </span>
+      <div style="width:160px"><div class="nx-progress"><span style="width:71%"></span></div></div>
+      <strong style="width:48px; text-align:right">71%</strong>
+      <div class="nx-ribbon" style="width:72px" title="Identified → Handed off → Sustained"><span class="done"></span><span class="current"></span><span></span></div>
+    </div>
+
+    <div class="nx-row">
+      <span class="grow">
+        <strong>Automate intake triage</strong>
+        <span class="nx-card-sub" style="display:block">5 KRs · day 21 of 75 · <em>at risk</em></span>
+      </span>
+      <div style="width:160px"><div class="nx-progress"><span style="width:34%"></span></div></div>
+      <strong style="width:48px; text-align:right">34%</strong>
+      <div class="nx-ribbon" style="width:72px"><span class="current"></span><span></span><span></span></div>
+    </div>
+
+    <div class="nx-row">
+      <span class="grow">
+        <strong>Inventory accuracy to 99.5%</strong>
+        <span class="nx-card-sub" style="display:block">Sustained KPI · tracked year over year</span>
+      </span>
+      <div style="width:160px"><div class="nx-progress"><span style="width:100%"></span></div></div>
+      <strong style="width:48px; text-align:right">✓</strong>
+      <div class="nx-ribbon" style="width:72px"><span class="done"></span><span class="done"></span><span class="done"></span></div>
+    </div>
+  </section>
+
+  <!-- Empty state (first-time view): setup checklist = the first-value journey -->
+  <p class="mock-note">Empty state — first login, before setup</p>
+  <section class="nx-empty">
+    <div class="nx-empty-mark"></div>
+    <h2>Your program, at a pulse</h2>
+    <p>Three steps light this page up: onboard your team, run the readiness assessment, create your first objectives from its results.</p>
+    <div class="nx-cta-pair" style="justify-content:center">
+      <button class="nx-btn-primary">Onboard your team</button>
+      <button class="nx-btn-secondary">Run the assessment</button>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
