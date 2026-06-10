@@ -2,25 +2,28 @@
 
 > Written by the previous session per `/close`. `/init` reads this and starts. Overwritten every session — history lives in JOURNAL.md.
 
-**Type**: coding (mockups — session 3 of 3, then founder review checkpoint)
-**Task**: `N1-P2-08` — Teams + Planning mockups, Builder variant, Profile player card
-**Why it's next**: founder merged #19 (mockups s2 incl. the PQ-4 flashcard deck) and #20 (4-CUSTOMER tier) on 2026-06-10 — session 3 is unblocked and completes the mockup set, triggering the **founder review checkpoint** that unblocks N1-P4-01 (Path B intent).
+**Type**: strategy/docs (N1-P3-01 part 2 — the last Night-1 work item before review-gated tasks) — **with a Level-0 gate**
+**Task**: `N1-P3-01` part 2 — 1-PRODUCT gap: `CAPABILITIES.md` + `ROADMAP.md`
 
-**Standard Level-0 check**: `gh pr list` first — if a session-3 PR is already open, skip to **`N1-P3-01`** (0-BUSINESS/1-PRODUCT population, M, last independent READY item; pre-scan what those folders already hold and define files to ADD, not duplicate; ambiguous split → clarifications). If both are in flight → journal a no-op with the wait reason.
+**Gate**: `gh pr list` first.
+- **Tick-18's PR (0-BUSINESS docs) merged** → proceed with part 2 below (it cites POSITIONING/GTM, so it stacks logically on part 1 — same task, must wait for the merge).
+- **Tick-18's PR still open** → part 2 is in-flight-gated, and N1-P2-08 is NEEDS-FOUNDER-REVIEW: **everything actionable is waiting on the human → journal a no-op** naming the three waits (merge #21 mockups-s3, merge tick-18 business docs, founder mockup review) and exit. Do NOT invent new tasks.
 
-**Session 3 scope**:
-- `teams.html` — people fabric per contract: Invite member primary CTA, tiles (onboarded vs invited, members per team, assessment participation), empty state "Invite your team — objectives need owners"
-- `planning.html` — Worker home per contract: Add milestone/task CTA (context-dependent), current-milestone tiles (tasks done vs planned, hours logged, completion streak), milestone→task list reading as "what do I do today" (NOT a Gantt chart), empty state "pick a key result and plan its first milestone"
-- `dashboard-builder.html` — the mode flip demonstrated: same pulse tiles, program = the application being built, My Clients absent from nav, srishti add-on visible in account dropdown
-- `profile.html` — the player card (PRODUCT_STRATEGY § player cards): skills/intrinsic motivations/interests as **tags, never prose** (fit thesis), role-per-program, assessment-fed fields marked ("from AIR Day 7")
-- New components → DESIGN_LANGUAGE table first; mockups/README table updated
-- **Seal step**: flip BACKLOG N1-P2-08 → NEEDS-FOUNDER-REVIEW (all 3 sessions done); the review feedback becomes the Night 3 build spec and unblocks N1-P4-01
+**Part 2 scope (when unblocked)**:
+- `1-PRODUCT/CAPABILITIES.md` — the capability map: what Nexus can DO, organized by the 8 lego blocks × 6 pages × 2 modes; each capability one line + its module owner + which night ships it; explicitly the bridge between PRODUCT_STRATEGY (contracts) and TECH_STRATEGY (modules) — cite both, duplicate neither
+- `1-PRODUCT/ROADMAP.md` — horizons: Nights 2–5 (from EXECUTION_PLAYBOOK budgets, by reference), beta exit criteria (NORTH_STAR § how we know it worked), post-beta parked items (IMPROVEMENT_PLAN parking lot + fit-thesis matcher + BOQ sub-scores + srishti + org-direct self-serve), each parked item with its unlock trigger
+- Genomes: parents PRODUCT_STRATEGY (+ EXECUTION_PLAYBOOK for ROADMAP); registry lines; validator green
+- Leads with Transformation OS framing; both GTM motions; Karvia adaptation notes (IM-11 light)
+- **Seal**: flip N1-P3-01 → DONE (re-scoped DoD: 4 business + 2 product docs, all six delivered)
 
-**Cards to draw**: PRODUCT_STRATEGY §§ Teams/Planning + § player cards + § fit thesis · NOF.md (milestone/task semantics) · DESIGN_LANGUAGE component set · mockups/shell.css · client/css/tokens.css
+**Cards to draw**: POSITIONING/GTM (from part 1, post-merge) · PRODUCT_STRATEGY · TECH_STRATEGY § module anatomy · EXECUTION_PLAYBOOK § phase plan · IMPROVEMENT_PLAN § parking lot · NORTH_STAR § how-we-know-it-worked
 
-**Definition of done (s3)**: 4 HTML files per contracts (one dominant CTA, ≤4 tiles, empty states); Profile is match-grade; hex scan = anchors only; every `var(--nx-*)` exists in tokens.css; README updated; validator green.
+**After this task, Night 1's remaining queue is entirely human-gated**:
+- N1-P2-08 NEEDS-FOUNDER-REVIEW (10 mockup surfaces → Night 3 build spec)
+- N1-P4-01 unblocks on that review (then: modularization plan + contract drafts, citing API_SURFACE + USER_JOURNEYS § contract index + MODULE_DEPENDENCY_GRAPH)
+- Then the Night-1 close-out groom: /audit, re-sum the night, draft SPRINTS_NIGHT_2
+- Ticks landing before the human returns should no-op with these wait reasons.
 
 **Watch out for**:
-- Planning is the most-used page by the most people (Workers) — calm beats dense
+- ROADMAP must not re-promise dates — nights and triggers, never calendar commitments (NOF spirit applies to us too)
 - Level 0: open PR, don't merge
-- After s3: the founder review is the last gate before N1-P4-01 (contracts) and the Night 2 sprint draft

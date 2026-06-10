@@ -110,7 +110,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: Human-directed (founder voice brief + iPad notes), added mid-sprint. Downstream: N1-P3-01 builds on PRODUCT_STRATEGY; N1-P4-01 aligns with TECH_STRATEGY; EXECUTION_PLAYBOOK governs all future step budgets.
 
 ### N1-P3-01 — Populate 0-BUSINESS and 1-PRODUCT (Transformation OS framing)
-- **Status**: READY
+- **Status**: IN-PROGRESS (part 1 of 2 done — tick 2026-06-10-18, PR pending: 0-BUSINESS gap filled with POSITIONING/GTM/STAKEHOLDERS/BUSINESS_MODEL. DoD re-scoped per re-sum rule: the strategy pack already covers vision+journeys, so the real gap = 4 business docs + 2 product docs (CAPABILITIES, ROADMAP — part 2). Original "4 files each" predates the pack.)
 - **Size**: M (2 ticks)
 - **Depends on**: N1-P1-01 (DONE — pending PR merge)
 - **Definition of done**:
