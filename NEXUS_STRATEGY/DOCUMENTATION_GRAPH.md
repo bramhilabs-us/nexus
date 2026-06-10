@@ -75,6 +75,11 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |-- 0-BUSINESS/AI_CONSULTING_PLAYBOOK.md ..... T0 | AIR framework, sprint, pricing
 |       `--> feeds: PRODUCT_STRATEGY (what pages must encode)
 |
+|-- 0-BUSINESS/POSITIONING.md ................ T0 | category, one-liners, message house
+|       |-- 0-BUSINESS/GTM.md ................ T0 | two motions, the flywheel
+|       |-- 0-BUSINESS/STAKEHOLDERS.md ....... T0 | personas, adoption order
+|       `-- 0-BUSINESS/BUSINESS_MODEL.md ..... T0 | 4 revenue streams, moat economics
+|
 |-- 1-PRODUCT/PRODUCT_STRATEGY.md ............ T1 | 6 page contracts, 2 modes, journeys
 |       |--> feeds: TECH_STRATEGY (page contracts as code)
 |       |-- 2-TECHNICAL/USER_JOURNEYS.md ..... T2 | 4 archetype journeys + seq diagrams
