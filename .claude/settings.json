@@ -11,10 +11,19 @@
       "Bash(git checkout:*)",
       "Bash(git branch:*)",
       "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git mv:*)",
+      "Bash(git rm:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git show:*)",
       "Bash(gh pr create:*)",
       "Bash(gh pr view:*)",
       "Bash(gh pr list:*)",
       "Bash(gh pr merge:*)",
+      "Bash(gh pr edit:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh pr ready:*)",
+      "Bash(gh auth status:*)",
       "Bash(gh run view:*)",
       "Bash(gh run list:*)",
       "Bash(ls:*)",
@@ -23,13 +32,32 @@
       "Bash(rg:*)",
       "Bash(cat:*)",
       "Bash(wc:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(diff:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(awk:*)",
+      "Bash(sed:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(echo:*)",
+      "Bash(touch:*)",
+      "Bash(date:*)",
+      "Bash(basename:*)",
+      "Bash(dirname:*)",
+      "Bash(jq:*)",
       "Bash(mkdir:*)",
+      "Bash(python3:*)",
+      "Bash(node:*)",
+      "Bash(pnpm:*)",
       "Bash(npm install:*)",
       "Bash(npm test:*)",
       "Bash(npm run:*)",
+      "Bash(cd:*)",
       "Read(*)",
-      "Write(/Users/sagarrs/Desktop/official_dev/nexus/**)",
-      "Edit(/Users/sagarrs/Desktop/official_dev/nexus/**)"
+      "Write(/Users/sagarrs/Desktop/Official Dev/nexus/**)",
+      "Edit(/Users/sagarrs/Desktop/Official Dev/nexus/**)"
     ],
     "deny": [
       "Write(/Users/sagarrs/Desktop/official_dev/karvia_business/**)",
@@ -47,7 +75,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/sagarrs/Desktop/official_dev/nexus/.claude/hooks/guard-karvia.sh"
+            "command": "/Users/sagarrs/Desktop/Official Dev/nexus/.claude/hooks/guard-karvia.sh"
           }
         ]
       },
@@ -56,7 +84,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/sagarrs/Desktop/official_dev/nexus/.claude/hooks/budget-check.sh"
+            "command": "/Users/sagarrs/Desktop/Official Dev/nexus/.claude/hooks/budget-check.sh"
           }
         ]
       }
@@ -66,7 +94,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/sagarrs/Desktop/official_dev/nexus/.claude/hooks/tick-end.sh"
+            "command": "/Users/sagarrs/Desktop/Official Dev/nexus/.claude/hooks/tick-end.sh"
           }
         ]
       }
