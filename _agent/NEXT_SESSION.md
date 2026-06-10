@@ -19,4 +19,4 @@
 **Watch out for**:
 - `karvia_business/` is READ-ONLY (hard rule 1)
 - Engines lie about their boundaries (all import shared models) — map *actual* imports, not the engine names
-- **C-008 is OPEN** (Goal/Move layer) — answer it before or during N1-P4-01; if it's still open when P4-01 starts, draft the CRM/assessment/governance/knowledge contracts first and leave the OKR chain for last
+- **C-008 ANSWERED → NOF** (`1-PRODUCT/NOF.md`): 4 levels, Goal/Move dropped, Milestone replaces WeeklyGoal, dynamic objective-relative timelines. N1-P4-01 fully unblocked; map Karvia's goal/move imports as "dies with NOF"

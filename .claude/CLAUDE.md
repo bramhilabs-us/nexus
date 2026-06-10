@@ -18,7 +18,7 @@ It is a **fork of `karvia_business`** at the code level — Karvia's CRM + OKR e
 ### What Nexus inherits from Karvia
 - Engine-based microservice architecture
 - Multi-role authority hierarchy (org → manager → employee → owner)
-- OKR-led delivery cadence (Objectives → Key Results → Weekly Goals → Tasks)
+- OKR-led delivery cadence — sharpened into **NOF** (Objectives → Key Results → Milestones → Tasks; dynamic, outcome-measured; see `NEXUS_STRATEGY/1-PRODUCT/NOF.md`)
 - MongoDB + Render + Docker infra patterns
 
 ### How Nexus differs
@@ -35,7 +35,7 @@ It is a **fork of `karvia_business`** at the code level — Karvia's CRM + OKR e
 @nexus/assessment       pluggable interface — AIR ships v1; future verticals plug in
 @nexus/objectives       O of OKR
 @nexus/key-results      KR of OKR
-@nexus/weekly-goals     sprint-cadence delivery
+@nexus/milestones       ~1-week milestones, objective-relative (NOF)
 @nexus/tasks            atomic work units
 @nexus/governance       program oversight, accountability, decision rights
 @nexus/knowledge        institutional knowledge capture, outcome evidence

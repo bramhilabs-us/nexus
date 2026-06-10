@@ -9,16 +9,14 @@ summary: >
   Every Karvia Mongoose schema (19 models, ~9,300 lines) catalogued with key
   fields, relations, and validation highlights, plus each model's Nexus
   disposition (lift / lift+program_id / redesign / fold / defer) and the new
-  Program entity. Three per-cluster ER diagrams. Surfaces C-008 (Goal/Move
-  layer vs the compressed roll-up chain).
+  Program entity. Three per-cluster ER diagrams. Dispositions reflect NOF
+  (C-008): Goal/Move dropped, WeeklyGoal reshaped to Milestone, KR de-calendared.
 parents:
   - NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md
   - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
 children: []
 revisit:
   - on: "any module's models/ diverge from the dispositions here"
-    stage: N2
-  - on: "C-008 is answered (Goal/Move layer decision)"
     stage: N2
 ---
 
@@ -34,7 +32,7 @@ Catalogue Karvia's actual data layer (read from `karvia_business/server/models/`
 - **Every model already carries `company_id` (indexed)** — adding `program_id` (C-005) is mechanical.
 - **The dual KeyResult is confirmed in code**: `Objective.js:173-184` embedded array + a `key_results_v2` virtual, with Karvia's own `CLEANUP-TARGET` comment. Nexus ships standalone-only (AP-4).
 - **`User.companies[]` (role per company) is the direct ancestor of `program_memberships[]`** — the pattern exists, it just generalizes.
-- **One open question (C-008)**: Karvia's full hierarchy is Objective → KR → **Goal (quarterly)** → WeeklyGoal → **Move**, with Task hanging off Goal — but the Nexus strategy docs describe the compressed chain Task → WeeklyGoal → KR → Objective. Needs a human call before contracts are drafted.
+- **C-008 ANSWERED same day → NOF** (`1-PRODUCT/NOF.md`): Goal and Move dropped, WeeklyGoal reshaped to Milestone (~1 week, objective-relative), Task re-parents to milestone_id, KR de-calendared. Dispositions below reflect the ruling.
 
 ---
 
@@ -61,26 +59,26 @@ erDiagram
     INVITATION }o--|| USER : sent_by
 ```
 
-## Cluster 2 — OKR chain (→ objectives / key-results / weekly-goals / tasks)
+## Cluster 2 — OKR chain (→ objectives / key-results / milestones / tasks, per NOF)
 
 | Model | Lines | Key fields | Relations | Disposition |
 |---|---|---|---|---|
 | **Objective** | 583 | title, short_label, `category` enum (6 MECE), owner_id, time_period_type (calendar/fiscal/custom), **embedded `key_results[]` (CLEANUP-TARGET at :173)** + `key_results_v2` virtual | → Company, User | **Lift + program_id + drop embedded KRs** (AP-4, D6). Add the lifecycle stage field (Identified → Handed off → Sustained) as the declared state machine. |
-| **KeyResult** | 130 | `metric_type` enum (number/percentage/boolean/currency), target/current/baseline_value, unit, quarters[], year | → Company, Objective | **Lift as-is + program_id** — the cleanest model in Karvia; already matches TECH_STRATEGY's spec. |
-| **Goal** (quarterly) | 607 | objective_id, optional key_result_id, **parent_goal_id/child_goal_ids[] (self-nesting)**, time_period | → Company, Objective, Goal | **OPEN — C-008.** Strategy docs compress the chain and omit Goal. Either Goal folds into WeeklyGoal/planning, or the roll-up chain in TECH_STRATEGY is wrong. Human call. |
-| **WeeklyGoal** | 167 | key_result_id (only — no objective_id), frequency enum (once→monthly), target_week/year, `completions[]` per week {status, score, notes} | → Company, KeyResult | **Lift + program_id.** The per-week completions[] array is the heartbeat of the weekly rhythm — keep. |
-| **Task** | 790 | objective_id + goal_id (both required!), assigned_to, created_by, due_date, hours fields | → Company, Objective, Goal, User | **Lift + program_id + re-parent (C-008)**: Task requires `goal_id`, not `weekly_goal_id` — the chain in code runs Task→Goal→Objective, parallel to WeeklyGoal→KR. Resolve with C-008. |
-| **Move** | 182 | weekly_goal_id, `move_type` enum (action/reaction/habit), discipline, frequency + days_of_week[] | → Company, WeeklyGoal | **OPEN — C-008.** Habit-layer below WeeklyGoal; absent from Nexus strategy docs. Lift, fold into Task, or defer. |
+| **KeyResult** | 130 | `metric_type` enum (number/percentage/boolean/currency), target/current/baseline_value, unit, quarters[], year | → Company, Objective | **Lift + program_id, de-calendared (NOF)** — cleanest model in Karvia; `quarters[]`/`year` dropped (reporting periods compute from objective dates). |
+| **Goal** (quarterly) | 607 | objective_id, optional key_result_id, **parent_goal_id/child_goal_ids[] (self-nesting)**, time_period | → Company, Objective, Goal | **Drop (C-008/NOF)** — the quarterly layer is calendar ritual NOF removes; nothing the 6 pages surface needs it. |
+| **WeeklyGoal** | 167 | key_result_id (only — no objective_id), frequency enum (once→monthly), target_week/year, `completions[]` per week {status, score, notes} | → Company, KeyResult | **Reshape → `Milestone` (C-008/NOF)**: ordered (M1, M2…), ~1 week, dated relative to the objective; ISO `target_week/year` dropped; the `completions[]` check-in pattern survives as milestone check-ins. |
+| **Task** | 790 | objective_id + goal_id (both required!), assigned_to, created_by, due_date, hours fields | → Company, Objective, Goal, User | **Lift + program_id + re-parent to `milestone_id` (C-008/NOF)** — the `goal_id` edge dies with Goal. |
+| **Move** | 182 | weekly_goal_id, `move_type` enum (action/reaction/habit), discipline, frequency + days_of_week[] | → Company, WeeklyGoal | **Drop (C-008/NOF)** — habit layer removed; recurrence becomes a Task property post-beta if ever needed. |
 | **OKROutcome** | 477 | per-KR records {final_value, achievement_percentage (0–200), outcome enum exceeded→not_measured}, summary, success/risk_factors[], recommendations[] | → KeyResult | **Lift + elevate**: this is the seed of `Program.outcome` + `@nexus/knowledge` evidence records — Karvia built the Transformation OS receipt without naming it. |
 
 ```mermaid
 erDiagram
     OBJECTIVE ||--o{ KEY_RESULT : has
-    OBJECTIVE ||--o{ GOAL : "quarterly (C-008)"
+    OBJECTIVE ||--o{ GOAL : "quarterly (dropped: NOF)"
     GOAL ||--o{ GOAL : "self-nesting"
-    GOAL ||--o{ TASK : "required goal_id (C-008)"
+    GOAL ||--o{ TASK : "required goal_id (re-parents: NOF)"
     KEY_RESULT ||--o{ WEEKLY_GOAL : has
-    WEEKLY_GOAL ||--o{ MOVE : "habits (C-008)"
+    WEEKLY_GOAL ||--o{ MOVE : "habits (dropped: NOF)"
     KEY_RESULT ||--o{ OKR_OUTCOME : "closure record"
     OBJECTIVE }o--|| USER : owner_id
 ```
@@ -120,4 +118,4 @@ erDiagram
 
 ## Open questions
 
-- **C-008** (filed in `_agent/clarifications.md`) — the Goal/Move layer: Karvia's code-truth hierarchy is `Objective → KR → Goal(quarterly, self-nesting) → WeeklyGoal → Move`, with `Task` requiring `goal_id`. The Nexus strategy docs describe the compressed `Task → WeeklyGoal → KR → Objective`. Lift, fold, or drop Goal+Move? Blocks N1-P4-01 contract drafts for the OKR chain.
+- ~~**C-008** — the Goal/Move layer~~ — **ANSWERED 2026-06-09, same session**: the founder defined **NOF** (`1-PRODUCT/NOF.md`): drop Goal and Move, reshape WeeklyGoal → Milestone (objective-relative), re-parent Task to milestone_id, de-calendar KR. Dispositions above reflect it. N1-P4-01 fully unblocked.

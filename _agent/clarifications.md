@@ -114,5 +114,5 @@ Format:
 - **b) Lift all** — keep Goal + Move as Nexus modules/fields; update TECH_STRATEGY's roll-up chain to 6 levels. Most faithful to "don't redesign the domain," but adds a layer the 6-page UI never surfaces.
 - **c) Defer Move only** — fold Goal (a), park Move as a post-beta habit feature.
 
-**Status**: OPEN
-**Answer**: (filled by human)
+**Status**: ANSWERED — see DECISIONS.md 2026-06-09 (C-008/NOF)
+**Answer**: Neither lift nor simple fold — the **Nexus Objective Framework (NOF)**: Objective → KRs → **Milestones (~1 week, objective-relative)** → Tasks. Goal and Move are dropped; all calendar coupling (ISO weeks, quarters[]) removed; objectives start/end any day, 6–7 self-rolling per org. KRs measure progress; an **outcome record** at objective close measures outcomes. Full spec: `NEXUS_STRATEGY/1-PRODUCT/NOF.md`.

@@ -14,6 +14,7 @@ parents:
   - NEXUS_STRATEGY/00_NORTH_STAR.md
   - NEXUS_STRATEGY/0-BUSINESS/AI_CONSULTING_PLAYBOOK.md
   - NEXUS_STRATEGY/1-PRODUCT/PRODUCT_STRATEGY.md
+  - NEXUS_STRATEGY/1-PRODUCT/NOF.md
   - NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md
   - NEXUS_STRATEGY/2-TECHNICAL/IMPROVEMENT_PLAN.md
 children:
@@ -97,11 +98,13 @@ One calculation service owns the progress math — the answer to "every task com
 
 ```
 Task (hours done / hours estimated)
-  → WeeklyGoal/Milestone % (its tasks)
+  → Milestone % (its tasks; ~1 week each, ordered, objective-relative dates)
     → KeyResult % (its milestones, against metric type: number | % | boolean | currency)
       → Objective % (weighted across its 4–5 KRs, default equal ≈ 25% each)
         → Program % (across objectives)
 ```
+
+Per [NOF](../1-PRODUCT/NOF.md): timelines are **objective-relative** — no ISO weeks, no quarters anywhere in the chain; objectives are self-rolling (start/end any day, 6–7 concurrent per org). Progress (this chain) is distinct from **outcome** (the outcome record written at objective close — see the lifecycle engine and NOF § outcome measurement).
 
 Rules: calculations are pure functions over typed inputs (unit-testable without Mongo); recomputed on the write path and stored denormalized with the event that caused them (read path is a lookup, not a recompute); every number a tile shows traces to one function in this service. Karvia scattered this across `calculatorService`, `scoring`, and `insights` — Nexus has exactly one roll-up module.
 
@@ -120,7 +123,7 @@ graph LR
         CRM["@nexus/crm<br/>tenants, programs, people, roles"]
     end
     subgraph OKR["OKR chain"]
-        OBJ["@nexus/objectives"] --> KR["@nexus/key-results"] --> WG["@nexus/weekly-goals"] --> TSK["@nexus/tasks"]
+        OBJ["@nexus/objectives"] --> KR["@nexus/key-results"] --> MS["@nexus/milestones"] --> TSK["@nexus/tasks"]
     end
     ASMT["@nexus/assessment<br/>provider interface<br/>impls: air (v1), future verticals"]
     GOV["@nexus/governance<br/>oversight, decision rights"]
