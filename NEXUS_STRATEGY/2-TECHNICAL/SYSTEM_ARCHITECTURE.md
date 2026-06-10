@@ -16,6 +16,7 @@ children:
   - NEXUS_STRATEGY/2-TECHNICAL/IMPROVEMENT_PLAN.md
   - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
   - NEXUS_STRATEGY/2-TECHNICAL/DATA_MODELS.md
+  - NEXUS_STRATEGY/2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md
 revisit:
   - on: "a Night 2 lift discovers the Karvia map was wrong somewhere"
     stage: N2

@@ -1,0 +1,73 @@
+graph LR
+    subgraph SHARED["server/models (shared, 19 schemas)"]
+        USR[User]
+        CMP[Company]
+        OBJ[Objective]
+        KR[KeyResult]
+        WG[WeeklyGoal]
+        TSK[Task]
+        GOL[Goal]:::dead
+        MOV[Move]:::dead
+        ASM[Assessment]
+        OKO[OKROutcome]
+        FBK[Feedback]
+        SSID[SSIDiagnosticReport]:::dead
+    end
+
+    subgraph ENG["Engines"]
+        IAM[iam]
+        ASMT[assessment]
+        PLN[planner]
+        SCR[scoring]
+        TRK[tracking]
+        COL[collaboration]
+        OBS[observer]
+        INS[insights]
+    end
+
+    subgraph SHADOW["Engine-local SHADOW schemas (same collections!)"]
+        STSK1["tracking/models/Task"]:::cycle
+        STSK2["collaboration/models/Task"]:::cycle
+        SUSR["scoring/models/User"]:::cycle
+        SOBJ["scoring/models/Objective"]:::cycle
+    end
+
+    subgraph ROUTES["Main-server route clusters"]
+        RCRM[crm routes]
+        RCON[consultant]
+        RASM[assessment routes]
+        ROBJ[objectives/planning]
+        RKR[key-results]
+        RWG[weekly-goals]
+        RTSK[tasks]
+        RGM["goals + moves"]:::dead
+        ROC[outcome-capture]
+        RDB[dashboard]
+    end
+
+    IAM --> USR & CMP
+    ASMT --> USR & CMP
+    PLN --> OBJ & USR & CMP
+
+    TRK --> STSK1
+    COL --> STSK2
+    SCR --> SUSR & SOBJ
+    STSK1 -. same collection .- TSK
+    STSK2 -. same collection .- TSK
+    SUSR -. same collection .- USR
+    SOBJ -. same collection .- OBJ
+
+    RCRM --> USR & CMP & OBJ
+    RCON --> USR & CMP & ASM & OBJ & KR & TSK
+    RASM --> ASM & USR & CMP
+    ROBJ --> OBJ & KR & TSK & WG & GOL
+    RKR --> KR & OBJ
+    RWG --> WG & KR & OBJ & TSK
+    RTSK --> TSK & WG & GOL & USR
+    RGM --> GOL & MOV
+    ROC --> OKO & OBJ
+    RDB --> OBJ & TSK & GOL
+
+    linkStyle 9,10,11,12 stroke:#c00,stroke-width:3px
+    classDef cycle fill:#fee,stroke:#c00,stroke-width:2px
+    classDef dead fill:#eee,stroke:#999,stroke-dasharray:5
