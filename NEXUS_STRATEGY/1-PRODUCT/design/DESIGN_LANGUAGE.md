@@ -95,6 +95,8 @@ One small set shared by all six pages — adding a component requires updating t
 | **Flashcard** | Assessment question delivery (never survey forms — PRODUCT_STRATEGY § delivery experience) | One question per card; flip/advance rhythm; calm, single-focus layout; the "why this assessment" intro card opens every deck |
 | **Deck progress** | Position within a flashcard deck | Dots, not "Q7/24" counters — progress felt, not dreaded; current dot in primary, done dots in primary-soft |
 | **Answer input** | The per-card response control (scale / choice / binary) | Large tap targets, one input family per card; selected state = primary-faint fill + primary border; never radio/checkbox form controls |
+| **Tag chip** | Match-grade profile signals (skills, motivations, interests — fit thesis) | Small pill, primary-faint fill; assessment-fed chips carry a source mark; chips are data, never decoration — free-prose never gets a chip |
+| **Task row** | Planning task lists ("what do I do today") | Status circle (todo/doing/done) + title + hours est/logged + owner; done = struck title, positive circle; calm list, never a Gantt |
 
 ## What this resolves
 

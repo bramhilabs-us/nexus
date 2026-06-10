@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexus — Dashboard (Builder mode mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../../client/css/tokens.css">
+<link rel="stylesheet" href="shell.css">
+</head>
+<body>
+
+<!-- BUILDER MODE: My Clients is absent; same pages, the program is the product being built -->
+<header class="nx-topbar">
+  <span class="nx-wordmark">Nexus</span>
+  <nav class="nx-nav">
+    <a class="active" href="dashboard-builder.html">Dashboard</a>
+    <a href="objectives.html">Objectives</a>
+    <a href="assessments.html">Assessments</a>
+    <a href="teams.html">Teams</a>
+    <a href="planning.html">Planning</a>
+  </nav>
+  <div class="nx-account">
+    <button class="nx-avatar" aria-haspopup="true">LC</button>
+    <div class="nx-dropdown">
+      <a href="profile.html">Profile</a>
+      <a href="#">Company Profile</a>
+      <a href="#">Configuration</a>
+      <a href="#">Settings</a>
+      <hr>
+      <a href="#">srishti — documents <span class="nx-pill ok" style="margin-left:4px; padding:1px 8px">add-on</span></a>
+      <a href="#">Feedback</a>
+    </div>
+  </div>
+</header>
+
+<main class="nx-page">
+
+  <div class="nx-page-head">
+    <div>
+      <h1 class="nx-page-title">Dashboard</h1>
+      <p class="nx-page-sub">Meridian Logistics · <strong>Builder mode</strong> · program: Dispatch Copilot v1 · 8 months post-handover</p>
+    </div>
+    <div class="nx-cta-pair">
+      <button class="nx-btn-primary">Push task completion</button>
+    </div>
+  </div>
+
+  <!-- Same tiles, product-development program -->
+  <section class="nx-tiles" aria-label="analytics">
+    <div class="nx-tile"><div class="nx-tile-number">44%</div><div class="nx-tile-label">Program complete</div></div>
+    <div class="nx-tile"><div class="nx-tile-number ok">3 / 4</div><div class="nx-tile-label">Objectives on track</div></div>
+    <div class="nx-tile"><div class="nx-tile-number">88%</div><div class="nx-tile-label">Week task completion</div></div>
+    <div class="nx-tile"><div class="nx-tile-number">1</div><div class="nx-tile-label">Overdue tasks</div></div>
+  </section>
+
+  <section class="nx-panel" aria-label="needs you today">
+    <h2 class="nx-panel-title">Needs you today</h2>
+    <div class="nx-row">
+      <span class="nx-pill risk">at risk</span>
+      <span class="grow">
+        <strong>Ship onboarding flow v2</strong>
+        <span class="nx-card-sub" style="display:block">KR 2 · milestone "Usability fixes round 2" · 1 task overdue · Owner: R. Alvarez</span>
+      </span>
+      <button class="nx-btn-secondary">Nudge owner</button>
+    </div>
+    <div class="nx-row">
+      <span class="nx-pill ok">review</span>
+      <span class="grow">
+        <strong>Quarterly re-assessment ready</strong>
+        <span class="nx-card-sub" style="display:block">Pulse deck for the build team — 5 cards, deltas vs last quarter</span>
+      </span>
+      <button class="nx-btn-quiet">Send decks →</button>
+    </div>
+  </section>
+
+  <section class="nx-panel" aria-label="objectives">
+    <h2 class="nx-panel-title">Objectives — Dispatch Copilot v1</h2>
+    <div class="nx-row">
+      <span class="grow">
+        <strong>Ship onboarding flow v2</strong>
+        <span class="nx-card-sub" style="display:block">4 KRs · day 18 of 45</span>
+      </span>
+      <div style="width:160px"><div class="nx-progress"><span style="width:41%"></span></div></div>
+      <strong style="width:48px; text-align:right">41%</strong>
+      <div class="nx-ribbon" style="width:72px"><span class="current"></span><span></span><span></span></div>
+    </div>
+    <div class="nx-row">
+      <span class="grow">
+        <strong>Cut support tickets 25%</strong>
+        <span class="nx-card-sub" style="display:block">Sustained KPI from the transformation · year 1 holding</span>
+      </span>
+      <div style="width:160px"><div class="nx-progress"><span style="width:100%"></span></div></div>
+      <strong style="width:48px; text-align:right">✓</strong>
+      <div class="nx-ribbon" style="width:72px"><span class="done"></span><span class="done"></span><span class="done"></span></div>
+    </div>
+  </section>
+
+  <p class="mock-note">
+    Mode flip demonstrated: nav loses My Clients; the account dropdown gains the srishti add-on entry; the page contract is otherwise identical —
+    same tiles, same CTA, the program is now the application being built. The Sustained KPI from the transformation era keeps rolling — the moat made visible.
+  </p>
+
+</main>
+</body>
+</html>

@@ -453,3 +453,43 @@ body {
   background: var(--nx-gradient-soft);
   color: var(--nx-positive);
 }
+
+/* ---------- Tag chip — match-grade signals (fit thesis), never decoration ---------- */
+.nx-tags { display: flex; flex-wrap: wrap; gap: var(--nx-space-2); }
+.nx-tag {
+  font-size: var(--nx-text-xs);
+  font-weight: var(--nx-weight-medium);
+  padding: var(--nx-space-1) var(--nx-space-3);
+  border-radius: var(--nx-radius-pill);
+  background: var(--nx-primary-faint);
+  color: var(--nx-primary);
+}
+.nx-tag.assessed::after {
+  content: ' ◆';
+  color: var(--nx-primary-soft);   /* source mark: fed by an assessment instrument */
+}
+.nx-tag-add {
+  font-size: var(--nx-text-xs);
+  padding: var(--nx-space-1) var(--nx-space-3);
+  border-radius: var(--nx-radius-pill);
+  border: 1px dashed var(--nx-primary-tint);
+  background: none;
+  color: var(--nx-text-tertiary);
+  cursor: pointer;
+}
+
+/* ---------- Task row — the Planning list ---------- */
+.nx-task { display: flex; align-items: center; gap: var(--nx-space-4); padding: var(--nx-space-3) 0; border-top: 1px solid var(--nx-border); }
+.nx-task:first-of-type { border-top: none; }
+.nx-task-state {
+  width: 22px; height: 22px; flex-shrink: 0;
+  border-radius: var(--nx-radius-pill);
+  border: 2px solid var(--nx-gray-light);
+  background: var(--nx-surface);
+  cursor: pointer;
+}
+.nx-task-state.doing { border-color: var(--nx-primary); }
+.nx-task-state.done { border-color: var(--nx-positive); background: var(--nx-positive); }
+.nx-task.done .nx-task-title { text-decoration: line-through; color: var(--nx-text-tertiary); }
+.nx-task-title { flex: 1; min-width: 0; }
+.nx-task-meta { font-size: var(--nx-text-xs); color: var(--nx-text-tertiary); white-space: nowrap; }

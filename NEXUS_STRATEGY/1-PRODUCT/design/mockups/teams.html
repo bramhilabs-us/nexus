@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexus — Teams (Engagement mode mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../../client/css/tokens.css">
+<link rel="stylesheet" href="shell.css">
+</head>
+<body>
+
+<header class="nx-topbar">
+  <span class="nx-wordmark">Nexus</span>
+  <nav class="nx-nav">
+    <a href="my-clients.html">My Clients</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="objectives.html">Objectives</a>
+    <a href="assessments.html">Assessments</a>
+    <a class="active" href="teams.html">Teams</a>
+    <a href="planning.html">Planning</a>
+  </nav>
+  <div class="nx-account">
+    <button class="nx-avatar" aria-haspopup="true">AR</button>
+    <div class="nx-dropdown">
+      <a href="profile.html">Profile</a>
+      <a href="#">Company Profile</a>
+      <a href="#">Configuration</a>
+      <a href="#">Settings</a>
+      <hr>
+      <a href="#">Feedback</a>
+    </div>
+  </div>
+</header>
+
+<main class="nx-page">
+
+  <div class="nx-page-head">
+    <div>
+      <h1 class="nx-page-title">Teams</h1>
+      <p class="nx-page-sub">Meridian Logistics · the people who execute the program</p>
+    </div>
+    <div class="nx-cta-pair">
+      <button class="nx-btn-primary">Invite member</button>
+      <button class="nx-btn-secondary">Create team</button>
+    </div>
+  </div>
+
+  <!-- Analytics strip (≤4 tiles) -->
+  <section class="nx-tiles" aria-label="analytics">
+    <div class="nx-tile"><div class="nx-tile-number">34/40</div><div class="nx-tile-label">Onboarded vs invited</div></div>
+    <div class="nx-tile"><div class="nx-tile-number">5</div><div class="nx-tile-label">Teams</div></div>
+    <div class="nx-tile"><div class="nx-tile-number ok">85%</div><div class="nx-tile-label">Assessment participation</div></div>
+    <div class="nx-tile"><div class="nx-tile-number alert">6</div><div class="nx-tile-label">Invites pending</div></div>
+  </section>
+
+  <!-- Team cards -->
+  <section class="nx-card-grid" aria-label="teams">
+
+    <article class="nx-card">
+      <h2 class="nx-card-title" style="margin-bottom:var(--nx-space-1)">Operations</h2>
+      <p class="nx-card-sub" style="margin-bottom:var(--nx-space-4)">Lead: D. Okafor · 12 members</p>
+      <div class="nx-row"><span class="grow nx-card-sub">Owns objectives</span><strong>2</strong></div>
+      <div class="nx-row"><span class="grow nx-card-sub">Assessed</span><strong>11 / 12</strong><span class="nx-pill ok">92%</span></div>
+      <div class="nx-row"><span class="grow nx-card-sub">Roles</span><span class="nx-tags"><span class="nx-tag">Team lead ×2</span><span class="nx-tag">Worker ×10</span></span></div>
+      <div style="margin-top:var(--nx-space-4)"><button class="nx-btn-quiet">Manage members →</button></div>
+    </article>
+
+    <article class="nx-card">
+      <h2 class="nx-card-title" style="margin-bottom:var(--nx-space-1)">Demand planning</h2>
+      <p class="nx-card-sub" style="margin-bottom:var(--nx-space-4)">Lead: L. Chen · 7 members</p>
+      <div class="nx-row"><span class="grow nx-card-sub">Owns objectives</span><strong>1</strong><span class="nx-pill ok">Sustained KPI owner</span></div>
+      <div class="nx-row"><span class="grow nx-card-sub">Assessed</span><strong>7 / 7</strong><span class="nx-pill ok">100%</span></div>
+      <div class="nx-row"><span class="grow nx-card-sub">Roles</span><span class="nx-tags"><span class="nx-tag">Delivery manager</span><span class="nx-tag">Worker ×6</span></span></div>
+      <div style="margin-top:var(--nx-space-4)"><button class="nx-btn-quiet">Manage members →</button></div>
+    </article>
+
+    <article class="nx-card">
+      <h2 class="nx-card-title" style="margin-bottom:var(--nx-space-1)">Customer service</h2>
+      <p class="nx-card-sub" style="margin-bottom:var(--nx-space-4)">Lead: unassigned · 9 members</p>
+      <div class="nx-row"><span class="grow nx-card-sub">Owns objectives</span><strong>1</strong><span class="nx-pill risk">needs owner</span></div>
+      <div class="nx-row"><span class="grow nx-card-sub">Assessed</span><strong>5 / 9</strong><span class="nx-pill risk">4 pending</span></div>
+      <div class="nx-row"><span class="grow nx-card-sub">Roles</span><span class="nx-tags"><span class="nx-tag">Worker ×9</span></span></div>
+      <div style="margin-top:var(--nx-space-4)"><button class="nx-btn-secondary">Assign lead</button></div>
+    </article>
+
+  </section>
+
+  <!-- Empty state -->
+  <p class="mock-note">Empty state — setup phase, arriving from the Dashboard checklist</p>
+  <section class="nx-empty">
+    <div class="nx-empty-mark"></div>
+    <h2>Invite your team — objectives need owners</h2>
+    <p>Everyone who executes the program gets a seat: leads own objectives, workers own tasks, and the readiness assessment includes them all.</p>
+    <button class="nx-btn-primary">Invite member</button>
+  </section>
+
+</main>
+</body>
+</html>
