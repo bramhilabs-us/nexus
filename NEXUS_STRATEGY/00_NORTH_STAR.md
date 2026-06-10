@@ -78,7 +78,7 @@ What makes ≤90 credible rather than aspirational:
 
 | Karvia spent sessions on | Nexus instead has |
 |---|---|
-| Discovering the domain model by building it | The proven hierarchy: Objective → Key Result → Weekly Goal/Milestone → Task, untouched (`DECISIONS.md`, IMPROVEMENT_PLAN parking lot) |
+| Discovering the domain model by building it | The proven chain, sharpened into **NOF**: Objective → KR → Milestone → Task — dynamic, outcome-measured (`1-PRODUCT/NOF.md`, C-008) |
 | Architecture experiments (10 engines, 8 dead) | Ratified decisions: consolidate (C-003), TypeScript strict (C-004), Program entity (C-005) |
 | Lifting + untangling legacy assessment code | SSI dropped (C-006); AIR built clean and data-driven inside the assessment block |
 | Re-deriving context every session | `_agent/` loop state + this pack of cards |

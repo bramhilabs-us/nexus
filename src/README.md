@@ -16,7 +16,7 @@ children:
   - src/modules/assessment/README.md
   - src/modules/objectives/README.md
   - src/modules/key-results/README.md
-  - src/modules/weekly-goals/README.md
+  - src/modules/milestones/README.md
   - src/modules/tasks/README.md
   - src/modules/governance/README.md
   - src/modules/knowledge/README.md

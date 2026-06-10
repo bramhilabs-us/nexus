@@ -170,6 +170,12 @@ Each anti-pattern is sourced from a specific Karvia observation (file:line refs 
 - Failed ticks → root cause → protocol improvement → JOURNAL retro entry
 - The two dry-run ticks already surfaced: stash-pop hazard, auth-flip recovery, linter races. These are protocol bugs, not user errors. Fix them, version the protocol.
 
+### IM-11. Karvia Reflection Gate (C-009) — why/what/how/when + relevancy
+- Every element copied or inspired from Karvia carries a **reflection record** before it lands: **Why** are we doing this · **What** are we doing · **How** · **When** is the right time · **Relevant** for Nexus? · **Improving** anything? · **Complexity** added? · **Redundancy** created?
+- Lightweight form: a disposition column in catalogue docs (see `DATA_MODELS.md`). Full form: the 8-question table in the lifting PR (worked example: `1-PRODUCT/NOF.md` § Reflection record).
+- **Improvement sessions** (session type, see EXECUTION_PLAYBOOK) periodically re-run the reflection on already-lifted elements: can it be done better *within Nexus*? Verdict: keep / improve / replace, journaled.
+- Enforcement: PR checklist line below; reviewer rejects a Karvia lift without a reflection record.
+
 ---
 
 ## Implications for the 3 open clarifications
@@ -200,6 +206,7 @@ The agent's PR checklist (in `.github/PULL_REQUEST_TEMPLATE.md`, to be added Nig
 [ ] DECISIONS.md entry exists for any non-trivial architectural choice
 [ ] No new `// TODO` without a BACKLOG ID linked
 [ ] No new module dependency without a note in DEPENDENCIES.md
+[ ] If lifted/inspired from Karvia: reflection record included (IM-11 — why/what/how/when + relevancy/complexity/redundancy)
 ```
 
 A PR failing any required item is not merged. The agent's tick protocol marks it BLOCKED and journals why.
@@ -218,7 +225,7 @@ Things Nexus will **not** do in Nights 1–5, and why. Each rejected item has a 
 | Multi-region / multi-cloud | Premature. Render single-region for launch. |
 | Custom UI framework | Vanilla JS (Karvia's pattern), or a thin layer (htmx / alpine / React without Redux). Defer the framework debate. |
 | Rebuild auth from scratch | Lift Karvia's JWT+IAM pattern, harden it (rotate keys, add 2FA later, audit logs). Don't reinvent. |
-| Rewrite the OKR domain | Karvia's hierarchy (Objective → KR → Goal → WeeklyGoal+Task → Move) is sound. Refactor boundaries; don't redesign domain. |
+| Rewrite the OKR domain beyond NOF | NOF (C-008) is the ratified, measured redesign: Objective → KR → Milestone → Task, dynamic + outcome-measured. No further domain redesign in v1. |
 | AI-everywhere | Every AI feature has a non-AI fallback and an explicit cost ceiling. No AI-required code paths. |
 | Real-time collaboration | Socket.IO exists in Karvia but lightly used; Nexus defers real-time to post-v1. |
 | Mobile apps | Web-first, mobile-responsive. Native apps deferred. |

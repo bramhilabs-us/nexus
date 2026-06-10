@@ -58,6 +58,7 @@ Karvia's 290 sessions break down roughly into: discovery and re-strategizing (th
 | **Coding** | Contract tests green; feature behind gates; PR open | ~50% |
 | **Test/QA** | Coverage raised, E2E journey walked, bugs filed as BACKLOG items | ~15% |
 | **Audit/Groom** | Drift report, BACKLOG groomed, next sprint drafted | ~10% |
+| **Improvement** | A lifted Karvia element re-reflected (C-009/IM-11): keep / improve / replace, journaled | folded into the audit share |
 
 A session that produces no deliverable is journaled NO-OP and still counts — pressure to make every step land.
 

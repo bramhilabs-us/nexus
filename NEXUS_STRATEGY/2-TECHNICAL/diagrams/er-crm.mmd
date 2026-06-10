@@ -1,0 +1,9 @@
+erDiagram
+    COMPANY ||--o{ USER : "companies[]"
+    COMPANY ||--o{ TEAM : has
+    COMPANY ||--o{ INVITATION : scopes
+    COMPANY ||--o{ PROGRAM : "runs (NEW)"
+    PROGRAM ||--o{ PROGRAM_MEMBERSHIP : "members (NEW)"
+    USER ||--o{ PROGRAM_MEMBERSHIP : holds
+    TEAM }o--|| USER : manager_id
+    INVITATION }o--|| USER : sent_by

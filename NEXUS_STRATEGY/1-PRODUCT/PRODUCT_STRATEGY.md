@@ -15,6 +15,7 @@ parents:
   - NEXUS_STRATEGY/0-BUSINESS/AI_CONSULTING_PLAYBOOK.md
 children:
   - NEXUS_STRATEGY/1-PRODUCT/design/DESIGN_LANGUAGE.md
+  - NEXUS_STRATEGY/1-PRODUCT/NOF.md
   - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
 revisit:
   - on: "a page contract changes in code (PageContract registration differs from this doc)"
@@ -41,7 +42,7 @@ This document is the UI-layer card of the pack. It defines the **page contract**
 
 ## The product in one paragraph
 
-Nexus is more than an OKR tool: it makes strategy a rhythm instead of a one-off. An objective is achieved through a definitive number of steps — each step a task measured in hours; several tasks complete a milestone (weekly goal); several milestones complete a key result; a key result is roughly 25% of the way to an objective (4–5 KRs per objective, ideally). Small teams coordinate through this cadence, and management overhead collapses because strategy, planning, and execution live in one recursive loop — not in a project tool someone "regularly looks at."
+Nexus is more than an OKR tool: it makes strategy a rhythm instead of a one-off. An objective is achieved through a definitive number of steps — each step a task measured in hours; several tasks complete a milestone (~1 week each); several milestones complete a key result; a key result is roughly 25% of the way to an objective (4–5 KRs per objective, ideally). Per [NOF](NOF.md), objectives are **self-rolling**: they start and end on any day, everything beneath aligns to *their* timeline (no quarters, no ISO weeks), an org runs 6–7 concurrently — and KRs measure *progress* while the close of each objective writes an *outcome* record. Small teams coordinate through this cadence, and management overhead collapses because strategy, planning, and execution live in one recursive loop — not in a project tool someone "regularly looks at."
 
 ## Two operating modes
 
@@ -125,7 +126,7 @@ In Builder mode the Dashboard is the product team's delivery pulse — same tile
 | Purpose | Create and track objectives through their three lifecycle stages; the gamified heart of the product |
 | Primary role | Manager (home page); Business Owner |
 | Entry points | Nav; Dashboard drill-down; Assessments ("create objectives from these results") |
-| Exit points | Planning (break a KR into weekly goals); Dashboard (zoom back out) |
+| Exit points | Planning (break a KR into milestones); Dashboard (zoom back out) |
 | Primary CTA | **Create objective** — pre-seeded from assessment deliverables (e.g., AIR's Opportunity Register) when arriving from Assessments |
 | Secondary CTA | Update progress / check-in on a KR |
 | Analytics strip | Objectives by stage (Identified / Handed off / Sustained), on-track vs at-risk, avg % complete |
@@ -169,14 +170,14 @@ This page is a **shell**: every assessment-specific surface — instruments, evi
 
 | Field | Contract |
 |---|---|
-| Purpose | Turn KRs into this week's goals and tasks; the execution surface where hours get logged |
+| Purpose | Turn KRs into milestones (~1 week each) and tasks; the execution surface where hours get logged |
 | Primary role | Employee (home page); Manager (planning) |
 | Entry points | Employee login (default landing); nav; Objectives ("plan this KR") |
 | Exit points | Back to Objectives (progress rolls up automatically); Dashboard |
-| Primary CTA | **Add weekly goal / task** (context-dependent: planning vs executing) |
+| Primary CTA | **Add milestone / task** (context-dependent: planning vs executing) |
 | Secondary CTA | Mark task complete / log hours |
-| Analytics strip | This week: tasks done vs planned, hours logged, weekly goal completion streak |
-| Empty state | "Pick a key result and plan your week" |
+| Analytics strip | Current milestone: tasks done vs planned, hours logged, milestone completion streak |
+| Empty state | "Pick a key result and plan its first milestone" |
 
 ## The first-value journey
 
@@ -186,7 +187,7 @@ The journey every new engagement walks; the Dashboard empty state, the demo scri
 2. Client appears as Prospect → consultant clicks **Start assessment** (AIR Strategic Assessment).
 3. Client onboards their team (**Teams**); the engagement runs in **Assessments** — evidence captured per the assessment's instruments, scored, deliverables generated.
 4. Deliverables land → BO/Manager clicks **Create objectives from these results** (**Objectives**) → objectives *Identified*, 4–5 KRs each, seeded from the Opportunity Register / 90-day plan.
-5. Manager plans the first week (**Planning**) → weekly goals → tasks with hour estimates.
+5. Manager plans the first milestone (**Planning**) → tasks with hour estimates.
 6. Team executes; task completion rolls up task → milestone → KR → objective; **Dashboard** shows the pulse.
 7. Objectives complete → *Handed off* → program handover → **Builder mode**: the product team keeps Nexus (+ srishti) as their development OS; objectives become *Sustained* KPIs tracked year over year.
 

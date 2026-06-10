@@ -55,6 +55,7 @@ SEAL      /close: journal (with quality self-score), doc-graph green, write NEXT
 | 7 | Read the model's validation contract before seeding fixtures; fabricate ObjectIds for hierarchy you don't depend on | Testing |
 | 8 | Spend the first 10–15% of any coding session on the pre-scan; it IS the work | Coding |
 | 9 | Name the invariants you're touching in the pre-scan output; escalate before breaking one | Coding, strategy |
+| 10 | Every Karvia lift carries the C-009 reflection record: why/what/how/when + relevant? improving? complexity? redundancy? (IM-11) | Any session lifting from Karvia |
 
 ## Quality self-score (sealed into every JOURNAL entry)
 

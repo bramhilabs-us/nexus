@@ -1,0 +1,9 @@
+erDiagram
+    ASSESSMENT }o--|| COMPANY : tenant
+    ASSESSMENT }o--o| ASSESSMENT_TEMPLATE : template_id
+    ASSESSMENT_TEMPLATE }o--o{ ASSESSMENT_QUESTION : selected_questions
+    ASSESSMENT }o--o| INVITATION : via
+    ASSESSMENT ||--o{ AI_OKR_SUGGESTION : seeds
+    AI_OKR_SUGGESTION ||--o{ OBJECTIVE : "drafts approved into"
+    ASSESSMENT ||--o{ DIAGNOSTIC_REPORT : generates
+    ASSESSMENT ||--o{ SSI_DIAGNOSTIC_REPORT : "generates (SSI-only)"

@@ -226,3 +226,29 @@ Every domain model gains a required `program_id`: `Objective`, `KeyResult`, `Goa
 - BRAMHI brand guide moved to `1-PRODUCT/design/brand/`; `DESIGN_LANGUAGE.md` translates it (PQ-3 resolved; token-first rule prevents Karvia's drifting-hex bug).
 - CI gains the doc-graph check as a required gate in Night 2.
 - Supersedes MASTER_GUIDE's "no genome tags" stance (the objection was to Karvia's *implementation*, not the idea).
+
+---
+
+## 2026-06-09 — NOF: the Nexus Objective Framework (C-008 answered)
+
+**Context**: The data models catalogue (N1-P2-02) surfaced that Karvia's code-truth hierarchy is `Objective → KR → Goal(quarterly, self-nesting) → WeeklyGoal(ISO weeks) → Move`, with Task requiring `goal_id` — while the Nexus strategy docs described a compressed chain. The founder resolved it by defining the framework outright.
+
+**Decision**: **NOF** — `Objective → Key Results → Milestones (~1 week each) → Tasks`. Specified in `NEXUS_STRATEGY/1-PRODUCT/NOF.md`. Core properties:
+1. **Goal and Move dropped.** Four levels, no more.
+2. **Fully dynamic**: objectives start/end on any day; milestones/KRs/tasks align to the objective's own window; no ISO weeks, no quarters[]. 6–7 self-rolling objectives per org.
+3. **Outcome-measured**: KRs measure progress; an outcome record at objective close (descended from Karvia's OKROutcome) measures what actually changed; Sustained stage tracks it year-over-year; program-level aggregation feeds @nexus/knowledge.
+4. **Self-evolving**: the assessment module periodically runs an NOF-effectiveness check (designed N4) — the framework that assesses the org also assesses itself.
+
+**Alternatives considered**: (b) lift all 6 levels — rejected, carries calendar ritual and layers the 6-page UI never surfaces; (a) plain fold — superseded by NOF, which also fixes the progress-vs-outcome flaw.
+
+**Consequences**: `@nexus/weekly-goals` module renamed `@nexus/milestones`; WeeklyGoal reshaped to Milestone (ordered, objective-relative dates); Task re-parents to milestone_id; KR loses quarters[]/year; DATA_MODELS dispositions updated; N1-P4-01 OKR-chain contracts unblocked.
+
+---
+
+## 2026-06-09 — Karvia Reflection Gate: why/what/how/when + relevancy (C-009)
+
+**Context**: Founder directive — everything copied or inspired from Karvia must pass a self-reflection before it lands in Nexus. Improvement sessions evaluate whether each incorporated element can be done better.
+
+**Decision**: Every Karvia lift carries a **reflection record**: **Why** are we doing this · **What** are we doing · **How** · **When** is the right time · **Relevant?** for Nexus · **Improving?** anything · **Complexity added?** · **Redundancy created?** Enforced as IM-11 in IMPROVEMENT_PLAN (PR checklist line) and SESSION_PRACTICES rule 10. A new **improvement** session type re-evaluates already-lifted elements ("can it be better within Nexus?").
+
+**Consequences**: DATA_MODELS-style disposition tables are the lightweight form (disposition column = the reflection verdict); module-level lifts in N2 carry the full 8-question record in their PR; NOF.md § "Reflection record" is the worked example.

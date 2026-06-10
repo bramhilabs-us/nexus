@@ -26,12 +26,15 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - ✓ Opened C-003 / C-004 / C-005 on architecture questions
 
 ### N1-P2-02 — Data models catalogue
-- **Status**: READY
-- **Size**: M (2 ticks)
+- **Status**: DONE (PR pending merge — session 2026-06-09-02)
+- **Size**: M (2 ticks; completed in 1 session)
 - **Depends on**: N1-P1-01
 - **Definition of done**:
-  - `NEXUS_STRATEGY/2-TECHNICAL/DATA_MODELS.md` lists every Mongoose schema
-  - Per-cluster ER diagrams (CRM, OKR, Assessment)
+  - ✓ `NEXUS_STRATEGY/2-TECHNICAL/DATA_MODELS.md` — all 19 Mongoose schemas (~9,300 lines) with key fields, relations, validations
+  - ✓ Per-cluster ER diagrams (CRM, OKR, Assessment) in `diagrams/er-*.mmd`
+  - ✓ Per-model Nexus disposition (lift / lift+program_id / redesign / fold / defer)
+  - ✓ Wired into doc graph (genome, 2 parents); validator green
+- **Notes**: Surfaced C-008 (Goal/Move layer) — ANSWERED same day by the founder: **NOF** (`1-PRODUCT/NOF.md`, DECISIONS C-008/C-009). N1-P4-01 fully unblocked; dispositions updated in DATA_MODELS.md.
 
 ### N1-P2-03 — API surface catalogue
 - **Status**: READY
