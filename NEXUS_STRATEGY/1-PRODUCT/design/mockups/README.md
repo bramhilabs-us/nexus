@@ -31,6 +31,9 @@ Open any `.html` file directly in a browser (tokens load via relative path to `c
 | `objectives.html` | Objectives (Engagement) — lifecycle board: stage tiles, KR cards + ribbons across all 3 stages, assessment-driven empty state | session 2 |
 | `assessments.html` | Assessments (Engagement) — pluggable shell: AIR sprint workspace in block slots, score + deliverables → objectives handoff, gallery empty state | session 2 |
 | `assessment-flashcards.html` | **PQ-4 exploration** — taker's deck: why-card, scale/choice/binary cards, dot progress, recurring-delta greeting, completion card; alternatives noted for founder | session 2 |
-| *teams, planning, Builder variants, Profile player card* | — | session 3 |
+| `teams.html` | Teams (Engagement) — people fabric: invite CTA, participation tiles, team cards with role tags, "objectives need owners" empty state | session 3 |
+| `planning.html` | Planning (Worker home) — "what do I do today": current-milestone tiles, task rows (my tasks first), team view, next-milestone draft, empty state | session 3 |
+| `dashboard-builder.html` | Dashboard (**Builder mode**) — the mode flip: no My Clients, srishti add-on in dropdown, product program, Sustained KPI rolling | session 3 |
+| `profile.html` | Profile (player card) — match-grade tags only (◆ = assessment-fed), role-per-program, fit-thesis note | session 3 |
 
 **Rules enforced here**: every page = its PRODUCT_STRATEGY contract (one dominant CTA, ≤4 tiles, empty state teaches the purpose); colors/type/space only via `var(--nx-*)` — `grep -rE '#[0-9a-fA-F]{3,6}' mockups/` must return nothing; fonts per DESIGN_LANGUAGE § Token table (Inter UI; Playfair Display only in the empty-state display moment; never Cinzel/Cormorant in chrome). Each mockup also shows its empty state below a dashed `mock-note` separator — mockup convention, not a product surface.

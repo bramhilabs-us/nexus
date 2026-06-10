@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexus — Planning (Worker home mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../../client/css/tokens.css">
+<link rel="stylesheet" href="shell.css">
+</head>
+<body>
+
+<header class="nx-topbar">
+  <span class="nx-wordmark">Nexus</span>
+  <nav class="nx-nav">
+    <a href="my-clients.html">My Clients</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="objectives.html">Objectives</a>
+    <a href="assessments.html">Assessments</a>
+    <a href="teams.html">Teams</a>
+    <a class="active" href="planning.html">Planning</a>
+  </nav>
+  <div class="nx-account">
+    <button class="nx-avatar" aria-haspopup="true">JM</button>
+    <div class="nx-dropdown">
+      <a href="profile.html">Profile</a>
+      <a href="#">Company Profile</a>
+      <a href="#">Configuration</a>
+      <a href="#">Settings</a>
+      <hr>
+      <a href="#">Feedback</a>
+    </div>
+  </div>
+</header>
+
+<main class="nx-page">
+
+  <div class="nx-page-head">
+    <div>
+      <h1 class="nx-page-title">Planning</h1>
+      <p class="nx-page-sub">Good morning, Jonah — Milestone 2 of "Cut order-to-ship time 30%", day 3 of 7</p>
+    </div>
+    <div class="nx-cta-pair">
+      <button class="nx-btn-primary">Add task</button>
+      <button class="nx-btn-secondary">Log hours</button>
+    </div>
+  </div>
+
+  <!-- Analytics strip: the current milestone, nothing else (≤4 tiles) -->
+  <section class="nx-tiles" aria-label="analytics">
+    <div class="nx-tile"><div class="nx-tile-number">7/11</div><div class="nx-tile-label">Tasks done</div></div>
+    <div class="nx-tile"><div class="nx-tile-number">19h</div><div class="nx-tile-label">Logged of 26h est</div></div>
+    <div class="nx-tile"><div class="nx-tile-number ok">4</div><div class="nx-tile-label">Milestone streak</div></div>
+    <div class="nx-tile"><div class="nx-tile-number">4d</div><div class="nx-tile-label">Left in milestone</div></div>
+  </section>
+
+  <!-- What do I do today — my tasks first, calm list, never a Gantt -->
+  <section class="nx-panel" aria-label="my tasks">
+    <h2 class="nx-panel-title">Your tasks — Milestone 2 · "Pilot on east region" <span class="nx-card-sub">(KR 3 · East-region pilot live)</span></h2>
+
+    <div class="nx-task done">
+      <button class="nx-task-state done" aria-label="done"></button>
+      <span class="nx-task-title">Map east-region carrier handoffs</span>
+      <span class="nx-task-meta">3h est · 2.5h logged</span>
+    </div>
+    <div class="nx-task done">
+      <button class="nx-task-state done" aria-label="done"></button>
+      <span class="nx-task-title">Draft pilot routing rules</span>
+      <span class="nx-task-meta">4h est · 5h logged</span>
+    </div>
+    <div class="nx-task">
+      <button class="nx-task-state doing" aria-label="in progress"></button>
+      <span class="nx-task-title"><strong>Configure pilot dashboard alerts</strong></span>
+      <span class="nx-task-meta">2h est · 1h logged · due today</span>
+    </div>
+    <div class="nx-task">
+      <button class="nx-task-state" aria-label="todo"></button>
+      <span class="nx-task-title">Walk through exception flow with dispatch</span>
+      <span class="nx-task-meta">2h est · tomorrow</span>
+    </div>
+    <div class="nx-task">
+      <button class="nx-task-state" aria-label="todo"></button>
+      <span class="nx-task-title">Pilot readiness checklist with D. Okafor</span>
+      <span class="nx-task-meta">1h est · day 6</span>
+    </div>
+  </section>
+
+  <!-- The rest of the milestone (team view) -->
+  <section class="nx-panel" aria-label="team tasks">
+    <h2 class="nx-panel-title">Rest of the milestone <span class="nx-card-sub">6 tasks · 3 owners</span></h2>
+    <div class="nx-task done">
+      <button class="nx-task-state done"></button>
+      <span class="nx-task-title">Baseline east-region cycle times</span>
+      <span class="nx-task-meta">P. Singh · done</span>
+    </div>
+    <div class="nx-task">
+      <button class="nx-task-state doing"></button>
+      <span class="nx-task-title">Train dispatch team on pilot flow</span>
+      <span class="nx-task-meta">R. Alvarez · 4h est · <span class="nx-pill risk" style="padding:2px 8px">blocked: room booking</span></span>
+    </div>
+    <div class="nx-task">
+      <button class="nx-task-state"></button>
+      <span class="nx-task-title">Go/no-go review with ops lead</span>
+      <span class="nx-task-meta">D. Okafor · day 7</span>
+    </div>
+    <div style="margin-top:var(--nx-space-4)">
+      <span class="nx-card-sub">Milestone progress rolls up automatically — task → milestone → KR → objective. Nothing to update by hand.</span>
+    </div>
+  </section>
+
+  <!-- Manager planning view: next milestone, draft -->
+  <section class="nx-panel" aria-label="next milestone">
+    <h2 class="nx-panel-title">Up next — Milestone 3 · "Exception handling tuned" <span class="nx-pill" style="background:var(--nx-gray-light); color:var(--nx-gray)">draft</span></h2>
+    <p class="nx-card-sub" style="margin-bottom:var(--nx-space-3)">Starts when M2 closes · dated relative to the objective, not the calendar</p>
+    <div class="nx-cta-pair">
+      <button class="nx-btn-secondary">Add milestone</button>
+      <button class="nx-btn-quiet">Draft tasks with AI →</button>
+    </div>
+  </section>
+
+  <!-- Empty state -->
+  <p class="mock-note">Empty state — a worker whose KR has no plan yet</p>
+  <section class="nx-empty">
+    <div class="nx-empty-mark"></div>
+    <h2>Pick a key result and plan its first milestone</h2>
+    <p>A milestone is about a week of work: a handful of tasks, each a few hours. Finish the milestone, the key result moves — progress takes care of itself.</p>
+    <button class="nx-btn-primary">Add milestone</button>
+  </section>
+
+</main>
+</body>
+</html>
