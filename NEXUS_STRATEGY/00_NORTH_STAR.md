@@ -1,12 +1,31 @@
-# Nexus North Star — the 90-step thesis
-
-**Status**: Active
-**Last Updated**: 2026-06-09
-**Owner**: Founder + agent (interactive sessions 2026-06-09)
-**Tier**: T0
-**Depends on**: `_agent/DECISIONS.md` (C-001…C-006), `.claude/CLAUDE.md`, `_source/KARVIA_STRATEGY/00_MASTER_STRATEGY.md`, `_source/karvia_claude/SESSION_LOG.md`
-
 ---
+id: nexus.north-star
+title: Nexus North Star — the 90-step thesis
+tier: T0
+status: active
+owner: founder
+updated: 2026-06-09
+summary: >
+  The root of the document graph. States the play (AI consulting beachhead,
+  Nexus as instrument + handed-over product, srishti add-on), the ≤90-session
+  thesis vs Karvia's ~290, the three-layer model, and the pack-of-cards system
+  that hands off to the business/product/tech/execution cards.
+parents: []
+children:
+  - NEXUS_STRATEGY/0-BUSINESS/AI_CONSULTING_PLAYBOOK.md
+  - NEXUS_STRATEGY/1-PRODUCT/PRODUCT_STRATEGY.md
+  - NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md
+  - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
+  - NEXUS_STRATEGY/3-DELIVERY/EXECUTION_PLAYBOOK.md
+  - NEXUS_STRATEGY/DOCUMENTATION_GRAPH.md
+revisit:
+  - on: "any C-xxx decision in _agent/DECISIONS.md is ratified or reversed"
+    stage: always
+  - on: "GTM, pricing, or the srishti relationship changes"
+    stage: always
+---
+
+# Nexus North Star — the 90-step thesis
 
 ## Purpose
 

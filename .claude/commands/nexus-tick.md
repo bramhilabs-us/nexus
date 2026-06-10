@@ -10,10 +10,12 @@ You are running one tick of the Nexus autonomous loop. Follow the protocol exact
 
 1. `.claude/CLAUDE.md` — hard rules, what Nexus is
 2. `.claude/TICK_PROTOCOL.md` — the loop steps you must follow
-3. `_agent/AUTONOMY.md` — current level + budget status
-4. `_agent/JOURNAL.md` — tail, last 5 entries (skip if empty)
-5. `_agent/BACKLOG.md` — full file (the work queue)
-6. `_agent/clarifications.md` — check for human answers since last tick
+3. `.claude/SESSION_PRACTICES.md` — pre-scan discipline, quality scoring
+4. `_agent/AUTONOMY.md` — current level + budget status
+5. `_agent/NEXT_SESSION.md` — the card: if it names a tick-executable task, that IS your pick (skip BACKLOG scanning)
+6. `_agent/JOURNAL.md` — tail, last 5 entries (skip if empty)
+7. `_agent/BACKLOG.md` — full file only if the card is missing/blocked (fallback queue)
+8. `_agent/clarifications.md` — check for human answers since last tick
 
 ## Then execute the protocol
 
@@ -46,4 +48,4 @@ Exactly one of:
 - A JOURNAL entry explaining the no-op.
 - An entry in `clarifications.md` posing a precise question.
 
-Never an empty tick.
+Never an empty tick. **Plus, always**: rewrite `_agent/NEXT_SESSION.md` naming the next session (type, task, cards to draw, definition of done) — the chain must never break, even on a no-op.

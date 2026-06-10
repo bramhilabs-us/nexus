@@ -1,12 +1,28 @@
-# AI Consulting Playbook — the AIR Strategic Assessment
-
-**Status**: Active
-**Last Updated**: 2026-06-09
-**Owner**: Founder + agent (interactive session 2026-06-09)
-**Tier**: T0
-**Depends on**: [00_NORTH_STAR.md](../00_NORTH_STAR.md), `_agent/DECISIONS.md` (C-006)
-
 ---
+id: nexus.consulting-playbook
+title: AI Consulting Playbook — the AIR Strategic Assessment
+tier: T0
+status: active
+owner: founder
+updated: 2026-06-09
+summary: >
+  The consulting service Nexus must encode: AIR framework (5 dimensions,
+  journey-is-input), two-week discovery sprint day-by-day, ~35-person interview
+  matrix, 7 deliverables, pricing tiers and the $130k funnel, collateral specs.
+  Everything AIR-specific is content of ONE assessment impl, never core product.
+parents:
+  - NEXUS_STRATEGY/00_NORTH_STAR.md
+children:
+  - NEXUS_STRATEGY/1-PRODUCT/PRODUCT_STRATEGY.md
+  - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
+revisit:
+  - on: "AIR dimensions, sprint structure, deliverables, or pricing change"
+    stage: always
+  - on: "first 3 client engagements complete (refine from real data)"
+    stage: N5
+---
+
+# AI Consulting Playbook — the AIR Strategic Assessment
 
 ## Purpose
 

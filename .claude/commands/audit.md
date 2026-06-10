@@ -1,5 +1,5 @@
 ---
-description: Read-only audit pass. Surfaces inconsistencies between docs and code, stale BACKLOG items, undocumented decisions.
+description: Read-only audit pass. Doc-graph health, doc↔code drift, BACKLOG hygiene, decisions coverage, secrets, step-budget tracking.
 ---
 
 # /audit
@@ -8,13 +8,15 @@ Run a read-only audit. Produce a report; do not change anything.
 
 ## What to check
 
-- **Doc ↔ code drift**: any doc in `NEXUS_STRATEGY/2-TECHNICAL/` that contradicts code in `server/`, `client/`, `engines/`
-- **BACKLOG hygiene**: items DONE but not closed, BLOCKED items with no clarification, READY items with stale depends-on
-- **DECISIONS coverage**: every architectural choice in code should map to an entry in `DECISIONS.md`
-- **Test coverage gap**: modules with no tests, tests with no assertions
-- **Secrets in repo**: scan for likely-leaked credentials (mongodb+srv://, sk-, ghp_, AKIA, etc.)
-- **Karvia leakage**: any string "karvia" still present in code/docs (excluding `_source/`)
+- **Doc graph**: run `python3 .claude/hooks/doc-graph-check.py`. Report orphans, broken/one-way edges, missing genomes, staleness warnings (children not updated after a parent changed).
+- **Doc ↔ code drift**: any doc in `NEXUS_STRATEGY/` that contradicts code in `src/`, `client/`, `tests/`; any code file whose governing README/genome no longer describes it.
+- **Revisit triggers due**: scan genome `revisit:` entries whose `stage` matches the current night — list docs due for re-review.
+- **BACKLOG hygiene**: items DONE but not closed, BLOCKED with no clarification, READY with stale depends-on. Re-sum any points/budget tables (never trust the labelled total).
+- **Step budget**: journal entries since North Star date vs the EXECUTION_PLAYBOOK phase budgets; flag a night >25% over.
+- **DECISIONS coverage**: every architectural choice in code maps to a `DECISIONS.md` entry.
+- **Secrets**: scan for likely-leaked credentials (mongodb+srv://, sk-, ghp_, AKIA, etc.).
+- **Karvia leakage**: any "karvia" string in code/docs outside `_source/`.
 
 ## Output
 
-Write `_agent/AUDIT_<date>.md` with sections per check, one finding per row, severity (low/med/high), recommended action. Do not auto-fix.
+Write `_agent/AUDIT_<date>.md`: one section per check, one finding per row, severity (low/med/high), recommended action. Do not auto-fix.

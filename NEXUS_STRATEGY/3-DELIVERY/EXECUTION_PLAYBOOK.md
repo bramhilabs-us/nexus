@@ -1,12 +1,27 @@
-# Nexus Execution Playbook — 290 steps becomes 90
-
-**Status**: Active
-**Last Updated**: 2026-06-09
-**Owner**: Founder + agent (interactive session 2026-06-09)
-**Tier**: T3
-**Depends on**: [00_NORTH_STAR.md](../00_NORTH_STAR.md), `.claude/TICK_PROTOCOL.md`, `_agent/AUTONOMY.md`, `2-TECHNICAL/IMPROVEMENT_PLAN.md`
-
 ---
+id: nexus.execution-playbook
+title: Nexus Execution Playbook — 290 steps becomes 90
+tier: T3
+status: active
+owner: founder
+updated: 2026-06-09
+summary: >
+  The execution card: 5 session types with deliverables, the 90-step phase
+  budgets (N1:18 N2:24 N3:18 N4:16 N5:10 buffer:4), the pack-of-cards rule
+  (every session ends naming the next), folder + command hierarchy, and the
+  step-counter measurement against Karvia's ~290-session baseline.
+parents:
+  - NEXUS_STRATEGY/00_NORTH_STAR.md
+  - NEXUS_STRATEGY/2-TECHNICAL/IMPROVEMENT_PLAN.md
+children: []
+revisit:
+  - on: "a night exceeds its step budget by more than 25%"
+    stage: always
+  - on: "autonomy level changes in _agent/AUTONOMY.md"
+    stage: always
+---
+
+# Nexus Execution Playbook — 290 steps becomes 90
 
 ## Purpose
 

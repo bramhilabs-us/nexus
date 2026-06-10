@@ -1,12 +1,29 @@
-# Nexus Product Strategy — six pages, two modes
-
-**Status**: Active
-**Last Updated**: 2026-06-09
-**Owner**: Founder + agent (interactive sessions 2026-06-09)
-**Tier**: T1
-**Depends on**: [00_NORTH_STAR.md](../00_NORTH_STAR.md), [0-BUSINESS/AI_CONSULTING_PLAYBOOK.md](../0-BUSINESS/AI_CONSULTING_PLAYBOOK.md), `_agent/DECISIONS.md` (C-001, C-005, C-006)
-
 ---
+id: nexus.product-strategy
+title: Nexus Product Strategy — six pages, two modes
+tier: T1
+status: active
+owner: founder
+updated: 2026-06-09
+summary: >
+  The UI-layer card: the page contract (purpose, primary role, entry/exit,
+  primary/secondary CTA, analytics strip, empty state) applied to all six
+  pages; two operating modes (Engagement/Builder); objective lifecycle;
+  first-value journey; analytics doctrine; design-language pointer.
+parents:
+  - NEXUS_STRATEGY/00_NORTH_STAR.md
+  - NEXUS_STRATEGY/0-BUSINESS/AI_CONSULTING_PLAYBOOK.md
+children:
+  - NEXUS_STRATEGY/1-PRODUCT/design/DESIGN_LANGUAGE.md
+  - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
+revisit:
+  - on: "a page contract changes in code (PageContract registration differs from this doc)"
+    stage: N3
+  - on: "an assessment block adds/changes what pages must surface"
+    stage: N3
+---
+
+# Nexus Product Strategy — six pages, two modes
 
 ## Purpose
 
@@ -177,13 +194,13 @@ The journey every new engagement walks; the Dashboard empty state, the demo scri
 
 ## Design language
 
-New, minimalistic — Nexus does not inherit Karvia's visual design. Governing intent until the founder's design docs land (they exist and will be added under `1-PRODUCT/design/`):
+New, minimalistic — Nexus does not inherit Karvia's visual design. The source of truth is the BRAMHI brand guide, now in-repo and translated to UI rules in [design/DESIGN_LANGUAGE.md](design/DESIGN_LANGUAGE.md). Governing intent:
 
 - Few words, strong visual hierarchy; executive-dashboard feel, not consulting-flyer (the same standard set for the one-pager collateral).
 - Minimum chrome: one primary CTA visually dominant per page, analytics tiles ≤ 4, whitespace over borders.
 - One small component set shared by all six pages (tile, card, stage ribbon, CTA pair, empty state) — the design system is itself a lego constraint.
 
-**Dependency**: `DESIGN_DOCS-TBD` — page-level specs must not be finalized in code until the design docs are in the repo. Tracked as PQ-3 below.
+Page-level mockups are produced during Night 3 *from* these rules, token-first (see DESIGN_LANGUAGE § token-first workflow).
 
 ## Analytics doctrine
 
@@ -195,4 +212,4 @@ New, minimalistic — Nexus does not inherit Karvia's visual design. Governing i
 
 - **PQ-1** — Dashboard primary CTA final wording ("Push task completion" vs "Nudge owners"): settle during Night 3 UI build; not blocking.
 - **PQ-2** — Exact tile sets per page beyond the four named on My Clients: derive from real usage in beta; start with the contracts above.
-- **PQ-3** — **Design docs**: founder to add the minimalistic design system docs under `1-PRODUCT/design/`. UI build sessions are blocked on this; everything else proceeds.
+- ~~**PQ-3** — Design docs~~ — **RESOLVED 2026-06-09**: BRAMHI brand guide landed in `design/brand/`; [design/DESIGN_LANGUAGE.md](design/DESIGN_LANGUAGE.md) governs. UI build unblocked.

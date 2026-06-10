@@ -203,3 +203,26 @@ Every domain model gains a required `program_id`: `Objective`, `KeyResult`, `Goa
 - `.claude/CLAUDE.md` positioning updated (SSI references removed).
 
 **Refines**: C-001 (scope stands; GTM sharpened). **Supersedes**: all SSI-as-Nexus-impl references in prior docs.
+
+---
+
+## 2026-06-09 — Document genome, session chain, 5-command process (C-007)
+
+**Context**: Karvia's ~280 sessions paid repeatedly for document drift (215 "regression" / 120 "drift" / 50 "stale" mentions in SESSION_LOG): stale epics contradicting handoffs, mockups built from superseded specs, 16 slash commands whose bookkeeping itself drifted. srishti's DOCUMENTATION_GRAPH defines the cure (metadata genome + dependency graph + propagation); Karvia's inline `@GENOME` comment tags were the failed version (unreadable, unenforced — Nexus initially rejected them outright in MASTER_GUIDE).
+
+**Decision**:
+1. **Document genome adopted** — every governed doc (`NEXUS_STRATEGY/`, `src/`, `client/`, `tests/`) opens with YAML frontmatter: `id, tier, status, owner, summary, parents, children, revisit(on/stage)`. Spec + registry + propagation rules in `NEXUS_STRATEGY/DOCUMENTATION_GRAPH.md`.
+2. **Machine enforcement** — `.claude/hooks/doc-graph-check.py`: no orphans (all docs reachable from 00_NORTH_STAR), bidirectional edges, unique ids, staleness warnings (child not updated within 14 days of a parent change). Red graph blocks `/close`. Propagation is notification-first: T0/T1 changes flag children for human review; T2 changes the agent patches in the same PR.
+3. **Session chain** — `_agent/NEXT_SESSION.md` is the card every session ends by writing and every session starts by reading. `/init` is the only command a human needs; session *types* (strategy/contract/coding/test/audit/sprint-planning/general) are data on the card, each with its own scan list. "general" sessions are free-form and do not consume the card.
+4. **5 commands, not 16** — init, close, nexus-tick, sprint-load, audit. Karvia's per-session-type commands are replaced by the typed card.
+5. **Session practices codified** — `.claude/SESSION_PRACTICES.md` distills Karvia's lessons (pre-scan is the work; newer decision beats older spec; re-sum tables; tokens before mockups; grep before trusting; quality self-score per session).
+
+**Alternatives considered**:
+- srishti's full genome (doc_id/schema_version/surface/lifecycle_node/content_contract/edges.kind/propagation thresholds): rejected for v1 — more metadata than a 2-person + agent team will maintain; fields can be added later per DOCUMENTATION_GRAPH's evolution rule.
+- No enforcement (genome as convention): rejected — Karvia proved conventions decay; the validator is the difference.
+
+**Consequences**:
+- Code skeleton exists now (`src/modules/<8>/README.md`, `client/`, `tests/`) so every future code file has a governed parent from day one.
+- BRAMHI brand guide moved to `1-PRODUCT/design/brand/`; `DESIGN_LANGUAGE.md` translates it (PQ-3 resolved; token-first rule prevents Karvia's drifting-hex bug).
+- CI gains the doc-graph check as a required gate in Night 2.
+- Supersedes MASTER_GUIDE's "no genome tags" stance (the objection was to Karvia's *implementation*, not the idea).

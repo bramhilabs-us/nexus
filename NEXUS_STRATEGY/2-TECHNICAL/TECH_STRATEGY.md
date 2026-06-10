@@ -1,12 +1,35 @@
-# Nexus Tech Strategy — three layers, eight blocks
-
-**Status**: Active
-**Last Updated**: 2026-06-09
-**Owner**: Founder + agent (interactive sessions 2026-06-09)
-**Tier**: T2
-**Depends on**: [00_NORTH_STAR.md](../00_NORTH_STAR.md), [0-BUSINESS/AI_CONSULTING_PLAYBOOK.md](../0-BUSINESS/AI_CONSULTING_PLAYBOOK.md), [SYSTEM_ARCHITECTURE.md](SYSTEM_ARCHITECTURE.md), [IMPROVEMENT_PLAN.md](IMPROVEMENT_PLAN.md), `_agent/DECISIONS.md` (C-003…C-006)
-
 ---
+id: nexus.tech-strategy
+title: Nexus Tech Strategy — three layers, eight blocks
+tier: T2
+status: active
+owner: founder
+updated: 2026-06-09
+summary: >
+  The architecture card: page contracts as code, lifecycle + roll-up engines,
+  private program-scoped data, 8-block module anatomy, the generalized
+  AssessmentProvider (instruments/evidence/score/deliverables, AIR is v1,
+  SSI dropped), handover mechanics, and the srishti integration boundary.
+parents:
+  - NEXUS_STRATEGY/00_NORTH_STAR.md
+  - NEXUS_STRATEGY/0-BUSINESS/AI_CONSULTING_PLAYBOOK.md
+  - NEXUS_STRATEGY/1-PRODUCT/PRODUCT_STRATEGY.md
+  - NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md
+  - NEXUS_STRATEGY/2-TECHNICAL/IMPROVEMENT_PLAN.md
+children:
+  - src/README.md
+  - client/README.md
+  - tests/README.md
+revisit:
+  - on: "any module contract.ts diverges from the anatomy or contracts described here"
+    stage: N2
+  - on: "AssessmentProvider interface changes shape"
+    stage: N3
+  - on: "srishti interfaces stabilize (TQ-3)"
+    stage: N4
+---
+
+# Nexus Tech Strategy — three layers, eight blocks
 
 ## Purpose
 
