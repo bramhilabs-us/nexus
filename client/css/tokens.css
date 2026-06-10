@@ -1,0 +1,81 @@
+/*
+ * Nexus design tokens — the only color/type/space source for all UI.
+ * Governed by NEXUS_STRATEGY/1-PRODUCT/design/DESIGN_LANGUAGE.md (§ Token table).
+ * Values extracted from the BRAMHI Brandguide (design/brand/) and the two
+ * investor-deck references (design/references/) on 2026-06-09 (N1-P2-07).
+ * Rule: no inline hex anywhere downstream — pages and mockups consume
+ * var(--nx-*) only (SESSION_PRACTICES rule 3).
+ */
+
+:root {
+  /* ---------- Color: brand core (Brandguide declared hex) ---------- */
+  --nx-primary: #6b4ba3;        /* deep purple — primary actions, emphasis */
+  --nx-primary-soft: #9d8cc6;   /* lavender — secondary emphasis, gradient end */
+  --nx-primary-tint: #dcc5e8;   /* lilac — badge/border tints, hover fills */
+  --nx-primary-faint: #f3e8ff;  /* palest lavender — selected states, soft fills */
+
+  /* ---------- Color: ink & text (brand ink + deck slate hierarchy) ---------- */
+  --nx-ink: #1a1a1a;            /* brand near-black — display headlines only */
+  --nx-text: #2d3748;           /* primary body text */
+  --nx-text-secondary: #64748b; /* supporting text, labels */
+  --nx-text-tertiary: #94a3b8;  /* hints, timestamps, placeholders */
+
+  /* ---------- Color: neutrals (Brandguide) ---------- */
+  --nx-gray: #6f6f6f;           /* icons, disabled text */
+  --nx-gray-light: #e6e6e6;     /* dividers, disabled fills */
+  --nx-sand: #c9b59a;           /* warm brand accent — illustration, never text */
+  --nx-cream: #ede7df;          /* warm panel alternative — empty states */
+
+  /* ---------- Color: signal ---------- */
+  --nx-gold: #bd8e2d;           /* emphasis, sparingly — never decoration */
+  --nx-positive: #229d83;       /* positive signal, on-track */
+
+  /* ---------- Surfaces (deck cues: depth from light, not borders) ---------- */
+  --nx-surface: #ffffff;        /* panels, cards */
+  --nx-surface-page: linear-gradient(160deg, #f8fafc 0%, #f5f3ff 50%, #f8fafc 100%);
+  --nx-border: #e2e8f0;         /* hairline borders */
+  --nx-shadow-color: rgba(107, 75, 163, 0.06); /* deck shadow recipe on brand primary */
+  --nx-shadow-card: 0 2px 8px var(--nx-shadow-color), 0 8px 24px var(--nx-shadow-color);
+  --nx-focus-ring: 0 0 0 3px var(--nx-primary-faint);
+
+  /* ---------- Gradients (Brandguide declared stops) ---------- */
+  --nx-gradient-primary: linear-gradient(135deg, #6b4ba3 0%, #9d8cc6 100%);
+  --nx-gradient-soft: linear-gradient(135deg, #eadbf6 0%, #f7f3ff 100%);
+
+  /* ---------- Typography (Brandguide; Comfortaa not carried — see DESIGN_LANGUAGE) ---------- */
+  --nx-font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --nx-font-display: 'Playfair Display', Georgia, serif;     /* headline moments only */
+  --nx-font-brand: 'Cinzel', Georgia, serif;                 /* brand lockups only, never app chrome */
+  --nx-font-tagline: 'Cormorant Garamond', Georgia, serif;   /* italic brand taglines only */
+
+  --nx-text-xs: 0.75rem;   /* 12px — small-caps tile labels, badges */
+  --nx-text-sm: 0.875rem;  /* 14px — secondary text, table body */
+  --nx-text-base: 1rem;    /* 16px — body */
+  --nx-text-lg: 1.125rem;  /* 18px — card titles */
+  --nx-text-xl: 1.375rem;  /* 22px — section headings */
+  --nx-text-2xl: 1.75rem;  /* 28px — page titles, tile numbers */
+  --nx-text-3xl: 2.25rem;  /* 36px — display moments */
+
+  --nx-weight-regular: 400;
+  --nx-weight-medium: 500;
+  --nx-weight-semibold: 600;
+
+  --nx-leading-tight: 1.25;  /* headings, tile numbers */
+  --nx-leading-base: 1.5;    /* body */
+
+  /* ---------- Spacing (4px base) ---------- */
+  --nx-space-1: 4px;
+  --nx-space-2: 8px;
+  --nx-space-3: 12px;
+  --nx-space-4: 16px;
+  --nx-space-6: 24px;
+  --nx-space-8: 32px;
+  --nx-space-12: 48px;
+  --nx-space-16: 64px;
+
+  /* ---------- Radii (8px default per deck cue; pill for primary CTA per Brandguide) ---------- */
+  --nx-radius-sm: 4px;
+  --nx-radius: 8px;
+  --nx-radius-lg: 12px;
+  --nx-radius-pill: 999px;
+}

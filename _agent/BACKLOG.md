@@ -68,7 +68,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: This doc is the bar every Night 2-5 tick is measured against. Added mid-sprint per human request.
 
 ### N1-P2-07 — Design tokens from the Brandguide (Path B pull-forward)
-- **Status**: READY
+- **Status**: DONE (tick 2026-06-09-10, PR pending merge)
 - **Size**: S (1 session)
 - **Depends on**: DESIGN_LANGUAGE.md (DONE), N1-P2-04 (sequencing only — tokens session follows the module graph)
 - **Definition of done**:
@@ -78,7 +78,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: Path B decision (2026-06-09): mockups pulled forward from Night 3 — they depend only on page contracts + design language, both done. Tokens-before-mockups per SESSION_PRACTICES rule 3.
 
 ### N1-P2-08 — Six page mockups (static HTML, token-first) (Path B pull-forward)
-- **Status**: READY (after N1-P2-07)
+- **Status**: READY (N1-P2-07 done — tokens exist)
 - **Size**: M (2–3 sessions)
 - **Depends on**: N1-P2-07, PRODUCT_STRATEGY page contracts (DONE)
 - **Definition of done**:
