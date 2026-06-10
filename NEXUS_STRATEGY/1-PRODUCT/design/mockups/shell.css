@@ -1,0 +1,327 @@
+/*
+ * Nexus mockup shell — shared components for the six-page mockups.
+ * Governed by DESIGN_LANGUAGE.md (component set) + PRODUCT_STRATEGY.md (page contract).
+ * Color/type/space come ONLY from client/css/tokens.css (var(--nx-*)) —
+ * inline hex anywhere in mockups/ is a review-blocking violation.
+ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--nx-font-ui);
+  font-size: var(--nx-text-base);
+  line-height: var(--nx-leading-base);
+  color: var(--nx-text);
+  background: var(--nx-surface-page);
+  min-height: 100vh;
+}
+
+/* ---------- Top bar ---------- */
+.nx-topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--nx-space-8);
+  padding: var(--nx-space-3) var(--nx-space-8);
+  background: var(--nx-surface);
+  border-bottom: 1px solid var(--nx-border);
+}
+.nx-wordmark {
+  font-weight: var(--nx-weight-semibold);
+  font-size: var(--nx-text-lg);
+  color: var(--nx-ink);
+  letter-spacing: 0.02em;
+}
+.nx-wordmark::before {
+  content: '';
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: var(--nx-radius-pill);
+  background: var(--nx-gradient-primary);
+  margin-right: var(--nx-space-2);
+}
+.nx-nav { display: flex; gap: var(--nx-space-6); flex: 1; }
+.nx-nav a {
+  text-decoration: none;
+  color: var(--nx-text-secondary);
+  font-size: var(--nx-text-sm);
+  font-weight: var(--nx-weight-medium);
+  padding: var(--nx-space-2) 0;
+  border-bottom: 2px solid transparent;
+}
+.nx-nav a.active {
+  color: var(--nx-primary);
+  border-bottom-color: var(--nx-primary);
+}
+.nx-nav a:hover { color: var(--nx-text); }
+
+/* Account dropdown — the 5 secondary surfaces */
+.nx-account { position: relative; }
+.nx-avatar {
+  width: 36px; height: 36px;
+  border-radius: var(--nx-radius-pill);
+  background: var(--nx-gradient-primary);
+  color: var(--nx-surface);
+  font-size: var(--nx-text-sm);
+  font-weight: var(--nx-weight-semibold);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  border: none;
+}
+.nx-dropdown {
+  display: none;
+  position: absolute;
+  right: 0; top: calc(100% + var(--nx-space-2));
+  min-width: 200px;
+  background: var(--nx-surface);
+  border: 1px solid var(--nx-border);
+  border-radius: var(--nx-radius);
+  box-shadow: var(--nx-shadow-card);
+  padding: var(--nx-space-2);
+  z-index: 10;
+}
+.nx-account:hover .nx-dropdown,
+.nx-account:focus-within .nx-dropdown { display: block; }
+.nx-dropdown a {
+  display: block;
+  padding: var(--nx-space-2) var(--nx-space-3);
+  border-radius: var(--nx-radius-sm);
+  text-decoration: none;
+  color: var(--nx-text);
+  font-size: var(--nx-text-sm);
+}
+.nx-dropdown a:hover { background: var(--nx-primary-faint); color: var(--nx-primary); }
+.nx-dropdown hr { border: none; border-top: 1px solid var(--nx-border); margin: var(--nx-space-2) 0; }
+
+/* ---------- Page scaffold ---------- */
+.nx-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--nx-space-8) var(--nx-space-8) var(--nx-space-16);
+}
+.nx-page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--nx-space-4);
+  margin-bottom: var(--nx-space-6);
+}
+.nx-page-title {
+  font-size: var(--nx-text-2xl);
+  font-weight: var(--nx-weight-semibold);
+  color: var(--nx-ink);
+  line-height: var(--nx-leading-tight);
+}
+.nx-page-sub {
+  color: var(--nx-text-secondary);
+  font-size: var(--nx-text-sm);
+  margin-top: var(--nx-space-1);
+}
+
+/* CTA pair — primary filled pill, secondary quiet */
+.nx-cta-pair { display: flex; gap: var(--nx-space-3); align-items: center; }
+.nx-btn-primary {
+  font-family: var(--nx-font-ui);
+  font-size: var(--nx-text-sm);
+  font-weight: var(--nx-weight-semibold);
+  color: var(--nx-surface);
+  background: var(--nx-primary);
+  border: none;
+  border-radius: var(--nx-radius-pill);
+  padding: var(--nx-space-3) var(--nx-space-6);
+  cursor: pointer;
+}
+.nx-btn-primary:hover { background: var(--nx-primary-soft); }
+.nx-btn-secondary {
+  font-family: var(--nx-font-ui);
+  font-size: var(--nx-text-sm);
+  font-weight: var(--nx-weight-medium);
+  color: var(--nx-primary);
+  background: transparent;
+  border: 1px solid var(--nx-primary-tint);
+  border-radius: var(--nx-radius-pill);
+  padding: calc(var(--nx-space-3) - 1px) var(--nx-space-6);
+  cursor: pointer;
+}
+.nx-btn-secondary:hover { background: var(--nx-primary-faint); }
+.nx-btn-quiet {
+  font-family: var(--nx-font-ui);
+  font-size: var(--nx-text-sm);
+  color: var(--nx-primary);
+  background: none; border: none; cursor: pointer;
+  font-weight: var(--nx-weight-medium);
+}
+
+/* ---------- Tiles (analytics strip, <=4 per page) ---------- */
+.nx-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--nx-space-4);
+  margin-bottom: var(--nx-space-8);
+}
+.nx-tile {
+  background: var(--nx-surface);
+  border-radius: var(--nx-radius);
+  box-shadow: var(--nx-shadow-card);
+  padding: var(--nx-space-4) var(--nx-space-6);
+  cursor: pointer;
+}
+.nx-tile-number {
+  font-size: var(--nx-text-2xl);
+  font-weight: var(--nx-weight-semibold);
+  color: var(--nx-ink);
+  line-height: var(--nx-leading-tight);
+}
+.nx-tile-number.alert { color: var(--nx-gold); }
+.nx-tile-number.ok { color: var(--nx-positive); }
+.nx-tile-label {
+  font-size: var(--nx-text-xs);
+  font-weight: var(--nx-weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nx-text-tertiary);
+  margin-top: var(--nx-space-1);
+}
+
+/* ---------- Cards ---------- */
+.nx-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: var(--nx-space-4);
+}
+.nx-card {
+  position: relative;
+  background: var(--nx-surface);
+  border-radius: var(--nx-radius);
+  box-shadow: var(--nx-shadow-card);   /* shadow, never border-tint AND shadow */
+  padding: var(--nx-space-6);
+}
+.nx-card-title { font-size: var(--nx-text-lg); font-weight: var(--nx-weight-semibold); color: var(--nx-ink); }
+.nx-card-sub { font-size: var(--nx-text-sm); color: var(--nx-text-secondary); }
+
+/* Stage badge — top-right per DESIGN_LANGUAGE */
+.nx-stage {
+  position: absolute;
+  top: var(--nx-space-4); right: var(--nx-space-4);
+  font-size: var(--nx-text-xs);
+  font-weight: var(--nx-weight-semibold);
+  letter-spacing: 0.05em;
+  padding: var(--nx-space-1) var(--nx-space-3);
+  border-radius: var(--nx-radius-pill);
+}
+.nx-stage.prospect  { background: var(--nx-gray-light); color: var(--nx-gray); }
+.nx-stage.assessing { background: var(--nx-primary-faint); color: var(--nx-primary); }
+.nx-stage.engaged   { background: var(--nx-gradient-soft); color: var(--nx-primary); }
+.nx-stage.handed    { background: var(--nx-primary); color: var(--nx-surface); }
+
+/* Score ring — ring style owned here, dimension colors by the assessment block */
+.nx-ring {
+  --ring-value: 72;
+  --ring-color: var(--nx-primary);
+  width: 56px; height: 56px;
+  border-radius: var(--nx-radius-pill);
+  background: conic-gradient(var(--ring-color) calc(var(--ring-value) * 1%), var(--nx-gray-light) 0);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.nx-ring-inner {
+  width: 44px; height: 44px;
+  border-radius: var(--nx-radius-pill);
+  background: var(--nx-surface);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--nx-text-sm);
+  font-weight: var(--nx-weight-semibold);
+  color: var(--nx-ink);
+}
+
+/* Stage ribbon — objective lifecycle, gradient progression */
+.nx-ribbon { display: flex; gap: var(--nx-space-1); }
+.nx-ribbon span {
+  flex: 1;
+  height: 6px;
+  border-radius: var(--nx-radius-pill);
+  background: var(--nx-gray-light);
+}
+.nx-ribbon span.done { background: var(--nx-gradient-primary); }
+.nx-ribbon span.current { background: var(--nx-primary-soft); }
+
+/* Progress bar */
+.nx-progress {
+  height: 6px;
+  border-radius: var(--nx-radius-pill);
+  background: var(--nx-gray-light);
+  overflow: hidden;
+}
+.nx-progress > span {
+  display: block; height: 100%;
+  border-radius: var(--nx-radius-pill);
+  background: var(--nx-gradient-primary);
+}
+
+/* ---------- List rows (needs-you-today etc.) ---------- */
+.nx-panel {
+  background: var(--nx-surface);
+  border-radius: var(--nx-radius);
+  box-shadow: var(--nx-shadow-card);
+  padding: var(--nx-space-6);
+  margin-bottom: var(--nx-space-6);
+}
+.nx-panel-title {
+  font-size: var(--nx-text-base);
+  font-weight: var(--nx-weight-semibold);
+  color: var(--nx-ink);
+  margin-bottom: var(--nx-space-4);
+}
+.nx-row {
+  display: flex; align-items: center; gap: var(--nx-space-4);
+  padding: var(--nx-space-3) 0;
+  border-top: 1px solid var(--nx-border);
+}
+.nx-row:first-of-type { border-top: none; }
+.nx-row .grow { flex: 1; min-width: 0; }
+.nx-pill {
+  font-size: var(--nx-text-xs);
+  font-weight: var(--nx-weight-semibold);
+  padding: var(--nx-space-1) var(--nx-space-3);
+  border-radius: var(--nx-radius-pill);
+}
+.nx-pill.risk { background: var(--nx-cream); color: var(--nx-gold); }
+.nx-pill.ok   { background: var(--nx-gradient-soft); color: var(--nx-positive); }
+
+/* ---------- Empty state — teaches the page's purpose ---------- */
+.nx-empty {
+  text-align: center;
+  padding: var(--nx-space-16) var(--nx-space-8);
+  background: var(--nx-surface);
+  border-radius: var(--nx-radius);
+  box-shadow: var(--nx-shadow-card);
+}
+.nx-empty-mark {
+  width: 64px; height: 64px;
+  margin: 0 auto var(--nx-space-4);
+  border-radius: var(--nx-radius-pill);
+  background: var(--nx-gradient-soft);
+}
+.nx-empty h2 {
+  font-family: var(--nx-font-display);   /* the one display moment per page */
+  font-size: var(--nx-text-xl);
+  font-weight: var(--nx-weight-medium);
+  color: var(--nx-ink);
+  margin-bottom: var(--nx-space-2);
+}
+.nx-empty p {
+  color: var(--nx-text-secondary);
+  font-size: var(--nx-text-sm);
+  max-width: 420px;
+  margin: 0 auto var(--nx-space-6);
+}
+
+/* Mockup-only annotation strip (not a product component) */
+.mock-note {
+  margin: var(--nx-space-12) 0 var(--nx-space-4);
+  font-size: var(--nx-text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nx-text-tertiary);
+  border-top: 1px dashed var(--nx-border);
+  padding-top: var(--nx-space-4);
+}
