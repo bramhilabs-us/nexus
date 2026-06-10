@@ -84,6 +84,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - Static HTML mockups for all 6 pages in `NEXUS_STRATEGY/1-PRODUCT/design/mockups/`, consuming `var(--token)` only
   - Engagement + Builder variants for My Clients, Dashboard, Assessments
   - Each mockup implements its page contract exactly: one dominant primary CTA, ≤4 analytics tiles, empty state teaching the purpose
+  - Shell includes the account dropdown with the 5 secondary surfaces (Profile, Company Profile, Configuration, Settings, Feedback) per PRODUCT_STRATEGY § player cards; one mockup of Profile (the player card) included
   - Founder review checkpoint — feedback feeds N1-P4-01 contracts and becomes the Night 3 build spec
 - **Notes**: First visible product. Throwaway-quality is NOT acceptable — these are the Night 3 spec (Karvia lesson #174-3).
 

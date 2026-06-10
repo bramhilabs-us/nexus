@@ -179,6 +179,24 @@ This page is a **shell**: every assessment-specific surface — instruments, evi
 | Analytics strip | Current milestone: tasks done vs planned, hours logged, milestone completion streak |
 | Empty state | "Pick a key result and plan its first milestone" |
 
+## The secondary surfaces — player cards and the meta-loop
+
+The six pages are the game board. The account-menu surfaces (Karvia's avatar dropdown: Profile, Company Profile, Configuration, Settings, Feedback) are not afterthoughts — each has its own purpose, and two of them are **player cards** whose data makes the endgame possible:
+
+| Surface | Purpose | Scope | What it captures (and why) |
+|---|---|---|---|
+| **Profile** | Who the player is | Per user | Skills, **intrinsic motivations, interests**, working style, role per program. Partially populated by assessment instruments (AIR Day 7 workforce assessment feeds it). |
+| **Company Profile** | What the team is playing for | Per company | Industry, size, **goals and strategic priorities**, context. AIR's Day 1 Business Context Canvas lands here — the engagement fills the card, not a separate form. |
+| **Configuration** | What the admin shapes | Per company/program (admin only) | Installed assessment blocks, program defaults, feature flags, integrations (srishti), roles & permissions |
+| **Settings** | What each user adjusts | Per user | Notifications, appearance, locale. Strictly personal — anything affecting others belongs in Configuration, never here. |
+| **Feedback** | The meta-loop | Per user → BRAMHI | Feature ideas, bugs, pulse. Flows into **Nexus's own backlog**: triaged, prioritized, status visible to the submitter ("you said → we did"). This is IM-9 dogfooding with a pipe: every tenant is a product-development sensor. |
+
+### The fit thesis — best task, best person
+
+Profile tells us **who** (intrinsic motivation, skills, interests). Company Profile tells us **what the company wants**. The Objective states the goal explicitly. Tasks are the atoms. Put 20 tasks under an objective and the backend can match the best task to the best person by joining these three structures.
+
+**v1 does not build the matcher — v1 makes the matcher possible.** The rule for every schema touching these surfaces: capture signals as *structured, queryable fields* (tags, enums, scored dimensions), never as prose blobs. A profile "interests" field that's free text is decoration; one that's tagged is a future join key. (Data rules: TECH_STRATEGY Layer 3; the fit engine itself is parked in IMPROVEMENT_PLAN until post-beta.)
+
 ## The first-value journey
 
 The journey every new engagement walks; the Dashboard empty state, the demo script, and the E2E test suite are all this list:
