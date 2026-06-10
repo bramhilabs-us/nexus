@@ -18,6 +18,7 @@ children:
   - NEXUS_STRATEGY/1-PRODUCT/NOF.md
   - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
   - NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md
+  - NEXUS_STRATEGY/4-CUSTOMER/README.md
 revisit:
   - on: "a page contract changes in code (PageContract registration differs from this doc)"
     stage: N3

@@ -79,6 +79,11 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |       |--> feeds: TECH_STRATEGY (page contracts as code)
 |       |-- 2-TECHNICAL/USER_JOURNEYS.md ..... T2 | 4 archetype journeys + seq diagrams
 |       |       (parents: + TECH_STRATEGY)
+|       |-- 4-CUSTOMER/README.md ............. T4 | evidence, feedback, metrics tier
+|       |       |-- 4-CUSTOMER/INTERVIEW_TEMPLATE.md  T4 | sprint capture form
+|       |       |-- 4-CUSTOMER/FEEDBACK_LOG.md  T4 | meta-loop paper trail
+|       |       |-- 4-CUSTOMER/EVIDENCE_INDEX.md  T4 | artifact traceability
+|       |       `-- 4-CUSTOMER/METRICS.md .... T4 | the numbers Nexus is judged by
 |       `-- 1-PRODUCT/design/DESIGN_LANGUAGE.md  T1 | BRAMHI brand → Nexus UI rules
 |               |-- design/brand/* (assets, exempt)
 |               `-- design/mockups/README.md . T1 | token-first page mockups (N3 spec)

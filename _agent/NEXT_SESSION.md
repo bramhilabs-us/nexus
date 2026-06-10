@@ -3,23 +3,24 @@
 > Written by the previous session per `/close`. `/init` reads this and starts. Overwritten every session — history lives in JOURNAL.md.
 
 **Type**: coding (mockups — session 3 of 3, then founder review checkpoint)
-**Task**: `N1-P2-08` — Teams + Planning mockups, Builder variants, Profile player card
-**Why it's next**: sessions 1–2 covered shell + 5 surfaces incl. the PQ-4 flashcard deck. Session 3 completes the set and triggers the **founder review checkpoint** — the gate for N1-P4-01 contracts (Path B intent).
+**Task**: `N1-P2-08` — Teams + Planning mockups, Builder variant, Profile player card
+**Why it's next**: founder merged #19 (mockups s2 incl. the PQ-4 flashcard deck) and #20 (4-CUSTOMER tier) on 2026-06-10 — session 3 is unblocked and completes the mockup set, triggering the **founder review checkpoint** that unblocks N1-P4-01 (Path B intent).
 
-**Level-0 gate**: `gh pr list` first. If the session-2 PR (tick-15) is still open → don't stack; pick **`N1-P3-03` — 4-CUSTOMER skeleton** (S, READY: INTERVIEW_TEMPLATE/FEEDBACK_LOG/EVIDENCE_INDEX/METRICS templates in `NEXUS_STRATEGY/4-CUSTOMER/`; draw PRODUCT_STRATEGY § Feedback meta-loop + § metrics, AI_CONSULTING_PLAYBOOK § interview matrix + deliverables; pick the cleanest single graph parent — likely PRODUCT_STRATEGY — and note it in the PR). Next fallback after that: `N1-P3-01` (M).
+**Standard Level-0 check**: `gh pr list` first — if a session-3 PR is already open, skip to **`N1-P3-01`** (0-BUSINESS/1-PRODUCT population, M, last independent READY item; pre-scan what those folders already hold and define files to ADD, not duplicate; ambiguous split → clarifications). If both are in flight → journal a no-op with the wait reason.
 
 **Session 3 scope**:
-- `teams.html` — people fabric per contract: Invite member primary CTA, tiles (onboarded vs invited, per team, assessment participation), empty state "objectives need owners"
-- `planning.html` — weekly rhythm per contract (Worker home): Add milestone/task primary CTA (context-dependent), current-milestone tiles (tasks done/planned, hours logged, streak), milestone→task board, empty state "pick a KR, plan its first milestone"
-- **Builder variants** (per BACKLOG DoD: My Clients hides, Dashboard/Assessments re-skinned for product teams) — one `dashboard-builder.html` showing the mode flip is enough to demonstrate; note in README
-- `profile.html` — the player card (PRODUCT_STRATEGY § player cards): who the player is — skills/motivations/interests as **tags, never prose** (the fit thesis), role-per-program, assessment-fed fields marked
-- mockups/README table updated; any new component → DESIGN_LANGUAGE first
+- `teams.html` — people fabric per contract: Invite member primary CTA, tiles (onboarded vs invited, members per team, assessment participation), empty state "Invite your team — objectives need owners"
+- `planning.html` — Worker home per contract: Add milestone/task CTA (context-dependent), current-milestone tiles (tasks done vs planned, hours logged, completion streak), milestone→task list reading as "what do I do today" (NOT a Gantt chart), empty state "pick a key result and plan its first milestone"
+- `dashboard-builder.html` — the mode flip demonstrated: same pulse tiles, program = the application being built, My Clients absent from nav, srishti add-on visible in account dropdown
+- `profile.html` — the player card (PRODUCT_STRATEGY § player cards): skills/intrinsic motivations/interests as **tags, never prose** (fit thesis), role-per-program, assessment-fed fields marked ("from AIR Day 7")
+- New components → DESIGN_LANGUAGE table first; mockups/README table updated
+- **Seal step**: flip BACKLOG N1-P2-08 → NEEDS-FOUNDER-REVIEW (all 3 sessions done); the review feedback becomes the Night 3 build spec and unblocks N1-P4-01
 
-**Cards to draw**: PRODUCT_STRATEGY §§ Teams/Planning contracts + § player cards + § fit thesis · NOF.md (milestone/task semantics for Planning) · DESIGN_LANGUAGE component set · mockups/shell.css · client/css/tokens.css
+**Cards to draw**: PRODUCT_STRATEGY §§ Teams/Planning + § player cards + § fit thesis · NOF.md (milestone/task semantics) · DESIGN_LANGUAGE component set · mockups/shell.css · client/css/tokens.css
 
-**Definition of done (session 3 slice)**: 4 HTML files per contracts (one dominant CTA, ≤4 tiles, empty states); Profile captures match-grade tags not prose; hex scan = only `href="#"` anchors; tokens all exist; README updated; validator green. **Then**: BACKLOG flips N1-P2-08 to NEEDS-FOUNDER-REVIEW; the review feedback becomes the Night 3 build spec and unblocks N1-P4-01.
+**Definition of done (s3)**: 4 HTML files per contracts (one dominant CTA, ≤4 tiles, empty states); Profile is match-grade; hex scan = anchors only; every `var(--nx-*)` exists in tokens.css; README updated; validator green.
 
 **Watch out for**:
-- Planning page is the Worker's home — it must read like "what do I do today", not a Gantt chart
-- Level 0: open PR, don't merge; never stack onto an unmerged branch
-- Morning human TODO: review the session-2 PR — especially `assessment-flashcards.html` (PQ-4: direction + 3 alternatives noted in the closing mock-note)
+- Planning is the most-used page by the most people (Workers) — calm beats dense
+- Level 0: open PR, don't merge
+- After s3: the founder review is the last gate before N1-P4-01 (contracts) and the Night 2 sprint draft
