@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexus — Assessments (Engagement mode mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../../client/css/tokens.css">
+<link rel="stylesheet" href="shell.css">
+</head>
+<body>
+
+<header class="nx-topbar">
+  <span class="nx-wordmark">Nexus</span>
+  <nav class="nx-nav">
+    <a href="my-clients.html">My Clients</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="objectives.html">Objectives</a>
+    <a class="active" href="assessments.html">Assessments</a>
+    <a href="#">Teams</a>
+    <a href="#">Planning</a>
+  </nav>
+  <div class="nx-account">
+    <button class="nx-avatar" aria-haspopup="true">SR</button>
+    <div class="nx-dropdown">
+      <a href="#">Profile</a>
+      <a href="#">Company Profile</a>
+      <a href="#">Configuration</a>
+      <a href="#">Settings</a>
+      <hr>
+      <a href="#">Feedback</a>
+    </div>
+  </div>
+</header>
+
+<main class="nx-page">
+
+  <div class="nx-page-head">
+    <div>
+      <h1 class="nx-page-title">Assessments</h1>
+      <p class="nx-page-sub">Halcyon Health · AIR Strategic Assessment in progress</p>
+    </div>
+    <div class="nx-cta-pair">
+      <!-- Typed per installed block — one option per assessment block, never hardcoded -->
+      <button class="nx-btn-primary">Create AIR Strategic Assessment</button>
+      <button class="nx-btn-secondary">Review results</button>
+    </div>
+  </div>
+
+  <!-- Analytics strip: DEFINED BY THE BLOCK (AIR slots) — ≤4 tiles -->
+  <section class="nx-tiles" aria-label="analytics (AIR block slots)">
+    <div class="nx-tile"><div class="nx-tile-number">Day 5</div><div class="nx-tile-label">of 10 · sprint</div></div>
+    <div class="nx-tile"><div class="nx-tile-number">7/12</div><div class="nx-tile-label">Evidence artifacts</div></div>
+    <div class="nx-tile"><div class="nx-tile-number">11/25</div><div class="nx-tile-label">Participants assessed</div></div>
+    <div class="nx-tile"><div class="nx-tile-number alert">2</div><div class="nx-tile-label">Instruments due today</div></div>
+  </section>
+
+  <!-- Active engagement workspace: the block renders into the shell's slots -->
+  <section class="nx-panel" aria-label="active assessment">
+    <h2 class="nx-panel-title">AIR Strategic Assessment — two-week sprint <span class="nx-pill ok" style="margin-left:var(--nx-space-2)">Week 1</span></h2>
+    <div class="nx-row">
+      <span class="nx-pill ok">done</span>
+      <span class="grow"><strong>Day 1 · Executive Alignment Workshop</strong><span class="nx-card-sub" style="display:block">Business Context Canvas captured → Company Profile</span></span>
+      <button class="nx-btn-quiet">View canvas →</button>
+    </div>
+    <div class="nx-row">
+      <span class="nx-pill ok">done</span>
+      <span class="grow"><strong>Days 2–4 · Operations, Sales, Service deep dives</strong><span class="nx-card-sub" style="display:block">Value Stream Map · Revenue Flow Map · Customer Experience Map</span></span>
+      <button class="nx-btn-quiet">View artifacts →</button>
+    </div>
+    <div class="nx-row">
+      <span class="nx-pill risk">today</span>
+      <span class="grow"><strong>Day 5 · Technology &amp; data</strong><span class="nx-card-sub" style="display:block">Systems inventory + Enterprise Knowledge Map · 2 instruments open</span></span>
+      <button class="nx-btn-secondary">Capture evidence</button>
+    </div>
+    <div class="nx-row">
+      <span class="nx-pill" style="background:var(--nx-gray-light); color:var(--nx-gray)">week 2</span>
+      <span class="grow"><strong>Days 6–10 · Validation &amp; opportunity mapping</strong><span class="nx-card-sub" style="display:block">Workforce flashcard decks go out Day 7 → <a href="assessment-flashcards.html" class="nx-btn-quiet" style="padding:0">preview the taker experience</a></span></span>
+    </div>
+  </section>
+
+  <!-- Completed assessment: deliverables seed objectives (the page's exit) -->
+  <section class="nx-panel" aria-label="completed assessment">
+    <h2 class="nx-panel-title">Meridian Logistics — completed <span class="nx-card-sub">scored day 10</span></h2>
+    <div style="display:flex; gap:var(--nx-space-6); align-items:center; margin-bottom:var(--nx-space-4)">
+      <div class="nx-ring" style="--ring-value:74; --ring-color:var(--nx-positive); width:72px; height:72px"><div class="nx-ring-inner" style="width:56px; height:56px">74</div></div>
+      <div class="grow">
+        <strong>AIR Score 74 · Ready with focus areas</strong>
+        <p class="nx-card-sub">Leadership 82 · Workforce 71 · Process 68 · Data 70 · Execution 79</p>
+      </div>
+      <button class="nx-btn-primary">Create objectives from these results</button>
+    </div>
+    <div class="nx-row"><span class="grow nx-card-sub">Opportunity Register</span><strong>5 use cases ranked</strong><button class="nx-btn-quiet">Open →</button></div>
+    <div class="nx-row"><span class="grow nx-card-sub">90-Day Action Plan · 12-Month Roadmap · Risk Register · BRAMHI Baseline</span><button class="nx-btn-quiet">All deliverables →</button></div>
+  </section>
+
+  <!-- Empty state: gallery of installed blocks -->
+  <p class="mock-note">Empty state — gallery of installed assessment types</p>
+  <section class="nx-empty">
+    <div class="nx-empty-mark"></div>
+    <h2>Run your first assessment</h2>
+    <p>One assessment type is installed. Each produces scored results and deliverables that seed your objectives — nothing here is a survey.</p>
+    <div class="nx-card" style="max-width:420px; margin:0 auto var(--nx-space-6); text-align:left">
+      <h3 class="nx-card-title" style="font-size:var(--nx-text-base)">AIR Strategic Assessment</h3>
+      <p class="nx-card-sub">Two-week executive discovery sprint: where AI creates measurable value, where it will fail, what the next 12 months look like.</p>
+    </div>
+    <button class="nx-btn-primary">Create AIR Strategic Assessment</button>
+  </section>
+
+</main>
+</body>
+</html>
