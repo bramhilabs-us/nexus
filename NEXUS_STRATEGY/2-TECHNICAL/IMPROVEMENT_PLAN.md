@@ -1,12 +1,28 @@
-# Engineering Principles & Improvement Bar
-
-**Status**: Active
-**Last Updated**: 2026-06-04
-**Owner**: tick N1-P2-06
-**Tier**: T2
-**Depends on**: `SYSTEM_ARCHITECTURE.md`, `_agent/DECISIONS.md`, `_source/karvia_root/CLAUDE_STRATEGY.md`
-
 ---
+id: nexus.improvement-plan
+title: Engineering Principles & Improvement Bar
+tier: T2
+status: active
+owner: agent
+updated: 2026-06-04
+summary: >
+  The quality bar every PR is measured against: 10 named anti-patterns from
+  Karvia evidence (AP-1..AP-10), 10 improvements with enforcement (IM-1..IM-10),
+  CI quality gates, the parking lot, and the Karvia-baseline vs Nexus-target
+  success table.
+parents:
+  - NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md
+children:
+  - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
+  - NEXUS_STRATEGY/3-DELIVERY/EXECUTION_PLAYBOOK.md
+revisit:
+  - on: "a Nexus retro reveals a new anti-pattern or an unenforceable improvement"
+    stage: always
+  - on: "any quality gate is relaxed (requires DECISIONS.md entry)"
+    stage: always
+---
+
+# Engineering Principles & Improvement Bar
 
 ## Purpose
 

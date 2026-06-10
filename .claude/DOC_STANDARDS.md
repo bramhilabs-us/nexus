@@ -10,17 +10,27 @@
 
 ## Doc anatomy
 
-Every strategy doc opens with:
+Every governed doc (in `NEXUS_STRATEGY/`, `src/`, `client/`, `tests/`) opens with the **genome frontmatter** — the full spec lives in `NEXUS_STRATEGY/DOCUMENTATION_GRAPH.md`:
 
+```yaml
+---
+id: nexus.<slug>
+title: <human title>
+tier: T0 | T1 | T2 | T3 | T4
+status: draft | active | archived
+owner: founder | agent | <module>
+updated: YYYY-MM-DD
+summary: >
+  1–3 lines: what is IN this document
+parents: [paths]      # bidirectional with children; validated
+children: [paths]
+revisit:
+  - on: "<trigger>"
+    stage: N2..N5 | always
+---
 ```
-# Title
 
-**Status**: Draft | Active | Archived
-**Last Updated**: YYYY-MM-DD
-**Owner**: <module or role>
-**Tier**: T0 | T1 | T2 | T3 | T4
-**Depends on**: [link to upstream docs]
-```
+`python3 .claude/hooks/doc-graph-check.py` must be green before any close. New docs must be wired into the graph (parent updated in the same PR).
 
 Then:
 

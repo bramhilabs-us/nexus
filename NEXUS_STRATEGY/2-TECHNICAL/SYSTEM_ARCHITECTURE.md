@@ -1,12 +1,26 @@
-# System Architecture
-
-**Status**: Active
-**Last Updated**: 2026-06-03
-**Owner**: tick N1-P2-01
-**Tier**: T2
-**Depends on**: `_source/karvia_root/DEPLOYMENT_RUNBOOK.md`, `_source/karvia_root/ECOSYSTEM_ARCHITECTURE.md`, `_agent/DECISIONS.md`
-
 ---
+id: nexus.system-architecture
+title: System Architecture — Karvia as-is map
+tier: T2
+status: active
+owner: agent
+updated: 2026-06-03
+summary: >
+  The as-is map of karvia_business grounding all Nexus refactors: monolith with
+  10 engines (8 dead in prod), shared server/models coupling, request
+  lifecycle, data hierarchy, Render shape, 10 surprising findings, and the
+  8 Nexus deltas (D1-D8). Reference truth — describes Karvia, not Nexus.
+parents:
+  - NEXUS_STRATEGY/00_NORTH_STAR.md
+children:
+  - NEXUS_STRATEGY/2-TECHNICAL/IMPROVEMENT_PLAN.md
+  - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
+revisit:
+  - on: "a Night 2 lift discovers the Karvia map was wrong somewhere"
+    stage: N2
+---
+
+# System Architecture — Karvia as-is map
 
 ## Purpose
 

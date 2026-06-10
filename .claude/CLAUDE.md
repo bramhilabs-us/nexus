@@ -3,7 +3,7 @@
 **Repository**: bramhilabs-us/nexus
 **Owner**: BRAMHI Labs
 **Bot identity**: bramhi-bot
-**Last Updated**: 2026-06-03
+**Last Updated**: 2026-06-09
 
 ---
 
@@ -11,7 +11,7 @@
 
 **Nexus is a Transformation OS.**
 
-A multi-tenant platform that lets any organization — directly, or through a consultant — run a transformation program end to end: assess readiness, govern the program, set objectives and key results, drive weekly execution, capture institutional knowledge, and measure business outcomes. **AI Readiness is the launch vertical.** The architecture is built so that any future transformation vertical (ESG, digital, ops excellence, M&A integration) plugs in as a new assessment + a new playbook on the same lego blocks.
+A multi-tenant platform that lets any organization — directly, or through a consultant — run a transformation program end to end: assess readiness, govern the program, set objectives and key results, drive weekly execution, capture institutional knowledge, and measure business outcomes. **AI transformation consulting is the GTM beachhead** (C-006): BRAMHI delivers AIR Strategic Assessments and transformation engagements *through* Nexus, then hands Nexus over so the client's product teams keep it as their project-management OS (with srishti as the document/intelligence add-on). The architecture is built so that any future transformation vertical (ESG, digital, ops excellence, M&A integration) plugs in as a new assessment + a new playbook on the same lego blocks. Strategy pack entry point: `NEXUS_STRATEGY/00_NORTH_STAR.md`.
 
 It is a **fork of `karvia_business`** at the code level — Karvia's CRM + OKR engines are the seed — but Nexus is repositioned and re-architected:
 
@@ -23,7 +23,7 @@ It is a **fork of `karvia_business`** at the code level — Karvia's CRM + OKR e
 
 ### How Nexus differs
 - **Transformation OS positioning** — not consultant-only; org-direct is a first-class GTM motion
-- **Pluggable Assessment** — Karvia's SSI is one impl; AI Readiness ships v1; the interface is the primitive
+- **Pluggable Assessment** — the interface is the primitive; **AIR (AI Readiness Intelligence Rating) ships v1**; SSI is NOT carried over (Karvia reference only, C-006); any future assessment is a new impl folder
 - **Lego-block modules** with published contracts — every capability is composable
 - **Two new first-class modules**: `@nexus/governance` (program oversight) and `@nexus/knowledge` (institutional knowledge capture)
 - Fresh MongoDB instance, fresh tenant model
@@ -32,7 +32,7 @@ It is a **fork of `karvia_business`** at the code level — Karvia's CRM + OKR e
 ### The 8 lego blocks
 ```
 @nexus/crm              tenants, organizations, people, roles
-@nexus/assessment       pluggable interface — AI Readiness, SSI, future verticals
+@nexus/assessment       pluggable interface — AIR ships v1; future verticals plug in
 @nexus/objectives       O of OKR
 @nexus/key-results      KR of OKR
 @nexus/weekly-goals     sprint-cadence delivery

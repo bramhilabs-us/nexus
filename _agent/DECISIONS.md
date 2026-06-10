@@ -177,3 +177,52 @@ Every domain model gains a required `program_id`: `Objective`, `KeyResult`, `Goa
 
 **Supersedes**: Karvia's implicit single-OKR-tree-per-company tenancy model.
 
+
+---
+
+## 2026-06-09 — AI transformation consulting is the beachhead; AIR replaces SSI (C-006)
+
+**Context**: C-001 ratified the broad Transformation OS scope. The founder sharpened the go-to-market in the 2026-06-09 interactive session: BRAMHI runs AI transformation consulting for product-development companies as the wedge, with Nexus as both the delivery instrument and the handed-over product (the client's product teams keep Nexus as their project-management OS, with srishti as the document/intelligence add-on).
+
+**Decision**:
+1. **AI transformation consulting is the explicit GTM beachhead.** The engagement: onboard client → AIR Strategic Assessment (two-week discovery sprint) → deliverables (AIR Score, Opportunity Register, Risk Register, 90-day plan, 12-month roadmap, BRAMHI baseline) → transformation engagement executed as OKRs in Nexus → handover.
+2. **AIR (AI Readiness Intelligence Rating) is the v1 assessment** — five dimensions (Leadership, Workforce, Process, Data, Execution), evidence-based (the company's operating journey is the input; AIR is the output).
+3. **SSI is dropped from Nexus.** Not lifted, not shipped — it remains a Karvia reference example in `_source/` only. The assessment block is fully generic (`AssessmentProvider`: instruments, evidence, scoring, deliverables); any future assessment is a new impl folder.
+4. **Handover is a first-class program lifecycle transition** (engagement mode → builder mode); **srishti integrates behind a published contract** owned by `@nexus/knowledge`, declared OPTIONAL with tested fallback.
+5. **New minimalistic design language** — Nexus does not inherit Karvia's visual design. Founder's design docs to land in `1-PRODUCT/design/`; UI build sessions blocked on them (PQ-3).
+
+**Alternatives considered**:
+- Keep "AI Readiness" generic without the consulting methodology: rejected — the two-week sprint, deliverables, and pricing ARE the business; the product must encode them or the consulting runs in slide decks.
+- Lift SSI as a second impl to prove pluggability: rejected — it carries Karvia's hardcoded-bank legacy for no revenue; pluggability is proven cheaper by the Night 3 second-provider drill.
+
+**Consequences**:
+- New pack card: `NEXUS_STRATEGY/0-BUSINESS/AI_CONSULTING_PLAYBOOK.md` (AIR framework, sprint, deliverables, pricing, collateral). North Star, Product, Tech, Execution cards adapted.
+- `AssessmentProvider` contract generalizes from question/score to instruments/evidence/score/deliverables.
+- Client pipeline stages become Prospect → Assessing → Engaged → Handed over.
+- N1-P4-02's ASSESSMENT_INTERFACE_SPEC targets the generalized contract; AIR is the worked example.
+- `.claude/CLAUDE.md` positioning updated (SSI references removed).
+
+**Refines**: C-001 (scope stands; GTM sharpened). **Supersedes**: all SSI-as-Nexus-impl references in prior docs.
+
+---
+
+## 2026-06-09 — Document genome, session chain, 5-command process (C-007)
+
+**Context**: Karvia's ~280 sessions paid repeatedly for document drift (215 "regression" / 120 "drift" / 50 "stale" mentions in SESSION_LOG): stale epics contradicting handoffs, mockups built from superseded specs, 16 slash commands whose bookkeeping itself drifted. srishti's DOCUMENTATION_GRAPH defines the cure (metadata genome + dependency graph + propagation); Karvia's inline `@GENOME` comment tags were the failed version (unreadable, unenforced — Nexus initially rejected them outright in MASTER_GUIDE).
+
+**Decision**:
+1. **Document genome adopted** — every governed doc (`NEXUS_STRATEGY/`, `src/`, `client/`, `tests/`) opens with YAML frontmatter: `id, tier, status, owner, summary, parents, children, revisit(on/stage)`. Spec + registry + propagation rules in `NEXUS_STRATEGY/DOCUMENTATION_GRAPH.md`.
+2. **Machine enforcement** — `.claude/hooks/doc-graph-check.py`: no orphans (all docs reachable from 00_NORTH_STAR), bidirectional edges, unique ids, staleness warnings (child not updated within 14 days of a parent change). Red graph blocks `/close`. Propagation is notification-first: T0/T1 changes flag children for human review; T2 changes the agent patches in the same PR.
+3. **Session chain** — `_agent/NEXT_SESSION.md` is the card every session ends by writing and every session starts by reading. `/init` is the only command a human needs; session *types* (strategy/contract/coding/test/audit/sprint-planning/general) are data on the card, each with its own scan list. "general" sessions are free-form and do not consume the card.
+4. **5 commands, not 16** — init, close, nexus-tick, sprint-load, audit. Karvia's per-session-type commands are replaced by the typed card.
+5. **Session practices codified** — `.claude/SESSION_PRACTICES.md` distills Karvia's lessons (pre-scan is the work; newer decision beats older spec; re-sum tables; tokens before mockups; grep before trusting; quality self-score per session).
+
+**Alternatives considered**:
+- srishti's full genome (doc_id/schema_version/surface/lifecycle_node/content_contract/edges.kind/propagation thresholds): rejected for v1 — more metadata than a 2-person + agent team will maintain; fields can be added later per DOCUMENTATION_GRAPH's evolution rule.
+- No enforcement (genome as convention): rejected — Karvia proved conventions decay; the validator is the difference.
+
+**Consequences**:
+- Code skeleton exists now (`src/modules/<8>/README.md`, `client/`, `tests/`) so every future code file has a governed parent from day one.
+- BRAMHI brand guide moved to `1-PRODUCT/design/brand/`; `DESIGN_LANGUAGE.md` translates it (PQ-3 resolved; token-first rule prevents Karvia's drifting-hex bug).
+- CI gains the doc-graph check as a required gate in Night 2.
+- Supersedes MASTER_GUIDE's "no genome tags" stance (the objection was to Karvia's *implementation*, not the idea).

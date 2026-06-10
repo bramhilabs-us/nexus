@@ -71,6 +71,17 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - 4 journeys with numbered steps + Mermaid sequence diagrams
   - File: `NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md`
 
+### N1-P0-02 — Strategy pack: North Star + product/tech/execution cards
+- **Status**: DONE (PR pending merge — interactive session 2026-06-09-01)
+- **Size**: M (completed in 1 interactive session)
+- **Depends on**: N1-P2-01, N1-P2-06, DECISIONS C-001/3/4/5
+- **Definition of done**:
+  - ✓ `NEXUS_STRATEGY/00_NORTH_STAR.md` — ≤90-step thesis, three-layer model, pack-of-cards system
+  - ✓ `1-PRODUCT/PRODUCT_STRATEGY.md` — page contracts for all 6 pages, lifecycle stages, first-value journey
+  - ✓ `2-TECHNICAL/TECH_STRATEGY.md` — 3 layers, 8-block anatomy, AssessmentProvider contract
+  - ✓ `3-DELIVERY/EXECUTION_PLAYBOOK.md` — session types, 90-step phase budgets, measurement
+- **Notes**: Human-directed (founder voice brief + iPad notes), added mid-sprint. Downstream: N1-P3-01 builds on PRODUCT_STRATEGY; N1-P4-01 aligns with TECH_STRATEGY; EXECUTION_PLAYBOOK governs all future step budgets.
+
 ### N1-P3-01 — Populate 0-BUSINESS and 1-PRODUCT (Transformation OS framing)
 - **Status**: READY
 - **Size**: M (2 ticks)
@@ -101,7 +112,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Size**: M (2 ticks)
 - **Depends on**: N1-P2-04 (module graph), N1-P2-02 (data models)
 - **Definition of done**:
-  - MODULARIZATION_PLAN.md with 8 modules (CRM, Objectives, KeyResults, WeeklyGoals, Tasks, Assessment + Governance + Knowledge) + assessment impls (SSI, AI-Readiness)
+  - MODULARIZATION_PLAN.md with 8 modules (CRM, Objectives, KeyResults, WeeklyGoals, Tasks, Assessment + Governance + Knowledge) + assessment impl (AIR — SSI dropped per C-006, Karvia reference only)
   - MODULE_CONTRACTS_DRAFT.md with TS interface signatures
   - Reflects ratified decisions: consolidate engines, TypeScript strict, Program as first-class entity
 - **Notes**: All 3 architectural clarifications now answered (2026-06-04). N1-P4-02 also unblocked.
