@@ -52,6 +52,7 @@ One small set shared by all six pages — adding a component requires updating t
 | **CTA pair** | Primary + secondary per page contract | Primary: filled deep purple, pill (per guide buttons); secondary: quiet outline/text |
 | **Empty state** | First-time teaching | Lotus-adjacent calm illustration, one sentence, one CTA |
 | **Score ring** | Assessment scores on cards | Dimension color mapping defined by the assessment block, ring style defined here |
+| **Flashcard** | Assessment question delivery (never survey forms — PRODUCT_STRATEGY § delivery experience) | One question per card; flip/advance rhythm; calm, single-focus layout; the "why this assessment" intro card opens every deck |
 
 ## What this resolves
 

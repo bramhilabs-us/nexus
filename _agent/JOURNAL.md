@@ -116,3 +116,13 @@ Statuses: DONE | BLOCKED | NO-OP | BUDGET-STOP | ABORTED
 **Quality**: 9/10 — clean encode of a fuzzy philosophical brief into enforceable doc rules; -1: the fit thesis deserves a worked example (which profile tags join to which task fields) — deferred to the Profile schema design in N2.
 **Files**: PRODUCT_STRATEGY.md, TECH_STRATEGY.md, DATA_MODELS.md, IMPROVEMENT_PLAN.md, _agent/{BACKLOG,JOURNAL}.md
 **Next**: Unchanged card — N1-P2-04 Module dependency graph, then Path B queue (tokens → mockups, now incl. Profile mockup).
+
+---
+
+## 2026-06-09T20:45Z — session-2026-06-09-06 — DONE
+**Task**: Assessment delivery experience principles (founder directive: flashcards, never surveys; dynamic per assessment moment)
+**Branch**: session/2026-06-09-05-assessment-experience
+**Outcome**: (1) PRODUCT_STRATEGY Assessments page gains "Delivery experience" principles: every question a flashcard (one card, flip/advance rhythm); delivery format follows the moment — first-time (onboarding-grade, IS the funnel), recurring (lighter, shows deltas vs taker's own history), in-between pulses (minutes not sessions); "why this assessment, now" always on screen; completion rate + taker sentiment are product metrics. PQ-4 opened: interaction mechanics deliberately unexplored — founder has the principle, not the mechanics; explored in N1-P2-08 mockups, settled N3. (2) DESIGN_LANGUAGE component set gains Flashcard. (3) TECH_STRATEGY AssessmentProvider: instruments declare delivery moment ('first_time'|'recurring'|'pulse'); question instruments render through the shell's flashcard deck; recurring decks receive history for deltas. (4) N1-P2-08 DoD gains an assessment flashcard deck mockup (intro why-card + 2–3 question cards). No conflict with today's assessment work — the provider contract was delivery-agnostic; this fills the experience layer it left open.
+**Quality**: 9/10 — directive encoded as enforceable principles + a mockup checkpoint; mechanics intentionally left to PQ-4 rather than invented.
+**Files**: PRODUCT_STRATEGY.md, design/DESIGN_LANGUAGE.md, TECH_STRATEGY.md, _agent/{BACKLOG,JOURNAL}.md
+**Next**: Unchanged card — N1-P2-04 module graph, then tokens, then mockups (now incl. Profile card + assessment flashcard deck).
