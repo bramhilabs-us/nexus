@@ -4,7 +4,7 @@ title: Nexus Execution Playbook — 290 steps becomes 90
 tier: T3
 status: active
 owner: founder
-updated: 2026-06-09
+updated: 2026-06-10
 summary: >
   The execution card: 5 session types with deliverables, the 90-step phase
   budgets (N1:18 N2:24 N3:18 N4:16 N5:10 buffer:4), the pack-of-cards rule
@@ -13,7 +13,10 @@ summary: >
 parents:
   - NEXUS_STRATEGY/00_NORTH_STAR.md
   - NEXUS_STRATEGY/2-TECHNICAL/IMPROVEMENT_PLAN.md
-children: []
+children:
+  - NEXUS_STRATEGY/3-DELIVERY/SPRINT_PROCESS.md
+  - NEXUS_STRATEGY/3-DELIVERY/RELEASE_PROCESS.md
+  - NEXUS_STRATEGY/3-DELIVERY/CI_CD.md
 revisit:
   - on: "a night exceeds its step budget by more than 25%"
     stage: always

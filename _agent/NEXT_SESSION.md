@@ -2,30 +2,25 @@
 
 > Written by the previous session per `/close`. `/init` reads this and starts. Overwritten every session — history lives in JOURNAL.md.
 
-**Type**: coding (mockups — first visible product)
-**Task**: `N1-P2-08` — Six page mockups, session 1 of 2–3 (static HTML, token-first)
-**Why it's next**: tokens merged (N1-P2-07 ✓, PR #14), API surface merged (N1-P2-03 ✓, PR #15) — founder merged both before leaving 2026-06-10; the Path B queue is fully unblocked and mockups are the founder review checkpoint that feeds N1-P4-01 contracts and becomes the Night 3 build spec.
+**Type**: coding (mockups — session 2 of 2–3) — **with a Level-0 gate, read first**
+**Task**: `N1-P2-08` — Objectives + Assessments mockups, including the **assessment flashcard deck** (PQ-4 exploration)
 
-**Queue (Path B)**: this session (+1–2 more mockup sessions, founder review checkpoint) → Night 1 remainder (N1-P3-01, N1-P4-01 — now has architecture, data models, dependency graph AND the API surface tables).
+**Gate**: run `gh pr list` first.
+- **PR #16 (mockups s1) merged** → proceed with session 2 (scope below; reuse `shell.css` from main).
+- **PR #16 still open** → pick **`N1-P3-03` — 4-CUSTOMER skeleton** instead (S, READY, no in-flight deps; DoD: INTERVIEW_TEMPLATE.md, FEEDBACK_LOG.md, EVIDENCE_INDEX.md, METRICS.md templates in `NEXUS_STRATEGY/4-CUSTOMER/`; draw PRODUCT_STRATEGY § Feedback meta-loop + § first-value journey metrics, AI_CONSULTING_PLAYBOOK § interview matrix + deliverables, BOQ_FRAMEWORK signal layer; wire as children of… check the registry — 4-CUSTOMER has no parent doc yet, likely children of NORTH_STAR or PRODUCT_STRATEGY; pick the cleanest single parent and note it in the PR).
+- After N1-P3-03, the only fully-independent READY item left is **N1-P3-01** (0-BUSINESS/1-PRODUCT population, M) — then the queue genuinely needs the morning merges (mockups s2/s3 need #16; N1-P4-01 waits on the mockups founder review by Path B intent).
+- In-flight as of this card: #16 (mockups s1), #17 (user journeys), tick-14's delivery-skeleton PR.
 
-**Session 1 scope** (size M, 2–3 sessions total — don't chain past one PR):
-- The shared shell: nav, account dropdown with the 5 secondary surfaces (Profile, Company Profile, Configuration, Settings, Feedback), page scaffold consuming `var(--nx-*)` only
-- 2–3 Engagement-mode pages (e.g., My Clients, Dashboard) against their page contracts
-- Later sessions: remaining pages + Builder variants, Profile player card, assessment flashcard deck (PQ-4)
+**Session 2 scope (when #16 is merged)**:
+- `objectives.html` — lifecycle board per contract: Create objective primary CTA, stage tiles, objective cards with KR lists + stage ribbons, assessment-driven empty state
+- `assessments.html` — pluggable shell per contract: typed Create-assessment CTA, block-defined analytics slots, gallery empty state
+- `assessment-flashcards.html` — **PQ-4**: why-card → 2–3 question cards (different input types) → progress feel, flip/advance rhythm; one strong direction, alternatives in mock-notes
+- New components added to DESIGN_LANGUAGE's component table in the same PR
 
-**Cards to draw**:
-- `client/css/tokens.css` — the only color/type/space source; zero inline hex (review-blocking)
-- `NEXUS_STRATEGY/1-PRODUCT/design/DESIGN_LANGUAGE.md` — § Token table, component set (Tile, Card, Stage ribbon, CTA pair, Empty state, Score ring, Flashcard), minimalism rules
-- `NEXUS_STRATEGY/1-PRODUCT/PRODUCT_STRATEGY.md` — page contracts (one dominant CTA, ≤4 tiles, empty states), § player cards, § assessment delivery experience
-- `NEXUS_STRATEGY/1-PRODUCT/design/references/` — the two decks for feel (spacing, surface, restraint)
+**Cards to draw**: mockups/README.md + shell.css · PRODUCT_STRATEGY §§ Objectives/Assessments/delivery-experience + PQ-4 · DESIGN_LANGUAGE § Token table + component set · USER_JOURNEYS J2 · client/css/tokens.css
 
-**Definition of done** (per BACKLOG N1-P2-08, this session's slice):
-- Mockups in `NEXUS_STRATEGY/1-PRODUCT/design/mockups/`, consuming `var(--token)` only
-- Each implements its page contract exactly
-- `grep -rE '#[0-9a-fA-F]{3,6}' mockups/` returns nothing before commit (tokens.css is the only hex)
-- Graph: if mockups/ gains a governed node, wire parents (DESIGN_LANGUAGE) and run validator
+**Definition of done (session 2 slice)**: 3 HTML files implementing contracts exactly; flashcards never look like a form; hex scan = only `href="#"` anchors; every `var(--nx-*)` exists in tokens.css; mockups/README table updated; validator green.
 
 **Watch out for**:
-- Throwaway quality NOT acceptable — these are the Night 3 spec (Karvia lesson #174-3)
-- Fonts: Inter for UI; Playfair Display display moments only; Cinzel/Cormorant never in app chrome (DESIGN_LANGUAGE § Token table)
-- Level 0: open PR, don't merge; check `gh pr list` first — if this task's PR is already open and unmerged, skip to the next READY item without an open PR (fallback: N1-P2-05 user journeys)
+- Level 0: open PR, don't merge; never stack onto an unmerged branch
+- Morning human TODO (queue-unblocking order): merge **#16** first (opens mockups s2+s3), then #17, then tick-14's PR
