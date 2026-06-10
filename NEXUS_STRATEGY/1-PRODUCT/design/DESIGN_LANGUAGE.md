@@ -93,6 +93,8 @@ One small set shared by all six pages — adding a component requires updating t
 | **Empty state** | First-time teaching | Lotus-adjacent calm illustration, one sentence, one CTA |
 | **Score ring** | Assessment scores on cards | Dimension color mapping defined by the assessment block, ring style defined here |
 | **Flashcard** | Assessment question delivery (never survey forms — PRODUCT_STRATEGY § delivery experience) | One question per card; flip/advance rhythm; calm, single-focus layout; the "why this assessment" intro card opens every deck |
+| **Deck progress** | Position within a flashcard deck | Dots, not "Q7/24" counters — progress felt, not dreaded; current dot in primary, done dots in primary-soft |
+| **Answer input** | The per-card response control (scale / choice / binary) | Large tap targets, one input family per card; selected state = primary-faint fill + primary border; never radio/checkbox form controls |
 
 ## What this resolves
 

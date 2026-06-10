@@ -78,7 +78,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: Path B decision (2026-06-09): mockups pulled forward from Night 3 — they depend only on page contracts + design language, both done. Tokens-before-mockups per SESSION_PRACTICES rule 3.
 
 ### N1-P2-08 — Six page mockups (static HTML, token-first) (Path B pull-forward)
-- **Status**: IN-PROGRESS (session 1 of 2–3 done — tick 2026-06-10-12, PR pending: shell + My Clients + Dashboard, Engagement mode. Remaining: Objectives, Assessments + flashcard deck (PQ-4), Teams, Planning, Builder variants, Profile player card)
+- **Status**: IN-PROGRESS (sessions 1–2 of 3 done — s1 merged; s2 tick 2026-06-10-15 PR pending: Objectives + Assessments + flashcard deck (PQ-4 explored, alternatives noted). Remaining s3: Teams, Planning, Builder variants, Profile player card → founder review checkpoint)
 - **Size**: M (2–3 sessions)
 - **Depends on**: N1-P2-07, PRODUCT_STRATEGY page contracts (DONE)
 - **Definition of done**:

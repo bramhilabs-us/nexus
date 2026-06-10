@@ -2,26 +2,24 @@
 
 > Written by the previous session per `/close`. `/init` reads this and starts. Overwritten every session — history lives in JOURNAL.md.
 
-**Type**: coding (mockups — session 2 of 2–3)
-**Task**: `N1-P2-08` — Objectives + Assessments mockups, including the **assessment flashcard deck** (PQ-4 exploration)
-**Why it's next**: founder merged the whole night queue 2026-06-10 (#16 mockups s1, #17 user journeys, #18 delivery skeleton) — mockups session 2 is unblocked, `shell.css` is on main, and the flashcard deck is the founder's open interaction question (PQ-4), the most valuable thing to put in front of them at the review checkpoint.
+**Type**: coding (mockups — session 3 of 3, then founder review checkpoint)
+**Task**: `N1-P2-08` — Teams + Planning mockups, Builder variants, Profile player card
+**Why it's next**: sessions 1–2 covered shell + 5 surfaces incl. the PQ-4 flashcard deck. Session 3 completes the set and triggers the **founder review checkpoint** — the gate for N1-P4-01 contracts (Path B intent).
 
-**Standard Level-0 check**: `gh pr list` first — if a session-2 PR is already open and unmerged, skip to the next READY item (fallbacks: `N1-P3-03` 4-CUSTOMER skeleton, then `N1-P3-01` 0-BUSINESS/1-PRODUCT population). N1-P4-01 stays parked until the mockups founder review lands (Path B intent).
+**Level-0 gate**: `gh pr list` first. If the session-2 PR (tick-15) is still open → don't stack; pick **`N1-P3-03` — 4-CUSTOMER skeleton** (S, READY: INTERVIEW_TEMPLATE/FEEDBACK_LOG/EVIDENCE_INDEX/METRICS templates in `NEXUS_STRATEGY/4-CUSTOMER/`; draw PRODUCT_STRATEGY § Feedback meta-loop + § metrics, AI_CONSULTING_PLAYBOOK § interview matrix + deliverables; pick the cleanest single graph parent — likely PRODUCT_STRATEGY — and note it in the PR). Next fallback after that: `N1-P3-01` (M).
 
-**Session 2 scope**:
-- `objectives.html` — lifecycle board per contract: Create objective primary CTA (pre-seeded framing when arriving from Assessments), stage tiles (Identified/Handed off/Sustained), objective cards with KR lists + stage ribbons, assessment-driven empty state ("your assessment found these opportunities")
-- `assessments.html` — pluggable shell per contract: typed Create-assessment CTA (*Create AIR Strategic Assessment*), block-defined analytics slots (AIR: evidence coverage, dimension scores, participants), gallery empty state
-- `assessment-flashcards.html` — **PQ-4**: the "why this assessment, now" intro card + 2–3 question cards (different input types) + progress feel + flip/advance rhythm; calm, single-focus; one strong direction, alternatives in mock-notes
-- New components (flashcard inputs, deck progress) added to DESIGN_LANGUAGE's component table in the same PR
+**Session 3 scope**:
+- `teams.html` — people fabric per contract: Invite member primary CTA, tiles (onboarded vs invited, per team, assessment participation), empty state "objectives need owners"
+- `planning.html` — weekly rhythm per contract (Worker home): Add milestone/task primary CTA (context-dependent), current-milestone tiles (tasks done/planned, hours logged, streak), milestone→task board, empty state "pick a KR, plan its first milestone"
+- **Builder variants** (per BACKLOG DoD: My Clients hides, Dashboard/Assessments re-skinned for product teams) — one `dashboard-builder.html` showing the mode flip is enough to demonstrate; note in README
+- `profile.html` — the player card (PRODUCT_STRATEGY § player cards): who the player is — skills/motivations/interests as **tags, never prose** (the fit thesis), role-per-program, assessment-fed fields marked
+- mockups/README table updated; any new component → DESIGN_LANGUAGE first
 
-**Cards to draw**: mockups/README.md + shell.css (conventions incl. mock-note separators) · PRODUCT_STRATEGY §§ Objectives/Assessments/delivery-experience + PQ-4 · DESIGN_LANGUAGE § Token table + component set · USER_JOURNEYS J2 (the taker journey the deck implements) · client/css/tokens.css
+**Cards to draw**: PRODUCT_STRATEGY §§ Teams/Planning contracts + § player cards + § fit thesis · NOF.md (milestone/task semantics for Planning) · DESIGN_LANGUAGE component set · mockups/shell.css · client/css/tokens.css
 
-**Definition of done (session 2 slice)**:
-- 3 HTML files implementing their contracts exactly (one dominant CTA, ≤4 tiles, empty states)
-- Flashcard deck demonstrates: intro why-card, one question per card, advance rhythm, progress felt-not-dreaded — never looks like a numbered form
-- Hex scan over mockups/ = only `href="#"` anchors; every `var(--nx-*)` exists in tokens.css
-- mockups/README.md table updated; validator green
+**Definition of done (session 3 slice)**: 4 HTML files per contracts (one dominant CTA, ≤4 tiles, empty states); Profile captures match-grade tags not prose; hex scan = only `href="#"` anchors; tokens all exist; README updated; validator green. **Then**: BACKLOG flips N1-P2-08 to NEEDS-FOUNDER-REVIEW; the review feedback becomes the Night 3 build spec and unblocks N1-P4-01.
 
 **Watch out for**:
+- Planning page is the Worker's home — it must read like "what do I do today", not a Gantt chart
 - Level 0: open PR, don't merge; never stack onto an unmerged branch
-- Session 3 (after): Teams + Planning + Builder variants + Profile player card → full founder review checkpoint
+- Morning human TODO: review the session-2 PR — especially `assessment-flashcards.html` (PQ-4: direction + 3 alternatives noted in the closing mock-note)
