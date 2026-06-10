@@ -20,6 +20,7 @@ children:
   - src/README.md
   - client/README.md
   - tests/README.md
+  - NEXUS_STRATEGY/2-TECHNICAL/DATA_MODELS.md
 revisit:
   - on: "any module contract.ts diverges from the anatomy or contracts described here"
     stage: N2

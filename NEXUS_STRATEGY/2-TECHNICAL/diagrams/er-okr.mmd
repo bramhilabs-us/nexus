@@ -1,0 +1,9 @@
+erDiagram
+    OBJECTIVE ||--o{ KEY_RESULT : has
+    OBJECTIVE ||--o{ GOAL : "quarterly (C-008)"
+    GOAL ||--o{ GOAL : "self-nesting"
+    GOAL ||--o{ TASK : "required goal_id (C-008)"
+    KEY_RESULT ||--o{ WEEKLY_GOAL : has
+    WEEKLY_GOAL ||--o{ MOVE : "habits (C-008)"
+    KEY_RESULT ||--o{ OKR_OUTCOME : "closure record"
+    OBJECTIVE }o--|| USER : owner_id

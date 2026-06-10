@@ -100,3 +100,19 @@ Format:
 **Answer**: Yes. `Program` is a first-class top-level entity. `Company → Program → Objective`. Every domain doc gains `program_id`. Users get `program_memberships[]`.
 
 
+---
+
+## C-008 — Goal (quarterly) and Move layers: lift, fold, or drop?
+
+**Asked**: 2026-06-09 by session N1-P2-02 (data models catalogue)
+**Context**: Karvia's code-truth hierarchy is `Objective → KeyResult → Goal (quarterly, self-nesting) → WeeklyGoal → Move`, and `Task` requires `goal_id` (Task hangs off Goal, parallel to the WeeklyGoal branch). But the Nexus strategy docs (TECH_STRATEGY roll-up engine, PRODUCT_STRATEGY value chain) describe the compressed chain `Task → WeeklyGoal/Milestone → KR → Objective` — no Goal, no Move. IMPROVEMENT_PLAN's parking lot says "don't redesign the domain," which cuts both ways.
+
+**Question**: For Nexus v1, what happens to the Goal (quarterly) and Move (habit) layers?
+
+**Options the agent sees**:
+- **a) Fold** — Goal's quarterly grouping becomes a property of WeeklyGoal/planning (quarter tags on KRs already exist: `KeyResult.quarters[]`); Task re-parents to WeeklyGoal; Move folds into Task (move_type/frequency become Task fields). Matches the strategy docs; one migration; simpler roll-up. **Recommended.**
+- **b) Lift all** — keep Goal + Move as Nexus modules/fields; update TECH_STRATEGY's roll-up chain to 6 levels. Most faithful to "don't redesign the domain," but adds a layer the 6-page UI never surfaces.
+- **c) Defer Move only** — fold Goal (a), park Move as a post-beta habit feature.
+
+**Status**: OPEN
+**Answer**: (filled by human)

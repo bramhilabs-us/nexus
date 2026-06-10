@@ -76,3 +76,13 @@ Statuses: DONE | BLOCKED | NO-OP | BUDGET-STOP | ABORTED
 **Quality**: 9/10 — all deliverables landed and validator green; -1 for one graph edge caught by the validator rather than by me (which is also proof the validator works).
 **Files**: NEXUS_STRATEGY/DOCUMENTATION_GRAPH.md (new), .claude/hooks/doc-graph-check.py (new), .claude/SESSION_PRACTICES.md (new), NEXUS_STRATEGY/1-PRODUCT/design/DESIGN_LANGUAGE.md (new) + brand/ (moved), src/** + client/ + tests/ READMEs (new, 11), 7 strategy docs (genome backfill), .claude/commands/{init,close,audit,nexus-tick}.md, .claude/{MASTER_GUIDE,DOC_STANDARDS}.md, _agent/{NEXT_SESSION.md(new),DECISIONS.md,JOURNAL.md}
 **Next**: Per _agent/NEXT_SESSION.md — strategy session, N1-P2-02 Data models catalogue. Start it with /init.
+
+---
+
+## 2026-06-09T17:00Z — session-2026-06-09-02 — DONE
+**Task**: N1-P2-02 — Data models catalogue (first session run through the new /init → card → /close chain)
+**Branch**: session/2026-06-09-02-data-models
+**Outcome**: Catalogued all 19 Karvia Mongoose schemas (~9,300 lines) in `NEXUS_STRATEGY/2-TECHNICAL/DATA_MODELS.md` with key fields, relations, validation highlights, and a Nexus disposition per model (lift / lift+program_id / redesign / fold / defer). 3 ER diagrams (`er-crm/okr/assessment.mmd`). Pre-scan caught 2 spec↔reality drifts before work: (1) 19 models vs the 8 headline models in SYSTEM_ARCHITECTURE; (2) confirmed the dual-KeyResult in code (Objective.js:173, Karvia's own CLEANUP-TARGET comment). Key findings: User.companies[] is the direct ancestor of program_memberships[]; OKROutcome is the unnamed seed of Program.outcome + knowledge evidence; Assessment.ssi_scores hardcoded in the shared model is AP-3's data-layer twin. **Surfaced C-008**: Karvia's code-truth hierarchy has Goal (quarterly, self-nesting) and Move layers that the Nexus strategy docs compress away; Task requires goal_id not weekly_goal_id. Filed with 3 options (recommend fold); partially blocks N1-P4-01 OKR-chain contracts.
+**Quality**: 9/10 — DoD fully met in one session (budgeted 2); -1 because C-008 ideally should have been caught when TECH_STRATEGY was written, not now (the catalogue is doing its job, but a session earlier would have been cheaper).
+**Files**: NEXUS_STRATEGY/2-TECHNICAL/DATA_MODELS.md (new), NEXUS_STRATEGY/2-TECHNICAL/diagrams/er-{crm,okr,assessment}.mmd (new), SYSTEM_ARCHITECTURE.md + TECH_STRATEGY.md (children edges), _agent/{clarifications.md (C-008), BACKLOG.md, NEXT_SESSION.md, JOURNAL.md}
+**Next**: Per NEXT_SESSION.md — strategy session, N1-P2-04 Module dependency graph. Human: answer C-008 when reviewing this PR.
