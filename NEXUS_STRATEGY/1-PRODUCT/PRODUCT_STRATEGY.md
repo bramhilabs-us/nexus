@@ -4,7 +4,7 @@ title: Nexus Product Strategy — six pages, two modes
 tier: T1
 status: active
 owner: founder
-updated: 2026-06-09
+updated: 2026-06-10
 summary: >
   The UI-layer card: the page contract (purpose, primary role, entry/exit,
   primary/secondary CTA, analytics strip, empty state) applied to all six
@@ -17,6 +17,7 @@ children:
   - NEXUS_STRATEGY/1-PRODUCT/design/DESIGN_LANGUAGE.md
   - NEXUS_STRATEGY/1-PRODUCT/NOF.md
   - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
+  - NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md
 revisit:
   - on: "a page contract changes in code (PageContract registration differs from this doc)"
     stage: N3
