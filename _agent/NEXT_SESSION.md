@@ -4,7 +4,9 @@
 
 **Type**: strategy
 **Task**: `N1-P2-04` — Module dependency graph
-**Why it's next**: with data models catalogued (N1-P2-02 ✓), the module graph is the last input N1-P4-01 (modularization plan + contracts) needs. C-008 blocks only the OKR-chain contracts, not this mapping work.
+**Why it's next**: with data models catalogued (N1-P2-02 ✓), the module graph is the last input N1-P4-01 (modularization plan + contracts) needs.
+
+**Queue (Path B, ratified 2026-06-09)**: this session → `N1-P2-07` design tokens → `N1-P2-08` six page mockups (first visible product, ≈ sessions 8–10) → resume Night 1 remainder. Mockup feedback feeds N1-P4-01.
 
 **Cards to draw**:
 - `NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md` — engine inventory + shared-model coupling

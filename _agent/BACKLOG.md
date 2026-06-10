@@ -66,6 +66,27 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - ✓ Implications for C-003/4/5 stated
 - **Notes**: This doc is the bar every Night 2-5 tick is measured against. Added mid-sprint per human request.
 
+### N1-P2-07 — Design tokens from the Brandguide (Path B pull-forward)
+- **Status**: READY
+- **Size**: S (1 session)
+- **Depends on**: DESIGN_LANGUAGE.md (DONE), N1-P2-04 (sequencing only — tokens session follows the module graph)
+- **Definition of done**:
+  - `client/css/tokens.css` — semantic tokens (`--nx-primary`, `--nx-ink`, `--nx-surface`, type/spacing/radius scales) extracted from `1-PRODUCT/design/brand/` assets
+  - Hex/scale table recorded in DESIGN_LANGUAGE.md (filling its declared placeholder)
+  - Zero inline hex anywhere; tokens are the only color source from here on
+- **Notes**: Path B decision (2026-06-09): mockups pulled forward from Night 3 — they depend only on page contracts + design language, both done. Tokens-before-mockups per SESSION_PRACTICES rule 3.
+
+### N1-P2-08 — Six page mockups (static HTML, token-first) (Path B pull-forward)
+- **Status**: READY (after N1-P2-07)
+- **Size**: M (2–3 sessions)
+- **Depends on**: N1-P2-07, PRODUCT_STRATEGY page contracts (DONE)
+- **Definition of done**:
+  - Static HTML mockups for all 6 pages in `NEXUS_STRATEGY/1-PRODUCT/design/mockups/`, consuming `var(--token)` only
+  - Engagement + Builder variants for My Clients, Dashboard, Assessments
+  - Each mockup implements its page contract exactly: one dominant primary CTA, ≤4 analytics tiles, empty state teaching the purpose
+  - Founder review checkpoint — feedback feeds N1-P4-01 contracts and becomes the Night 3 build spec
+- **Notes**: First visible product. Throwaway-quality is NOT acceptable — these are the Night 3 spec (Karvia lesson #174-3).
+
 ### N1-P2-05 — User journeys
 - **Status**: READY
 - **Size**: M (2 ticks)
