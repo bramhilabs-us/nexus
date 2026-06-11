@@ -72,6 +72,10 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |
 00_NORTH_STAR.md ............................. T0 | the play, the 90-step thesis — ROOT
 |
+|-- 01_NEXUS_MODEL.md ........................ T0 | the constitution: thesis · ladder · measurement · articles
+|       |-- 02_NBM_MODEL.md .................. T0 | the Staircase, BOQ ⇄ NBM, the core USP (draft)
+|       `--> feeds: BOQ_FRAMEWORK (score family it must implement)
+|
 |-- 0-BUSINESS/AI_CONSULTING_PLAYBOOK.md ..... T0 | AIR framework, sprint, pricing
 |       `--> feeds: PRODUCT_STRATEGY (what pages must encode)
 |

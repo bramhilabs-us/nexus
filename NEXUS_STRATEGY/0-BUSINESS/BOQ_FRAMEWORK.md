@@ -14,6 +14,7 @@ summary: >
   pluggable calculators so the strategy can grow alongside the product.
 parents:
   - NEXUS_STRATEGY/00_NORTH_STAR.md
+  - NEXUS_STRATEGY/01_NEXUS_MODEL.md
   - NEXUS_STRATEGY/0-BUSINESS/AI_CONSULTING_PLAYBOOK.md
 children: []
 revisit:

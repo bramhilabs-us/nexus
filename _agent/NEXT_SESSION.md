@@ -3,17 +3,22 @@
 > Written by the previous session per `/close`. `/init` reads this and starts. Overwritten every session — history lives in JOURNAL.md.
 
 **Type**: STRATEGY SESSION (interactive, founder present) — the cron loop is OFF; do not tick.
-**Task**: Ratify and execute the 2026-06-10 strategy review — ecosystem repositioning (BRAMHI/iBrain/Nexus), unified scoring model, assessment mechanics, Company Journey, two-tier brand + sidebar layout.
+**Task**: N1-P3-04 — Finalize the constitution + NBM model, record the decision set, then resume the doc work list.
 
-**READ FIRST**: `_agent/STRATEGY_SESSION_BRIEF_2026-06-10.md` — the complete synthesis: the new ecosystem truth (iBrain = all engine capability; the Karvia-engines→iBrain lineage), 13 pending decisions (proposed C-010…C-013) with recommendations, the 12-item document work list, and the source map (BOQ whitepaper, ExternalCom/bramhi corpus, official_dev/iBrain docs, NEXUS brand guide).
+**READ FIRST** (in order):
+1. `NEXUS_STRATEGY/01_NEXUS_MODEL.md` — **the constitution** (draft, pending founder read-through). The document Nexus is held against.
+2. `NEXUS_STRATEGY/02_NBM_MODEL.md` — the NBM brainstorm capture. **§5 is the session agenda** — 7 open items: ratify the Staircase, constitution amendments (deliverables column, NBM ¶ in §3, BOQ↔NBM hypothesis in honest limits, candidate Article 13 score≠prediction), name the Align/Transform deliverables, decide "Ensure", decide Culture Score, write DECISIONS entries, then resume the doc list.
+3. `_agent/STRATEGY_SESSION_BRIEF_2026-06-10.md` §8 — the 12-item doc work list (items 2–12 still pending; they now execute against the constitution, not the brief).
 
 **Session flow**:
-1. Walk the founder through the 13 decisions (§7 of the brief) — rapid ratification, record in DECISIONS.md as C-010…C-013
-2. Execute the doc work list (§8) in order — BOQ_FRAMEWORK revision and TECH_STRATEGY iBrain architecture are the load-bearing ones
-3. Brand/layout rework last (tokens v2 from the NEXUS guide, sidebar shell, 10 mockups re-skin)
-4. Then: N1-P3-01 part 2 (CAPABILITIES, ROADMAP) reflecting everything, Night-1 close-out groom, SPRINTS_NIGHT_2 draft
+1. Founder reads/reacts to the constitution → flip `status: draft → active` when satisfied
+2. Walk 02_NBM_MODEL.md §5 items 1–5 (rapid decisions, like session 20's batches)
+3. Record `_agent/DECISIONS.md` C-010…C-013 + brainstorm settlements (the full list is in §5 item 6)
+4. Resume the doc work list: **BOQ_FRAMEWORK.md revision first** (it still carries the old score family + "BRAMHI Organizational Quotient"), then COMPANY_JOURNEY decision (own doc vs constitution Appendix E pointer), SCORING_MODEL, TECH_STRATEGY iBrain (+ dev-stack telemetry ingestion — new, load-bearing), then brand/layout rework, then N1-P3-01 pt2 + Night-1 close-out
 
 **Watch out for**:
-- Nothing in the brief is canon until ratified — it is a proposal, not a decision record
-- The brief flags which iBrain docs were NOT yet read in depth (API_REFERENCE, KARVIA integration folder, MVP strategy) — read them before drawing the Nexus↔iBrain contract
-- BACKLOG state: N1-P2-08 NEEDS-FOUNDER-REVIEW is effectively superseded by this session's brand/layout rework (the founder's review IS the rework); N1-P4-01 waits for the new architecture decisions
+- **Everything in 02_NBM_MODEL.md is brainstorm capture, not canon** — ratify/revise/strike each claim explicitly
+- All 13 morning decisions ARE ratified (session 20, via question batches) but NOT yet in DECISIONS.md — don't re-litigate, just record; the brainstorm refined some (journey names: Prospect→Measure→Align→Transform→Evolve supersedes the ratified D9 stage names; founder approved the compression in-session)
+- The constitution says **Business** Operating Quotient (founder + brand guide); BOQ_FRAMEWORK and older docs still say BRAMHI Organizational Quotient — revision pending, newer wins
+- iBrain API_REFERENCE + KARVIA integration folder still unread in depth — required before TECH_STRATEGY work (flagged since session 19)
+- BACKLOG: N1-P2-08 NEEDS-FOUNDER-REVIEW is absorbed by the brand rework; N1-P4-01 waits on the architecture docs

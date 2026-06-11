@@ -174,3 +174,14 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - JOURNAL summary for Night 1
   - BACKLOG groomed
   - SPRINTS_NIGHT_2.md draft proposed
+
+### N1-P3-04 — Constitution finalization + strategy-pack realignment (discovered, session 2026-06-10-20)
+- **Status**: READY (next session — strategy, founder present)
+- **Size**: M (1–2 sessions)
+- **Depends on**: founder read-through of 01_NEXUS_MODEL.md + 02_NBM_MODEL.md
+- **Definition of done**:
+  - 01_NEXUS_MODEL.md amendments: deliverables column, NBM §3 paragraph, BOQ↔NBM hypothesis in honest limits, candidate Article 13 (score ≠ prediction), Staircase as signature diagram
+  - 02_NBM_MODEL.md: each claim ratified/revised/struck; status draft → active
+  - `_agent/DECISIONS.md`: C-010…C-013 + brainstorm settlements recorded (4+1 ladder, Catalyst = commitment moment, target market = software/AI-SaaS, tier-placement normalization, provenance labels, dev-stack ingestion, BOQ ⇄ NBM equality, BOQ = Business Operating Quotient)
+  - Then resume the doc work list (BOQ_FRAMEWORK revision first — still carries the old score family)
+- **Notes**: Open items list: 02_NBM_MODEL.md §5. The 12-item doc work list from STRATEGY_SESSION_BRIEF_2026-06-10 §8 remains the master queue; items 2–12 now execute against the constitution instead of the brief.

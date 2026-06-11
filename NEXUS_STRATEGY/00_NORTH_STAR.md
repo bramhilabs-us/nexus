@@ -12,6 +12,7 @@ summary: >
   that hands off to the business/product/tech/execution cards.
 parents: []
 children:
+  - NEXUS_STRATEGY/01_NEXUS_MODEL.md
   - NEXUS_STRATEGY/0-BUSINESS/AI_CONSULTING_PLAYBOOK.md
   - NEXUS_STRATEGY/0-BUSINESS/POSITIONING.md
   - NEXUS_STRATEGY/0-BUSINESS/BOQ_FRAMEWORK.md
