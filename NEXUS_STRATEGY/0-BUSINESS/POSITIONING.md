@@ -25,7 +25,7 @@ revisit:
 
 ## The category
 
-**Nexus is a Transformation OS** — the operating system an organization runs its transformation on, then keeps as its project-management OS. Not a consulting deliverable, not another PM tool, not an assessment product: the category is deliberately the intersection, because no incumbent sits there (BOQ_FRAMEWORK § the pitch: every existing tool solves one box of the bridge; nothing manages the whole diagram).
+**Nexus is a Transformation OS** — the operating system an organization runs its transformation on, then keeps as its project-management OS. Not a consulting deliverable, not another PM tool, not an assessment product: the category is deliberately the intersection, because no incumbent sits there (scores/BOQ.md § the Bridge: every existing tool solves one box of the diagram; nothing manages the whole bridge — the category claim in full: 02_NBM_MODEL §3.5).
 
 **AI transformation is the launch vertical** (C-006). The category claim is bigger than the vertical on purpose — ESG, digital, ops-excellence transformations are new assessment plugs on the same blocks, not new products.
 

@@ -1,35 +1,39 @@
 ---
 id: nexus.nbm-model
-title: The NBM Model — the staircase, the BOQ ⇄ NBM equality, the core USP (brainstorm capture)
+title: The NBM Model — the staircase, the BOQ ⇄ NBM equality, the core USP
 tier: T0
-status: draft
+status: active
 owner: founder
-updated: 2026-06-10
+updated: 2026-06-11
 summary: >
-  Capture of the 2026-06-10 founder brainstorm on Next Best Move as the north
-  star. The signature result: the Staircase — one diagram where each stage
-  raises one score and hands over one deliverable, terminating in the
-  BOQ ⇄ NBM equality (a number and a sentence, the same truth). Also: the
-  duality design law, NBM at three altitudes, the task × person match, the
-  Nexus-computes/iBrain-predicts seam, and the category claim. DRAFT —
-  the next strategy session finalizes this into canon and amends the
-  constitution accordingly. Evidence base: founder's handwritten notes
+  The Next Best Move model, ratified 2026-06-11 (C-015) after a 16-run
+  devil's-advocate simulation (C-016). The signature result: the Staircase —
+  each stage raises one score and hands over one deliverable, terminating in
+  the BOQ ⇄ NBM equality (a number and a sentence, the same truth) — now the
+  constitution's signature diagram. Also canon: the structure/theory split,
+  the duality design law, NBM at three altitudes (with size/jurisdiction
+  limits), the causal-correctness requirement (gradient + Bridge edges), the
+  task × person match v1, the Nexus-computes/iBrain-predicts seam (Article
+  13), and the category claim. Evidence base: founder's handwritten notes
   (4 pages, 2026-06-10), the Eight Metrics PDF, the Lineage PDF.
 parents:
   - NEXUS_STRATEGY/01_NEXUS_MODEL.md
 children: []
 revisit:
-  - on: "the next strategy session ratifies or revises any claim here"
-    stage: always
   - on: "the NBM v1 implementation (scoring engine, opportunity ranking, task×person match) is designed"
     stage: N4
+  - on: "first real engagement closes its first objective — test the staircase's theory layer (which score in which brick) against what actually happened"
+    stage: always
 ---
 
 # The NBM Model — the staircase and the core USP
 
-> **Status: brainstorm capture, not canon.** This document records the 2026-06-10 founder
-> brainstorming session verbatim-in-spirit. The next strategy session finalizes it: ratify,
-> revise, or strike each claim, then amend the constitution (01_NEXUS_MODEL.md) where stated.
+> **Status: RATIFIED canon (C-015, 2026-06-11).** Captured from the 2026-06-10 founder
+> brainstorm, then stress-tested by a devil's-advocate simulation (Works24 end-to-end + 15
+> archetypes; the structure held in all 16 runs — every failure was theory-layer) and
+> finalized. The Staircase is now the constitution's signature diagram (01_NEXUS_MODEL.md §4);
+> the open items in §5 below are resolved, each with its pointer. Bottom-brick naming:
+> the brainstorm's "Discover" canonizes as **Measure** (the tagline's verb).
 
 ## 1 · The signature result — the Staircase
 
@@ -123,9 +127,18 @@ predicts the next best move for an AI SaaS company** — not just a project-mana
 *We sell the qualitative; we defend it with the quantitative.*
 
 **Honesty obligation**: until the cohort exists, the BOQ ↔ NBM correlation is a **hypothesis**,
-stated as such (joins the constitution's honest-limits section on finalization).
+stated as such (now in the constitution's honest limits, §9).
 
-## 3 · The supporting claims (each needs ratify/revise/strike next session)
+**The causal-correctness requirement** (added at ratification, C-015.7): at company altitude
+the v1 NBM falls out of the BOQ arithmetic itself — the geometric mean's defining property
+("fixing your weakest driver always helps more") means **BOQ is the position and NBM is the
+gradient at that position**. But the gradient must be read **through the Bridge's causal edges**
+(ARS enables BRQ enables the engine): drivers are coupled, so the weakest *measured* driver can
+be a symptom whose cause sits upstream. Which-driver is computed arithmetic (Nexus); which
+specific move within it, for which team and person, is prediction (iBrain) — Article 13 splits
+exactly there.
+
+## 3 · The supporting claims (all ratified, C-015)
 
 ### 3.1 The duality design law — "calculable categorization is the USP"
 
@@ -152,6 +165,14 @@ cohort calibration, and the closed outcome loop. This grid is the moat, stated p
 | **Company** | which driver/initiative to attack next | the Opportunity Register (= ranked company-NBMs) |
 | **Team** | which objective/milestone deserves focus now | NOF state + capacity + dependencies |
 | **Person** | which task, to whom, today | Planning page; the task × person match |
+
+**Altitude limits** (added at ratification, C-016): the selling altitude is the company (the
+2028 one-liner); the *training* altitude is the person — daily usage is what feeds the engine.
+But person-altitude NBM degrades by **org size** (below ~30 people the founder's own knowledge
+of every person beats any matcher) and by **jurisdiction** (works-council/consent regimes
+constrain per-person telemetry). And it carries the Goodhart exposure: once gauges are felt as
+appraisal, they get gamed — the appraisal posture is deliberately open (C-016.4), watched per
+score doc, revisited on the first real-world signal.
 
 ### 3.3 The task × person match (founder notes p.3, formalized v1)
 
@@ -198,23 +219,14 @@ capability-replication signals inside CRS. The founder's layered sketch is the *
 **aggregation view** (how to score); the staircase is the **journey view** (when it's real).
 Three views, one model.
 
-## 5 · Open items for the finalization session
+## 5 · The finalization record (all items resolved, 2026-06-11)
 
-1. **Ratify the Staircase** as the constitution's signature diagram (replacing nothing — it
-   unifies §3/§4/§5 of the constitution; the ladder table stays as its detail).
-2. **Constitution amendments**: deliverables column in the ladder (drafted in session 20's
-   transcript); an NBM paragraph in §3; BOQ↔NBM correlation added to honest limits as a
-   hypothesis; candidate Article 13 (score ≠ prediction, §3.4 above). BOQ expansion already
-   fixed to *Business Operating Quotient*.
-3. **Name the deliverables** of Align ("a team moving in cadence" wants a crisp noun, the way
-   "the Roadmap" is crisp) and Transform ("a measured engine").
-4. **"Ensure"** — founder's sketches use it at the apex alongside Evolve. Client-facing verb or
-   shorthand? Decide.
-5. **Culture Score** — appears in founder notes p.4 ("Culture Score + BPI" feeding Transform).
-   New driver candidate, BRQ/FLS territory, or future composite? Parked, undecided.
-6. **DECISIONS.md entries** still owed: C-010…C-013 from the morning ratifications **plus**
-   this brainstorm's settled points (4+1 ladder with brand-verb names; assessment-driven order;
-   Catalyst = the commitment moment; target market = software/AI-SaaS companies; tier-placement
-   normalization; provenance labels; dev-stack telemetry ingestion; BOQ ⇄ NBM equality).
-7. Then the downstream doc work list resumes (BOQ_FRAMEWORK revision first — it still carries
-   the old score family and the "BRAMHI Organizational Quotient" expansion).
+| # | Open item | Resolution |
+|---|---|---|
+| 1 | Ratify the Staircase | **RATIFIED** (C-015.1) — now the constitution's signature diagram (01 §4); the ladder table stays as its per-state detail |
+| 2 | Constitution amendments | **DONE** — deliverables column, NBM ¶ + equality in §3, hypothesis in honest limits, **Article 13** ratified; plus the C-016 amendments (ICP, scope clause, gauge-lag, restatement rule, BOQ referent, reserved seats, proxy valley) |
+| 3 | Name the deliverables | Measure → **the Roadmap** · Align → **the Cadence** · Transform → **the Measured Engine** · Evolve → **the equality** (C-015.3, pending founder read-through confirmation) |
+| 4 | "Ensure" | **Internal shorthand only**, never client-facing — Evolve is the brand verb (C-015.4, glossary entry added) |
+| 5 | Culture Score | **Reserved seat** in `scores/BOQ.md` alongside the market/customer-signal driver — registered candidate, not a v1 driver; enters, if ever, by amendment (C-016.3) |
+| 6 | DECISIONS entries | **DONE** — C-010…C-014 (session-20 ratifications incl. all brainstorm settlements), C-015 (this model), C-016 (measurement library + scope decisions) |
+| 7 | Resume the doc list | Next: `0-BUSINESS/scores/` library (BOQ.md absorbs BOQ_FRAMEWORK.md), ICP.md, COMPANY_JOURNEY.md, SCORING_MODEL.md, then the C-016 consequence revisions |

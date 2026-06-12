@@ -22,7 +22,7 @@ revisit:
 
 # Metrics — the numbers Nexus is judged by
 
-> Definitions are binding now; values fill from the first engagement. **The L3 rule governs admission** (BOQ_FRAMEWORK): every metric must trace to directly-measured signal data — a number that can't walk back to its signals doesn't get a row.
+> Definitions are binding now; values fill from the first engagement. **The signal rule governs admission** (Article 1; scores/BOQ.md): every metric must trace to directly-measured signal data — a number that can't walk back to its signals doesn't get a row.
 
 ## The two headline metrics (PRODUCT_STRATEGY)
 

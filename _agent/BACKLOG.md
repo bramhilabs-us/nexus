@@ -176,12 +176,33 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - SPRINTS_NIGHT_2.md draft proposed
 
 ### N1-P3-04 — Constitution finalization + strategy-pack realignment (discovered, session 2026-06-10-20)
-- **Status**: READY (next session — strategy, founder present)
-- **Size**: M (1–2 sessions)
-- **Depends on**: founder read-through of 01_NEXUS_MODEL.md + 02_NBM_MODEL.md
+- **Status**: DONE (session 2026-06-11-21) — exceeded scope
+- **Size**: M (1–2 sessions) → done in 1
+- **Delivered**: DECISIONS C-010…C-016 (incl. the simulation-driven D1–D8 set); all constitution amendments (Staircase signature diagram, deliverables column, Articles 6+13, ICP, scope clause, gauge-lag, restatement rule, BOQ referent, honest-limits additions, reserved seats); 02_NBM_MODEL ratified → active (+ causal-correctness, altitude limits); **NEW 03_NEXUS_GAME.md** (game whitepaper: stage-responsive page matrix, 14-friction two-pass audit all designed, SaaS value bridge, playthrough); **NEW `0-BUSINESS/scores/` library** (BOQ.md core model with the epistemic engine + 6 driver docs on the shared template); BOQ_FRAMEWORK absorbed + deleted, 12 reference sites rewired
+- **Residual**: 01_NEXUS_MODEL.md and 03_NEXUS_GAME.md stay `status: draft` pending founder read-through (5 naming proposals in 01; 4 candidate constitutional rules + Steward/data-covenant in 03)
+
+### N1-P3-05 — Doc list: ICP.md + COMPANY_JOURNEY.md (discovered, C-016)
+- **Status**: READY
+- **Size**: S–M (1 session)
+- **Depends on**: C-016 (ratified); benefits from founder flipping 01/03 active first
 - **Definition of done**:
-  - 01_NEXUS_MODEL.md amendments: deliverables column, NBM §3 paragraph, BOQ↔NBM hypothesis in honest limits, candidate Article 13 (score ≠ prediction), Staircase as signature diagram
-  - 02_NBM_MODEL.md: each claim ratified/revised/struck; status draft → active
-  - `_agent/DECISIONS.md`: C-010…C-013 + brainstorm settlements recorded (4+1 ladder, Catalyst = commitment moment, target market = software/AI-SaaS, tier-placement normalization, provenance labels, dev-stack ingestion, BOQ ⇄ NBM equality, BOQ = Business Operating Quotient)
-  - Then resume the doc work list (BOQ_FRAMEWORK revision first — still carries the old score family)
-- **Notes**: Open items list: 02_NBM_MODEL.md §5. The 12-item doc work list from STRATEGY_SESSION_BRIEF_2026-06-10 §8 remains the master queue; items 2–12 now execute against the constitution instead of the brief.
+  - `0-BUSINESS/ICP.md` — v1 qualification profile, the 15-archetype segment map, anchor-pack roadmap
+  - `0-BUSINESS/COMPANY_JOURNEY.md` — the ladder as client-facing journey: proxy-valley narrative, gauges-lighting sequence, Sponsor bridge (03 §6.1)
+  - Graph wired, validator green
+
+### N1-P3-06 — SCORING_MODEL.md + TECH_STRATEGY iBrain revision (queued since session-19)
+- **Status**: READY (blocked-on-read: iBrain API_REFERENCE + KARVIA integration folder — read in-session before drafting)
+- **Size**: M (1–2 sessions)
+- **Definition of done**:
+  - `2-TECHNICAL/SCORING_MODEL.md` — signal store, calculator-plugin contract, question schema, weights-as-config, causal-edge config, triangulation rule
+  - TECH_STRATEGY: iBrain consumption architecture (C-010), dev-stack telemetry ingestion, **the stage machine** (03 §8), compliance-veto fallback
+  - SYSTEM_ARCHITECTURE/API_SURFACE annotations (engines ≈ iBrain ancestors; ibrain/* route disposition flip)
+
+### N1-P3-07 — C-016/game consequence revisions (discovered, 03 §9 queue)
+- **Status**: READY (after founder flips 01/03 active)
+- **Size**: M (1 session)
+- **Definition of done**:
+  - AI_CONSULTING_PLAYBOOK: ICP gate at Prospect, segment TLO variants, proxy-valley script, Sponsor bridge step, data covenant, value-bridge collateral
+  - PRODUCT_STRATEGY: stage-responsive page contract (+ §4 matrix), valley UX (gauges-lit), NBM framing, first-session contract, bedside-manner display notes
+  - BUSINESS_MODEL: the Steward + Calibration Review (pricing stays in Builder TODO); POSITIONING/GTM ecosystem positioning pass
+- **Notes**: brand/layout rework (C-013) and N1-P3-01 pt 2 remain on the master doc list after these.

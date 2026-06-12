@@ -23,6 +23,6 @@ Founder-curated sources the strategy cards cite. Subfolders per topic; non-markd
 
 | Folder | Contents | Feeds |
 |---|---|---|
-| `boq/` | **BRAMHI BOQ strategy whitepaper** (`bramhi-boq-strategy-whitepaper.html`) — BOQ as umbrella score with layered evidence reveal; Karvia as the first measured BOQ/BPI proof surface; measured-vs-proxy BPI separation; CRT as "how fast an AI-native system replicates the 20% of capabilities producing 80% of customer value"; *the methodology is the IP, not the whitepaper*; BOQ as front door, the platform as implementation engine; survey design turning subjective pain into measurable signals; phased IP build (publish → assess → implement → benchmark); public benchmark sources | [0-BUSINESS/BOQ_FRAMEWORK.md](../0-BUSINESS/BOQ_FRAMEWORK.md) |
+| `boq/` | **BRAMHI BOQ strategy whitepaper** (`bramhi-boq-strategy-whitepaper.html`) — BOQ as umbrella score with layered evidence reveal; Karvia as the first measured BOQ/BPI proof surface; measured-vs-proxy BPI separation; CRT as "how fast an AI-native system replicates the 20% of capabilities producing 80% of customer value"; *the methodology is the IP, not the whitepaper*; BOQ as front door, the platform as implementation engine; survey design turning subjective pain into measurable signals; phased IP build (publish → assess → implement → benchmark); public benchmark sources | [0-BUSINESS/scores/BOQ.md](../0-BUSINESS/scores/BOQ.md) |
 
 Design-feel references (investor decks) live with the design system: `1-PRODUCT/design/references/`.

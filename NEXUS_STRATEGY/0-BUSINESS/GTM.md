@@ -47,7 +47,7 @@ The architecture treats no consultant as a degenerate case (C-001): My Clients h
 
 1. Engagement runs **through** Nexus → every instrument, deliverable, and outcome is product usage, not consulting exhaust.
 2. Handover → **Builder mode** subscription begins; the 90-day retention metric starts (the moat metric).
-3. Builder-mode usage accrues L3 signals passively → cadenced re-assessments → sub-scores light up → **BOQ becomes the client's own North Star** (the maturity ladder, BOQ_FRAMEWORK).
+3. Builder-mode usage accrues L3 signals passively → cadenced re-assessments → sub-scores light up → **BOQ becomes the client's own North Star** (the ladder, constitution §4; the score family, scores/BOQ.md).
 4. Outcome records + signals sharpen AIR's benchmarks → the next engagement diagnoses faster and more credibly → repeat.
 
 Each loop around the wheel raises both willingness-to-pay (proof) and switching cost (institutional memory lives in `@nexus/knowledge`).
