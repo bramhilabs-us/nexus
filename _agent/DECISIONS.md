@@ -436,3 +436,19 @@ Every domain model gains a required `program_id`: `Objective`, `KeyResult`, `Goa
 4. **The absorption review is a standing N1-P6-01 groom agenda item**, alongside the phase-budget re-baseline (audit finding 7).
 
 **Refines**: C-014 (the constitution remains the conflict-winner the indexes point at).
+
+## 2026-06-12 — Night-1 close: budget re-baseline + absorption verdicts (C-022)
+
+**Context**: The N1-P6-01 groom. The >25% budget trigger fired (audit 2026-06-12 finding 7: N1 at 28 steps vs 18 budgeted at audit time; 29 at close including the groom itself). The groom card authorizes the re-baseline as the agent's professional re-plan, founder veto in PR review. The absorption review is the standing C-021.4 agenda item.
+
+**Decision**:
+1. **The step budget is re-baselined 90 → 105** (EXECUTION_PLAYBOOK § the re-baseline record). N1 closed at 29 actual — cause named: the founder-driven strategy expansion of sessions 19–23 (constitution, NBM, the Game, the Runtime Model, scores library, ICP/COMPANY_JOURNEY, SCORING_MODEL, reflection audit + fix-pass), none of it in the original N1 scope, all of it Karvia-grade discovery bought at ~11 steps. A new **Night 1b — Product & technical docs (10)** carries N1's re-phased doc scope + the C-013 rework. Build nights re-cut against the richer spec: N2 24→22, N3 18→14 (tokens + 10 mockups pre-paid via Path B), N4 16→15, N5 10, buffer 4→5. Re-summed: 29+10+22+14+15+10+5 = 105.
+2. **EQ-1 closed**: every journal entry counts, including the 3 pre-North-Star entries. One session = one step, no exemptions — the raw count is what every audit and card reported in practice; redefining the counter to flatter the overrun is exactly the arithmetic drift SESSION_PRACTICES rule 2 exists to block.
+3. **Night numbering preserved; the new phase is "1b"** — sprint file `_agent/SPRINTS_NIGHT_1B.md`, deviating from the groom card's "SPRINTS_NIGHT_2.md" name. Reason: ~40 references across 20 docs use "Night 2" to mean Foundation (and N3/N4/N5 likewise); renumbering would stale all of them — the Karvia failure mode the card itself warns about. The card's *content* (the docs stage as sprints-with-goals) is delivered unchanged.
+4. **Absorption review verdicts** (C-021.4; no deletions executed — C-021.3 gates them after the product-docs stage, founder sign-off required):
+   - **02_NBM_MODEL — strongest candidate, parked.** The Staircase (§1) and the BOQ⇄NBM equality (§2) are absorbed into the constitution; the §3 claims are ratified (C-015) with altitudes/team-NBM propagated to PRODUCT_STRATEGY. Unpropagated residue: the task×person match v1 mechanics and the evidence index (§4). Absorb-and-delete becomes executable once Night 1b's CAPABILITIES work gives the match mechanics a canon home.
+   - **03_NEXUS_GAME — keep; not a candidate.** It is an owner doc, not capture residue: 11+ incoming citations (all six score docs, COMPANY_JOURNEY, PRODUCT_STRATEGY) point INTO it for the quest lines, the 14-friction audit, and the SaaS value bridge. Absorption would orphan the citation network for no simplification gain.
+   - **04_RUNTIME_MODEL — candidate-in-waiting.** §7 propagation rows 1–6 landed; row 7 (trigger map + playthroughs → USER_JOURNEYS) waits on N1-P3-08. It still solely owns the nudge doctrine and card-zoom grammar as cited sources. Re-review at the Night-1b close groom after P3-08 lands.
+
+**Consequences**: EXECUTION_PLAYBOOK re-baselined (table + record + EQ-1); the 105 propagated to NORTH_STAR, DOCUMENTATION_GRAPH, both READMEs, BUSINESS_MODEL, SPRINT_PROCESS; SPRINTS_NIGHT_1B.md drafted; BACKLOG swept and re-phased.
+**Refines**: C-021 (absorption pattern), EXECUTION_PLAYBOOK genome (the >25% revisit trigger — answered).

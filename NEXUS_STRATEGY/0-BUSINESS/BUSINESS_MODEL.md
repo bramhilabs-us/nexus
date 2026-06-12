@@ -9,7 +9,7 @@ summary: >
   The revenue architecture: consulting engagements (playbook owns tiers),
   Builder-mode SaaS post-handover (with the Steward + Calibration Review as
   the subscription's human shape), the srishti add-on, and the methodology/
-  benchmark horizon. Cost shape (agent-built, the 90-step budget) and the
+  benchmark horizon. Cost shape (agent-built, the 105-step budget) and the
   moat economics. SaaS pricing deliberately TODO until first handovers.
 parents:
   - NEXUS_STRATEGY/0-BUSINESS/POSITIONING.md
@@ -55,7 +55,7 @@ unset until 2–3 real handovers, priced as part of (or atop) the Builder subscr
 
 ## Cost shape
 
-- **Build**: the agent loop — the 90-step budget (EXECUTION_PLAYBOOK) bounded by `_agent/AUTONOMY.md` daily caps. Engineering cost is, unusually, a *metered and journaled* line item.
+- **Build**: the agent loop — the 105-step budget (EXECUTION_PLAYBOOK) bounded by `_agent/AUTONOMY.md` daily caps. Engineering cost is, unusually, a *metered and journaled* line item.
 - **Deliver**: consultant time (the two-week sprint, ~35 interviews) dominates engagement COGS — which is why instruments, evidence capture, scoring, and deliverable *generation* live in the product: every automated artifact raises engagement margin.
 - **Run**: consolidated single app (C-003) + fresh Mongo + Render — deliberately boring, two environments (RELEASE_PROCESS), no per-engine fleet.
 
