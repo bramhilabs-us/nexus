@@ -2,13 +2,13 @@
 id: nexus.game-model
 title: "Nexus: The Game — the whitepaper"
 tier: T0
-status: draft
+status: active
 owner: founder
-updated: 2026-06-11
+updated: 2026-06-12
 summary: >
   The game view of the whole system: the constitution's stages as levels, the
   drivers as the character sheet, NOF as the quest tree, NBM as the hint
-  arrow, provenance as fog of war, the thirteen articles as anti-cheat.
+  arrow, provenance as fog of war, the binding articles as anti-cheat.
   Contains the stage-responsive page matrix (every page serves any player at
   any stage — the page-philosophy rule), a full playthrough at a fictional
   ICP-true company, the two-pass friction audit (fourteen frictions, every
@@ -18,12 +18,14 @@ summary: >
   triangulation rule, fractal rule), the SaaS value bridge (drivers → the
   financial lines a board already tracks), and the architecture-fit verdict
   (the stage machine is the one missing piece). Reference whitepaper; binding
-  implications propagate per the §9 consequence queue; four candidate
-  constitutional additions await founder ratification.
+  implications propagate per the §9 consequence queue; the four candidate
+  constitutional additions were ratified with the paper (C-017).
 parents:
   - NEXUS_STRATEGY/01_NEXUS_MODEL.md
   - NEXUS_STRATEGY/1-PRODUCT/PRODUCT_STRATEGY.md
-children: []
+children:
+  - NEXUS_STRATEGY/0-BUSINESS/COMPANY_JOURNEY.md
+  - NEXUS_STRATEGY/04_RUNTIME_MODEL.md
 revisit:
   - on: "the first real engagement playtests the game — re-verdict every friction (F1–F8) against what actually happened"
     stage: always
@@ -66,7 +68,7 @@ mapping explicit, then stress-tests it.
 | **Hint arrow** | NBM at three altitudes: company (which driver to attack) · team (which objective) · person (which task, today) | 02_NBM_MODEL §3.2 |
 | **The dice vs the DM** | Nexus computes (auditable arithmetic — the dice everyone can read); iBrain predicts (the game master who suggests, with a confidence and a why) | Article 13 |
 | **The codex** | @nexus/knowledge — institutional memory; outcome records are the lore the next campaign builds on | TECH_STRATEGY |
-| **The referee** | @nexus/governance + the thirteen articles | Constitution §7 |
+| **The referee** | @nexus/governance + the fourteen articles (C-017) | Constitution §7 |
 | **Anti-cheat** | Validity floors (no numbers from noise), provenance labels (no silent blending), calibrate-never-invent (no invented scores), the restatement rule (no moving rulers) | Articles 1–4, 10, §5.3 |
 | **Season patches** | Anchor packs: dated, versioned, per segment; trends restate on patch day — re-ranked against the new frontier, recomputed from stored signals | Constitution §5.3 |
 | **Expansion packs** | Assessment packages: AIR is the launch campaign; any future vertical is a new package on the same engine | Constitution §5.5, C-012 |
@@ -147,10 +149,12 @@ The founder's page philosophy, stated as a rule:
 > weather. A page that renders identically at Measure and at Evolve is breaking its
 > promise to one of them.
 
-The existing page contract (PRODUCT_STRATEGY) is **player-aware** (primary role, CTA,
+The existing page contract (PRODUCT_STRATEGY) was **player-aware** (primary role, CTA,
 empty state) but **stage-blind** — this paper's main architectural finding (friction F5).
-The matrix below is what stage-responsiveness means, page by page. It is the reference
-for the PRODUCT_STRATEGY revision; the row logic ships as the **stage machine** (§8).
+The matrix below is what stage-responsiveness means, page by page. **Landed**: the
+contract gained its stage-weather and rules-surface fields in PRODUCT_STRATEGY
+(N1-P3-07, 2026-06-12); the row logic ships as the **stage machine** (§8), designed in
+TECH_STRATEGY at N1-P3-06.
 
 | Page | Prospect (lobby) | Measure | Align | Transform | Evolve |
 |---|---|---|---|---|---|

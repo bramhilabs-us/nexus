@@ -4,10 +4,11 @@ title: Business model — consulting funds the product, the product makes consul
 tier: T0
 status: active
 owner: agent
-updated: 2026-06-10
+updated: 2026-06-12
 summary: >
   The revenue architecture: consulting engagements (playbook owns tiers),
-  Builder-mode SaaS post-handover, the srishti add-on, and the methodology/
+  Builder-mode SaaS post-handover (with the Steward + Calibration Review as
+  the subscription's human shape), the srishti add-on, and the methodology/
   benchmark horizon. Cost shape (agent-built, the 90-step budget) and the
   moat economics. SaaS pricing deliberately TODO until first handovers.
 parents:
@@ -32,6 +33,25 @@ revisit:
 | 4 | **Methodology & benchmarks** | Published BOQ methodology, industry benchmark reports, eventual certification/licensing | Horizon bet — "the methodology is the IP, BOQ is the front door" (research base) | Parked post-beta; phased IP build sequences it |
 
 **Stream-2 dependency discipline**: nothing in Night 2–5 may couple revenue to per-feature gating — flags are config (AP-3), tenancy is per-program (C-005), so any pricing shape stays implementable without rework.
+
+## The Steward — stream 2's human shape (03 §6.4, C-017)
+
+BRAMHI's presence splits into two characters with opposite economics:
+
+| | **The Guide** (consultant) | **The Steward** |
+|---|---|---|
+| Economics | one-to-one, engagement-priced | one-to-many, subscription-side |
+| Lifespan | Measure → handover, then retires | standing, for the Evolve life of the account |
+| What they do | runs the engagement | one human touchpoint per cycle: **the Calibration Review** |
+
+The Calibration Review is consultant-grade, once per re-assessment cycle: it delivers
+the cycle's hardest truths with human craft (the bedside-manner valve), runs
+calibrate-never-invent on the re-assessment (Article 4 needs a qualified human), owns
+the renewal conversation, and **curates the cohort** — every review sharpens the
+anchors, making the Steward the benchmark flywheel's named operator. The productized
+core runs fully alone (Article 9): org-direct clients can buy the review as an add-on
+but never need it. **Steward pricing folds into the stream-2 TODO** — deliberately
+unset until 2–3 real handovers, priced as part of (or atop) the Builder subscription.
 
 ## Cost shape
 

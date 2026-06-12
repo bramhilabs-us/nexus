@@ -4,11 +4,14 @@ title: Nexus Product Strategy — six pages, two modes
 tier: T1
 status: active
 owner: founder
-updated: 2026-06-10
+updated: 2026-06-12
 summary: >
   The UI-layer card: the page contract (purpose, primary role, entry/exit,
-  primary/secondary CTA, analytics strip, empty state) applied to all six
-  pages; two operating modes (Engagement/Builder); objective lifecycle;
+  primary/secondary CTA, analytics strip, stage weather, rules surface,
+  empty-as-early state) applied to all six pages; the stage dimension
+  (6 pages × 5 stages matrix, one home page per stage — from the Game §4);
+  two operating modes (Engagement/Builder); objective lifecycle; score
+  display doctrine (Article 6 + bedside-manner); three-things-today;
   first-value journey; analytics doctrine; design-language pointer.
 parents:
   - NEXUS_STRATEGY/00_NORTH_STAR.md
@@ -36,7 +39,8 @@ This document is the UI-layer card of the pack. It defines the **page contract**
 ## TL;DR
 
 - Nexus keeps Karvia's **six pages**: My Clients, Dashboard, Objectives, Assessments, Teams, Planning. Same flow, same clicks — better purpose-clarity per page, **new minimalistic design language** (founder's design docs, incoming).
-- Every page obeys one **page contract**: purpose, primary role, entry points, exit points, primary CTA, secondary CTA, analytics strip, empty state.
+- Every page obeys one **page contract**: purpose, primary role, entry points, exit points, primary CTA, secondary CTA, analytics strip, stage weather, rules surface, empty (early) state.
+- Pages are **stage-responsive** (03 §4, C-017 propagation): a page knows which stage the program is in and serves that player at that stage — same place, different weather. Each stage has exactly one home page; an "empty" state is really an *early* state.
 - Two modes, one product: **Engagement mode** (consultant runs an AIR engagement end to end) and **Builder mode** (the handed-over client's product team runs product development on the same pages).
 - The Assessments page is **assessment-agnostic**: it renders whatever assessment blocks are installed. AIR is simply the first. Nothing on any page hardcodes AIR.
 - Analytics answer two different users: the **first-time** visitor (am I set up right?) and the **hundredth-time** visitor (what changed, what needs me?). Minimum space, no vanity numbers.
@@ -81,7 +85,7 @@ In org-direct/Builder mode there is no Consultant; My Clients hides, and the jou
 
 ## The page contract
 
-Every page declares all eight fields. A page that can't fill in a field is a page without a reason to exist.
+Every page declares all ten fields. A page that can't fill in a field is a page without a reason to exist.
 
 | Field | Meaning |
 |---|---|
@@ -92,7 +96,32 @@ Every page declares all eight fields. A page that can't fill in a field is a pag
 | **Primary CTA** | The single most important action — visually dominant, one per page |
 | **Secondary CTA** | The supporting action — present but subordinate |
 | **Analytics strip** | The few numbers worth the space: first-time view + hundredth-time view |
-| **Empty state** | What a brand-new user sees; must teach the page's purpose and point at the primary CTA |
+| **Stage weather** | How the page renders per program stage (the matrix below); implemented by the stage machine (TECH_STRATEGY) |
+| **Rules surface** | Where the page states the game rule it embodies — pages teach the game in place, never in a manual (04_RUNTIME_MODEL §5) |
+| **Empty (early) state** | What a brand-new user sees. An empty state is the page's *pre-stage weather* — a page is never empty, it is early; it must teach the page's purpose and point at the primary CTA |
+
+## The stage dimension — same place, different weather
+
+The founder's page philosophy, binding (03 §4 → here, per the consequence queue): **every
+page serves any player at any stage**. A page that renders identically at Measure and at
+Evolve is breaking its promise to one of them. The reference matrix:
+
+| Page | Prospect (lobby) | Measure | Align | Transform | Evolve |
+|---|---|---|---|---|---|
+| **My Clients** | prospect tile, *Start assessment* CTA | sprint progress ring, days elapsed | engagement badge, roadmap status | portfolio gauges lighting up | alumni view: subscription health, re-assessment cadence |
+| **Dashboard** | — (no program yet) | **sprint pulse**: instruments done, participants assessed, days to workshop | commitment view: roadmap → objectives conversion, owners assigned | **execution pulse** + the instrumentation quest line ("gauges lit: n of 9") | rhythm view: cadence adherence, BOQ trend, band position |
+| **Objectives** | — | early state: "your assessment will seed these" | **seeding**: Opportunity Register → objectives, KRs drafted | the living board: lifecycle ribbons, roll-ups | Sustained KPIs tracked year-over-year |
+| **Assessments** | invitation pending | **the stage itself**: the two-week workspace, evidence, scoring workshop | results → *Create objectives* handoff | pulses; instrumentation quests as telemetry connects | recurring decks with deltas; re-benchmarking |
+| **Teams** | sponsor's guided matrix import | the interview matrix: who's being assessed, participation | role labels → objective owners mapping | daily fabric: who's in which program | the org map matured: profiles rich, match-grade tags |
+| **Planning** | — | — (Workers aren't in the game yet) | first milestones drafted by Managers | **the stage itself**: the Worker's daily home | cadence on rails; milestone streaks without nudges |
+
+Two structural rules fall out of the matrix:
+
+1. **Each stage has exactly one home page where that stage is played** — Measure lives
+   on Assessments, Align on Objectives, Transform on Planning, Evolve on Dashboard. The
+   staircase maps onto the nav; the game always has a "you are here."
+2. **Stage state is engine state, not UI state**: the stage machine is a Layer-2 concern
+   (TECH_STRATEGY, designed in N1-P3-06); pages *render* the stage, they never compute it.
 
 ## The six pages
 
@@ -104,24 +133,25 @@ Every page declares all eight fields. A page that can't fill in a field is a pag
 | Primary role | Consultant (their home page / landing page after login) |
 | Entry points | Consultant login (default landing); global nav |
 | Exit points | **Company page** of a client (the natural drill-down); Assessments (start an assessment for a prospect) |
-| Primary CTA | **Add Client** — and adding a client **auto-initiates the entry assessment (AIR)**: no manual send; the assessment module owns delivery from this moment, and cadenced re-assessments keep the ladder moving (the constitution §4; scores: 0-BUSINESS/scores/BOQ.md) |
+| Primary CTA | **Add Client** — captures a **named Sponsor** (name + email, the Sponsor bridge, 03 §6.1) and **auto-initiates the entry assessment (AIR)**: no manual send; the mail goes to the Sponsor, who **takes the assessment or delegates it** (04_RUNTIME_MODEL §4); the assessment module owns delivery from this moment, and cadenced re-assessments keep the ladder moving (the constitution §4; scores: 0-BUSINESS/scores/BOQ.md) |
 | Secondary CTA | **Open company page** (per client card) |
 | Analytics strip | First-time: Clients count. Hundredth-time: **Need Attention**, **Avg assessment score**, **At Risk** — the triage numbers. |
 | Empty state | "Add your first client" — one card-sized explainer of the engagement journey |
 
-Per-client tile shows: company + contact, score ring per installed assessment (AIR today; columns appear per assessment block, never hardcoded), objectives total, on-track count, % complete, pipeline stage badge (Prospect → Assessing → Engaged → Handed over), assessed-members count. A Prospect tile's inline CTA is **Start assessment** — the tile itself advances the journey.
+Per-client tile shows: company + contact, score ring per installed assessment (AIR today; columns appear per assessment block, never hardcoded), objectives total, on-track count, % complete, pipeline stage badge (**Prospect · Measuring · Aligning · Transforming · Evolving** — the constitution §4 ladder; earlier badge names are superseded), assessed-members count. A Prospect tile's inline CTA is **Start assessment** — the tile itself advances the journey. Prospect's exit criterion is crisp (03 §6.1): **sponsor activated + matrix loaded + sprint scheduled.**
 
 ### 2. Dashboard — the pulse
 
 | Field | Contract |
 |---|---|
-| Purpose | Answer "is the program on track, and what needs me today?" for the accountable owner |
-| Primary role | Business Owner (home page); Manager (frequent) |
+| Purpose | Answer "is the program on track, and what needs me today?" — for *any* player. **The three-things-today rule** (04_RUNTIME_MODEL §5): every archetype arriving here sees the ~3 actions that keep the ball rolling today — stage-aware, person-altitude, drawn from the game structure (an assessment to take, a review due, a milestone at risk). This is the NBM made daily. |
+| Primary role | Business Owner (home page); Manager (frequent); every archetype daily |
 | Entry points | BO login (default landing); nav; "view program" from My Clients (consultant viewing a client) |
 | Exit points | Objectives (drill into a slipping objective); Planning (drill into this week) |
-| Primary CTA | **Push task completion** — nudge the owners of overdue/at-risk tasks (the dashboard's job is to convert visibility into action) |
+| Primary CTA | **Push task completion** — nudge the owners of overdue/at-risk tasks (the dashboard's job is to convert visibility into action). Every push is a **logged nudge event** — BRQ measures nudge-independence, so the system records its own prompts (04_RUNTIME_MODEL §4) |
 | Secondary CTA | Natural insights — open the analytics detail for any tile |
 | Analytics strip | First-time: setup completeness (team onboarded? assessment done? objectives created?). Hundredth-time: program % complete, on-track/at-risk objectives, this week's task completion rate, overdue count. |
+| Stage weather | At **Transform**, the instrumentation quest line is a first-class object: *"Gauges lit: 5 of 9 — next: connect the incident tracker; MTTR arms after two weeks of data"* (the valley UX, 03 §6.2). Each gauge declares its arming checklist; watching the fog lift is the product working. |
 | Empty state | Setup checklist mirroring the first-value journey (below) |
 
 In Builder mode the Dashboard is the product team's delivery pulse — same tiles, program = the application being built.
@@ -135,8 +165,8 @@ In Builder mode the Dashboard is the product team's delivery pulse — same tile
 | Entry points | Nav; Dashboard drill-down; Assessments ("create objectives from these results") |
 | Exit points | Planning (break a KR into milestones); Dashboard (zoom back out) |
 | Primary CTA | **Create objective** — pre-seeded from assessment deliverables (e.g., AIR's Opportunity Register) when arriving from Assessments |
-| Secondary CTA | Update progress / check-in on a KR |
-| Analytics strip | Objectives by stage (Identified / Handed off / Sustained), on-track vs at-risk, avg % complete |
+| Secondary CTA | Update progress / check-in on a KR; the quiet **AI-draft CTA** — KRs/milestones drafted by the planner seam, always labeled AI-drafted, accepted by a human (04_RUNTIME_MODEL §3; lifts the Manager's clerical weight, 03 F9) |
+| Analytics strip | Objectives by stage (Identified / Handed off / Sustained), on-track vs at-risk, avg % complete — plus the **team-altitude NBM**: "which objective deserves focus now," the Manager's hint arrow, first-class on this page (03 F9; Article 13 display: a recommendation with a confidence and a why) |
 | Empty state | "Your assessment found these opportunities — create your first objective" (assessment-driven, never a blank form) |
 
 **The objective lifecycle** (gamified, shown as a stage ribbon on every objective):
@@ -198,6 +228,15 @@ This page is a **shell**: every assessment-specific surface — instruments, evi
 | Analytics strip | Current milestone: tasks done vs planned, hours logged, milestone completion streak |
 | Empty state | "Pick a key result and plan its first milestone" |
 
+**The first-session contract** (03 §6.3, binding for the Worker's first Planning visit):
+(1) it greets them with their own thread — *"in week one you told us X; here's what
+changed because of it"* (the Taker→Worker continuity, paid off explicitly); (2) zero
+setup — milestone and tasks arrive pre-seeded by the Manager's planning; (3) it ends
+inside ten minutes with one real action logged; (4) **the subtraction rule** — within
+the first week, the team names one standing meeting or status artifact the roll-up has
+made redundant, and kills it, visibly. Adoption is purchased with removal, never with
+features.
+
 ## The secondary surfaces — player cards and the meta-loop
 
 The six pages are the game board. The account-menu surfaces (Karvia's avatar dropdown: Profile, Company Profile, Configuration, Settings, Feedback) are not afterthoughts — each has its own purpose, and two of them are **player cards** whose data makes the endgame possible:
@@ -230,6 +269,28 @@ The journey every new engagement walks; the Dashboard empty state, the demo scri
 
 **North-star metric**: time from consultant's first login (or org signup) to the client's first objective reaching *Identified* with a planned week. Everything in the UI exists to shorten this. **Second metric** (the moat): % of handed-over clients still active in Builder mode 90 days after handover.
 
+## The score display doctrine
+
+Every score surface on every page obeys the constitution's display rules — UI never gets
+a vote on these:
+
+- **Article 6, all five, always**: number + band + provenance label + anchor-pack id +
+  evidence drill-down. Plus its two extensions (C-017): **the cohort floor** (below a
+  real segment cohort: anchor placement labeled research-grade and self-trend only —
+  never a fake percentile) and **no verdict without a path** (a score below its band's
+  midpoint never renders without its paired NBM).
+- **Articles 3 + 2**: below an activity or freshness floor the gauge says *"insufficient
+  signal"* or *"running on old data"* — never a confident number; provenance (Proxy /
+  Partially Measured / Measured) is never blended silently.
+- **The bedside-manner rules** (03 §6.5) govern negative gauges: the implicated see it
+  first; trend before position; evidence is dignity; the hardest truth of a cycle routes
+  through the human Calibration Review, never a push notification.
+- **Article 14 (PvE)**: no surface, tile, or nudge ever renders a colleague-vs-colleague
+  comparison.
+- **Three kinds of number, three labels** (04_RUNTIME_MODEL §3, proposed): *computed*
+  scores carry evidence; *learned* recommendations carry a confidence and a why;
+  *generated* content carries an AI-drafted label until a human accepts it.
+
 ## Design language
 
 New, minimalistic — Nexus does not inherit Karvia's visual design. The source of truth is the BRAMHI brand guide, now in-repo and translated to UI rules in [design/DESIGN_LANGUAGE.md](design/DESIGN_LANGUAGE.md). Governing intent:
@@ -237,6 +298,7 @@ New, minimalistic — Nexus does not inherit Karvia's visual design. The source 
 - Few words, strong visual hierarchy; executive-dashboard feel, not consulting-flyer (the same standard set for the one-pager collateral).
 - Minimum chrome: one primary CTA visually dominant per page, analytics tiles ≤ 4, whitespace over borders.
 - One small component set shared by all six pages (tile, card, stage ribbon, CTA pair, empty state) — the design system is itself a lego constraint.
+- **The card zoom grammar** (04_RUNTIME_MODEL §5): every entity card declares its zoom levels (full / compact / line) with fixed fields per level; a page chooses a zoom level, never a field mix. Detail: DESIGN_LANGUAGE § card grammar.
 
 Page-level mockups are produced during Night 3 *from* these rules, token-first (see DESIGN_LANGUAGE § token-first workflow).
 

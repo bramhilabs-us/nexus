@@ -27,6 +27,7 @@ children:
   - NEXUS_STRATEGY/0-BUSINESS/scores/BRQ.md
   - NEXUS_STRATEGY/0-BUSINESS/scores/FLS.md
   - NEXUS_STRATEGY/0-BUSINESS/scores/CRS.md
+  - NEXUS_STRATEGY/0-BUSINESS/ICP.md
 revisit:
   - on: "any driver's base model, floors, or anchors change (the child doc's calibration log entry triggers a check here)"
     stage: always

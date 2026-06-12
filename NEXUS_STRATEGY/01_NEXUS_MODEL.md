@@ -2,9 +2,9 @@
 id: nexus.model
 title: The Nexus Constitution — the thesis, the journey, the measurement system
 tier: T0
-status: draft
+status: active
 owner: founder
-updated: 2026-06-11
+updated: 2026-06-12
 summary: >
   The constitutional document for Nexus. Self-contained: the thesis (AI-native
   software development, proven on Karvia), the ecosystem (BRAMHI / Nexus /
@@ -13,7 +13,7 @@ summary: >
   terminating in the BOQ ⇄ NBM equality), the five-state company ladder with
   gauges that light up per stage, the measurement system (signals → six
   drivers → BOQ; tier-placement normalization; versioned anchor packs;
-  provenance labels), thirteen binding articles, and appendices (glossary,
+  provenance labels), fourteen binding articles, and appendices (glossary,
   drivers, the Eight Metrics, BOQ math, stages, lineage & references).
   Written for any reader, including non-technical. Supersedes all earlier
   journey/scoring framings; amended only by founder ratification.
@@ -22,7 +22,10 @@ parents:
 children:
   - NEXUS_STRATEGY/02_NBM_MODEL.md
   - NEXUS_STRATEGY/03_NEXUS_GAME.md
+  - NEXUS_STRATEGY/04_RUNTIME_MODEL.md
   - NEXUS_STRATEGY/0-BUSINESS/scores/BOQ.md
+  - NEXUS_STRATEGY/0-BUSINESS/ICP.md
+  - NEXUS_STRATEGY/0-BUSINESS/COMPANY_JOURNEY.md
 revisit:
   - on: "founder amends any article; every amendment requires a DECISIONS.md entry"
     stage: always
@@ -240,14 +243,14 @@ Survey questions are never invented per assessment. Every question is born from 
 
 ## 7 · The binding articles
 
-These thirteen rules are the constitution proper. Everything else in this document explains them.
+These fourteen rules are the constitution proper. Everything else in this document explains them. (Thirteen ratified with the constitution; Article 3's freshness extension, Article 6's two display extensions, and Article 14 entered by amendment C-017, sourced from the Game's audit.)
 
 1. **The signal rule.** Only signals are directly measured; every score is calculated and traceable to signals on demand.
 2. **The provenance rule.** Every displayed score carries Proxy / Partially Measured / Measured. No silent blending.
-3. **The validity floor.** Below a metric's published activity floor, display "insufficient signal" — never a number.
+3. **The validity floor.** Below a metric's published activity floor, display "insufficient signal" — never a number. Floors have a recency dimension (the freshness floor, C-017): every gauge carries its data-freshness, and a stale gauge says *"running on old data"* instead of displaying confidently.
 4. **Calibrate, never invent.** Human adjustments annotate their justifying evidence. No evidence, no adjustment.
 5. **Questions derive from the model.** Every survey question declares its metric mapping. The question bank is data; the weights are configuration; neither is ever hardcoded.
-6. **The display rule.** Score = number + band + provenance + anchor-pack + evidence drill-down. Always all five.
+6. **The display rule.** Score = number + band + provenance + anchor-pack + evidence drill-down. Always all five. Two display extensions (C-017): **the cohort floor** — below a real measured cohort in a segment, scores show anchor placement (labeled research-grade) and self-trend only, never a percentile against a cohort that doesn't exist; and **no verdict without a path** — a score below its band's midpoint never renders without its paired NBM.
 7. **Assessment-driven order.** The sequence of transformation work is prescribed by the assessment (weakest driver first), never by a fixed curriculum.
 8. **The trinity rule.** Each brand component deliberately names three things at once — a practice, a place on the ladder, and a gauge. Documents must say which sense they mean.
 9. **No consultant hardcoded.** Every step of the ladder must work consultant-led *and* org-direct. The consultant is a guide, never a dependency.
@@ -255,6 +258,7 @@ These thirteen rules are the constitution proper. Everything else in this docume
 11. **The floor guard.** Drivers entering the BOQ composite are clamped to 1–100, so a single zero cannot annihilate the quotient (it will still drag it brutally — that's the design).
 12. **The amendment rule.** This document changes only by founder ratification recorded in `_agent/DECISIONS.md`, and every change propagates to the documents that implement it.
 13. **Score ≠ prediction.** Scores are auditable arithmetic, traceable to signals — Nexus computes them; the trust layer is never a black box. Predictions and recommendations are learned models — iBrain predicts them, and they may be probabilistic. An NBM is always displayed as a recommendation with a confidence and a why — never as a fact.
+14. **The PvE principle.** The opponent is the company's own entropy, never its people: no gauge, score, or nudge ever feeds colleague-vs-colleague comparison (C-017).
 
 ## 8 · Settled vs evolving
 
@@ -264,7 +268,7 @@ These thirteen rules are the constitution proper. Everything else in this docume
 | The loop (M-A-T-E), the five-state ladder with its entry moments, and the Staircase's *shape* (C-015) | *Which* score sits in *which* brick — the staircase's theory layer — and the deliverables' precise contents |
 | The six-driver family and BOQ as their geometric mean; **BOQ's referent: the company** (signals collected per program) | Driver weights, signal sets, calibration constants (trade-secret configuration); program-gauge surfaces |
 | The five bands | Band boundaries, after real cohorts exist |
-| All thirteen articles | The Eight Metrics' anchor values, as benchmarks improve (versioned per the restatement rule) |
+| All fourteen articles | The Eight Metrics' anchor values, as benchmarks improve (versioned per the restatement rule) |
 | The three collection channels, incl. engineering-stack ingestion | Which integrations ship in which order |
 | Paid-only assessment until Nexus matures (C-016 — cohort speed traded for maturity, deliberately) | When the self-serve/org-direct assessment tier opens |
 | | **The appraisal posture — deliberately open** (C-016): Nexus grows with each company; each company's rhythm differs; no binding anti-gaming article — learn, adapt fast, revisit on the first real-world signal |
