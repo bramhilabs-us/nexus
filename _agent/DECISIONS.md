@@ -454,3 +454,15 @@ Every domain model gains a required `program_id`: `Objective`, `KeyResult`, `Goa
 **Refines**: C-021 (absorption pattern), EXECUTION_PLAYBOOK genome (the >25% revisit trigger — answered).
 
 **RATIFIED by founder, 2026-06-12 (session-25, in-session)**: "C-022 — agree on it, let's rebase it to 105." The veto window is closed; the 105 re-baseline, Night 1b, and the night cuts stand as canon ahead of the PR #27 merge. Ratification sweep in the same session: SPRINTS_NIGHT_1B flipped DRAFT → ACTIVE; the three live stale "vs 90" references fixed (4-CUSTOMER/METRICS.md § build-quality, `.claude/commands/init.md` ×2, `.claude/commands/close.md`); historical records (JOURNAL, DONE backlog entries) untouched.
+
+## 2026-06-12 — The four archetypes finalized; extensibility = fixed four + documented seam (C-023)
+
+**Context**: Session-26 founder review of USER_JOURNEYS surfaced two questions: (a) finalize the archetype roster — the founder's list said "consultant, business owner, manager, employee" while canon says **Worker**; (b) is future archetype extensibility architecturally considered? Reality check: PRODUCT_STRATEGY fixes exactly four archetypes ("permissions, home pages, and page contracts bind to these and only these") with roles as extensible labels below them — but no procedure existed for ever adding a fifth, and USER_JOURNEYS' purpose line conflated journeys with archetypes (omitted Manager, treated "the org" as an archetype).
+
+**Decision** (founder-ratified in-session, 2026-06-12):
+1. **The four archetypes are final: Consultant · Business Owner · Manager · Worker.** "Worker" is confirmed over "Employee" — already ratified across the doc set, and it avoids the ambiguity that Managers and Business Owners are also employees. The Taker stays a *persona* (the tutorial player any archetype passes through, 03 §2), never a fifth archetype.
+2. **Extensibility posture: fixed four + documented seam.** Roles remain the cheap extension path (admin-addable labels mapping to an archetype, zero code — PRODUCT_STRATEGY § roles). The archetype set itself is NOT config-extensible; adding a fifth is a designed structural move with a named cost: new archetype enum value + a home page + a full page contract (all ten fields × stage weather) + a permission set + a STAKEHOLDERS row. The procedure lives in PRODUCT_STRATEGY § the archetype seam. A registry-extensible archetype system was considered and rejected as v1 over-engineering (page contracts, permissions, and the stage matrix would all need to become data-driven).
+3. **The Steward (03 §6.4) is the named watch-case** — the first candidate that may someday earn archetype status via this seam; until then it is a BRAMHI-side role, not an archetype.
+
+**Consequences**: PRODUCT_STRATEGY gains § the archetype seam; USER_JOURNEYS purpose rewritten to name the four archetypes + the Taker persona and map journeys ↔ archetypes explicitly (J-steps already correct, framing was not).
+**Refines**: PRODUCT_STRATEGY § four-archetypes-unlimited-roles (made explicit, not changed); C-017 (the Game's player table stands).

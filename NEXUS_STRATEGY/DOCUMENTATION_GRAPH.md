@@ -83,7 +83,7 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |       |-- 03_NEXUS_GAME.md ................. T0 | the game whitepaper: stage-responsive pages, friction audit, value bridge (parents: + PRODUCT_STRATEGY; ratified C-017)
 |       |       |-- 0-BUSINESS/COMPANY_JOURNEY.md  T0 | the ladder client-facing: Sponsor bridge, proxy valley, gauges-lighting, the equality (parents: + 01_NEXUS_MODEL)
 |       |       `-- 04_RUNTIME_MODEL.md ...... T0 | founder capture: 4-layer matrix, orchestrator (Nexus-side, C-020), epistemic tri-split, trigger map, nudge doctrine (parents: + 01_NEXUS_MODEL; ratified C-019)
-|       |               `--> feeds: TECH_STRATEGY (Layer 4 + stage machine) + 2-TECHNICAL/SCORING_MODEL.md
+|       |               `--> feeds: TECH_STRATEGY (Layer 4 + stage machine) + 2-TECHNICAL/SCORING_MODEL.md + 2-TECHNICAL/USER_JOURNEYS.md (trigger map + playthroughs, N1-P3-08)
 |       |-- 0-BUSINESS/ICP.md ................ T0 | v1 profile + qualification gate + segment registry + anchor-pack roadmap (parents: + scores/BOQ.md)
 |       `--> feeds: scores/BOQ.md (the score family it binds)
 |
@@ -108,8 +108,8 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |       |-- 1-PRODUCT/CAPABILITIES.md ........ T1 | 8 blocks as user capabilities; task×person match v1 canon home (C-022.4)
 |       |-- 1-PRODUCT/ROADMAP.md ............. T1 | what ships when, re-baselined nights
 |       |       (parents: + EXECUTION_PLAYBOOK)
-|       |-- 2-TECHNICAL/USER_JOURNEYS.md ..... T2 | 4 archetype journeys + seq diagrams
-|       |       (parents: + TECH_STRATEGY)
+|       |-- 2-TECHNICAL/USER_JOURNEYS.md ..... T2 | 5 journeys (J5 org-direct) + best/hostile playthroughs + the trigger map T0–T10
+|       |       (parents: + TECH_STRATEGY, 04_RUNTIME_MODEL)
 |       |-- 4-CUSTOMER/README.md ............. T4 | evidence, feedback, metrics tier
 |       |       |-- 4-CUSTOMER/INTERVIEW_TEMPLATE.md  T4 | sprint capture form
 |       |       |-- 4-CUSTOMER/FEEDBACK_LOG.md  T4 | meta-loop paper trail
