@@ -116,3 +116,29 @@ Format:
 
 **Status**: ANSWERED — see DECISIONS.md 2026-06-09 (C-008/NOF)
 **Answer**: Neither lift nor simple fold — the **Nexus Objective Framework (NOF)**: Objective → KRs → **Milestones (~1 week, objective-relative)** → Tasks. Goal and Move are dropped; all calendar coupling (ISO weeks, quarters[]) removed; objectives start/end any day, 6–7 self-rolling per org. KRs measure progress; an **outcome record** at objective close measures outcomes. Full spec: `NEXUS_STRATEGY/1-PRODUCT/NOF.md`.
+
+---
+
+## C-018 — The 15-archetype roster: confirm the reconstructed registry
+
+**Asked**: 2026-06-12 by session-22 (N1-P3-05, ICP.md)
+**Context**: C-016's devil's-advocate simulation ran Works24 + 15 company archetypes, but the full numbered roster was session-state and never persisted. Only 7 slot numbers survive as citations in the score docs (#4 agencies, #5 regulated, #6 PE-owned, #7 solo-founder, #8 embedded/hardware, #9 game studios, #12 remote-async), plus two segments canon names without numbers (software-enabled services — the Works24 archetype; internal IT orgs). `0-BUSINESS/ICP.md` §3 canonizes the registry **by name**, keeping the cited slot numbers valid and leaving the unrecoverable slots out rather than fabricating them.
+**Question**: Is the 9-segment registry in ICP.md §3 the right canon going forward, or do you want the missing simulation archetypes (≈6 more) reconstructed and added?
+**Options the agent sees**:
+- **a) Registry-by-name is canon** — slots append as engagements meet new archetypes; the simulation's missing rows are not needed. (Recommended — the registry's job is gate + pack roadmap, not simulation archaeology.)
+- **b) Reconstruct the full 15** — founder recalls/derives the missing rows; ICP.md gains them with fresh numbers.
+**Status**: OPEN
+**Answer**:
+
+---
+
+## C-019 — Ratify 04_RUNTIME_MODEL.md (the founder's runtime capture)
+
+**Asked**: 2026-06-12 by session-22 (N1-P3-07)
+**Context**: The founder's runtime brainstorm (diagram + walkthrough, 2026-06-12) was captured as `NEXUS_STRATEGY/04_RUNTIME_MODEL.md` (draft) and its product half propagated in the same session (PRODUCT_STRATEGY, DESIGN_LANGUAGE, AI_CONSULTING_PLAYBOOK). Two pieces carry constitutional weight and need explicit founder ratification:
+**Question**: (a) Ratify the **three epistemic categories** (computed / learned / generated — the Article 13 extension: generated content always labeled AI-drafted, human-accepted before becoming program canon)? (b) Ratify 04_RUNTIME_MODEL as a whole → flip `draft → active`?
+**Options the agent sees**:
+- **a) Ratify both** — Article 13 gains the generated category; 04 flips active.
+- **b) Ratify 04, hold the Article 13 extension** — the tri-split stays a proposed rule in 04 §3 until the first LLM-content feature forces the decision.
+**Status**: OPEN
+**Answer**:

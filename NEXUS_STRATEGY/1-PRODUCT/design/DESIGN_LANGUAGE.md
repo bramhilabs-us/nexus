@@ -4,7 +4,7 @@ title: Nexus Design Language — BRAMHI brand applied
 tier: T1
 status: active
 owner: founder
-updated: 2026-06-10
+updated: 2026-06-12
 summary: >
   How the BRAMHI Labs brand guide (brand/ assets) becomes Nexus's minimalistic
   UI: palette, typography, component rules, the token-first workflow that
@@ -97,6 +97,39 @@ One small set shared by all six pages — adding a component requires updating t
 | **Answer input** | The per-card response control (scale / choice / binary) | Large tap targets, one input family per card; selected state = primary-faint fill + primary border; never radio/checkbox form controls |
 | **Tag chip** | Match-grade profile signals (skills, motivations, interests — fit thesis) | Small pill, primary-faint fill; assessment-fed chips carry a source mark; chips are data, never decoration — free-prose never gets a chip |
 | **Task row** | Planning task lists ("what do I do today") | Status circle (todo/doing/done) + title + hours est/logged + owner; done = struck title, positive circle; calm list, never a Gantt |
+
+## Card grammar — zoom levels (04_RUNTIME_MODEL §5)
+
+Every entity card declares its **zoom levels**, each with fixed fields; a page chooses a
+zoom level, never a field mix. A card is never an information dump: anyone glancing at
+any zoom level gets that level's complete answer. Same grammar on every viewport —
+web-first, mobile-responsive (native apps stay deferred, IMPROVEMENT_PLAN).
+
+| Entity | **Full** (the card's home page) | **Compact** (cross-page reference) | **Line** (lists, roll-ups) |
+|---|---|---|---|
+| **Objective** | owner · status · objective statement · KRs · lifecycle ribbon | headline · owner · status | headline · status |
+| **Client** | company + contact · score rings · objectives summary · pipeline badge · sponsor | company · score ring · pipeline badge | company · badge |
+| **Milestone** | title · objective link · tasks done/planned · hours · streak | title · status · due | title · status |
+
+New entities entering the UI add a row here first (the lego constraint applies to
+grammar, not just components). Zoom levels are the *information* rule; the Tile/Card
+components above are the *visual* rule.
+
+## UX doctrine — friction is the enemy (04_RUNTIME_MODEL)
+
+The founder's runtime principles, binding for every page spec and mockup:
+
+1. **CTA placement is strategy.** One primary CTA visually dominant per page (existing
+   rule), placed where the player's eye lands at that stage — the stage-responsive
+   contract (PRODUCT_STRATEGY § stage dimension) decides *which* CTA that is per stage.
+2. **Reduce friction structurally, then visually.** Pre-seeded content beats empty
+   forms (zero-setup first sessions); guided imports beat uploads (the Sponsor's
+   matrix); defaults beat configuration. Visual calm is the last 10%, not the fix.
+3. **Pages teach the game in place.** The rules surface (page contract field) renders
+   the one game rule the page embodies — quiet, dismissible, never a tour or a manual.
+4. **Consistency is cross-page trust.** The same entity at the same zoom level renders
+   identically everywhere (card grammar above); a player who learns a card once has
+   learned it on all six pages.
 
 ## What this resolves
 

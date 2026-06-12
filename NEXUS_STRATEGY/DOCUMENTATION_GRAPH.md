@@ -74,7 +74,10 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |
 |-- 01_NEXUS_MODEL.md ........................ T0 | the constitution: thesis · ladder · measurement · articles
 |       |-- 02_NBM_MODEL.md .................. T0 | the Staircase, BOQ ⇄ NBM, the core USP (ratified C-015)
-|       |-- 03_NEXUS_GAME.md ................. T0 | the game whitepaper: stage-responsive pages, friction audit, value bridge (parents: + PRODUCT_STRATEGY)
+|       |-- 03_NEXUS_GAME.md ................. T0 | the game whitepaper: stage-responsive pages, friction audit, value bridge (parents: + PRODUCT_STRATEGY; ratified C-017)
+|       |       |-- 0-BUSINESS/COMPANY_JOURNEY.md  T0 | the ladder client-facing: Sponsor bridge, proxy valley, gauges-lighting, the equality (parents: + 01_NEXUS_MODEL)
+|       |       `-- 04_RUNTIME_MODEL.md ...... T0 | founder capture: 4-layer matrix, orchestrator, epistemic tri-split, trigger map, nudge doctrine (parents: + 01_NEXUS_MODEL)
+|       |-- 0-BUSINESS/ICP.md ................ T0 | v1 profile + qualification gate + segment registry + anchor-pack roadmap (parents: + scores/BOQ.md)
 |       `--> feeds: scores/BOQ.md (the score family it binds)
 |
 |-- 0-BUSINESS/AI_CONSULTING_PLAYBOOK.md ..... T0 | AIR framework, sprint, pricing

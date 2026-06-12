@@ -4,12 +4,13 @@ title: Positioning — what Nexus is, against what, for whom
 tier: T0
 status: active
 owner: agent
-updated: 2026-06-10
+updated: 2026-06-12
 summary: >
-  The category claim (Transformation OS), the one-liner per audience, the
-  three differentiation axes (vs consultancies, vs PM tools, vs assessment
-  vendors), and the message house under "we sell certainty." Operational
-  positioning card — the strategy behind it lives in NORTH_STAR.
+  The category claim (Transformation OS), the ecosystem positioning (BRAMHI /
+  Nexus / iBrain — who builds what, constitution §2), the one-liner per
+  audience, the three differentiation axes (vs consultancies, vs PM tools,
+  vs assessment vendors), and the message house under "we sell certainty."
+  Operational positioning card — the strategy behind it lives in NORTH_STAR.
 parents:
   - NEXUS_STRATEGY/00_NORTH_STAR.md
 children:
@@ -28,6 +29,18 @@ revisit:
 **Nexus is a Transformation OS** — the operating system an organization runs its transformation on, then keeps as its project-management OS. Not a consulting deliverable, not another PM tool, not an assessment product: the category is deliberately the intersection, because no incumbent sits there (scores/BOQ.md § the Bridge: every existing tool solves one box of the diagram; nothing manages the whole bridge — the category claim in full: 02_NBM_MODEL §3.5).
 
 **AI transformation is the launch vertical** (C-006). The category claim is bigger than the vertical on purpose — ESG, digital, ops-excellence transformations are new assessment plugs on the same blocks, not new products.
+
+## The ecosystem position (constitution §2)
+
+Nexus never stands alone in the story — it is the delivery system of a three-entity family, and external copy names the family deliberately:
+
+| Entity | Positioned as | One line |
+|---|---|---|
+| **BRAMHI Labs** | the parent — the philosophy, the methodology, the measurement standard | "the standard's author" |
+| **Nexus** | the delivery system — *"the connective intelligence layer that brings everything together"* | where the work, the gauges, and the evidence live |
+| **iBrain** | the intelligence platform — engines proven on Karvia, consumed by Nexus through published interfaces | "Nexus computes the trust layer; iBrain predicts" (Article 13) |
+
+The credibility chain in every pitch: iBrain's engines *are* the engines that built Karvia — the dogfood is the demo. Nexus never claims to be the brain; it claims to be the place where the brain's advice becomes measured work. (The v1 nuance — self-contained iBrain-shaped implementations until the live platform connects, C-010 — is engineering posture, never marketing copy.)
 
 ## The one-liner, per audience
 

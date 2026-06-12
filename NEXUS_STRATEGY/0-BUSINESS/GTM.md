@@ -4,7 +4,7 @@ title: GTM — two motions, one flywheel
 tier: T0
 status: active
 owner: agent
-updated: 2026-06-10
+updated: 2026-06-12
 summary: >
   The go-to-market: consultant-led engagements as the beachhead (the $130k
   funnel, ICP, phased channel build) and org-direct as the first-class second
@@ -25,7 +25,7 @@ revisit:
 
 ## Motion 1 — consultant-led (the beachhead, C-006)
 
-**ICP** (playbook): founder-led, service-heavy, product-development SMBs · $10M–$100M revenue · 20–200 employees · North America first.
+**ICP** (C-016.5, [ICP.md](ICP.md) owns the gate): software *product* companies · ~20–500 people · **≥10 engineers** · modern delivery pipeline · measurement-permissive jurisdiction · North America first. The earlier "service-heavy SMB" framing is superseded — every other archetype is a future anchor pack (ICP.md §3), and the qualification gate runs at Prospect, before the Sponsor bridge.
 
 **The funnel** (playbook owns pricing detail): AIR Strategic Assessment (~$25k) → quick wins (3 mo) → transformation partnership (12 mo) ≈ **$130k client value**, targeting 30–50% assessment→engagement conversion. Then **handover converts the engagement into a product account** — the moment GTM motion 1 feeds motion 2.
 
@@ -41,7 +41,7 @@ revisit:
 
 ## Motion 2 — org-direct (first-class, not a someday)
 
-The architecture treats no consultant as a degenerate case (C-001): My Clients hides, the journey starts at Assessments or Objectives, the first-value journey is steps 3–7 of J1. Activation sequence: manual onboarding of design-partner orgs during beta → self-serve post-beta (signup → AIR Discovery-grade self-assessment → objectives). **Rule**: nothing ships that hardcodes the consultant into the critical path — the org-direct user walks the same pages.
+The architecture treats no consultant as a degenerate case (C-001): My Clients hides, the journey starts at Assessments or Objectives, the first-value journey is steps 3–7 of J1. Activation sequence: manual onboarding of design-partner orgs during beta → self-serve post-beta (signup → AIR Discovery-grade self-assessment → objectives). **Paid-only initially** (C-016.6): no free assessment tier until Nexus matures — a known trade, maturity over cohort speed. In Evolve, org-direct accounts run on the productized core alone (Article 9); the Steward's Calibration Review is a purchasable add-on, never a dependency (BUSINESS_MODEL § the Steward). **Rule**: nothing ships that hardcodes the consultant into the critical path — the org-direct user walks the same pages.
 
 ## The flywheel (NORTH_STAR's diagram, GTM view)
 

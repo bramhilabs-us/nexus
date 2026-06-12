@@ -2,23 +2,24 @@
 
 > Written by the previous session per `/close`. `/init` reads this and starts. Overwritten every session — history lives in JOURNAL.md.
 
-**Type**: STRATEGY (founder read-through preferred; the doc work is executable solo — cron stays OFF)
-**Task**: Founder flips 01 + 03 `draft → active`, then **N1-P3-05** — ICP.md + COMPANY_JOURNEY.md (the doc list continues against ratified canon).
+**Type**: STRATEGY (T2 doc work; solo-executable — the iBrain read happens in-session; founder presence useful only for C-018/C-019 answers)
+**Task**: **N1-P3-06** — SCORING_MODEL.md + TECH_STRATEGY iBrain revision. Why now: it is the last blocked item on the Night-1 doc list, every input finally exists (constitution active, scores library, 04's technical half queued to it), and N1-P3-08 + the architecture work wait on its stage machine.
 
-**READ FIRST** (in order):
-1. `_agent/DECISIONS.md` C-015 + C-016 — what this session executes against (everything is ratified; nothing needs re-litigating)
-2. `NEXUS_STRATEGY/01_NEXUS_MODEL.md` — **founder read-through list** (flagged in C-015): the deliverable names (the Cadence, the Measured Engine), "Ensure" = internal-only, Discover→Measure canonization, the ICP wording in §2, the appraisal-posture wording in §8. Satisfied → flip `status: draft → active`.
-3. `NEXUS_STRATEGY/03_NEXUS_GAME.md` §9 — item 12 carries **4 candidate constitutional rules** (cohort floor, freshness floor, no-verdict-without-a-path, PvE principle) + the **Steward model** and **data covenant** — all ratify by the founder approving the paper → flip active.
-4. `0-BUSINESS/scores/BOQ.md` — the core model the new docs build on (§5 anchor packs, §7 epistemic engine, §8 driver index).
+**READ FIRST** (in order, before drafting anything):
+1. **The iBrain API_REFERENCE + the KARVIA integration folder** — the session's gating read (paths per the Karvia reference: `/Users/sagarrs/Desktop/official_dev/karvia_business/`, read-only). Two sessions have warned: nothing iBrain-shaped gets drafted before this read.
+2. `NEXUS_STRATEGY/04_RUNTIME_MODEL.md` §§2, 4, 7 — the technical half this session lands: the orchestrator's home (decide ONLY after read #1), the stage machine, nudge-events-as-BRQ-telemetry
+3. `_agent/DECISIONS.md` C-010 (iBrain local-first) + C-017 — the constraints the design must satisfy
+4. `2-TECHNICAL/TECH_STRATEGY.md` (module anatomy + assessment seams §) and `0-BUSINESS/scores/BOQ.md` §7 (epistemic engine — SCORING_MODEL implements it)
 
-**Session flow**:
-1. Founder reads 01 + 03 → flips, with any amendments recorded per Article 12
-2. N1-P3-05: write `0-BUSINESS/ICP.md` (v1 profile, 15-archetype segment map, anchor-pack roadmap — source: 03 §6.6 + C-016.5) and `0-BUSINESS/COMPANY_JOURNEY.md` (the ladder client-facing: proxy-valley narrative, gauges-lighting sequence, the Sponsor bridge — sources: constitution §4, 03 §§4–6)
-3. If time remains: start N1-P3-07 (playbook/product/business-model consequence revisions) — NOT N1-P3-06 (it requires the iBrain read first)
+**Definition of done**:
+- `2-TECHNICAL/SCORING_MODEL.md` — signal store, calculator-plugin contract, question schema, weights-as-config, causal-edge config, triangulation rule (03 F13)
+- TECH_STRATEGY: iBrain consumption architecture (C-010), dev-stack telemetry ingestion, **the stage machine** (03 §8 / 04 §7), **the orchestrator's home decided and recorded** (DECISIONS entry), compliance-veto fallback; SYSTEM_ARCHITECTURE/API_SURFACE annotations (engines ≈ iBrain ancestors)
+- scores/BRQ.md instruments: nudge events as logged telemetry (04 §4); graph green
 
 **Watch out for**:
-- **If the founder is absent**: N1-P3-05 proceeds (decisions are ratified); the draft→active flips wait — do not flip without the founder (Article 12)
-- 01 and 03 are `draft` but **C-010…C-016 are canon** — newer decision beats older doc text everywhere
-- iBrain API_REFERENCE + KARVIA integration folder **still unread** — N1-P3-06 is blocked-on-read; don't draft SCORING_MODEL or touch TECH_STRATEGY's iBrain section before reading them in-session
-- The brand rework (C-013) and N1-P3-01 pt 2 remain on the master doc list after N1-P3-07; Night-1 close-out groom (N1-P6-01) comes last
-- Step count: 26/90 after this session's journal entry
+- **karvia_business/ is READ-ONLY** — reads only, ever
+- The orchestrator decision is **open on purpose** (04 §2): Nexus-side context assembly vs iBrain consumption surface — the API read decides; do not import the founder sketch as architecture without it
+- **C-018 + C-019 are OPEN** on the founder (archetype registry; 04 ratification + the Article 13 generated-content extension). 04 is `draft` but its *queued consequences* are executable; the Article 13 amendment itself waits for C-019
+- Three epistemic categories: if C-019 lands as "ratify both," amend Article 13 + flip 04 active in this session (Article 12 entry required)
+- After this: N1-P3-08 (trigger map/playthroughs), brand rework (C-013), N1-P3-01 pt 2, then N1-P6-01 close-out groom
+- Step count: 27/90 after this session's journal entry

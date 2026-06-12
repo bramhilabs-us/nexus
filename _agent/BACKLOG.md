@@ -182,13 +182,10 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Residual**: 01_NEXUS_MODEL.md and 03_NEXUS_GAME.md stay `status: draft` pending founder read-through (5 naming proposals in 01; 4 candidate constitutional rules + Steward/data-covenant in 03)
 
 ### N1-P3-05 — Doc list: ICP.md + COMPANY_JOURNEY.md (discovered, C-016)
-- **Status**: READY
-- **Size**: S–M (1 session)
-- **Depends on**: C-016 (ratified); benefits from founder flipping 01/03 active first
-- **Definition of done**:
-  - `0-BUSINESS/ICP.md` — v1 qualification profile, the 15-archetype segment map, anchor-pack roadmap
-  - `0-BUSINESS/COMPANY_JOURNEY.md` — the ladder as client-facing journey: proxy-valley narrative, gauges-lighting sequence, Sponsor bridge (03 §6.1)
-  - Graph wired, validator green
+- **Status**: DONE (session 2026-06-12-22)
+- **Size**: S–M (1 session) → done in 1, same session as the 01/03 ratification flips (C-017)
+- **Delivered**: `0-BUSINESS/ICP.md` (v1 profile with per-criterion why, 5-question qualification gate, segment registry, demand-triggered anchor-pack roadmap) + `0-BUSINESS/COMPANY_JOURNEY.md` (client-facing ladder: Sponsor bridge, proxy valley owned, gauges-lighting sequence, Steward/handover, promises-and-limits). Graph wired (51 docs green).
+- **Residual**: the simulation's full 15-archetype roster was never persisted — ICP.md §3 canonizes the registry by name with the 7 recoverable slot numbers; founder confirms via **clarification C-018**
 
 ### N1-P3-06 — SCORING_MODEL.md + TECH_STRATEGY iBrain revision (queued since session-19)
 - **Status**: READY (blocked-on-read: iBrain API_REFERENCE + KARVIA integration folder — read in-session before drafting)
@@ -199,10 +196,22 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - SYSTEM_ARCHITECTURE/API_SURFACE annotations (engines ≈ iBrain ancestors; ibrain/* route disposition flip)
 
 ### N1-P3-07 — C-016/game consequence revisions (discovered, 03 §9 queue)
-- **Status**: READY (after founder flips 01/03 active)
-- **Size**: M (1 session)
-- **Definition of done**:
-  - AI_CONSULTING_PLAYBOOK: ICP gate at Prospect, segment TLO variants, proxy-valley script, Sponsor bridge step, data covenant, value-bridge collateral
-  - PRODUCT_STRATEGY: stage-responsive page contract (+ §4 matrix), valley UX (gauges-lit), NBM framing, first-session contract, bedside-manner display notes
-  - BUSINESS_MODEL: the Steward + Calibration Review (pricing stays in Builder TODO); POSITIONING/GTM ecosystem positioning pass
+- **Status**: DONE (session 2026-06-12-22, same session as ratification + N1-P3-05)
+- **Size**: M (1 session) → done in 1
+- **Delivered**: full DoD + the founder's runtime-model capture, same pass —
+  - **NEW `04_RUNTIME_MODEL.md`** (draft, founder capture): 4-layer × 8-block matrix modularization, the orchestrator role (home decided at N1-P3-06 after the iBrain read), the three epistemic categories (computed/learned/generated — proposed Article 13 extension), trigger map + self-retiring nudge doctrine (nudges are BRQ telemetry), three-things-today, card zoom grammar, best/hostile playthroughs
+  - Constitution: the four C-017 rules written into the articles (Art 3 freshness, Art 6 cohort floor + no-verdict-without-a-path, **new Art 14 PvE** — now fourteen articles, refs swept)
+  - PRODUCT_STRATEGY: page contract → 10 fields (+ stage weather, rules surface), §stage-dimension matrix landed, Sponsor capture + delegate path on My Clients, pipeline badges fixed (constitution §4 names), three-things-today + valley quest line on Dashboard, team-altitude NBM + AI-draft CTA on Objectives, first-session contract + subtraction rule on Planning, score display doctrine section
+  - DESIGN_LANGUAGE: card grammar (zoom levels) + UX doctrine sections
+  - AI_CONSULTING_PLAYBOOK: qualification gate (+ segment TLO honesty), Sponsor bridge + engagement nudge chain, proxy-valley script, data covenant, value-bridge collateral; **stale ICP framing ("service-heavy SMB") superseded** here and in GTM
+  - BUSINESS_MODEL: the Steward + Calibration Review (pricing in stream-2 TODO); POSITIONING: ecosystem position section (BRAMHI/Nexus/iBrain); GTM: ICP fixed, paid-only + Steward notes
+- **Residual**: 04_RUNTIME_MODEL ratification (clarification C-019); orchestrator home + stage machine + nudge-telemetry instrument → N1-P3-06 (still blocked-on-read); hostile-playthrough USER_JOURNEYS pass → post-P3-07 task
 - **Notes**: brand/layout rework (C-013) and N1-P3-01 pt 2 remain on the master doc list after these.
+
+### N1-P3-08 — Trigger map + best/hostile playthroughs → USER_JOURNEYS (discovered, 04 §7)
+- **Status**: READY after C-019 (04 ratification) and N1-P3-06 (the stage machine names the transitions)
+- **Size**: S–M (1 session)
+- **Definition of done**:
+  - The trigger map: every stage transition × designed trigger × fallback nudge chain × owner (derived by walking the hostile playthrough transition by transition)
+  - `2-TECHNICAL/USER_JOURNEYS.md` gains the best-case and hostile playthroughs alongside the 4 archetype journeys
+  - Nudge fences honored in every chain: structure-first, self-retiring (logged as BRQ telemetry), PvE (Art 14), Article 9 (org-direct chains end without a consultant)

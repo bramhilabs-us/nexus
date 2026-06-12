@@ -367,3 +367,16 @@ Every domain model gains a required `program_id`: `Objective`, `KeyResult`, `Goa
 **Consequences**: constitution amendments this session (staircase, deliverables column, Articles 6+13, ICP, scope clause, gauge-lag, restatement rule, BOQ referent, honest-limits additions, reserved seats); scores library + ICP.md + COMPANY_JOURNEY.md + SCORING_MODEL.md queued next; AI_CONSULTING_PLAYBOOK gains the ICP qualification gate, segment TLO variants, and the **proxy-valley narrative** (fees peak when provenance is weakest — the engagement script owns it; "gauges lit n/9" is the honest mid-journey progress proof); PRODUCT_STRATEGY gains valley UX + score display rule.
 
 **Refines**: C-005 (program tenancy: programs are signal-collection scopes under a company-level BOQ), C-006 (GTM: paid-only sharpens the wedge), C-015.
+
+---
+
+## 2026-06-12 — Constitution + Game ratified: draft → active (C-017)
+
+**Context**: Founder read-through per the session-21 NEXT_SESSION card. Both papers approved **as-is, no amendments**.
+
+**Decision**:
+1. **`01_NEXUS_MODEL.md` (the constitution) is `active`.** The flagged confirm items are ratified with it: the deliverable names (Measure → the Roadmap · Align → the Cadence · Transform → the Measured Engine · Evolve → the equality), "Ensure" = internal-only, Discover → Measure canonization, the §2 ICP wording, the §8 appraisal-posture wording. C-015 items 3–4 lose their "proposed" qualifier.
+2. **`03_NEXUS_GAME.md` (the Game whitepaper) is `active`.** Ratified with the paper (§9 item 12 + flagged models): the **four candidate constitutional rules** — cohort floor (F10), freshness floor (F11), no-verdict-without-a-path (§6.5 rule 1), PvE principle (§3) — plus the **Steward model** and the **data covenant** (F12).
+3. The four rules are ratified **as canon**; writing them into the constitution's articles is consequence work, riding the 03 §9 queue (N1-P3-07) per Article 12's amendment process.
+
+**Refines**: C-015 (confirms its proposed items), C-016.
