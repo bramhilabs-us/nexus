@@ -20,8 +20,6 @@ children: []
 revisit:
   - on: "the first real engagement completes — re-tell every stage against what actually happened (the playthrough was fiction; this doc must become reportage)"
     stage: always
-  - on: "the §9 consequence revisions land in AI_CONSULTING_PLAYBOOK / PRODUCT_STRATEGY (N1-P3-07) — verify the narrative and the collateral stay in step"
-    stage: N1
 ---
 
 # The Company Journey — from first question to playing solo

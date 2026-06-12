@@ -4,7 +4,7 @@ title: BOQ — the core model (Business Operating Quotient)
 tier: T0
 status: active
 owner: founder
-updated: 2026-06-11
+updated: 2026-06-12
 summary: >
   The core measurement model: how six drivers combine into BOQ (geometric
   mean, clamp, provenance inheritance), the bands, tier placement with
@@ -28,6 +28,8 @@ children:
   - NEXUS_STRATEGY/0-BUSINESS/scores/FLS.md
   - NEXUS_STRATEGY/0-BUSINESS/scores/CRS.md
   - NEXUS_STRATEGY/0-BUSINESS/ICP.md
+  - NEXUS_STRATEGY/2-TECHNICAL/SCORING_MODEL.md
+  - NEXUS_STRATEGY/0-BUSINESS/scores/README.md
 revisit:
   - on: "any driver's base model, floors, or anchors change (the child doc's calibration log entry triggers a check here)"
     stage: always

@@ -4,7 +4,7 @@ title: User Journeys — four archetypes walking the product
 tier: T2
 status: active
 owner: agent
-updated: 2026-06-10
+updated: 2026-06-12
 summary: >
   The four canonical journeys, one per archetype: consultant first-value
   (Add Client → AIR → objectives), assessment taker (invitation → flashcard
@@ -46,7 +46,7 @@ The north-star metric clock starts at step 1 and stops at step 10.
 4. Client tile appears as **Prospect**, ring empty, inline CTA **Start assessment**.
 5. The AIR two-week sprint runs in **Assessments** (engagement workspace): per-day instruments capture evidence — Day 1 Business Context Canvas lands in the client's **Company Profile**; Day 7 workforce instruments feed taker **Profiles** (J2). `assessment.captureEvidence(instrument, day)`
 6. Day 10 scoring workshop → AIR Score + deliverables generated (Opportunity Register, Risk Register, 90-day plan, roadmap). `assessment.score()` → `assessment.deliverables()`
-7. Tile flips **Assessing → Engaged**; score ring fills; My Clients triage tiles update.
+7. Tile badge advances **Measuring → Aligning** (the stage machine fires on the commitment entry moment, 01 §4); score ring fills; My Clients triage tiles update.
 8. BO/Manager clicks **Create objectives from these results** (the product's most important handoff) → **Objectives**, pre-seeded from the Opportunity Register. `objectives.createFrom(deliverable)` — objectives *Identified*, 4–5 KRs each.
 9. Manager opens **Planning** → breaks the first KR into Milestone 1 (~1 week) with tasks + hour estimates. `milestones.create(objective-relative)`, `tasks.bulkCreate(milestone)`
 10. **Dashboard** lights up: program pulse live. **North-star metric stops: first objective *Identified* with a planned milestone.**
@@ -65,7 +65,7 @@ sequenceDiagram
     AS->>AS: auto-initiate AIR (first_time)
     Note over AS: 2-week sprint — evidence,<br/>canvas → Company Profile
     AS->>AS: Day 10: score + deliverables
-    AS-->>MC: score ring + stage Engaged
+    AS-->>MC: score ring + badge Aligning
     C->>OBJ: Create objectives from results
     OBJ->>AS: read Opportunity Register (contract)
     OBJ->>OBJ: objectives Identified (4–5 KRs)

@@ -4,12 +4,13 @@ title: Nexus North Star — the 90-step thesis
 tier: T0
 status: active
 owner: founder
-updated: 2026-06-09
+updated: 2026-06-12
 summary: >
   The root of the document graph. States the play (AI consulting beachhead,
   Nexus as instrument + handed-over product, srishti add-on), the ≤90-session
-  thesis vs Karvia's ~290, the three-layer model, and the pack-of-cards system
-  that hands off to the business/product/tech/execution cards.
+  thesis vs Karvia's ~290, the four-layer model, and the pack-of-cards system
+  that hands off to the business/product/tech/execution cards — with the
+  constitution (01_NEXUS_MODEL) as the document every conflict defers to.
 parents: []
 children:
   - NEXUS_STRATEGY/01_NEXUS_MODEL.md
@@ -22,6 +23,11 @@ children:
   - NEXUS_STRATEGY/3-DELIVERY/EXECUTION_PLAYBOOK.md
   - NEXUS_STRATEGY/DOCUMENTATION_GRAPH.md
   - NEXUS_STRATEGY/research/README.md
+  - NEXUS_STRATEGY/README.md
+  - NEXUS_STRATEGY/0-BUSINESS/README.md
+  - NEXUS_STRATEGY/1-PRODUCT/README.md
+  - NEXUS_STRATEGY/2-TECHNICAL/README.md
+  - NEXUS_STRATEGY/3-DELIVERY/README.md
 revisit:
   - on: "any C-xxx decision in _agent/DECISIONS.md is ratified or reversed"
     stage: always
@@ -33,13 +39,14 @@ revisit:
 
 ## Purpose
 
-This is the single entry point for building Nexus. It states the play, the philosophy, the constraint, and the three-layer model, and it hands off to four downstream documents — business, product, technical, execution — that together act as a **pack of cards**: each session draws the next card with minimal human intervention. If a future session is unsure what to do, it starts here.
+This is the single entry point for building Nexus. It states the play, the philosophy, the constraint, and the four-layer model, and it hands off to four downstream documents — business, product, technical, execution — that together act as a **pack of cards**: each session draws the next card with minimal human intervention. If a future session is unsure what to do, it starts here. Where any document disagrees with another, **the constitution ([01_NEXUS_MODEL.md](01_NEXUS_MODEL.md)) wins** (C-014).
 
 ## TL;DR
 
 - **The play**: BRAMHI becomes a world-class **AI transformation consulting** practice, and **Nexus is the instrument that delivers it** — from AIR assessment through roadmap through execution — and then **the product that gets handed over**: the client's product teams keep Nexus as their project-management OS, with srishti as the document/intelligence add-on.
 - **The thesis**: Karvia went from idea to working beta in ~290 sessions. Nexus arrives at a better product in **≤ 90 sessions**, because we have the complete journey in hindsight, ratified architecture decisions, and an autonomous agent loop with a quality bar.
-- **The method**: three layers (UI, business logic, data); every capability a **lego block** with a published contract. The assessment block is the flagship proof: **AIR ships v1; any future assessment plugs in without touching the rest**. SSI is not carried into Nexus — it remains a Karvia reference only.
+- **The method**: four layers (UI, business logic, data, intelligence — 04_RUNTIME_MODEL, C-020); every capability a **lego block** with a published contract. The assessment block is the flagship proof: **AIR ships v1; any future assessment plugs in without touching the rest**. SSI is not carried into Nexus — it remains a Karvia reference only.
+- **The model**: the constitution ([01_NEXUS_MODEL.md](01_NEXUS_MODEL.md)) governs everything — the Measure → Align → Transform → Evolve ladder, the Staircase, and the measurement system (signals → six drivers → **BOQ**, the library at [0-BUSINESS/scores/](0-BUSINESS/scores/BOQ.md)); 02 (NBM), 03 (the Game), and 04 (the Runtime) are its ratified companion papers.
 - **The pack of cards**: four documents — [AI_CONSULTING_PLAYBOOK.md](0-BUSINESS/AI_CONSULTING_PLAYBOOK.md) (the service), [PRODUCT_STRATEGY.md](1-PRODUCT/PRODUCT_STRATEGY.md) (the tool), [TECH_STRATEGY.md](2-TECHNICAL/TECH_STRATEGY.md) (the architecture), [EXECUTION_PLAYBOOK.md](3-DELIVERY/EXECUTION_PLAYBOOK.md) (the ≤90-session plan).
 - **The bar**: every session is measured against `2-TECHNICAL/IMPROVEMENT_PLAN.md`. Nexus is not a copy of Karvia — it is the codebase Karvia should have been.
 
@@ -95,27 +102,31 @@ Nexus is a **Transformation OS**: a multi-tenant platform where a consultant (or
 
 At the experience level, Nexus **is Karvia 2.0**: the same six pages, the same click flow, the same backend models — re-skinned with a **new minimalistic design language** (founder's design docs, incoming — see PRODUCT_STRATEGY § design). A Karvia user should recognize the flow instantly; a Karvia developer should not recognize the codebase.
 
-## The three-layer model
+## The four-layer model
 
-Every decision in the pack of cards lives in exactly one layer:
+Every decision in the pack of cards lives in exactly one layer (the fourth entered by 04_RUNTIME_MODEL, C-019/C-020):
 
 ```mermaid
 graph TB
     subgraph L1["LAYER 1 — UI (PRODUCT_STRATEGY.md)"]
-        P["6 pages: My Clients · Dashboard · Objectives · Assessments · Teams · Planning<br/>Each page = a contract: purpose, primary role, entry, exit, primary CTA, secondary CTA, analytics strip<br/>Two modes: Engagement (consultant-led) · Builder (post-handover PM)"]
+        P["6 pages: My Clients · Dashboard · Objectives · Assessments · Teams · Planning<br/>Each page = a ten-field stage-responsive contract (PRODUCT_STRATEGY)<br/>Two modes: Engagement (consultant-led) · Builder (post-handover PM)"]
     end
     subgraph L2["LAYER 2 — Business logic (TECH_STRATEGY.md)"]
-        B["Lifecycle engines + roll-up calculations<br/>Objective: Identified → Handed off → Sustained<br/>Task hours → Milestone → KR (~25%) → Objective progress"]
+        B["Lifecycle engines + the stage machine + roll-up calculations<br/>Program: Prospect → Measure → Align → Transform → Evolve<br/>Task hours → Milestone → KR → Objective progress · every computed score (SCORING_MODEL)"]
     end
     subgraph L3["LAYER 3 — Data (TECH_STRATEGY.md)"]
-        D["Same Karvia models, improved<br/>Company → Program → Objective tenancy (C-005)<br/>8 lego-block modules, each owning its models privately"]
+        D["Same Karvia models, improved<br/>Company → Program → Objective tenancy (C-005)<br/>8 lego-block modules, each owning its models privately + the signal store"]
+    end
+    subgraph L4["LAYER 4 — Intelligence (TECH_STRATEGY.md)"]
+        I["iBrain consumption + LLM content, fronted by the Nexus-side orchestrator (C-020)<br/>never computes a score — supplies predictions and drafts, labeled per Article 13"]
     end
     P --> B --> D
+    B <--> I
 ```
 
-*The three layers. UI strategy is owned by the product card; business logic and data are owned by the tech card.*
+*The four layers. UI strategy is owned by the product card; business logic, data, and intelligence are owned by the tech card.*
 
-The **lego rule** binds all three layers: every capability (CRM, assessment, objectives, key results, weekly goals, tasks, governance, knowledge) is a black box with a published TypeScript contract. You ask the objectives module for an objective and it answers — you never reach into its schemas. The flagship case: **the assessment block**. AIR — its five dimensions, its two-week sprint instruments, its scoring, its deliverable generators — lives entirely inside `assessment/impls/air/`. Installing a different assessment tomorrow adds a folder; it changes nothing else. That swap-in-hours property is the acceptance test of the whole architecture.
+The **lego rule** binds all four layers: every capability (CRM, assessment, objectives, key results, milestones, tasks, governance, knowledge) is a black box with a published TypeScript contract. You ask the objectives module for an objective and it answers — you never reach into its schemas. The flagship case: **the assessment block**. AIR — its five dimensions, its two-week sprint instruments, its scoring, its deliverable generators — lives entirely inside `assessment/impls/air/`. Installing a different assessment tomorrow adds a folder; it changes nothing else. That swap-in-hours property is the acceptance test of the whole architecture.
 
 ## The pack of cards
 
@@ -125,11 +136,13 @@ Four documents, each owning one concern, none overlapping:
 |---|---|---|---|
 | **Business** | [0-BUSINESS/AI_CONSULTING_PLAYBOOK.md](0-BUSINESS/AI_CONSULTING_PLAYBOOK.md) | The AIR framework, two-week sprint, deliverables, pricing, funnel, collateral | Any session touching the consulting service or what AIR must produce |
 | **Product** | [1-PRODUCT/PRODUCT_STRATEGY.md](1-PRODUCT/PRODUCT_STRATEGY.md) | The 6 page contracts, two operating modes, first-value journey, design language | Any session touching what a user sees or does |
-| **Tech** | [2-TECHNICAL/TECH_STRATEGY.md](2-TECHNICAL/TECH_STRATEGY.md) | The 3-layer architecture, 8 module contracts, pluggable assessment, handover, srishti boundary | Any session touching code structure, models, or APIs |
+| **Tech** | [2-TECHNICAL/TECH_STRATEGY.md](2-TECHNICAL/TECH_STRATEGY.md) | The 4-layer architecture, 8 module contracts, pluggable assessment, the stage machine, the iBrain seam, handover, srishti boundary | Any session touching code structure, models, or APIs |
 | **Execution** | [3-DELIVERY/EXECUTION_PLAYBOOK.md](3-DELIVERY/EXECUTION_PLAYBOOK.md) | The ≤90-session plan, session types, folder + command hierarchy, measurement | Every session — it names the next card |
 
 Supporting (already exist, not duplicated here):
 
+- `01_NEXUS_MODEL.md` — **the constitution**: the ladder, the measurement system, the fourteen articles; wins every conflict (C-014)
+- `0-BUSINESS/scores/BOQ.md` — the measurement library: BOQ + the six drivers, one doc each
 - `2-TECHNICAL/SYSTEM_ARCHITECTURE.md` — what Karvia *is* (the as-is map)
 - `2-TECHNICAL/IMPROVEMENT_PLAN.md` — the quality bar (10 anti-patterns, 10 improvements, per-PR gates)
 - `_agent/DECISIONS.md` — every ratified architectural choice, dated

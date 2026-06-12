@@ -127,8 +127,8 @@ Format:
 **Options the agent sees**:
 - **a) Registry-by-name is canon** — slots append as engagements meet new archetypes; the simulation's missing rows are not needed. (Recommended — the registry's job is gate + pack roadmap, not simulation archaeology.)
 - **b) Reconstruct the full 15** — founder recalls/derives the missing rows; ICP.md gains them with fresh numbers.
-**Status**: OPEN
-**Answer**:
+**Status**: ANSWERED — see DECISIONS.md 2026-06-12 (C-018)
+**Answer**: (a) Registry-by-name is canon. Slots append as engagements meet new archetypes; the unrecovered simulation rows are not reconstructed.
 
 ---
 
@@ -140,5 +140,5 @@ Format:
 **Options the agent sees**:
 - **a) Ratify both** — Article 13 gains the generated category; 04 flips active.
 - **b) Ratify 04, hold the Article 13 extension** — the tri-split stays a proposed rule in 04 §3 until the first LLM-content feature forces the decision.
-**Status**: OPEN
-**Answer**:
+**Status**: ANSWERED — see DECISIONS.md 2026-06-12 (C-019)
+**Answer**: (a) Ratify both. Article 13 amended (score ≠ prediction ≠ draft); 04_RUNTIME_MODEL flipped active.

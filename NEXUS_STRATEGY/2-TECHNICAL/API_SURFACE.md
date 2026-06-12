@@ -213,8 +213,8 @@ Greps over `karvia_business/` (read-only): `app.use(` in `server/index.js` for m
 | POST | /calculate-dates · /validate-dates · /:objectiveId/check-cascade | OKR | →obj (de-calendared per NOF: any-day start/end) |
 | PUT | /:objectiveId/cascade-dates | OKR | →obj |
 | POST | /:objectiveId/ai-help · /generate-krs | AI | →obj |
-| GET | /ibrain/priorities/:userId · /ibrain/insights/:userId | COMPOSE | ✄ — iBRAIN integration not carried to v1 |
-| POST | /ibrain/refresh/:userId | COMPOSE | ✄ — iBRAIN |
+| GET | /ibrain/priorities/:userId · /ibrain/insights/:userId | COMPOSE | seam ancestor (C-010/C-020) — the local-heuristic leg of what becomes the Layer-4 orchestrator's fallback; not lifted as-is, revisit at N4 |
+| POST | /ibrain/refresh/:userId | COMPOSE | seam ancestor (C-010/C-020) — same |
 
 ### key-results.js → `/api/key-results` (4) — `@nexus/key-results`
 

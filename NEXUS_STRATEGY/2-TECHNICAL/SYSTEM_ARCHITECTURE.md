@@ -109,6 +109,8 @@ graph TB
 
 **Critical pattern**: every engine does `require('../../server/models/User')` style imports. There is no published API between engines. Engines call each other only via HTTP for one thing: JWT verification. All other inter-engine "communication" is implicit, through shared MongoDB documents.
 
+**Lineage note (C-010/C-020)**: this engine list is iBrain's ancestry — tracking, observer, scoring, planner, assessment, and iam were extracted into the iBrain platform (IQaaS) rather than killed. Nexus therefore never lifts these engines; it consumes their descendants through iBrain's published API behind the Layer-4 seam (TECH_STRATEGY Layer 4). The inventory below remains as the as-is map of the fork source.
+
 ## Request lifecycle
 
 The shape of a typical user session — login, see objectives, run an SSI assessment.

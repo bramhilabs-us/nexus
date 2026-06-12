@@ -72,11 +72,18 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |
 00_NORTH_STAR.md ............................. T0 | the play, the 90-step thesis — ROOT
 |
+|-- README.md ................................ T0 | folder index: the strategy pack
+|-- 0-BUSINESS/README.md ..................... T0 | folder index: the business tier
+|-- 1-PRODUCT/README.md ...................... T1 | folder index: the product tier
+|-- 2-TECHNICAL/README.md .................... T2 | folder index: the technical tier
+|-- 3-DELIVERY/README.md ..................... T3 | folder index: the delivery tier
+|
 |-- 01_NEXUS_MODEL.md ........................ T0 | the constitution: thesis · ladder · measurement · articles
 |       |-- 02_NBM_MODEL.md .................. T0 | the Staircase, BOQ ⇄ NBM, the core USP (ratified C-015)
 |       |-- 03_NEXUS_GAME.md ................. T0 | the game whitepaper: stage-responsive pages, friction audit, value bridge (parents: + PRODUCT_STRATEGY; ratified C-017)
 |       |       |-- 0-BUSINESS/COMPANY_JOURNEY.md  T0 | the ladder client-facing: Sponsor bridge, proxy valley, gauges-lighting, the equality (parents: + 01_NEXUS_MODEL)
-|       |       `-- 04_RUNTIME_MODEL.md ...... T0 | founder capture: 4-layer matrix, orchestrator, epistemic tri-split, trigger map, nudge doctrine (parents: + 01_NEXUS_MODEL)
+|       |       `-- 04_RUNTIME_MODEL.md ...... T0 | founder capture: 4-layer matrix, orchestrator (Nexus-side, C-020), epistemic tri-split, trigger map, nudge doctrine (parents: + 01_NEXUS_MODEL; ratified C-019)
+|       |               `--> feeds: TECH_STRATEGY (Layer 4 + stage machine) + 2-TECHNICAL/SCORING_MODEL.md
 |       |-- 0-BUSINESS/ICP.md ................ T0 | v1 profile + qualification gate + segment registry + anchor-pack roadmap (parents: + scores/BOQ.md)
 |       `--> feeds: scores/BOQ.md (the score family it binds)
 |
@@ -87,7 +94,8 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |       |       |-- scores/CFS.md ............ T0 | Coordination Friction Score
 |       |       |-- scores/BRQ.md ............ T0 | Business Rhythm Quotient
 |       |       |-- scores/FLS.md ............ T0 | Founder Leverage Score
-|       |       `-- scores/CRS.md ............ T0 | Consolidation Readiness Score
+|       |       |-- scores/CRS.md ............ T0 | Consolidation Readiness Score
+|       |       `-- scores/README.md ......... T0 | folder index: the measurement library
 |       `--> feeds: PRODUCT_STRATEGY (what pages must encode)
 |
 |-- 0-BUSINESS/POSITIONING.md ................ T0 | category, one-liners, message house
@@ -106,6 +114,7 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |       |       `-- 4-CUSTOMER/METRICS.md .... T4 | the numbers Nexus is judged by
 |       `-- 1-PRODUCT/design/DESIGN_LANGUAGE.md  T1 | BRAMHI brand → Nexus UI rules
 |               |-- design/brand/* (assets, exempt)
+|               |-- design/README.md .......... T1 | folder index: the design subtree
 |               `-- design/mockups/README.md . T1 | token-first page mockups (N3 spec)
 |
 |-- 2-TECHNICAL/SYSTEM_ARCHITECTURE.md ....... T2 | Karvia as-is map (reference)
@@ -117,12 +126,14 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |       `-- 2-TECHNICAL/API_SURFACE.md ....... T2 | 410 routes shape-tagged + dispositions
 |               (parents: + MODULE_DEPENDENCY_GRAPH)
 |
-|-- 2-TECHNICAL/TECH_STRATEGY.md ............. T2 | 3 layers, 8 blocks, AssessmentProvider
+|-- 2-TECHNICAL/TECH_STRATEGY.md ............. T2 | 4 layers, 8 blocks, AssessmentProvider, stage machine, Layer-4/iBrain seam
 |       |   (parents: NORTH_STAR, PLAYBOOK, PRODUCT_STRATEGY,
-|       |    SYSTEM_ARCHITECTURE, IMPROVEMENT_PLAN)
+|       |    SYSTEM_ARCHITECTURE, IMPROVEMENT_PLAN, 04_RUNTIME_MODEL)
+|       |-- 2-TECHNICAL/SCORING_MODEL.md ..... T2 | signal store, question schema, calculator registry, packs, triangulation
+|       |       (parents: + scores/BOQ.md, 04_RUNTIME_MODEL)
 |       `-- src/README.md .................... T2 | module anatomy in the codebase
 |               |-- src/modules/<8 blocks>/README.md  (crm, assessment, objectives,
-|               |        key-results, weekly-goals, tasks, governance, knowledge)
+|               |        key-results, milestones, tasks, governance, knowledge)
 |               |-- client/README.md ......... T2 | UI shell (parents: + DESIGN_LANGUAGE)
 |               `-- tests/README.md .......... T3 | test strategy per module
 |

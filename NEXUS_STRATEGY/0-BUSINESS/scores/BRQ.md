@@ -4,7 +4,7 @@ title: BRQ — Business Rhythm Quotient
 tier: T0
 status: active
 owner: founder
-updated: 2026-06-11
+updated: 2026-06-12
 summary: >
   The cadence driver: does the company run on a rhythm, together — or on
   heroics? The Align stage's head-on score, measurable only at Evolve (weeks
@@ -59,6 +59,15 @@ being used (the game telemetry insight: the product *is* a signal collector). Th
 rhythm survey section seeds a Proxy estimate at Measure; pulses keep the human
 experience of cadence ("does it feel like dancing or like drills?") alongside the
 telemetry.
+
+**The nudge event log is itself an instrument** (04_RUNTIME_MODEL §4): every nudge
+the system sends, acts-on, or expires is a logged telemetry event in the signal
+store — `nudge.sent` / `nudge.acted` / `nudge.expired` — alongside every cadence
+event that happened *unprompted*. Nudge-independence (§3) is computed from exactly
+these records, and the nudge engine reads its own success metric — a **declining
+send rate** — from the same log. A nudge that isn't logged didn't happen; an engine
+that can't see its sends falling can't retire itself. Record shapes:
+`2-TECHNICAL/SCORING_MODEL.md` §2.2.
 
 ## 5 · Floors
 

@@ -2,7 +2,7 @@
 id: nexus.runtime-model
 title: The Runtime Model — how the game actually runs (founder capture, 2026-06-12)
 tier: T0
-status: draft
+status: active
 owner: founder
 updated: 2026-06-12
 summary: >
@@ -13,18 +13,20 @@ summary: >
   content — a proposed Article 13 extension), the trigger map and the
   self-retiring nudge doctrine (nudge events are BRQ telemetry), the
   three-things-today dashboard rule, the card zoom grammar, and the two
-  playthroughs (best-case and hostile) that derive the trigger map. Draft
-  pending founder ratification; the product half propagates via N1-P3-07,
-  the technical half is deliberately deferred to N1-P3-06 (after the iBrain
-  API read, per C-010).
+  playthroughs (best-case and hostile) that derive the trigger map. Ratified
+  whole (C-019, 2026-06-12): the Article 13 generated-content extension is
+  amended into the constitution; both propagation halves landed — product via
+  N1-P3-07, technical via N1-P3-06 (TECH_STRATEGY Layer 4 + the stage machine
+  + SCORING_MODEL, after the iBrain API read; orchestrator home decided
+  Nexus-side, C-020).
 parents:
   - NEXUS_STRATEGY/01_NEXUS_MODEL.md
   - NEXUS_STRATEGY/03_NEXUS_GAME.md
-children: []
+children:
+  - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
+  - NEXUS_STRATEGY/2-TECHNICAL/SCORING_MODEL.md
 revisit:
-  - on: "founder ratifies this capture — record the decision, flip active, and verify both propagation halves landed (N1-P3-07 product, N1-P3-06 technical)"
-    stage: N1
-  - on: "the iBrain API_REFERENCE is read (N1-P3-06) — settle the orchestrator's home (Nexus-side context assembly vs iBrain consumption seam) and update §2"
+  - on: "the trigger map lands (N1-P3-08) — verify §4's fences are honored in every chain and §6's playthroughs moved to USER_JOURNEYS"
     stage: N1
 ---
 
@@ -70,11 +72,12 @@ What is settled and what is not:
   narratives, market-informed context); iBrain supplies *gamification, insights, NBM*.
   Every AI feature keeps a non-AI fallback and a cost ceiling (TECH_STRATEGY parking
   lot rule).
-- **Deliberately open**: whether the orchestrator lives Nexus-side (a Layer-2/4 seam
-  component that calls both iBrain and LLM interfaces) or *is* part of iBrain's
-  consumption surface. **This is decided in N1-P3-06, after the iBrain API_REFERENCE
-  read — not before** (the read may reveal iBrain already owns context assembly).
-  Until then the orchestrator is a named role, not a designed component.
+- **Decided (C-020, N1-P3-06)**: the orchestrator lives **Nexus-side**, a Layer-4
+  seam component. The iBrain API read settled it: iBrain's surface is app-agnostic
+  IQaaS (event ingestion, Observer rules → webhooks, caller-briefed Planner) with
+  no context-assembly surface — the game state lives behind Nexus module contracts,
+  and the policy obligations (data covenant, no-PII, cost ceilings, the compliance
+  veto) must execute before anything leaves Nexus. Design: TECH_STRATEGY Layer 4.
 
 ## 3 · The three epistemic categories (proposed Article 13 extension)
 
@@ -90,8 +93,8 @@ A generated artifact never silently becomes a score input; if accepted content l
 produces signals (e.g., an adopted onboarding process changes cadence), the signals are
 measured normally — the content itself stays in the *generated* category forever.
 
-**Status**: proposed constitutional amendment (Article 12 applies); ratifies with this
-paper or by separate DECISIONS entry.
+**Status**: **ratified** (C-019, 2026-06-12, Article 12 process) — Article 13 now reads
+*score ≠ prediction ≠ draft*; this table is its source.
 
 ## 4 · The trigger map and the self-retiring nudge doctrine
 
@@ -160,9 +163,9 @@ The Game's §5 walked Meridian cooperatively. The runtime model requires both en
 | 1 | Stage-responsive page contract + rules surface + three-things-today + card zoom grammar | PRODUCT_STRATEGY | N1-P3-07 (this night) |
 | 2 | UX principles (CTA placement, friction reduction, zoom grammar detail) | DESIGN_LANGUAGE | N1-P3-07 |
 | 3 | Sponsor bridge delegate path + engagement-level nudge chain | AI_CONSULTING_PLAYBOOK | N1-P3-07 |
-| 4 | The three epistemic categories | 01_NEXUS_MODEL Article 13 (amendment) | on ratification of this paper |
-| 5 | Layer-4 architecture + the orchestrator's home + the stage machine | TECH_STRATEGY | **N1-P3-06, after the iBrain read — not before** |
-| 6 | Nudge events as BRQ telemetry (logged sends; declining-send-rate metric) | scores/BRQ.md instruments | N1-P3-06 (with the signal store) |
+| 4 | The three epistemic categories | 01_NEXUS_MODEL Article 13 (amendment) | **landed** — ratified C-019, Article 13 amended |
+| 5 | Layer-4 architecture + the orchestrator's home + the stage machine | TECH_STRATEGY | **landed** — N1-P3-06, after the iBrain read (C-020) |
+| 6 | Nudge events as BRQ telemetry (logged sends; declining-send-rate metric) | scores/BRQ.md instruments | **landed** — N1-P3-06 (SCORING_MODEL §2.2) |
 | 7 | Best-case + hostile playthroughs with the trigger map | 2-TECHNICAL/USER_JOURNEYS.md | after the trigger map (post P3-07) |
 
 One line, the founder's thesis: **we have the power to visualize the entire game before
