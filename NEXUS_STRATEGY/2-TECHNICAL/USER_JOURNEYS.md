@@ -6,11 +6,14 @@ status: active
 owner: agent
 updated: 2026-06-12
 summary: >
-  The five canonical journeys: consultant first-value (Add Client → AIR →
-  objectives), assessment taker (invitation → flashcard deck), worker weekly
-  execution (NOF roll-up loop), objective close → handover → Builder mode,
-  and the org-direct journey (J5 — Article 9 made walkable, no consultant on
-  any step). Plus the two playthroughs from 04_RUNTIME_MODEL §6 (best-case
+  Two altitudes: the archetype loops (A1–A4 — each of the four players' own
+  login-to-action walk: Consultant/My Clients, Business Owner/Dashboard,
+  Manager/Objectives, Worker/Planning) and the five lifecycle journeys:
+  consultant first-value (Add Client → AIR → objectives), assessment taker
+  (invitation → flashcard deck), worker weekly execution (NOF roll-up loop),
+  objective close → handover → Builder mode, and the org-direct journey (J5
+  — Article 9 made walkable, no consultant on any step). Plus the two
+  playthroughs from 04_RUNTIME_MODEL §6 (best-case
   and hostile) and the trigger map they derive: every stage transition ×
   designed trigger × fallback nudge chain × owner, honoring the four nudge
   fences (structure-first, self-retiring, PvE, Article 9). Numbered steps +
@@ -44,7 +47,7 @@ Walk the product end to end through the eyes of the **four archetypes — Consul
 | **J4** close → handover → Builder | the org (Business Owner + Manager) | Consultant (retiring) |
 | **J5** org-direct | Business Owner | Manager + Worker (J3 unchanged); no Consultant, by design |
 
-PRODUCT_STRATEGY defines what each page is; this doc strings the pages into the journeys the E2E suite, the demo script, and the empty states must all agree on. It also holds the **trigger map** (04_RUNTIME_MODEL §4): what fires at each stage transition, and what catches it when it stalls — derived by walking the hostile playthrough.
+The doc therefore reads at two altitudes: **the archetype loops (A1–A4)** — what each of the four players sees and does from login, every day — and **the lifecycle journeys (J1–J5)** — how value flows end to end across stages. The loops answer "what is my day in Nexus?"; the journeys answer "how does the program move?". PRODUCT_STRATEGY defines what each page is; this doc strings the pages into the walks the E2E suite, the demo script, and the empty states must all agree on. It also holds the **trigger map** (04_RUNTIME_MODEL §4): what fires at each stage transition, and what catches it when it stalls — derived by walking the hostile playthrough.
 
 ## TL;DR
 
@@ -54,7 +57,42 @@ PRODUCT_STRATEGY defines what each page is; this doc strings the pages into the 
 - **J4 Close → handover → Builder** is the moat: outcome records prove value, handover flips the program, and the second metric (90-day Builder retention) starts counting.
 - **J5 Org-direct** is Article 9 made walkable: the same pages minus My Clients, signup to Evolve with no consultant on any critical path.
 - **The trigger map** (T0–T10) names, for every stage transition and known stall, the designed trigger, the fallback nudge chain (system → human), and the owner — every nudge logged (BRQ telemetry), every chain terminating without a consultant.
-- Every step names its module contract — J-steps and T-rows are the acceptance criteria N1-P4-01's contracts must satisfy.
+- **The archetype loops (A1–A4)** give each of the four players their own login-to-action walk — home page, page set, daily/weekly moves — so no archetype's experience exists only implicitly inside someone else's journey.
+- Every step names its module contract — A-loops, J-steps, and T-rows are the acceptance criteria N1-P4-01's contracts must satisfy.
+
+## The archetype loops — login to action, per player (A1–A4)
+
+Each of the four archetypes (C-023), from "I log in" to "I acted": their home page, the page set they live in, and the loop they run. Page sets come from PRODUCT_STRATEGY's contracts; the home pages are the archetype bindings (§ four archetypes). The Taker precedes all of these — most players' very first Nexus experience is J2's deck, before they have an account at all.
+
+### A1 — The Consultant (home: My Clients; sees all six pages, per client)
+
+1. Logs in → **My Clients**: the portfolio triage — every client tile readable in <20 seconds (stage badge, score ring, at-risk flag). `crm.authenticate`; tiles read `program.stage` + roll-ups
+2. Tile CTAs are stage-shaped (03 §4 row 1): Prospect → sponsor-bridge checklist (T1) · Measuring → sprint progress ring · Aligning → roadmap status · Transforming → portfolio gauges · Evolving → alumni view
+3. Opens a client → works *that client's* stage in their workspace: run the sprint (J1 5–7), seed objectives with the BO + Manager (J1 8), watch the quest line (T8)
+4. **Add Client** grows the portfolio (J1 1–4); the nudge engine catches stalls (T0–T3), so My Clients surfaces catches — the consultant never chases
+5. Handover retires them per client (J4): the loop's win is its own shrinkage toward the alumni view — the Guide is designed to be deleted (Article 9)
+
+### A2 — The Business Owner (home: Dashboard; pages: Dashboard · Objectives · Assessments · Teams · Planning — no My Clients)
+
+1. Logs in → **Dashboard**: **three-things-today** answers "is the program on track, what needs me?" in 20 seconds — stage-aware, person-altitude (04 §5)
+2. Acts on the at-risk rows: unblock a flagged task, **Push task completion** (J3 4), hold the review the Manager let slip (T7)
+3. At Align: co-owns seeding with the Managers — *Create objectives from these results* (J1 8); owns the Company Profile
+4. Weekly: outcome records as objectives close (J4 1–3) — the program's receipt accruing. `knowledge.programOutcome`
+5. At Evolve the same page becomes the rhythm view: cadence adherence, **BOQ trend next to revenue** — the number that ends up in the board deck (03 §5)
+6. Org-direct: the BO is also the Sponsor and walks J5 from signup
+
+### A3 — The Manager (home: Objectives; pages: same five as the BO)
+
+1. Logs in → **Objectives**: *their* objectives as a living board — lifecycle ribbons, roll-ups arriving without status-chasing (the Manager's relief, 03 F9)
+2. At Align: turns the Opportunity Register into objectives + KRs — the AI-draft CTA takes the clerical weight (J1 8, T4). `objectives.createFrom(deliverable)`
+3. In **Planning**: breaks the next KR into a ~1-week milestone with tasks + hour estimates (J1 9). `milestones.create`, `tasks.bulkCreate`
+4. Daily: team-altitude NBM is *their* hint arrow — which objective deserves focus now (02 §3.2); responds to blocked tasks (J3 7)
+5. Runs milestone reviews on the cadence rail (T7); milestones advance objective-relative (J3 5)
+6. At an objective's close: the outcome-record ritual — final vs baseline, class, evidence (J4 1)
+
+### A4 — The Worker (home: Planning; pages: Planning · Dashboard · Teams)
+
+The Worker's loop **is J3** — login → current milestone's tasks, theirs first → execute, log hours → the roll-up does the rest. Two framing notes: their first session obeys the first-session contract (pre-seeded tasks, done inside ten minutes, the subtraction rule — T5, 03 §6.3), and they usually met Nexus before this loop began, as a Taker (J2) — the deck-to-Planning continuity ("in week one you told us X; here's what changed") is the loop's opening move.
 
 ## J1 — Consultant first-value (Engagement mode)
 
