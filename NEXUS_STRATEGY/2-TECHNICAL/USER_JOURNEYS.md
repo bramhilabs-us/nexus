@@ -34,7 +34,17 @@ revisit:
 
 ## Purpose
 
-Walk the archetypes (Consultant, Business Owner/taker, Worker, the org itself at handover — and the org-direct company with no consultant at all) through the product end to end, naming the page, the action, and the module contract behind every step. PRODUCT_STRATEGY defines what each page is; this doc strings the pages into the journeys the E2E suite, the demo script, and the empty states must all agree on. It also holds the **trigger map** (04_RUNTIME_MODEL §4): what fires at each stage transition, and what catches it when it stalls — derived by walking the hostile playthrough.
+Walk the product end to end through the eyes of the **four archetypes — Consultant · Business Owner · Manager · Worker** (the finalized roster, C-023; PRODUCT_STRATEGY § four archetypes) — plus the **Taker**, the tutorial persona any archetype passes through (03 §2), naming the page, the action, and the module contract behind every step. Journeys and archetypes are deliberately not 1:1 — a journey follows a *thread of value*, and several archetypes act inside each one:
+
+| Journey | Lead player | Other archetypes in it |
+|---|---|---|
+| **J1** consultant first-value | Consultant | Business Owner + Manager (steps 8–9) |
+| **J2** assessment taker | Taker (persona — usually a future Worker) | — |
+| **J3** worker weekly loop | Worker | Manager (planning), Business Owner (push/unblock) |
+| **J4** close → handover → Builder | the org (Business Owner + Manager) | Consultant (retiring) |
+| **J5** org-direct | Business Owner | Manager + Worker (J3 unchanged); no Consultant, by design |
+
+PRODUCT_STRATEGY defines what each page is; this doc strings the pages into the journeys the E2E suite, the demo script, and the empty states must all agree on. It also holds the **trigger map** (04_RUNTIME_MODEL §4): what fires at each stage transition, and what catches it when it stalls — derived by walking the hostile playthrough.
 
 ## TL;DR
 

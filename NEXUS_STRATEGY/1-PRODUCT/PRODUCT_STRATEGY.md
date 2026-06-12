@@ -83,6 +83,8 @@ Per C-001/C-006, consultant-led is the beachhead and org-direct remains first-cl
 
 Below the archetypes, **roles are extensible labels**: adding "Architect" or "Delivery Manager" is creating a label that maps to the Worker archetype — one admin action in Configuration, zero permission redesign. The label slots into the Company Profile (org structure); the *skill set* behind it lives in the person's Profile (match-grade, per the fit thesis). New role ≠ new code, ever.
 
+**The archetype seam** (C-023). The roster — Consultant · Business Owner · Manager · Worker — is finalized, and "Worker" is the confirmed name (an individual contributor; "employee" would ambiguously include Managers and BOs). The Taker is a *persona*, not an archetype — the tutorial player any archetype passes through (03 §2). The set is deliberately **not** config-extensible the way roles are: a new archetype is a designed structural move, and its cost is named so it can be priced rather than improvised — a new archetype enum value (DATA_MODELS § User) + a home page + a full page contract (all ten fields × stage weather) + a permission set + a STAKEHOLDERS row. Anything cheaper than that bill is a role label, not an archetype. The named watch-case is the **Steward** (03 §6.4) — a BRAMHI-side role today, the first candidate that may someday earn archetype status through this seam.
+
 In org-direct/Builder mode there is no Consultant; My Clients hides, and the journey starts at Assessments or Objectives.
 
 ## The page contract
