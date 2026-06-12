@@ -11,7 +11,7 @@ Start a session. The session chain rule: **the previous session already decided 
 1. `_agent/NEXT_SESSION.md` — the card: type, task, cards to draw, definition of done
 2. `.claude/CLAUDE.md` — hard rules
 3. `.claude/SESSION_PRACTICES.md` — the session shape (pre-scan!)
-4. `_agent/JOURNAL.md` — tail, last 5 entries (step count vs 90)
+4. `_agent/JOURNAL.md` — tail, last 5 entries (step count vs 105)
 5. `_agent/clarifications.md` — human answers since last session
 
 ## Then scan by session type (from the card, or the human's one-line override)
@@ -29,7 +29,7 @@ Start a session. The session chain rule: **the previous session already decided 
 ## Then
 
 1. Run `python3 .claude/hooks/doc-graph-check.py` — if red, fixing the graph becomes step one (except general sessions: just report it).
-2. Report in ≤10 lines: **this session is** (type + task from the card, or "general — what do you want to explore?"), step count used/90, anything blocked on the human, doc-graph/staleness warnings, revisit-triggers due this night.
+2. Report in ≤10 lines: **this session is** (type + task from the card, or "general — what do you want to explore?"), step count used/105, anything blocked on the human, doc-graph/staleness warnings, revisit-triggers due this night.
 3. **Pre-scan** per SESSION_PRACTICES for work sessions: ground the card against reality; surface drifts as a numbered list.
 4. Card still right → start. Reality moved → say why, propose the corrected card, confirm, start.
 

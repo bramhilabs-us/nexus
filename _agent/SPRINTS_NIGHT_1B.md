@@ -1,6 +1,6 @@
 # Sprints — Night 1b (Product & technical docs)
 
-**Status**: DRAFT — proposed by the N1-P6-01 close-out groom (session 2026-06-12-24, C-022); founder ratifies by merging the groom PR
+**Status**: ACTIVE — proposed by the N1-P6-01 close-out groom (session 2026-06-12-24, C-022); **founder ratified in-session 2026-06-12 (session-25): "agree on it, let's rebase it to 105"** — effective ahead of the PR #27 merge
 **Theme**: The docs stage — walk the whole game on paper so the build inherits a game already played (audit 2026-06-12 §10). Product docs + mockup rework, then technical contracts, then the QA map. Zero production code.
 **Budget**: 10 steps (EXECUTION_PLAYBOOK § the phase plan — re-baselined 2026-06-12)
 **Autonomy**: Level 0 (open PRs only; human merges)

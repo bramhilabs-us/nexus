@@ -105,6 +105,9 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |
 |-- 1-PRODUCT/PRODUCT_STRATEGY.md ............ T1 | 6 page contracts, 2 modes, journeys
 |       |--> feeds: TECH_STRATEGY (page contracts as code)
+|       |-- 1-PRODUCT/CAPABILITIES.md ........ T1 | 8 blocks as user capabilities; task×person match v1 canon home (C-022.4)
+|       |-- 1-PRODUCT/ROADMAP.md ............. T1 | what ships when, re-baselined nights
+|       |       (parents: + EXECUTION_PLAYBOOK)
 |       |-- 2-TECHNICAL/USER_JOURNEYS.md ..... T2 | 4 archetype journeys + seq diagrams
 |       |       (parents: + TECH_STRATEGY)
 |       |-- 4-CUSTOMER/README.md ............. T4 | evidence, feedback, metrics tier

@@ -22,7 +22,9 @@ What a user sees and does, and why each page exists.
 | Doc | Owns |
 |---|---|
 | [PRODUCT_STRATEGY.md](PRODUCT_STRATEGY.md) | The product card of the pack: the six ten-field page contracts, stage weather, two operating modes, first-value journey, score display doctrine |
+| [CAPABILITIES.md](CAPABILITIES.md) | The 8 blocks as user-facing capabilities (block → verb → page CTA → module surface), stage-responsive, both motions; canon home of the task×person match v1 (C-022.4) |
+| [ROADMAP.md](ROADMAP.md) | What ships when, phased on the re-baselined nights (C-022); vertical/segment expansion grammar; honest pre-data flags |
 | [NOF.md](NOF.md) | The Nexus Objective Framework: Objective → KRs → Milestones → Tasks, objective-relative, outcome-measured (C-008) |
 | [design/](design/README.md) | DESIGN_LANGUAGE, brand assets, the 10 mockup surfaces (C-013 rework queued) |
 
-Queued for this tier (the product-docs stage): `CAPABILITIES.md` + `ROADMAP.md` (N1-P3-01 pt 2), user stories.
+Queued for this tier (the product-docs stage): user stories.
