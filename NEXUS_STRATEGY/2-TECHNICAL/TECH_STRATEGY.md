@@ -193,10 +193,10 @@ What registration buys, with zero changes elsewhere: a *Create {name} assessment
 
 **Acceptance test of the entire architecture**: implementing a second provider touches only `assessment/impls/<new>/` and takes hours, not days. This drill runs in Night 3 and the result is journaled.
 
-Two seams the assessment block reserves for the BOQ universe (`0-BUSINESS/BOQ_FRAMEWORK.md`, deliberately evolving):
+Two seams the assessment block reserves for the BOQ universe (`0-BUSINESS/scores/BOQ.md` + one doc per driver, deliberately evolving):
 
 - **Auto-initiation**: the `client.added` domain event triggers the entry assessment automatically (the assessment module subscribes; My Clients never calls it directly). Cadenced re-assessments/pulses are scheduled by the assessment module per its instruments' delivery moments.
-- **Score calculators as lego blocks**: BOQ-family scores (ARS, BRQ, BPI, Knowledge, CRT, KRP → BOQ) are pure-function calculators registered over a **signal store** (assessment evidence + domain-event telemetry: decision latency, rework, meeting load accrue from normal usage). Only signals are measured; every score decomposes to signals on demand. Engine design lands Night 4 — the seam (signal store + calculator registry) is the binding part, formulas are not.
+- **Score calculators as lego blocks**: the six drivers (ARS, BPI, CFS, BRQ, FLS, CRS → BOQ; C-011) are pure-function calculators registered over a **signal store** (assessment evidence + domain-event telemetry: decision latency, rework, meeting load accrue from normal usage). Only signals are measured; every score decomposes to signals on demand. Engine design lands Night 4 — the seam (signal store + calculator registry) is the binding part, formulas are not.
 
 ## Handover — engagement becomes product
 

@@ -2,18 +2,23 @@
 
 > Written by the previous session per `/close`. `/init` reads this and starts. Overwritten every session — history lives in JOURNAL.md.
 
-**Type**: STRATEGY SESSION (interactive, founder present) — the cron loop is OFF; do not tick.
-**Task**: Ratify and execute the 2026-06-10 strategy review — ecosystem repositioning (BRAMHI/iBrain/Nexus), unified scoring model, assessment mechanics, Company Journey, two-tier brand + sidebar layout.
+**Type**: STRATEGY (founder read-through preferred; the doc work is executable solo — cron stays OFF)
+**Task**: Founder flips 01 + 03 `draft → active`, then **N1-P3-05** — ICP.md + COMPANY_JOURNEY.md (the doc list continues against ratified canon).
 
-**READ FIRST**: `_agent/STRATEGY_SESSION_BRIEF_2026-06-10.md` — the complete synthesis: the new ecosystem truth (iBrain = all engine capability; the Karvia-engines→iBrain lineage), 13 pending decisions (proposed C-010…C-013) with recommendations, the 12-item document work list, and the source map (BOQ whitepaper, ExternalCom/bramhi corpus, official_dev/iBrain docs, NEXUS brand guide).
+**READ FIRST** (in order):
+1. `_agent/DECISIONS.md` C-015 + C-016 — what this session executes against (everything is ratified; nothing needs re-litigating)
+2. `NEXUS_STRATEGY/01_NEXUS_MODEL.md` — **founder read-through list** (flagged in C-015): the deliverable names (the Cadence, the Measured Engine), "Ensure" = internal-only, Discover→Measure canonization, the ICP wording in §2, the appraisal-posture wording in §8. Satisfied → flip `status: draft → active`.
+3. `NEXUS_STRATEGY/03_NEXUS_GAME.md` §9 — item 12 carries **4 candidate constitutional rules** (cohort floor, freshness floor, no-verdict-without-a-path, PvE principle) + the **Steward model** and **data covenant** — all ratify by the founder approving the paper → flip active.
+4. `0-BUSINESS/scores/BOQ.md` — the core model the new docs build on (§5 anchor packs, §7 epistemic engine, §8 driver index).
 
 **Session flow**:
-1. Walk the founder through the 13 decisions (§7 of the brief) — rapid ratification, record in DECISIONS.md as C-010…C-013
-2. Execute the doc work list (§8) in order — BOQ_FRAMEWORK revision and TECH_STRATEGY iBrain architecture are the load-bearing ones
-3. Brand/layout rework last (tokens v2 from the NEXUS guide, sidebar shell, 10 mockups re-skin)
-4. Then: N1-P3-01 part 2 (CAPABILITIES, ROADMAP) reflecting everything, Night-1 close-out groom, SPRINTS_NIGHT_2 draft
+1. Founder reads 01 + 03 → flips, with any amendments recorded per Article 12
+2. N1-P3-05: write `0-BUSINESS/ICP.md` (v1 profile, 15-archetype segment map, anchor-pack roadmap — source: 03 §6.6 + C-016.5) and `0-BUSINESS/COMPANY_JOURNEY.md` (the ladder client-facing: proxy-valley narrative, gauges-lighting sequence, the Sponsor bridge — sources: constitution §4, 03 §§4–6)
+3. If time remains: start N1-P3-07 (playbook/product/business-model consequence revisions) — NOT N1-P3-06 (it requires the iBrain read first)
 
 **Watch out for**:
-- Nothing in the brief is canon until ratified — it is a proposal, not a decision record
-- The brief flags which iBrain docs were NOT yet read in depth (API_REFERENCE, KARVIA integration folder, MVP strategy) — read them before drawing the Nexus↔iBrain contract
-- BACKLOG state: N1-P2-08 NEEDS-FOUNDER-REVIEW is effectively superseded by this session's brand/layout rework (the founder's review IS the rework); N1-P4-01 waits for the new architecture decisions
+- **If the founder is absent**: N1-P3-05 proceeds (decisions are ratified); the draft→active flips wait — do not flip without the founder (Article 12)
+- 01 and 03 are `draft` but **C-010…C-016 are canon** — newer decision beats older doc text everywhere
+- iBrain API_REFERENCE + KARVIA integration folder **still unread** — N1-P3-06 is blocked-on-read; don't draft SCORING_MODEL or touch TECH_STRATEGY's iBrain section before reading them in-session
+- The brand rework (C-013) and N1-P3-01 pt 2 remain on the master doc list after N1-P3-07; Night-1 close-out groom (N1-P6-01) comes last
+- Step count: 26/90 after this session's journal entry

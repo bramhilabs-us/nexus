@@ -14,6 +14,7 @@ parents:
   - NEXUS_STRATEGY/00_NORTH_STAR.md
   - NEXUS_STRATEGY/0-BUSINESS/AI_CONSULTING_PLAYBOOK.md
 children:
+  - NEXUS_STRATEGY/03_NEXUS_GAME.md
   - NEXUS_STRATEGY/1-PRODUCT/design/DESIGN_LANGUAGE.md
   - NEXUS_STRATEGY/1-PRODUCT/NOF.md
   - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
@@ -103,7 +104,7 @@ Every page declares all eight fields. A page that can't fill in a field is a pag
 | Primary role | Consultant (their home page / landing page after login) |
 | Entry points | Consultant login (default landing); global nav |
 | Exit points | **Company page** of a client (the natural drill-down); Assessments (start an assessment for a prospect) |
-| Primary CTA | **Add Client** — and adding a client **auto-initiates the entry assessment (AIR)**: no manual send; the assessment module owns delivery from this moment, and cadenced re-assessments keep the maturity ladder moving (BOQ_FRAMEWORK § maturity journey) |
+| Primary CTA | **Add Client** — and adding a client **auto-initiates the entry assessment (AIR)**: no manual send; the assessment module owns delivery from this moment, and cadenced re-assessments keep the ladder moving (the constitution §4; scores: 0-BUSINESS/scores/BOQ.md) |
 | Secondary CTA | **Open company page** (per client card) |
 | Analytics strip | First-time: Clients count. Hundredth-time: **Need Attention**, **Avg assessment score**, **At Risk** — the triage numbers. |
 | Empty state | "Add your first client" — one card-sized explainer of the engagement journey |

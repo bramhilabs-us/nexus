@@ -252,3 +252,118 @@ Every domain model gains a required `program_id`: `Objective`, `KeyResult`, `Goa
 **Decision**: Every Karvia lift carries a **reflection record**: **Why** are we doing this · **What** are we doing · **How** · **When** is the right time · **Relevant?** for Nexus · **Improving?** anything · **Complexity added?** · **Redundancy created?** Enforced as IM-11 in IMPROVEMENT_PLAN (PR checklist line) and SESSION_PRACTICES rule 10. A new **improvement** session type re-evaluates already-lifted elements ("can it be better within Nexus?").
 
 **Consequences**: DATA_MODELS-style disposition tables are the lightweight form (disposition column = the reflection verdict); module-level lifts in N2 carry the full 8-question record in their PR; NOF.md § "Reflection record" is the worked example.
+
+---
+
+## 2026-06-10 — iBrain delegation: local-first behind iBrain-shaped contracts (C-010)
+
+**Context**: Session-19 repositioned the ecosystem: BRAMHI = the parent company; Nexus = the delivery system (the front-end where the work happens); **iBrain = ALL intelligence/engine capability** (IQaaS — seven engines: Universal Adapter, Tracking, Observer, Scoring, Planner, Assessment, IAM). The lineage insight: Karvia's "dead engines" are iBrain's ancestors — extracted into a platform, not killed. Ratified session-20; recorded here.
+
+**Decision**:
+1. **Nexus never rebuilds intelligence.** It consumes iBrain through published contracts using the **Hybrid Intelligence Pattern** (iBrain recommendation + local business logic + tested fallback).
+2. **v1 ships local-first**: each scoring/matching/nudge capability is implemented locally as the fallback leg, shaped like iBrain's interfaces — swapping to live iBrain is configuration, not refactor.
+3. **Event emission starts early** (domain events shaped for the Universal Adapter); live Planner/Scoring calls target N4.
+4. **C-003 (consolidate) survives**: it governs the Nexus app. iBrain is a separate BRAMHI platform service, never a Nexus engine.
+
+**Consequences**: TECH_STRATEGY gains the iBrain consumption architecture (queued); API_SURFACE's `objectives/ibrain/*` disposition flips from "✄ not carried" to "seam ancestor — revisit"; the shadow-schema problem dissolves behind iBrain's API; the client's dev-stack telemetry (git, CI, AI usage/billing) ingests through iBrain's event pipeline (constitution §5.5).
+
+**Refines**: C-003.
+
+---
+
+## 2026-06-10 — The scoring model: six drivers → BOQ (C-011)
+
+**Context**: The BOQ whitepaper and BOQ_FRAMEWORK.md disagreed on the score family. Session-20 reconciled them via question batches; the constitution (§5, Appendices B–D) is the canonical statement. Recorded here.
+
+**Decision**:
+1. **Six drivers**: ARS · BPI · CFS · **BRQ** (rhythm name settled — Business Rhythm Quotient, over RAQ) · FLS · **CRS** (KRP renamed — Consolidation Readiness Score; "Karvia Replacement Probability" was self-referential). Knowledge Intelligence demotes to a BPI pillar (weight 0.25); CRT demotes to a signal feeding CRS — both traceable one layer down.
+2. **BOQ = geometric mean** of the six, each clamped [1, 100] (the floor guard); BOQ measures balance. **BOQ expands to "Business Operating Quotient"** (brand guide + founder 2026-06-10).
+3. **Five bands** for every 0–100 score: Reactive 0–30 · Operational 31–50 · Structured 51–70 · AI-Ready 71–85 · AI-Native 86–100.
+4. **ARS ≡ AIR Score** — one number, two contexts.
+5. **Tier-placement normalization**: every score is a 0–100 position between published newbie and top-0.1% anchors; raw values are evidence, never scores. **Provenance labels** (Proxy / Partially Measured / Measured) always displayed; BOQ inherits the weakest among its drivers.
+6. **Two stacks + two visuals** kept as views of one model: the disclosure stack and the measurement stack; the **Organizational Map** (executive 2-axis: rhythm × efficiency) and the **Bridge** (the compounding-engine explainer).
+7. **BPI formula v1** (whitepaper): `100 × Velocity^0.30 × Quality^0.15 × Knowledge^0.25 × CapitalEfficiency^0.30`, fed by the Eight Metrics; calibration constants are trade-secret configuration (Article 5).
+
+**Supersedes**: BOQ_FRAMEWORK.md's score family (Knowledge Intelligence / CRT / KRP as top-level) and the "BRAMHI Organizational Quotient" expansion everywhere it appears.
+
+---
+
+## 2026-06-10 — Assessment conduct: packages, question derivation, calibration (C-012)
+
+**Context**: Session-20 ratified how assessments are conducted, scored, and interpreted. Recorded here.
+
+**Decision**:
+1. **Three instrument classes, one engine**: survey (flashcard decks, audience-split founder/manager/member), observed (interviews, workshops, floor observation), telemetry (live signals — both Nexus usage AND the client's engineering stack).
+2. **An assessment = a package**: instruments × audiences × moments (first_time / recurring / pulse). AIR is the first package; "BOQ Discovery" (the whitepaper's week-1 lite) is a candidate cheap second package — proof of the lego claim.
+3. **Questions derive from the metric model, never invented per assessment** (Article 5). Question schema: `{audience, moment, section, answer_type, maps_to:[metric, weight]}` — the bank is data, the weights are config, neither is ever hardcoded.
+4. **Calibrate, never invent** (the Day-10 workshop rule, Article 4): every human adjustment annotates its justifying evidence.
+5. **Interpretation drives the Opportunity Register mechanically**: weakest drivers → ranked opportunity categories; every displayed score carries band + provenance + evidence drill-down (Article 6).
+
+**Consequences**: SCORING_MODEL.md (new T2 doc, queued) owns the schema and calculator contracts; AI_CONSULTING_PLAYBOOK maps AIR's 5 dimensions ↔ the 6 question sections.
+
+---
+
+## 2026-06-10 — Brand & layout: two-tier brand, sidebar shell (C-013)
+
+**Context**: The NEXUS product brand guide landed 2026-06-10 (`design/brand/NEXUS1BRANDGUIDE.png`); ExternalCom's BRAMHI BRAND_GUIDELINES v2 validated the parent tier. Ratified session-20; recorded here.
+
+**Decision**:
+1. **Two-tier brand architecture**: **BRAMHI Labs** (parent — lotus, Cinzel/Playfair/Inter, purple-lavender) for consulting collateral and whitepapers; **NEXUS** (product — Sora display + Manrope body + Cormorant taglines, teal + gold accents, own lotus-derived logo system) for ALL product surfaces.
+2. **Sidebar navigation shell** (the brand guide's application example) adopted across all 10 mockup surfaces.
+3. Work queued: tokens.css v2 re-extraction from the NEXUS guide → DESIGN_LANGUAGE two-tier rework → mockup re-skin → hex/token/contract verification gates re-run.
+
+**Supersedes**: the single-tier (BRAMHI-only) brand assumption in DESIGN_LANGUAGE. **Absorbs**: N1-P2-08's NEEDS-FOUNDER-REVIEW status (the review verdict is this rework).
+
+---
+
+## 2026-06-10 — The constitution and the 4+1 ladder (C-014)
+
+**Context**: Session-20 wrote `NEXUS_STRATEGY/01_NEXUS_MODEL.md` as the constitutional document for Nexus. Ratified in-session; recorded here.
+
+**Decision**:
+1. **01_NEXUS_MODEL.md is the constitution**: where any document disagrees with it, the constitution wins and the other gets revised. Amendments only by founder ratification + a dated DECISIONS entry (Article 12).
+2. **The 4+1 ladder**: **Prospect → Measure → Align → Transform → Evolve** — the brand-tagline verbs are the stage names; the journey is the loop's first lap. Pipeline badges read Prospect · Measuring · Aligning · Transforming · Evolving.
+3. **Catalyst = the commitment moment**, the doorway into Align (the trinity rule, Article 8, governs all eight brand components: practice + place + gauge).
+4. **Target market v1**: companies that build software — digital products and services; all v1 metrics, playbooks, and benchmarks calibrated for them.
+5. **Dev-stack telemetry ingestion is load-bearing**: the Eight Metrics live in the client's engineering infrastructure, not inside Nexus; Nexus must ingest that data (via iBrain) or the most saleable gauges stay consultant-collected snapshots.
+6. **States are statements of measurability, not badges**; authority flows down the ladder, conviction flows up; "BOQ becomes the industry standard" is BRAMHI's journey, never a client stage.
+
+**Supersedes**: the C-006-era pipeline names (Prospect → Assessing → Engaged → Handed over / Builder / North Star) everywhere they appear — BOQ_FRAMEWORK § maturity journey, PRODUCT_STRATEGY badges, DATA_MODELS / TECH_STRATEGY stage references (revisions queued).
+
+---
+
+## 2026-06-11 — The NBM model: the Staircase, the equality, score ≠ prediction (C-015)
+
+**Context**: The 2026-06-10 founder brainstorm (captured as `NEXUS_STRATEGY/02_NBM_MODEL.md`, status draft) was finalized this session after a devil's-advocate simulation (Works24 walked end-to-end through the staircase + a 15-archetype portfolio run).
+
+**Decision**:
+1. **The Staircase is ratified** as the constitution's signature diagram: each stage *enters on the previous stage's deliverable, raises one focus score head-on, and hands over a deliverable that is the next stage's floor*; it terminates in the **BOQ ⇄ NBM equality** — a number and a sentence, the same truth in two notations. The ladder table remains as its per-state detail.
+2. **The structure/theory split is binding**: the staircase's shape is constitutional; *which* score sits in *which* brick (ARS→Measure, BRQ→Align, the engine four→Transform) is v1 theory, calibrated by real engagements. The v1 theory is itself the first NBM the system ever gives — the consultant's prior, sharpened per segment by the cohort.
+3. **Deliverable names**: Measure → **the Roadmap** · Align → **the Cadence** (a team moving in rhythm on the roadmap) · Transform → **the Measured Engine** (live gauges + outcome records) · Evolve → the equality itself. *(Proposed this session — founder confirms at constitution read-through.)*
+4. **"Ensure" is internal shorthand only** — the founder-sketch word for the apex guarantee; never client-facing (Evolve is the brand verb). *(Proposed — founder confirms at read-through.)*
+5. **"Discover" = Measure**: the brainstorm's bottom-brick name canonizes as **Measure** (the tagline's verb); Discover survives as a glossary synonym.
+6. **Article 13 — score ≠ prediction**: scores are auditable arithmetic, traceable to signals (Nexus computes); predictions are learned models (iBrain predicts); an NBM is always displayed as a recommendation with a confidence and a why — never as a fact.
+7. **The causal-correctness requirement**: company-altitude NBM = the weakest-driver gradient of the geometric mean **informed by the Bridge's causal edges** — drivers are coupled (ARS enables BRQ enables the engine), so the gradient alone can point at a symptom whose cause sits upstream.
+8. **NBM at three altitudes** (company / team / person) ratified; the BOQ ↔ NBM correlation is a stated **hypothesis** until the measured cohort exists (constitution honest limits).
+
+**Refines**: C-011 (the equality gives BOQ its commercial role: *NBM is the product; BOQ is the trust certificate*).
+
+---
+
+## 2026-06-11 — The measurement library and the scope decisions (C-016)
+
+**Context**: The devil's-advocate simulation stress-tested the staircase against Works24 (software-enabled services, 29 people, ~5 engineers) and 15 company archetypes. **The structure held in all 16 runs; every failure was theory-layer** (metric scope, anchors, floors, segments, altitudes). Eight decisions close the exposed gaps; founder ratified all eight this session.
+
+**Decision**:
+1. **One document per score** — new `NEXUS_STRATEGY/0-BUSINESS/scores/`: **BOQ.md is the core model** (aggregation, provenance inheritance, bands, anchor packs, reserved-seats registry) + ARS / BPI / CFS / BRQ / FLS / CRS.md on one shared template (identity · Bridge position · signals · instruments · floors **+ size conditioning** · versioned anchors · provenance path · staircase position · gaming exposure · known misfits · calibration log). **BOQ_FRAMEWORK.md is absorbed into scores/BOQ.md** (its 4-layer stack collapses into signals→drivers; the Bridge survives as the causal view; the old family's demotion mapping is recorded).
+2. **BOQ's referent = the company**: signals are collected program-scoped (work happens there); drivers compute company-level (BPI/CFS/BRQ aggregate across programs; FLS/ARS/CRS are inherently company-wide); program-level views are **program gauges** — diagnostics, never called a BOQ. Two genuinely unlike businesses in one legal entity = two companies in Nexus (tenancy edge, noted not designed for).
+3. **Scope honesty**: BOQ measures the **operating engine, not market direction** — a company can run a flawless engine and build the wrong product. The NBM claim is scoped to *operating* moves. A **market/customer-signal driver** and the founder's **Culture Score** are *reserved seats* in BOQ.md — registered candidates, not v1 drivers.
+4. **The appraisal posture stays deliberately open** (no binding anti-gaming article): Nexus is dynamic — it grows with each company, each company's rhythm differs; learn, adapt fast. Gaming-exposure sections in every score doc are standing watch-items. Revisit trigger: first client surveillance/appraisal concern, or first deal in a works-council jurisdiction.
+5. **ICP v1**: software *product* companies, ~20–500 people, **≥10 engineers**, modern delivery pipeline, measurement-permissive jurisdiction. Every other archetype (agencies, embedded, services-enabled, internal IT, studios) = a future **anchor pack**, not a v1 customer. New doc queued: `0-BUSINESS/ICP.md`.
+6. **Paid-only initially**: no self-serve/free assessment tier until Nexus matures. **Known trade, chosen deliberately**: slower cohort growth → the gold-standard calendar moves out; maturity over data speed.
+7. **The restatement rule** (anchor versioning): anchors live in **versioned anchor packs** (segment × edition; annual + out-of-cycle on material frontier shifts); every displayed score carries its pack id (Article 6 extension); trend views always **restate** history against the current pack by recomputing from stored signals (guaranteed free by Article 1); pack changes are ratified in DECISIONS.
+8. **Top band = direct-to-Evolve**: a company arriving at AI-Ready/AI-Native enters the ladder at the rung its provenance supports (Measure → Evolve directly); its product is the Evolve subscription ("readiness never saturates"). **Certification/badge parked** — badge value derives from the standard's authority, which requires the cohort. Revisit trigger: first inbound certification request, or a meaningful cohort threshold.
+
+**Consequences**: constitution amendments this session (staircase, deliverables column, Articles 6+13, ICP, scope clause, gauge-lag, restatement rule, BOQ referent, honest-limits additions, reserved seats); scores library + ICP.md + COMPANY_JOURNEY.md + SCORING_MODEL.md queued next; AI_CONSULTING_PLAYBOOK gains the ICP qualification gate, segment TLO variants, and the **proxy-valley narrative** (fees peak when provenance is weakest — the engagement script owns it; "gauges lit n/9" is the honest mid-journey progress proof); PRODUCT_STRATEGY gains valley UX + score display rule.
+
+**Refines**: C-005 (program tenancy: programs are signal-collection scopes under a company-level BOQ), C-006 (GTM: paid-only sharpens the wedge), C-015.

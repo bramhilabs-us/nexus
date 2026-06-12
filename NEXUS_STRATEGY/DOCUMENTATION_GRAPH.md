@@ -72,7 +72,19 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |
 00_NORTH_STAR.md ............................. T0 | the play, the 90-step thesis — ROOT
 |
+|-- 01_NEXUS_MODEL.md ........................ T0 | the constitution: thesis · ladder · measurement · articles
+|       |-- 02_NBM_MODEL.md .................. T0 | the Staircase, BOQ ⇄ NBM, the core USP (ratified C-015)
+|       |-- 03_NEXUS_GAME.md ................. T0 | the game whitepaper: stage-responsive pages, friction audit, value bridge (parents: + PRODUCT_STRATEGY)
+|       `--> feeds: scores/BOQ.md (the score family it binds)
+|
 |-- 0-BUSINESS/AI_CONSULTING_PLAYBOOK.md ..... T0 | AIR framework, sprint, pricing
+|       |-- 0-BUSINESS/scores/BOQ.md ......... T0 | the core measurement model + epistemic engine (parents: + NORTH_STAR, 01_NEXUS_MODEL; absorbs BOQ_FRAMEWORK, C-016.1)
+|       |       |-- scores/ARS.md ............ T0 | AI Readiness Score
+|       |       |-- scores/BPI.md ............ T0 | Productivity Index (the Eight Metrics)
+|       |       |-- scores/CFS.md ............ T0 | Coordination Friction Score
+|       |       |-- scores/BRQ.md ............ T0 | Business Rhythm Quotient
+|       |       |-- scores/FLS.md ............ T0 | Founder Leverage Score
+|       |       `-- scores/CRS.md ............ T0 | Consolidation Readiness Score
 |       `--> feeds: PRODUCT_STRATEGY (what pages must encode)
 |
 |-- 0-BUSINESS/POSITIONING.md ................ T0 | category, one-liners, message house
