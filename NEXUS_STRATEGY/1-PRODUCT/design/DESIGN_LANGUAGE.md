@@ -1,15 +1,17 @@
 ---
 id: nexus.design-language
-title: Nexus Design Language — BRAMHI brand applied
+title: Nexus Design Language — the two-tier brand applied
 tier: T1
 status: active
 owner: founder
-updated: 2026-06-12
+updated: 2026-06-13
 summary: >
-  How the BRAMHI Labs brand guide (brand/ assets) becomes Nexus's minimalistic
-  UI: palette, typography, component rules, the token-first workflow that
-  prevents Karvia's drifting-hex problem, and the extracted token table
-  (N1-P2-07). Resolves PQ-3.
+  How the two-tier brand (C-013) becomes Nexus's minimalistic UI: BRAMHI Labs
+  is the parent tier (collateral only); NEXUS is the product tier — Sora +
+  Manrope, Intelligence Blue on calm surfaces, the dark sidebar shell. Palette,
+  typography, component rules, the token-first workflow that prevents Karvia's
+  drifting-hex problem, and the v2 token table re-extracted from the NEXUS
+  brand guide (N1-P3-09). Resolves PQ-3.
 parents:
   - NEXUS_STRATEGY/1-PRODUCT/PRODUCT_STRATEGY.md
 children:
@@ -17,81 +19,89 @@ children:
   - NEXUS_STRATEGY/1-PRODUCT/design/mockups/README.md
   - NEXUS_STRATEGY/1-PRODUCT/design/README.md
 revisit:
-  - on: "the BRAMHI brand guide is updated, or page-level design specs are added"
+  - on: "either brand guide is updated, or page-level design specs are added"
     stage: N3
 ---
 
-# Nexus Design Language — BRAMHI brand applied
+# Nexus Design Language — the two-tier brand applied
 
 ## Purpose
 
-Translate the BRAMHI Labs brand guide ([brand/Brand Guide Bramhi.png](brand/Brand%20Guide%20Bramhi.png), [brand/BRAMHI_LABS_full_logo.svg](brand/BRAMHI_LABS_full_logo.svg)) into rules the Night 3 UI build can execute. This is the design source of truth for Nexus; page behavior stays in [PRODUCT_STRATEGY.md](../PRODUCT_STRATEGY.md).
+Translate the NEXUS product brand guide ([brand/NEXUS_BRANDGUIDE.png](brand/NEXUS_BRANDGUIDE.png), [brand/NEXUS_LoopwithBrandGAuide.png](brand/NEXUS_LoopwithBrandGAuide.png)) into rules the Night 3 UI build can execute. This is the design source of truth for Nexus; page behavior stays in [PRODUCT_STRATEGY.md](../PRODUCT_STRATEGY.md).
+
+## The two-tier brand (C-013)
+
+| Tier | Brand | Voice & assets | Where it appears |
+|---|---|---|---|
+| **Parent** | **BRAMHI Labs** — lotus mark, "nurturing consciousness" | Cinzel (logo) / Playfair Display (headings) / Inter (body), purple-lavender family ([brand/BRAMHI_V1_BRANDGUIDE.png](brand/BRAMHI_V1_BRANDGUIDE.png), [brand/BRAMHI_LABS_full_logo.svg](brand/BRAMHI_LABS_full_logo.svg)) | Consulting collateral, whitepapers, investor decks — never product surfaces |
+| **Product** | **NEXUS by BRAMHI** — lotus-derived logo system, "Measure. Align. Transform. Evolve." | Sora (display) / Manrope (UI) / Cormorant Garamond italic (taglines), Intelligence Blue + the loop palette | ALL product surfaces: every page, mockup, email, and in-app moment |
+
+**The hard rule**: parent-tier fonts or colors in product chrome are a review-blocking violation, exactly like inline hex. The parent tier deliberately has no tokens in `client/css/tokens.css` — if you need Cinzel or BRAMHI purple-lavender in a product surface, the answer is no (Consciousness Purple `--nx-purple` is the one sanctioned bridge: gradient start and brand moments, by token only).
 
 ## TL;DR
 
-- **Brand**: BRAMHI Labs — lotus mark, "nurturing consciousness." Personality keywords: mindful, balanced, wise, transcendent. Nexus's executive surfaces must feel calm and certain — the UI equivalent of "we sell certainty."
-- **Palette**: BRAMHI purple/lavender family on warm neutrals. Deep purple for primary actions and emphasis; lavender tints for fills, states, and gradients; near-black ink for text; generous white space.
-- **Typography**: serif display for brand/headline moments (Cinzel / Playfair Display per the guide), **Inter for all product UI** (body, tiles, tables, CTAs). Cormorant Garamond italic only for brand taglines — never in app chrome.
+- **Personality** (NEXUS guide): intelligent, calm, certain — "the AI Transformation Operating System." Executive surfaces must feel like "we sell certainty"; taker surfaces must feel light (PQ-4 flashcards, not forms).
+- **Palette**: Intelligence Blue `#7287F2` is the product primary; Deep Text `#2C3446` anchors text and the sidebar; Surface `#F7F7FB` keeps pages calm; Growth Green and Human Warmth are signal accents — the loop's verb colors, never decoration.
+- **Typography**: **Sora** for display/headline moments, **Manrope** for all product UI, **Cormorant Garamond italic** only for brand signature moments — never in app chrome.
+- **Layout**: the **dark sidebar shell** (guide § application examples) on every product surface — logo top, icon+label nav, primary-pill active state, account at the bottom; content on the Surface page background.
 - **Minimalism is enforced, not aspired to**: one dominant primary CTA per page, ≤4 analytics tiles, whitespace over borders, no decoration that doesn't change a decision.
 - **Tokens before mockups, always** (Karvia lesson #174-3): every color/space/type value is a CSS custom property defined once; no inline hex in pages or mockups.
-
-## Reference visuals — what "classy, minimalistic" means here
-
-Two BRAMHI investor decks are the **feel** references, preserved in [references/](references/) (`bramhi-consciousness-ecosystem-v3.html`, `bramhi-intro-v1.html`). Concrete cues extracted from their CSS — the starting point for the Night-1 token session:
-
-- **Surfaces**: near-white gradient page background (`#f8fafc → #f5f3ff → #f8fafc`), pure-white panels, soft purple-tinted shadows (`rgba(118,75,162,0.06)`), hairline borders (`#e2e8f0`), 8px radius — depth from light, never from heavy borders.
-- **Color**: the purple family as accent (`#764ba2`, `#5c3a7e`, indigo `#667eea`), **gold sparingly** (`#bd8e2d` — emphasis, never decoration), teal (`#229d83`) for positive signal.
-- **Text**: three-step slate hierarchy (`#2d3748` primary / `#64748b` secondary / `#94a3b8` tertiary) — hierarchy by tone, not by size inflation.
-- **Type note**: decks use Comfortaa; the brand guide says Cinzel/Playfair display + Inter body. **Resolved in N1-P2-07** (§ Token table): brand-guide fonts for product UI; the decks govern *spacing, surface, and restraint*, not typeface.
 
 ## Token-first workflow
 
 Karvia's mockups referenced `--s22-navy` weeks before the token existed; authors hardcoded fallback hex values and the canonical navy drifted across pages. The Nexus rule:
 
-1. **Step 1 of any visual work**: define/extend tokens in `client/css/tokens.css` — palette (sampled from the brand guide PNG at build time, named semantically: `--nx-primary`, `--nx-primary-soft`, `--nx-ink`, `--nx-surface`, `--nx-accent-gradient`…), type scale, spacing scale, radii.
+1. **Step 1 of any visual work**: define/extend tokens in `client/css/tokens.css` — palette (the guide's declared hex, named semantically), type scale, spacing scale, radii.
 2. Mockups and pages consume `var(--token)` only. One-off inline hex is a review-blocking violation except in throwaway stakeholder pitches.
-3. Exact hex/scale values were extracted from the brand assets in the N1-P2-07 token session (pulled forward from Night 3 per Path B) and recorded in the table below. `client/css/tokens.css` is the executable form; this table is its governed mirror — change them together.
+3. `client/css/tokens.css` is the executable form; the table below is its governed mirror — **change them together**.
 
-## Token table (extracted 2026-06-09, N1-P2-07)
+## Token table v2 (re-extracted 2026-06-13, N1-P3-09 / C-013)
 
-Source legend: **BG** = Brandguide PNG declared hex (source of truth for brand color), **deck** = reference-deck CSS cue (governs surfaces, shadows, restraint).
+Source legend: **NG** = NEXUS guide declared hex (source of truth), **loop** = the operating-loop poster, **derived** = recorded derivation on a declared color, **v1** = carried from the v1 extraction (the guide doesn't redeclare it).
 
 | Token | Value | Source | Use |
 |---|---|---|---|
-| `--nx-primary` | `#6B4BA3` | BG primary | Primary actions, emphasis |
-| `--nx-primary-soft` | `#9D8CC6` | BG primary | Secondary emphasis, gradient end |
-| `--nx-primary-tint` | `#DCC5E8` | BG accent | Badge/border tints, hover fills |
-| `--nx-primary-faint` | `#F3E8FF` | BG accent | Selected states, soft fills |
-| `--nx-ink` | `#1A1A1A` | BG neutral | Display headlines only |
-| `--nx-text` / `-secondary` / `-tertiary` | `#2D3748` / `#64748B` / `#94A3B8` | deck | Three-step slate text hierarchy |
-| `--nx-gray` / `--nx-gray-light` | `#6F6F6F` / `#E6E6E6` | BG neutral | Icons + disabled / dividers |
-| `--nx-sand` / `--nx-cream` | `#C9B59A` / `#EDE7DF` | BG accent | Warm accents — illustration, empty states; never text |
-| `--nx-gold` | `#BD8E2D` | deck | Emphasis, sparingly — never decoration |
-| `--nx-positive` | `#229D83` | deck | Positive signal (decks also use `#19AC86`; this one is canonical) |
-| `--nx-surface` / `--nx-border` | `#FFFFFF` / `#E2E8F0` | deck | White panels, hairline borders |
-| `--nx-surface-page` | `#F8FAFC → #F5F3FF → #F8FAFC` | deck | Near-white gradient page background |
-| `--nx-shadow-card` | `rgba(107,75,163,0.06)` | deck recipe on BG primary | Purple-tinted depth — never heavy borders |
-| `--nx-gradient-primary` | `#6B4BA3 → #9D8CC6` | BG gradient | Stage ribbons, primary gradient moments |
-| `--nx-gradient-soft` | `#EADBF6 → #F7F3FF` | BG gradient | Soft fills, ribbon backgrounds |
-| Type scale | 12 / 14 / 16 / 18 / 22 / 28 / 36 px | — | `--nx-text-xs … 3xl`; weights 400/500/600 |
-| Spacing | 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 px | — | `--nx-space-1 … 16`, 4px base |
-| Radii | 4 / **8** / 12 / pill | deck (8px) + BG (pill CTA) | `--nx-radius-*`; 8px is the default |
+| `--nx-primary` | `#7287F2` | NG (Intelligence Blue) | Primary actions, emphasis, active states |
+| `--nx-purple` | `#5E4DB2` | NG (Consciousness Purple) | Parent-brand accent: gradient start, brand moments only |
+| `--nx-positive` | `#A8D5C2` | NG (Growth Green) | Success fills, on-track rings |
+| `--nx-gold` | `#C98B62` | NG (Human Warmth) | Warm accent — emphasis, never decoration |
+| `--nx-ink` | `#2C3446` | NG (Deep Text) | Headlines, primary text anchor |
+| `--nx-primary-soft` / `-tint` / `-faint` | `#9CABF6` / `#C7CFFA` / `#EEF1FD` | derived (30/60/88% white-mix on primary) | Secondary emphasis / badge tints, hovers / selected states, soft fills |
+| `--nx-text` / `-secondary` / `-tertiary` | `#2C3446` / `#5A6275` / `#8C93A6` | NG + derived (25/50% white-mix on Deep Text) | Three-step text hierarchy — tone, not size inflation |
+| `--nx-gray` / `--nx-gray-light` | `#6F7689` / `#E4E6F0` | derived (Deep Text family) | Icons + disabled / dividers |
+| `--nx-cream` | `#F7EDE7` | derived (85% white-mix on Human Warmth) | Risk fills, warm empty states |
+| `--nx-positive-deep` / `--nx-gold-deep` | `#3E8E72` / `#A96F47` | derived (legibility) | Positive / warm text and icons on light surfaces |
+| `--nx-stage-*` | prospect `#8C93A6` · measure `#7287F2` · align `#5E4DB2` · transform `#A8D5C2` · evolve `#C98B62` | loop (verb colors) + derived neutral | Stage badges and ribbons (constitution §4 names) |
+| `--nx-surface` / `--nx-surface-page` / `--nx-border` | `#FFFFFF` / `#F7F7FB` / `#E4E6F0` | NG (Surface) + derived | White panels on the calm flat page; hairline borders |
+| `--nx-shadow-card` | `rgba(114,135,242,0.07)` recipe | derived (v1 recipe recomputed on NEXUS primary) | Depth from light — never heavy borders |
+| `--nx-gradient-primary` / `-loop` / `-soft` | `#5E4DB2→#7287F2` / `#7287F2→#A8D5C2` / faint | NG (visual-language chips) | Brand moments / loop progression / soft fills |
+| `--nx-sidebar-*` | bg `#2C3446` · active pill `#7287F2` · white text alphas · width 232px | NG (application examples) | The sidebar shell, below |
+| Type | Sora display · Manrope UI · Cormorant Garamond italic taglines | NG §02 | Weights 400/500/600/700; scale 12–36px (v1) |
+| Spacing / radii | 4px base scale · 4/**8**/12/pill | v1 | 8px default radius; pill CTAs |
 
-**Type question resolved (Comfortaa vs brand fonts)**: the Brandguide explicitly declares Cinzel (logo), Playfair Display (headings), Inter (body), Cormorant Garamond italic (taglines); Comfortaa appears only in the decks. Product UI is **Inter** (`--nx-font-ui`); **Playfair Display** for rare display moments; **Cinzel** reserved for brand lockups, never app chrome; **Cormorant Garamond italic** for brand taglines only. Comfortaa is not carried into Nexus.
+**Extraction notes v2 (recorded so nobody re-derives)**: (1) The guide PNG is a compressed render — sampled swatch pixels drift from the printed labels; **the declared hex wins** (same precedent as the v1 BRAMHI extraction). Declared set: `#5E4DB2 #7287F2 #A8D5C2 #C98B62 #F7F7FB #2C3446`. (2) C-013's prose says "teal + gold accents"; the guide's declared accents are **Growth Green** (sage, the "teal") and **Human Warmth** (copper, the "gold") — the decision's prose named them loosely, the guide governs. `--nx-gold` keeps its v1 name but now points at Human Warmth; the v1 deck gold `#BD8E2D` is retired. (3) Type scale, spacing, and radii carry from v1 — the guide doesn't redeclare them and the deck-derived restraint cues (the two investor decks preserved in [references/](references/)) still govern spacing, surfaces, and restraint — never typeface or color. (4) The v1 BRAMHI palette (`#6B4BA3` family) is not deleted from history — it moves to the parent tier and lives only in collateral, outside this token file.
 
-**Extraction notes (asset drift, recorded so nobody re-derives)**: (1) the Brandguide neutral row prints `#1A1A1A` twice — a typo in the asset; the second swatch samples ≈`#767675`, and the labeled `#6F6F6F` is used as the canonical mid-gray. (2) The decks' purple is `#764BA2`, not the Brandguide primary `#6B4BA3`; the Brandguide wins for color, and the deck purple survives only as the shadow-tint recipe recomputed on the brand primary.
+## The sidebar shell (guide § application examples)
+
+Every product surface renders inside the same shell — the brand guide's own application example, adopted across all 10 mockups (C-013):
+
+- **Sidebar** (`--nx-sidebar-width`, fixed left): `--nx-sidebar-bg` (Deep Text navy). Top: the NEXUS lockup (white). Middle: icon + label nav, one row per primary surface; the active row is a `--nx-sidebar-active-bg` pill with white text; hover is a soft white-alpha fill. Bottom: the account block (avatar + dropdown: Profile, Company Profile, Configuration, Settings, Feedback).
+- **Content area**: `--nx-surface-page` background; the page head (title + the page's one primary CTA) replaces the old topbar; white cards and tiles carry the content.
+- **Mode flips stay in the shell**: Builder mode and org-direct remove/replace nav rows (e.g. no My Clients) — they never invent a second shell.
+- Mobile: the sidebar collapses to a bottom/sheet nav — same rows, same active grammar (mockups are web-first; responsive behavior lands N3).
 
 ## Component set (the lego constraint, visually)
 
-One small set shared by all six pages — adding a component requires updating this doc first:
+One small set shared by all pages — adding a component requires updating this doc first:
 
 | Component | Used for | Brand notes |
 |---|---|---|
-| **Tile** | Analytics strips (≤4/page) | Number-first, label small-caps Inter; tap target = drill-down |
-| **Card** | Client cards, objective cards | Soft lavender border-tint or shadow, never both; stage badge top-right |
-| **Stage ribbon** | Objective lifecycle, pipeline stages | Gradient progression in the purple family (guide's gradient swatches) |
-| **CTA pair** | Primary + secondary per page contract | Primary: filled deep purple, pill (per guide buttons); secondary: quiet outline/text |
-| **Empty state** | First-time teaching | Lotus-adjacent calm illustration, one sentence, one CTA |
+| **Sidebar shell** | Global navigation, all surfaces | Dark Deep-Text navy; active = primary pill; the only dark surface in the product |
+| **Tile** | Analytics strips (≤4/page) | Number-first, label small-caps Manrope; tap target = drill-down |
+| **Card** | Client cards, objective cards | Hairline border-tint or soft shadow, never both; stage badge top-right |
+| **Stage ribbon** | Objective lifecycle, pipeline stages | The loop's verb colors via `--nx-stage-*`; badges read **Prospect · Measuring · Aligning · Transforming · Evolving** (constitution §4 — never the dead C-006 names) |
+| **CTA pair** | Primary + secondary per page contract | Primary: filled Intelligence Blue, pill; secondary: quiet outline/text |
+| **Empty state** | First-time teaching | Calm lotus-adjacent illustration, one sentence, one CTA; Sora for the one display line |
 | **Score ring** | Assessment scores on cards | Dimension color mapping defined by the assessment block, ring style defined here |
 | **Flashcard** | Assessment question delivery (never survey forms — PRODUCT_STRATEGY § delivery experience) | One question per card; flip/advance rhythm; calm, single-focus layout; the "why this assessment" intro card opens every deck |
 | **Deck progress** | Position within a flashcard deck | Dots, not "Q7/24" counters — progress felt, not dreaded; current dot in primary, done dots in primary-soft |
@@ -132,6 +142,18 @@ The founder's runtime principles, binding for every page spec and mockup:
    identically everywhere (card grammar above); a player who learns a card once has
    learned it on all six pages.
 
+## Display doctrine — how gauges speak (owners indexed, not forked)
+
+The rules for what a number is allowed to look like are owned elsewhere and bind every
+visual spec here: **Article 6 all-five** (number + band + provenance + anchor-pack id +
+evidence drill-down) and its extensions, the floors ("insufficient signal" / "running on
+old data" — never a confident number), and **the bedside-manner rules** (03_NEXUS_GAME
+§6.5: no verdict without a path; the implicated see it first; trend before position;
+evidence is dignity; the Steward valve). See PRODUCT_STRATEGY § display doctrine for the
+binding list. Visually that means: negative gauges get the same calm surfaces as
+positive ones — no red-alert theatrics; `--nx-gold` warmth marks attention, the paired
+NBM marks the path.
+
 ## What this resolves
 
-PQ-3 (PRODUCT_STRATEGY) is resolved: the design source exists in-repo. Page-level specs (per-page mockups) are produced during Night 3 *from* these rules — they do not block earlier sessions.
+PQ-3 (PRODUCT_STRATEGY) is resolved: the design source exists in-repo. C-013 is executed: the two-tier brand is the rule set above, tokens.css v2 is live, and the 10 mockups carry the NEXUS brand + sidebar shell. Page-level specs (per-page mockups) are produced during Night 3 *from* these rules — they do not block earlier sessions.

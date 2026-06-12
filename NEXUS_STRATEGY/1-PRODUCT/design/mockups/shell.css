@@ -1,13 +1,16 @@
 /*
- * Nexus mockup shell — shared components for the six-page mockups.
- * Governed by DESIGN_LANGUAGE.md (component set) + PRODUCT_STRATEGY.md (page contract).
+ * Nexus mockup shell — shared components for the page mockups.
+ * Governed by DESIGN_LANGUAGE.md (component set + sidebar shell) +
+ * PRODUCT_STRATEGY.md (page contract).
  * Color/type/space come ONLY from client/css/tokens.css (var(--nx-*)) —
  * inline hex anywhere in mockups/ is a review-blocking violation.
+ * v2 (C-013): NEXUS product brand — Sora/Manrope, dark sidebar shell.
  */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
+  display: flex;
   font-family: var(--nx-font-ui);
   font-size: var(--nx-text-base);
   line-height: var(--nx-leading-base);
@@ -16,20 +19,32 @@ body {
   min-height: 100vh;
 }
 
-/* ---------- Top bar ---------- */
-.nx-topbar {
+/* ---------- Sidebar shell (DESIGN_LANGUAGE § the sidebar shell) ---------- */
+.nx-sidebar {
+  width: var(--nx-sidebar-width);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
   display: flex;
-  align-items: center;
-  gap: var(--nx-space-8);
-  padding: var(--nx-space-3) var(--nx-space-8);
-  background: var(--nx-surface);
-  border-bottom: 1px solid var(--nx-border);
+  flex-direction: column;
+  background: var(--nx-sidebar-bg);
+  padding: var(--nx-space-6) var(--nx-space-4);
+}
+.nx-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-space-1);
+  padding: 0 var(--nx-space-3) var(--nx-space-6);
+  border-bottom: 1px solid var(--nx-sidebar-border);
+  margin-bottom: var(--nx-space-6);
 }
 .nx-wordmark {
+  font-family: var(--nx-font-display);
   font-weight: var(--nx-weight-semibold);
   font-size: var(--nx-text-lg);
-  color: var(--nx-ink);
-  letter-spacing: 0.02em;
+  color: var(--nx-sidebar-text-active);
+  letter-spacing: 0.06em;
 }
 .nx-wordmark::before {
   content: '';
@@ -39,23 +54,39 @@ body {
   background: var(--nx-gradient-primary);
   margin-right: var(--nx-space-2);
 }
-.nx-nav { display: flex; gap: var(--nx-space-6); flex: 1; }
+.nx-byline {
+  font-size: var(--nx-text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--nx-sidebar-text);
+}
+.nx-nav { display: flex; flex-direction: column; gap: var(--nx-space-1); flex: 1; }
 .nx-nav a {
   text-decoration: none;
-  color: var(--nx-text-secondary);
+  color: var(--nx-sidebar-text);
   font-size: var(--nx-text-sm);
   font-weight: var(--nx-weight-medium);
-  padding: var(--nx-space-2) 0;
-  border-bottom: 2px solid transparent;
+  padding: var(--nx-space-2) var(--nx-space-3);
+  border-radius: var(--nx-radius);
 }
 .nx-nav a.active {
-  color: var(--nx-primary);
-  border-bottom-color: var(--nx-primary);
+  background: var(--nx-sidebar-active-bg);
+  color: var(--nx-sidebar-text-active);
 }
-.nx-nav a:hover { color: var(--nx-text); }
+.nx-nav a:hover:not(.active) {
+  background: var(--nx-sidebar-hover-bg);
+  color: var(--nx-sidebar-text-active);
+}
 
-/* Account dropdown — the 5 secondary surfaces */
-.nx-account { position: relative; }
+/* Account block — sidebar bottom; dropdown = the 5 secondary surfaces */
+.nx-account {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--nx-space-3);
+  padding: var(--nx-space-3) var(--nx-space-3) 0;
+  border-top: 1px solid var(--nx-sidebar-border);
+}
 .nx-avatar {
   width: 36px; height: 36px;
   border-radius: var(--nx-radius-pill);
@@ -70,7 +101,7 @@ body {
 .nx-dropdown {
   display: none;
   position: absolute;
-  right: 0; top: calc(100% + var(--nx-space-2));
+  left: 0; bottom: calc(100% + var(--nx-space-2));
   min-width: 200px;
   background: var(--nx-surface);
   border: 1px solid var(--nx-border);
@@ -92,8 +123,10 @@ body {
 .nx-dropdown a:hover { background: var(--nx-primary-faint); color: var(--nx-primary); }
 .nx-dropdown hr { border: none; border-top: 1px solid var(--nx-border); margin: var(--nx-space-2) 0; }
 
-/* ---------- Page scaffold ---------- */
+/* ---------- Page scaffold (content area right of the sidebar) ---------- */
 .nx-page {
+  flex: 1;
+  min-width: 0;
   max-width: 1120px;
   margin: 0 auto;
   padding: var(--nx-space-8) var(--nx-space-8) var(--nx-space-16);
@@ -106,6 +139,7 @@ body {
   margin-bottom: var(--nx-space-6);
 }
 .nx-page-title {
+  font-family: var(--nx-font-display);   /* Sora — the page's headline moment */
   font-size: var(--nx-text-2xl);
   font-weight: var(--nx-weight-semibold);
   color: var(--nx-ink);
@@ -195,7 +229,12 @@ body {
   box-shadow: var(--nx-shadow-card);   /* shadow, never border-tint AND shadow */
   padding: var(--nx-space-6);
 }
-.nx-card-title { font-size: var(--nx-text-lg); font-weight: var(--nx-weight-semibold); color: var(--nx-ink); }
+.nx-card-title {
+  font-size: var(--nx-text-lg);
+  font-weight: var(--nx-weight-semibold);
+  color: var(--nx-ink);
+  padding-right: calc(var(--nx-space-16) + var(--nx-space-8)); /* clearance for the absolute stage badge */
+}
 .nx-card-sub { font-size: var(--nx-text-sm); color: var(--nx-text-secondary); }
 
 /* Stage badge — top-right per DESIGN_LANGUAGE */
@@ -208,10 +247,19 @@ body {
   padding: var(--nx-space-1) var(--nx-space-3);
   border-radius: var(--nx-radius-pill);
 }
-.nx-stage.prospect  { background: var(--nx-gray-light); color: var(--nx-gray); }
-.nx-stage.assessing { background: var(--nx-primary-faint); color: var(--nx-primary); }
-.nx-stage.engaged   { background: var(--nx-gradient-soft); color: var(--nx-primary); }
-.nx-stage.handed    { background: var(--nx-primary); color: var(--nx-surface); }
+/* Badge names per constitution §4 (C-014): Prospect · Measuring · Aligning ·
+   Transforming · Evolving — stage colors from the loop (--nx-stage-*) */
+.nx-stage.prospect     { background: var(--nx-gray-light); color: var(--nx-gray); }
+.nx-stage.measuring    { background: var(--nx-primary-faint); color: var(--nx-stage-measure); }
+.nx-stage.aligning     { background: var(--nx-gradient-soft); color: var(--nx-stage-align); }
+.nx-stage.transforming { background: var(--nx-stage-transform); color: var(--nx-positive-deep); }
+.nx-stage.evolving     { background: var(--nx-cream); color: var(--nx-gold-deep); }
+
+/* Objective lifecycle badges (NOF: Identified → Handed off → Sustained) —
+   a different state machine than the company stage; named honestly */
+.nx-stage.identified { background: var(--nx-primary-faint); color: var(--nx-primary); }
+.nx-stage.handed-off { background: var(--nx-gradient-soft); color: var(--nx-purple); }
+.nx-stage.sustained  { background: var(--nx-stage-transform); color: var(--nx-positive-deep); }
 
 /* Score ring — ring style owned here, dimension colors by the assessment block */
 .nx-ring {
@@ -326,6 +374,20 @@ body {
   padding-top: var(--nx-space-4);
 }
 
+/* ---------- Deck surface — the taker's one no-sidebar surface ----------
+   The accountless taker sees only the deck (PQ-4 calm doctrine): a slim
+   light bar replaces the sidebar; nothing to navigate, nothing competes. */
+body.nx-deck-surface { display: block; }
+.nx-deckbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--nx-space-3) var(--nx-space-8);
+  background: var(--nx-surface);
+  border-bottom: 1px solid var(--nx-border);
+}
+.nx-deckbar .nx-wordmark { color: var(--nx-ink); }
+
 /* ---------- Flashcard deck (assessment delivery — never survey forms) ---------- */
 .nx-deck-stage {
   min-height: 70vh;
@@ -399,7 +461,7 @@ body {
 }
 .nx-answer-scale button:hover { border-color: var(--nx-primary-tint); background: var(--nx-primary-faint); }
 .nx-answer-scale button.selected { background: var(--nx-primary-faint); border-color: var(--nx-primary); color: var(--nx-primary); }
-.nx-answer-scale .scale-ends {
+.scale-ends {
   display: flex; justify-content: space-between;
   font-size: var(--nx-text-xs); color: var(--nx-text-tertiary);
   margin-top: var(--nx-space-2);

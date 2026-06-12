@@ -216,7 +216,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: brand/layout rework (C-013) and N1-P3-01 pt 2 remain on the master doc list after these.
 
 ### N1-P3-09 — C-013 brand & layout rework (discovered by audit 2026-06-12 — decision had no BACKLOG item)
-- **Status**: READY — **Night 1b, sprint 1** (C-013 ratified 2026-06-10; brand assets in `design/brand/`)
+- **Status**: DONE — session-27 (2026-06-13): tokens.css v2 re-extracted from the NEXUS guide's declared palette (#7287F2 primary, #5E4DB2, #A8D5C2, #C98B62, #F7F7FB, #2C3446; Sora/Manrope; stage colors from the loop poster); DESIGN_LANGUAGE reworked two-tier (parent collateral-only rule, sidebar-shell spec, display-doctrine index kept); dark sidebar shell on all surfaces (the taker's flashcard deck stays the one deliberate no-sidebar surface — slim deckbar); stage-badge sweep done (Transforming/Measuring/Prospect/Evolving on my-clients; objective-lifecycle badges got honestly-named classes, text unchanged); all gates green (hex scan zero, token-existence, contract check, doc-graph 62/0/0); headless-Chrome render verified
 - **Size**: M (1–2 sessions)
 - **Definition of done** (the C-013 work list):
   - tokens.css v2 re-extracted from the NEXUS product guide (Sora display + Manrope body + Cormorant taglines; teal + gold accents)
