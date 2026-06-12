@@ -227,11 +227,11 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: absorbs the N1-P2-08 founder-review checkpoint (C-013: "the review verdict is this rework"). design/README.md carries the pending-state note.
 
 ### N1-P3-08 — Trigger map + best/hostile playthroughs → USER_JOURNEYS (discovered, 04 §7)
-- **Status**: READY — **Night 1b, sprint 1** — C-019 ratified (04 active) and N1-P3-06 done (the stage machine + its transitions in TECH_STRATEGY); no blockers. Landing this closes 04 §7 row 7 → triggers the 04 absorption re-review (C-022.4)
+- **Status**: DONE — session-26 (2026-06-12): trigger map T0–T10 (transition × designed trigger × fallback chain × owner), best-case + hostile playthroughs, J5 org-direct journey, stage-machine alignment sweep (J1 step 7 badge moment moved to the commitment entry moment; J4 handover cites the Evolve entry + stage_changed event), all four nudge fences verified per chain, 04 §7 row 7 closed + its revisit trigger retired, graph edge 04 ↔ USER_JOURNEYS wired. **The 04 absorption re-review is now unblocked for the N1b close groom (C-022.4)**
 - **Size**: S–M (1 session)
-- **Definition of done**:
-  - The trigger map: every stage transition × designed trigger × fallback nudge chain × owner (derived by walking the hostile playthrough transition by transition)
-  - `2-TECHNICAL/USER_JOURNEYS.md` gains the best-case and hostile playthroughs alongside the 4 archetype journeys
-  - **J5 — the org-direct journey** (audit 2026-06-12 finding 4.4): the company self-serves the ladder with no consultant in any step (Article 9 made walkable)
-  - Stage-machine alignment sweep over the existing journeys (audit 2.4 residue: J4's handover framing checked against the stage machine's Evolve entry)
-  - Nudge fences honored in every chain: structure-first, self-retiring (logged as BRQ telemetry), PvE (Art 14), Article 9 (org-direct chains end without a consultant)
+- **Definition of done** (all met):
+  - [x] The trigger map: every stage transition × designed trigger × fallback nudge chain × owner (derived by walking the hostile playthrough transition by transition)
+  - [x] `2-TECHNICAL/USER_JOURNEYS.md` gains the best-case and hostile playthroughs alongside the 4 archetype journeys
+  - [x] **J5 — the org-direct journey** (audit 2026-06-12 finding 4.4): the company self-serves the ladder with no consultant in any step (Article 9 made walkable)
+  - [x] Stage-machine alignment sweep over the existing journeys (audit 2.4 residue: J4's handover framing checked against the stage machine's Evolve entry)
+  - [x] Nudge fences honored in every chain: structure-first, self-retiring (logged as BRQ telemetry), PvE (Art 14), Article 9 (org-direct chains end without a consultant)

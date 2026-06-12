@@ -25,9 +25,7 @@ parents:
 children:
   - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
   - NEXUS_STRATEGY/2-TECHNICAL/SCORING_MODEL.md
-revisit:
-  - on: "the trigger map lands (N1-P3-08) — verify §4's fences are honored in every chain and §6's playthroughs moved to USER_JOURNEYS"
-    stage: N1
+  - NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md
 ---
 
 # The Runtime Model — how the game actually runs
@@ -166,7 +164,7 @@ The Game's §5 walked Meridian cooperatively. The runtime model requires both en
 | 4 | The three epistemic categories | 01_NEXUS_MODEL Article 13 (amendment) | **landed** — ratified C-019, Article 13 amended |
 | 5 | Layer-4 architecture + the orchestrator's home + the stage machine | TECH_STRATEGY | **landed** — N1-P3-06, after the iBrain read (C-020) |
 | 6 | Nudge events as BRQ telemetry (logged sends; declining-send-rate metric) | scores/BRQ.md instruments | **landed** — N1-P3-06 (SCORING_MODEL §2.2) |
-| 7 | Best-case + hostile playthroughs with the trigger map | 2-TECHNICAL/USER_JOURNEYS.md | after the trigger map (post P3-07) |
+| 7 | Best-case + hostile playthroughs with the trigger map | 2-TECHNICAL/USER_JOURNEYS.md | **landed** — N1-P3-08 (T0–T10 map, both playthroughs, J5; §4's four fences verified in every chain) |
 
 One line, the founder's thesis: **we have the power to visualize the entire game before
 building it — so every situation, from the hostile case to the frictionless case, is
