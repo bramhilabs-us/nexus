@@ -371,8 +371,10 @@ standard — the flywheel, which is BRAMHI's game, not the client's).
 
 ## 8 · Does the lego architecture support the game?
 
-The three layers are the game's anatomy: **pages are the board, business logic is the
-rules, models are the state.** Module by module:
+The four layers are the game's anatomy: **pages are the board, business logic is the
+rules, models are the state, and the intelligence layer is the game master's voice**
+(the fourth layer entered by 04_RUNTIME_MODEL / C-020 after this paper was ratified).
+Module by module:
 
 | Module | Game subsystem |
 |---|---|

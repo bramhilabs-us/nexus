@@ -23,8 +23,6 @@ revisit:
     stage: always
   - on: "a new anchor pack edition is ratified in DECISIONS — move the segment's registry row from 'future pack' to 'packed'"
     stage: always
-  - on: "founder confirms or corrects the reconstructed registry slots (clarification C-018)"
-    stage: N1
 ---
 
 # ICP — who Nexus measures first
@@ -79,7 +77,9 @@ ruler. Until then: not a customer.
 run in-session; seven slot numbers survive as citations in the score docs and are fixed
 here. The remaining registry rows are the segments canon names without numbers. The
 registry canonizes **names**; slot numbers exist only to keep the score docs' citations
-valid. Founder confirmation of the full roster: clarification C-018.
+valid. **Ratified as canon (C-018, 2026-06-12)**: registry-by-name going forward — slots
+append as engagements meet new archetypes; the simulation's unrecovered rows are not
+reconstructed.
 
 | Slot | Segment | Where v1 anchors break (cited misfits) | Path in |
 |---|---|---|---|

@@ -78,7 +78,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: Path B decision (2026-06-09): mockups pulled forward from Night 3 — they depend only on page contracts + design language, both done. Tokens-before-mockups per SESSION_PRACTICES rule 3.
 
 ### N1-P2-08 — Six page mockups (static HTML, token-first) (Path B pull-forward)
-- **Status**: NEEDS-FOUNDER-REVIEW (all 3 sessions done — s1+s2 merged, s3 tick 2026-06-10-17 PR pending: Teams, Planning, Builder variant, Profile. 10 mockup surfaces total. **Founder review checkpoint: feedback becomes the Night 3 build spec and unblocks N1-P4-01**)
+- **Status**: DONE — superseded review: C-013 absorbed the founder-review checkpoint ("the review verdict is this rework"); the re-skin is N1-P3-09. All 10 surfaces merged.
 - **Size**: M (2–3 sessions)
 - **Depends on**: N1-P2-07, PRODUCT_STRATEGY page contracts (DONE)
 - **Definition of done**:
@@ -139,9 +139,10 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Size**: M (2 ticks)
 - **Depends on**: N1-P2-04 (module graph), N1-P2-02 (data models)
 - **Definition of done**:
-  - MODULARIZATION_PLAN.md with 8 modules (CRM, Objectives, KeyResults, WeeklyGoals, Tasks, Assessment + Governance + Knowledge) + assessment impl (AIR — SSI dropped per C-006, Karvia reference only)
-  - MODULE_CONTRACTS_DRAFT.md with TS interface signatures
-  - Reflects ratified decisions: consolidate engines, TypeScript strict, Program as first-class entity
+  - MODULARIZATION_PLAN.md with 8 modules (CRM, Objectives, KeyResults, Milestones (C-008), Tasks, Assessment + Governance + Knowledge) + assessment impl (AIR — SSI dropped per C-006, Karvia reference only)
+  - MODULE_CONTRACTS_DRAFT.md with TS interface signatures — journey steps (USER_JOURNEYS J-index) are the acceptance criteria; route sets cite API_SURFACE; edges cite MODULE_DEPENDENCY_GRAPH
+  - **Assign the outbound notification/mail owner** (audit 2026-06-12 finding 4.5): invitations, nudge delivery, review reminders — a contract-fronted capability (likely @nexus/crm or a small platform service), never per-module ad-hoc mail
+  - Reflects ratified decisions: consolidate engines, TypeScript strict, Program as first-class entity, the stage machine + Layer 4 (C-020)
 - **Notes**: All 3 architectural clarifications now answered (2026-06-04). N1-P4-02 also unblocked.
 
 ### N1-P4-02 — Nexus vs Karvia diff + Assessment interface spec
@@ -168,11 +169,14 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 
 ### N1-P6-01 — Journal + BACKLOG groom + Night 2 sprint draft
 - **Status**: READY
-- **Size**: S (1 tick)
+- **Size**: S–M (1 session; grew per audit 2026-06-12 + C-021)
 - **Depends on**: all other N1 tasks DONE or accounted for
 - **Definition of done**:
   - JOURNAL summary for Night 1
-  - BACKLOG groomed
+  - **Phase-budget re-baseline** (audit finding 7 — N1 ran 27+ steps vs 18 budgeted; re-sum, re-cut N2–N5 against the now-richer strategy or formally extend the 90; EXECUTION_PLAYBOOK table updated and the >25% trigger answered)
+  - **Absorption review** (C-021.4): for each capture paper (02/03/04), is its content fully propagated into canon? Absorb-and-delete candidates named (BOQ_FRAMEWORK precedent); execute only with founder sign-off
+  - BACKLOG groomed (incl. the stale "PR pending merge" annotation sweep — audit 3.3)
+  - Run `/audit` as the groom's opening move (the night-end cadence, audit §10)
   - SPRINTS_NIGHT_2.md draft proposed
 
 ### N1-P3-04 — Constitution finalization + strategy-pack realignment (discovered, session 2026-06-10-20)
@@ -188,12 +192,14 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Residual**: the simulation's full 15-archetype roster was never persisted — ICP.md §3 canonizes the registry by name with the 7 recoverable slot numbers; founder confirms via **clarification C-018**
 
 ### N1-P3-06 — SCORING_MODEL.md + TECH_STRATEGY iBrain revision (queued since session-19)
-- **Status**: READY (blocked-on-read: iBrain API_REFERENCE + KARVIA integration folder — read in-session before drafting)
-- **Size**: M (1–2 sessions)
-- **Definition of done**:
-  - `2-TECHNICAL/SCORING_MODEL.md` — signal store, calculator-plugin contract, question schema, weights-as-config, causal-edge config, triangulation rule
-  - TECH_STRATEGY: iBrain consumption architecture (C-010), dev-stack telemetry ingestion, **the stage machine** (03 §8), compliance-veto fallback
-  - SYSTEM_ARCHITECTURE/API_SURFACE annotations (engines ≈ iBrain ancestors; ibrain/* route disposition flip)
+- **Status**: DONE (session 2026-06-12-23)
+- **Size**: M (1–2 sessions) → done in 1
+- **Delivered**: the gating read first (iBrain `04_API_REFERENCE.md` + all six `karvia_business/iBRAIN_Integration/` contracts + Karvia's shipped `iBrainService.js`), then —
+  - **NEW `2-TECHNICAL/SCORING_MODEL.md`**: the computed-category mechanics — signal store (append-only, program-scoped, raw-never-normalized; nudge events + iBrain-piped dev-stack telemetry as signals), question schema (`maps_to` mandatory — bank derives from the metric model, C-012), calculator-plugin contract (pure functions; score optional / floor_state not — absence is typed), BOQ aggregator (geometric mean + provenance inheritance + the gradient), anchor packs as config + restatement-by-recompute, causal-edge config (the Bridge as data, C-015.7), triangulation rule (F13 channel floor + `baseline.divergence`), adjustment records (evidence_ref required — calibrate-never-invent as a schema constraint), epistemic-engine mapping (BOQ §7), module placement + 7th-driver acceptance test
+  - **TECH_STRATEGY → four layers**: Layer 4 (iBrain consumption seams: events out / signed webhooks in / request-response N4; compliance veto = PvE + no-verdict-without-a-path + Article 13 labeling + cost ceiling/fallback; dev-stack telemetry via iBrain), **the stage machine** as a first-class Layer-2 engine (constitutional entry moments; subscribers: page weather, gauge arming, deck scheduling, registry; stale C-014 pipeline names fixed en route)
+  - **C-020 recorded**: the orchestrator lives **Nexus-side** — iBrain's surface is app-agnostic IQaaS with no context-assembly surface; game state + policy obligations are Nexus's. 04 §2 updated from "deliberately open" to decided; 04 §7 rows 5–6 marked landed
+  - SYSTEM_ARCHITECTURE lineage note (engines ≈ iBrain ancestors) + API_SURFACE `/ibrain/*` flip (✄ → seam ancestor, C-010/C-020); BRQ §4 nudge-event-log instrument (declining-send-rate metric); graph green (53 docs)
+- **Headline read finding**: Karvia's `iBrainService.js` never integrated with iBrain at all — it is a local in-process heuristic under the iBrain name; the planned integration (the contract folder) was never implemented. Accidentally, that is C-010's local-first fallback pattern.
 
 ### N1-P3-07 — C-016/game consequence revisions (discovered, 03 §9 queue)
 - **Status**: DONE (session 2026-06-12-22, same session as ratification + N1-P3-05)
@@ -208,10 +214,23 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Residual**: 04_RUNTIME_MODEL ratification (clarification C-019); orchestrator home + stage machine + nudge-telemetry instrument → N1-P3-06 (still blocked-on-read); hostile-playthrough USER_JOURNEYS pass → post-P3-07 task
 - **Notes**: brand/layout rework (C-013) and N1-P3-01 pt 2 remain on the master doc list after these.
 
+### N1-P3-09 — C-013 brand & layout rework (discovered by audit 2026-06-12 — decision had no BACKLOG item)
+- **Status**: READY (C-013 ratified 2026-06-10; brand assets in `design/brand/`)
+- **Size**: M (1–2 sessions)
+- **Definition of done** (the C-013 work list):
+  - tokens.css v2 re-extracted from the NEXUS product guide (Sora display + Manrope body + Cormorant taglines; teal + gold accents)
+  - DESIGN_LANGUAGE two-tier rework (BRAMHI parent tier vs NEXUS product tier)
+  - Sidebar navigation shell replaces the topbar across all 10 mockup surfaces
+  - Mockup re-skin incl. **stage-badge text sweep** (audit 2.8: Engaged/Assessing/Handed over → constitution §4 badge names)
+  - Verification gates re-run: hex scan zero, token-existence check, contract check, doc-graph green
+- **Notes**: absorbs the N1-P2-08 founder-review checkpoint (C-013: "the review verdict is this rework"). design/README.md carries the pending-state note.
+
 ### N1-P3-08 — Trigger map + best/hostile playthroughs → USER_JOURNEYS (discovered, 04 §7)
-- **Status**: READY after C-019 (04 ratification) and N1-P3-06 (the stage machine names the transitions)
+- **Status**: READY — C-019 ratified (04 active) and N1-P3-06 done (the stage machine + its transitions in TECH_STRATEGY); no blockers
 - **Size**: S–M (1 session)
 - **Definition of done**:
   - The trigger map: every stage transition × designed trigger × fallback nudge chain × owner (derived by walking the hostile playthrough transition by transition)
   - `2-TECHNICAL/USER_JOURNEYS.md` gains the best-case and hostile playthroughs alongside the 4 archetype journeys
+  - **J5 — the org-direct journey** (audit 2026-06-12 finding 4.4): the company self-serves the ladder with no consultant in any step (Article 9 made walkable)
+  - Stage-machine alignment sweep over the existing journeys (audit 2.4 residue: J4's handover framing checked against the stage machine's Evolve entry)
   - Nudge fences honored in every chain: structure-first, self-retiring (logged as BRQ telemetry), PvE (Art 14), Article 9 (org-direct chains end without a consultant)

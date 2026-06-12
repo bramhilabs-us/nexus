@@ -1,15 +1,18 @@
 ---
 id: nexus.tech-strategy
-title: Nexus Tech Strategy — three layers, eight blocks
+title: Nexus Tech Strategy — four layers, eight blocks
 tier: T2
 status: active
 owner: founder
-updated: 2026-06-10
+updated: 2026-06-12
 summary: >
-  The architecture card: page contracts as code, lifecycle + roll-up engines,
-  private program-scoped data, 8-block module anatomy, the generalized
-  AssessmentProvider (instruments/evidence/score/deliverables, AIR is v1,
-  SSI dropped), handover mechanics, and the srishti integration boundary.
+  The architecture card: page contracts as code, lifecycle + roll-up engines
+  plus the stage machine, private program-scoped data, the intelligence layer
+  (iBrain consumption per C-010, the Nexus-side orchestrator per C-020, the
+  compliance veto, dev-stack telemetry ingestion), 8-block module anatomy,
+  the generalized AssessmentProvider (instruments/evidence/score/deliverables,
+  AIR is v1, SSI dropped), handover mechanics, and the srishti integration
+  boundary.
 parents:
   - NEXUS_STRATEGY/00_NORTH_STAR.md
   - NEXUS_STRATEGY/0-BUSINESS/AI_CONSULTING_PLAYBOOK.md
@@ -17,12 +20,14 @@ parents:
   - NEXUS_STRATEGY/1-PRODUCT/NOF.md
   - NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md
   - NEXUS_STRATEGY/2-TECHNICAL/IMPROVEMENT_PLAN.md
+  - NEXUS_STRATEGY/04_RUNTIME_MODEL.md
 children:
   - src/README.md
   - client/README.md
   - tests/README.md
   - NEXUS_STRATEGY/2-TECHNICAL/DATA_MODELS.md
   - NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md
+  - NEXUS_STRATEGY/2-TECHNICAL/SCORING_MODEL.md
 revisit:
   - on: "any module contract.ts diverges from the anatomy or contracts described here"
     stage: N2
@@ -30,18 +35,21 @@ revisit:
     stage: N3
   - on: "srishti interfaces stabilize (TQ-3)"
     stage: N4
+  - on: "first live iBrain call (N4) — verify the local-first legs swap by config as C-010 promises"
+    stage: N4
 ---
 
-# Nexus Tech Strategy — three layers, eight blocks
+# Nexus Tech Strategy — four layers, eight blocks
 
 ## Purpose
 
-This is the tech card of the pack: how Nexus is structured so that every capability is a swappable lego block. It defines the three layers, the eight module contracts, the generalized assessment interface (with AIR as the first implementation), the calculation engine, the handover mechanics, and the srishti boundary. It does **not** re-describe Karvia (that's `SYSTEM_ARCHITECTURE.md`) or restate the quality bar (that's `IMPROVEMENT_PLAN.md`); it builds on both and on the ratified decisions.
+This is the tech card of the pack: how Nexus is structured so that every capability is a swappable lego block. It defines the four layers, the eight module contracts, the generalized assessment interface (with AIR as the first implementation), the calculation engine, the stage machine, the intelligence layer, the handover mechanics, and the srishti boundary. It does **not** re-describe Karvia (that's `SYSTEM_ARCHITECTURE.md`) or restate the quality bar (that's `IMPROVEMENT_PLAN.md`); it builds on both and on the ratified decisions.
 
 ## TL;DR
 
 - **One process, many modules** (C-003): a single TypeScript-strict Express app (C-004); module boundaries enforced by contracts and lint, not ports.
-- **Three layers, one rule per layer**: UI renders page contracts; business logic owns lifecycles and roll-ups; data is private to its module.
+- **Four layers, one rule per layer** (04_RUNTIME_MODEL §1): UI renders page contracts; business logic owns lifecycles, roll-ups, and every number Nexus computes; data is private to its module; intelligence is consumed through the orchestrator — it supplies predictions and content, never scores.
+- **Modularization is two-dimensional**: the eight blocks slice vertically, the four layers slice horizontally through every block; a capability is located by its (block, layer) coordinate, and contracts exist at both cuts.
 - **Eight blocks, black-box discipline**: you ask a module through its published interface; you never import its models. Karvia's shared-`server/models/` pattern (AP-1) is the one thing Nexus must never recreate.
 - **The assessment block is fully generic**: an `AssessmentProvider` contract covering instruments, evidence, scoring, and deliverable generation. **AIR is the first implementation; SSI is not carried over** (C-006). Shipping any future assessment in hours, touching only its impl folder, is the acceptance test of the whole architecture.
 - **Handover is a first-class lifecycle event**, and **srishti is an external add-on behind a published integration contract** — never a coupled dependency.
@@ -60,7 +68,10 @@ interface PageContract {
   primaryCta: Cta;                      // exactly one
   secondaryCta?: Cta;
   analyticsStrip: TileSpec[];           // max 4; each tile names its drill-down target
-  emptyState: EmptyStateSpec;           // teaches purpose, points at primaryCta
+  stageWeather: StageWeatherSpec;       // per-program-stage rendering row (PRODUCT_STRATEGY
+                                        // § stage matrix) — driven by the stage machine's events
+  rulesSurface: string;                 // the game rule this page embodies, stated on-page (04 §5)
+  emptyState: EmptyStateSpec;           // the pre-stage weather: teaches purpose, points at primaryCta
   entryPoints: PageRef[];               // for nav/journey tests
   exitPoints: PageRef[];
   modes: ('engagement' | 'builder')[];  // which operating modes show this page
@@ -87,11 +98,34 @@ State machines, declared as data, executed synchronously inside the request (or 
 | Entity | States | Transition triggers |
 |---|---|---|
 | Objective | Identified → Handed off → Sustained | completion threshold met → handoff confirmed → sustained review cadence established |
-| Client (pipeline stage) | Prospect → Assessing → Engaged → Handed over | assessment started → deliverables accepted + objectives seeded → program handover |
-| Program | active → handed_over → completed / paused | handover event / outcome recorded / human action |
+| Program (the stage machine) | Prospect → Measure → Align → Transform → Evolve | the constitutional entry moments (01 §4): client added → assessment sprint begins → engagement signed → daily work tracked → handover |
+| Program (operational) | active → handed_over → completed / paused | handover event / outcome recorded / human action |
 | Assessment | draft → in_progress → scored → delivered | provider lifecycle hooks (see contract below) |
 
 Every transition emits a typed domain event on an in-process event bus (one process per C-003 — no message broker needed), but events are first-class so tiles, notifications, and the knowledge module subscribe instead of polling Mongo.
+
+### The stage machine
+
+The Game's one engineering requirement (03 §8) and the runtime model's level
+controller (04 §7): **program stage is a first-class Layer-2 engine, not a badge on
+a client tile.** A program carries its stage; stages transition only on the
+constitution's crisp, observable entry moments (01 §4 — never on judgment calls or
+timers); transitions emit `program.stage_changed` events that everything
+stage-responsive subscribes to:
+
+- **pages re-weather** — the stage-responsive page contract (PRODUCT_STRATEGY) reads
+  the stage to pick its weather/emphasis row;
+- **gauges arm** — driver instruments activate per the staircase (telemetry
+  connection at Transform, BRQ measurement windows at Evolve);
+- **decks re-schedule** — the assessment module re-plans recurring/pulse moments;
+- **the pipeline registry updates** — My Clients badges read Prospect · Measuring ·
+  Aligning · Transforming · Evolving (C-014).
+
+Two rules the machine enforces: **entry is earned, not sequential** (C-016.8 — a
+company arriving instrumented enters at the rung its provenance supports, so the
+machine validates evidence for the entry moment rather than requiring the previous
+stage's duration), and **stage never causes provenance** (stages gate which
+instruments *run*; provenance follows from which signals exist — SCORING_MODEL §10).
 
 ### The roll-up engine
 
@@ -116,6 +150,82 @@ Rules: calculations are pure functions over typed inputs (unit-testable without 
 - Domain data is data (AP-3): instruments, scoring rubrics, deliverable templates, lifecycle definitions are seeds/config, never literals in handlers. (Karvia's hardcoded SSI question bank is the canonical counter-example — studied, not lifted.)
 - **Match-grade capture** (fit thesis, PRODUCT_STRATEGY): User profile signals (motivations, skills, interests), Company Profile goals/priorities, and Task metadata are structured fields (tags/enums/scored dimensions), never prose blobs — the post-beta fit engine must be a query over existing data, not a migration.
 - Each module owns its collections privately. Cross-module reads go through the owning module's interface — enforced by `no-restricted-imports` (AP-1).
+
+## Layer 4 — Intelligence: iBrain consumption and the orchestrator
+
+The fourth layer (04_RUNTIME_MODEL §1) supplies what Nexus deliberately does not
+build: predictions, pattern detection, planning, and generated content. Its one
+rule: **it never computes a score** — every number Nexus shows as fact is Layer-2
+arithmetic (Article 13; SCORING_MODEL owns the computed category).
+
+### What the iBrain read settled (the basis for C-020)
+
+The iBrain platform (IQaaS — Universal Adapter, Tracking, Observer, Scoring,
+Planner, Assessment, IAM) exposes an **app-agnostic** surface: apps register
+(`X-App-Id`), push events (`POST /ingest/native` / `/ingest/batch`), define
+Observer rules whose actions fire webhooks back, and call request/response engines
+(Planner `generate-plan`/`refine-plan`, Scoring `calculate`, per-user scores).
+iBrain knows what you send it — it has **no surface for assembling another app's
+domain context**, and its Planner expects the *caller* to brief it. Karvia's planned
+integration (the `iBRAIN_Integration/` contract set: telemetry out, nudge webhook
+in, KARVIA-owns-business-data, graceful degradation) put the consumption seam on
+the app side; Karvia's shipped `iBrainService.js` is no integration at all — a
+local heuristic under the iBrain name, which is, accidentally, the local-first
+fallback pattern C-010 formalizes.
+
+### The orchestrator lives Nexus-side (C-020)
+
+The context assembler (04 §2) is a **Nexus Layer-4 seam component**, not part of
+iBrain:
+
+- **Only Nexus has the context.** Game state — company, program, stage, player,
+  page, signals — lives behind Nexus module contracts. Assembling it inside iBrain
+  would mean exporting the domain model wholesale, inverting the data-ownership
+  rule (business data is Nexus's; ML data is iBrain's).
+- **Policy must run before anything leaves.** The data covenant (03 F12), no-PII
+  telemetry, program scoping, and cost ceilings are Nexus-side obligations; the
+  assembler that composes the briefing is where they are enforced.
+- **C-010 demands it**: local-first legs behind iBrain-shaped contracts only work
+  if the seam component is ours to point at either implementation.
+
+The orchestrator's job at any fetch moment: build the briefing (game state +
+relevant signals + the constitutional display rules in force), call the right
+backend (iBrain engine, external LLM, or local fallback), and label the result's
+epistemic category before any module sees it.
+
+### The three consumption seams
+
+| Seam | Direction | Shape (per the iBrain API + the Karvia contract set) |
+|---|---|---|
+| **Events out** | Nexus → iBrain | domain events (Layer 2 bus) mapped to Universal Adapter envelopes — `eventType`, `userId`, scoped IDs, no PII; batch for low-priority, real-time for high; retry with backoff + dead-letter |
+| **Webhooks in** | iBrain → Nexus | one signed receiver (`/api/webhooks/ibrain/*`, HMAC-verified): nudges, score updates, predictions — each enters the compliance veto before any surface shows it |
+| **Request/response** | Nexus → iBrain | Planner/Scoring calls, **N4** (C-010.3); until then the local fallback leg answers, behind the same contract |
+
+Dev-stack telemetry (git, CI, incidents, AI usage/billing — the Eight Metrics'
+home, constitution §5.5) ingests through iBrain's pipeline and lands in the signal
+store as `telemetry` signals (SCORING_MODEL §2.2). Nexus never builds collectors
+for the client's infrastructure; it consumes iBrain's normalized stream.
+
+### The compliance veto — the Hybrid Intelligence Pattern's local leg
+
+Every Layer-4 output (learned or generated) passes a Nexus-side policy gate before
+display, and the gate can veto:
+
+1. **PvE** (Article 14) — anything carrying a colleague-vs-colleague comparison is
+   rejected outright;
+2. **No verdict without a path** (Article 6) — a hard truth without a next step is
+   returned to the backend for re-framing or dropped;
+3. **Labeling** (Article 13) — learned outputs render as recommendation +
+   confidence + why; generated outputs carry the AI-drafted label and the
+   human-accept gate (the tri-split, ratified C-019);
+4. **Cost ceiling + fallback** — every AI feature has an explicit spend ceiling and
+   a tested non-AI fallback (the parking-lot rule); iBrain unavailable ⇒ the local
+   leg answers, degraded but functional (AP-8 discipline, declared OPTIONAL
+   dependency).
+
+The veto is business logic — deterministic, contract-tested, Layer 2 — which is
+exactly the Hybrid Intelligence Pattern: *iBrain recommendation + local business
+logic + fallback*.
 
 ## The eight blocks
 
@@ -196,7 +306,7 @@ What registration buys, with zero changes elsewhere: a *Create {name} assessment
 Two seams the assessment block reserves for the BOQ universe (`0-BUSINESS/scores/BOQ.md` + one doc per driver, deliberately evolving):
 
 - **Auto-initiation**: the `client.added` domain event triggers the entry assessment automatically (the assessment module subscribes; My Clients never calls it directly). Cadenced re-assessments/pulses are scheduled by the assessment module per its instruments' delivery moments.
-- **Score calculators as lego blocks**: the six drivers (ARS, BPI, CFS, BRQ, FLS, CRS → BOQ; C-011) are pure-function calculators registered over a **signal store** (assessment evidence + domain-event telemetry: decision latency, rework, meeting load accrue from normal usage). Only signals are measured; every score decomposes to signals on demand. Engine design lands Night 4 — the seam (signal store + calculator registry) is the binding part, formulas are not.
+- **Score calculators as lego blocks**: the six drivers (ARS, BPI, CFS, BRQ, FLS, CRS → BOQ; C-011) are pure-function calculators registered over a **signal store** (assessment evidence + domain-event telemetry: decision latency, rework, meeting load accrue from normal usage). Only signals are measured; every score decomposes to signals on demand. The seam is now specified — record shapes, calculator contract, floors, packs, triangulation, calibration mechanics — in [SCORING_MODEL.md](SCORING_MODEL.md); engine build lands Night 4.
 
 ## Handover — engagement becomes product
 

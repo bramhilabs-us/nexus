@@ -15,6 +15,7 @@ parents:
 children:
   - client/README.md
   - NEXUS_STRATEGY/1-PRODUCT/design/mockups/README.md
+  - NEXUS_STRATEGY/1-PRODUCT/design/README.md
 revisit:
   - on: "the BRAMHI brand guide is updated, or page-level design specs are added"
     stage: N3

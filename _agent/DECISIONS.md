@@ -380,3 +380,59 @@ Every domain model gains a required `program_id`: `Objective`, `KeyResult`, `Goa
 3. The four rules are ratified **as canon**; writing them into the constitution's articles is consequence work, riding the 03 §9 queue (N1-P3-07) per Article 12's amendment process.
 
 **Refines**: C-015 (confirms its proposed items), C-016.
+
+---
+
+## 2026-06-12 — The orchestrator lives Nexus-side (C-020)
+
+**Context**: 04_RUNTIME_MODEL §2 left the context assembler's home deliberately open — Nexus-side seam component vs part of iBrain's consumption surface — pending the iBrain API read (two sessions enforced the gate). Session-23 (N1-P3-06) performed the read: `iBrain/External_App_Integration/04_API_REFERENCE.md` + the full `karvia_business/iBRAIN_Integration/` contract set (API_CONTRACT, TELEMETRY_SPEC, SYNC_PROTOCOL, ML_REQUIREMENTS, SHARED_GLOSSARY, INTEGRATION_OVERVIEW) + Karvia's shipped `server/services/iBrainService.js`.
+
+**What the read established**:
+1. iBrain's surface is **app-agnostic IQaaS**: app registration (`X-App-Id`), event ingestion (Universal Adapter `/ingest/native|batch`), Observer rules → webhook actions, and request/response engines (Planner, Scoring). It has **no context-assembly surface**; the Planner expects the *caller* to brief it (`userInput` is caller-composed).
+2. Karvia's planned integration put the consumption seam on the app side (telemetry out / signed nudge webhook in / KARVIA-owns-business-data / graceful degradation) — and was **never implemented**: the shipped `iBrainService.js` is a local in-process heuristic under the iBrain name. Accidentally, that is the local-first fallback leg C-010 formalizes.
+
+**Decision**: **The orchestrator (04 §2's context assembler) is a Nexus-side Layer-4 seam component.** Rationale: (a) the game state it assembles — company, program, stage, player, page, signals — lives behind Nexus module contracts; assembling it inside iBrain would export the domain model and invert the data-ownership rule; (b) the policy obligations (data covenant, no-PII, program scoping, cost ceilings, the compliance veto) must execute before anything leaves Nexus; (c) C-010's swap-by-config promise requires the seam component to be Nexus's to point at either implementation. The three consumption seams (events out / webhooks in / request-response N4), the compliance veto, and the epistemic labeling duty are specified in TECH_STRATEGY Layer 4.
+
+**Consequences**: TECH_STRATEGY reframed three layers → **four layers** (04 §1 propagated); the stage machine recorded as a first-class Layer-2 engine (03 §8); SCORING_MODEL.md lands as the computed-category spec; 04 §2 updated from "deliberately open" to decided; SYSTEM_ARCHITECTURE/API_SURFACE annotated (Karvia engines ≈ iBrain ancestors; `/ibrain/*` routes = seam ancestors).
+
+**Refines**: C-010 (gives its consumption pattern a designed home).
+
+---
+
+## 2026-06-12 — The segment registry is canon by name (C-018)
+
+**Context**: C-016's devil's-advocate simulation ran 15 company archetypes, but the full numbered roster was session state and never persisted — only 7 slot numbers survive as score-doc citations, plus two named-but-unnumbered segments. `0-BUSINESS/ICP.md` §3 canonized the registry by name. Founder answered clarification C-018 in session-23.
+
+**Decision**: **Registry-by-name is canon.** The registry's job is the qualification gate + the anchor-pack roadmap, not simulation archaeology: slots append as engagements meet new archetypes; the simulation's unrecovered rows are not reconstructed. The 7 surviving slot numbers stay fixed solely to keep the score docs' citations valid.
+
+**Consequences**: ICP.md §3 provenance note updated; its C-018 revisit trigger resolved.
+
+**Refines**: C-016.5.
+
+---
+
+## 2026-06-12 — The Runtime Model ratified; Article 13 gains the generated category (C-019)
+
+**Context**: 04_RUNTIME_MODEL (the founder's 2026-06-12 runtime capture) carried two pieces of constitutional weight pending ratification: the three epistemic categories (computed / learned / generated — a proposed Article 13 extension) and the paper's own draft status. Both propagation halves had already landed (product N1-P3-07, technical N1-P3-06 incl. C-020). Founder answered clarification C-019 in session-23: **ratify both**.
+
+**Decision**:
+1. **Article 13 is amended** (Article 12 process): *score ≠ prediction ≠ draft*. Generated content — anything drafted by an LLM via the orchestrator — is always labeled AI-drafted, becomes program canon only after a human accepts it, always has a non-AI fallback, and never silently becomes a score input (signals produced by adopted content are measured normally; the content stays generated forever).
+2. **`04_RUNTIME_MODEL.md` is `active`.** Its remaining open piece, the trigger map, rides N1-P3-08 (now unblocked).
+
+**Consequences**: constitution §7 amended (Article 13 + provenance line); 04 flipped active with §3 marked ratified and queue rows closed; TECH_STRATEGY/SCORING_MODEL "pending C-019" annotations resolved; N1-P3-08 unblocked.
+
+**Refines**: C-015.6 (extends the two-way split it ratified), C-017, C-020.
+
+---
+
+## 2026-06-12 — Repo structure & doc-simplification posture (C-021)
+
+**Context**: The first full reflection audit (`_agent/AUDIT_2026-06-12.md`) prompted two founder questions: should the implementation live under a dedicated `nexus-implementation/` folder, and can the 60-doc set be simplified without losing meaning? Founder ratified both recommendations in-session.
+
+**Decision**:
+1. **The implementation stays at repo root** — `src/` + `client/` + `tests/`, the Node/pnpm convention every tool assumes. The root `README.md` names them "the implementation"; no `nexus-implementation/` wrapper folder. The Night-2 pnpm workspace formalizes the boundary.
+2. **Every folder carries a thin README index** (8 added this session: root + 7 governed). READMEs are navigation only — content lives in the documents, so an index can never become a second source of truth.
+3. **No doc merging now** — every governed doc has exactly one job; the doc count is dominated by indexes, frozen as-is maps, and the per-driver calibration logs that *require* separation. Simplification happens via the **absorption pattern** (the BOQ_FRAMEWORK precedent): once a capture paper's content has fully propagated into canon, it is absorbed and deleted, references rewired. 02/03/04 become absorption candidates after the product-docs stage.
+4. **The absorption review is a standing N1-P6-01 groom agenda item**, alongside the phase-budget re-baseline (audit finding 7).
+
+**Refines**: C-014 (the constitution remains the conflict-winner the indexes point at).

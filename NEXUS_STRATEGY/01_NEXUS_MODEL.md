@@ -243,7 +243,7 @@ Survey questions are never invented per assessment. Every question is born from 
 
 ## 7 · The binding articles
 
-These fourteen rules are the constitution proper. Everything else in this document explains them. (Thirteen ratified with the constitution; Article 3's freshness extension, Article 6's two display extensions, and Article 14 entered by amendment C-017, sourced from the Game's audit.)
+These fourteen rules are the constitution proper. Everything else in this document explains them. (Thirteen ratified with the constitution; Article 3's freshness extension, Article 6's two display extensions, and Article 14 entered by amendment C-017, sourced from the Game's audit; Article 13's generated-content extension entered by amendment C-019, sourced from the Runtime Model.)
 
 1. **The signal rule.** Only signals are directly measured; every score is calculated and traceable to signals on demand.
 2. **The provenance rule.** Every displayed score carries Proxy / Partially Measured / Measured. No silent blending.
@@ -257,7 +257,7 @@ These fourteen rules are the constitution proper. Everything else in this docume
 10. **Tier-placement normalization.** Every score is a 0–100 position between published newbie and top-0.1% anchors. Raw values are evidence, never scores.
 11. **The floor guard.** Drivers entering the BOQ composite are clamped to 1–100, so a single zero cannot annihilate the quotient (it will still drag it brutally — that's the design).
 12. **The amendment rule.** This document changes only by founder ratification recorded in `_agent/DECISIONS.md`, and every change propagates to the documents that implement it.
-13. **Score ≠ prediction.** Scores are auditable arithmetic, traceable to signals — Nexus computes them; the trust layer is never a black box. Predictions and recommendations are learned models — iBrain predicts them, and they may be probabilistic. An NBM is always displayed as a recommendation with a confidence and a why — never as a fact.
+13. **Score ≠ prediction ≠ draft.** Scores are auditable arithmetic, traceable to signals — Nexus computes them; the trust layer is never a black box. Predictions and recommendations are learned models — iBrain predicts them, and they may be probabilistic. An NBM is always displayed as a recommendation with a confidence and a why — never as a fact. **Generated content** is the third category (C-019, the Runtime Model's tri-split): anything drafted by an LLM — processes, KR drafts, narratives — is always labeled AI-drafted, becomes program canon only after a human accepts it, and always has a non-AI fallback. An accepted draft never silently becomes a score input: if adopted content later produces signals, those signals are measured normally, but the content itself stays in the generated category forever.
 14. **The PvE principle.** The opponent is the company's own entropy, never its people: no gauge, score, or nudge ever feeds colleague-vs-colleague comparison (C-017).
 
 ## 8 · Settled vs evolving
