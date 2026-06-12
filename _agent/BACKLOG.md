@@ -1,12 +1,13 @@
 # Backlog
 
 Loaded from `SPRINTS_NIGHT_1.md` on 2026-06-03.
+**2026-06-12 groom (C-022)**: Night 1 CLOSED at 29 steps (re-baseline: budget 90 → 105, EXECUTION_PLAYBOOK § the re-baseline record). All open items below are re-phased into **Night 1b — Product & technical docs** (`SPRINTS_NIGHT_1B.md`); IDs are kept stable. None dropped.
 Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 
 ---
 
 ### N1-P1-01 — Snapshot Karvia docs into `_source/`
-- **Status**: DONE (PR pending merge — tick 2026-06-03-01)
+- **Status**: DONE (merged — tick 2026-06-03-01)
 - **Size**: S (1 tick)
 - **Depends on**: none
 - **Definition of done**:
@@ -16,7 +17,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: Mechanical. Hooks must NOT fire on karvia path (reads only).
 
 ### N1-P2-01 — System architecture map
-- **Status**: DONE (PR pending merge — tick 2026-06-03-02)
+- **Status**: DONE (merged — tick 2026-06-03-02)
 - **Size**: M (2 ticks; completed in 1)
 - **Depends on**: N1-P1-01 (DONE, merged)
 - **Definition of done**:
@@ -26,7 +27,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - ✓ Opened C-003 / C-004 / C-005 on architecture questions
 
 ### N1-P2-02 — Data models catalogue
-- **Status**: DONE (PR pending merge — session 2026-06-09-02)
+- **Status**: DONE (merged — session 2026-06-09-02)
 - **Size**: M (2 ticks; completed in 1 session)
 - **Depends on**: N1-P1-01
 - **Definition of done**:
@@ -37,7 +38,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: Surfaced C-008 (Goal/Move layer) — ANSWERED same day by the founder: **NOF** (`1-PRODUCT/NOF.md`, DECISIONS C-008/C-009). N1-P4-01 fully unblocked; dispositions updated in DATA_MODELS.md.
 
 ### N1-P2-03 — API surface catalogue
-- **Status**: DONE (tick 2026-06-09-11, PR pending merge)
+- **Status**: DONE (tick 2026-06-09-11, merged)
 - **Size**: M (2 ticks — done in 1)
 - **Depends on**: N1-P1-01
 - **Definition of done**:
@@ -45,7 +46,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - ✓ Shape-tagging per route (CRM / OKR / ASMT + COMPOSE/AI/SIGNAL/CONF/META aux) with per-route Nexus dispositions
 
 ### N1-P2-04 — Module dependency graph
-- **Status**: DONE (tick 2026-06-09-09, PR pending merge)
+- **Status**: DONE (tick 2026-06-09-09, merged)
 - **Size**: M (2 ticks — done in 1)
 - **Depends on**: N1-P1-01
 - **Definition of done**:
@@ -54,9 +55,9 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - ✓ Every engine + route-cluster mapped to actual grepped imports; each cross-boundary edge labeled stays-in-module / contract call / domain event / dies (NOF or SSI)
 
 ### N1-P2-06 — Engineering principles & improvement bar
-- **Status**: DONE (PR pending merge — tick 2026-06-04-03)
+- **Status**: DONE (merged — tick 2026-06-04-03)
 - **Size**: M (1 tick)
-- **Depends on**: N1-P2-01 (DONE, PR #2 pending merge)
+- **Depends on**: N1-P2-01 (DONE, merged)
 - **Definition of done**:
   - ✓ `NEXUS_STRATEGY/2-TECHNICAL/IMPROVEMENT_PLAN.md` written
   - ✓ 10 named anti-patterns sourced from Karvia evidence
@@ -68,7 +69,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: This doc is the bar every Night 2-5 tick is measured against. Added mid-sprint per human request.
 
 ### N1-P2-07 — Design tokens from the Brandguide (Path B pull-forward)
-- **Status**: DONE (tick 2026-06-09-10, PR pending merge)
+- **Status**: DONE (tick 2026-06-09-10, merged)
 - **Size**: S (1 session)
 - **Depends on**: DESIGN_LANGUAGE.md (DONE), N1-P2-04 (sequencing only — tokens session follows the module graph)
 - **Definition of done**:
@@ -91,7 +92,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: First visible product. Throwaway-quality is NOT acceptable — these are the Night 3 spec (Karvia lesson #174-3).
 
 ### N1-P2-05 — User journeys
-- **Status**: DONE (tick 2026-06-10-13, PR pending merge)
+- **Status**: DONE (tick 2026-06-10-13, merged)
 - **Size**: M (2 ticks — done in 1)
 - **Depends on**: N1-P1-01
 - **Definition of done**:
@@ -99,7 +100,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - ✓ `NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md` + journey↔contract index for N1-P4-01
 
 ### N1-P0-02 — Strategy pack: North Star + product/tech/execution cards
-- **Status**: DONE (PR pending merge — interactive session 2026-06-09-01)
+- **Status**: DONE (merged — interactive session 2026-06-09-01)
 - **Size**: M (completed in 1 interactive session)
 - **Depends on**: N1-P2-01, N1-P2-06, DECISIONS C-001/3/4/5
 - **Definition of done**:
@@ -110,9 +111,9 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: Human-directed (founder voice brief + iPad notes), added mid-sprint. Downstream: N1-P3-01 builds on PRODUCT_STRATEGY; N1-P4-01 aligns with TECH_STRATEGY; EXECUTION_PLAYBOOK governs all future step budgets.
 
 ### N1-P3-01 — Populate 0-BUSINESS and 1-PRODUCT (Transformation OS framing)
-- **Status**: IN-PROGRESS (part 1 of 2 done — tick 2026-06-10-18, PR pending: 0-BUSINESS gap filled with POSITIONING/GTM/STAKEHOLDERS/BUSINESS_MODEL. DoD re-scoped per re-sum rule: the strategy pack already covers vision+journeys, so the real gap = 4 business docs + 2 product docs (CAPABILITIES, ROADMAP — part 2). Original "4 files each" predates the pack.)
+- **Status**: IN-PROGRESS — **Night 1b, sprint 1** (part 1 of 2 done — tick 2026-06-10-18, merged: 0-BUSINESS gap filled with POSITIONING/GTM/STAKEHOLDERS/BUSINESS_MODEL. DoD re-scoped per re-sum rule: the strategy pack already covers vision+journeys, so the real gap = 4 business docs + 2 product docs (CAPABILITIES, ROADMAP — part 2). Original "4 files each" predates the pack. Part 2 note: CAPABILITIES is the canon home the 02 absorption waits on — give the task×person match v1 mechanics a section, per C-022.4.)
 - **Size**: M (2 ticks)
-- **Depends on**: N1-P1-01 (DONE — pending PR merge)
+- **Depends on**: N1-P1-01 (DONE, merged)
 - **Definition of done**:
   - 4 files each in 0-BUSINESS/ and 1-PRODUCT/
   - Leads with "Transformation OS"; AI Readiness as launch vertical
@@ -121,21 +122,21 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: C-001 answered — broad scope (Transformation OS). See DECISIONS.md 2026-06-03.
 
 ### N1-P3-02 — Populate 3-DELIVERY skeleton
-- **Status**: DONE (tick 2026-06-10-14, PR pending merge)
+- **Status**: DONE (tick 2026-06-10-14, merged)
 - **Size**: S (1 tick)
 - **Depends on**: N1-P1-01
 - **Definition of done**:
   - ✓ SPRINT_PROCESS.md, RELEASE_PROCESS.md, CI_CD.md written — each with IM-11 reflection record, wired as EXECUTION_PLAYBOOK children
 
 ### N1-P3-03 — Populate 4-CUSTOMER skeleton
-- **Status**: DONE (tick 2026-06-10-16, PR pending merge)
+- **Status**: DONE (tick 2026-06-10-16, merged)
 - **Size**: S (1 tick)
 - **Depends on**: N1-P1-01
 - **Definition of done**:
   - ✓ INTERVIEW_TEMPLATE, FEEDBACK_LOG, EVIDENCE_INDEX, METRICS templates + tier README — all governed T4 nodes under PRODUCT_STRATEGY
 
 ### N1-P4-01 — Modularization plan + contract drafts
-- **Status**: READY (C-003/4/5 all answered — see DECISIONS.md 2026-06-04)
+- **Status**: READY — **Night 1b, sprint 2** (C-003/4/5 all answered — see DECISIONS.md 2026-06-04)
 - **Size**: M (2 ticks)
 - **Depends on**: N1-P2-04 (module graph), N1-P2-02 (data models)
 - **Definition of done**:
@@ -146,7 +147,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: All 3 architectural clarifications now answered (2026-06-04). N1-P4-02 also unblocked.
 
 ### N1-P4-02 — Nexus vs Karvia diff + Assessment interface spec
-- **Status**: READY
+- **Status**: READY — **Night 1b, sprint 2**
 - **Size**: M (2 ticks)
 - **Depends on**: N1-P4-01
 - **Definition of done**:
@@ -154,36 +155,35 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - ASSESSMENT_INTERFACE_SPEC.md (pluggable contract)
 
 ### N1-P5-01 — Test inventory
-- **Status**: READY
+- **Status**: READY — **Night 1b, sprint 3**
 - **Size**: M (2 ticks)
 - **Depends on**: N1-P1-01
 - **Definition of done**:
   - `NEXUS_STRATEGY/3-DELIVERY/QA/TEST_INVENTORY.md` with every Karvia test file catalogued
 
 ### N1-P5-02 — Coverage map + path to 80%
-- **Status**: READY
+- **Status**: READY — **Night 1b, sprint 3**
 - **Size**: M (2 ticks)
 - **Depends on**: N1-P5-01, N1-P2-04
 - **Definition of done**:
   - COVERAGE_MAP.md, COVERAGE_GAPS.md, PATH_TO_80_PERCENT.md
 
-### N1-P6-01 — Journal + BACKLOG groom + Night 2 sprint draft
-- **Status**: READY
-- **Size**: S–M (1 session; grew per audit 2026-06-12 + C-021)
+### N1-P6-01 — Journal + BACKLOG groom + Night 1b sprint draft (the Night-1 close-out)
+- **Status**: DONE (session 2026-06-12-24)
+- **Size**: S–M (1 session; grew per audit 2026-06-12 + C-021) → done in 1
 - **Depends on**: all other N1 tasks DONE or accounted for
-- **Definition of done**:
-  - JOURNAL summary for Night 1
-  - **Phase-budget re-baseline** (audit finding 7 — N1 ran 27+ steps vs 18 budgeted; re-sum, re-cut N2–N5 against the now-richer strategy or formally extend the 90; EXECUTION_PLAYBOOK table updated and the >25% trigger answered)
-  - **Absorption review** (C-021.4): for each capture paper (02/03/04), is its content fully propagated into canon? Absorb-and-delete candidates named (BOQ_FRAMEWORK precedent); execute only with founder sign-off
-  - BACKLOG groomed (incl. the stale "PR pending merge" annotation sweep — audit 3.3)
-  - Run `/audit` as the groom's opening move (the night-end cadence, audit §10)
-  - SPRINTS_NIGHT_2.md draft proposed
+- **Delivered**:
+  - ✓ `/audit` re-verify opened the session (addendum in `AUDIT_2026-06-12.md`): fix-pass fully landed, graph green at 60 docs, secrets clean
+  - ✓ **Phase-budget re-baseline (C-022)**: N1 closed at 29 actual (cause named: founder strategy expansion, sessions 19–23); budget 90 → 105; new **Night 1b** docs phase (10); N2–N4 re-cut against the richer spec (−7); EQ-1 closed (every entry counts); the >25% trigger answered; 105 propagated to NORTH_STAR/registry/READMEs/BUSINESS_MODEL/SPRINT_PROCESS
+  - ✓ **Absorption review verdicts (C-022.4)**: 02 strongest candidate (parked on CAPABILITIES landing); 03 keep — owner doc, not residue; 04 candidate-in-waiting (re-review after P3-08). No deletions — founder-gated, and C-021.3 gates them after the product-docs stage anyway
+  - ✓ BACKLOG swept (13 stale "PR pending merge" annotations cleared; N1-P3-04 residual updated per C-017) + open items re-phased into Night 1b, IDs stable, none dropped
+  - ✓ **`SPRINTS_NIGHT_1B.md` drafted** (deviation from the card's "SPRINTS_NIGHT_2.md" name, recorded in C-022.3: Night 2 = Foundation in ~40 refs across 20 docs; renumbering would stale them all)
 
 ### N1-P3-04 — Constitution finalization + strategy-pack realignment (discovered, session 2026-06-10-20)
 - **Status**: DONE (session 2026-06-11-21) — exceeded scope
 - **Size**: M (1–2 sessions) → done in 1
 - **Delivered**: DECISIONS C-010…C-016 (incl. the simulation-driven D1–D8 set); all constitution amendments (Staircase signature diagram, deliverables column, Articles 6+13, ICP, scope clause, gauge-lag, restatement rule, BOQ referent, honest-limits additions, reserved seats); 02_NBM_MODEL ratified → active (+ causal-correctness, altitude limits); **NEW 03_NEXUS_GAME.md** (game whitepaper: stage-responsive page matrix, 14-friction two-pass audit all designed, SaaS value bridge, playthrough); **NEW `0-BUSINESS/scores/` library** (BOQ.md core model with the epistemic engine + 6 driver docs on the shared template); BOQ_FRAMEWORK absorbed + deleted, 12 reference sites rewired
-- **Residual**: 01_NEXUS_MODEL.md and 03_NEXUS_GAME.md stay `status: draft` pending founder read-through (5 naming proposals in 01; 4 candidate constitutional rules + Steward/data-covenant in 03)
+- **Residual**: resolved — C-017 (session-22) ratified both: 01 + 03 flipped `active`, the 4 candidate rules written into the articles (incl. Art 14 PvE)
 
 ### N1-P3-05 — Doc list: ICP.md + COMPANY_JOURNEY.md (discovered, C-016)
 - **Status**: DONE (session 2026-06-12-22)
@@ -215,7 +215,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: brand/layout rework (C-013) and N1-P3-01 pt 2 remain on the master doc list after these.
 
 ### N1-P3-09 — C-013 brand & layout rework (discovered by audit 2026-06-12 — decision had no BACKLOG item)
-- **Status**: READY (C-013 ratified 2026-06-10; brand assets in `design/brand/`)
+- **Status**: READY — **Night 1b, sprint 1** (C-013 ratified 2026-06-10; brand assets in `design/brand/`)
 - **Size**: M (1–2 sessions)
 - **Definition of done** (the C-013 work list):
   - tokens.css v2 re-extracted from the NEXUS product guide (Sora display + Manrope body + Cormorant taglines; teal + gold accents)
@@ -226,7 +226,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: absorbs the N1-P2-08 founder-review checkpoint (C-013: "the review verdict is this rework"). design/README.md carries the pending-state note.
 
 ### N1-P3-08 — Trigger map + best/hostile playthroughs → USER_JOURNEYS (discovered, 04 §7)
-- **Status**: READY — C-019 ratified (04 active) and N1-P3-06 done (the stage machine + its transitions in TECH_STRATEGY); no blockers
+- **Status**: READY — **Night 1b, sprint 1** — C-019 ratified (04 active) and N1-P3-06 done (the stage machine + its transitions in TECH_STRATEGY); no blockers. Landing this closes 04 §7 row 7 → triggers the 04 absorption re-review (C-022.4)
 - **Size**: S–M (1 session)
 - **Definition of done**:
   - The trigger map: every stage transition × designed trigger × fallback nudge chain × owner (derived by walking the hostile playthrough transition by transition)

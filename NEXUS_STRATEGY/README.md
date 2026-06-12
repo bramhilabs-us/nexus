@@ -29,7 +29,7 @@ Everything Nexus *decides* lives here; everything Nexus *is* lives in `src/`, `c
 | T0 business | [0-BUSINESS/](0-BUSINESS/README.md) — playbook, positioning, ICP, the scores library |
 | T1 product | [1-PRODUCT/](1-PRODUCT/README.md) — page contracts, NOF, design |
 | T2 technical | [2-TECHNICAL/](2-TECHNICAL/README.md) — architecture, scoring mechanics, as-is maps |
-| T3 delivery | [3-DELIVERY/](3-DELIVERY/README.md) — the 90-step plan, sprint/release/CI process |
+| T3 delivery | [3-DELIVERY/](3-DELIVERY/README.md) — the 105-step plan, sprint/release/CI process |
 | T4 customer | [4-CUSTOMER/](4-CUSTOMER/README.md) — evidence, feedback, metrics |
 | Source research | [research/](research/README.md) |
 | The full registry + edge rules | [DOCUMENTATION_GRAPH.md](DOCUMENTATION_GRAPH.md) |

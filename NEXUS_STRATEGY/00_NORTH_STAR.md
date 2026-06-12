@@ -1,13 +1,13 @@
 ---
 id: nexus.north-star
-title: Nexus North Star — the 90-step thesis
+title: Nexus North Star — the 105-step thesis
 tier: T0
 status: active
 owner: founder
 updated: 2026-06-12
 summary: >
   The root of the document graph. States the play (AI consulting beachhead,
-  Nexus as instrument + handed-over product, srishti add-on), the ≤90-session
+  Nexus as instrument + handed-over product, srishti add-on), the ≤105-session
   thesis vs Karvia's ~290, the four-layer model, and the pack-of-cards system
   that hands off to the business/product/tech/execution cards — with the
   constitution (01_NEXUS_MODEL) as the document every conflict defers to.
@@ -35,7 +35,7 @@ revisit:
     stage: always
 ---
 
-# Nexus North Star — the 90-step thesis
+# Nexus North Star — the 105-step thesis
 
 ## Purpose
 
@@ -47,7 +47,7 @@ This is the single entry point for building Nexus. It states the play, the philo
 - **The thesis**: Karvia went from idea to working beta in ~290 sessions. Nexus arrives at a better product in **≤ 90 sessions**, because we have the complete journey in hindsight, ratified architecture decisions, and an autonomous agent loop with a quality bar.
 - **The method**: four layers (UI, business logic, data, intelligence — 04_RUNTIME_MODEL, C-020); every capability a **lego block** with a published contract. The assessment block is the flagship proof: **AIR ships v1; any future assessment plugs in without touching the rest**. SSI is not carried into Nexus — it remains a Karvia reference only.
 - **The model**: the constitution ([01_NEXUS_MODEL.md](01_NEXUS_MODEL.md)) governs everything — the Measure → Align → Transform → Evolve ladder, the Staircase, and the measurement system (signals → six drivers → **BOQ**, the library at [0-BUSINESS/scores/](0-BUSINESS/scores/BOQ.md)); 02 (NBM), 03 (the Game), and 04 (the Runtime) are its ratified companion papers.
-- **The pack of cards**: four documents — [AI_CONSULTING_PLAYBOOK.md](0-BUSINESS/AI_CONSULTING_PLAYBOOK.md) (the service), [PRODUCT_STRATEGY.md](1-PRODUCT/PRODUCT_STRATEGY.md) (the tool), [TECH_STRATEGY.md](2-TECHNICAL/TECH_STRATEGY.md) (the architecture), [EXECUTION_PLAYBOOK.md](3-DELIVERY/EXECUTION_PLAYBOOK.md) (the ≤90-session plan).
+- **The pack of cards**: four documents — [AI_CONSULTING_PLAYBOOK.md](0-BUSINESS/AI_CONSULTING_PLAYBOOK.md) (the service), [PRODUCT_STRATEGY.md](1-PRODUCT/PRODUCT_STRATEGY.md) (the tool), [TECH_STRATEGY.md](2-TECHNICAL/TECH_STRATEGY.md) (the architecture), [EXECUTION_PLAYBOOK.md](3-DELIVERY/EXECUTION_PLAYBOOK.md) (the ≤105-session plan).
 - **The bar**: every session is measured against `2-TECHNICAL/IMPROVEMENT_PLAN.md`. Nexus is not a copy of Karvia — it is the codebase Karvia should have been.
 
 ---
@@ -83,9 +83,9 @@ The question Nexus answers — and the philosophy behind the wider Srishti proce
 
 > **How many steps does it take to go from idea to a launched product, when you already know the whole journey?**
 
-Karvia's 290 steps included every dead end: engines that never deployed, dual-write migrations left open, hardcoded question banks, strategy docs that drifted. Nexus deletes the dead ends and keeps the destinations. One session = one step. The budget is **90 steps**, and each step must either be a strategy card, a contract card, or a code card — never a "figure out what we're doing" card, because the pack of cards already answers that.
+Karvia's 290 steps included every dead end: engines that never deployed, dual-write migrations left open, hardcoded question banks, strategy docs that drifted. Nexus deletes the dead ends and keeps the destinations. One session = one step. The budget is **105 steps** (re-baselined from 90 at the Night-1 close — EXECUTION_PLAYBOOK § the re-baseline record; the overrun bought the constitutional canon), and each step must either be a strategy card, a contract card, or a code card — never a "figure out what we're doing" card, because the pack of cards already answers that.
 
-What makes ≤90 credible rather than aspirational:
+What makes ≤105 credible rather than aspirational:
 
 | Karvia spent sessions on | Nexus instead has |
 |---|---|
@@ -137,7 +137,7 @@ Four documents, each owning one concern, none overlapping:
 | **Business** | [0-BUSINESS/AI_CONSULTING_PLAYBOOK.md](0-BUSINESS/AI_CONSULTING_PLAYBOOK.md) | The AIR framework, two-week sprint, deliverables, pricing, funnel, collateral | Any session touching the consulting service or what AIR must produce |
 | **Product** | [1-PRODUCT/PRODUCT_STRATEGY.md](1-PRODUCT/PRODUCT_STRATEGY.md) | The 6 page contracts, two operating modes, first-value journey, design language | Any session touching what a user sees or does |
 | **Tech** | [2-TECHNICAL/TECH_STRATEGY.md](2-TECHNICAL/TECH_STRATEGY.md) | The 4-layer architecture, 8 module contracts, pluggable assessment, the stage machine, the iBrain seam, handover, srishti boundary | Any session touching code structure, models, or APIs |
-| **Execution** | [3-DELIVERY/EXECUTION_PLAYBOOK.md](3-DELIVERY/EXECUTION_PLAYBOOK.md) | The ≤90-session plan, session types, folder + command hierarchy, measurement | Every session — it names the next card |
+| **Execution** | [3-DELIVERY/EXECUTION_PLAYBOOK.md](3-DELIVERY/EXECUTION_PLAYBOOK.md) | The ≤105-session plan, session types, folder + command hierarchy, measurement | Every session — it names the next card |
 
 Supporting (already exist, not duplicated here):
 
@@ -161,7 +161,7 @@ Supporting (already exist, not duplicated here):
 
 The agent loop is the delivery engine. Commands (defined in `.claude/commands/`):
 
-| Command | Role in the 90 steps |
+| Command | Role in the 105 steps |
 |---|---|
 | `/init` | Interactive session start — load this pack |
 | `/sprint-load` | Turn a night's sprint file into tick-sized BACKLOG entries |

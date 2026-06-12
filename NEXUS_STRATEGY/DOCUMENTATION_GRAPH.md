@@ -62,7 +62,7 @@ Field rules:
 
 - `summary` is the orphan-rescue field: a reader (or the agent) must know what the doc contains without opening the body.
 - `parents` means *upstream*: "if that changes, I may be stale." `children` means *downstream*: "if I change, those need review." One root: `00_NORTH_STAR.md` (`parents: []`).
-- `revisit.on` is the propagation trigger in plain language; `revisit.stage` says when in the 90-step plan it bites (so `/init` can surface "docs due for revisit this night").
+- `revisit.on` is the propagation trigger in plain language; `revisit.stage` says when in the 105-step plan it bites (so `/init` can surface "docs due for revisit this night").
 - Exempt from the genome: `_agent/` state files (JOURNAL, BACKLOG, etc. — they are the loop's memory, not graph nodes), `_source/` (frozen), `.claude/` config, diagram sources, brand assets.
 
 ## The registry — tree with dependency overlay
@@ -70,7 +70,7 @@ Field rules:
 ```text
 NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |
-00_NORTH_STAR.md ............................. T0 | the play, the 90-step thesis — ROOT
+00_NORTH_STAR.md ............................. T0 | the play, the 105-step thesis — ROOT
 |
 |-- README.md ................................ T0 | folder index: the strategy pack
 |-- 0-BUSINESS/README.md ..................... T0 | folder index: the business tier
@@ -137,7 +137,7 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |               |-- client/README.md ......... T2 | UI shell (parents: + DESIGN_LANGUAGE)
 |               `-- tests/README.md .......... T3 | test strategy per module
 |
-|-- 3-DELIVERY/EXECUTION_PLAYBOOK.md ......... T3 | session types, 90-step budgets
+|-- 3-DELIVERY/EXECUTION_PLAYBOOK.md ......... T3 | session types, 105-step budgets
 |       |   (parents: NORTH_STAR, IMPROVEMENT_PLAN)
 |       |-- 3-DELIVERY/SPRINT_PROCESS.md ..... T3 | the per-night cycle, DoD, card chain
 |       |-- 3-DELIVERY/RELEASE_PROCESS.md .... T3 | 2 envs, release train, <5min rollback

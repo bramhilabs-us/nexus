@@ -2,23 +2,24 @@
 
 > Written by the previous session per `/close`. `/init` reads this and starts. Overwritten every session — history lives in JOURNAL.md.
 
-**Type**: AUDIT/GROOM (N1-P6-01 — the Night-1 close-out; solo-executable except the absorption sign-off, which waits on the founder if absent)
-**Task**: **N1-P6-01** — Night-1 groom: phase-budget re-baseline + absorption review + BACKLOG sweep + SPRINTS_NIGHT_2 draft. Why now: the first reflection audit (`_agent/AUDIT_2026-06-12.md`) returned gate-verdict **GO after ① fix-pass ② this groom** — the fix-pass landed in session-23; this groom is the last gate before the product-docs stage.
+**Type**: STRATEGY (product docs — Night 1b, sprint 1 opener)
+**Task**: **N1-P3-01 pt 2** — `1-PRODUCT/CAPABILITIES.md` + `1-PRODUCT/ROADMAP.md`. Why now: Night 1 closed at the groom (C-022); the product-docs stage is gated open (audit verdict GO, both conditions met) and SPRINTS_NIGHT_1B sprint 1 starts here — CAPABILITIES is also the canon home the 02_NBM_MODEL absorption waits on.
 
 **READ FIRST** (in order):
-1. `_agent/AUDIT_2026-06-12.md` — the findings feed the groom (esp. §7 budget, §4 completeness list, §3 hygiene)
-2. `NEXUS_STRATEGY/3-DELIVERY/EXECUTION_PLAYBOOK.md` — the phase budgets (N1:18 N2:24 N3:18 N4:16 N5:10 buffer:4) this session re-baselines
-3. Full `_agent/BACKLOG.md` — **re-sum, never trust labels** (open N1 items: P3-01 pt2, P3-08, P3-09, P4-01/02, P5-01/02)
-4. `_agent/JOURNAL.md` tail (sessions 19–23 are the overrun to account for)
+1. `_agent/SPRINTS_NIGHT_1B.md` — the night's shape; this task's spec (sprint 1)
+2. `NEXUS_STRATEGY/1-PRODUCT/PRODUCT_STRATEGY.md` — page contracts + capabilities frame the docs must extend, not contradict
+3. `NEXUS_STRATEGY/02_NBM_MODEL.md` §3 — the task×person match v1 mechanics that CAPABILITIES must house (C-022.4: this is the absorption hinge)
+4. `NEXUS_STRATEGY/1-PRODUCT/NOF.md` + `0-BUSINESS/ICP.md` — the framework and the buyer the capabilities serve
+5. `NEXUS_STRATEGY/3-DELIVERY/EXECUTION_PLAYBOOK.md` § the phase plan — ROADMAP phases against the **re-baselined** nights (1b/2/3/4/5, total 105)
 
 **Definition of done**:
-- **Budget re-baseline recorded**: N1 closed at its true step count with the strategy-expansion cause named; N2–N5 re-cut against the now-richer spec (or the 90 formally extended) — EXECUTION_PLAYBOOK table updated + a DECISIONS entry; the >25% trigger answered, not just noted
-- **Absorption review verdicts**: for 02/03/04 — propagated-fully? absorb-and-delete candidate or keep? (C-021.4; execute deletions ONLY with founder sign-off — otherwise record candidates and park)
-- BACKLOG swept (stale "PR pending merge" annotations; remaining N1 items re-phased into the product-docs stage, none silently dropped) + `SPRINTS_NIGHT_2.md` draft proposed (the product-docs stage as sprints-with-goals: P3-01 pt2 → P3-08 → P3-09, then N1-P4 tech docs)
+- `CAPABILITIES.md`: the 8 lego blocks as user-facing capabilities, stage-responsive surfaces, both GTM motions (consultant-led + org-direct, Article 9), **a task×person match v1 section** (gives 02's unpropagated mechanics a canon home)
+- `ROADMAP.md`: phased against the re-baselined nights; AIR v1 → future verticals as new assessment impls; honest pre-data flags (constitution §9 posture)
+- Both wired into the doc graph (genome, parents incl. PRODUCT_STRATEGY) — graph green; BACKLOG N1-P3-01 → DONE
 
 **Watch out for**:
-- Open `/audit` as the first move (the night-end cadence, audit §10) — cheap re-verify that the fix-pass left everything green
-- **PRs #25 (session-22) and the session-23 PR are stacked** — merge order matters; if both merged, branch from main; else continue the chain
-- The re-sum rule (SESSION_PRACTICES #2): any "folded" scope must name where its budget went
-- Absorption is founder-gated; the budget re-baseline is not — record it as the agent's professional re-plan, founder can veto in review
-- Step count: 28/90 after session-23's journal entry
+- **The PR stack is now 3 deep** (#25 ← #26 ← session-24 groom PR). If all merged: branch from main. If not: continue the chain — and do NOT base new work on main
+- **Founder veto window on C-022**: the 90→105 re-baseline and the night cuts are agent judgment pending review. If the founder vetoes in the groom PR, re-plan before writing ROADMAP (it cites the re-baselined phases)
+- Lead with "Transformation OS"; AIR is the launch vertical, never the ceiling (C-001/C-006)
+- Capabilities must cite page contracts / module surfaces, not invent new ones — the contract-first gate condition (audit §10) holds across the stage boundary
+- Step count: 29/105 after session-24's journal entry

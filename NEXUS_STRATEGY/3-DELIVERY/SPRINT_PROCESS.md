@@ -4,7 +4,7 @@ title: Sprint Process — how a night of work runs
 tier: T3
 status: active
 owner: agent
-updated: 2026-06-10
+updated: 2026-06-12
 summary: >
   How Nexus sprints execute: SPRINTS_NIGHT_N → /sprint-load → BACKLOG →
   tick/session loop → night-end groom. Definition of done per task, the
@@ -24,7 +24,7 @@ revisit:
 
 ## Purpose
 
-The operating procedure between EXECUTION_PLAYBOOK's phase budgets and an individual tick: how a night's sprint is defined, loaded, executed, and groomed. The playbook says *what the 90 steps buy*; this doc says *how each night spends its budget*.
+The operating procedure between EXECUTION_PLAYBOOK's phase budgets and an individual tick: how a night's sprint is defined, loaded, executed, and groomed. The playbook says *what the 105 steps buy*; this doc says *how each night spends its budget*.
 
 ## The sprint cycle
 
