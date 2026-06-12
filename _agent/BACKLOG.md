@@ -111,15 +111,16 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: Human-directed (founder voice brief + iPad notes), added mid-sprint. Downstream: N1-P3-01 builds on PRODUCT_STRATEGY; N1-P4-01 aligns with TECH_STRATEGY; EXECUTION_PLAYBOOK governs all future step budgets.
 
 ### N1-P3-01 — Populate 0-BUSINESS and 1-PRODUCT (Transformation OS framing)
-- **Status**: IN-PROGRESS — **Night 1b, sprint 1** (part 1 of 2 done — tick 2026-06-10-18, merged: 0-BUSINESS gap filled with POSITIONING/GTM/STAKEHOLDERS/BUSINESS_MODEL. DoD re-scoped per re-sum rule: the strategy pack already covers vision+journeys, so the real gap = 4 business docs + 2 product docs (CAPABILITIES, ROADMAP — part 2). Original "4 files each" predates the pack. Part 2 note: CAPABILITIES is the canon home the 02 absorption waits on — give the task×person match v1 mechanics a section, per C-022.4.)
+- **Status**: DONE — **Night 1b, sprint 1** (part 1: tick 2026-06-10-18, merged — 0-BUSINESS gap filled with POSITIONING/GTM/STAKEHOLDERS/BUSINESS_MODEL. Part 2: session 2026-06-12-25 — CAPABILITIES.md + ROADMAP.md. DoD had been re-scoped per re-sum rule: the strategy pack already covers vision+journeys, so the real gap = 4 business docs + 2 product docs.)
 - **Size**: M (2 ticks)
 - **Depends on**: N1-P1-01 (DONE, merged)
 - **Definition of done**:
-  - 4 files each in 0-BUSINESS/ and 1-PRODUCT/
-  - Leads with "Transformation OS"; AI Readiness as launch vertical
-  - Both GTM motions covered: consultant-led + direct-to-org
-  - Karvia adaptations cited; TODOs flagged where untranslatable
-- **Notes**: C-001 answered — broad scope (Transformation OS). See DECISIONS.md 2026-06-03.
+  - ✓ 4 business docs + 2 product docs (re-scoped from "4 files each"; 1-PRODUCT now holds PRODUCT_STRATEGY, NOF, CAPABILITIES, ROADMAP)
+  - ✓ Leads with "Transformation OS"; AIR as launch vertical, never the ceiling (C-001/C-006)
+  - ✓ Both GTM motions covered: consultant-led + org-direct (Article 9; CAPABILITIES §3)
+  - ✓ Capabilities cite page contracts + module surfaces only (contract-first gate, audit §10); task×person match v1 given its canon home (CAPABILITIES §5, the 02 absorption hinge per C-022.4)
+  - ✓ ROADMAP phased on the re-baselined nights (C-022) with honest §9 pre-data flags
+- **Notes**: C-001 answered — broad scope (Transformation OS). See DECISIONS.md 2026-06-03. The 02_NBM_MODEL absorption re-review (C-022.4) is now unblocked for the N1b close groom.
 
 ### N1-P3-02 — Populate 3-DELIVERY skeleton
 - **Status**: DONE (tick 2026-06-10-14, merged)

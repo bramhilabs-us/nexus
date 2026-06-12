@@ -49,7 +49,7 @@ revisit:
 
 ## Build-quality metrics (we measure ourselves the same way)
 
-Defined elsewhere, reported here at each night-end groom: steps used vs 90 (EXECUTION_PLAYBOOK § measurement), IM-5 gate pass rate (must be 100%), doc-graph staleness warnings.
+Defined elsewhere, reported here at each night-end groom: steps used vs 105 (EXECUTION_PLAYBOOK § measurement; re-baselined from 90 at the Night-1 close, C-022), IM-5 gate pass rate (must be 100%), doc-graph staleness warnings.
 
 ## Explicitly NOT metrics
 

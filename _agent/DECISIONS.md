@@ -452,3 +452,5 @@ Every domain model gains a required `program_id`: `Objective`, `KeyResult`, `Goa
 
 **Consequences**: EXECUTION_PLAYBOOK re-baselined (table + record + EQ-1); the 105 propagated to NORTH_STAR, DOCUMENTATION_GRAPH, both READMEs, BUSINESS_MODEL, SPRINT_PROCESS; SPRINTS_NIGHT_1B.md drafted; BACKLOG swept and re-phased.
 **Refines**: C-021 (absorption pattern), EXECUTION_PLAYBOOK genome (the >25% revisit trigger — answered).
+
+**RATIFIED by founder, 2026-06-12 (session-25, in-session)**: "C-022 — agree on it, let's rebase it to 105." The veto window is closed; the 105 re-baseline, Night 1b, and the night cuts stand as canon ahead of the PR #27 merge. Ratification sweep in the same session: SPRINTS_NIGHT_1B flipped DRAFT → ACTIVE; the three live stale "vs 90" references fixed (4-CUSTOMER/METRICS.md § build-quality, `.claude/commands/init.md` ×2, `.claude/commands/close.md`); historical records (JOURNAL, DONE backlog entries) untouched.
