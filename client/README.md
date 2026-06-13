@@ -4,12 +4,13 @@ title: client — the Nexus UI shell
 tier: T2
 status: draft
 owner: agent
-updated: 2026-06-09
+updated: 2026-06-13
 summary: >
   Vanilla JS client for v1 (C-004). Renders the six pages from server-served
-  PageContract configs; one small component set (tile, card, stage ribbon, CTA
-  pair, empty state) styled by the BRAMHI design language. Assessment-specific
-  surfaces render into typed slots owned by the installed assessment block.
+  PageContract configs inside the sidebar shell; one small component set (tile,
+  card, stage ribbon, CTA pair, empty state) styled by the NEXUS product brand
+  (C-013 two-tier — css/tokens.css v2). Assessment-specific surfaces render
+  into typed slots owned by the installed assessment block.
 parents:
   - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
   - NEXUS_STRATEGY/1-PRODUCT/design/DESIGN_LANGUAGE.md

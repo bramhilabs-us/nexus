@@ -136,6 +136,15 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Definition of done**:
   - ✓ INTERVIEW_TEMPLATE, FEEDBACK_LOG, EVIDENCE_INDEX, METRICS templates + tier README — all governed T4 nodes under PRODUCT_STRATEGY
 
+### N1-P3-10 — Stage-weather scan: rules-surface slot + quest-line component (discovered, session-27 pt 3 founder scan)
+- **Status**: READY — small; can ride any design touch or Night 3's first UI session
+- **Size**: S (well under 1 session)
+- **Depends on**: N1-P3-09 (DONE — the mockup system these slot into)
+- **Definition of done**:
+  - **Rules-surface slot**: one quiet, dismissible rule-line component (DESIGN_LANGUAGE component row + shell.css + one example rendered per mockup) — the page-contract field "pages teach the game in place" is currently unrendered on all 10 surfaces; the Dashboard is the founder-named priority (it delivers the players' rules/activities)
+  - **Instrumentation quest line**: component for Transform-stage Dashboard — "Gauges lit: n of 9 — next: {gauge} + arming checklist" (the valley UX, 03 §6.2); DESIGN_LANGUAGE row + one mocked instance
+- **Notes**: Scan verdict (quick, founder-gated): the 10-page plan **holds across all 5 stages** — every stage transition is data/state inside existing slots; these two component gaps plus the two contract declarations routed into N1-P4-01 are the only structural debts found.
+
 ### N1-P4-01 — Modularization plan + contract drafts
 - **Status**: READY — **Night 1b, sprint 2** (C-003/4/5 all answered — see DECISIONS.md 2026-06-04)
 - **Size**: M (2 ticks)
@@ -145,6 +154,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
   - MODULE_CONTRACTS_DRAFT.md with TS interface signatures — journey steps (USER_JOURNEYS J-index) are the acceptance criteria; route sets cite API_SURFACE; edges cite MODULE_DEPENDENCY_GRAPH
   - **Assign the outbound notification/mail owner** (audit 2026-06-12 finding 4.5): invitations, nudge delivery, review reminders — a contract-fronted capability (likely @nexus/crm or a small platform service), never per-module ad-hoc mail
   - Reflects ratified decisions: consolidate engines, TypeScript strict, Program as first-class entity, the stage machine + Layer 4 (C-020)
+  - **Stage-weather scan items (founder-directed scan, session-27 pt 3)**: the PageContract draft declares the **stage-keyed slots** explicitly — primary CTA is stage-keyed config (Dashboard's "Push task completion" is Transform weather; Measure wants sprint-pulse CTAs) and the Dashboard's third section is stage-keyed (objectives board at Transform, sprint pulse at Measure); Teams' Prospect weather is the **Sponsor's guided matrix import** (03 §6.1 bridge) — its empty state is stage-variant ("Import your team matrix" before "Invite member"), so the user story exists
 - **Notes**: All 3 architectural clarifications now answered (2026-06-04). N1-P4-02 also unblocked.
 
 ### N1-P4-02 — Nexus vs Karvia diff + Assessment interface spec
@@ -216,7 +226,7 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: brand/layout rework (C-013) and N1-P3-01 pt 2 remain on the master doc list after these.
 
 ### N1-P3-09 — C-013 brand & layout rework (discovered by audit 2026-06-12 — decision had no BACKLOG item)
-- **Status**: READY — **Night 1b, sprint 1** (C-013 ratified 2026-06-10; brand assets in `design/brand/`)
+- **Status**: DONE — session-27 (2026-06-13): tokens.css v2 re-extracted from the NEXUS guide's declared palette (#7287F2 primary, #5E4DB2, #A8D5C2, #C98B62, #F7F7FB, #2C3446; Sora/Manrope; stage colors from the loop poster); DESIGN_LANGUAGE reworked two-tier (parent collateral-only rule, sidebar-shell spec, display-doctrine index kept); dark sidebar shell on all surfaces (the taker's flashcard deck stays the one deliberate no-sidebar surface — slim deckbar); stage-badge sweep done (Transforming/Measuring/Prospect/Evolving on my-clients; objective-lifecycle badges got honestly-named classes, text unchanged); all gates green (hex scan zero, token-existence, contract check, doc-graph 62/0/0); headless-Chrome render verified
 - **Size**: M (1–2 sessions)
 - **Definition of done** (the C-013 work list):
   - tokens.css v2 re-extracted from the NEXUS product guide (Sora display + Manrope body + Cormorant taglines; teal + gold accents)

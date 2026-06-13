@@ -5,24 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nexus — Dashboard (Builder mode mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Sora:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../../client/css/tokens.css">
 <link rel="stylesheet" href="shell.css">
 </head>
 <body>
 
 <!-- BUILDER MODE: My Clients is absent; same pages, the program is the product being built -->
-<header class="nx-topbar">
-  <span class="nx-wordmark">Nexus</span>
+<aside class="nx-sidebar">
+  <div class="nx-brand">
+    <img src="../brand/NEXUSLOGO_on-dark.png" alt="NEXUS by BRAMHI">
+  </div>
   <nav class="nx-nav">
-    <a class="active" href="dashboard-builder.html">Dashboard</a>
-    <a href="objectives.html">Objectives</a>
-    <a href="assessments.html">Assessments</a>
-    <a href="teams.html">Teams</a>
-    <a href="planning.html">Planning</a>
+    <a class="active" href="dashboard.html">
+      <svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+      Dashboard</a>
+    <a href="objectives.html">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/></svg>
+      Objectives</a>
+    <a href="assessments.html">
+      <svg viewBox="0 0 24 24"><path d="M4 15.5a8 8 0 1 1 16 0"/><path d="M12 15.5 16 10"/><path d="M4.5 19.5h15"/></svg>
+      Assessments</a>
+    <a href="teams.html">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.5"/><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="16.5" cy="8" r="2.5"/><path d="M16.5 13.5c2.5 0 4.5 1.8 4.5 4.5"/></svg>
+      Teams</a>
+    <a href="planning.html">
+      <svg viewBox="0 0 24 24"><rect x="4" y="4.5" width="16" height="16" rx="2"/><path d="m8 12.5 2.5 2.5 5.5-5.5"/></svg>
+      Planning</a>
   </nav>
   <div class="nx-account">
     <button class="nx-avatar" aria-haspopup="true">LC</button>
+    <div class="nx-account-id">
+      <span class="nx-account-name">Lena Chen</span>
+      <span class="nx-account-role">Manager</span>
+    </div>
     <div class="nx-dropdown">
       <a href="profile.html">Profile</a>
       <a href="#">Company Profile</a>
@@ -33,14 +49,14 @@
       <a href="#">Feedback</a>
     </div>
   </div>
-</header>
+</aside>
 
 <main class="nx-page">
 
   <div class="nx-page-head">
     <div>
-      <h1 class="nx-page-title">Dashboard</h1>
-      <p class="nx-page-sub">Meridian Logistics · <strong>Builder mode</strong> · program: Dispatch Copilot v1 · 8 months post-handover</p>
+      <h1 class="nx-page-title">Welcome back, Lena</h1>
+      <p class="nx-page-sub">Dispatch Copilot v1 · <strong>Builder mode</strong> · 8 months post-handover</p>
     </div>
     <div class="nx-cta-pair">
       <button class="nx-btn-primary">Push task completion</button>
@@ -48,53 +64,54 @@
   </div>
 
   <!-- Same tiles, product-development program -->
-  <section class="nx-tiles" aria-label="analytics">
-    <div class="nx-tile"><div class="nx-tile-number">44%</div><div class="nx-tile-label">Program complete</div></div>
-    <div class="nx-tile"><div class="nx-tile-number ok">3 / 4</div><div class="nx-tile-label">Objectives on track</div></div>
-    <div class="nx-tile"><div class="nx-tile-number">88%</div><div class="nx-tile-label">Week task completion</div></div>
-    <div class="nx-tile"><div class="nx-tile-number">1</div><div class="nx-tile-label">Overdue tasks</div></div>
+  <section class="nx-tiles hero" aria-label="analytics">
+    <div class="nx-tile">
+      <div class="nx-ring lg" style="--ring-value:44;"><div class="nx-ring-inner">44%</div></div>
+      <div class="nx-tile-label">Program</div>
+    </div>
+    <div class="nx-tile"><div class="nx-tile-number ok">3 / 4</div><div class="nx-tile-label">On track</div></div>
+    <div class="nx-tile"><div class="nx-tile-number">88%</div><div class="nx-tile-label">This week</div></div>
+    <div class="nx-tile"><div class="nx-tile-number alert">1</div><div class="nx-tile-label">Overdue</div></div>
   </section>
 
-  <section class="nx-panel" aria-label="needs you today">
-    <h2 class="nx-panel-title">Needs you today</h2>
-    <div class="nx-row">
+  <h2 class="nx-section-title">Needs you today</h2>
+  <section class="nx-card-grid cols-3" aria-label="needs you today">
+    <article class="nx-card action">
       <span class="nx-pill risk">at risk</span>
-      <span class="grow">
-        <strong>Ship onboarding flow v2</strong>
-        <span class="nx-card-sub" style="display:block">KR 2 · milestone "Usability fixes round 2" · 1 task overdue · Owner: R. Alvarez</span>
-      </span>
+      <h3 class="nx-card-title">Ship onboarding flow v2</h3>
+      <p class="nx-card-sub">Usability fixes round 2 · 1 overdue · R. Alvarez</p>
       <button class="nx-btn-secondary">Nudge owner</button>
-    </div>
-    <div class="nx-row">
+    </article>
+    <article class="nx-card action">
       <span class="nx-pill ok">review</span>
-      <span class="grow">
-        <strong>Quarterly re-assessment ready</strong>
-        <span class="nx-card-sub" style="display:block">Pulse deck for the build team — 5 cards, deltas vs last quarter</span>
-      </span>
+      <h3 class="nx-card-title">Quarterly re-assessment ready</h3>
+      <p class="nx-card-sub">5-card pulse deck · deltas vs last quarter</p>
       <button class="nx-btn-quiet">Send decks →</button>
-    </div>
+    </article>
   </section>
 
-  <section class="nx-panel" aria-label="objectives">
-    <h2 class="nx-panel-title">Objectives — Dispatch Copilot v1</h2>
-    <div class="nx-row">
-      <span class="grow">
-        <strong>Ship onboarding flow v2</strong>
-        <span class="nx-card-sub" style="display:block">4 KRs · day 18 of 45</span>
-      </span>
-      <div style="width:160px"><div class="nx-progress"><span style="width:41%"></span></div></div>
-      <strong style="width:48px; text-align:right">41%</strong>
-      <div class="nx-ribbon" style="width:72px"><span class="current"></span><span></span><span></span></div>
-    </div>
-    <div class="nx-row">
-      <span class="grow">
-        <strong>Cut support tickets 25%</strong>
-        <span class="nx-card-sub" style="display:block">Sustained KPI from the transformation · year 1 holding</span>
-      </span>
-      <div style="width:160px"><div class="nx-progress"><span style="width:100%"></span></div></div>
-      <strong style="width:48px; text-align:right">✓</strong>
-      <div class="nx-ribbon" style="width:72px"><span class="done"></span><span class="done"></span><span class="done"></span></div>
-    </div>
+  <h2 class="nx-section-title">Objectives — Dispatch Copilot v1</h2>
+  <section class="nx-card-grid cols-3" aria-label="objectives">
+    <article class="nx-card objective">
+      <div class="head">
+        <div class="nx-ring" style="--ring-value:41;"><div class="nx-ring-inner">41%</div></div>
+        <div>
+          <h3 class="nx-card-title">Ship onboarding flow v2</h3>
+          <p class="nx-card-sub">4 KRs · day 18 of 45</p>
+        </div>
+      </div>
+      <div class="nx-ribbon"><span class="current"></span><span></span><span></span></div>
+    </article>
+    <article class="nx-card objective">
+      <div class="head">
+        <div class="nx-ring" style="--ring-value:100; --ring-color:var(--nx-positive);"><div class="nx-ring-inner">✓</div></div>
+        <div>
+          <h3 class="nx-card-title">Cut support tickets 25%</h3>
+          <p class="nx-card-sub">Sustained KPI · year 1 holding</p>
+        </div>
+      </div>
+      <div class="nx-ribbon"><span class="done"></span><span class="done"></span><span class="done"></span></div>
+    </article>
   </section>
 
   <p class="mock-note">

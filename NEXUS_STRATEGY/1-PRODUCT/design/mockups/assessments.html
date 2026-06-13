@@ -5,24 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nexus — Assessments (Engagement mode mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Sora:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../../client/css/tokens.css">
 <link rel="stylesheet" href="shell.css">
 </head>
 <body>
 
-<header class="nx-topbar">
-  <span class="nx-wordmark">Nexus</span>
+<aside class="nx-sidebar">
+  <div class="nx-brand">
+    <img src="../brand/NEXUSLOGO_on-dark.png" alt="NEXUS by BRAMHI">
+  </div>
   <nav class="nx-nav">
-    <a href="my-clients.html">My Clients</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="objectives.html">Objectives</a>
-    <a class="active" href="assessments.html">Assessments</a>
-    <a href="#">Teams</a>
-    <a href="#">Planning</a>
+    <a href="my-clients.html">
+      <svg viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="12" rx="2"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5"/></svg>
+      My Clients</a>
+    <a href="dashboard.html">
+      <svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+      Dashboard</a>
+    <a href="objectives.html">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/></svg>
+      Objectives</a>
+    <a class="active" href="assessments.html">
+      <svg viewBox="0 0 24 24"><path d="M4 15.5a8 8 0 1 1 16 0"/><path d="M12 15.5 16 10"/><path d="M4.5 19.5h15"/></svg>
+      Assessments</a>
+    <a href="teams.html">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.5"/><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="16.5" cy="8" r="2.5"/><path d="M16.5 13.5c2.5 0 4.5 1.8 4.5 4.5"/></svg>
+      Teams</a>
+    <a href="planning.html">
+      <svg viewBox="0 0 24 24"><rect x="4" y="4.5" width="16" height="16" rx="2"/><path d="m8 12.5 2.5 2.5 5.5-5.5"/></svg>
+      Planning</a>
   </nav>
   <div class="nx-account">
     <button class="nx-avatar" aria-haspopup="true">SR</button>
+    <div class="nx-account-id">
+      <span class="nx-account-name">Sam Rivera</span>
+      <span class="nx-account-role">Consultant</span>
+    </div>
     <div class="nx-dropdown">
       <a href="#">Profile</a>
       <a href="#">Company Profile</a>
@@ -32,14 +50,14 @@
       <a href="#">Feedback</a>
     </div>
   </div>
-</header>
+</aside>
 
 <main class="nx-page">
 
   <div class="nx-page-head">
     <div>
       <h1 class="nx-page-title">Assessments</h1>
-      <p class="nx-page-sub">Halcyon Health · AIR Strategic Assessment in progress</p>
+      <p class="nx-page-sub">Halcyon Health · AIR sprint in progress</p>
     </div>
     <div class="nx-cta-pair">
       <!-- Typed per installed block — one option per assessment block, never hardcoded -->
@@ -49,11 +67,14 @@
   </div>
 
   <!-- Analytics strip: DEFINED BY THE BLOCK (AIR slots) — ≤4 tiles -->
-  <section class="nx-tiles" aria-label="analytics (AIR block slots)">
-    <div class="nx-tile"><div class="nx-tile-number">Day 5</div><div class="nx-tile-label">of 10 · sprint</div></div>
-    <div class="nx-tile"><div class="nx-tile-number">7/12</div><div class="nx-tile-label">Evidence artifacts</div></div>
-    <div class="nx-tile"><div class="nx-tile-number">11/25</div><div class="nx-tile-label">Participants assessed</div></div>
-    <div class="nx-tile"><div class="nx-tile-number alert">2</div><div class="nx-tile-label">Instruments due today</div></div>
+  <section class="nx-tiles hero" aria-label="analytics (AIR block slots)">
+    <div class="nx-tile">
+      <div class="nx-ring lg" style="--ring-value:50;"><div class="nx-ring-inner">5/10</div></div>
+      <div class="nx-tile-label">Sprint days</div>
+    </div>
+    <div class="nx-tile"><div class="nx-tile-number">7/12</div><div class="nx-tile-label">Evidence</div></div>
+    <div class="nx-tile"><div class="nx-tile-number">11/25</div><div class="nx-tile-label">Assessed</div></div>
+    <div class="nx-tile"><div class="nx-tile-number alert">2</div><div class="nx-tile-label">Due today</div></div>
   </section>
 
   <!-- Active engagement workspace: the block renders into the shell's slots -->
@@ -98,7 +119,7 @@
   <!-- Empty state: gallery of installed blocks -->
   <p class="mock-note">Empty state — gallery of installed assessment types</p>
   <section class="nx-empty">
-    <div class="nx-empty-mark"></div>
+    <div class="nx-empty-mark"><img src="../brand/NEXUSLOGO_icon.png" alt=""></div>
     <h2>Run your first assessment</h2>
     <p>One assessment type is installed. Each produces scored results and deliverables that seed your objectives — nothing here is a survey.</p>
     <div class="nx-card" style="max-width:420px; margin:0 auto var(--nx-space-6); text-align:left">

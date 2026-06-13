@@ -297,7 +297,7 @@ a vote on these:
 
 ## Design language
 
-New, minimalistic — Nexus does not inherit Karvia's visual design. The source of truth is the BRAMHI brand guide, now in-repo and translated to UI rules in [design/DESIGN_LANGUAGE.md](design/DESIGN_LANGUAGE.md). Governing intent:
+New, minimalistic — Nexus does not inherit Karvia's visual design. The source of truth is the two-tier brand (C-013): the NEXUS product guide (Sora/Manrope, sidebar shell) governs all product surfaces, the BRAMHI parent guide governs collateral only — translated to UI rules in [design/DESIGN_LANGUAGE.md](design/DESIGN_LANGUAGE.md). Governing intent:
 
 - Few words, strong visual hierarchy; executive-dashboard feel, not consulting-flyer (the same standard set for the one-pager collateral).
 - Minimum chrome: one primary CTA visually dominant per page, analytics tiles ≤ 4, whitespace over borders.

@@ -5,24 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nexus — Planning (Worker home mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Sora:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../../client/css/tokens.css">
 <link rel="stylesheet" href="shell.css">
 </head>
 <body>
 
-<header class="nx-topbar">
-  <span class="nx-wordmark">Nexus</span>
+<aside class="nx-sidebar">
+  <div class="nx-brand">
+    <img src="../brand/NEXUSLOGO_on-dark.png" alt="NEXUS by BRAMHI">
+  </div>
   <nav class="nx-nav">
-    <a href="my-clients.html">My Clients</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="objectives.html">Objectives</a>
-    <a href="assessments.html">Assessments</a>
-    <a href="teams.html">Teams</a>
-    <a class="active" href="planning.html">Planning</a>
+    <a href="my-clients.html">
+      <svg viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="12" rx="2"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5"/></svg>
+      My Clients</a>
+    <a href="dashboard.html">
+      <svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+      Dashboard</a>
+    <a href="objectives.html">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/></svg>
+      Objectives</a>
+    <a href="assessments.html">
+      <svg viewBox="0 0 24 24"><path d="M4 15.5a8 8 0 1 1 16 0"/><path d="M12 15.5 16 10"/><path d="M4.5 19.5h15"/></svg>
+      Assessments</a>
+    <a href="teams.html">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.5"/><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="16.5" cy="8" r="2.5"/><path d="M16.5 13.5c2.5 0 4.5 1.8 4.5 4.5"/></svg>
+      Teams</a>
+    <a class="active" href="planning.html">
+      <svg viewBox="0 0 24 24"><rect x="4" y="4.5" width="16" height="16" rx="2"/><path d="m8 12.5 2.5 2.5 5.5-5.5"/></svg>
+      Planning</a>
   </nav>
   <div class="nx-account">
     <button class="nx-avatar" aria-haspopup="true">JM</button>
+    <div class="nx-account-id">
+      <span class="nx-account-name">Jonah Mensah</span>
+      <span class="nx-account-role">Worker</span>
+    </div>
     <div class="nx-dropdown">
       <a href="profile.html">Profile</a>
       <a href="#">Company Profile</a>
@@ -32,14 +50,14 @@
       <a href="#">Feedback</a>
     </div>
   </div>
-</header>
+</aside>
 
 <main class="nx-page">
 
   <div class="nx-page-head">
     <div>
-      <h1 class="nx-page-title">Planning</h1>
-      <p class="nx-page-sub">Good morning, Jonah — Milestone 2 of "Cut order-to-ship time 30%", day 3 of 7</p>
+      <h1 class="nx-page-title">Good morning, Jonah</h1>
+      <p class="nx-page-sub">Milestone 2 · day 3 of 7 · Cut order-to-ship time 30%</p>
     </div>
     <div class="nx-cta-pair">
       <button class="nx-btn-primary">Add task</button>
@@ -48,11 +66,14 @@
   </div>
 
   <!-- Analytics strip: the current milestone, nothing else (≤4 tiles) -->
-  <section class="nx-tiles" aria-label="analytics">
-    <div class="nx-tile"><div class="nx-tile-number">7/11</div><div class="nx-tile-label">Tasks done</div></div>
-    <div class="nx-tile"><div class="nx-tile-number">19h</div><div class="nx-tile-label">Logged of 26h est</div></div>
-    <div class="nx-tile"><div class="nx-tile-number ok">4</div><div class="nx-tile-label">Milestone streak</div></div>
-    <div class="nx-tile"><div class="nx-tile-number">4d</div><div class="nx-tile-label">Left in milestone</div></div>
+  <section class="nx-tiles hero" aria-label="analytics">
+    <div class="nx-tile">
+      <div class="nx-ring lg" style="--ring-value:64;"><div class="nx-ring-inner">7/11</div></div>
+      <div class="nx-tile-label">Tasks</div>
+    </div>
+    <div class="nx-tile"><div class="nx-tile-number">19h</div><div class="nx-tile-label">of 26h logged</div></div>
+    <div class="nx-tile"><div class="nx-tile-number ok">4</div><div class="nx-tile-label">Streak</div></div>
+    <div class="nx-tile"><div class="nx-tile-number">4d</div><div class="nx-tile-label">Left</div></div>
   </section>
 
   <!-- What do I do today — my tasks first, calm list, never a Gantt -->
@@ -122,7 +143,7 @@
   <!-- Empty state -->
   <p class="mock-note">Empty state — a worker whose KR has no plan yet</p>
   <section class="nx-empty">
-    <div class="nx-empty-mark"></div>
+    <div class="nx-empty-mark"><img src="../brand/NEXUSLOGO_icon.png" alt=""></div>
     <h2>Pick a key result and plan its first milestone</h2>
     <p>A milestone is about a week of work: a handful of tasks, each a few hours. Finish the milestone, the key result moves — progress takes care of itself.</p>
     <button class="nx-btn-primary">Add milestone</button>
