@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nexus — Dashboard (Builder mode mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Sora:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&amp;family=Sora:wght@500;600&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../../client/css/tokens.css">
 <link rel="stylesheet" href="shell.css">
 </head>
@@ -55,42 +55,53 @@
 
   <div class="nx-page-head">
     <div>
+      <span class="nx-eyebrow">Builder pulse · month 8</span>
       <h1 class="nx-page-title">Welcome back, Lena</h1>
-      <p class="nx-page-sub">Dispatch Copilot v1 · <strong>Builder mode</strong> · 8 months post-handover</p>
+      <p class="nx-page-sub">Dispatch Copilot v1 · <strong>Builder mode</strong> · the same transformation rhythm, now owned by the product team.</p>
     </div>
     <div class="nx-cta-pair">
       <button class="nx-btn-primary">Push task completion</button>
     </div>
   </div>
 
-  <!-- Same tiles, product-development program -->
-  <section class="nx-tiles hero" aria-label="analytics">
-    <div class="nx-tile">
-      <div class="nx-ring lg" style="--ring-value:44;"><div class="nx-ring-inner">44%</div></div>
-      <div class="nx-tile-label">Program</div>
+  <div class="nx-loop-rail" aria-label="Nexus operating loop">
+    <span class="nx-loop-step done">Measure</span>
+    <span class="nx-loop-step done">Align</span>
+    <span class="nx-loop-step active">Transform</span>
+    <span class="nx-loop-step">Evolve</span>
+  </div>
+
+  <section class="nx-pulse" aria-label="product program pulse">
+    <div class="nx-pulse-hero">
+      <div class="nx-ring" style="--ring-value:44;"><div class="nx-ring-inner">44%</div></div>
+      <div class="nx-pulse-copy">
+        <span class="nx-pulse-label">Product program</span>
+        <span class="nx-pulse-value">Building</span>
+        <p class="nx-pulse-caption">The team owns the loop. Onboarding flow v2 is the highest-leverage move this week.</p>
+      </div>
     </div>
-    <div class="nx-tile"><div class="nx-tile-number ok">3 / 4</div><div class="nx-tile-label">On track</div></div>
-    <div class="nx-tile"><div class="nx-tile-number">88%</div><div class="nx-tile-label">This week</div></div>
-    <div class="nx-tile"><div class="nx-tile-number alert">1</div><div class="nx-tile-label">Overdue</div></div>
+    <div class="nx-pulse-metrics">
+      <div class="nx-metric"><span class="nx-metric-value ok">3 / 4</span><span class="nx-metric-label">On track</span></div>
+      <div class="nx-metric"><span class="nx-metric-value">88%</span><span class="nx-metric-label">Weekly rhythm</span></div>
+      <div class="nx-metric"><span class="nx-metric-value alert">1</span><span class="nx-metric-label">Overdue</span></div>
+    </div>
   </section>
 
-  <h2 class="nx-section-title">Needs you today</h2>
-  <section class="nx-card-grid cols-3" aria-label="needs you today">
-    <article class="nx-card action">
-      <span class="nx-pill risk">at risk</span>
-      <h3 class="nx-card-title">Ship onboarding flow v2</h3>
-      <p class="nx-card-sub">Usability fixes round 2 · 1 overdue · R. Alvarez</p>
-      <button class="nx-btn-secondary">Nudge owner</button>
+  <h2 class="nx-section-title">Needs you today <small>ranked by delivery impact</small></h2>
+  <section class="nx-decision-list" aria-label="needs you today">
+    <article class="nx-decision primary">
+      <span class="nx-decision-rank">1</span>
+      <div><span class="nx-decision-title">Ship onboarding flow v2</span><span class="nx-decision-meta">Usability fixes round 2 · 1 overdue · R. Alvarez</span></div>
+      <button class="nx-btn-primary">Nudge owner</button>
     </article>
-    <article class="nx-card action">
-      <span class="nx-pill ok">review</span>
-      <h3 class="nx-card-title">Quarterly re-assessment ready</h3>
-      <p class="nx-card-sub">5-card pulse deck · deltas vs last quarter</p>
+    <article class="nx-decision">
+      <span class="nx-decision-rank">2</span>
+      <div><span class="nx-decision-title">Send the quarterly pulse decks</span><span class="nx-decision-meta">5 cards · deltas against last quarter</span></div>
       <button class="nx-btn-quiet">Send decks →</button>
     </article>
   </section>
 
-  <h2 class="nx-section-title">Objectives — Dispatch Copilot v1</h2>
+  <h2 class="nx-section-title">Objectives — Dispatch Copilot v1 <small>evidence behind the pulse</small></h2>
   <section class="nx-card-grid cols-3" aria-label="objectives">
     <article class="nx-card objective">
       <div class="head">

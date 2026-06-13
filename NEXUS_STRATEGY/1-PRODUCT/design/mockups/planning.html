@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nexus — Planning (Worker home mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Sora:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&amp;family=Sora:wght@500;600&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../../client/css/tokens.css">
 <link rel="stylesheet" href="shell.css">
 </head>
@@ -56,8 +56,9 @@
 
   <div class="nx-page-head">
     <div>
+      <span class="nx-eyebrow">Execute · your work today</span>
       <h1 class="nx-page-title">Good morning, Jonah</h1>
-      <p class="nx-page-sub">Milestone 2 · day 3 of 7 · Cut order-to-ship time 30%</p>
+      <p class="nx-page-sub">Milestone 2 · day 3 of 7 · Nexus has put your highest-leverage task first.</p>
     </div>
     <div class="nx-cta-pair">
       <button class="nx-btn-primary">Add task</button>
@@ -65,15 +66,28 @@
     </div>
   </div>
 
-  <!-- Analytics strip: the current milestone, nothing else (≤4 tiles) -->
-  <section class="nx-tiles hero" aria-label="analytics">
-    <div class="nx-tile">
-      <div class="nx-ring lg" style="--ring-value:64;"><div class="nx-ring-inner">7/11</div></div>
-      <div class="nx-tile-label">Tasks</div>
+  <div class="nx-loop-rail" aria-label="Nexus operating loop">
+    <span class="nx-loop-step done">Measure</span>
+    <span class="nx-loop-step done">Align</span>
+    <span class="nx-loop-step active">Transform</span>
+    <span class="nx-loop-step">Evolve</span>
+  </div>
+
+  <section class="nx-task-focus" aria-label="next best task">
+    <div class="nx-person-mark">JM</div>
+    <div>
+      <span class="nx-eyebrow">Next best task</span>
+      <strong class="nx-task-focus-title">Configure pilot dashboard alerts</strong>
+      <span class="nx-task-focus-meta">2h estimate · 1h logged · due today · unblocks the east-region pilot review</span>
     </div>
-    <div class="nx-tile"><div class="nx-tile-number">19h</div><div class="nx-tile-label">of 26h logged</div></div>
-    <div class="nx-tile"><div class="nx-tile-number ok">4</div><div class="nx-tile-label">Streak</div></div>
-    <div class="nx-tile"><div class="nx-tile-number">4d</div><div class="nx-tile-label">Left</div></div>
+    <button class="nx-btn-primary">Continue task</button>
+  </section>
+
+  <section class="nx-context-strip" aria-label="milestone context">
+    <div class="nx-context-item"><span class="nx-context-value">7 / 11</span><span class="nx-context-label">Tasks</span></div>
+    <div class="nx-context-item"><span class="nx-context-value">19h / 26h</span><span class="nx-context-label">Logged</span></div>
+    <div class="nx-context-item"><span class="nx-context-value">4 days</span><span class="nx-context-label">Streak</span></div>
+    <div class="nx-context-item"><span class="nx-context-value">4 days</span><span class="nx-context-label">Remaining</span></div>
   </section>
 
   <!-- What do I do today — my tasks first, calm list, never a Gantt -->

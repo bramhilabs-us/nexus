@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nexus — My Clients (Engagement mode mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Sora:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&amp;family=Sora:wght@500;600&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../../client/css/tokens.css">
 <link rel="stylesheet" href="shell.css">
 </head>
@@ -56,37 +56,50 @@
 
   <div class="nx-page-head">
     <div>
+      <span class="nx-eyebrow">Consulting portfolio</span>
       <h1 class="nx-page-title">Welcome back, Sam</h1>
-      <p class="nx-page-sub">12 engagements · everything in twenty seconds</p>
+      <p class="nx-page-sub">Twelve engagements, ordered by where your attention changes an outcome.</p>
     </div>
     <div class="nx-cta-pair">
       <button class="nx-btn-primary">Add Client</button>
     </div>
   </div>
 
-  <!-- Analytics strip: hundredth-time triage numbers (≤4 tiles) -->
-  <section class="nx-tiles hero" aria-label="analytics">
-    <div class="nx-tile"><div class="nx-tile-number">12</div><div class="nx-tile-label">Clients</div></div>
-    <div class="nx-tile"><div class="nx-tile-number alert">3</div><div class="nx-tile-label">Need attention</div></div>
-    <div class="nx-tile">
-      <div class="nx-ring lg" style="--ring-value:68;"><div class="nx-ring-inner">68</div></div>
-      <div class="nx-tile-label">Avg AIR</div>
+  <!-- No loop rail here: the operating loop is a per-PROGRAM signature; a single
+       "active" stage is meaningless across a portfolio whose clients sit in every
+       stage at once (see the per-client stage badges below). DESIGN_LANGUAGE
+       § Loop rail. -->
+
+  <section class="nx-pulse" aria-label="portfolio pulse">
+    <div class="nx-pulse-hero">
+      <div class="nx-ring" style="--ring-value:68;"><div class="nx-ring-inner">68</div></div>
+      <div class="nx-pulse-copy">
+        <span class="nx-pulse-label">Portfolio AIR</span>
+        <span class="nx-pulse-value">68 average</span>
+        <p class="nx-pulse-caption">The portfolio is ready to move, but three clients need intervention before the next stage.</p>
+      </div>
     </div>
-    <div class="nx-tile"><div class="nx-tile-number alert">2</div><div class="nx-tile-label">At risk</div></div>
+    <div class="nx-pulse-metrics">
+      <div class="nx-metric"><span class="nx-metric-value">12</span><span class="nx-metric-label">Clients</span></div>
+      <div class="nx-metric"><span class="nx-metric-value alert">3</span><span class="nx-metric-label">Need attention</span></div>
+      <div class="nx-metric"><span class="nx-metric-value alert">2</span><span class="nx-metric-label">At risk</span></div>
+    </div>
   </section>
 
   <!-- Client cards: score ring per installed assessment, stage badge top-right -->
+  <h2 class="nx-section-title">Client pipeline <small>ordered by next meaningful move</small></h2>
   <section class="nx-card-grid" aria-label="client engagements">
 
     <article class="nx-card">
       <span class="nx-stage transforming">Transforming</span>
-      <div style="display:flex; gap:var(--nx-space-4); align-items:center; margin-bottom:var(--nx-space-4);">
+      <div class="nx-dossier-head">
         <div class="nx-ring" style="--ring-value:74; --ring-color:var(--nx-positive);"><div class="nx-ring-inner">74</div></div>
         <div>
           <h2 class="nx-card-title">Meridian Logistics</h2>
           <p class="nx-card-sub">Anika Rao · COO</p>
         </div>
       </div>
+      <p class="nx-card-signal"><strong>Next move:</strong> protect the east-region pilot; it unlocks two dependent KRs.</p>
       <div class="nx-row"><span class="grow nx-card-sub">Objectives</span><strong>6</strong><span class="nx-pill ok">5 on track</span></div>
       <div class="nx-row"><span class="grow nx-card-sub">Program complete</span><strong>62%</strong></div>
       <div class="nx-row"><span class="grow nx-card-sub">Members assessed</span><strong>34 / 40</strong></div>
@@ -95,13 +108,14 @@
 
     <article class="nx-card">
       <span class="nx-stage measuring">Measuring</span>
-      <div style="display:flex; gap:var(--nx-space-4); align-items:center; margin-bottom:var(--nx-space-4);">
+      <div class="nx-dossier-head">
         <div class="nx-ring" style="--ring-value:38; --ring-color:var(--nx-gold);"><div class="nx-ring-inner">—</div></div>
         <div>
           <h2 class="nx-card-title">Halcyon Health</h2>
           <p class="nx-card-sub">Tomás Vega · Head of Ops</p>
         </div>
       </div>
+      <p class="nx-card-signal"><strong>Next move:</strong> collect the two technology instruments due today.</p>
       <div class="nx-row"><span class="grow nx-card-sub">AIR sprint</span><strong>Day 5 of 10</strong><span class="nx-pill risk">2 instruments due</span></div>
       <div class="nx-row"><span class="grow nx-card-sub">Members assessed</span><strong>11 / 25</strong></div>
       <div class="nx-row"><span class="grow nx-card-sub">Objectives</span><strong>—</strong></div>
@@ -110,27 +124,28 @@
 
     <article class="nx-card">
       <span class="nx-stage prospect">Prospect</span>
-      <div style="display:flex; gap:var(--nx-space-4); align-items:center; margin-bottom:var(--nx-space-4);">
-        <div class="nx-ring" style="--ring-value:0;"><div class="nx-ring-inner">·</div></div>
+      <div class="nx-dossier-head">
+        <div class="nx-org-mark">BF</div>
         <div>
           <h2 class="nx-card-title">Bluegrain Foods</h2>
           <p class="nx-card-sub">Priya Natarajan · CEO</p>
         </div>
       </div>
-      <p class="nx-card-sub" style="margin-bottom:var(--nx-space-4);">Added 2 days ago. The entry assessment starts the maturity ladder.</p>
+      <p class="nx-card-signal"><strong>Next move:</strong> begin the entry assessment and establish the evidence baseline.</p>
       <!-- Prospect tile's inline CTA advances the journey -->
       <button class="nx-btn-secondary">Start assessment</button>
     </article>
 
     <article class="nx-card">
       <span class="nx-stage evolving">Evolving</span>
-      <div style="display:flex; gap:var(--nx-space-4); align-items:center; margin-bottom:var(--nx-space-4);">
+      <div class="nx-dossier-head">
         <div class="nx-ring" style="--ring-value:91; --ring-color:var(--nx-positive);"><div class="nx-ring-inner">91</div></div>
         <div>
           <h2 class="nx-card-title">Northwind Capital</h2>
           <p class="nx-card-sub">Builder mode · 4 months</p>
         </div>
       </div>
+      <p class="nx-card-signal"><strong>Next move:</strong> schedule the re-assessment while adoption is still strong.</p>
       <div class="nx-row"><span class="grow nx-card-sub">Sustained KPIs</span><strong>4</strong><span class="nx-pill ok">all green</span></div>
       <div class="nx-row"><span class="grow nx-card-sub">Re-assessment</span><strong>due in 3 weeks</strong></div>
       <div class="nx-row"><span class="grow nx-card-sub">Active in Builder</span><strong>weekly</strong></div>

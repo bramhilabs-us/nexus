@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nexus — Objectives (Engagement mode mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Sora:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&amp;family=Sora:wght@500;600&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../../client/css/tokens.css">
 <link rel="stylesheet" href="shell.css">
 </head>
@@ -56,35 +56,42 @@
 
   <div class="nx-page-head">
     <div>
+      <span class="nx-eyebrow">Outcome portfolio</span>
       <h1 class="nx-page-title">Welcome back, Maya</h1>
-      <p class="nx-page-sub">Meridian Logistics · 6 objectives</p>
+      <p class="nx-page-sub">Six objectives. Nexus has ranked the move most likely to improve the whole system.</p>
     </div>
     <div class="nx-cta-pair">
       <button class="nx-btn-primary">Create objective</button>
-      <button class="nx-btn-secondary">Check in on a KR</button>
-      <button class="nx-btn-quiet">Draft KRs with AI →</button>
+      <button class="nx-btn-quiet">More actions ···</button>
     </div>
   </div>
 
-  <!-- Analytics strip: stages + health (≤4 tiles) -->
-  <section class="nx-tiles hero" aria-label="analytics">
-    <div class="nx-tile"><div class="nx-tile-number">4</div><div class="nx-tile-label">Identified</div></div>
-    <div class="nx-tile"><div class="nx-tile-number">1</div><div class="nx-tile-label">Handed off</div></div>
-    <div class="nx-tile"><div class="nx-tile-number ok">1</div><div class="nx-tile-label">Sustained</div></div>
-    <div class="nx-tile"><div class="nx-tile-number">58%</div><div class="nx-tile-label">Avg complete</div></div>
+  <div class="nx-loop-rail" aria-label="objective lifecycle">
+    <span class="nx-loop-step done">Measure</span>
+    <span class="nx-loop-step active">Align</span>
+    <span class="nx-loop-step">Transform</span>
+    <span class="nx-loop-step">Evolve</span>
+  </div>
+
+  <section class="nx-context-strip" aria-label="objective status">
+    <div class="nx-context-item"><span class="nx-context-value">4</span><span class="nx-context-label">Identified</span></div>
+    <div class="nx-context-item"><span class="nx-context-value">1</span><span class="nx-context-label">Handed off</span></div>
+    <div class="nx-context-item"><span class="nx-context-value">1</span><span class="nx-context-label">Sustained</span></div>
+    <div class="nx-context-item"><span class="nx-context-value">58%</span><span class="nx-context-label">Average complete</span></div>
   </section>
 
   <!-- The team-altitude NBM: the Manager's hint arrow (03 F9; Article 13) -->
   <section class="nx-focus" aria-label="focus recommendation">
-    <span class="nx-focus-kicker">Focus now</span>
-    <span class="grow">
-      <strong>Automate intake triage</strong>
-      <span class="nx-card-sub" style="display:block">Two KRs behind pace, and the pilot depends on it — moving this unblocks the most downstream work.</span>
+    <span class="nx-focus-main">
+      <span class="nx-focus-kicker">Focus now</span>
+      <strong class="nx-focus-title">Automate intake triage</strong>
+      <span class="nx-card-sub">Two KRs are behind pace and the pilot depends on them. Moving this objective unblocks the most downstream work.</span>
     </span>
     <span class="nx-pill conf">confidence 72% · why →</span>
   </section>
 
   <!-- Objective cards: KR list + lifecycle ribbon -->
+  <h2 class="nx-section-title">All objectives <small>expand a card for evidence and KR detail</small></h2>
   <section class="nx-card-grid" aria-label="objectives">
 
     <article class="nx-card">
