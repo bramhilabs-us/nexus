@@ -338,3 +338,12 @@ Statuses: DONE | BLOCKED | NO-OP | BUDGET-STOP | ABORTED
 **Files**: design/brand/{NEXUSLOGO_primary,NEXUSLOGO_icon,NEXUSLOGO_on-dark}.png (new), design/mockups/{shell.css,8×html,README.md}, design/{DESIGN_LANGUAGE,README}.md, _agent/{JOURNAL,NEXT_SESSION}.md
 **Verification**: hex scan zero; token-existence pass (all consumed ⊆ defined); doc-graph green (62/0/0); headless-Chrome renders of 5 surfaces inspected.
 **Next**: unchanged — N1-P4-01 (sprint 2 opener). Founder confirms pending: Builder-dashboard viewer choice, PQ-1 wording, P3-08 cadences.
+
+## 2026-06-13T06:15Z — session-2026-06-13-27 pt 3 — DONE
+**Task**: Stage-weather quick scan (founder-directed): do the 10 mockups hold across all 5 stages × 4 archetypes without structural change?
+**Branch**: session/2026-06-13-27-c013-brand-rework (same PR #30)
+**Outcome**: **Verdict: the plan holds.** Every stage transition in the matrix (PRODUCT_STRATEGY § the stage dimension) is a data/state change inside slots the mockups already have — per-card stage on My Clients, empty states as pre-stage weather, deck variants on Assessments, access (not structure) gating Planning pre-Align. Four structural debts found and logged: (1) the **rules surface** is unrendered on all 10 surfaces (mandatory page-contract field; Dashboard is the founder-named priority — it delivers the players' rules/activities); (2) the **instrumentation quest line** (Transform Dashboard, valley UX 03 §6.2) has no component — both → new BACKLOG **N1-P3-10** (S); (3) **stage-keyed slots must be declared in contracts** (primary CTA and the Dashboard's third section are stage-keyed config, not fixed content); (4) **Teams' Prospect empty state = the Sponsor's guided matrix import**, a stage variant — both folded into **N1-P4-01's DoD** so the contract drafts carry them. mockups README carries the scan note; NEXT_SESSION card updated.
+**Quality**: 9/10 — scan scoped exactly as asked (quick, no page changes), verdict grounded row-by-row in the stage matrix, all findings routed to owned homes (none live only in chat); -1: the scan was matrix-level, not playthrough-level — the hostile playthrough's 11 stalls weren't re-walked against the mockups (acceptable for a quick sync; the trigger map already owns those).
+**Files**: _agent/{BACKLOG,NEXT_SESSION,JOURNAL}.md, NEXUS_STRATEGY/1-PRODUCT/design/mockups/README.md
+**Verification**: doc-graph green (62/0/0); BACKLOG re-read (N1-P3-10 added READY, N1-P4-01 DoD extended).
+**Next**: unchanged — N1-P4-01 (sprint 2 opener), now carrying the scan's two contract declarations.

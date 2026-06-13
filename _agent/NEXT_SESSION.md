@@ -15,6 +15,7 @@
 **Definition of done** (from the sprint spec):
 - MODULARIZATION_PLAN.md + MODULE_CONTRACTS_DRAFT.md exist under 2-TECHNICAL, graph-wired, with TS signatures for the 8 lego blocks + the AIR impl folder
 - The outbound notification/mail owner is assigned (contract-fronted, never per-module ad-hoc mail — audit 4.5)
+- The stage-weather scan items land in the PageContract draft: stage-keyed primary CTA + stage-keyed Dashboard section; Teams' Prospect empty state = Sponsor matrix import (BACKLOG N1-P4-01 DoD, added session-27 pt 3)
 - MODULE_DEPENDENCY_GRAPH + API_SURFACE revisit triggers fired and retired
 
 **Watch out for**:
