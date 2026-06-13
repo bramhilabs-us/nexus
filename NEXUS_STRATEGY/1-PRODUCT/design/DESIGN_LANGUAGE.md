@@ -18,6 +18,7 @@ children:
   - client/README.md
   - NEXUS_STRATEGY/1-PRODUCT/design/mockups/README.md
   - NEXUS_STRATEGY/1-PRODUCT/design/README.md
+  - NEXUS_STRATEGY/1-PRODUCT/design/EXTERNAL_DESIGN_AUDIT_2026-06-13.md
 revisit:
   - on: "either brand guide is updated, or page-level design specs are added"
     stage: N3
@@ -46,6 +47,91 @@ Translate the NEXUS product brand guide ([brand/NEXUS_BRANDGUIDE.png](brand/NEXU
 - **Layout**: the **dark sidebar shell** (guide § application examples) on every product surface — logo top, icon+label nav, primary-pill active state, account at the bottom; content on the Surface page background.
 - **Minimalism is enforced, not aspired to**: one dominant primary CTA per page, ≤4 analytics tiles, whitespace over borders, no decoration that doesn't change a decision.
 - **Tokens before mockups, always** (Karvia lesson #174-3): every color/space/type value is a CSS custom property defined once; no inline hex in pages or mockups.
+
+## External-audit refinement — hierarchy makes the product feel premium
+
+The June 13, 2026 external design audit found that the brand direction was
+coherent but the application grammar gave too many white rectangles equal
+visual weight. The implemented v3 mockups preserve all C-013 rules and add a
+binding three-level hierarchy:
+
+1. **Orientation** — one dominant pulse, recommendation, result, or task that
+   tells the player where they are.
+2. **Decision** — the single next action, ranked when several candidates exist.
+3. **Evidence** — metrics, cards, rows, and provenance that support the decision
+   without competing with it.
+
+The operating loop is now an application signature: a restrained stage rail and
+rare gradient moments tied to Measure, Align, Transform, and Evolve. It is never
+used as ambient decoration across ordinary cards. Full rationale and the
+page-by-page implementation record:
+[EXTERNAL_DESIGN_AUDIT_2026-06-13.md](EXTERNAL_DESIGN_AUDIT_2026-06-13.md).
+
+## Structural grammar adopted from the audit — we own the content
+
+The audit's value is **structure**, and structure is what Nexus adopts as canon.
+**Copy is not.** The dividing line, stated once and binding:
+
+> **Adopt the slot; write the words ourselves.** A composition's structure —
+> what occupies orientation/decision/evidence, how it collapses, how it moves —
+> is binding for the Night 3 build. The *words inside it* are a product decision,
+> owned by PRODUCT_STRATEGY, the constitution, and the page contracts (rules
+> surface, NBM grammar, stage names per §4), never by the auditor.
+
+The auditor's example copy — taglines (*"Measure honestly. Transform
+deliberately."*), the *"How Nexus sees your fit"* framing, pulse headlines, and
+recommendation wording in the v3 mockups — is **illustrative placeholder**. It
+demonstrates the slot; it is not approved product copy. Treat any string in the
+mockups as a lorem-stand-in unless it traces to a governed source.
+
+### The structural rules now canon (beyond the three levels above)
+
+1. **One focal composition per page.** Every executive/workflow page leads with a
+   single memorable composition; everything else is subordinate evidence. The
+   focal map (binding — a page changing its focal slot updates this row first):
+
+   | Page | Focal composition |
+   |---|---|
+   | Dashboard / Builder dashboard | Program pulse (the highest-leverage decision is the only dominant action) |
+   | My Clients | Portfolio AIR pulse → client dossiers ordered by next meaningful move |
+   | Objectives | Next Best Move (the focus hint, Article-13 grammar) |
+   | Assessments | Sprint pulse + the guided journey; scored result is a distinct handoff |
+   | Teams | Participation pulse + the explicit alignment gap |
+   | Planning | Next Best Task (before any reporting metric) |
+   | Profile | Fit interpretation (transparent, provenance kept) |
+   | Flashcards | The question itself |
+
+2. **Surface hierarchy — three tiers + the teaching empty state.** Not every white
+   rectangle is equal (the audit's core finding): **quiet panel** (hairline, no
+   elevation — supporting evidence), **interactive card** (restrained elevation —
+   things you act on), **spotlight** (stronger composition + depth — the one focal
+   moment), and the **dashed teaching surface** for empty states (never another
+   elevated card). This supersedes the older "hairline *or* soft shadow" card note
+   as the page-level rule: elevation now signals *role*, not taste.
+
+3. **Motion doctrine.** Three tiers — `120ms` (feedback), `180ms` (selection/
+   state), `240ms` (depth/spotlight). Motion is allowed only for feedback,
+   selection, and depth — never ambient drift. `prefers-reduced-motion` is
+   honored. (This corrects the earlier "responsive/motion lands N3" deferral —
+   the grammar is decided now; only the production-component build is N3.)
+
+4. **Responsive doctrine.** Breakpoints at large-tablet / compact-tablet / mobile;
+   the sidebar collapses to a compact horizontal nav (same rows, same active
+   grammar — never a second shell); grids, decision rows, task metadata,
+   flashcards, and context strips collapse **deliberately**, not by accidental
+   wrap.
+
+### Token-promotion path (the one debt this leaves)
+
+The audit kept its derived interaction tones, raised/spotlight shadows, and motion
+timings **local to `mockups/shell.css`** because its scope was the design folder
+only — the production `client/css/tokens.css` was intentionally untouched. So the
+N3 component build's **step 1** is to graduate the `--nx-audit-*` set into
+governed `--nx-*` tokens (they are already `color-mix()` on declared tokens, so
+this is a rename + a row in the Token table v2, not a re-derivation). The
+no-local-derivation rule (token-first workflow below) applies to the production
+build; the mockups' local block is the sanctioned exception while they remain
+mockups.
 
 ## Token-first workflow
 
@@ -88,7 +174,7 @@ Every product surface renders inside the same shell — the brand guide's own ap
 - **Sidebar** (`--nx-sidebar-width`, fixed left): `--nx-sidebar-bg` (Deep Text navy). Top: the NEXUS lockup (white). Middle: icon + label nav, one row per primary surface; the active row is a `--nx-sidebar-active-bg` pill with white text; hover is a soft white-alpha fill. Bottom: the account block (avatar + dropdown: Profile, Company Profile, Configuration, Settings, Feedback).
 - **Content area**: `--nx-surface-page` background; the page head (title + the page's one primary CTA) replaces the old topbar; white cards and tiles carry the content.
 - **Mode flips stay in the shell**: Builder mode and org-direct remove/replace nav rows (e.g. no My Clients) — they never invent a second shell.
-- Mobile: the sidebar collapses to a bottom/sheet nav — same rows, same active grammar (mockups are web-first; responsive behavior lands N3).
+- Mobile: the sidebar collapses to a compact horizontal nav — same rows, same active grammar (the v3 mockups now carry this; see § Responsive doctrine — only the production component build is N3, not the grammar).
 
 ## Component set (the lego constraint, visually)
 
@@ -109,6 +195,16 @@ One small set shared by all pages — adding a component requires updating this 
 | **Answer input** | The per-card response control (scale / choice / binary) | Large tap targets, one input family per card; selected state = primary-faint fill + primary border; never radio/checkbox form controls |
 | **Tag chip** | Match-grade profile signals (skills, motivations, interests — fit thesis) | Small pill, primary-faint fill; assessment-fed chips carry a source mark; chips are data, never decoration — free-prose never gets a chip |
 | **Task row** | Planning task lists ("what do I do today") | Status circle (todo/doing/done) + title + hours est/logged + owner; done = struck title, positive circle; calm list, never a Gantt |
+| **Executive pulse** | Dashboard, Clients, Assessments, Teams | One dominant orientation signal plus three quiet supporting metrics; replaces equal-weight analytics-card strips |
+| **Decision rail** | Ranked "needs you" actions | Highest downstream-impact move first; one dominant action, quieter alternatives |
+| **Loop rail** | Current Measure/Align/Transform/Evolve context | Signature stage context only; active state may use the brand gradient. **Per-program only** — never on a cross-portfolio view (My Clients): one "active" stage is meaningless when the consultant's clients sit in every stage at once. On portfolio pages, stage lives only as the per-client badge (the audit's v3 My Clients loop rail was removed for this reason, founder call 2026-06-13). |
+| **Journey** | Assessment sprint progression | Completed, active, and upcoming work in a vertical evidence path |
+| **Task focus** | Worker home | The next best task appears before reporting metrics and task inventory |
+| **Fit summary** | Profile | Transparent interpretation of routing signals; never hides provenance or replaces editable tags |
+| **Dossier head** | Client / team identity | Score or org mark · sponsor · stage · primary signal — the scannable identity row on My Clients/Teams; Prospect shows no empty score ring |
+| **Result spotlight** | Scored assessment handoff | The completed AIR result as a distinct composition, visually wired to its "Create objectives" CTA (the deliverable→objectives seam, J1) |
+| **Context strip** | Quiet supporting metrics | Lifecycle counts / milestone metrics demoted out of the focal slot into one calm strip — evidence, not orientation |
+| **Signal grid** | Profile signals | Grouped, two-column responsive signal layout; assessment-fed groups carry the source mark (replaces the v1 tag-wall) |
 
 ## Card grammar — zoom levels (04_RUNTIME_MODEL §5)
 

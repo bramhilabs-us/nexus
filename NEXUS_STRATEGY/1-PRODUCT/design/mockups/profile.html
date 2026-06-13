@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nexus — Profile (player card mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Sora:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&amp;family=Sora:wght@500;600&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../../client/css/tokens.css">
 <link rel="stylesheet" href="shell.css">
 </head>
@@ -56,13 +56,20 @@
 
   <div class="nx-page-head">
     <div>
+      <span class="nx-eyebrow">Your player card</span>
       <h1 class="nx-page-title">Profile</h1>
-      <p class="nx-page-sub">This card routes the right work to you</p>
+      <p class="nx-page-sub">A transparent picture of the signals Nexus uses to route meaningful work to you.</p>
     </div>
     <div class="nx-cta-pair">
       <button class="nx-btn-primary">Edit profile</button>
     </div>
   </div>
+
+  <section class="nx-fit-summary" aria-label="fit interpretation">
+    <span class="nx-eyebrow">How Nexus sees your fit</span>
+    <h2>Jonah turns operational friction into measurable, teachable improvements.</h2>
+    <p>Routing systems, process mapping, and a preference for written handoffs make him a strong fit for pilot configuration and adoption work. Every assessment-fed signal remains visible below.</p>
+  </section>
 
   <!-- Identity + role per program -->
   <section class="nx-panel">
@@ -78,47 +85,49 @@
     <p class="nx-card-sub" style="margin-top:var(--nx-space-3)">Role labels map to one of the four archetypes — added by your admin in Configuration, never hard-coded.</p>
   </section>
 
-  <!-- Match-grade signals: tags, never prose. ◆ = fed by an assessment instrument -->
-  <section class="nx-panel">
-    <h2 class="nx-panel-title">Skills <span class="nx-card-sub">◆ = from your workforce assessment (AIR Day 7)</span></h2>
-    <div class="nx-tags">
-      <span class="nx-tag assessed">routing-systems</span>
-      <span class="nx-tag assessed">data-analysis</span>
-      <span class="nx-tag">sql</span>
-      <span class="nx-tag">carrier-ops</span>
-      <span class="nx-tag assessed">process-mapping</span>
-      <button class="nx-tag-add">+ add skill</button>
-    </div>
-  </section>
+  <!-- Match-grade signals: grouped for scanability. ◆ = assessment-fed. -->
+  <div class="nx-signal-grid">
+    <section class="nx-panel">
+      <h2 class="nx-panel-title">Skills <span class="nx-card-sub">◆ assessment-fed</span></h2>
+      <div class="nx-tags">
+        <span class="nx-tag assessed">routing-systems</span>
+        <span class="nx-tag assessed">data-analysis</span>
+        <span class="nx-tag">sql</span>
+        <span class="nx-tag">carrier-ops</span>
+        <span class="nx-tag assessed">process-mapping</span>
+        <button class="nx-tag-add">+ add skill</button>
+      </div>
+    </section>
 
-  <section class="nx-panel">
-    <h2 class="nx-panel-title">Intrinsic motivations</h2>
-    <div class="nx-tags">
-      <span class="nx-tag assessed">fixing-broken-processes</span>
-      <span class="nx-tag assessed">teaching-others</span>
-      <span class="nx-tag">measurable-wins</span>
-      <button class="nx-tag-add">+ add</button>
-    </div>
-  </section>
+    <section class="nx-panel">
+      <h2 class="nx-panel-title">Intrinsic motivations</h2>
+      <div class="nx-tags">
+        <span class="nx-tag assessed">fixing-broken-processes</span>
+        <span class="nx-tag assessed">teaching-others</span>
+        <span class="nx-tag">measurable-wins</span>
+        <button class="nx-tag-add">+ add</button>
+      </div>
+    </section>
 
-  <section class="nx-panel">
-    <h2 class="nx-panel-title">Interests</h2>
-    <div class="nx-tags">
-      <span class="nx-tag">automation</span>
-      <span class="nx-tag assessed">ai-tools</span>
-      <span class="nx-tag">logistics-tech</span>
-      <button class="nx-tag-add">+ add</button>
-    </div>
-  </section>
+    <section class="nx-panel">
+      <h2 class="nx-panel-title">Interests</h2>
+      <div class="nx-tags">
+        <span class="nx-tag">automation</span>
+        <span class="nx-tag assessed">ai-tools</span>
+        <span class="nx-tag">logistics-tech</span>
+        <button class="nx-tag-add">+ add</button>
+      </div>
+    </section>
 
-  <section class="nx-panel">
-    <h2 class="nx-panel-title">Working style</h2>
-    <div class="nx-tags">
-      <span class="nx-tag">deep-focus-mornings</span>
-      <span class="nx-tag">prefers-written-handoffs</span>
-      <button class="nx-tag-add">+ add</button>
-    </div>
-  </section>
+    <section class="nx-panel">
+      <h2 class="nx-panel-title">Working style</h2>
+      <div class="nx-tags">
+        <span class="nx-tag">deep-focus-mornings</span>
+        <span class="nx-tag">prefers-written-handoffs</span>
+        <button class="nx-tag-add">+ add</button>
+      </div>
+    </section>
+  </div>
 
   <p class="mock-note">
     The fit thesis made visible: every field is a tag (a future join key), never prose. Profile (who) + Company Profile (what the team plays for) +

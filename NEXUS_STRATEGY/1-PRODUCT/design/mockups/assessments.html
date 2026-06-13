@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nexus — Assessments (Engagement mode mockup)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Sora:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&amp;family=Sora:wght@500;600&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../../client/css/tokens.css">
 <link rel="stylesheet" href="shell.css">
 </head>
@@ -56,8 +56,9 @@
 
   <div class="nx-page-head">
     <div>
+      <span class="nx-eyebrow">Measure · AIR sprint</span>
       <h1 class="nx-page-title">Assessments</h1>
-      <p class="nx-page-sub">Halcyon Health · AIR sprint in progress</p>
+      <p class="nx-page-sub">Halcyon Health · evidence is becoming a decision-ready picture, one guided step at a time.</p>
     </div>
     <div class="nx-cta-pair">
       <!-- Typed per installed block — one option per assessment block, never hardcoded -->
@@ -66,48 +67,63 @@
     </div>
   </div>
 
-  <!-- Analytics strip: DEFINED BY THE BLOCK (AIR slots) — ≤4 tiles -->
-  <section class="nx-tiles hero" aria-label="analytics (AIR block slots)">
-    <div class="nx-tile">
-      <div class="nx-ring lg" style="--ring-value:50;"><div class="nx-ring-inner">5/10</div></div>
-      <div class="nx-tile-label">Sprint days</div>
+  <div class="nx-loop-rail" aria-label="Nexus operating loop">
+    <span class="nx-loop-step active">Measure</span>
+    <span class="nx-loop-step">Align</span>
+    <span class="nx-loop-step">Transform</span>
+    <span class="nx-loop-step">Evolve</span>
+  </div>
+
+  <section class="nx-pulse" aria-label="assessment pulse">
+    <div class="nx-pulse-hero">
+      <div class="nx-ring" style="--ring-value:50;"><div class="nx-ring-inner">5/10</div></div>
+      <div class="nx-pulse-copy">
+        <span class="nx-pulse-label">AIR sprint</span>
+        <span class="nx-pulse-value">Halfway</span>
+        <p class="nx-pulse-caption">Technology evidence is today's critical path. Two instruments still need a response.</p>
+      </div>
     </div>
-    <div class="nx-tile"><div class="nx-tile-number">7/12</div><div class="nx-tile-label">Evidence</div></div>
-    <div class="nx-tile"><div class="nx-tile-number">11/25</div><div class="nx-tile-label">Assessed</div></div>
-    <div class="nx-tile"><div class="nx-tile-number alert">2</div><div class="nx-tile-label">Due today</div></div>
+    <div class="nx-pulse-metrics">
+      <div class="nx-metric"><span class="nx-metric-value">7 / 12</span><span class="nx-metric-label">Evidence</span></div>
+      <div class="nx-metric"><span class="nx-metric-value">11 / 25</span><span class="nx-metric-label">Assessed</span></div>
+      <div class="nx-metric"><span class="nx-metric-value alert">2</span><span class="nx-metric-label">Due today</span></div>
+    </div>
   </section>
 
   <!-- Active engagement workspace: the block renders into the shell's slots -->
   <section class="nx-panel" aria-label="active assessment">
-    <h2 class="nx-panel-title">AIR Strategic Assessment — two-week sprint <span class="nx-pill ok" style="margin-left:var(--nx-space-2)">Week 1</span></h2>
-    <div class="nx-row">
-      <span class="nx-pill ok">done</span>
-      <span class="grow"><strong>Day 1 · Executive Alignment Workshop</strong><span class="nx-card-sub" style="display:block">Business Context Canvas captured → Company Profile</span></span>
-      <button class="nx-btn-quiet">View canvas →</button>
-    </div>
-    <div class="nx-row">
-      <span class="nx-pill ok">done</span>
-      <span class="grow"><strong>Days 2–4 · Operations, Sales, Service deep dives</strong><span class="nx-card-sub" style="display:block">Value Stream Map · Revenue Flow Map · Customer Experience Map</span></span>
-      <button class="nx-btn-quiet">View artifacts →</button>
-    </div>
-    <div class="nx-row">
-      <span class="nx-pill risk">today</span>
-      <span class="grow"><strong>Day 5 · Technology &amp; data</strong><span class="nx-card-sub" style="display:block">Systems inventory + Enterprise Knowledge Map · 2 instruments open</span></span>
-      <button class="nx-btn-secondary">Capture evidence</button>
-    </div>
-    <div class="nx-row">
-      <span class="nx-pill" style="background:var(--nx-gray-light); color:var(--nx-gray)">week 2</span>
-      <span class="grow"><strong>Days 6–10 · Validation &amp; opportunity mapping</strong><span class="nx-card-sub" style="display:block">Workforce flashcard decks go out Day 7 → <a href="assessment-flashcards.html" class="nx-btn-quiet" style="padding:0">preview the taker experience</a></span></span>
+    <h2 class="nx-panel-title">AIR Strategic Assessment <span class="nx-pill ok">Week 1</span></h2>
+    <div class="nx-journey">
+      <div class="nx-journey-step done">
+        <span class="nx-journey-dot">✓</span>
+        <span><span class="nx-journey-title">Day 1 · Executive alignment</span><span class="nx-journey-desc">Business Context Canvas captured into Company Profile.</span></span>
+        <button class="nx-btn-quiet">View canvas →</button>
+      </div>
+      <div class="nx-journey-step done">
+        <span class="nx-journey-dot">✓</span>
+        <span><span class="nx-journey-title">Days 2–4 · Operational deep dives</span><span class="nx-journey-desc">Value Stream, Revenue Flow, and Customer Experience maps complete.</span></span>
+        <button class="nx-btn-quiet">View artifacts →</button>
+      </div>
+      <div class="nx-journey-step active">
+        <span class="nx-journey-dot">5</span>
+        <span><span class="nx-journey-title">Today · Technology and data</span><span class="nx-journey-desc">Systems inventory + Enterprise Knowledge Map · 2 instruments open.</span></span>
+        <button class="nx-btn-primary">Capture evidence</button>
+      </div>
+      <div class="nx-journey-step">
+        <span class="nx-journey-dot">6–10</span>
+        <span><span class="nx-journey-title">Validation and opportunity mapping</span><span class="nx-journey-desc">Workforce decks go out Day 7, then evidence becomes ranked opportunities.</span></span>
+        <a href="assessment-flashcards.html" class="nx-btn-quiet">Preview deck →</a>
+      </div>
     </div>
   </section>
 
   <!-- Completed assessment: deliverables seed objectives (the page's exit) -->
   <section class="nx-panel" aria-label="completed assessment">
     <h2 class="nx-panel-title">Meridian Logistics — completed <span class="nx-card-sub">scored day 10</span></h2>
-    <div style="display:flex; gap:var(--nx-space-6); align-items:center; margin-bottom:var(--nx-space-4)">
+    <div class="nx-result-spotlight">
       <div class="nx-ring" style="--ring-value:74; --ring-color:var(--nx-positive); width:72px; height:72px"><div class="nx-ring-inner" style="width:56px; height:56px">74</div></div>
       <div class="grow">
-        <strong>AIR Score 74 · Ready with focus areas</strong>
+        <strong class="nx-result-title">Ready, with clear focus areas</strong>
         <p class="nx-card-sub">Leadership 82 · Workforce 71 · Process 68 · Data 70 · Execution 79</p>
       </div>
       <button class="nx-btn-primary">Create objectives from these results</button>

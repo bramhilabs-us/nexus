@@ -14,10 +14,9 @@ summary: >
 parents:
   - NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md
   - NEXUS_STRATEGY/2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md
-children: []
+children:
+  - NEXUS_STRATEGY/2-TECHNICAL/MODULARIZATION_PLAN.md
 revisit:
-  - on: "N1-P4-01 draws module contracts — endpoint sets must cite these tables"
-    stage: N1
   - on: "a Night 2-3 lift finds a route this catalogue missed or mis-tagged"
     stage: N2
 ---

@@ -2,25 +2,26 @@
 
 > Written by the previous session per `/close`. `/init` reads this and starts. Overwritten every session — history lives in JOURNAL.md.
 
-**Type**: CONTRACT (Night 1b, sprint 2 opener)
-**Task**: **N1-P4-01 — Modularization plan + contract drafts** (2 steps; may span 2 sessions). Why now: sprint 1 closed with session-27 (P3-01, P3-08, P3-09 all DONE); sprint 2's goal is the frozen build spec, and N1-P4-01 is its opener — N1-P4-02 (Karvia diff + assessment interface) consumes its output.
+**Type**: CONTRACT (Night 1b, sprint 2 — N1-P4-02)
+**Task**: **N1-P4-02 — Nexus-vs-Karvia diff + Assessment interface spec** (2 deliverables). Why now: N1-P4-01 sealed both steps (session-28 placement, session-29 signatures) — the contract surface is fixed, so the next move is (a) the module-by-module diff that tells the Night 2 lift what changes vs Karvia, and (b) the full `AssessmentProvider` spec whose acceptance test is the second-provider drill. It consumes MODULE_CONTRACTS_DRAFT directly.
 
 **READ FIRST** (in order):
-1. `_agent/SPRINTS_NIGHT_1B.md` § N1-P4-01 — the spec: MODULARIZATION_PLAN.md (8 modules + AIR impl folder) + MODULE_CONTRACTS_DRAFT.md (TS signatures; journey steps as acceptance criteria; routes cite API_SURFACE; edges cite MODULE_DEPENDENCY_GRAPH); assign the outbound notification/mail owner (audit 4.5)
-2. `NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md` — module anatomy + the 4 layers + stage machine (C-020)
-3. `NEXUS_STRATEGY/2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md` + `API_SURFACE.md` — the as-is maps whose revisit triggers this task fires
-4. `NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md` J-index — journey steps are the acceptance criteria; J5's new contract entry point `crm.createCompany(motion=direct)` is flagged there for exactly this task
-5. `_agent/DECISIONS.md` C-003 (consolidate engines), C-004 (TS strict), C-005 (Program entity), C-020 — the contracts must reflect all four
+1. `NEXUS_STRATEGY/2-TECHNICAL/MODULE_CONTRACTS_DRAFT.md` — **the source for this session**: the 8 `contract.ts` interfaces, the AIR `AssessmentProvider` registration, the shells, NotificationPort, orchestrator. The diff and the spec build *on* these signatures.
+2. `NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md` § pluggable assessment (the `AssessmentProvider` TS, L271–305) — the spec extends this to its full shape (Instrument, Evidence, Score, Deliverable, ObjectiveDraft, ProgramContext, lifecycle hooks); ASSESSMENT_INTERFACE_SPEC.md is the canonical home those types graduate into.
+3. `NEXUS_STRATEGY/2-TECHNICAL/MODULARIZATION_PLAN.md` § @nexus/assessment + the AIR impl-folder layout — the diff's assessment row; what dies (SSI bank, 40 routes) vs what AIR ships.
+4. `NEXUS_STRATEGY/2-TECHNICAL/SYSTEM_ARCHITECTURE.md` + `API_SURFACE.md` — the Karvia side of every diff row (engines → modules, 410 routes → 8 surfaces + 2 shells).
+5. `_agent/DECISIONS.md` C-006 (SSI drop — the assessment diff's spine), C-003/4/5/C-020 (the four the diff must reflect).
+6. Karvia reference (READ-ONLY, CLAUDE.md rule 1): `_source/` snapshot for the module-by-module before/after; `karvia_business/engines/assessment/` as the SSI counter-example the spec cites but does not lift.
 
-**Definition of done** (from the sprint spec):
-- MODULARIZATION_PLAN.md + MODULE_CONTRACTS_DRAFT.md exist under 2-TECHNICAL, graph-wired, with TS signatures for the 8 lego blocks + the AIR impl folder
-- The outbound notification/mail owner is assigned (contract-fronted, never per-module ad-hoc mail — audit 4.5)
-- The stage-weather scan items land in the PageContract draft: stage-keyed primary CTA + stage-keyed Dashboard section; Teams' Prospect empty state = Sponsor matrix import (BACKLOG N1-P4-01 DoD, added session-27 pt 3)
-- MODULE_DEPENDENCY_GRAPH + API_SURFACE revisit triggers fired and retired
+**Definition of done**:
+- `NEXUS_VS_KARVIA_DIFF.md` under 2-TECHNICAL, graph-wired (parent: SYSTEM_ARCHITECTURE or MODULARIZATION_PLAN — pick by altitude) — **module-by-module**: for each of the 8 blocks + 2 shells, what Karvia had → what Nexus keeps/reshapes/drops, citing the route/model dispositions already catalogued (don't re-derive — cite API_SURFACE / MODULE_DEPENDENCY_GRAPH / the contracts draft).
+- `ASSESSMENT_INTERFACE_SPEC.md` under 2-TECHNICAL, graph-wired (child of TECH_STRATEGY; sibling of MODULE_CONTRACTS_DRAFT) — the **full pluggable contract**: every type the `AssessmentProvider` interface references fleshed out, the registration lifecycle, the AIR impl as the worked example, and **the second-provider drill written as the acceptance test** (implementing provider #2 touches only `assessment/impls/<new>/`).
+- Doc-graph green; both new docs carry summary + parents + revisit triggers; retire any N1 revisit trigger they satisfy.
 
 **Watch out for**:
-- **The PR stack is now 6 deep** (#25 ← #26 ← #27 ← #28 ← #29 ← session-27 PR). If all merged: branch from main. If not: continue the chain off `session/2026-06-13-27-c013-brand-rework` — do NOT base on main
-- 2-step task: if it splits, seal MODULARIZATION_PLAN as step 1 and carry the contract drafts; don't chain past budget
-- Contract-first invariant: interface + contract test shape first (CLAUDE.md rule 7); journey steps as acceptance criteria, not invented ones
-- **Founder flags pending** (30-second confirms if in-session): (a) P3-08's fallback cadences (48h/day-3/day-7, carried from session-26); (b) from the session-27 founder review (which approved the re-skin direction + card system): the Builder-dashboard viewer (agent picked Lena Chen · Manager), PQ-1 CTA wording (kept "Push task completion"), and official exports of the derived logo variants (icon/on-dark are programmatic)
-- Step count: **34/105** after session-27's three journal entries (EQ-1 raw count — one conversation, three sealed units: re-skin, founder iteration, stage scan). **Night 1b: 5 of 10 spent with 6 steps of task remaining** (P4-01 2 · P4-02 1 · P5-01 1 · P5-02 1 · P6-01 1) — a 1-step squeeze; the N1b close groom re-sums (rule 2) and the global buffer (5) absorbs it if P4/P5 don't come in under
+- **PR stack is now 8 deep** (#25←…←session-28←session-29). Continue the chain off `session/2026-06-13-28-modularization-plan` — do NOT base on main unless the stack has merged. (Branch name is stale vs session number — that's fine, the stack is what matters.)
+- **Step-count drift to reconcile (rule 2)**: the session-28 card listed `P6-01` among Night-1b's remaining steps, but BACKLOG shows N1-P6-01 **DONE in session-24** (the Night-1 close-out). Either the card double-counted or there's a distinct Night-1b close-out not yet in BACKLOG. **The N1b close groom (whoever runs it) must re-sum and name where that step went** — do not trust the labelled "5 remaining."
+- **Founder flags still pending** (carried since session-27, none block this session): (a) the §7 NotificationPort owner ratification (governance dispatch + crm-direct invitation mail); (b) P3-08 fallback cadences (48h/day-3/day-7); (c) review leftovers (Builder viewer = Lena Chen·Manager, PQ-1 "Push task completion" wording, official logo-variant exports). 30-sec confirms if the founder is in-session.
+- Don't re-invent the `AssessmentProvider` interface — it's fixed in TECH_STRATEGY and cited in the contracts draft. The spec *fleshes out its referenced types and the drill*, it doesn't re-shape the interface (if a type reveals the interface is wrong, fix TECH_STRATEGY — the newer record wins, rule 1 — and note it).
+- **New design follow-up (session-29b, founder-directed)**: the external design audit is now canon — DESIGN_LANGUAGE § "Structural grammar adopted from the audit" sets the rule **adopt the slot, write the words ourselves**. Two open threads ride into N3 (not blocking N1-P4-02): (a) a **design copy-pass** — replace the auditor's illustrative strings in the v3 mockups with product-owned copy traced to governed sources; (b) the **token-promotion** step — graduate the `--nx-audit-*` local tokens in `mockups/shell.css` into governed `--nx-*`. The loop rail is now canon as **per-program only** (removed from My Clients); apply that lens if more content-misalignment passes run.
+- Step count: **36/105** after session-29 (the contracts unit) + a founder-directed design unit (29b, doc-only, not a planned step). **Night 1b: 7 of 10 spent**; task-steps remaining: P5-01 · P5-02 (the test pair) — then the N1b close groom. Re-sum at the groom.

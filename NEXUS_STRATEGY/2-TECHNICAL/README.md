@@ -24,6 +24,7 @@ How Nexus is built so every capability is a swappable lego block.
 | Doc | Owns |
 |---|---|
 | [TECH_STRATEGY.md](TECH_STRATEGY.md) | The tech card of the pack: four layers, eight module contracts, the stage machine, the Layer-4/iBrain seam (C-020), AssessmentProvider, handover, srishti boundary |
+| [MODULARIZATION_PLAN.md](MODULARIZATION_PLAN.md) | The placement plan: every Karvia model/route/engine assigned to one of the 8 blocks, a shell, or death; AIR impl-folder layout; the outbound-notification owner (§7); Night 2 build order |
 | [SCORING_MODEL.md](SCORING_MODEL.md) | The computed category's mechanics: signal store, question schema, calculator registry, anchor packs, triangulation, calibration |
 | [USER_JOURNEYS.md](USER_JOURNEYS.md) | The four archetype journeys over the module contracts (playthroughs + trigger map land via N1-P3-08) |
 | [IMPROVEMENT_PLAN.md](IMPROVEMENT_PLAN.md) | The quality bar: 10 anti-patterns, 10 improvements, per-PR gates |
