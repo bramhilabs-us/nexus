@@ -28,6 +28,7 @@ children:
   - NEXUS_STRATEGY/2-TECHNICAL/DATA_MODELS.md
   - NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md
   - NEXUS_STRATEGY/2-TECHNICAL/SCORING_MODEL.md
+  - NEXUS_STRATEGY/2-TECHNICAL/MODULARIZATION_PLAN.md
 revisit:
   - on: "any module contract.ts diverges from the anatomy or contracts described here"
     stage: N2

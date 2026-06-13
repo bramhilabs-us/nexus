@@ -134,6 +134,8 @@ NEXUS DOCUMENT GRAPH                                  (tier | one-line role)
 |       |    SYSTEM_ARCHITECTURE, IMPROVEMENT_PLAN, 04_RUNTIME_MODEL)
 |       |-- 2-TECHNICAL/SCORING_MODEL.md ..... T2 | signal store, question schema, calculator registry, packs, triangulation
 |       |       (parents: + scores/BOQ.md, 04_RUNTIME_MODEL)
+|       |-- 2-TECHNICAL/MODULARIZATION_PLAN.md  T2 | Karvia surface → 8 blocks/2 shells/death; AIR folder; mail owner; build order
+|       |       (parents: + MODULE_DEPENDENCY_GRAPH, API_SURFACE)
 |       `-- src/README.md .................... T2 | module anatomy in the codebase
 |               |-- src/modules/<8 blocks>/README.md  (crm, assessment, objectives,
 |               |        key-results, milestones, tasks, governance, knowledge)

@@ -2,25 +2,27 @@
 
 > Written by the previous session per `/close`. `/init` reads this and starts. Overwritten every session — history lives in JOURNAL.md.
 
-**Type**: CONTRACT (Night 1b, sprint 2 opener)
-**Task**: **N1-P4-01 — Modularization plan + contract drafts** (2 steps; may span 2 sessions). Why now: sprint 1 closed with session-27 (P3-01, P3-08, P3-09 all DONE); sprint 2's goal is the frozen build spec, and N1-P4-01 is its opener — N1-P4-02 (Karvia diff + assessment interface) consumes its output.
+**Type**: CONTRACT (Night 1b, sprint 2 — N1-P4-01 step 2 of 2)
+**Task**: **N1-P4-01 step 2 — MODULE_CONTRACTS_DRAFT.md** (1 step). Why now: step 1 (MODULARIZATION_PLAN) sealed in session-28 — the placement is fixed; step 2 draws the actual `contract.ts` TypeScript signatures on those placements. N1-P4-02 (Karvia diff + assessment interface spec) consumes this.
 
 **READ FIRST** (in order):
-1. `_agent/SPRINTS_NIGHT_1B.md` § N1-P4-01 — the spec: MODULARIZATION_PLAN.md (8 modules + AIR impl folder) + MODULE_CONTRACTS_DRAFT.md (TS signatures; journey steps as acceptance criteria; routes cite API_SURFACE; edges cite MODULE_DEPENDENCY_GRAPH); assign the outbound notification/mail owner (audit 4.5)
-2. `NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md` — module anatomy + the 4 layers + stage machine (C-020)
-3. `NEXUS_STRATEGY/2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md` + `API_SURFACE.md` — the as-is maps whose revisit triggers this task fires
-4. `NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md` J-index — journey steps are the acceptance criteria; J5's new contract entry point `crm.createCompany(motion=direct)` is flagged there for exactly this task
-5. `_agent/DECISIONS.md` C-003 (consolidate engines), C-004 (TS strict), C-005 (Program entity), C-020 — the contracts must reflect all four
+1. `NEXUS_STRATEGY/2-TECHNICAL/MODULARIZATION_PLAN.md` — **the spec for this session**: §the eight blocks (what each owns/consumes/republishes), §the two shells, §Layer-4 + stage machine placement, §7 the NotificationPort owner, §"What N1-P4-01 step 2 takes from here" (the explicit draw-list)
+2. `NEXUS_STRATEGY/2-TECHNICAL/USER_JOURNEYS.md` § "Journey ↔ contract index" (lines ~313–326) — **these calls/events ARE the acceptance criteria**; every `crm.*`/`assessment.*`/`objectives.*`/`milestones.*`/`tasks.*`/`governance.*`/`knowledge.*` + every `event …` there must appear in a signature
+3. `NEXUS_STRATEGY/2-TECHNICAL/API_SURFACE.md` — route sets each block republishes (cite the cluster tables)
+4. `NEXUS_STRATEGY/2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md` — the bold cross-boundary edges = exactly the contract surface; nothing else crosses a boundary in v1
+5. `NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md` — the `PageContract` + `AssessmentProvider` TS already drafted there (§Layer 1, §pluggable assessment); the contracts draft extends/cites them, doesn't re-invent
+6. `_agent/DECISIONS.md` C-003/C-004/C-005/C-020 — the four the signatures must reflect
 
-**Definition of done** (from the sprint spec):
-- MODULARIZATION_PLAN.md + MODULE_CONTRACTS_DRAFT.md exist under 2-TECHNICAL, graph-wired, with TS signatures for the 8 lego blocks + the AIR impl folder
-- The outbound notification/mail owner is assigned (contract-fronted, never per-module ad-hoc mail — audit 4.5)
-- The stage-weather scan items land in the PageContract draft: stage-keyed primary CTA + stage-keyed Dashboard section; Teams' Prospect empty state = Sponsor matrix import (BACKLOG N1-P4-01 DoD, added session-27 pt 3)
-- MODULE_DEPENDENCY_GRAPH + API_SURFACE revisit triggers fired and retired
+**Definition of done**:
+- `MODULE_CONTRACTS_DRAFT.md` exists under 2-TECHNICAL, **graph-wired as a child of MODULARIZATION_PLAN** (the plan already carries a `revisit` trigger expecting exactly this; retire it on landing) — TS `contract.ts` signature per the 8 blocks + the AIR provider registration + the 2 shells' composition interfaces
+- Every entry in the USER_JOURNEYS journey↔contract index has a matching signature (acceptance criteria); routes cite API_SURFACE, edges cite MODULE_DEPENDENCY_GRAPH
+- **PageContract draft carries the stage-weather items** (session-27 pt 3, in the plan's handoff §): stage-keyed primary CTA + stage-keyed Dashboard section as declared config; Teams' Prospect empty state = Sponsor matrix import; the **rules surface** field (N1-P3-10) rendered in the contract
+- The **`NotificationPort`** and **Layer-4 orchestrator** interfaces (plan §7, §C-020) drafted
+- Contract-first invariant (CLAUDE.md rule 7): interface + the contract-test *shape* (shapes/errors/idempotency/tenant-isolation per TECH_STRATEGY anatomy), not implementations
 
 **Watch out for**:
-- **The PR stack is now 6 deep** (#25 ← #26 ← #27 ← #28 ← #29 ← session-27 PR). If all merged: branch from main. If not: continue the chain off `session/2026-06-13-27-c013-brand-rework` — do NOT base on main
-- 2-step task: if it splits, seal MODULARIZATION_PLAN as step 1 and carry the contract drafts; don't chain past budget
-- Contract-first invariant: interface + contract test shape first (CLAUDE.md rule 7); journey steps as acceptance criteria, not invented ones
-- **Founder flags pending** (30-second confirms if in-session): (a) P3-08's fallback cadences (48h/day-3/day-7, carried from session-26); (b) from the session-27 founder review (which approved the re-skin direction + card system): the Builder-dashboard viewer (agent picked Lena Chen · Manager), PQ-1 CTA wording (kept "Push task completion"), and official exports of the derived logo variants (icon/on-dark are programmatic)
-- Step count: **34/105** after session-27's three journal entries (EQ-1 raw count — one conversation, three sealed units: re-skin, founder iteration, stage scan). **Night 1b: 5 of 10 spent with 6 steps of task remaining** (P4-01 2 · P4-02 1 · P5-01 1 · P5-02 1 · P6-01 1) — a 1-step squeeze; the N1b close groom re-sums (rule 2) and the global buffer (5) absorbs it if P4/P5 don't come in under
+- **PR stack is now 7 deep** (#25←#26←#27←#28←#29←#30←session-28 PR). Continue the chain off `session/2026-06-13-28-modularization-plan` — do NOT base on main unless the stack has merged
+- Don't re-draw the placement — it's fixed in the plan; step 2 is signatures *on* it. If a signature reveals a placement is wrong, fix the plan (the newer record wins, SESSION_PRACTICES rule 1) and note it, don't silently diverge
+- **Founder flags still pending** (30-sec confirms if in-session): (a) the §7 mail-owner assignment (governance dispatch + crm-direct invitation mail) — the plan flagged it for ratification; (b) P3-08 fallback cadences (48h/day-3/day-7); (c) session-27 review leftovers (Builder viewer = Lena Chen·Manager, PQ-1 "Push task completion" wording, official logo-variant exports)
+- The roll-up engine host (objectives vs a thin `platform/rollup`) was deferred from step 1 — decide it here as a contract-shape call
+- Step count: **35/105** after session-28 (one sealed unit). **Night 1b: 6 of 10 spent, 5 steps of task remaining** (P4-01 step 2 · P4-02 1 · P5-01 1 · P5-02 1 · P6-01 1) — the squeeze is now resolved (step 1 + mail-owner done in one unit absorbed it); the N1b close groom re-sums (rule 2)

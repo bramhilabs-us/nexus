@@ -146,13 +146,13 @@ Status legend: READY | IN-PROGRESS | BLOCKED | DONE
 - **Notes**: Scan verdict (quick, founder-gated): the 10-page plan **holds across all 5 stages** — every stage transition is data/state inside existing slots; these two component gaps plus the two contract declarations routed into N1-P4-01 are the only structural debts found.
 
 ### N1-P4-01 — Modularization plan + contract drafts
-- **Status**: READY — **Night 1b, sprint 2** (C-003/4/5 all answered — see DECISIONS.md 2026-06-04)
+- **Status**: IN PROGRESS — step 1 (MODULARIZATION_PLAN) **DONE** session-28; step 2 (MODULE_CONTRACTS_DRAFT) carried — **Night 1b, sprint 2** (C-003/4/5 all answered — see DECISIONS.md 2026-06-04)
 - **Size**: M (2 ticks)
 - **Depends on**: N1-P2-04 (module graph), N1-P2-02 (data models)
 - **Definition of done**:
-  - MODULARIZATION_PLAN.md with 8 modules (CRM, Objectives, KeyResults, Milestones (C-008), Tasks, Assessment + Governance + Knowledge) + assessment impl (AIR — SSI dropped per C-006, Karvia reference only)
-  - MODULE_CONTRACTS_DRAFT.md with TS interface signatures — journey steps (USER_JOURNEYS J-index) are the acceptance criteria; route sets cite API_SURFACE; edges cite MODULE_DEPENDENCY_GRAPH
-  - **Assign the outbound notification/mail owner** (audit 2026-06-12 finding 4.5): invitations, nudge delivery, review reminders — a contract-fronted capability (likely @nexus/crm or a small platform service), never per-module ad-hoc mail
+  - ✓ MODULARIZATION_PLAN.md with 8 modules (CRM, Objectives, KeyResults, Milestones (C-008), Tasks, Assessment + Governance + Knowledge) + assessment impl (AIR — SSI dropped per C-006, Karvia reference only) — **done session-28**; AIR impl-folder layout fixed, build order ranked off the cycles, MODULE_DEPENDENCY_GRAPH + API_SURFACE N1 revisit triggers retired
+  - ☐ MODULE_CONTRACTS_DRAFT.md with TS interface signatures — journey steps (USER_JOURNEYS J-index) are the acceptance criteria; route sets cite API_SURFACE; edges cite MODULE_DEPENDENCY_GRAPH **(step 2 — next session)**
+  - ✓ **Assign the outbound notification/mail owner** (audit 2026-06-12 finding 4.5): **done session-28** (MODULARIZATION_PLAN §7) — platform `NotificationPort` delivers; `@nexus/governance` owns program-scoped dispatch policy; `@nexus/crm` calls the port directly only for pre-program invitation mail. Flagged for founder ratification (technical placement, revisit trigger on the plan)
   - Reflects ratified decisions: consolidate engines, TypeScript strict, Program as first-class entity, the stage machine + Layer 4 (C-020)
   - **Stage-weather scan items (founder-directed scan, session-27 pt 3)**: the PageContract draft declares the **stage-keyed slots** explicitly — primary CTA is stage-keyed config (Dashboard's "Push task completion" is Transform weather; Measure wants sprint-pulse CTAs) and the Dashboard's third section is stage-keyed (objectives board at Transform, sprint pulse at Measure); Teams' Prospect weather is the **Sponsor's guided matrix import** (03 §6.1 bridge) — its empty state is stage-variant ("Import your team matrix" before "Invite member"), so the user story exists
 - **Notes**: All 3 architectural clarifications now answered (2026-06-04). N1-P4-02 also unblocked.

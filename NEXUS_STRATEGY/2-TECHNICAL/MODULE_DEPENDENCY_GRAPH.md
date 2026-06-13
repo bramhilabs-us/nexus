@@ -18,9 +18,8 @@ parents:
   - NEXUS_STRATEGY/2-TECHNICAL/DATA_MODELS.md
 children:
   - NEXUS_STRATEGY/2-TECHNICAL/API_SURFACE.md
+  - NEXUS_STRATEGY/2-TECHNICAL/MODULARIZATION_PLAN.md
 revisit:
-  - on: "N1-P4-01 modularization plan consumes this; any contract it draws must cite the edge here"
-    stage: N1
   - on: "a Night 2 lift finds an import this map missed"
     stage: N2
 ---
