@@ -23,4 +23,4 @@
 - 2-step task: if it splits, seal MODULARIZATION_PLAN as step 1 and carry the contract drafts; don't chain past budget
 - Contract-first invariant: interface + contract test shape first (CLAUDE.md rule 7); journey steps as acceptance criteria, not invented ones
 - **Founder flags pending** (30-second confirms if in-session): (a) P3-08's fallback cadences (48h/day-3/day-7, carried from session-26); (b) from the session-27 founder review (which approved the re-skin direction + card system): the Builder-dashboard viewer (agent picked Lena Chen · Manager), PQ-1 CTA wording (kept "Push task completion"), and official exports of the derived logo variants (icon/on-dark are programmatic)
-- Step count: 32/105 after session-27's journal entry (Night 1b: 3 of 10 spent)
+- Step count: **34/105** after session-27's three journal entries (EQ-1 raw count — one conversation, three sealed units: re-skin, founder iteration, stage scan). **Night 1b: 5 of 10 spent with 6 steps of task remaining** (P4-01 2 · P4-02 1 · P5-01 1 · P5-02 1 · P6-01 1) — a 1-step squeeze; the N1b close groom re-sums (rule 2) and the global buffer (5) absorbs it if P4/P5 don't come in under
