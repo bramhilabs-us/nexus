@@ -21,10 +21,9 @@ parents:
   - NEXUS_STRATEGY/2-TECHNICAL/TECH_STRATEGY.md
   - NEXUS_STRATEGY/2-TECHNICAL/MODULE_DEPENDENCY_GRAPH.md
   - NEXUS_STRATEGY/2-TECHNICAL/API_SURFACE.md
-children: []
+children:
+  - NEXUS_STRATEGY/2-TECHNICAL/MODULE_CONTRACTS_DRAFT.md
 revisit:
-  - on: "MODULE_CONTRACTS_DRAFT.md lands (N1-P4-01 step 2) — it becomes a child here; every signature must trace to a block placed in this doc"
-    stage: N1
   - on: "a Night 2 lift re-homes a model/route this plan placed elsewhere"
     stage: N2
   - on: "the outbound-notification owner assignment (§7) is ratified or overridden by the founder"
