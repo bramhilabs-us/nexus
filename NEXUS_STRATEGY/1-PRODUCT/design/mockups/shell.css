@@ -60,8 +60,14 @@ body {
   text-transform: uppercase;
   color: var(--nx-sidebar-text);
 }
+/* The real lockup — brand/NEXUSLOGO_on-dark.png (white line-art variant,
+   derived from the founder's master per the guide § 05 logo usage) */
+.nx-brand img { display: block; width: 148px; height: auto; }
 .nx-nav { display: flex; flex-direction: column; gap: var(--nx-space-1); flex: 1; }
 .nx-nav a {
+  display: flex;
+  align-items: center;
+  gap: var(--nx-space-3);
   text-decoration: none;
   color: var(--nx-sidebar-text);
   font-size: var(--nx-text-sm);
@@ -69,6 +75,8 @@ body {
   padding: var(--nx-space-2) var(--nx-space-3);
   border-radius: var(--nx-radius);
 }
+/* outline nav icons — guide § visual language icon style */
+.nx-nav svg { width: 18px; height: 18px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .nx-nav a.active {
   background: var(--nx-sidebar-active-bg);
   color: var(--nx-sidebar-text-active);
@@ -112,6 +120,15 @@ body {
 }
 .nx-account:hover .nx-dropdown,
 .nx-account:focus-within .nx-dropdown { display: block; }
+/* Who am I here — name + archetype, inherent on every surface */
+.nx-account-id { display: flex; flex-direction: column; line-height: var(--nx-leading-tight); min-width: 0; }
+.nx-account-name {
+  color: var(--nx-sidebar-text-active);
+  font-size: var(--nx-text-sm);
+  font-weight: var(--nx-weight-semibold);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.nx-account-role { color: var(--nx-sidebar-text); font-size: var(--nx-text-xs); }
 .nx-dropdown a {
   display: block;
   padding: var(--nx-space-2) var(--nx-space-3);
@@ -215,6 +232,27 @@ body {
   color: var(--nx-text-tertiary);
   margin-top: var(--nx-space-1);
 }
+/* Hero tiles (guide § application examples): data visuals lead, words follow */
+.nx-tiles.hero .nx-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--nx-space-2);
+  padding: var(--nx-space-6);
+}
+.nx-tiles.hero .nx-tile-number {
+  font-family: var(--nx-font-display);   /* big numbers are key moments */
+  font-size: var(--nx-text-3xl);
+}
+/* hero-size text needs the deep signal variants — the raw fills are for surfaces */
+.nx-tiles.hero .nx-tile-number.ok    { color: var(--nx-positive-deep); }
+.nx-tiles.hero .nx-tile-number.alert { color: var(--nx-gold-deep); }
+.nx-ring.lg { width: 72px; height: 72px; }
+.nx-ring.lg .nx-ring-inner {
+  width: 56px; height: 56px;
+  font-size: var(--nx-text-base);
+  font-family: var(--nx-font-display);
+}
 
 /* ---------- Cards ---------- */
 .nx-card-grid {
@@ -222,6 +260,46 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
   gap: var(--nx-space-4);
 }
+.nx-card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* Section title on the page surface — sections breathe, panels don't stack */
+.nx-section-title {
+  font-size: var(--nx-text-base);
+  font-weight: var(--nx-weight-semibold);
+  color: var(--nx-ink);
+  margin: var(--nx-space-8) 0 var(--nx-space-4);
+}
+
+/* Action card — one decision per card (status → what → one move) */
+.nx-card.action { display: flex; flex-direction: column; align-items: flex-start; gap: var(--nx-space-3); }
+.nx-card.action .nx-btn-secondary, .nx-card.action .nx-btn-quiet { margin-top: auto; }
+.nx-card.action .nx-pill { position: static; }
+
+/* Focus hint — the team-altitude NBM on Objectives (03 F9; Article 13:
+   a recommendation with a confidence and a why — never a fact) */
+.nx-focus {
+  display: flex;
+  align-items: center;
+  gap: var(--nx-space-4);
+  background: var(--nx-gradient-soft);
+  border-radius: var(--nx-radius);
+  padding: var(--nx-space-4) var(--nx-space-6);
+  margin-bottom: var(--nx-space-6);
+}
+.nx-focus-kicker {
+  font-size: var(--nx-text-xs);
+  font-weight: var(--nx-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nx-purple);
+  white-space: nowrap;
+}
+.nx-pill.conf { background: var(--nx-surface); color: var(--nx-primary); white-space: nowrap; }
+
+/* Objective card — the ring is the message, words are the caption */
+.nx-card.objective { display: flex; flex-direction: column; gap: var(--nx-space-3); }
+.nx-card.objective .head { display: flex; align-items: center; gap: var(--nx-space-4); }
+.nx-card.objective .nx-ribbon { margin-top: auto; }
 .nx-card {
   position: relative;
   background: var(--nx-surface);
@@ -348,7 +426,9 @@ body {
   margin: 0 auto var(--nx-space-4);
   border-radius: var(--nx-radius-pill);
   background: var(--nx-gradient-soft);
+  display: flex; align-items: center; justify-content: center;
 }
+.nx-empty-mark img { width: 36px; height: auto; }  /* the lotus, calm at the center */
 .nx-empty h2 {
   font-family: var(--nx-font-display);   /* the one display moment per page */
   font-size: var(--nx-text-xl);

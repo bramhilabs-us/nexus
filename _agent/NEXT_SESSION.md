@@ -21,5 +21,5 @@
 - **The PR stack is now 6 deep** (#25 ← #26 ← #27 ← #28 ← #29 ← session-27 PR). If all merged: branch from main. If not: continue the chain off `session/2026-06-13-27-c013-brand-rework` — do NOT base on main
 - 2-step task: if it splits, seal MODULARIZATION_PLAN as step 1 and carry the contract drafts; don't chain past budget
 - Contract-first invariant: interface + contract test shape first (CLAUDE.md rule 7); journey steps as acceptance criteria, not invented ones
-- **Founder flags pending** (30-second confirms if in-session): (a) P3-08's fallback cadences (48h/day-3/day-7, carried from session-26); (b) session-27's four visual judgment calls — label-only sidebar nav until N3 icons, the flashcard deck as the one no-sidebar surface, the stage-badge color mapping, and my-clients' Engaged→Transforming relabel
+- **Founder flags pending** (30-second confirms if in-session): (a) P3-08's fallback cadences (48h/day-3/day-7, carried from session-26); (b) from the session-27 founder review (which approved the re-skin direction + card system): the Builder-dashboard viewer (agent picked Lena Chen · Manager), PQ-1 CTA wording (kept "Push task completion"), and official exports of the derived logo variants (icon/on-dark are programmatic)
 - Step count: 32/105 after session-27's journal entry (Night 1b: 3 of 10 spent)

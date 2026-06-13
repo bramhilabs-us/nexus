@@ -21,7 +21,7 @@ revisit: []
 | What | Where |
 |---|---|
 | The rules: two-tier brand, tokens, components, sidebar shell, UX doctrine, card grammar | [DESIGN_LANGUAGE.md](DESIGN_LANGUAGE.md) |
-| Brand assets (graph-exempt) | `brand/` — NEXUS product guide (×2) + BRAMHI parent guide + logo |
+| Brand assets (graph-exempt) | `brand/` — NEXUS product guide (×2) + BRAMHI parent guide + logos: `NEXUSLOGO.png` (master) + derived `_primary` / `_icon` / `_on-dark` variants |
 | Feel references (restraint only, never color/type) | `references/` — two BRAMHI investor decks |
 | The 10 mockup surfaces | [mockups/](mockups/README.md) |
 

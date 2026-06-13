@@ -13,19 +13,34 @@
 
 <aside class="nx-sidebar">
   <div class="nx-brand">
-    <span class="nx-wordmark">Nexus</span>
-    <span class="nx-byline">by BRAMHI</span>
+    <img src="../brand/NEXUSLOGO_on-dark.png" alt="NEXUS by BRAMHI">
   </div>
   <nav class="nx-nav">
-    <a href="my-clients.html">My Clients</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a class="active" href="objectives.html">Objectives</a>
-    <a href="assessments.html">Assessments</a>
-    <a href="#">Teams</a>
-    <a href="#">Planning</a>
+    <a href="my-clients.html">
+      <svg viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="12" rx="2"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5"/></svg>
+      My Clients</a>
+    <a href="dashboard.html">
+      <svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+      Dashboard</a>
+    <a class="active" href="objectives.html">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/></svg>
+      Objectives</a>
+    <a href="assessments.html">
+      <svg viewBox="0 0 24 24"><path d="M4 15.5a8 8 0 1 1 16 0"/><path d="M12 15.5 16 10"/><path d="M4.5 19.5h15"/></svg>
+      Assessments</a>
+    <a href="teams.html">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.5"/><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="16.5" cy="8" r="2.5"/><path d="M16.5 13.5c2.5 0 4.5 1.8 4.5 4.5"/></svg>
+      Teams</a>
+    <a href="planning.html">
+      <svg viewBox="0 0 24 24"><rect x="4" y="4.5" width="16" height="16" rx="2"/><path d="m8 12.5 2.5 2.5 5.5-5.5"/></svg>
+      Planning</a>
   </nav>
   <div class="nx-account">
     <button class="nx-avatar" aria-haspopup="true">MK</button>
+    <div class="nx-account-id">
+      <span class="nx-account-name">Maya Krishnan</span>
+      <span class="nx-account-role">Manager</span>
+    </div>
     <div class="nx-dropdown">
       <a href="#">Profile</a>
       <a href="#">Company Profile</a>
@@ -41,21 +56,32 @@
 
   <div class="nx-page-head">
     <div>
-      <h1 class="nx-page-title">Objectives</h1>
-      <p class="nx-page-sub">Meridian Logistics · 6 self-rolling objectives</p>
+      <h1 class="nx-page-title">Welcome back, Maya</h1>
+      <p class="nx-page-sub">Meridian Logistics · 6 objectives</p>
     </div>
     <div class="nx-cta-pair">
       <button class="nx-btn-primary">Create objective</button>
       <button class="nx-btn-secondary">Check in on a KR</button>
+      <button class="nx-btn-quiet">Draft KRs with AI →</button>
     </div>
   </div>
 
   <!-- Analytics strip: stages + health (≤4 tiles) -->
-  <section class="nx-tiles" aria-label="analytics">
+  <section class="nx-tiles hero" aria-label="analytics">
     <div class="nx-tile"><div class="nx-tile-number">4</div><div class="nx-tile-label">Identified</div></div>
     <div class="nx-tile"><div class="nx-tile-number">1</div><div class="nx-tile-label">Handed off</div></div>
     <div class="nx-tile"><div class="nx-tile-number ok">1</div><div class="nx-tile-label">Sustained</div></div>
     <div class="nx-tile"><div class="nx-tile-number">58%</div><div class="nx-tile-label">Avg complete</div></div>
+  </section>
+
+  <!-- The team-altitude NBM: the Manager's hint arrow (03 F9; Article 13) -->
+  <section class="nx-focus" aria-label="focus recommendation">
+    <span class="nx-focus-kicker">Focus now</span>
+    <span class="grow">
+      <strong>Automate intake triage</strong>
+      <span class="nx-card-sub" style="display:block">Two KRs behind pace, and the pilot depends on it — moving this unblocks the most downstream work.</span>
+    </span>
+    <span class="nx-pill conf">confidence 72% · why →</span>
   </section>
 
   <!-- Objective cards: KR list + lifecycle ribbon -->
@@ -117,7 +143,7 @@
   <!-- Empty state: assessment-driven, never a blank form -->
   <p class="mock-note">Empty state — arriving from assessment results</p>
   <section class="nx-empty">
-    <div class="nx-empty-mark"></div>
+    <div class="nx-empty-mark"><img src="../brand/NEXUSLOGO_icon.png" alt=""></div>
     <h2>Your assessment found these opportunities</h2>
     <p>The AIR Opportunity Register ranked five use cases by impact and effort. Create your first objective from the top one — KRs come pre-drafted, you stay in control.</p>
     <button class="nx-btn-primary">Create objective from results</button>

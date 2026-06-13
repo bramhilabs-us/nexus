@@ -103,6 +103,7 @@ One small set shared by all pages — adding a component requires updating this 
 | **CTA pair** | Primary + secondary per page contract | Primary: filled Intelligence Blue, pill; secondary: quiet outline/text |
 | **Empty state** | First-time teaching | Calm lotus-adjacent illustration, one sentence, one CTA; Sora for the one display line |
 | **Score ring** | Assessment scores on cards | Dimension color mapping defined by the assessment block, ring style defined here |
+| **Focus hint** | The team-altitude NBM on Objectives (03 F9) | Gradient-soft banner: kicker + one-sentence why + confidence chip — Article 13 display grammar (recommendation, never a fact) |
 | **Flashcard** | Assessment question delivery (never survey forms — PRODUCT_STRATEGY § delivery experience) | One question per card; flip/advance rhythm; calm, single-focus layout; the "why this assessment" intro card opens every deck |
 | **Deck progress** | Position within a flashcard deck | Dots, not "Q7/24" counters — progress felt, not dreaded; current dot in primary, done dots in primary-soft |
 | **Answer input** | The per-card response control (scale / choice / binary) | Large tap targets, one input family per card; selected state = primary-faint fill + primary border; never radio/checkbox form controls |
